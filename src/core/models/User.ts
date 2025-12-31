@@ -10,6 +10,11 @@ export interface IUser extends Document {
     dash: {
         total_solved: number;
         streak: number;
+        heatmap: {
+            date: string;
+            count: number;
+            intensity: number;
+        }[];
         // heatmap data stored separately or summarized here? Overview said heatmap in dash, but daily logs separate.
         // We will keep a summary here for fast load.
         last_active: Date;
@@ -33,6 +38,13 @@ const UserSchema: Schema = new Schema(
         dash: {
             total_solved: { type: Number, default: 0 },
             streak: { type: Number, default: 0 },
+            heatmap: [
+                {
+                    date: { type: String },
+                    count: { type: Number },
+                    intensity: { type: Number },
+                },
+            ],
             last_active: { type: Date, default: Date.now },
         },
     },
