@@ -18,6 +18,9 @@ export interface IQuestionOption {
     text: string;
     is_correct: boolean;
     inf_tag?: string; // Mistake tag (e.g., "IGNORED_BASE_CHANGE")
+
+    // Option can have an image (diagram, graph, etc.)
+    image?: string; // GridFS file ID or base64
 }
 
 export interface IMistakeDistribution {
@@ -33,6 +36,10 @@ export interface IQuestion extends Document {
     content: {
         text: string;
         options: IQuestionOption[];
+
+        // Flags for media presence
+        has_diagram?: boolean;
+        has_table?: boolean;
     };
 
     // Speed expectations for inference calibration
@@ -50,6 +57,16 @@ export interface IQuestion extends Document {
         original_paper?: string; // e.g., "Tier 1 - Shift 2"
         question_number?: number; // Original question number in paper
     };
+
+    // Media references (IDs from Media collection)
+    media_ids?: mongoose.Types.ObjectId[]; // Array of Media document IDs
+
+    // Simple verification flag (you're the only reviewer)
+    is_verified?: boolean; // Ready for practice mode (default: false)
+
+    // Version control and batch tracking
+    version?: number; // Increment on updates
+    import_batch?: string; // e.g., "2024-01-SSC-CGL-Tier1"
 
     // Crowd-sourced calibration (evolves over time)
     calibration?: {

@@ -1,0 +1,19 @@
+# Python Dependencies for SSC CGL Question Extraction
+
+# PDF Processing
+pdfplumber==0.10.3
+
+# MongoDB + GridFS
+pymongo==4.6.0
+
+# Image Processing
+Pillow==10.1.0
+
+# LaTeX Conversion (FREE!)
+sympy==1.12
+
+# Data Validation
+pydantic==2.5.0
+
+# Utilities
+python-dotenv==1.0.0
