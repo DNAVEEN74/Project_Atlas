@@ -1,68 +1,83 @@
-# Data Extraction Scripts
+# Scripts Directory
 
-This directory contains Python scripts for extracting and transforming SSC question papers into Project Atlas database format.
+This directory contains Python scripts for data extraction and web scraping.
 
-## Setup
+## 📁 Directory Structure
 
-1. **Install Python dependencies:**
+```
+scripts/
+├── extractors/          # Question extraction scripts
+│   ├── extract_ssc_cgl.py
+│   └── README.md
+├── scrapers/           # Web scraping scripts
+│   ├── download_ssc_papers.py
+│   └── README.md
+├── requirements.txt    # Python dependencies
+└── README.md          # This file
+```
+
+## 🚀 Quick Start
+
+### 1. Install Dependencies
 ```bash
+cd scripts
 pip install -r requirements.txt
 ```
 
-## Scripts
-
-### `extract_questions.py`
-Extracts questions from SSC CGL/CHSL previous year papers and converts them to the Question schema format.
-
-**Usage:**
+### 2. Download Question Papers
 ```bash
-# From a text file
-python extract_questions.py --input paper.txt --output questions.json --exam "SSC CGL 2023" --year 2023 --paper "Tier 1 - Shift 2"
-
-# Basic usage
-python extract_questions.py --input paper.txt --output questions.json
+cd scrapers
+python download_ssc_papers.py
 ```
 
-**Arguments:**
-- `--input`: Input file (PDF or TXT) containing questions
-- `--output`: Output JSON file path
-- `--exam`: Exam name (default: "SSC CGL")
-- `--year`: Exam year (optional)
-- `--paper`: Paper name, e.g., "Tier 1 - Shift 2" (optional)
-
-**Expected Input Format:**
-```
-1. Question text here?
-(A) Option A
-(B) Option B
-(C) Option C
-(D) Option D
-Answer: C
-
-2. Next question...
+### 3. Extract Questions from PDFs
+```bash
+cd extractors
+python extract_ssc_cgl.py --pdf "path/to/paper.pdf" --exam "SSC CGL 2024" --year 2024 --paper "Tier 1 - 09.09.2024"
 ```
 
-**Output:**
-JSON file with questions matching the MongoDB Question schema, including:
-- Question text and options
-- Correct answer marking
-- Source metadata (exam, year, paper, question number)
-- Default benchmarks and status
+## 📋 Available Scripts
 
-**Post-Processing Required:**
-After extraction, you'll need to manually:
-1. Add Pattern IDs (`p_id`) to link questions to patterns
-2. Add mistake tags (`inf_tag`) to wrong options for inference
-3. Set difficulty levels (EASY/MEDIUM/HARD)
-4. Adjust speed benchmarks (`golden_ms`, `speed_category`)
+### **Scrapers** (`scrapers/`)
+- `download_ssc_papers.py` - Downloads SSC CGL papers from Adda247
+- See `scrapers/README.md` for details
 
-## Workflow
+### **Extractors** (`extractors/`)
+- `extract_ssc_cgl.py` - Extracts questions from SSC CGL PDFs
+- See `extractors/README.md` for details
 
-1. **Extract questions** from source papers
-2. **Review and validate** the JSON output
-3. **Manually enrich** with pattern IDs and mistake tags
-4. **Import to MongoDB** using backend API or direct insertion
+## 📦 Dependencies
 
----
+All required packages are in `requirements.txt`:
+- `beautifulsoup4` - Web scraping
+- `requests` - HTTP requests
+- `pdfplumber` - PDF text extraction
+- `pymongo` - MongoDB integration
+- `Pillow` - Image processing
+- `sympy` - LaTeX conversion
+- `pydantic` - Data validation
 
-**Note:** The extraction script provides a starting point. Real SSC papers may have varying formats and will require adjustments to the parsing logic.
+## 🔧 Adding New Scripts
+
+### For New Scrapers:
+1. Create script in `scrapers/` directory
+2. Follow the pattern in `download_ssc_papers.py`
+3. Update `scrapers/README.md`
+
+### For New Extractors:
+1. Create script in `extractors/` directory
+2. Follow the pattern in `extract_ssc_cgl.py`
+3. Update `extractors/README.md`
+
+## 📖 Documentation
+
+- **Scrapers Guide**: `scrapers/README.md`
+- **Extractors Guide**: `extractors/README.md`
+- **Extraction Guide**: `extractors/EXTRACTION_GUIDE.md`
+
+## ⚠️ Important Notes
+
+- Downloaded PDFs are stored in `docs/PYQs/` (not in git)
+- Extracted JSON goes to project root or specified output
+- Always test scripts on sample data first
+- Use virtual environment for Python packages

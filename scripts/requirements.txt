@@ -15,5 +15,9 @@ sympy==1.12
 # Data Validation
 pydantic==2.5.0
 
+# Web Scraping
+beautifulsoup4==4.12.2
+requests==2.31.0
+
 # Utilities
 python-dotenv==1.0.0
