@@ -27,6 +27,9 @@ const DailyLogSchema: Schema = new Schema(
     { _id: false, timestamps: true } // We handle _id manually
 );
 
+// Non-negotiable compound index for calendar queries
+DailyLogSchema.index({ u_id: 1, date: -1 });
+
 const DailyLog: Model<IDailyLog> =
     mongoose.models.DailyLog || mongoose.model<IDailyLog>('DailyLog', DailyLogSchema);
 
