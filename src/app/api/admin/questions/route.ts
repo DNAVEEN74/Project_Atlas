@@ -35,8 +35,12 @@ export async function GET(request: NextRequest) {
         console.log('[API] Filter:', JSON.stringify(filter));
 
         const questions = await Question.find(filter)
-            .sort({ 'source.question_number': 1 })
-            .limit(100)
+            .sort({
+                'source.file_name': 1,      // Group by PDF file
+                'source.section': 1,         // Then by section (QUANT/REASONING)
+                'source.question_number': 1  // Then by question number
+            })
+            .limit(200)  // Increased limit for full PDF review
             .lean();
 
         console.log('[API] Found', questions.length, 'questions');

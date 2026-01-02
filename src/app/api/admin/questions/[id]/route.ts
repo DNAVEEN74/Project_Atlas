@@ -5,18 +5,30 @@ import Question from '@/core/models/Question';
 // PATCH /api/admin/questions/[id] - Update question
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         await dbConnect();
 
         const body = await request.json();
-        const { id } = params;
+        const { id } = await params;  // Await params in Next.js 13+
+
+        console.log('[API] Updating question:', id);
 
         const updateData: any = {};
 
         if (body.is_verified !== undefined) {
             updateData.is_verified = body.is_verified;
+        }
+
+        // Handle direct content.image update
+        if (body['content.image'] !== undefined) {
+            updateData['content.image'] = body['content.image'];
+        }
+
+        // Handle direct content.options update
+        if (body['content.options'] !== undefined) {
+            updateData['content.options'] = body['content.options'];
         }
 
         if (body.content) {
