@@ -53,7 +53,7 @@ def main():
     print(f"📁 Database: {db_name}")
     
     # Load JSON
-    json_file = Path(__file__).parent / "output" / "2024" / "ssc_cgl_2024_all.json"
+    json_file = Path(__file__).parent / "output" / "2023" / "ssc_cgl_2023_all.json"
     
     if not json_file.exists():
         print(f"❌ File not found: {json_file}")

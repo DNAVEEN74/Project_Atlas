@@ -15,6 +15,24 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 
 import pdfplumber
+import pytesseract
+from pdf2image import convert_from_path
+import os
+
+# Configure Tesseract path for Windows
+TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+if os.path.exists(TESSERACT_PATH):
+    pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
+
+# Find Poppler path (installed via winget)
+POPPLER_PATH = None
+for path in [
+    r"C:\Program Files\poppler\Library\bin",
+    os.path.expandvars(r"%LOCALAPPDATA%\Microsoft\WinGet\Packages\oschwartz10612.Poppler_Microsoft.Winget.Source_8wekyb3d8bbwe\poppler-25.07.0\Library\bin"),
+]:
+    if os.path.exists(path):
+        POPPLER_PATH = path
+        break
 
 # Section configuration
 SECTIONS = {
@@ -104,23 +122,70 @@ class SSCExtractor:
         
         all_questions = []
         
-        with pdfplumber.open(self.pdf_path) as pdf:
-            # Build full text with page markers
-            full_text = ""
-            for i, page in enumerate(pdf.pages):
-                full_text += f"\n---PAGE_{i+1}---\n"
-                full_text += (page.extract_text() or "")
+        # Try pdfplumber first
+        full_text = self._extract_text_pdfplumber()
+        
+        # Check if section headers are found - if not, likely a scanned PDF
+        has_reasoning = any(h in full_text for h in [SECTIONS['REASONING']['header']] + SECTIONS['REASONING']['alt_headers'])
+        has_quant = any(h in full_text for h in [SECTIONS['QUANT']['header']] + SECTIONS['QUANT']['alt_headers'])
+        
+        # Also check if we have actual question content (Q.1, Q.2, etc.)
+        # Some PDFs have text headers but image-based question content
+        question_patterns = re.findall(r'Q\.\d+\s+\w', full_text)
+        has_questions = len(question_patterns) >= 10  # Expect at least 10 Q.X patterns
+        
+        need_ocr = False
+        if not has_reasoning or not has_quant:
+            print("   🔍 Scanned PDF detected (section headers not found) - using OCR...")
+            need_ocr = True
+        elif not has_questions:
+            print("   🔍 Image-based questions detected (headers found but no Q.X patterns) - using OCR...")
+            need_ocr = True
+        
+        if need_ocr:
+            full_text = self._extract_text_ocr()
+        
+        for section_name, section_info in SECTIONS.items():
+            section_qs = self._extract_section(full_text, section_name, section_info)
+            all_questions.extend(section_qs)
             
-            for section_name, section_info in SECTIONS.items():
-                section_qs = self._extract_section(full_text, section_name, section_info)
-                all_questions.extend(section_qs)
-                
-                clean = sum(1 for q in section_qs if not q.needs_image_review)
-                review = len(section_qs) - clean
-                print(f"   ✅ {section_name}: {len(section_qs)} questions ({clean} clean, {review} need images)")
+            clean = sum(1 for q in section_qs if not q.needs_image_review)
+            review = len(section_qs) - clean
+            print(f"   ✅ {section_name}: {len(section_qs)} questions ({clean} clean, {review} need images)")
         
         print(f"📊 Total: {len(all_questions)} questions")
         return all_questions
+    
+    def _extract_text_pdfplumber(self) -> str:
+        """Extract text using pdfplumber (works for text-based PDFs)"""
+        full_text = ""
+        with pdfplumber.open(self.pdf_path) as pdf:
+            for i, page in enumerate(pdf.pages):
+                full_text += f"\n---PAGE_{i+1}---\n"
+                full_text += (page.extract_text() or "")
+        return full_text
+    
+    def _extract_text_ocr(self) -> str:
+        """Extract text using OCR for scanned PDFs"""
+        full_text = ""
+        try:
+            # Convert PDF pages to images
+            images = convert_from_path(
+                self.pdf_path, 
+                dpi=200,  # Balance between quality and speed
+                poppler_path=POPPLER_PATH
+            )
+            
+            for i, image in enumerate(images):
+                full_text += f"\n---PAGE_{i+1}---\n"
+                # OCR with English language
+                page_text = pytesseract.image_to_string(image, lang='eng')
+                full_text += page_text
+                
+        except Exception as e:
+            print(f"   ⚠️ OCR failed: {str(e)[:50]}")
+            
+        return full_text
     
     def _extract_section(self, full_text: str, section_name: str, section_info: dict) -> List[Question]:
         """Extract questions from a specific section"""
