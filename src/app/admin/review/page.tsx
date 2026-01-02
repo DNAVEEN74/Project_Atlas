@@ -5,7 +5,6 @@ import {
     CheckCircleIcon,
     CancelIcon,
     EditIcon,
-    UploadIcon,
     SaveIcon,
     CloseIcon
 } from '@/components/icons';
@@ -14,7 +13,7 @@ interface QuestionOption {
     id: string;
     text: string;
     is_correct: boolean;
-    media_id?: string;
+    image?: string;
 }
 
 interface Question {
@@ -22,37 +21,53 @@ interface Question {
     content: {
         text: string;
         options: QuestionOption[];
+        correct_option_id: string;
+        image?: string;
     };
-    metadata: {
-        source_exam: string;
+    source: {
+        exam: string;
         year: number;
-        original_paper: string;
+        paper: string;
+        section: string;  // REASONING or QUANT
         question_number: number;
+        file_name: string;
     };
     is_verified: boolean;
-    media_ids?: string[];
+    needs_image_review: boolean;
 }
 
 export default function AdminReviewPage() {
     const [questions, setQuestions] = useState<Question[]>([]);
-    const [filter, setFilter] = useState<'all' | 'verified' | 'unverified'>('unverified');
+    const [filter, setFilter] = useState<'all' | 'verified' | 'unverified' | 'needs_review'>('unverified');
     const [editingId, setEditingId] = useState<string | null>(null);
     const [editedQuestion, setEditedQuestion] = useState<Question | null>(null);
+    const [loading, setLoading] = useState(true);
 
-    // Fetch questions
     useEffect(() => {
         fetchQuestions();
     }, [filter]);
 
     const fetchQuestions = async () => {
+        setLoading(true);
         const params = new URLSearchParams();
-        if (filter !== 'all') {
-            params.append('verified', filter === 'verified' ? 'true' : 'false');
+
+        if (filter === 'verified') {
+            params.append('verified', 'true');
+        } else if (filter === 'unverified') {
+            params.append('verified', 'false');
+        } else if (filter === 'needs_review') {
+            params.append('needs_review', 'true');
         }
 
-        const res = await fetch(`/api/admin/questions?${params}`);
-        const data = await res.json();
-        setQuestions(data.questions);
+        try {
+            const res = await fetch(`/api/admin/questions?${params}`);
+            const data = await res.json();
+            setQuestions(data.questions || []);
+        } catch (error) {
+            console.error('Error fetching questions:', error);
+            setQuestions([]);
+        }
+        setLoading(false);
     };
 
     const toggleVerify = async (questionId: string, currentStatus: boolean) => {
@@ -90,6 +105,14 @@ export default function AdminReviewPage() {
         fetchQuestions();
     };
 
+    const updateQuestionText = (newText: string) => {
+        if (!editedQuestion) return;
+        setEditedQuestion({
+            ...editedQuestion,
+            content: { ...editedQuestion.content, text: newText }
+        });
+    };
+
     const updateOptionText = (optionId: string, newText: string) => {
         if (!editedQuestion) return;
         setEditedQuestion({
@@ -103,252 +126,189 @@ export default function AdminReviewPage() {
         });
     };
 
-    const toggleCorrectAnswer = (optionId: string) => {
-        if (!editedQuestion) return;
-        setEditedQuestion({
-            ...editedQuestion,
-            content: {
-                ...editedQuestion.content,
-                options: editedQuestion.content.options.map(opt => ({
-                    ...opt,
-                    is_correct: opt.id === optionId,
-                })),
-            },
-        });
-    };
-
-    const stats = {
-        total: questions.length,
-        verified: questions.filter(q => q.is_verified).length,
-        unverified: questions.filter(q => !q.is_verified).length,
-    };
-
     return (
-        <div className="min-h-screen bg-background p-space-6">
+        <div className="min-h-screen bg-gray-900 text-white p-6">
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
-                <div className="mb-space-8">
-                    <h1 className="text-4xl font-bold text-primary mb-space-2">
-                        Question Review
-                    </h1>
-                    <p className="text-secondary">
-                        Review and verify extracted questions before publishing
-                    </p>
+                <div className="mb-8">
+                    <h1 className="text-3xl font-bold mb-2">Question Review</h1>
+                    <p className="text-gray-400">Review and verify extracted questions</p>
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-3 gap-space-4 mb-space-6">
-                    <div className="bg-surface p-space-4 radius-lg border border-border">
-                        <div className="text-2xl font-bold text-primary">{stats.total}</div>
-                        <div className="text-sm text-secondary">Total Questions</div>
+                <div className="grid grid-cols-4 gap-4 mb-6">
+                    <div className="bg-gray-800 rounded-lg p-4">
+                        <div className="text-2xl font-bold">{questions.length}</div>
+                        <div className="text-gray-400 text-sm">Showing</div>
                     </div>
-                    <div className="bg-surface p-space-4 radius-lg border border-border">
-                        <div className="text-2xl font-bold text-accent-green">{stats.verified}</div>
-                        <div className="text-sm text-secondary">Verified</div>
+                    <div className="bg-gray-800 rounded-lg p-4">
+                        <div className="text-2xl font-bold text-green-400">
+                            {questions.filter(q => q.is_verified).length}
+                        </div>
+                        <div className="text-gray-400 text-sm">Verified</div>
                     </div>
-                    <div className="bg-surface p-space-4 radius-lg border border-border">
-                        <div className="text-2xl font-bold text-accent-yellow">{stats.unverified}</div>
-                        <div className="text-sm text-secondary">Pending Review</div>
+                    <div className="bg-gray-800 rounded-lg p-4">
+                        <div className="text-2xl font-bold text-yellow-400">
+                            {questions.filter(q => !q.is_verified).length}
+                        </div>
+                        <div className="text-gray-400 text-sm">Unverified</div>
+                    </div>
+                    <div className="bg-gray-800 rounded-lg p-4">
+                        <div className="text-2xl font-bold text-orange-400">
+                            {questions.filter(q => q.needs_image_review).length}
+                        </div>
+                        <div className="text-gray-400 text-sm">Need Images</div>
                     </div>
                 </div>
 
                 {/* Filters */}
-                <div className="flex gap-space-2 mb-space-6">
-                    <button
-                        onClick={() => setFilter('all')}
-                        className={`px-space-4 py-space-2 radius-md transition-smooth ${filter === 'all'
-                            ? 'bg-accent-blue text-white'
-                            : 'bg-surface text-secondary hover:bg-surface-hover'
-                            }`}
-                    >
-                        All
-                    </button>
-                    <button
-                        onClick={() => setFilter('unverified')}
-                        className={`px-space-4 py-space-2 radius-md transition-smooth ${filter === 'unverified'
-                            ? 'bg-accent-yellow text-background'
-                            : 'bg-surface text-secondary hover:bg-surface-hover'
-                            }`}
-                    >
-                        Unverified
-                    </button>
-                    <button
-                        onClick={() => setFilter('verified')}
-                        className={`px-space-4 py-space-2 radius-md transition-smooth ${filter === 'verified'
-                            ? 'bg-accent-green text-white'
-                            : 'bg-surface text-secondary hover:bg-surface-hover'
-                            }`}
-                    >
-                        Verified
-                    </button>
+                <div className="flex gap-2 mb-6">
+                    {(['all', 'unverified', 'verified', 'needs_review'] as const).map((f) => (
+                        <button
+                            key={f}
+                            onClick={() => setFilter(f)}
+                            className={`px-4 py-2 rounded-lg transition ${filter === f
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
+                                }`}
+                        >
+                            {f === 'needs_review' ? 'Need Images' : f.charAt(0).toUpperCase() + f.slice(1)}
+                        </button>
+                    ))}
                 </div>
+
+                {/* Loading */}
+                {loading && (
+                    <div className="text-center py-8 text-gray-400">Loading questions...</div>
+                )}
 
                 {/* Questions List */}
-                <div className="space-y-space-4">
-                    {questions.map((question) => {
-                        const isEditing = editingId === question._id;
-                        const displayQuestion = isEditing ? editedQuestion! : question;
+                {!loading && questions.length === 0 && (
+                    <div className="text-center py-8 text-gray-400">No questions found</div>
+                )}
 
-                        return (
-                            <div
-                                key={question._id}
-                                className="bg-surface border border-border radius-lg p-space-6"
-                            >
-                                {/* Source Info */}
-                                <div className="flex items-center justify-between mb-space-4 pb-space-4 border-b border-border">
-                                    <div className="text-sm text-secondary">
-                                        <span className="font-medium text-primary">
-                                            {question.metadata.source_exam}
+                <div className="space-y-4">
+                    {questions.map((question) => (
+                        <div
+                            key={question._id}
+                            className={`bg-gray-800 rounded-xl p-6 border-l-4 ${question.is_verified ? 'border-green-500' :
+                                question.needs_image_review ? 'border-orange-500' : 'border-yellow-500'
+                                }`}
+                        >
+                            {/* Header */}
+                            <div className="flex justify-between items-start mb-4">
+                                <div>
+                                    <span className="text-blue-400 font-medium">
+                                        Q.{question.source.question_number}
+                                    </span>
+                                    <span className="text-gray-500 ml-2">
+                                        {question.source.paper}
+                                    </span>
+                                    {question.needs_image_review && (
+                                        <span className="ml-2 px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded">
+                                            Needs Image
                                         </span>
-                                        {' • '}
-                                        <span>{question.metadata.year}</span>
-                                        {' • '}
-                                        <span>{question.metadata.original_paper}</span>
-                                        {' • '}
-                                        <span>Q.{question.metadata.question_number}</span>
-                                    </div>
-                                    <div className="flex items-center gap-space-2">
-                                        {!isEditing && (
-                                            <>
-                                                <button
-                                                    onClick={() => startEdit(question)}
-                                                    className="p-space-2 hover:bg-surface-hover radius-md transition-smooth"
-                                                    title="Edit"
-                                                >
-                                                    <EditIcon sx={{ fontSize: 18 }} className="text-secondary" />
-                                                </button>
-                                                <button
-                                                    onClick={() => toggleVerify(question._id, question.is_verified)}
-                                                    className={`flex items-center gap-space-2 px-space-3 py-space-2 radius-md transition-smooth ${question.is_verified
-                                                        ? 'bg-accent-green text-white'
-                                                        : 'bg-accent-yellow text-background'
-                                                        }`}
-                                                >
-                                                    {question.is_verified ? (
-                                                        <>
-                                                            <CheckCircleIcon sx={{ fontSize: 16 }} />
-                                                            <span className="text-sm font-medium">Verified</span>
-                                                        </>
-                                                    ) : (
-                                                        <>
-                                                            <CancelIcon sx={{ fontSize: 16 }} />
-                                                            <span className="text-sm font-medium">Unverified</span>
-                                                        </>
-                                                    )}
-                                                </button>
-                                            </>
-                                        )}
-                                        {isEditing && (
-                                            <>
-                                                <button
-                                                    onClick={saveEdit}
-                                                    className="flex items-center gap-space-2 px-space-3 py-space-2 bg-accent-green text-white radius-md hover:opacity-90 transition-smooth"
-                                                >
-                                                    <SaveIcon sx={{ fontSize: 16 }} />
-                                                    <span className="text-sm font-medium">Save</span>
-                                                </button>
-                                                <button
-                                                    onClick={cancelEdit}
-                                                    className="flex items-center gap-space-2 px-space-3 py-space-2 bg-surface-hover text-secondary radius-md hover:bg-border transition-smooth"
-                                                >
-                                                    <CloseIcon sx={{ fontSize: 16 }} />
-                                                    <span className="text-sm font-medium">Cancel</span>
-                                                </button>
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-
-                                {/* Question Text */}
-                                <div className="mb-space-4">
-                                    {isEditing ? (
-                                        <textarea
-                                            value={displayQuestion.content.text}
-                                            onChange={(e) =>
-                                                setEditedQuestion({
-                                                    ...editedQuestion!,
-                                                    content: {
-                                                        ...editedQuestion!.content,
-                                                        text: e.target.value,
-                                                    },
-                                                })
-                                            }
-                                            className="w-full bg-background border border-border radius-md p-space-3 text-primary font-medium resize-none"
-                                            rows={3}
-                                        />
-                                    ) : (
-                                        <div className="text-primary font-medium text-lg">
-                                            {displayQuestion.content.text}
-                                        </div>
                                     )}
                                 </div>
-
-                                {/* Options */}
-                                <div className="space-y-space-2">
-                                    {displayQuestion.content.options.map((option) => (
-                                        <div
-                                            key={option.id}
-                                            className={`flex items-start gap-space-3 p-space-3 radius-md border ${option.is_correct
-                                                ? 'border-accent-green bg-accent-green/10'
-                                                : 'border-border bg-background'
-                                                }`}
-                                        >
-                                            {isEditing && (
-                                                <input
-                                                    type="radio"
-                                                    name={`correct-${question._id}`}
-                                                    checked={option.is_correct}
-                                                    onChange={() => toggleCorrectAnswer(option.id)}
-                                                    className="mt-1"
-                                                />
-                                            )}
-                                            <div className="flex-1">
-                                                {isEditing ? (
-                                                    <input
-                                                        type="text"
-                                                        value={option.text}
-                                                        onChange={(e) => updateOptionText(option.id, e.target.value)}
-                                                        className="w-full bg-transparent border-none text-primary focus:outline-none"
-                                                    />
+                                <div className="flex gap-2">
+                                    {editingId === question._id ? (
+                                        <>
+                                            <button
+                                                onClick={saveEdit}
+                                                className="p-2 bg-green-600 rounded-lg hover:bg-green-700"
+                                            >
+                                                <SaveIcon className="w-4 h-4" />
+                                            </button>
+                                            <button
+                                                onClick={cancelEdit}
+                                                className="p-2 bg-gray-600 rounded-lg hover:bg-gray-700"
+                                            >
+                                                <CloseIcon className="w-4 h-4" />
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <button
+                                                onClick={() => startEdit(question)}
+                                                className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600"
+                                            >
+                                                <EditIcon className="w-4 h-4" />
+                                            </button>
+                                            <button
+                                                onClick={() => toggleVerify(question._id, question.is_verified)}
+                                                className={`p-2 rounded-lg ${question.is_verified
+                                                    ? 'bg-green-600 hover:bg-green-700'
+                                                    : 'bg-gray-700 hover:bg-gray-600'
+                                                    }`}
+                                            >
+                                                {question.is_verified ? (
+                                                    <CheckCircleIcon className="w-4 h-4" />
                                                 ) : (
-                                                    <span className="text-primary">{option.text}</span>
+                                                    <CancelIcon className="w-4 h-4" />
                                                 )}
-                                            </div>
-                                            {option.is_correct && !isEditing && (
-                                                <CheckCircleIcon sx={{ fontSize: 20 }} className="text-accent-green flex-shrink-0" />
-                                            )}
-                                        </div>
-                                    ))}
+                                            </button>
+                                        </>
+                                    )}
                                 </div>
+                            </div>
 
-                                {/* Images */}
-                                {question.media_ids && question.media_ids.length > 0 && (
-                                    <div className="mt-space-4 pt-space-4 border-t border-border">
-                                        <div className="text-sm text-secondary mb-space-2">
-                                            {question.media_ids.length} image(s)
-                                        </div>
-                                        <div className="flex gap-space-2">
-                                            {question.media_ids.map((mediaId) => (
-                                                <img
-                                                    key={mediaId}
-                                                    src={`/api/media/${mediaId}`}
-                                                    alt="Question media"
-                                                    className="h-24 radius-md border border-border object-contain"
-                                                />
-                                            ))}
-                                        </div>
-                                    </div>
+                            {/* Source File */}
+                            <div className="text-xs text-gray-500 mb-3">
+                                📄 {question.source.file_name}
+                            </div>
+
+                            {/* Question Text */}
+                            <div className="mb-4">
+                                {editingId === question._id ? (
+                                    <textarea
+                                        value={editedQuestion?.content.text || ''}
+                                        onChange={(e) => updateQuestionText(e.target.value)}
+                                        className="w-full bg-gray-900 border border-gray-700 rounded-lg p-3 text-white"
+                                        rows={3}
+                                    />
+                                ) : (
+                                    <p className="text-gray-200 whitespace-pre-wrap">
+                                        {question.content.text}
+                                    </p>
                                 )}
                             </div>
-                        );
-                    })}
-                </div>
 
-                {questions.length === 0 && (
-                    <div className="text-center py-space-12 text-secondary">
-                        No questions found
-                    </div>
-                )}
+                            {/* Options */}
+                            <div className="grid grid-cols-2 gap-3">
+                                {question.content.options.map((option) => (
+                                    <div
+                                        key={option.id}
+                                        className={`p-3 rounded-lg border ${option.is_correct
+                                            ? 'border-green-500 bg-green-500/10'
+                                            : 'border-gray-700 bg-gray-900'
+                                            }`}
+                                    >
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-gray-500 font-medium">
+                                                {option.id.replace('opt_', '')}
+                                            </span>
+                                            {option.is_correct && (
+                                                <CheckCircleIcon className="w-4 h-4 text-green-500" />
+                                            )}
+                                        </div>
+                                        {editingId === question._id ? (
+                                            <input
+                                                type="text"
+                                                value={
+                                                    editedQuestion?.content.options.find(o => o.id === option.id)?.text || ''
+                                                }
+                                                onChange={(e) => updateOptionText(option.id, e.target.value)}
+                                                className="w-full bg-gray-800 border border-gray-600 rounded px-2 py-1 mt-1"
+                                            />
+                                        ) : (
+                                            <p className="text-gray-300 text-sm mt-1">{option.text}</p>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
