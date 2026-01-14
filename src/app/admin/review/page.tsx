@@ -153,7 +153,7 @@ export default function AdminReviewPage() {
     const [editingId, setEditingId] = useState<string | null>(null);
     const [editedQuestion, setEditedQuestion] = useState<Question | null>(null);
     const [loading, setLoading] = useState(true);
-    const [totalCount, setTotalCount] = useState({ total: 0, verified: 0, unverified: 0, needImages: 0 });
+    const [collectionStats, setCollectionStats] = useState({ total: 0, verified: 0, unverified: 0, needImages: 0 });
 
     // OCR State
     const [ocrModalOpen, setOcrModalOpen] = useState(false);
@@ -161,8 +161,24 @@ export default function AdminReviewPage() {
     const [ocrOptionId, setOcrOptionId] = useState<string | null>(null);
 
     useEffect(() => {
+        fetchCollectionStats();
         fetchQuestions();
     }, [filter]);
+
+    const fetchCollectionStats = async () => {
+        try {
+            const res = await fetch('/api/admin/stats');
+            const data = await res.json();
+            setCollectionStats({
+                total: data.total || 0,
+                verified: data.verified || 0,
+                unverified: data.unverified || 0,
+                needImages: data.needImages || 0,
+            });
+        } catch (error) {
+            console.error('Error fetching collection stats:', error);
+        }
+    };
 
     const fetchQuestions = async () => {
         setLoading(true);
@@ -189,15 +205,6 @@ export default function AdminReviewPage() {
             }
 
             setQuestions(filteredQuestions);
-
-            // Calculate stats from all fetched questions
-            const all = data.questions || [];
-            setTotalCount({
-                total: all.length,
-                verified: all.filter((q: Question) => q.is_verified).length,
-                unverified: all.filter((q: Question) => !q.is_verified).length,
-                needImages: all.filter((q: Question) => q.needs_image_review).length,
-            });
         } catch (error) {
             console.error('Error fetching questions:', error);
             setQuestions([]);
@@ -364,19 +371,19 @@ export default function AdminReviewPage() {
                 {/* Stats Cards */}
                 <div className="grid grid-cols-4 gap-4 mb-6">
                     <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 border border-gray-700">
-                        <div className="text-3xl font-bold">{totalCount.total}</div>
-                        <div className="text-gray-400 text-sm">Total Showing</div>
+                        <div className="text-3xl font-bold">{collectionStats.total}</div>
+                        <div className="text-gray-400 text-sm">Total in Collection</div>
                     </div>
                     <div className="bg-gradient-to-br from-green-900/50 to-gray-900 rounded-xl p-4 border border-green-800/50">
-                        <div className="text-3xl font-bold text-green-400">{totalCount.verified}</div>
+                        <div className="text-3xl font-bold text-green-400">{collectionStats.verified}</div>
                         <div className="text-gray-400 text-sm">Verified ✓</div>
                     </div>
                     <div className="bg-gradient-to-br from-yellow-900/50 to-gray-900 rounded-xl p-4 border border-yellow-800/50">
-                        <div className="text-3xl font-bold text-yellow-400">{totalCount.unverified}</div>
+                        <div className="text-3xl font-bold text-yellow-400">{collectionStats.unverified}</div>
                         <div className="text-gray-400 text-sm">Pending Review</div>
                     </div>
                     <div className="bg-gradient-to-br from-orange-900/50 to-gray-900 rounded-xl p-4 border border-orange-800/50">
-                        <div className="text-3xl font-bold text-orange-400">{totalCount.needImages}</div>
+                        <div className="text-3xl font-bold text-orange-400">{collectionStats.needImages}</div>
                         <div className="text-gray-400 text-sm">Need Images 📷</div>
                     </div>
                 </div>
@@ -524,7 +531,7 @@ export default function AdminReviewPage() {
                                                 </button>
                                             </div>
                                         ) : (
-                                            <MathText className="text-gray-200 leading-relaxed block">
+                                            <MathText className="text-gray-200 leading-relaxed block whitespace-pre-line">
                                                 {question.content.text}
                                             </MathText>
                                         )}
@@ -601,15 +608,6 @@ export default function AdminReviewPage() {
                                                 <MathText className="text-gray-300 text-sm block">
                                                     {option.text}
                                                 </MathText>
-                                            )}
-
-                                            {/* Option Image */}
-                                            {option.image && (
-                                                <img
-                                                    src={option.image}
-                                                    alt={`Option ${option.id}`}
-                                                    className="mt-2 rounded-lg max-h-24 object-contain"
-                                                />
                                             )}
 
                                             {/* Option Image Upload - Always show for flexibility */}

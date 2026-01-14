@@ -260,8 +260,8 @@ class SSCExtractor:
             else:
                 question_text = ""
         
-        # Clean question text
-        question_text = re.sub(r'\s+', ' ', question_text).strip()
+        # Clean question text - preserve newlines but collapse spaces/tabs
+        question_text = re.sub(r'[ \t]+', ' ', question_text).strip()  # Changed from \s+ to preserve \n
         question_text = re.sub(r'---PAGE_\d+---', '', question_text).strip()
         
         # Determine if question needs image

@@ -19,7 +19,7 @@ interface MathTextProps {
  * - Display math: \[...\] or $$...$$
  * 
  * If no LaTeX delimiters found, renders plain text.
- * 
+ *
  * Usage:
  * <MathText>Find the value of \(x^2 + y^2\) when x = 3</MathText>
  * <MathText>Plain text without math is also fine</MathText>
@@ -34,8 +34,18 @@ export function MathText({ children, className = '' }: MathTextProps) {
         // Check if text contains any LaTeX delimiters
         const hasLatex = /\\\(|\\\[|\$/.test(text);
 
-        if (!hasLatex) {
-            // No LaTeX delimiters - clean up any escaped characters and return
+        // Check if text contains bare LaTeX commands (without delimiters)
+        const latexCommands = /\\(frac|sqrt|text|triangle|times|div|cdot|pm|geq|leq|neq|approx|sum|prod|int|alpha|beta|gamma|Delta|Sigma|pi|theta|infty|partial|nabla|forall|exists|in|subset|cup|cap|angle|degree|circ|sin|cos|tan|log|ln|lim|rightarrow|leftarrow|Rightarrow|Leftarrow)/;
+        const hasBareLatex = !hasLatex && latexCommands.test(text);
+
+        if (hasBareLatex) {
+            // Auto-wrap in $ delimiters if bare LaTeX commands are detected
+            text = `$${text}$`;
+            foundMath = true;
+        }
+
+        if (!hasLatex && !hasBareLatex) {
+            // No LaTeX delimiters or commands - clean up any escaped characters and return
             const cleaned = text
                 .replace(/\\%/g, '%')
                 .replace(/\\#/g, '#')
