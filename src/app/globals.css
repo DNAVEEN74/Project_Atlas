@@ -3,12 +3,16 @@
 @tailwind utilities;
 
 /* ============================================
-   PROJECT ATLAS - DESIGN SYSTEM
+   PREPLEAGUE - DESIGN SYSTEM
    Centralized design tokens for colors, typography, spacing
    Dark mode only - Quantitative Aptitude Platform
    ============================================ */
 
 @layer base {
+  html {
+    font-size: 18px;
+  }
+
   :root {
     /* ========== COLOR PALETTE ========== */
     /* Background Colors - Deep Navy/Slate Theme */

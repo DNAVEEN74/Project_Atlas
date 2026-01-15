@@ -1,5 +1,5 @@
 /**
- * PROJECT ATLAS - THEME CONFIGURATION
+ * PREPLEAGUE - THEME CONFIGURATION
  * Centralized theme values for TypeScript usage
  * Mirrors the CSS variables defined in globals.css
  */

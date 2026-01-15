@@ -1,0 +1,24 @@
+// Helper function to format paper field (e.g., "Tier 1 - 09.09.2024 04.00 PM 05.00 PM" -> "Tier 1 - 09 Sep 2024 (04:00 PM - 05:00 PM)")
+function formatPaperInfo(paper: string): string {
+    // Extract date pattern like DD.MM.YYYY
+    const dateMatch = paper.match(/(\d{2})\.(\d{2})\.(\d{4})/);
+    if (!dateMatch) return paper; // Return as-is if no date found
+    
+    const [fullDate, day, month, year] = dateMatch;
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthName = monthNames[parseInt(month) - 1];
+    const formattedDate = `${day} ${monthName} ${year}`;
+    
+    // Replace the DD.MM.YYYY with formatted date
+    let result = paper.replace(fullDate, formattedDate);
+    
+    // Format time if present (e.g., "04.00 PM 05.00 PM" -> "(04:00 PM - 05:00 PM)")
+    const timeMatch = result.match(/(\d{2})\.(\d{2})\s+(AM|PM)\s+(\d{2})\.(\d{2})\s+(AM|PM)/);
+    if (timeMatch) {
+        const [fullTime, startHour, startMin, startPeriod, endHour, endMin, endPeriod] = timeMatch;
+        const formattedTime = `(${startHour}:${startMin} ${startPeriod} - ${endHour}:${endMin} ${endPeriod})`;
+        result = result.replace(fullTime, formattedTime);
+    }
+    
+    return result;
+}

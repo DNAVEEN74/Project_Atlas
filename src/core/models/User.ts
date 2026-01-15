@@ -1,14 +1,19 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface IUser extends Document {
-    u_id: string; // Auth0 ID
     email: string;
+    password_hash: string;
 
-    // Profile information (optional - can be populated from Auth0 or user input)
-    profile?: {
-        name?: string;
+    profile: {
+        name: string;
         username?: string;
         avatar_url?: string;
+    };
+
+    // Target exam info (onboarding data)
+    target: {
+        exam: 'SSC_CGL' | 'SSC_CHSL' | 'SSC_MTS' | 'BANK_PO' | 'BANK_CLERK' | 'RRB_NTPC' | 'OTHER';
+        year: number;
     };
 
     config: {
@@ -16,38 +21,58 @@ export interface IUser extends Document {
         is_premium: boolean;
     };
 
-    // User preferences (future enhancement)
-    preferences?: {
+    preferences: {
         notifications_enabled: boolean;
         email_digest: boolean;
         difficulty_preference?: 'EASY' | 'MEDIUM' | 'HARD';
     };
 
+    // Dashboard summary data
     dash: {
         total_solved: number;
+        total_correct: number;
         streak: number;
         heatmap: {
-            date: string;
+            date: string; // YYYY-MM-DD format
             count: number;
-            intensity: number;
+            intensity: number; // 0-4 for color intensity
         }[];
-        // heatmap data stored separately or summarized here? Overview said heatmap in dash, but daily logs separate.
-        // We will keep a summary here for fast load.
         last_active: Date;
     };
+
+    // Bookmarked questions
+    bookmarks: mongoose.Types.ObjectId[];
+
+    is_email_verified: boolean;
     createdAt: Date;
     updatedAt: Date;
 }
 
 const UserSchema: Schema = new Schema(
     {
-        u_id: { type: String, required: true, unique: true, index: true },
-        email: { type: String, required: true },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+            lowercase: true,
+            trim: true,
+            index: true
+        },
+        password_hash: { type: String, required: true },
 
         profile: {
-            name: { type: String },
+            name: { type: String, required: true },
             username: { type: String, unique: true, sparse: true },
             avatar_url: { type: String },
+        },
+
+        target: {
+            exam: {
+                type: String,
+                enum: ['SSC_CGL', 'SSC_CHSL', 'SSC_MTS', 'BANK_PO', 'BANK_CLERK', 'RRB_NTPC', 'OTHER'],
+                default: 'SSC_CGL',
+            },
+            year: { type: Number, default: 2025 },
         },
 
         config: {
@@ -70,16 +95,21 @@ const UserSchema: Schema = new Schema(
 
         dash: {
             total_solved: { type: Number, default: 0 },
+            total_correct: { type: Number, default: 0 },
             streak: { type: Number, default: 0 },
             heatmap: [
                 {
                     date: { type: String },
                     count: { type: Number },
-                    intensity: { type: Number },
+                    intensity: { type: Number, min: 0, max: 4 },
                 },
             ],
             last_active: { type: Date, default: Date.now },
         },
+
+        bookmarks: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
+
+        is_email_verified: { type: Boolean, default: false },
     },
     { timestamps: true }
 );

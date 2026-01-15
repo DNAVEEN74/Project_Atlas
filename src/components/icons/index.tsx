@@ -1,5 +1,5 @@
 /**
- * PROJECT ATLAS - CENTRALIZED ICONS MODULE
+ * PREPLEAGUE - CENTRALIZED ICONS MODULE
  * All Material UI icons used in the application
  * Import icons from this file throughout the app for consistency
  */
@@ -20,11 +20,16 @@ export { default as MoreHorizIcon } from '@mui/icons-material/MoreHoriz';
 
 // ========== USER & ACCOUNT ICONS ==========
 export { default as PersonIcon } from '@mui/icons-material/Person';
+export { default as PersonOutlinedIcon } from '@mui/icons-material/PersonOutlined';
 export { default as AccountCircleIcon } from '@mui/icons-material/AccountCircle';
 export { default as LoginIcon } from '@mui/icons-material/Login';
 export { default as LogoutIcon } from '@mui/icons-material/Logout';
 export { default as SettingsIcon } from '@mui/icons-material/Settings';
 export { default as ManageAccountsIcon } from '@mui/icons-material/ManageAccounts';
+export { default as EmailOutlinedIcon } from '@mui/icons-material/EmailOutlined';
+export { default as LockOutlinedIcon } from '@mui/icons-material/LockOutlined';
+export { default as BookmarkIcon } from '@mui/icons-material/Bookmark';
+export { default as BookmarkBorderIcon } from '@mui/icons-material/BookmarkBorder';
 
 // ========== LEARNING & EDUCATION ICONS ==========
 export { default as SchoolIcon } from '@mui/icons-material/School';
@@ -99,8 +104,6 @@ export { default as ImageIcon } from '@mui/icons-material/Image';
 export { default as VideoIcon } from '@mui/icons-material/VideoLibrary';
 export { default as ArticleIcon } from '@mui/icons-material/Article';
 export { default as NotesIcon } from '@mui/icons-material/Notes';
-export { default as BookmarkIcon } from '@mui/icons-material/Bookmark';
-export { default as BookmarkBorderIcon } from '@mui/icons-material/BookmarkBorder';
 
 // ========== COMMUNICATION ICONS ==========
 export { default as NotificationIcon } from '@mui/icons-material/Notifications';
@@ -137,6 +140,26 @@ export { default as AppsIcon } from '@mui/icons-material/Apps';
 export { default as GridIcon } from '@mui/icons-material/GridView';
 export { default as ListIcon } from '@mui/icons-material/ViewList';
 export { default as TableIcon } from '@mui/icons-material/TableChart';
+
+// ========== OUTLINED ICONS ==========
+export { default as CalculateOutlinedIcon } from '@mui/icons-material/CalculateOutlined';
+export { default as PsychologyOutlinedIcon } from '@mui/icons-material/PsychologyOutlined';
+export { default as BarChartOutlinedIcon } from '@mui/icons-material/BarChartOutlined';
+export { default as CalendarTodayOutlinedIcon } from '@mui/icons-material/CalendarTodayOutlined';
+export { default as TrackChangesOutlinedIcon } from '@mui/icons-material/TrackChangesOutlined';
+export { default as AccessTimeOutlinedIcon } from '@mui/icons-material/AccessTimeOutlined';
+export { default as CampaignOutlinedIcon } from '@mui/icons-material/CampaignOutlined';
+export { default as MenuBookOutlinedIcon } from '@mui/icons-material/MenuBookOutlined';
+export { default as AssignmentOutlinedIcon } from '@mui/icons-material/AssignmentOutlined';
+export { default as HistoryEduOutlinedIcon } from '@mui/icons-material/HistoryEduOutlined';
+export { default as LeaderboardOutlinedIcon } from '@mui/icons-material/LeaderboardOutlined';
+export { default as CheckCircleOutlinedIcon } from '@mui/icons-material/CheckCircleOutlined';
+export { default as RadioButtonUncheckedOutlinedIcon } from '@mui/icons-material/RadioButtonUncheckedOutlined';
+export { default as SchoolOutlinedIcon } from '@mui/icons-material/SchoolOutlined';
+export { default as QuizOutlinedIcon } from '@mui/icons-material/QuizOutlined';
+export { default as TrendingUpOutlinedIcon } from '@mui/icons-material/TrendingUpOutlined';
+export { default as LocalFireDepartmentOutlinedIcon } from '@mui/icons-material/LocalFireDepartmentOutlined';
+export { default as EmojiEventsOutlinedIcon } from '@mui/icons-material/EmojiEventsOutlined';
 
 /**
  * Helper function to get icon size styles
