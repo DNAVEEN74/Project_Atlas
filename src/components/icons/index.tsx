@@ -205,3 +205,10 @@ export const StatusIcons = {
     Warning: 'WarningIcon',
     Info: 'InfoIcon',
 } as const;
+// ========== TOAST & ALERT ICONS ==========
+export { default as InfoOutlinedIcon } from '@mui/icons-material/InfoOutlined';
+export { default as WarningOutlinedIcon } from '@mui/icons-material/WarningOutlined';
+export { default as ZoomInOutlinedIcon } from '@mui/icons-material/ZoomIn';
+export { default as ZoomOutOutlinedIcon } from '@mui/icons-material/ZoomOut';
+export { default as ViewListIcon } from '@mui/icons-material/ViewList';
+export { default as SplitscreenIcon } from '@mui/icons-material/Splitscreen';

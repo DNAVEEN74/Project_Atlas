@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import mongoose from "mongoose";
 import dbConnect from "@/core/db/connect";
 import Attempt from "@/core/models/Attempt";
+import Question from "@/core/models/Question";
 import User from "@/core/models/User";
 import { getCurrentUser } from "@/lib/auth";
 
@@ -8,7 +10,7 @@ import { getCurrentUser } from "@/lib/auth";
  * GET /api/user/progress
  * Returns user's progress including:
  * - Question IDs by status (solved correctly, solved wrongly, bookmarked)
- * - Stats by section
+ * - Stats by section and difficulty
  * - Overall progress
  */
 export async function GET(req: NextRequest) {
@@ -26,9 +28,12 @@ export async function GET(req: NextRequest) {
         const { searchParams } = new URL(req.url);
         const section = searchParams.get('section'); // Optional: QUANT or REASONING
 
-        // Get all user's attempts with question sections
+        // Convert userId string to ObjectId for aggregation
+        const userObjectId = new mongoose.Types.ObjectId(authUser.userId);
+
+        // Get all user's attempts with question details (section + difficulty)
         const attempts = await Attempt.aggregate([
-            { $match: { u_id: authUser.userId } },
+            { $match: { u_id: userObjectId } },
             {
                 $lookup: {
                     from: 'questions',
@@ -38,43 +43,85 @@ export async function GET(req: NextRequest) {
                 }
             },
             { $unwind: '$question' },
+            // Only include verified questions
+            { $match: { 'question.is_verified': true } },
             ...(section ? [{ $match: { 'question.source.section': section } }] : []),
             {
                 $group: {
                     _id: '$q_id',
-                    is_correct: { $last: '$is_correct' }, // Last attempt result
+                    is_correct: { $last: '$is_correct' },
                     attempts_count: { $sum: 1 },
-                    section: { $first: '$question.source.section' }
+                    section: { $first: '$question.source.section' },
+                    difficulty: { $first: '$question.difficulty' }
                 }
             }
         ]);
 
-        // Categorize questions
+        // Categorize questions by status and difficulty
         const solvedCorrect: string[] = [];
         const solvedWrong: string[] = [];
         const attempted: string[] = [];
 
+        const difficultyBreakdown = {
+            EASY: { solved: 0, wrong: 0 },
+            MEDIUM: { solved: 0, wrong: 0 },
+            HARD: { solved: 0, wrong: 0 }
+        };
+
         for (const attempt of attempts) {
             const qId = attempt._id.toString();
+            const difficulty = attempt.difficulty as 'EASY' | 'MEDIUM' | 'HARD';
             attempted.push(qId);
+
             if (attempt.is_correct) {
                 solvedCorrect.push(qId);
+                if (difficultyBreakdown[difficulty]) {
+                    difficultyBreakdown[difficulty].solved += 1;
+                }
             } else {
                 solvedWrong.push(qId);
+                if (difficultyBreakdown[difficulty]) {
+                    difficultyBreakdown[difficulty].wrong += 1;
+                }
             }
         }
 
-        // Get user's bookmarks and heatmap for calendar
+        // Get total verified questions count by difficulty (for progress bars)
+        const sectionFilter = section ? { 'source.section': section } : {};
+        const totalQuestions = await Question.aggregate([
+            { $match: { is_verified: true, ...sectionFilter } },
+            {
+                $group: {
+                    _id: '$difficulty',
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+
+        const totalsByDifficulty = {
+            EASY: 0,
+            MEDIUM: 0,
+            HARD: 0,
+            ALL: 0
+        };
+
+        for (const t of totalQuestions) {
+            if (t._id && totalsByDifficulty.hasOwnProperty(t._id)) {
+                totalsByDifficulty[t._id as 'EASY' | 'MEDIUM' | 'HARD'] = t.count;
+                totalsByDifficulty.ALL += t.count;
+            }
+        }
+
+        // Get user's bookmarks and heatmap
         const user = await User.findById(authUser.userId).select('bookmarks dash.heatmap').lean();
         const bookmarks = ((user as any)?.bookmarks || []).map((b: any) => b.toString());
 
-        // Extract activity dates for current month
-        const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM
+        const currentMonth = new Date().toISOString().slice(0, 7);
         const activityDates = ((user as any)?.dash?.heatmap || [])
             .filter((h: any) => h.date.startsWith(currentMonth))
             .map((h: any) => h.date);
 
-        // Calculate section-wise stats
+        // Calculate stats
         const stats = {
             totalAttempted: attempted.length,
             totalCorrect: solvedCorrect.length,
@@ -92,6 +139,8 @@ export async function GET(req: NextRequest) {
                 bookmarks,
                 activityDates,
                 stats,
+                difficultyBreakdown,
+                totalsByDifficulty,
             },
         });
     } catch (error) {

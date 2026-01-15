@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
@@ -26,6 +26,7 @@ import {
     ExpandMoreIcon,
     ExpandLessIcon,
 } from '@/components/icons';
+import { useToast } from '@/contexts/ToastContext';
 
 interface QuestionItem {
     id: string;
@@ -43,7 +44,8 @@ interface PaginationInfo {
     totalPages: number;
 }
 
-export default function ProblemsPage() {
+function ProblemsPageContent() {
+    const { error: notifyError, info: notifyInfo } = useToast();
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -249,8 +251,12 @@ export default function ProblemsPage() {
                                     onClick={() => setShowUserMenu(!showUserMenu)}
                                     className="flex items-center gap-3 p-1.5 hover:bg-neutral-800 rounded-xl transition-colors"
                                 >
-                                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-sm font-bold">
-                                        {getUserInitials()}
+                                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-sm font-bold overflow-hidden">
+                                        {user?.avatar_url ? (
+                                            <img src={user.avatar_url} alt={user.name} className="w-full h-full object-cover" />
+                                        ) : (
+                                            getUserInitials()
+                                        )}
                                     </div>
                                     <div className="hidden sm:block text-left">
                                         <p className="text-sm font-medium text-neutral-200 leading-tight">{user?.name || 'Guest'}</p>
@@ -530,10 +536,19 @@ export default function ProblemsPage() {
                         </div>
 
                         {/* Quick Practice */}
-                        <div className="bg-gradient-to-br from-amber-600/20 to-orange-600/20 border border-amber-500/20 rounded-2xl p-5">
+                        <div className={`border rounded-2xl p-5 transition-all duration-300 ${activeSection === 'QUANT'
+                            ? 'bg-gradient-to-br from-amber-600/20 to-orange-600/20 border-amber-500/20'
+                            : 'bg-gradient-to-br from-violet-600/20 to-purple-600/20 border-violet-500/20'
+                            }`}>
                             <div className="flex items-center gap-2 mb-3">
-                                <TrackChangesOutlinedIcon sx={{ fontSize: '1.2rem' }} className="text-amber-400" />
+                                <TrackChangesOutlinedIcon sx={{ fontSize: '1.2rem' }} className={activeSection === 'QUANT' ? 'text-amber-400' : 'text-violet-400'} />
                                 <h3 className="text-sm font-semibold text-white">Quick Practice</h3>
+                                <span className={`text-[10px] px-2 py-0.5 rounded-full ${activeSection === 'QUANT'
+                                    ? 'bg-amber-500/20 text-amber-400'
+                                    : 'bg-violet-500/20 text-violet-400'
+                                    }`}>
+                                    {activeSection === 'QUANT' ? 'Quant' : 'Reasoning'}
+                                </span>
                             </div>
                             <p className="text-xs text-neutral-400 mb-4 leading-relaxed">Solve 5 random questions from your selected topic.</p>
                             <button
@@ -542,16 +557,26 @@ export default function ProblemsPage() {
                                         const res = await fetch(`/api/quick-practice?section=${activeSection}&topic=${activeTopic}&limit=5`);
                                         const data = await res.json();
                                         if (data.success && data.questionIds.length > 0) {
-                                            router.push(`/problems/${data.questionIds[0]}?section=${activeSection}`);
+                                            // Store practice session in sessionStorage for tracking
+                                            sessionStorage.setItem('practiceSession', JSON.stringify({
+                                                questionIds: data.questionIds,
+                                                currentIndex: 0,
+                                                section: activeSection,
+                                                topic: activeTopic
+                                            }));
+                                            router.push(`/problems/${data.questionIds[0]}?section=${activeSection}&practice=true`);
                                         } else {
-                                            alert('No unattempted questions found in this category!');
+                                            notifyInfo('No unattempted questions found in this category!');
                                         }
                                     } catch (error) {
                                         console.error('Quick practice failed:', error);
-                                        alert('Failed to start practice session');
+                                        notifyError('Failed to start practice session');
                                     }
                                 }}
-                                className="w-full py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-amber-500/20"
+                                className={`w-full py-2.5 text-white text-sm font-semibold rounded-xl transition-all shadow-lg ${activeSection === 'QUANT'
+                                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 shadow-amber-500/20'
+                                    : 'bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-400 hover:to-purple-400 shadow-violet-500/20'
+                                    }`}
                             >
                                 Start Practice
                             </button>
@@ -600,6 +625,18 @@ export default function ProblemsPage() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
+    );
+}
+
+export default function ProblemsPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
+                <div className="text-neutral-400">Loading...</div>
+            </div>
+        }>
+            <ProblemsPageContent />
+        </Suspense>
     );
 }

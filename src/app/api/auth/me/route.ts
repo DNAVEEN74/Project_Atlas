@@ -40,6 +40,7 @@ export async function GET() {
                 lastActive: (user as any).dash?.last_active,
                 bookmarks: (user as any).bookmarks || [],
                 heatmap: (user as any).dash?.heatmap || [],
+                avatar_url: (user as any).profile?.avatar_url,
             },
         });
     } catch (error) {

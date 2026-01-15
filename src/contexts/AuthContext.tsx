@@ -13,6 +13,7 @@ interface User {
     streak: number;
     bookmarks: string[];
     heatmap: { date: string; count: number; intensity: number }[];
+    avatar_url?: string;
 }
 
 interface AuthContextType {

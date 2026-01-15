@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import mongoose from "mongoose";
 import dbConnect from "@/core/db/connect";
 import Attempt from "@/core/models/Attempt";
 import Question from "@/core/models/Question";
@@ -41,10 +42,13 @@ export async function POST(req: NextRequest) {
 
         const is_correct = (question as any).content.correct_option_id === optionSelected;
 
+        // Convert userId to ObjectId for MongoDB queries
+        const userObjectId = new mongoose.Types.ObjectId(authUser.userId);
+
         // IMPORTANT: Check if question was already solved BEFORE creating the new attempt
         // This prevents the bug where the newly created attempt is found by the query
         const alreadySolvedCorrectly = await Attempt.exists({
-            u_id: authUser.userId,
+            u_id: userObjectId,
             q_id: questionId,
             is_correct: true,
         });
@@ -52,11 +56,11 @@ export async function POST(req: NextRequest) {
         // Use upsert to update existing attempt or create new one
         const attempt = await Attempt.findOneAndUpdate(
             {
-                u_id: authUser.userId,
+                u_id: userObjectId,
                 q_id: questionId,
             },
             {
-                u_id: authUser.userId,
+                u_id: userObjectId,
                 q_id: questionId,
                 p_id: (question as any).p_id || null,
                 is_correct,

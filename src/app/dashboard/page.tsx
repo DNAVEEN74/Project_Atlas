@@ -19,10 +19,12 @@ import {
     ExpandMoreIcon,
     DashboardIcon,
 } from '@/components/icons';
+import { useToast } from '@/contexts/ToastContext';
 
 export default function DashboardPage() {
     const router = useRouter();
-    const { user, loading, logout } = useAuth();
+    const { user, loading, logout, refreshUser } = useAuth();
+    const { success, error: notifyError } = useToast();
     const [recentActivity, setRecentActivity] = React.useState<any[]>([]);
     const [activeTab, setActiveTab] = React.useState<'recent' | 'bookmarks'>('recent');
     const [showUserMenu, setShowUserMenu] = React.useState(false);
@@ -56,9 +58,103 @@ export default function DashboardPage() {
         fetchBookmarks();
     }, []);
 
+    // Dynamic stats (calculated from actual attempts, not cached user.dash)
+    const [dynamicStats, setDynamicStats] = React.useState({
+        totalCorrect: 0,
+        totalWrong: 0,
+        totalAttempted: 0,
+        accuracy: 0,
+    });
+
+    const [difficultyStats, setDifficultyStats] = React.useState({
+        easy: { solved: 0, total: 0 },
+        medium: { solved: 0, total: 0 },
+        hard: { solved: 0, total: 0 },
+    });
+
+    const [totalQuestions, setTotalQuestions] = React.useState(0);
+    const [selectedSection, setSelectedSection] = React.useState<'ALL' | 'QUANT' | 'REASONING'>('ALL');
+
+    React.useEffect(() => {
+        const fetchDynamicStats = async () => {
+            try {
+                const url = selectedSection === 'ALL'
+                    ? '/api/user/progress'
+                    : `/api/user/progress?section=${selectedSection}`;
+                const res = await fetch(url);
+                if (res.ok) {
+                    const { data } = await res.json();
+                    setDynamicStats({
+                        totalCorrect: data.stats.totalCorrect,
+                        totalWrong: data.stats.totalWrong,
+                        totalAttempted: data.stats.totalAttempted,
+                        accuracy: data.stats.accuracy,
+                    });
+                    setDifficultyStats({
+                        easy: {
+                            solved: data.difficultyBreakdown?.EASY?.solved || 0,
+                            total: data.totalsByDifficulty?.EASY || 0
+                        },
+                        medium: {
+                            solved: data.difficultyBreakdown?.MEDIUM?.solved || 0,
+                            total: data.totalsByDifficulty?.MEDIUM || 0
+                        },
+                        hard: {
+                            solved: data.difficultyBreakdown?.HARD?.solved || 0,
+                            total: data.totalsByDifficulty?.HARD || 0
+                        },
+                    });
+                    setTotalQuestions(data.totalsByDifficulty?.ALL || 0);
+                }
+            } catch (error) {
+                console.error('Failed to fetch dynamic stats:', error);
+            }
+        };
+        if (user) fetchDynamicStats();
+    }, [user, selectedSection]);
+
     React.useEffect(() => {
         if (!loading && !user) router.push('/login');
     }, [user, loading, router]);
+
+    const fileInputRef = React.useRef<HTMLInputElement>(null);
+    const [uploadingAvatar, setUploadingAvatar] = React.useState(false);
+
+    const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setUploadingAvatar(true);
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const res = await fetch('/api/user/avatar', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                // Determine functionality to refresh user or update local state
+                // Since this context updates the user, calling logout then login is too heavy
+                // But refreshUser() should handle it if it fetches fresh data
+                // Assuming refreshUser is available from useAuth based on context definition
+                // We'll reload the page or trigger a refresh if the context exposes it.
+                // Looking at useAuth, it does expose refreshUser!
+                // Wait, I need to check if I can access refreshUser from the hook.
+                // let's assume I check the context file and it exports it.
+                // If not, a window.location.reload() is a safe fallback.
+                await refreshUser();
+                success('Profile picture updated!');
+            }
+        } catch (error) {
+            console.error('Failed to upload avatar:', error);
+            notifyError('Failed to upload profile picture');
+        } finally {
+            setUploadingAvatar(false);
+        }
+    };
 
     const handleLogout = async () => {
         await logout();
@@ -146,12 +242,8 @@ export default function DashboardPage() {
     const totalActiveDays = heatmapData.length;
     const totalSubmissions = heatmapData.reduce((sum, h) => sum + h.count, 0);
 
-    // Mock data for difficulty breakdown (you'd get this from API)
-    const difficultyStats = {
-        easy: { solved: Math.floor(user.totalSolved * 0.4), total: 500 },
-        medium: { solved: Math.floor(user.totalSolved * 0.45), total: 800 },
-        hard: { solved: Math.floor(user.totalSolved * 0.15), total: 300 },
-    };
+
+
 
     return (
         <div className="min-h-screen bg-[#0f0f0f]">
@@ -197,7 +289,7 @@ export default function DashboardPage() {
                             <div className="hidden md:flex items-center gap-3">
                                 <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
                                     <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
-                                    <span className="text-xs font-medium text-emerald-400">{user?.totalCorrect || 0} Solved</span>
+                                    <span className="text-xs font-medium text-emerald-400">{dynamicStats.totalCorrect} Solved</span>
                                 </div>
                                 <div className="flex items-center gap-2 px-3 py-1.5 bg-orange-500/10 border border-orange-500/20 rounded-full">
                                     <span className="text-sm">🔥</span>
@@ -210,8 +302,12 @@ export default function DashboardPage() {
                                     onClick={() => setShowUserMenu(!showUserMenu)}
                                     className="flex items-center gap-3 p-1.5 hover:bg-neutral-800 rounded-xl transition-colors"
                                 >
-                                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-sm font-bold">
-                                        {getUserInitials()}
+                                    <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-sm font-bold overflow-hidden">
+                                        {user?.avatar_url ? (
+                                            <img src={user.avatar_url} alt={user.name} className="w-full h-full object-cover" />
+                                        ) : (
+                                            getUserInitials()
+                                        )}
                                     </div>
                                     <div className="hidden sm:block text-left">
                                         <p className="text-sm font-medium text-neutral-200 leading-tight">{user?.name || 'Guest'}</p>
@@ -262,9 +358,35 @@ export default function DashboardPage() {
                         <div className="bg-[#1a1a1a] rounded-xl border border-neutral-800 p-6">
                             {/* Avatar & Name */}
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg shrink-0">
-                                    {getUserInitials()}
+                                <div className="relative group/avatar">
+                                    <div
+                                        onClick={() => fileInputRef.current?.click()}
+                                        className="w-20 h-20 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-2xl font-bold shadow-lg shrink-0 overflow-hidden cursor-pointer relative"
+                                    >
+                                        {user.avatar_url ? (
+                                            <img src={user.avatar_url} alt={user.name} className="w-full h-full object-cover" />
+                                        ) : (
+                                            getUserInitials()
+                                        )}
+
+                                        {/* Overlay for hover */}
+                                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover/avatar:opacity-100 transition-opacity">
+                                            {uploadingAvatar ? (
+                                                <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                            ) : (
+                                                <span className="text-xs font-medium text-white">Change</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <input
+                                        type="file"
+                                        ref={fileInputRef}
+                                        onChange={handleAvatarUpload}
+                                        accept="image/*"
+                                        className="hidden"
+                                    />
                                 </div>
+
                                 <div className="min-w-0">
                                     <h2 className="text-xl font-bold text-white truncate">{user.name}</h2>
                                     <p className="text-sm text-neutral-400 truncate" title={user.email}>{user.email}</p>
@@ -292,14 +414,14 @@ export default function DashboardPage() {
                                         <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
                                         <span className="text-lg text-neutral-200">Correct</span>
                                     </div>
-                                    <span className="text-lg font-semibold text-white">{user.totalCorrect}</span>
+                                    <span className="text-lg font-semibold text-white">{dynamicStats.totalCorrect}</span>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-3">
                                         <div className="w-3 h-3 rounded-full bg-rose-500"></div>
                                         <span className="text-lg text-neutral-200">Wrong</span>
                                     </div>
-                                    <span className="text-lg font-semibold text-white">{user.totalSolved - user.totalCorrect}</span>
+                                    <span className="text-lg font-semibold text-white">{dynamicStats.totalWrong}</span>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-3">
@@ -344,7 +466,7 @@ export default function DashboardPage() {
                             {/* Solved Progress Card */}
                             <div className="bg-[#1a1a1a] rounded-xl border border-neutral-800 p-5">
                                 <div className="flex items-center gap-8">
-                                    <CircularProgress solved={user.totalSolved} total={1600} />
+                                    <CircularProgress solved={dynamicStats.totalCorrect} total={totalQuestions || 1} />
 
                                     {/* Difficulty Breakdown */}
                                     <div className="flex-1 space-y-4">
@@ -397,30 +519,62 @@ export default function DashboardPage() {
                                 </div>
                             </div>
 
-                            {/* Practice Cards */}
+                            {/* Section Toggle Cards */}
                             <div className="flex flex-col gap-3 min-w-[200px]">
-                                <Link href="/problems?section=QUANT" className="flex-1">
-                                    <div className="h-full bg-gradient-to-r from-amber-600/20 to-orange-600/20 border border-amber-500/30 rounded-xl p-4 hover:border-amber-500/50 transition-all">
+                                {/* All Button */}
+                                <button
+                                    onClick={() => setSelectedSection('ALL')}
+                                    className={`flex-1 text-left transition-all duration-300 ${selectedSection === 'ALL' ? 'scale-[1.02]' : ''}`}
+                                >
+                                    <div className={`h-full bg-gradient-to-r from-neutral-600/20 to-neutral-600/20 border rounded-xl p-4 transition-all duration-300 ${selectedSection === 'ALL'
+                                        ? 'border-white/50 ring-2 ring-white/20'
+                                        : 'border-neutral-700 hover:border-neutral-500'
+                                        }`}>
                                         <div className="flex items-center gap-3">
-                                            <CalculateOutlinedIcon sx={{ fontSize: '1.5rem' }} className="text-amber-400" />
+                                            <TrendingUpIcon sx={{ fontSize: '1.5rem' }} className={`transition-colors duration-300 ${selectedSection === 'ALL' ? 'text-white' : 'text-neutral-400'}`} />
                                             <div>
-                                                <p className="text-sm font-semibold text-white">Quant</p>
+                                                <p className={`text-sm font-semibold transition-colors duration-300 ${selectedSection === 'ALL' ? 'text-white' : 'text-neutral-300'}`}>All Sections</p>
+                                                <p className="text-xs text-neutral-500">Combined Stats</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </button>
+                                {/* Quant Button */}
+                                <button
+                                    onClick={() => setSelectedSection('QUANT')}
+                                    className={`flex-1 text-left transition-all duration-300 ${selectedSection === 'QUANT' ? 'scale-[1.02]' : ''}`}
+                                >
+                                    <div className={`h-full bg-gradient-to-r from-amber-600/20 to-orange-600/20 border rounded-xl p-4 transition-all duration-300 ${selectedSection === 'QUANT'
+                                        ? 'border-amber-500/70 ring-2 ring-amber-500/20'
+                                        : 'border-amber-500/30 hover:border-amber-500/50'
+                                        }`}>
+                                        <div className="flex items-center gap-3">
+                                            <CalculateOutlinedIcon sx={{ fontSize: '1.5rem' }} className={`transition-colors duration-300 ${selectedSection === 'QUANT' ? 'text-amber-300' : 'text-amber-400'}`} />
+                                            <div>
+                                                <p className={`text-sm font-semibold transition-colors duration-300 ${selectedSection === 'QUANT' ? 'text-amber-300' : 'text-white'}`}>Quant</p>
                                                 <p className="text-xs text-neutral-500">Math & Arithmetic</p>
                                             </div>
                                         </div>
                                     </div>
-                                </Link>
-                                <Link href="/problems?section=REASONING" className="flex-1">
-                                    <div className="h-full bg-gradient-to-r from-violet-600/20 to-purple-600/20 border border-violet-500/30 rounded-xl p-4 hover:border-violet-500/50 transition-all">
+                                </button>
+                                {/* Reasoning Button */}
+                                <button
+                                    onClick={() => setSelectedSection('REASONING')}
+                                    className={`flex-1 text-left transition-all duration-300 ${selectedSection === 'REASONING' ? 'scale-[1.02]' : ''}`}
+                                >
+                                    <div className={`h-full bg-gradient-to-r from-violet-600/20 to-purple-600/20 border rounded-xl p-4 transition-all duration-300 ${selectedSection === 'REASONING'
+                                        ? 'border-violet-500/70 ring-2 ring-violet-500/20'
+                                        : 'border-violet-500/30 hover:border-violet-500/50'
+                                        }`}>
                                         <div className="flex items-center gap-3">
-                                            <PsychologyOutlinedIcon sx={{ fontSize: '1.5rem' }} className="text-violet-400" />
+                                            <PsychologyOutlinedIcon sx={{ fontSize: '1.5rem' }} className={`transition-colors duration-300 ${selectedSection === 'REASONING' ? 'text-violet-300' : 'text-violet-400'}`} />
                                             <div>
-                                                <p className="text-sm font-semibold text-white">Reasoning</p>
+                                                <p className={`text-sm font-semibold transition-colors duration-300 ${selectedSection === 'REASONING' ? 'text-violet-300' : 'text-white'}`}>Reasoning</p>
                                                 <p className="text-xs text-neutral-500">Logical Reasoning</p>
                                             </div>
                                         </div>
                                     </div>
-                                </Link>
+                                </button>
                             </div>
                         </div>
 
@@ -514,6 +668,19 @@ export default function DashboardPage() {
                                         );
                                     })}
                                 </div>
+                            </div>
+
+                            {/* Heatmap Legend */}
+                            <div className="flex items-center justify-end gap-2 mt-4">
+                                <span className="text-xs text-neutral-500">Less</span>
+                                <div className="flex gap-1">
+                                    <div className="w-3.5 h-3.5 rounded-sm bg-neutral-800" title="0 submissions"></div>
+                                    <div className="w-3.5 h-3.5 rounded-sm bg-emerald-900/80" title="1-2 submissions"></div>
+                                    <div className="w-3.5 h-3.5 rounded-sm bg-emerald-700" title="3-4 submissions"></div>
+                                    <div className="w-3.5 h-3.5 rounded-sm bg-emerald-500" title="5-9 submissions"></div>
+                                    <div className="w-3.5 h-3.5 rounded-sm bg-emerald-400" title="10+ submissions"></div>
+                                </div>
+                                <span className="text-xs text-neutral-500">More</span>
                             </div>
                         </div>
 

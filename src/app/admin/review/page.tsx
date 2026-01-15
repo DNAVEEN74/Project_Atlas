@@ -55,6 +55,7 @@ function ImageUpload({
 }) {
     const [uploading, setUploading] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
+    const { error: notifyError } = useToast();
 
     const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -64,7 +65,7 @@ function ImageUpload({
         try {
             // Reject files larger than 5MB before processing
             if (file.size > 5 * 1024 * 1024) {
-                alert('File too large! Max size is 5MB.');
+                notifyError('File too large! Max size is 5MB.');
                 setUploading(false);
                 return;
             }
@@ -146,8 +147,11 @@ function ImageUpload({
     );
 }
 
+import { useToast } from '@/contexts/ToastContext';
+
 export default function AdminReviewPage() {
     const [questions, setQuestions] = useState<Question[]>([]);
+    const { error: notifyError } = useToast();
     const [filter, setFilter] = useState<'all' | 'verified' | 'unverified' | 'needs_review'>('needs_review');
     const [sectionFilter, setSectionFilter] = useState<'all' | 'REASONING' | 'QUANT'>('all');
     const [editingId, setEditingId] = useState<string | null>(null);
