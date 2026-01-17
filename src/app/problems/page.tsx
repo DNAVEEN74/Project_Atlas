@@ -142,6 +142,13 @@ function ProblemsPageContent() {
         return () => window.removeEventListener('focus', onFocus);
     }, [fetchProgress]);
 
+    // Redirect if not authenticated
+    useEffect(() => {
+        if (!authLoading && !user) {
+            router.push('/');
+        }
+    }, [user, authLoading, router]);
+
     const handleLogout = async () => {
         await logout();
         router.push('/');
@@ -542,7 +549,7 @@ function ProblemsPageContent() {
                             }`}>
                             <div className="flex items-center gap-2 mb-3">
                                 <TrackChangesOutlinedIcon sx={{ fontSize: '1.2rem' }} className={activeSection === 'QUANT' ? 'text-amber-400' : 'text-violet-400'} />
-                                <h3 className="text-sm font-semibold text-white">Quick Practice</h3>
+                                <h3 className="text-sm font-semibold text-white">Daily Practice</h3>
                                 <span className={`text-[10px] px-2 py-0.5 rounded-full ${activeSection === 'QUANT'
                                     ? 'bg-amber-500/20 text-amber-400'
                                     : 'bg-violet-500/20 text-violet-400'
@@ -550,23 +557,41 @@ function ProblemsPageContent() {
                                     {activeSection === 'QUANT' ? 'Quant' : 'Reasoning'}
                                 </span>
                             </div>
-                            <p className="text-xs text-neutral-400 mb-4 leading-relaxed">Solve 5 random questions from your selected topic.</p>
+
+                            <p className="text-xs text-neutral-400 mb-4 leading-relaxed">
+                                Complete your daily target of <strong className="text-white">{activeSection === 'QUANT' ? (user?.dailyQuantGoal || 5) : (user?.dailyReasoningGoal || 5)} questions</strong>. Resume where you left off!
+                            </p>
                             <button
                                 onClick={async () => {
                                     try {
-                                        const res = await fetch(`/api/quick-practice?section=${activeSection}&topic=${activeTopic}&limit=5`);
+                                        const res = await fetch(`/api/quick-practice?section=${activeSection}&topic=${activeTopic}`);
                                         const data = await res.json();
-                                        if (data.success && data.questionIds.length > 0) {
+
+                                        if (data.completed) {
+                                            // Already completed today
+                                            notifyInfo("🎉 You've completed today's practice! Select questions from the list.");
+                                            return;
+                                        }
+
+                                        if (data.success && data.questionIds?.length > 0) {
                                             // Store practice session in sessionStorage for tracking
                                             sessionStorage.setItem('practiceSession', JSON.stringify({
                                                 questionIds: data.questionIds,
-                                                currentIndex: 0,
+                                                currentIndex: data.currentIndex || 0,
                                                 section: activeSection,
-                                                topic: activeTopic
+                                                topic: activeTopic,
+                                                resuming: data.resuming
                                             }));
-                                            router.push(`/problems/${data.questionIds[0]}?section=${activeSection}&practice=true`);
-                                        } else {
+
+                                            const nextId = data.nextQuestionId || data.questionIds[0];
+                                            if (data.resuming) {
+                                                notifyInfo(`Resuming practice: ${data.answered}/${data.total} completed`);
+                                            }
+                                            router.push(`/problems/${nextId}?section=${activeSection}&practice=true`);
+                                        } else if (data.questionIds?.length === 0) {
                                             notifyInfo('No unattempted questions found in this category!');
+                                        } else {
+                                            notifyError('Failed to start practice session');
                                         }
                                     } catch (error) {
                                         console.error('Quick practice failed:', error);

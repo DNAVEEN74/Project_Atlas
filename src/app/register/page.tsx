@@ -5,11 +5,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/contexts/ToastContext';
+import { CustomSelect } from '@/components/ui/CustomSelect';
+import { ExamRequestModal } from '@/components/ui/ExamRequestModal';
 import {
     LockOutlinedIcon,
     EmailOutlinedIcon,
     PersonOutlinedIcon,
-    ArrowBackIcon
+    ArrowBackIcon,
+    TrackChangesOutlinedIcon,
+    EditIcon,
+    SchoolIcon,
+    CalendarTodayOutlinedIcon
 } from '@/components/icons';
 
 const EXAM_OPTIONS = [
@@ -27,19 +34,28 @@ const YEAR_OPTIONS = [2025, 2026, 2027];
 export default function RegisterPage() {
     const router = useRouter();
     const { register, user, loading } = useAuth();
+    const { warning: notifyWarning } = useToast();
     const [name, setName] = useState('');
+    const [showExamRequestModal, setShowExamRequestModal] = useState(false);
+    const [pendingExam, setPendingExam] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [targetExam, setTargetExam] = useState('SSC_CGL');
     const [targetYear, setTargetYear] = useState(2025);
+    const [dailyQuantGoal, setDailyQuantGoal] = useState(5);
+    const [dailyReasoningGoal, setDailyReasoningGoal] = useState(5);
+    const [customQuantGoal, setCustomQuantGoal] = useState('');
+    const [customReasoningGoal, setCustomReasoningGoal] = useState('');
+    const [showCustomQuant, setShowCustomQuant] = useState(false);
+    const [showCustomReasoning, setShowCustomReasoning] = useState(false);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     // Redirect if already logged in
     React.useEffect(() => {
         if (!loading && user) {
-            router.push('/dashboard');
+            router.push('/problems');
         }
     }, [user, loading, router]);
 
@@ -65,6 +81,8 @@ export default function RegisterPage() {
             name,
             targetExam,
             targetYear,
+            dailyQuantGoal: showCustomQuant ? parseInt(customQuantGoal) || 5 : dailyQuantGoal,
+            dailyReasoningGoal: showCustomReasoning ? parseInt(customReasoningGoal) || 5 : dailyReasoningGoal,
         });
 
         if (result.success) {
@@ -161,37 +179,137 @@ export default function RegisterPage() {
                         <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-neutral-400 mb-2">Target Exam</label>
-                                <div className="relative">
-                                    <select
-                                        value={targetExam}
-                                        onChange={(e) => setTargetExam(e.target.value)}
-                                        className="w-full px-4 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white appearance-none cursor-pointer"
-                                    >
-                                        {EXAM_OPTIONS.map(opt => (
-                                            <option key={opt.value} value={opt.value}>{opt.label}</option>
-                                        ))}
-                                    </select>
-                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-500">
-                                        ▼
-                                    </div>
-                                </div>
+                                <CustomSelect
+                                    value={targetExam}
+                                    onChange={(value) => {
+                                        if (value !== 'SSC_CGL') {
+                                            setPendingExam(value);
+                                            setShowExamRequestModal(true);
+                                            return;
+                                        }
+                                        setTargetExam(value);
+                                    }}
+                                    options={EXAM_OPTIONS}
+                                    icon={<SchoolIcon sx={{ fontSize: '1.2rem' }} />}
+                                    className="w-full"
+                                />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-neutral-400 mb-2">Target Year</label>
-                                <div className="relative">
-                                    <select
-                                        value={targetYear}
-                                        onChange={(e) => setTargetYear(parseInt(e.target.value))}
-                                        className="w-full px-4 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white appearance-none cursor-pointer"
-                                    >
-                                        {YEAR_OPTIONS.map(year => (
-                                            <option key={year} value={year}>{year}</option>
-                                        ))}
-                                    </select>
-                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-500">
-                                        ▼
-                                    </div>
+                                <CustomSelect
+                                    value={targetYear.toString()}
+                                    onChange={(value) => setTargetYear(parseInt(value))}
+                                    options={YEAR_OPTIONS.map(year => ({ value: year.toString(), label: year.toString() }))}
+                                    icon={<CalendarTodayOutlinedIcon sx={{ fontSize: '1.1rem' }} />}
+                                    className="w-full"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Daily Practice Goals */}
+                        <div className="space-y-5 p-5 bg-gradient-to-br from-neutral-900/80 to-neutral-900/40 rounded-2xl border border-neutral-800/80 backdrop-blur-sm">
+                            <div className="flex items-center gap-3">
+                                <TrackChangesOutlinedIcon className="text-amber-500" sx={{ fontSize: '2rem' }} />
+                                <div>
+                                    <span className="text-sm font-semibold text-white">Daily Practice Goals</span>
+                                    <p className="text-[11px] text-neutral-500">Set your daily question targets</p>
                                 </div>
+                            </div>
+
+                            {/* Quant Goal */}
+                            <div className="space-y-3">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
+                                    <label className="text-xs font-semibold text-neutral-400 uppercase tracking-wide">Quantitative Aptitude</label>
+                                </div>
+                                <div className="flex flex-wrap gap-2">
+                                    {[5, 10, 15, 20, 25].map(num => (
+                                        <button
+                                            key={num}
+                                            type="button"
+                                            onClick={() => { setDailyQuantGoal(num); setShowCustomQuant(false); }}
+                                            className={`min-w-[44px] px-3 py-2 text-sm font-bold rounded-xl transition-all duration-200 ${!showCustomQuant && dailyQuantGoal === num
+                                                ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25 scale-105'
+                                                : 'bg-neutral-800/80 text-neutral-400 border border-neutral-700/50 hover:bg-neutral-700 hover:text-white hover:border-neutral-600'
+                                                }`}
+                                        >
+                                            {num}
+                                        </button>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowCustomQuant(!showCustomQuant)}
+                                        className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-200 flex items-center gap-1.5 ${showCustomQuant
+                                            ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25'
+                                            : 'bg-neutral-800/80 text-neutral-400 border border-neutral-700/50 hover:bg-neutral-700 hover:text-white hover:border-neutral-600'
+                                            }`}
+                                    >
+                                        <EditIcon sx={{ fontSize: '1rem' }} /> Custom
+                                    </button>
+                                </div>
+                                {showCustomQuant && (
+                                    <div className="flex items-center gap-3 mt-1">
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            max="50"
+                                            value={customQuantGoal}
+                                            onChange={(e) => setCustomQuantGoal(e.target.value)}
+                                            placeholder="Enter value"
+                                            className="w-28 px-4 py-2.5 bg-neutral-800 border border-amber-500/30 rounded-xl text-white text-sm font-medium focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 placeholder-neutral-600"
+                                        />
+                                        <span className="text-xs text-neutral-500">Max 50</span>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="border-t border-neutral-800/50"></div>
+
+                            {/* Reasoning Goal */}
+                            <div className="space-y-3">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-violet-500"></div>
+                                    <label className="text-xs font-semibold text-neutral-400 uppercase tracking-wide">Reasoning</label>
+                                </div>
+                                <div className="flex flex-wrap gap-2">
+                                    {[5, 10, 15, 20, 25].map(num => (
+                                        <button
+                                            key={num}
+                                            type="button"
+                                            onClick={() => { setDailyReasoningGoal(num); setShowCustomReasoning(false); }}
+                                            className={`min-w-[44px] px-3 py-2 text-sm font-bold rounded-xl transition-all duration-200 ${!showCustomReasoning && dailyReasoningGoal === num
+                                                ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-violet-500/25 scale-105'
+                                                : 'bg-neutral-800/80 text-neutral-400 border border-neutral-700/50 hover:bg-neutral-700 hover:text-white hover:border-neutral-600'
+                                                }`}
+                                        >
+                                            {num}
+                                        </button>
+                                    ))}
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowCustomReasoning(!showCustomReasoning)}
+                                        className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-200 flex items-center gap-1.5 ${showCustomReasoning
+                                            ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-violet-500/25'
+                                            : 'bg-neutral-800/80 text-neutral-400 border border-neutral-700/50 hover:bg-neutral-700 hover:text-white hover:border-neutral-600'
+                                            }`}
+                                    >
+                                        <EditIcon sx={{ fontSize: '1rem' }} /> Custom
+                                    </button>
+                                </div>
+                                {showCustomReasoning && (
+                                    <div className="flex items-center gap-3 mt-1">
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            max="50"
+                                            value={customReasoningGoal}
+                                            onChange={(e) => setCustomReasoningGoal(e.target.value)}
+                                            placeholder="Enter value"
+                                            className="w-28 px-4 py-2.5 bg-neutral-800 border border-violet-500/30 rounded-xl text-white text-sm font-medium focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-500/20 placeholder-neutral-600"
+                                        />
+                                        <span className="text-xs text-neutral-500">Max 50</span>
+                                    </div>
+                                )}
                             </div>
                         </div>
 
@@ -262,6 +380,12 @@ export default function RegisterPage() {
                     </Link>
                 </div>
             </div>
+
+            <ExamRequestModal
+                isOpen={showExamRequestModal}
+                onClose={() => setShowExamRequestModal(false)}
+                initialExam={pendingExam}
+            />
         </div>
     );
 }

@@ -412,6 +412,7 @@ export default function QuestionPage() {
             }
 
             try {
+                // Record the attempt
                 await fetch('/api/attempts', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -421,6 +422,25 @@ export default function QuestionPage() {
                         timeMs,
                     }),
                 });
+
+                // If in practice mode, mark question as answered in DB session
+                if (isPracticeMode && practiceSession) {
+                    const practiceRes = await fetch('/api/quick-practice', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            questionId: question.id,
+                            section: practiceSession.section
+                        }),
+                    });
+                    const practiceData = await practiceRes.json();
+
+                    // Check if practice session is now complete
+                    if (practiceData.isComplete) {
+                        setShowPracticeCompleteModal(true);
+                    }
+                }
+
                 refreshUser();
             } catch (error) {
                 console.error('Failed to record attempt:', error);

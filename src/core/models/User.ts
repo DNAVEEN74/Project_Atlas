@@ -25,6 +25,8 @@ export interface IUser extends Document {
         notifications_enabled: boolean;
         email_digest: boolean;
         difficulty_preference?: 'EASY' | 'MEDIUM' | 'HARD';
+        daily_quant_goal: number;
+        daily_reasoning_goal: number;
     };
 
     // Dashboard summary data
@@ -32,6 +34,7 @@ export interface IUser extends Document {
         total_solved: number;
         total_correct: number;
         streak: number;
+        max_streak: number;
         heatmap: {
             date: string; // YYYY-MM-DD format
             count: number;
@@ -91,12 +94,15 @@ const UserSchema: Schema = new Schema(
                 type: String,
                 enum: ['EASY', 'MEDIUM', 'HARD'],
             },
+            daily_quant_goal: { type: Number, default: 5, min: 1, max: 50 },
+            daily_reasoning_goal: { type: Number, default: 5, min: 1, max: 50 },
         },
 
         dash: {
             total_solved: { type: Number, default: 0 },
             total_correct: { type: Number, default: 0 },
             streak: { type: Number, default: 0 },
+            max_streak: { type: Number, default: 0 },
             heatmap: [
                 {
                     date: { type: String },

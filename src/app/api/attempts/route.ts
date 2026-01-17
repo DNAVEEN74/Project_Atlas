@@ -124,6 +124,11 @@ export async function POST(req: NextRequest) {
                     // Reset to 1 for starting a new streak today
                     user.dash.streak = 1;
                 }
+
+                // Update max streak if current streak is higher
+                if (user.dash.streak > (user.dash.max_streak || 0)) {
+                    user.dash.max_streak = user.dash.streak;
+                }
             }
             // If already had activity today, streak is already correct
 

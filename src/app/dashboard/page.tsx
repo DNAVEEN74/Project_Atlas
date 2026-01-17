@@ -58,6 +58,13 @@ export default function DashboardPage() {
         fetchBookmarks();
     }, []);
 
+    // Redirect if not authenticated
+    React.useEffect(() => {
+        if (!loading && !user) {
+            router.push('/');
+        }
+    }, [user, loading, router]);
+
     // Dynamic stats (calculated from actual attempts, not cached user.dash)
     const [dynamicStats, setDynamicStats] = React.useState({
         totalCorrect: 0,
@@ -435,7 +442,7 @@ export default function DashboardPage() {
                                         <div className="w-3 h-3 rounded-full bg-orange-500"></div>
                                         <span className="text-lg text-neutral-200">Max Streak</span>
                                     </div>
-                                    <span className="text-lg font-semibold text-white">{user.streak} 🔥</span>
+                                    <span className="text-lg font-semibold text-white">{user.maxStreak || user.streak} 🔥</span>
                                 </div>
                             </div>
                         </div>
@@ -587,7 +594,7 @@ export default function DashboardPage() {
                                 </div>
                                 <div className="flex items-center gap-6 text-sm">
                                     <span className="text-neutral-500">Total active days: <span className="text-white font-medium">{totalActiveDays}</span></span>
-                                    <span className="text-neutral-500">Max streak: <span className="text-white font-medium">{user.streak}</span></span>
+                                    <span className="text-neutral-500">Max streak: <span className="text-white font-medium">{user.maxStreak || user.streak}</span></span>
                                 </div>
                             </div>
 
@@ -611,13 +618,17 @@ export default function DashboardPage() {
                                         const daysInMonth = new Date(targetYear, targetMonth + 1, 0).getDate();
                                         const startDayOfWeek = new Date(targetYear, targetMonth, 1).getDay(); // 0 = Sun
 
-                                        // Helper to get attempt data
-                                        const getIntensityForDay = (day: number) => {
+                                        const getEntryForDay = (day: number) => {
                                             const dateStr = `${targetYear}-${String(targetMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                                             // Check if future
-                                            if (new Date(dateStr) > new Date()) return -1; // -1 for future
+                                            if (new Date(dateStr) > new Date()) return null;
 
-                                            const entry = user.heatmap?.find(h => h.date === dateStr);
+                                            return user.heatmap?.find(h => h.date === dateStr);
+                                        };
+
+                                        // Helper to get attempt data
+                                        const getIntensityForDay = (day: number) => {
+                                            const entry = getEntryForDay(day);
                                             return entry ? entry.intensity : 0;
                                         };
 
@@ -644,17 +655,54 @@ export default function DashboardPage() {
 
                                                                 const intensity = getIntensityForDay(dayNumber);
 
-                                                                // Future days
-                                                                if (intensity === -1) {
+                                                                // Future days check - simple date comparison
+                                                                const dateStr = `${targetYear}-${String(targetMonth + 1).padStart(2, '0')}-${String(dayNumber).padStart(2, '0')}`;
+                                                                const isFuture = new Date(dateStr) > new Date();
+
+                                                                if (isFuture) {
                                                                     return <div key={rowIndex} className="w-3.5 h-3.5 bg-neutral-900/30 rounded-sm" />; // Faint placeholder for future
                                                                 }
 
+                                                                const dayEntry = getEntryForDay(dayNumber);
+                                                                const submissionCount = dayEntry ? dayEntry.count : 0;
+
+                                                                // Custom Tooltip Implementation
+                                                                const isTopRow = rowIndex < 2; // Position below for top 2 rows to prevent cutoff
+
                                                                 return (
-                                                                    <div
-                                                                        key={rowIndex}
-                                                                        className={`w-3.5 h-3.5 rounded-sm transition-all hover:scale-125 hover:z-10 ${getIntensityColor(intensity)}`}
-                                                                        title={`${targetDate.toLocaleString('default', { month: 'short' })} ${dayNumber}, ${targetYear}`}
-                                                                    />
+                                                                    <div key={rowIndex} className="relative group/item hover:z-50">
+                                                                        <div
+                                                                            className={`w-3.5 h-3.5 rounded-sm transition-all duration-300 group-hover/item:scale-110 ${getIntensityColor(intensity)} cursor-default`}
+                                                                        />
+                                                                        {/* Custom Tooltip */}
+                                                                        <div className={`absolute left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 transition-all duration-200 pointer-events-none transform z-50 flex flex-col items-center
+                                                                            ${isTopRow
+                                                                                ? 'top-full mt-2 translate-y-[-8px] group-hover/item:translate-y-0'
+                                                                                : 'bottom-full mb-2 translate-y-2 group-hover/item:translate-y-0'
+                                                                            }`}>
+
+                                                                            {/* Tooltip Content */}
+                                                                            <div className={`bg-[#1a1a1a] border border-neutral-700 text-white text-xs px-3 py-2 rounded-xl shadow-2xl whitespace-nowrap min-w-max flex flex-col items-center gap-0.5 relative z-50 ${isTopRow ? 'order-2' : ''}`}>
+
+                                                                                {/* Arrow for Bottom Tooltip (Top Row) - Points Up */}
+                                                                                {isTopRow && (
+                                                                                    <div className="w-2.5 h-2.5 bg-[#1a1a1a] border-l border-t border-neutral-700 rotate-45 absolute -top-1.5 left-1/2 -translate-x-1/2 -z-10"></div>
+                                                                                )}
+
+                                                                                <div className="font-bold text-neutral-100">
+                                                                                    {submissionCount} {submissionCount === 1 ? 'submission' : 'submissions'}
+                                                                                </div>
+                                                                                <div className="text-[10px] text-neutral-400 font-medium bg-neutral-800/50 px-1.5 py-0.5 rounded-md mt-0.5">
+                                                                                    {targetDate.toLocaleString('default', { month: 'short' })} {dayNumber}, {targetYear}
+                                                                                </div>
+
+                                                                                {/* Arrow for Top Tooltip (Bottom Rows) - Points Down */}
+                                                                                {!isTopRow && (
+                                                                                    <div className="w-2.5 h-2.5 bg-[#1a1a1a] border-r border-b border-neutral-700 rotate-45 absolute -bottom-1.5 left-1/2 -translate-x-1/2 -z-10"></div>
+                                                                                )}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 );
                                                             })}
                                                         </div>

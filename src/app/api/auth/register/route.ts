@@ -8,7 +8,16 @@ export async function POST(req: NextRequest) {
         await dbConnect();
 
         const body = await req.json();
-        const { email, password, name, targetExam, targetYear } = body;
+        const {
+            email,
+            password,
+            name,
+            targetExam,
+            targetYear,
+            dailyQuantGoal,
+            dailyReasoningGoal
+        } = body;
+
 
         // Validation
         if (!email || !password || !name) {
@@ -48,10 +57,17 @@ export async function POST(req: NextRequest) {
                 exam: targetExam || 'SSC_CGL',
                 year: targetYear || 2025,
             },
+            preferences: {
+                notifications_enabled: true,
+                email_digest: false,
+                daily_quant_goal: Math.min(Math.max(dailyQuantGoal || 5, 1), 50),
+                daily_reasoning_goal: Math.min(Math.max(dailyReasoningGoal || 5, 1), 50),
+            },
             dash: {
                 total_solved: 0,
                 total_correct: 0,
                 streak: 0,
+                max_streak: 0,
                 heatmap: [],
                 last_active: new Date(),
             },
@@ -75,6 +91,8 @@ export async function POST(req: NextRequest) {
                 name: user.profile.name,
                 targetExam: user.target.exam,
                 targetYear: user.target.year,
+                dailyQuantGoal: user.preferences.daily_quant_goal,
+                dailyReasoningGoal: user.preferences.daily_reasoning_goal,
             },
         });
     } catch (error) {

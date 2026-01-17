@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/core/db/connect";
 import User from "@/core/models/User";
 import { verifyPassword, generateToken, setAuthCookie } from "@/lib/auth";
+import { validateUserStreak } from "@/lib/streak";
 
 export async function POST(req: NextRequest) {
     try {
@@ -36,8 +37,9 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // Update last active
+        // Update last active and validate streak
         user.dash.last_active = new Date();
+        validateUserStreak(user); // Validate streak here
         await user.save();
 
         // Generate JWT token
@@ -59,6 +61,7 @@ export async function POST(req: NextRequest) {
                 targetYear: user.target.year,
                 totalSolved: user.dash.total_solved,
                 streak: user.dash.streak,
+                maxStreak: user.dash.max_streak || 0,
             },
         });
     } catch (error) {

@@ -11,9 +11,12 @@ interface User {
     totalSolved: number;
     totalCorrect: number;
     streak: number;
+    maxStreak: number;
     bookmarks: string[];
     heatmap: { date: string; count: number; intensity: number }[];
     avatar_url?: string;
+    dailyQuantGoal: number;
+    dailyReasoningGoal: number;
 }
 
 interface AuthContextType {
@@ -31,6 +34,8 @@ interface RegisterData {
     name: string;
     targetExam?: string;
     targetYear?: number;
+    dailyQuantGoal?: number;
+    dailyReasoningGoal?: number;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -47,6 +52,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 setUser(data.user);
             } else {
                 setUser(null);
+                // If user is not found (e.g. deleted from DB) or token invalid, ensure cookie is cleared
+                await fetch('/api/auth/logout', { method: 'POST' });
             }
         } catch {
             setUser(null);
