@@ -94,6 +94,8 @@ export { default as DateRangeIcon } from '@mui/icons-material/DateRange';
 export { default as ScheduleIcon } from '@mui/icons-material/Schedule';
 export { default as TimerIcon } from '@mui/icons-material/Timer';
 export { default as AlarmIcon } from '@mui/icons-material/Alarm';
+export { default as HistoryIcon } from '@mui/icons-material/History';
+
 
 // ========== CONTENT ICONS ==========
 export { default as DocumentIcon } from '@mui/icons-material/Description';
@@ -140,6 +142,8 @@ export { default as AppsIcon } from '@mui/icons-material/Apps';
 export { default as GridIcon } from '@mui/icons-material/GridView';
 export { default as ListIcon } from '@mui/icons-material/ViewList';
 export { default as TableIcon } from '@mui/icons-material/TableChart';
+export { default as ExploreIcon } from '@mui/icons-material/Explore';
+export { default as FlipIcon } from '@mui/icons-material/Flip';
 
 // ========== OUTLINED ICONS ==========
 export { default as CalculateOutlinedIcon } from '@mui/icons-material/CalculateOutlined';

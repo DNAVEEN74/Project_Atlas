@@ -279,11 +279,11 @@ export default function DashboardPage() {
                                 <Link href="/problems" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
                                     Problems
                                 </Link>
-                                <Link href="/mock-test" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
-                                    Mock Tests
+                                <Link href="/games" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
+                                    Games
                                 </Link>
-                                <Link href="/previous-years" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
-                                    Previous Papers
+                                <Link href="/mock-test" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
+                                    Sprint Mode
                                 </Link>
                                 <Link href="/dashboard" className="px-5 py-2 text-sm font-semibold text-amber-500 bg-amber-500/10 rounded-full">
                                     Dashboard

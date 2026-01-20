@@ -46,6 +46,14 @@ export interface IUser extends Document {
     // Bookmarked questions
     bookmarks: mongoose.Types.ObjectId[];
 
+    // Game stats
+    games: {
+        gameId: string;
+        bestScore: number;
+        attempts: number;
+        lastPlayed: Date;
+    }[];
+
     is_email_verified: boolean;
     createdAt: Date;
     updatedAt: Date;
@@ -114,6 +122,15 @@ const UserSchema: Schema = new Schema(
         },
 
         bookmarks: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
+
+        games: [
+            {
+                gameId: { type: String, required: true },
+                bestScore: { type: Number, default: 0 },
+                attempts: { type: Number, default: 0 },
+                lastPlayed: { type: Date, default: Date.now },
+            }
+        ],
 
         is_email_verified: { type: Boolean, default: false },
     },

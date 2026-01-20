@@ -1,0 +1,217 @@
+[
+    {
+        "p_code": "QUANT_PERC",
+        "name": "Percentage",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_PL",
+        "name": "Profit & Loss",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_SI",
+        "name": "Simple Interest",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_CI",
+        "name": "Compound Interest",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_RATIO",
+        "name": "Ratio & Proportion",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_MIX",
+        "name": "Mixtures & Alligation",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_PART",
+        "name": "Partnership",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_AVG",
+        "name": "Average",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_TW",
+        "name": "Time & Work",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_PC",
+        "name": "Pipe & Cistern",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_TSD",
+        "name": "Time Speed Distance",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_BS",
+        "name": "Boat & Stream",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_NS",
+        "name": "Number System",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_HCF",
+        "name": "HCF & LCM",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_SIMP",
+        "name": "Simplification",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_PIS",
+        "name": "Power Indices Surds",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_ALG",
+        "name": "Algebra",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_TRIG",
+        "name": "Trigonometry",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_HD",
+        "name": "Height & Distance",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_GEO",
+        "name": "Geometry",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_M2D",
+        "name": "Mensuration 2D",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_M3D",
+        "name": "Mensuration 3D",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_CG",
+        "name": "Coordinate Geometry",
+        "trick_ids": []
+    },
+    {
+        "p_code": "QUANT_DI",
+        "name": "Data Interpretation",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_ANAL",
+        "name": "Analogy",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_CLASS",
+        "name": "Classification",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_CODE",
+        "name": "Coding-Decoding",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_SER",
+        "name": "Series",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_MISS",
+        "name": "Missing Number",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_BLD",
+        "name": "Blood Relations",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_DIR",
+        "name": "Direction Sense",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_ORD",
+        "name": "Order & Ranking",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_SIT",
+        "name": "Sitting Arrangement",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_SYLL",
+        "name": "Syllogism",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_VENN",
+        "name": "Venn Diagram",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_DICE",
+        "name": "Dice & Cube",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_CLK",
+        "name": "Clock & Calendar",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_CNT",
+        "name": "Counting Figures",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_MIR",
+        "name": "Mirror & Water Image",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_PAP",
+        "name": "Paper Cutting",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_EMB",
+        "name": "Embedded Figures",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_MAT",
+        "name": "Matrix",
+        "trick_ids": []
+    },
+    {
+        "p_code": "REAS_STMT",
+        "name": "Statement & Conclusion",
+        "trick_ids": []
+    }
+]

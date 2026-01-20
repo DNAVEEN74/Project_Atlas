@@ -228,11 +228,11 @@ function ProblemsPageContent() {
                                 <Link href="/problems" className="px-5 py-2 text-sm font-semibold text-amber-500 bg-amber-500/10 rounded-full">
                                     Problems
                                 </Link>
-                                <Link href="/mock-test" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
-                                    Mock Tests
+                                <Link href="/games" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
+                                    Games
                                 </Link>
-                                <Link href="/previous-years" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
-                                    Previous Papers
+                                <Link href="/mock-test" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
+                                    Sprint Mode
                                 </Link>
                                 <Link href="/dashboard" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
                                     Dashboard
@@ -564,7 +564,7 @@ function ProblemsPageContent() {
                             <button
                                 onClick={async () => {
                                     try {
-                                        const res = await fetch(`/api/quick-practice?section=${activeSection}&topic=${activeTopic}`);
+                                        const res = await fetch(`/api/quick-practice?section=${activeSection}&topic=All`);
                                         const data = await res.json();
 
                                         if (data.completed) {
@@ -579,7 +579,7 @@ function ProblemsPageContent() {
                                                 questionIds: data.questionIds,
                                                 currentIndex: data.currentIndex || 0,
                                                 section: activeSection,
-                                                topic: activeTopic,
+                                                topic: 'All',
                                                 resuming: data.resuming
                                             }));
 

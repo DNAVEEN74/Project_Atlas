@@ -20,7 +20,9 @@ import {
     ZoomInOutlinedIcon,
     ZoomOutOutlinedIcon,
     SplitscreenIcon,
+    WarningIcon,
 } from '@/components/icons';
+import { ReportModal } from '@/components/ui/ReportModal';
 
 interface QuestionOption {
     id: string;
@@ -139,6 +141,8 @@ export default function QuestionPage() {
     const { info: notifyInfo, warning: notifyWarning } = useToast();
     const [startTime, setStartTime] = useState<number>(Date.now());
     const [isBookmarked, setIsBookmarked] = useState(false);
+    const [showReportModal, setShowReportModal] = useState(false);
+
 
     // Timer tracking
     const [isTimerEnabled, setIsTimerEnabled] = useState(() => {
@@ -799,12 +803,22 @@ export default function QuestionPage() {
                                     </span>
                                 </>
                             )}
-                            <button
-                                onClick={handleBookmarkToggle}
-                                className={`ml-auto p-2 rounded-lg transition-colors ${isBookmarked ? 'text-yellow-500 bg-yellow-500/10' : 'text-neutral-500 hover:text-yellow-500 hover:bg-neutral-800'}`}
-                            >
-                                <BookmarkIcon sx={{ fontSize: '1.25rem' }} />
-                            </button>
+                            <div className="ml-auto flex items-center gap-2">
+                                <button
+                                    onClick={handleBookmarkToggle}
+                                    className={`p-2 rounded-lg transition-colors ${isBookmarked ? 'text-yellow-500 bg-yellow-500/10' : 'text-neutral-500 hover:text-yellow-500 hover:bg-neutral-800'}`}
+                                    title={isBookmarked ? 'Remove Bookmark' : 'Bookmark Question'}
+                                >
+                                    <BookmarkIcon sx={{ fontSize: '1.25rem' }} />
+                                </button>
+                                <button
+                                    onClick={() => setShowReportModal(true)}
+                                    className="p-2 rounded-lg text-neutral-500 hover:text-rose-500 hover:bg-neutral-800 transition-colors"
+                                    title="Report Issue"
+                                >
+                                    <WarningIcon sx={{ fontSize: '1.25rem' }} />
+                                </button>
+                            </div>
                         </div>
 
                         {/* Question Content */}
@@ -1080,6 +1094,14 @@ export default function QuestionPage() {
                     </div>
                 </div>
             )}
+
+            {/* Report Modal */}
+            <ReportModal
+                isOpen={showReportModal}
+                onClose={() => setShowReportModal(false)}
+                questionId={questionId}
+                questionTitle={question?.content?.text?.replace(/\[IMAGE\]/g, '').substring(0, 100)}
+            />
         </div>
     );
 }
