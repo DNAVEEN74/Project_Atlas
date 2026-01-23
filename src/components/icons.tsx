@@ -167,6 +167,8 @@ export { default as QuizOutlinedIcon } from '@mui/icons-material/QuizOutlined';
 export { default as TrendingUpOutlinedIcon } from '@mui/icons-material/TrendingUpOutlined';
 export { default as LocalFireDepartmentOutlinedIcon } from '@mui/icons-material/LocalFireDepartmentOutlined';
 export { default as EmojiEventsOutlinedIcon } from '@mui/icons-material/EmojiEventsOutlined';
+export { default as LightbulbOutlinedIcon } from '@mui/icons-material/LightbulbOutlined';
+export { default as WarningAmberOutlinedIcon } from '@mui/icons-material/WarningAmberOutlined';
 
 /**
  * Helper function to get icon size styles
@@ -219,3 +221,4 @@ export { default as ZoomInOutlinedIcon } from '@mui/icons-material/ZoomIn';
 export { default as ZoomOutOutlinedIcon } from '@mui/icons-material/ZoomOut';
 export { default as ViewListIcon } from '@mui/icons-material/ViewList';
 export { default as SplitscreenIcon } from '@mui/icons-material/Splitscreen';
+export { default as FormatListBulletedIcon } from '@mui/icons-material/FormatListBulleted';

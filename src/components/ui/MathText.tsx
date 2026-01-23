@@ -68,7 +68,7 @@ export function MathText({ children, className = '' }: MathTextProps) {
         });
 
         // Process \[...\] display math
-        text = text.replace(/\\\[([^\]]+)\\\]/g, (_, math) => {
+        text = text.replace(/\\\[([\s\S]+?)\\\]/g, (_, math) => {
             foundMath = true;
             try {
                 return katex.renderToString(math.trim(), {
@@ -81,7 +81,7 @@ export function MathText({ children, className = '' }: MathTextProps) {
         });
 
         // Process \(...\) inline math
-        text = text.replace(/\\\(([^)]+)\\\)/g, (_, math) => {
+        text = text.replace(/\\\(([\s\S]+?)\\\)/g, (_, math) => {
             foundMath = true;
             try {
                 return katex.renderToString(math.trim(), {
