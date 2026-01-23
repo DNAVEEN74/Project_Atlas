@@ -2,17 +2,13 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import {
     CalculateOutlinedIcon,
     PsychologyOutlinedIcon,
     CheckCircleOutlinedIcon,
-    BookmarkIcon,
     DashboardIcon,
-    LogoutIcon,
-    ExpandMoreIcon,
     CalculateIcon,
     SpeedIcon,
     FunctionsIcon,
@@ -29,13 +25,13 @@ import {
     HistoryIcon,
     ArrowForwardIcon,
 } from '@/components/icons';
+import Header from '@/components/layout/Header';
 import { QUANT_GAMES, REASONING_GAMES, GameConfig } from '@/components/games/games-config';
 import { GameModal } from '@/components/games/GameModal';
 
 export default function GamesPage() {
     const router = useRouter();
     const { user, loading, logout } = useAuth();
-    const [showUserMenu, setShowUserMenu] = useState(false);
     const [selectedGame, setSelectedGame] = useState<GameConfig | null>(null);
     const [activeTab, setActiveTab] = useState<'DASHBOARD' | 'QUANT' | 'REASONING'>('DASHBOARD');
     const [gameScores, setGameScores] = useState<Record<string, number>>({});
@@ -88,17 +84,7 @@ export default function GamesPage() {
     // ... (rest of code)
 
 
-    const handleLogout = async () => {
-        await logout();
-        router.push('/');
-    };
 
-    const getUserInitials = () => {
-        if (!user?.name) return 'U';
-        const names = user.name.split(' ');
-        if (names.length >= 2) return `${names[0][0]}${names[1][0]}`.toUpperCase();
-        return names[0][0].toUpperCase();
-    };
 
     if (loading) {
         return (
@@ -167,93 +153,8 @@ export default function GamesPage() {
             </div>
 
             {/* HEADER */}
-            <header className="bg-[#1a1a1a]/80 backdrop-blur-xl border-b border-neutral-800/50 sticky top-0 z-50">
-                <div className="w-full px-6 lg:px-12">
-                    <div className="flex items-center justify-between h-16">
-                        {/* Logo & Nav */}
-                        <div className="flex items-center gap-10">
-                            <Link href="/" className="flex items-center gap-3 group">
-                                <div className="relative w-10 h-10">
-                                    <Image
-                                        src="/logo-final.png"
-                                        alt="Logo"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                                <div className="hidden sm:block">
-                                    <span className="text-xl font-bold text-white">PrepLeague</span>
-                                    <p className="text-[10px] text-neutral-500 font-medium -mt-0.5">SSC CGL Preparation</p>
-                                </div>
-                            </Link>
-
-                            <nav className="hidden lg:flex items-center gap-1">
-                                <Link href="/problems" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
-                                    Problems
-                                </Link>
-                                <Link href="/games" className="px-5 py-2 text-sm font-semibold text-amber-500 bg-amber-500/10 rounded-full">
-                                    Games
-                                </Link>
-                                <Link href="/mock-test" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
-                                    Sprint Mode
-                                </Link>
-                                <Link href="/dashboard" className="px-5 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-full transition-colors">
-                                    Dashboard
-                                </Link>
-                            </nav>
-                        </div>
-
-                        {/* User Menu */}
-                        <div className="relative">
-                            <button
-                                onClick={() => setShowUserMenu(!showUserMenu)}
-                                className="flex items-center gap-3 p-1.5 hover:bg-neutral-800 rounded-xl transition-colors"
-                            >
-                                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-sm font-bold overflow-hidden">
-                                    {user?.avatar_url ? (
-                                        <img src={user.avatar_url} alt={user.name} className="w-full h-full object-cover" />
-                                    ) : (
-                                        getUserInitials()
-                                    )}
-                                </div>
-                                <div className="hidden sm:block text-left">
-                                    <p className="text-sm font-medium text-neutral-200 leading-tight">{user?.name || 'Guest'}</p>
-                                    <p className="text-[11px] text-neutral-500">{user?.targetExam?.replace('_', ' ') || 'SSC CGL'}</p>
-                                </div>
-                                <ExpandMoreIcon sx={{ fontSize: '1.1rem' }} className="text-neutral-500 hidden sm:block" />
-                            </button>
-
-                            {showUserMenu && (
-                                <>
-                                    <div className="fixed inset-0 z-40" onClick={() => setShowUserMenu(false)}></div>
-                                    <div className="absolute right-0 top-full mt-2 w-60 bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl z-50 overflow-hidden">
-                                        <div className="px-4 py-3 bg-neutral-800/50 border-b border-neutral-800">
-                                            <p className="text-sm font-medium text-white">{user?.name}</p>
-                                            <p className="text-xs text-neutral-500">{user?.email}</p>
-                                        </div>
-                                        <div className="py-1">
-                                            <Link href="/dashboard" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
-                                                <DashboardIcon sx={{ fontSize: '1.1rem' }} />
-                                                Dashboard
-                                            </Link>
-                                            <Link href="/bookmarks" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
-                                                <BookmarkIcon sx={{ fontSize: '1.1rem' }} />
-                                                Bookmarks
-                                            </Link>
-                                        </div>
-                                        <div className="border-t border-neutral-800 py-1">
-                                            <button onClick={handleLogout} className="flex items-center gap-3 px-4 py-2.5 text-sm text-rose-400 hover:bg-neutral-800 transition-colors w-full">
-                                                <LogoutIcon sx={{ fontSize: '1.1rem' }} />
-                                                Sign Out
-                                            </button>
-                                        </div>
-                                    </div>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </header>
+            {/* HEADER */}
+            <Header activePage="games" />
 
             {/* Main Content */}
             <div className="w-full px-6 lg:px-12 py-8">

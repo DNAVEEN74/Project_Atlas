@@ -17,10 +17,8 @@ import {
     TrophyIcon,
     ChevronRightIcon,
     ExpandMoreIcon,
-    DashboardIcon,
-    BookmarkIcon,
-    LogoutIcon
 } from '@/components/icons';
+import Header from '@/components/layout/Header';
 import { GAMES } from '@/components/games/games-config';
 
 interface GameAttempt {
@@ -51,7 +49,7 @@ export default function GamesHistoryPage() {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [isFetching, setIsFetching] = useState(false);
-    const [showUserMenu, setShowUserMenu] = useState(false);
+    const [isFetching, setIsFetching] = useState(false);
 
     // Filters
     const [categoryFilter, setCategoryFilter] = useState<'ALL' | 'QUANT' | 'REASONING'>('ALL');
@@ -103,17 +101,7 @@ export default function GamesHistoryPage() {
         }
     };
 
-    const handleLogout = async () => {
-        await logout();
-        router.push('/');
-    };
 
-    const getUserInitials = () => {
-        if (!user?.name) return 'U';
-        const names = user.name.split(' ');
-        if (names.length >= 2) return `${names[0][0]}${names[1][0]}`.toUpperCase();
-        return names[0][0].toUpperCase();
-    };
 
     if (loading) {
         return (
@@ -141,51 +129,8 @@ export default function GamesHistoryPage() {
             </div>
 
             {/* HEADER */}
-            <header className="bg-[#1a1a1a]/80 backdrop-blur-xl border-b border-neutral-800/50 sticky top-0 z-50">
-                <div className="w-full px-6 lg:px-12">
-                    <div className="flex items-center justify-between h-16">
-                        <div className="flex items-center gap-10">
-                            <Link href="/" className="flex items-center gap-3">
-                                <div className="relative w-8 h-8">
-                                    <Image src="/logo-final.png" alt="Logo" fill className="object-contain" />
-                                </div>
-                                <div className="hidden sm:block">
-                                    <span className="text-lg font-bold text-white">PrepLeague</span>
-                                </div>
-                            </Link>
-                            <nav className="hidden lg:flex items-center gap-1">
-                                <Link href="/games" className="px-4 py-2 text-sm font-medium text-neutral-400 hover:text-white transition-colors">Games</Link>
-                                <span className="text-neutral-700 mx-1">/</span>
-                                <span className="px-4 py-2 text-sm font-semibold text-amber-500 bg-amber-500/10 rounded-full">History</span>
-                            </nav>
-                        </div>
-
-                        <div className="relative">
-                            <button onClick={() => setShowUserMenu(!showUserMenu)} className="flex items-center gap-3 p-1.5 hover:bg-neutral-800 rounded-xl transition-colors">
-                                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white text-xs font-bold overflow-hidden">
-                                    {user?.avatar_url ? <img src={user.avatar_url} className="w-full h-full object-cover" /> : getUserInitials()}
-                                </div>
-                                <ExpandMoreIcon sx={{ fontSize: '1rem' }} className="text-neutral-500 hidden sm:block" />
-                            </button>
-                            {showUserMenu && (
-                                <>
-                                    <div className="fixed inset-0 z-40" onClick={() => setShowUserMenu(false)}></div>
-                                    <div className="absolute right-0 top-full mt-2 w-56 bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl z-50 overflow-hidden">
-                                        <div className="py-1">
-                                            <Link href="/dashboard" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
-                                                <DashboardIcon sx={{ fontSize: '1rem' }} /> Dashboard
-                                            </Link>
-                                            <button onClick={handleLogout} className="flex items-center gap-3 px-4 py-2.5 text-sm text-rose-400 hover:bg-neutral-800 transition-colors w-full">
-                                                <LogoutIcon sx={{ fontSize: '1rem' }} /> Sign Out
-                                            </button>
-                                        </div>
-                                    </div>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </header>
+            {/* HEADER */}
+            <Header activePage="games" />
 
             <main className="relative z-10 w-full px-6 lg:px-12 py-12 max-w-7xl mx-auto">
                 {/* Hero Section */}

@@ -53,7 +53,15 @@ interface QuestionData {
         question_number: number;
     };
     difficulty: 'EASY' | 'MEDIUM' | 'HARD';
+    status: string;
+    acceptance: string;
     is_verified: boolean;
+}
+
+interface PaginationInfo {
+    total: number;
+    page: number;
+    totalPages: number;
 }
 
 interface NavigationData {
@@ -173,6 +181,20 @@ export default function QuestionPage() {
         topic: string;
     } | null>(null);
     const [showPracticeCompleteModal, setShowPracticeCompleteModal] = useState(false);
+
+    // Sprint session tracking
+    const [isSprintMode, setIsSprintMode] = useState(false);
+    const [sprintSession, setSprintSession] = useState<{
+        sprintId: string;
+        questionIds: string[];
+        // Store full questions if available to avoid refetching sidebar details
+        questions?: any[];
+        currentIndex: number;
+        subject: string;
+        difficulty: string;
+        totalTimeAllowed: number;
+        startTime: number;
+    } | null>(null);
     const [zoomedImage, setZoomedImage] = useState<string | null>(null);
     const [zoomLevel, setZoomLevel] = useState(1);
     const [showSidebar, setShowSidebar] = useState(false);
@@ -182,6 +204,27 @@ export default function QuestionPage() {
         difficulty: string;
         isAttempted: boolean;
     }>>([]);
+    const [focusedSidebarIndex, setFocusedSidebarIndex] = useState(0);
+    const sidebarListRef = React.useRef<HTMLDivElement>(null);
+
+    // Auto-scroll sidebar when focusedIndex changes
+    useEffect(() => {
+        if (showSidebar && sidebarListRef.current) {
+            const focusedItem = document.getElementById(`sidebar-item-${focusedSidebarIndex}`);
+            if (focusedItem) {
+                focusedItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+    }, [focusedSidebarIndex, showSidebar]);
+
+    // Update focused index when sidebar opens or question changes
+    useEffect(() => {
+        if (isSprintMode && sprintSession) {
+            setFocusedSidebarIndex(sprintSession.currentIndex);
+        } else if (isPracticeMode && practiceSession) {
+            setFocusedSidebarIndex(practiceSession.currentIndex);
+        }
+    }, [showSidebar, isSprintMode, sprintSession?.currentIndex, isPracticeMode, practiceSession?.currentIndex]);
 
     // Keyboard zoom controls
     useEffect(() => {
@@ -232,9 +275,24 @@ export default function QuestionPage() {
                 );
                 setSidebarQuestions(details);
             }
+
+            if (isSprintMode && sprintSession) {
+                // If we stored full questions in session, use them
+                if (sprintSession.questions) {
+                    const details = sprintSession.questions.map((q: any) => ({
+                        id: q._id,
+                        text: q.content.text,
+                        difficulty: q.difficulty,
+                        isAttempted: false // We could track this if needed
+                    }));
+                    setSidebarQuestions(details);
+                    return;
+                }
+                // Fallback to fetching if needed (though Setup stores simple list usually)
+            }
         }
         fetchSidebarQuestions();
-    }, [showSidebar, isPracticeMode, practiceSession]);
+    }, [showSidebar, isPracticeMode, practiceSession, isSprintMode, sprintSession]);
 
     useEffect(() => {
         async function fetchQuestionAndNavigation() {
@@ -262,8 +320,9 @@ export default function QuestionPage() {
                     setIsBookmarked(bookmarksData.bookmarks.includes(questionId));
                 }
 
-                // Pre-populate previous attempt if exists
-                if (attemptData.data && attemptData.data.length > 0) {
+                // Pre-populate previous attempt if exists (but NOT in sprint mode - each sprint is independent)
+                const isInSprintMode = searchParams.get('sprint') === 'true';
+                if (!isInSprintMode && attemptData.data && attemptData.data.length > 0) {
                     const previousAttempt = attemptData.data[0];
                     setSelectedOption(previousAttempt.option_selected);
                     setIsSubmitted(true);
@@ -300,12 +359,67 @@ export default function QuestionPage() {
         }
     }, [questionId, searchParams]);
 
-    // Timer effect - runs when timer is enabled
+    // Load sprint session from sessionStorage
     useEffect(() => {
-        if (isTimerEnabled && !isSubmitted) {
-            // Restore saved time for this question or start fresh
-            setElapsedTime(questionTimes[questionId] || 0);
+        const sprintParam = searchParams.get('sprint');
+        if (sprintParam === 'true') {
+            const stored = sessionStorage.getItem('sprintSession');
+            if (stored) {
+                const session = JSON.parse(stored);
+                setSprintSession(session);
+                setIsSprintMode(true);
+                // Update currentIndex
+                const currentIdx = session.questionIds.indexOf(questionId);
+                if (currentIdx !== -1 && currentIdx !== session.currentIndex) {
+                    session.currentIndex = currentIdx;
+                    sessionStorage.setItem('sprintSession', JSON.stringify(session));
+                    setSprintSession(session);
+                }
+            }
+        } else {
+            setIsSprintMode(false);
+            setSprintSession(null);
+        }
+    }, [questionId, searchParams]);
 
+    // Timer effect - runs when timer is enabled
+    // Timer effect - runs when timer is enabled or in Sprint Mode
+    useEffect(() => {
+        // Continuous timer for Sprint Mode
+        if (isSprintMode && sprintSession) {
+            // Calculate elapsed time based on start time
+            // In Sprint Mode, we track specific question time too, but main timer is global
+            const updateTimer = () => {
+                const now = Date.now();
+                const totalElapsed = Math.floor((now - sprintSession.startTime) / 1000);
+
+                // If time is up, finish sprint
+                // Note: totalTimeAllowed is in milliseconds, convert to seconds for comparison
+                const totalTimeAllowedSec = Math.floor(sprintSession.totalTimeAllowed / 1000);
+                if (totalElapsed >= totalTimeAllowedSec) {
+                    if (timerRef.current) clearInterval(timerRef.current);
+
+                    // Auto-finish logic
+                    const totalTimeSpent = sprintSession.totalTimeAllowed; // Already in ms
+                    sessionStorage.setItem('sprintResults', JSON.stringify({
+                        sprintId: sprintSession.sprintId,
+                        totalTimeSpent,
+                        timedOut: true
+                    }));
+                    router.push('/sprint/summary');
+                    return;
+                }
+
+                // Update general elapsed time for display if needed, 
+                // but we mostly care about question-specific time or remaining time
+                setElapsedTime(totalElapsed);
+            };
+
+            updateTimer(); // Initial call
+            timerRef.current = setInterval(updateTimer, 1000);
+        } else if (isTimerEnabled && !isSubmitted) {
+            // Standard per-question timer
+            setElapsedTime(questionTimes[questionId] || 0);
             timerRef.current = setInterval(() => {
                 setElapsedTime(prev => prev + 1);
             }, 1000);
@@ -317,7 +431,7 @@ export default function QuestionPage() {
                 timerRef.current = null;
             }
         };
-    }, [questionId, isTimerEnabled, isSubmitted]);
+    }, [questionId, isTimerEnabled, isSubmitted, isSprintMode, sprintSession]);
 
     const goToPrevious = () => {
         // Save current question time before navigating
@@ -331,6 +445,12 @@ export default function QuestionPage() {
             if (prevIndex >= 0) {
                 const prevId = practiceSession.questionIds[prevIndex];
                 router.push(`/problems/${prevId}?section=${practiceSession.section}&practice=true`);
+            }
+        } else if (isSprintMode && sprintSession) {
+            const prevIndex = sprintSession.currentIndex - 1;
+            if (prevIndex >= 0) {
+                const prevId = sprintSession.questionIds[prevIndex];
+                router.push(`/problems/${prevId}?section=${sprintSession.subject}&sprint=true`);
             }
         } else if (navigation?.prevId) {
             router.push(`/problems/${navigation.prevId}?section=${section}`);
@@ -358,6 +478,39 @@ export default function QuestionPage() {
             }
             const nextId = practiceSession.questionIds[nextIndex];
             router.push(`/problems/${nextId}?section=${practiceSession.section}&practice=true`);
+        } else if (isSprintMode && sprintSession) {
+            const nextIndex = sprintSession.currentIndex + 1;
+            // Finish Sprint logic
+            if (nextIndex >= sprintSession.questionIds.length) {
+                // Submit final stats logic could go here, or just redirect
+                // We'll redirect to summary which handles "completing" the sprint based on session data?
+                // Actually summary page expects 'sprintResults' and 'currentSprint'.
+                // 'currentSprint' logic in summary page seems to expect data there.
+                // But wait, setup page set 'sprintSession'.
+                // I need to align the storage keys. The new Setup used 'sprintSession'.
+                // The OLD summary page used 'sprintResults' and 'currentSprint'.
+                // I need to REFACTOR Summary page to use 'sprintSession' or convert here.
+
+                // Let's assume I will refactor Summary page to look for 'completedSprint' or just read 'sprintSession'.
+                // For now, let's redirect to summary.
+
+                // Calculate total time
+                const totalTimeSpent = Date.now() - sprintSession.startTime;
+
+                // Save results for summary page
+                sessionStorage.setItem('sprintResults', JSON.stringify({
+                    sprintId: sprintSession.sprintId,
+                    totalTimeSpent,
+                    timedOut: false
+                }));
+                // We also leave 'sprintSession' there so Summary can read question count etc if needed
+
+                router.push('/sprint/summary');
+                return;
+            }
+
+            const nextId = sprintSession.questionIds[nextIndex];
+            router.push(`/problems/${nextId}?section=${sprintSession.subject}&sprint=true`);
         } else if (navigation?.nextId) {
             // Save current question time before navigating
             if (isTimerEnabled && !isSubmitted) {
@@ -407,6 +560,53 @@ export default function QuestionPage() {
         if (selectedOption && question) {
             // Use tracked time if timer is enabled, otherwise use basic time
             const timeMs = isTimerEnabled ? elapsedTime * 1000 : Date.now() - startTime;
+
+            // In Sprint Mode: Don't show result, navigate immediately
+            if (isSprintMode && sprintSession) {
+                // Record attempt in background (don't await)
+                fetch('/api/sprint', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        sprintId: sprintSession.sprintId,
+                        questionId: question.id,
+                        selectedOption: selectedOption,
+                        timeTaken: timeMs
+                    })
+                }).catch(err => console.error('Failed to record sprint attempt:', err));
+
+                // Also record as regular attempt in background
+                fetch('/api/attempts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        questionId: question.id,
+                        optionSelected: selectedOption,
+                        timeMs,
+                        isSprint: true,
+                    }),
+                }).catch(err => console.error('Failed to record attempt:', err));
+
+                // Navigate immediately - no delay, no visual feedback
+                const nextIndex = sprintSession.currentIndex + 1;
+                if (nextIndex >= sprintSession.questionIds.length) {
+                    // Sprint complete - go to summary
+                    const totalTimeSpent = Date.now() - sprintSession.startTime;
+                    sessionStorage.setItem('sprintResults', JSON.stringify({
+                        sprintId: sprintSession.sprintId,
+                        totalTimeSpent,
+                        timedOut: false
+                    }));
+                    router.push('/sprint/summary');
+                } else {
+                    // Go to next question
+                    const nextId = sprintSession.questionIds[nextIndex];
+                    router.push(`/problems/${nextId}?section=${sprintSession.subject}&sprint=true`);
+                }
+                return; // Exit early - don't set isSubmitted
+            }
+
+            // Normal mode: Show result
             setIsSubmitted(true);
 
             // Stop the timer
@@ -483,9 +683,54 @@ export default function QuestionPage() {
 
     // Keyboard shortcuts for option selection and submit
     useEffect(() => {
+
+
         const handleKeyDown = (e: KeyboardEvent) => {
             // Ignore if focus is on an input/textarea
             if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+
+            // --- SIDEBAR NAVIGATION (When Open) ---
+            if (showSidebar) {
+                const totalQuestions = isSprintMode && sprintSession ? sprintSession.questionIds.length : (isPracticeMode && practiceSession ? practiceSession.questionIds.length : 0);
+
+                if (totalQuestions > 0) {
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        setFocusedSidebarIndex(prev => (prev + 1) % totalQuestions);
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        setFocusedSidebarIndex(prev => (prev - 1 + totalQuestions) % totalQuestions);
+                    } else if (e.key === 'Enter') {
+                        e.preventDefault();
+                        // Navigate to focused question
+                        const ids = isSprintMode ? sprintSession!.questionIds : practiceSession!.questionIds;
+                        if (ids[focusedSidebarIndex]) {
+                            const sec = isSprintMode ? sprintSession!.subject : practiceSession!.section;
+                            router.push(`/problems/${ids[focusedSidebarIndex]}?section=${sec}&${isSprintMode ? 'sprint' : 'practice'}=true`);
+                            // Keep sidebar open or close? User usually wants to see the question now.
+                            // Let's keep it open for now as per "navigate between them" request, 
+                            // but usually selecting implies "I want to solve this now".
+                            // Let's NOT close it automatically, or make it optional.
+                            // Actually, let's close it so they can see the question full screen.
+                            // But wait, request said: "The questions should not appearing... we should prioritize how question appearing in sidebar... to switch between questions... navigate between these questions..."
+                            // It sounds like they want to preview/select.
+                            // Let's close it on Enter.
+                            setShowSidebar(false);
+                        }
+                    }
+                }
+                return; // Stop other handlers when sidebar is open
+            }
+
+            // --- NORMAL NAVIGATION (Sidebar Closed) ---
+            // Arrow keys for navigation (Sprint & Practice mode)
+            if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                goToNext();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                goToPrevious();
+            }
 
             // Number keys 1-4 for option selection
             if (!isSubmitted && question?.content.options) {
@@ -496,7 +741,7 @@ export default function QuestionPage() {
                 }
             }
 
-            // Enter to submit
+            // Enter to submit (only if sidebar closed)
             if (e.key === 'Enter' && selectedOption && !isSubmitted) {
                 handleSubmit();
             }
@@ -509,7 +754,7 @@ export default function QuestionPage() {
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [question, selectedOption, isSubmitted]);
+    }, [question, selectedOption, isSubmitted, goToNext, goToPrevious, showSidebar, sprintSession, practiceSession, focusedSidebarIndex]);
 
     const getDifficultyBadge = (difficulty: string) => {
         const styles = {
@@ -534,6 +779,15 @@ export default function QuestionPage() {
             return `${baseStyle} border-neutral-700 bg-neutral-800/50 hover:border-amber-500/30 hover:bg-neutral-800`;
         }
 
+        // In Sprint Mode: Don't reveal correct/incorrect - just show submitted state
+        if (isSprintMode) {
+            if (selectedOption === option.id) {
+                return `${baseStyle} border-blue-500/50 bg-blue-500/10`; // Neutral "submitted" styling
+            }
+            return `${baseStyle} border-neutral-800 bg-neutral-900/50 opacity-50`;
+        }
+
+        // Normal mode: Show correct/incorrect feedback
         if (option.is_correct) {
             return `${baseStyle} border-emerald-500/50 bg-emerald-500/10`;
         }
@@ -591,27 +845,29 @@ export default function QuestionPage() {
             {/* Sidebar Toggle Button */}
             <button
                 onClick={() => setShowSidebar(!showSidebar)}
-                className={`fixed left-0 top-1/2 -translate-y-1/2 z-50 p-2 rounded-r-xl transition-all duration-300 ${showSidebar ? 'bg-amber-500 text-white translate-x-[450px]' : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-white'}`}
+                className={`fixed left-0 top-1/2 -translate-y-1/2 z-50 p-2 rounded-r-xl transition-all duration-300 ${showSidebar ? 'bg-amber-500 text-white translate-x-[520px]' : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-white'}`}
                 title="Toggle Question List"
             >
                 <SplitscreenIcon sx={{ fontSize: '1.5rem' }} />
             </button>
 
             {/* Question Navigation Sidebar */}
-            <div className={`fixed left-0 top-0 h-full w-[450px] bg-[#1a1a1a] border-r border-neutral-800 z-40 transform transition-transform duration-300 ${showSidebar ? 'translate-x-0' : '-translate-x-full'}`}>
+            <div className={`fixed left-0 top-0 h-full w-[520px] bg-[#1a1a1a] border-r border-neutral-800 z-40 transform transition-transform duration-300 ${showSidebar ? 'translate-x-0' : '-translate-x-full'}`}>
                 {/* Header */}
                 <div className="p-4 border-b border-neutral-800 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <h3 className="text-lg font-bold text-white">
-                            {isPracticeMode ? 'Practice Questions' : 'Problem List'}
+                            {isSprintMode ? 'Sprint Questions' : (isPracticeMode ? 'Practice Questions' : 'Problem List')}
                         </h3>
                         <ChevronRightIcon sx={{ fontSize: '1.25rem' }} className="text-neutral-500" />
                     </div>
                     <div className="flex items-center gap-3">
                         <span className="text-sm text-neutral-400">
-                            {isPracticeMode && practiceSession
-                                ? `${practiceSession.currentIndex + 1}/${practiceSession.questionIds.length}`
-                                : navigation ? `${navigation.currentPosition}/${navigation.totalCount}` : ''
+                            {isSprintMode && sprintSession
+                                ? `${sprintSession.currentIndex + 1}/${sprintSession.questionIds.length}`
+                                : (isPracticeMode && practiceSession
+                                    ? `${practiceSession.currentIndex + 1}/${practiceSession.questionIds.length}`
+                                    : navigation ? `${navigation.currentPosition}/${navigation.totalCount}` : '')
                             }
                         </span>
                         <button
@@ -624,11 +880,12 @@ export default function QuestionPage() {
                 </div>
 
                 {/* Question List */}
-                <div className="overflow-y-auto max-h-[calc(100vh-80px)]">
-                    {isPracticeMode && practiceSession ? (
+                <div ref={sidebarListRef} className="overflow-y-auto max-h-[calc(100vh-80px)]">
+                    {(isPracticeMode && practiceSession) || (isSprintMode && sprintSession) ? (
                         <div className="divide-y divide-neutral-800">
-                            {practiceSession.questionIds.map((qId, idx) => {
+                            {(isSprintMode ? sprintSession!.questionIds : practiceSession!.questionIds).map((qId, idx) => {
                                 const isCurrent = qId === questionId;
+                                const isFocused = idx === focusedSidebarIndex;
                                 const qDetails = sidebarQuestions.find(q => q.id === qId);
                                 const diffStyles: Record<string, string> = {
                                     'EASY': 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
@@ -636,33 +893,40 @@ export default function QuestionPage() {
                                     'HARD': 'bg-rose-500/15 text-rose-400 border-rose-500/30'
                                 };
                                 const diffLabels: Record<string, string> = { 'EASY': 'Easy', 'MEDIUM': 'Med.', 'HARD': 'Hard' };
+
                                 return (
                                     <button
+                                        id={`sidebar-item-${idx}`}
                                         key={qId}
                                         onClick={() => {
-                                            router.push(`/problems/${qId}?section=${practiceSession.section}&practice=true`);
-                                            setShowSidebar(false);
+                                            const sec = isSprintMode ? sprintSession!.subject : practiceSession!.section;
+                                            router.push(`/problems/${qId}?section=${sec}&${isSprintMode ? 'sprint' : 'practice'}=true`);
+                                            // Close sidebar on mobile/smaller screens if needed, but keeping open for quick nav is good
+                                            // setShowSidebar(false); 
                                         }}
-                                        className={`w-full p-4 text-left transition-all flex items-start gap-3 hover:bg-neutral-800/50 ${isCurrent ? 'bg-amber-500/10 border-l-2 border-l-amber-500' : ''}`}
+                                        className={`w-full p-4 text-left transition-all flex items-start gap-4 hover:bg-neutral-800/80 group ${isCurrent
+                                            ? 'bg-amber-500/10 border-l-4 border-l-amber-500'
+                                            : 'border-l-4 border-l-transparent'
+                                            } ${isFocused && !isCurrent ? 'ring-2 ring-amber-500/50 bg-neutral-800/60' : ''}`}
                                     >
-                                        {/* Number */}
-                                        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${isCurrent ? 'bg-amber-500 text-white' : 'bg-neutral-700 text-neutral-400'}`}>
-                                            <span className="text-xs font-bold">{idx + 1}</span>
+                                        {/* Number Badge */}
+                                        <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold transition-transform group-hover:scale-110 ${isCurrent ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20' : 'bg-neutral-800 text-neutral-400 border border-neutral-700'
+                                            }`}>
+                                            {idx + 1}
                                         </div>
 
                                         {/* Question Info */}
                                         <div className="flex-1 min-w-0">
-                                            <div className="flex items-center gap-2 mb-1">
-                                                <span className={`text-sm font-medium ${isCurrent ? 'text-amber-400' : 'text-neutral-200'}`}>
-                                                    Q{idx + 1}
+                                            <div className="flex items-center gap-2 mb-1.5">
+                                                <span className={`text-sm font-semibold tracking-wide ${isCurrent ? 'text-amber-400' : 'text-neutral-300'}`}>
+                                                    Question {idx + 1}
                                                 </span>
-                                                <span className={`px-2 py-0.5 text-xs font-medium rounded border ${diffStyles[qDetails?.difficulty || 'MEDIUM']}`}>
+                                                <span className={`px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider rounded border ${diffStyles[qDetails?.difficulty || 'MEDIUM']}`}>
                                                     {diffLabels[qDetails?.difficulty || 'MEDIUM']}
                                                 </span>
                                             </div>
-                                            <p className="text-xs text-neutral-400 line-clamp-2">
-                                                {qDetails?.text?.replace(/\[IMAGE\]/g, '').substring(0, 100) || 'Loading...'}
-                                                {(qDetails?.text?.length || 0) > 100 ? '...' : ''}
+                                            <p className={`text-sm line-clamp-2 leading-relaxed ${isCurrent ? 'text-neutral-200' : 'text-neutral-300'}`}>
+                                                {qDetails?.text?.replace(/\[IMAGE\]/g, '📷 ').substring(0, 150) || 'Loading question...'}
                                             </p>
                                         </div>
                                     </button>
@@ -704,63 +968,87 @@ export default function QuestionPage() {
 
             {/* Top Bar */}
             <header className="bg-[#1a1a1a] border-b border-neutral-800 h-14 flex items-center px-4 lg:px-6 justify-between shrink-0">
-                <Link href="/problems" className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors">
+                <Link href={isSprintMode ? "/sprint" : "/problems"} className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors">
                     <ChevronLeftIcon sx={{ fontSize: '1.25rem' }} />
-                    <span className="font-medium text-sm">Back to Problems</span>
+                    <span className="font-medium text-sm">Back to {isSprintMode ? 'Sprint Setup' : 'Problems'}</span>
                 </Link>
 
                 {/* Timer Display (center) */}
+                {/* Timer Display (center) */}
                 <div className="flex items-center gap-2">
-                    <button
-                        onClick={() => {
-                            if (!isTimerEnabled) {
-                                setShowTimerPrompt(true);
-                            } else {
-                                // Disable timer and clear all unsaved question times
-                                setIsTimerEnabled(false);
-                                sessionStorage.setItem('timerEnabled', 'false');
-                                // Clear all tracked times (submitted ones are already in the database)
-                                setQuestionTimes({});
-                                sessionStorage.removeItem('questionTimes');
-                                setElapsedTime(0);
-                                if (timerRef.current) {
-                                    clearInterval(timerRef.current);
-                                    timerRef.current = null;
-                                }
-                            }
-                        }}
-                        className={`flex items-center gap-2.5 px-4 py-2 rounded-xl transition-all duration-300 ${isTimerEnabled
-                            ? 'bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 border border-amber-500/30 shadow-lg shadow-amber-500/10'
-                            : 'text-neutral-500 hover:bg-neutral-800 hover:text-neutral-300 border border-transparent'
-                            }`}
-                        title={isTimerEnabled ? 'Click to stop tracking time' : 'Click to track time'}
-                    >
-                        <TimerIcon sx={{ fontSize: '1.25rem' }} />
-                        {isTimerEnabled ? (
-                            <div className="flex items-center gap-1">
-                                <span className="text-base font-mono font-bold tracking-wider">
-                                    {Math.floor(elapsedTime / 60).toString().padStart(2, '0')}
-                                </span>
-                                <span className="text-amber-500">:</span>
-                                <span className="text-base font-mono font-bold tracking-wider">
-                                    {(elapsedTime % 60).toString().padStart(2, '0')}
-                                </span>
+                    {/* Sprint Timer Display */}
+                    {isSprintMode && sprintSession ? (() => {
+                        const totalTimeAllowedSec = Math.floor(sprintSession.totalTimeAllowed / 1000);
+                        const remainingTime = Math.max(0, totalTimeAllowedSec - elapsedTime);
+                        return (
+                            <div className={`flex items-center gap-2.5 px-4 py-2 rounded-xl transition-all border shadow-lg ${remainingTime < 60
+                                ? 'bg-rose-500/20 text-rose-400 border-rose-500/30 shadow-rose-500/10 animate-pulse'
+                                : 'bg-neutral-800 text-neutral-300 border-neutral-700'
+                                }`}>
+                                <TimerIcon sx={{ fontSize: '1.25rem' }} />
+                                <div className="flex items-center gap-1 font-mono font-bold tracking-wider text-base">
+                                    <span>{Math.floor(remainingTime / 60).toString().padStart(2, '0')}</span>
+                                    <span className="opacity-50">:</span>
+                                    <span>{(remainingTime % 60).toString().padStart(2, '0')}</span>
+                                </div>
                             </div>
-                        ) : (
-                            <span className="text-sm font-medium">Timer</span>
-                        )}
-                    </button>
+                        );
+                    })() : (
+                        /* Standard Timer Button */
+                        <button
+                            onClick={() => {
+                                if (!isTimerEnabled) {
+                                    setShowTimerPrompt(true);
+                                } else {
+                                    setIsTimerEnabled(false);
+                                    sessionStorage.setItem('timerEnabled', 'false');
+                                    setQuestionTimes({});
+                                    sessionStorage.removeItem('questionTimes');
+                                    setElapsedTime(0);
+                                    if (timerRef.current) {
+                                        clearInterval(timerRef.current);
+                                        timerRef.current = null;
+                                    }
+                                }
+                            }}
+                            className={`flex items-center gap-2.5 px-4 py-2 rounded-xl transition-all duration-300 ${isTimerEnabled
+                                ? 'bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 border border-amber-500/30 shadow-lg shadow-amber-500/10'
+                                : 'text-neutral-500 hover:bg-neutral-800 hover:text-neutral-300 border border-transparent'
+                                }`}
+                            title={isTimerEnabled ? 'Click to stop tracking time' : 'Click to track time'}
+                        >
+                            <TimerIcon sx={{ fontSize: '1.25rem' }} />
+                            {isTimerEnabled ? (
+                                <div className="flex items-center gap-1">
+                                    <span className="text-base font-mono font-bold tracking-wider">
+                                        {Math.floor(elapsedTime / 60).toString().padStart(2, '0')}
+                                    </span>
+                                    <span className="text-amber-500">:</span>
+                                    <span className="text-base font-mono font-bold tracking-wider">
+                                        {(elapsedTime % 60).toString().padStart(2, '0')}
+                                    </span>
+                                </div>
+                            ) : (
+                                <span className="text-sm font-medium">Timer</span>
+                            )}
+                        </button>
+                    )}
                 </div>
 
                 <div className="flex items-center gap-2">
                     <button
                         onClick={goToPrevious}
-                        disabled={isPracticeMode ? (practiceSession?.currentIndex === 0) : !hasPrevious}
+                        disabled={isSprintMode ? (sprintSession?.currentIndex === 0) : (isPracticeMode ? (practiceSession?.currentIndex === 0) : !hasPrevious)}
                         className="flex items-center gap-1 px-3 py-1.5 rounded-lg hover:bg-neutral-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-neutral-400 hover:text-white"
                     >
                         <ChevronLeftIcon sx={{ fontSize: '1.1rem' }} />
                         <span className="text-sm font-medium">Previous</span>
                     </button>
+                    {isSprintMode && sprintSession && (
+                        <span className="text-sm font-medium text-amber-400 px-2">
+                            {sprintSession.currentIndex + 1} / {sprintSession.questionIds.length}
+                        </span>
+                    )}
                     {isPracticeMode && practiceSession && (
                         <span className="text-sm font-medium text-amber-400 px-2">
                             {practiceSession.currentIndex + 1} / {practiceSession.questionIds.length}
@@ -768,13 +1056,15 @@ export default function QuestionPage() {
                     )}
                     <button
                         onClick={goToNext}
-                        disabled={!isPracticeMode && !hasNext}
+                        disabled={!isPracticeMode && !isSprintMode && !hasNext}
                         className="flex items-center gap-1 px-3 py-1.5 rounded-lg hover:bg-neutral-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-neutral-400 hover:text-white"
                     >
                         <span className="text-sm font-medium">
-                            {isPracticeMode && practiceSession?.currentIndex === (practiceSession?.questionIds?.length ?? 0) - 1
-                                ? 'Finish'
-                                : 'Next'}
+                            {isSprintMode && sprintSession?.currentIndex === (sprintSession?.questionIds?.length ?? 0) - 1
+                                ? 'Finish Sprint'
+                                : (isPracticeMode && practiceSession?.currentIndex === (practiceSession?.questionIds?.length ?? 0) - 1
+                                    ? 'Finish'
+                                    : 'Next')}
                         </span>
                         <ChevronRightIcon sx={{ fontSize: '1.1rem' }} />
                     </button>

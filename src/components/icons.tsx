@@ -129,6 +129,9 @@ export { default as BoltIcon } from '@mui/icons-material/Bolt';
 export { default as FlashIcon } from '@mui/icons-material/FlashOn';
 
 // ========== MISCELLANEOUS ICONS ==========
+export { default as PlayArrowIcon } from '@mui/icons-material/PlayArrow';
+export { default as EmojiEventsIcon } from '@mui/icons-material/EmojiEvents';
+export { default as TargetIcon } from '@mui/icons-material/TrackChanges';
 export { default as DarkModeIcon } from '@mui/icons-material/DarkMode';
 export { default as LightModeIcon } from '@mui/icons-material/LightMode';
 export { default as PaletteIcon } from '@mui/icons-material/Palette';

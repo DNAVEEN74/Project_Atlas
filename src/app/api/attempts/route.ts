@@ -92,42 +92,45 @@ export async function POST(req: NextRequest) {
             user.dash.last_active = new Date();
 
             // Update heatmap (tracks all submissions for activity visualization)
-            const existingDayIndex = user.dash.heatmap.findIndex(h => h.date === today);
-            const hadActivityToday = existingDayIndex >= 0;
+            // Skip heatmap update for Sprint attempts if isSprint flag is present
+            const isSprint = body.isSprint === true;
 
-            if (hadActivityToday) {
-                user.dash.heatmap[existingDayIndex].count += 1;
-                const count = user.dash.heatmap[existingDayIndex].count;
-                // Intensity levels: 1-2: 1, 3-5: 2, 6-10: 3, 11+: 4
-                user.dash.heatmap[existingDayIndex].intensity =
-                    count >= 10 ? 4 : count >= 5 ? 3 : count >= 3 ? 2 : 1;
-            } else {
-                user.dash.heatmap.push({
-                    date: today,
-                    count: 1,
-                    intensity: 1,
-                });
-            }
+            if (!isSprint) {
+                const existingDayIndex = user.dash.heatmap.findIndex(h => h.date === today);
+                const hadActivityToday = existingDayIndex >= 0;
 
-            // Update streak (only on first activity of the day)
-            if (!hadActivityToday) {
-                const yesterday = new Date();
-                yesterday.setDate(yesterday.getDate() - 1);
-                const yesterdayStr = yesterday.toISOString().split('T')[0];
-                const hadActivityYesterday = user.dash.heatmap.some(h => h.date === yesterdayStr);
-
-                if (hadActivityYesterday) {
-                    // Continue streak
-                    user.dash.streak += 1;
+                if (hadActivityToday) {
+                    user.dash.heatmap[existingDayIndex].count += 1;
+                    const count = user.dash.heatmap[existingDayIndex].count;
+                    // Intensity levels: 1-2: 1, 3-5: 2, 6-10: 3, 11+: 4
+                    user.dash.heatmap[existingDayIndex].intensity =
+                        count >= 10 ? 4 : count >= 5 ? 3 : count >= 3 ? 2 : 1;
                 } else {
-                    // Check if streak was broken (more than 1 day gap)
-                    // Reset to 1 for starting a new streak today
-                    user.dash.streak = 1;
-                }
+                    user.dash.heatmap.push({
+                        date: today,
+                        count: 1,
+                        intensity: 1,
+                    });
 
-                // Update max streak if current streak is higher
-                if (user.dash.streak > (user.dash.max_streak || 0)) {
-                    user.dash.max_streak = user.dash.streak;
+                    // Update streak (only on first activity of the day)
+                    const yesterday = new Date();
+                    yesterday.setDate(yesterday.getDate() - 1);
+                    const yesterdayStr = yesterday.toISOString().split('T')[0];
+                    const hadActivityYesterday = user.dash.heatmap.some(h => h.date === yesterdayStr);
+
+                    if (hadActivityYesterday) {
+                        // Continue streak
+                        user.dash.streak += 1;
+                    } else {
+                        // Check if streak was broken (more than 1 day gap)
+                        // Reset to 1 for starting a new streak today
+                        user.dash.streak = 1;
+                    }
+
+                    // Update max streak if current streak is higher
+                    if (user.dash.streak > (user.dash.max_streak || 0)) {
+                        user.dash.max_streak = user.dash.streak;
+                    }
                 }
             }
             // If already had activity today, streak is already correct
