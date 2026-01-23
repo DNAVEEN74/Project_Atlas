@@ -25,7 +25,7 @@ export default function DiceCubeContent() {
                     <span className="inline-block px-3 py-1 rounded-full bg-red-500/20 text-red-500 text-xs font-bold uppercase tracking-widest mb-2 border border-red-500/20">
                         Phase 02: Visual Reasoning
                     </span>
-                    <h1 className scr="text-4xl md:text-5xl font-bold text-white mb-2">Dice & Cube</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Dice & Cube</h1>
                     <p className="text-neutral-400 text-lg">Master opposite faces and painted cube problems.</p>
                 </div>
             </div>

@@ -49,7 +49,6 @@ export default function GamesHistoryPage() {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [isFetching, setIsFetching] = useState(false);
-    const [isFetching, setIsFetching] = useState(false);
 
     // Filters
     const [categoryFilter, setCategoryFilter] = useState<'ALL' | 'QUANT' | 'REASONING'>('ALL');
