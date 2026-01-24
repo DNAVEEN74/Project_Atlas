@@ -227,6 +227,32 @@ export default function ClockCalendarContent() {
                 />
             </ConceptSection>
 
+            {/* COMMON MISTAKES */}
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+                <div className="space-y-4 my-6">
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold">❌ Assuming Every 4th Year is Leap</h4>
+                        <p className="text-sm text-neutral-400 mt-1">
+                            Century years (1700, 1800, 1900) are NOT leap years unless divisible by 400. 2000 was a leap year, 1900 was not!
+                        </p>
+                    </div>
+
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold">❌ Angle Greater than 180°</h4>
+                        <p className="text-sm text-neutral-400 mt-1">
+                            Clock angles are usually measured as the smaller angle. If your formula gives 250°, convert it: 360° − 250° = 110°.
+                        </p>
+                    </div>
+
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold">❌ 12:00 vs 00:00</h4>
+                        <p className="text-sm text-neutral-400 mt-1">
+                            In calculations, treat 12:00 as Hour = 0 (or 12), but be consistent. |30(12) − 5.5(0)| = 360 = 0°.
+                        </p>
+                    </div>
+                </div>
+            </ConceptSection>
+
             {/* CHEAT SHEET */}
             <ConceptSection id="summary" title="Cheat Sheet">
                 <CheatSheet

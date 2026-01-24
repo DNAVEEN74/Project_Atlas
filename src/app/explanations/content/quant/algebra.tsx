@@ -225,6 +225,40 @@ export default function AlgebraContent() {
                 </TipBox>
             </ConceptSection>
 
+            {/* COMMON MISTAKES */}
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+                <div className="space-y-4 my-6">
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold">❌ (a + b)² ≠ a² + b²</h4>
+                        <p className="text-sm text-neutral-400 mt-1">
+                            Don't forget the middle term! (a + b)² = a² + <strong>2ab</strong> + b²
+                        </p>
+                    </div>
+
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold">❌ Confusing k² − 2 vs k² + 2</h4>
+                        <p className="text-sm text-neutral-400 mt-1">
+                            x + 1/x → use k² − 2 (minus). x − 1/x → use k² + 2 (plus). Notice the switch!
+                        </p>
+                    </div>
+
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold">❌ Expanding Instead of Pattern Matching</h4>
+                        <p className="text-sm text-neutral-400 mt-1">
+                            103² − 97² → Don't calculate squares! Use (a+b)(a−b) = 200 × 6 = 1200
+                        </p>
+                    </div>
+
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold">❌ Wrong Sign in Cube Identities</h4>
+                        <p className="text-sm text-neutral-400 mt-1">
+                            a³ + b³ = (a+b)(a² − ab + b²) has MINUS ab.<br />
+                            a³ − b³ = (a−b)(a² + ab + b²) has PLUS ab.
+                        </p>
+                    </div>
+                </div>
+            </ConceptSection>
+
             {/* CHEAT SHEET */}
             <ConceptSection id="summary" title="Cheat Sheet">
                 <CheatSheet

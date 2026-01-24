@@ -17,204 +17,487 @@ export default function BloodRelationsContent() {
         <LessonLayout>
             {/* HERO */}
             <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-neutral-900 to-black" />
+                <div className="absolute inset-0 bg-gradient-to-br from-rose-900/40 via-neutral-900 to-black" />
+
+                {/* Animated family tree */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                    <img
-                        src="/assets/blood_relations_hero.png"
-                        alt="Family Tree"
-                        className="object-cover w-full h-full opacity-60"
-                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                    />
-                    <div className="absolute text-[6rem] select-none opacity-20">👨‍👩‍👧‍👦</div>
+                    <div className="relative opacity-30">
+                        {/* Simple tree visualization */}
+                        <div className="flex gap-8 items-center">
+                            <div className="w-12 h-12 border-2 border-blue-500 rounded-sm flex items-center justify-center text-2xl">👨</div>
+                            <div className="w-8 h-0.5 bg-white" />
+                            <div className="w-12 h-12 border-2 border-pink-500 rounded-full flex items-center justify-center text-2xl">👩</div>
+                        </div>
+                        <div className="absolute left-1/2 top-full w-0.5 h-8 bg-white -translate-x-1/2" />
+                        <div className="absolute left-1/2 top-[calc(100%+2rem)] -translate-x-1/2 flex gap-4">
+                            <div className="w-10 h-10 border-2 border-blue-500/50 rounded-sm" />
+                            <div className="w-10 h-10 border-2 border-pink-500/50 rounded-full" />
+                        </div>
+                    </div>
                 </div>
+
                 <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
                     <span className="inline-block px-3 py-1 rounded-full bg-rose-500/20 text-rose-500 text-xs font-bold uppercase tracking-widest mb-2 border border-rose-500/20">
-                        Phase 04: Real World Logic
+                        Real World Logic
                     </span>
                     <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Blood Relations</h1>
-                    <p className="text-neutral-400 text-lg">Master family tree problems step by step.</p>
+                    <p className="text-neutral-400 text-lg">Master family tree problems — the key is to DRAW, never solve in your head!</p>
                 </div>
             </div>
 
-            {/* CONCEPT 1: THE GOLDEN RULE */}
-            <ConceptSection id="intro" title="The Golden Rule: ALWAYS Draw!" icon="✏️">
-                <p>
-                    <strong>NEVER solve blood relations in your head.</strong> Always draw a family tree diagram.
-                    It takes 10 seconds to draw but saves minutes of confusion.
+            {/* THE GOLDEN RULE */}
+            <ConceptSection id="intro" title="Rule #1: ALWAYS Draw!" icon="✏️">
+                <div className="bg-gradient-to-r from-rose-900/20 to-transparent p-6 rounded-xl border-l-4 border-rose-500 mb-6">
+                    <p className="text-2xl font-bold text-rose-400 text-center">
+                        NEVER Solve Blood Relations in Your Head!
+                    </p>
+                    <p className="text-center text-neutral-400 mt-2">
+                        Drawing takes 10 seconds but saves minutes of confusion!
+                    </p>
+                </div>
+
+                <p className="mb-6">
+                    These questions look tough because they describe relationships in words. But when you <strong>draw a family tree</strong>,
+                    everything becomes crystal clear!
                 </p>
 
+                {/* Standard symbols */}
                 <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-rose-500/30">
-                    <h4 className="text-rose-400 font-bold mb-4 text-center text-lg">Standard Symbols</h4>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <h4 className="text-rose-400 font-bold mb-6 text-center text-lg">Standard Symbols to Use</h4>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         <div className="text-center">
-                            <div className="w-12 h-12 border-2 border-blue-500 mx-auto"></div>
-                            <p className="text-sm text-blue-400 mt-2">Male (+)</p>
-                        </div>
-                        <div className="text-center">
-                            <div className="w-12 h-12 border-2 border-pink-500 rounded-full mx-auto"></div>
-                            <p className="text-sm text-pink-400 mt-2">Female (−)</p>
-                        </div>
-                        <div className="text-center">
-                            <div className="flex items-center justify-center gap-2 h-12">
-                                <div className="w-8 h-8 border-2 border-blue-500"></div>
-                                <div className="w-6 h-0.5 bg-white"></div>
-                                <div className="w-8 h-8 border-2 border-pink-500 rounded-full"></div>
+                            <div className="w-16 h-16 border-4 border-blue-500 mx-auto flex items-center justify-center bg-blue-500/10">
+                                <span className="text-blue-400 text-sm font-bold">M</span>
                             </div>
-                            <p className="text-sm text-neutral-400 mt-2">Couple (=)</p>
+                            <p className="text-sm text-blue-400 mt-3 font-bold">Male</p>
+                            <p className="text-xs text-neutral-500">Square shape</p>
                         </div>
                         <div className="text-center">
-                            <div className="flex flex-col items-center justify-center h-12">
+                            <div className="w-16 h-16 border-4 border-pink-500 rounded-full mx-auto flex items-center justify-center bg-pink-500/10">
+                                <span className="text-pink-400 text-sm font-bold">F</span>
+                            </div>
+                            <p className="text-sm text-pink-400 mt-3 font-bold">Female</p>
+                            <p className="text-xs text-neutral-500">Circle shape</p>
+                        </div>
+                        <div className="text-center">
+                            <div className="flex items-center justify-center gap-2 h-16 mx-auto">
+                                <div className="w-10 h-10 border-2 border-blue-500"></div>
+                                <div className="w-8 h-0.5 bg-white"></div>
+                                <div className="w-10 h-10 border-2 border-pink-500 rounded-full"></div>
+                            </div>
+                            <p className="text-sm text-neutral-400 mt-3 font-bold">Married</p>
+                            <p className="text-xs text-neutral-500">Horizontal line</p>
+                        </div>
+                        <div className="text-center">
+                            <div className="flex flex-col items-center justify-center h-16 mx-auto">
                                 <div className="w-0.5 h-4 bg-white"></div>
-                                <div className="flex gap-4">
-                                    <div className="w-4 h-4 border border-white"></div>
-                                    <div className="w-4 h-4 border border-white rounded-full"></div>
+                                <div className="flex gap-6">
+                                    <div className="w-6 h-6 border border-neutral-500"></div>
+                                    <div className="w-6 h-6 border border-neutral-500 rounded-full"></div>
                                 </div>
                             </div>
-                            <p className="text-sm text-neutral-400 mt-2">Children</p>
+                            <p className="text-sm text-neutral-400 mt-3 font-bold">Children</p>
+                            <p className="text-xs text-neutral-500">Vertical line down</p>
                         </div>
                     </div>
                 </div>
+
+                <TipBox variant="note" title="Unknown Gender?">
+                    <p className="text-sm">
+                        If gender is not mentioned, use a <strong>triangle △</strong> or <strong>question mark ?</strong>.
+                        You can determine the gender from other clues later!
+                    </p>
+                </TipBox>
             </ConceptSection>
 
-            {/* CONCEPT 2: RELATIONSHIPS CHART */}
-            <ConceptSection id="relations" title="Relationship Reference" icon="👨‍👩‍👧">
-                <p>Memorize these terms. They appear EVERY exam.</p>
+            {/* FAMILY RELATIONSHIPS */}
+            <ConceptSection id="relations" title="Complete Family Relationship Reference" icon="👨‍👩‍👧">
+                <p className="mb-6">Memorize these terms. They appear in EVERY exam!</p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-rose-400 font-bold mb-3">Paternal Side (Father's)</h4>
-                        <ul className="text-sm text-neutral-300 space-y-1">
-                            <li>• Father's Father → <strong>Grandfather (Paternal)</strong></li>
-                            <li>• Father's Mother → <strong>Grandmother (Paternal)</strong></li>
-                            <li>• Father's Brother → <strong>Uncle (Paternal)</strong></li>
-                            <li>• Father's Sister → <strong>Aunt (Paternal)</strong></li>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+                    {/* Paternal Side */}
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-blue-500/30">
+                        <h4 className="text-blue-400 font-bold mb-4 flex items-center gap-2">
+                            <span className="w-8 h-8 border-2 border-blue-500 flex items-center justify-center text-xs">👨</span>
+                            Paternal Side (Father's)
+                        </h4>
+                        <ul className="space-y-2 text-sm">
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Father's Father</span>
+                                <span className="text-white font-bold">Grandfather (Paternal)</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Father's Mother</span>
+                                <span className="text-white font-bold">Grandmother (Paternal)</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Father's Brother</span>
+                                <span className="text-white font-bold">Uncle (Paternal)</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Father's Sister</span>
+                                <span className="text-white font-bold">Aunt (Paternal)</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Father's Brother's Son</span>
+                                <span className="text-white font-bold">Cousin</span>
+                            </li>
                         </ul>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-rose-400 font-bold mb-3">Maternal Side (Mother's)</h4>
-                        <ul className="text-sm text-neutral-300 space-y-1">
-                            <li>• Mother's Father → <strong>Grandfather (Maternal)</strong></li>
-                            <li>• Mother's Mother → <strong>Grandmother (Maternal)</strong></li>
-                            <li>• Mother's Brother → <strong>Uncle (Maternal)</strong></li>
-                            <li>• Mother's Sister → <strong>Aunt (Maternal)</strong></li>
+
+                    {/* Maternal Side */}
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-pink-500/30">
+                        <h4 className="text-pink-400 font-bold mb-4 flex items-center gap-2">
+                            <span className="w-8 h-8 border-2 border-pink-500 rounded-full flex items-center justify-center text-xs">👩</span>
+                            Maternal Side (Mother's)
+                        </h4>
+                        <ul className="space-y-2 text-sm">
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Mother's Father</span>
+                                <span className="text-white font-bold">Grandfather (Maternal)</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Mother's Mother</span>
+                                <span className="text-white font-bold">Grandmother (Maternal)</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Mother's Brother</span>
+                                <span className="text-white font-bold">Uncle (Maternal)</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Mother's Sister</span>
+                                <span className="text-white font-bold">Aunt (Maternal)</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Mother's Sister's Daughter</span>
+                                <span className="text-white font-bold">Cousin</span>
+                            </li>
                         </ul>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-rose-400 font-bold mb-3">In-Laws (By Marriage)</h4>
-                        <ul className="text-sm text-neutral-300 space-y-1">
-                            <li>• Spouse's Father → <strong>Father-in-law</strong></li>
-                            <li>• Spouse's Mother → <strong>Mother-in-law</strong></li>
-                            <li>• Spouse's Brother → <strong>Brother-in-law</strong></li>
-                            <li>• Spouse's Sister → <strong>Sister-in-law</strong></li>
+
+                    {/* In-Laws */}
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-amber-500/30">
+                        <h4 className="text-amber-400 font-bold mb-4">💍 In-Laws (By Marriage)</h4>
+                        <ul className="space-y-2 text-sm">
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Spouse's Father</span>
+                                <span className="text-white font-bold">Father-in-law</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Spouse's Mother</span>
+                                <span className="text-white font-bold">Mother-in-law</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Spouse's Brother</span>
+                                <span className="text-white font-bold">Brother-in-law</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Spouse's Sister</span>
+                                <span className="text-white font-bold">Sister-in-law</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Son's Wife</span>
+                                <span className="text-white font-bold">Daughter-in-law</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Daughter's Husband</span>
+                                <span className="text-white font-bold">Son-in-law</span>
+                            </li>
                         </ul>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-rose-400 font-bold mb-3">Other Relations</h4>
-                        <ul className="text-sm text-neutral-300 space-y-1">
-                            <li>• Uncle's/Aunt's children → <strong>Cousin</strong></li>
-                            <li>• Brother's/Sister's son → <strong>Nephew</strong></li>
-                            <li>• Brother's/Sister's daughter → <strong>Niece</strong></li>
+
+                    {/* Siblings & Their Children */}
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-emerald-500/30">
+                        <h4 className="text-emerald-400 font-bold mb-4">👫 Siblings & Their Children</h4>
+                        <ul className="space-y-2 text-sm">
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Brother's Son</span>
+                                <span className="text-white font-bold">Nephew</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Brother's Daughter</span>
+                                <span className="text-white font-bold">Niece</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Sister's Son</span>
+                                <span className="text-white font-bold">Nephew</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Sister's Daughter</span>
+                                <span className="text-white font-bold">Niece</span>
+                            </li>
+                            <li className="flex justify-between">
+                                <span className="text-neutral-400">Uncle/Aunt's Children</span>
+                                <span className="text-white font-bold">Cousin</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
+
+                <CheckUnderstanding
+                    question="What is my mother's brother's daughter to me?"
+                    options={["Sister", "Niece", "Cousin", "Aunt"]}
+                    correctIndex={2}
+                    explanation="Mother's brother = Uncle (maternal). Uncle's daughter = Cousin!"
+                />
             </ConceptSection>
 
-            {/* CONCEPT 3: POINTING PROBLEMS */}
-            <ConceptSection id="pointing" title="Pointing Problems" icon="👉">
-                <p>
-                    "Pointing to a photograph, A said..." → Start from the END and work backwards to "MY".
+            {/* POINTING PROBLEMS */}
+            <ConceptSection id="pointing" title="Solving 'Pointing' Problems" icon="👉">
+                <p className="mb-4">
+                    The most common type: <strong>"Pointing to a photograph, A said..."</strong>
                 </p>
+
+                <div className="bg-gradient-to-r from-purple-900/20 to-transparent p-6 rounded-xl border-l-4 border-purple-500 mb-6">
+                    <h4 className="text-purple-400 font-bold mb-3">🔑 The Golden Technique</h4>
+                    <p className="text-lg">
+                        Start from the <strong>END</strong> of the sentence and work <strong>BACKWARDS</strong> to "MY"!
+                    </p>
+                </div>
+
+                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                    <h4 className="text-rose-400 font-bold mb-4">Step-by-Step Process</h4>
+                    <div className="space-y-4">
+                        <div className="flex gap-4 items-start">
+                            <div className="w-8 h-8 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400 font-bold shrink-0">1</div>
+                            <div>
+                                <p className="font-bold text-white">Read the FULL statement</p>
+                                <p className="text-sm text-neutral-400">Identify who is speaking (usually "I" or "A")</p>
+                            </div>
+                        </div>
+                        <div className="flex gap-4 items-start">
+                            <div className="w-8 h-8 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400 font-bold shrink-0">2</div>
+                            <div>
+                                <p className="font-bold text-white">Start from "MY" or "I"</p>
+                                <p className="text-sm text-neutral-400">Draw yourself first, then build the tree from there</p>
+                            </div>
+                        </div>
+                        <div className="flex gap-4 items-start">
+                            <div className="w-8 h-8 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400 font-bold shrink-0">3</div>
+                            <div>
+                                <p className="font-bold text-white">Work backwards through EACH relationship</p>
+                                <p className="text-sm text-neutral-400">"Brother's wife" → find brother first, then add wife</p>
+                            </div>
+                        </div>
+                        <div className="flex gap-4 items-start">
+                            <div className="w-8 h-8 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400 font-bold shrink-0">4</div>
+                            <div>
+                                <p className="font-bold text-white">Find the person in photo</p>
+                                <p className="text-sm text-neutral-400">Connect them to your tree and read the relationship</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <ExampleCard
                     number={1}
                     difficulty="medium"
+                    question="Pointing to a woman, a man said, 'Her mother is the only daughter of my mother.' How is the man related to the woman?"
+                    solution={
+                        <div className="space-y-3">
+                            <p><strong>Step 1:</strong> Start from "my mother"</p>
+                            <p><strong>Step 2:</strong> "Only daughter of my mother" = The man's sister</p>
+                            <p><strong>Step 3:</strong> "Her mother" = The woman's mother = Man's sister</p>
+                            <p><strong>Step 4:</strong> So the woman is the daughter of man's sister</p>
+                            <p><strong>Step 5:</strong> Sister's daughter = <span className="text-rose-400 font-bold">NIECE</span></p>
+                            <div className="mt-4 p-3 bg-black/50 rounded-lg">
+                                <p className="text-xs text-neutral-400">
+                                    Man's Mother → Man's Sister (only daughter) → Woman (daughter)
+                                </p>
+                            </div>
+                        </div>
+                    }
+                    answer="Uncle (The man is the woman's uncle)"
+                />
+
+                <ExampleCard
+                    number={2}
+                    difficulty="hard"
                     question="Pointing to a lady, a man said, 'The son of her only brother is the brother of my wife.' How is the lady related to the man?"
                     solution={
                         <div className="space-y-3">
-                            <p><strong>Work backwards:</strong></p>
-                            <p>1. "My wife" → Man's Wife</p>
-                            <p>2. "Brother of my wife" → Man's Brother-in-law</p>
-                            <p>3. "Son of her only brother" = Man's Brother-in-law</p>
-                            <p>4. So: Lady's Brother's Son = Man's Brother-in-law</p>
-                            <p>5. This means: Lady's Brother = Man's Father-in-law</p>
-                            <p>6. Therefore: Lady = Sister of Man's Father-in-law</p>
+                            <p><strong>Decode backwards:</strong></p>
+                            <ul className="list-disc list-inside text-sm space-y-1">
+                                <li>"my wife" → Man's Wife</li>
+                                <li>"brother of my wife" → Man's Brother-in-law</li>
+                                <li>"son of her only brother" = Man's Brother-in-law</li>
+                                <li>So: Lady's Brother's Son = Man's Brother-in-law</li>
+                                <li>This means: Lady's Brother = Man's Father-in-law</li>
+                                <li>Therefore: Lady = Sister of Man's Father-in-law</li>
+                            </ul>
                         </div>
                     }
-                    answer="Sister of Father-in-law"
+                    answer="Sister of Father-in-law (or Aunt-in-law)"
                 />
 
                 <CheckUnderstanding
                     question="Pointing to a man, a woman said, 'His mother is the only daughter of my mother.' How is the woman related to the man?"
                     options={["Mother", "Aunt", "Grandmother", "Sister"]}
                     correctIndex={0}
-                    explanation="'Only daughter of my mother' = The woman herself. So 'His mother' = The woman. Therefore, the woman is the man's mother."
+                    explanation="'Only daughter of my mother' = The woman herself. So 'His mother' = The woman. Therefore, the woman is the man's MOTHER!"
                 />
             </ConceptSection>
 
-            {/* CONCEPT 4: CODED RELATIONS */}
-            <ConceptSection id="coded" title="Coded Relations (A+B, A−B)" icon="🔢">
-                <p>Some questions use codes like: A + B means "A is mother of B"</p>
+            {/* CODED RELATIONS */}
+            <ConceptSection id="coded" title="Coded Relations (A+B, A×B)" icon="🔢">
+                <p className="mb-4">
+                    Some questions use symbols like +, −, ×, ÷ to represent relationships. <strong>Decode them first!</strong>
+                </p>
 
-                <div className="my-6 p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <p className="text-sm text-neutral-400 mb-4">Common coding patterns:</p>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm font-mono">
-                        <div className="text-center">
-                            <div className="text-rose-400">+</div>
-                            <div className="text-neutral-500">Mother</div>
+                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                    <h4 className="text-rose-400 font-bold mb-4 text-center">Common Coding Patterns</h4>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div className="p-4 bg-black/50 rounded-lg text-center">
+                            <div className="text-3xl text-rose-400 font-bold mb-2">+</div>
+                            <p className="text-sm text-neutral-400">Usually means</p>
+                            <p className="text-white font-bold">Mother</p>
                         </div>
-                        <div className="text-center">
-                            <div className="text-rose-400">−</div>
-                            <div className="text-neutral-500">Father</div>
+                        <div className="p-4 bg-black/50 rounded-lg text-center">
+                            <div className="text-3xl text-blue-400 font-bold mb-2">−</div>
+                            <p className="text-sm text-neutral-400">Usually means</p>
+                            <p className="text-white font-bold">Father</p>
                         </div>
-                        <div className="text-center">
-                            <div className="text-rose-400">×</div>
-                            <div className="text-neutral-500">Brother</div>
+                        <div className="p-4 bg-black/50 rounded-lg text-center">
+                            <div className="text-3xl text-amber-400 font-bold mb-2">×</div>
+                            <p className="text-sm text-neutral-400">Usually means</p>
+                            <p className="text-white font-bold">Brother</p>
                         </div>
-                        <div className="text-center">
-                            <div className="text-rose-400">÷</div>
-                            <div className="text-neutral-500">Sister</div>
+                        <div className="p-4 bg-black/50 rounded-lg text-center">
+                            <div className="text-3xl text-pink-400 font-bold mb-2">÷</div>
+                            <p className="text-sm text-neutral-400">Usually means</p>
+                            <p className="text-white font-bold">Sister</p>
                         </div>
                     </div>
+                    <p className="text-center text-neutral-500 text-xs mt-4">
+                        ⚠️ Always check the question — codes can vary!
+                    </p>
                 </div>
 
+                <FormulaBox title="The Decoding Method">
+                    <ol className="list-decimal list-inside text-sm space-y-2">
+                        <li>Write down the meaning of each symbol (given in question)</li>
+                        <li>Replace symbols with relationships: P + Q − R = "P mother of Q, Q father of R"</li>
+                        <li>Draw the family tree step by step</li>
+                        <li>Find the answer from your diagram</li>
+                    </ol>
+                </FormulaBox>
+
                 <ExampleCard
-                    number={2}
+                    number={3}
                     difficulty="hard"
                     question="If A + B means A is father of B, A − B means A is mother of B, A × B means A is brother of B. What does P + Q − R × S mean?"
                     solution={
-                        <div className="space-y-2">
+                        <div className="space-y-3">
                             <p><strong>Decode step by step:</strong></p>
-                            <p>P + Q → P is father of Q</p>
-                            <p>Q − R → Q is mother of R</p>
-                            <p>R × S → R is brother of S</p>
-                            <p><strong>Build tree:</strong> P married to Q, they have children R and S (R is male, S's gender unknown)</p>
+                            <ul className="list-disc list-inside text-sm space-y-1">
+                                <li>P + Q → P is father of Q</li>
+                                <li>Q − R → Q is mother of R</li>
+                                <li>R × S → R is brother of S</li>
+                            </ul>
+                            <p className="mt-2"><strong>Build tree:</strong></p>
+                            <ul className="list-disc list-inside text-sm space-y-1">
+                                <li>P (♂) married to Q (♀)</li>
+                                <li>They have children: R (♂, since he's brother) and S</li>
+                            </ul>
+                            <p className="text-rose-400 mt-2"><strong>P is grandfather of S</strong></p>
                         </div>
                     }
                     answer="P is grandfather of S"
                 />
             </ConceptSection>
 
-            {/* CONCEPT 5: COMMON TRAPS */}
-            <ConceptSection id="traps" title="Common Traps to Avoid" icon="⚠️">
+            {/* ONLY CHILD / ONLY SON */}
+            <ConceptSection id="only" title="'Only' Keyword — The Trap Word" icon="⚠️">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+                    <div className="p-5 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold mb-3">⚠️ "Only Son"</h4>
+                        <p className="text-sm text-neutral-300 mb-2">
+                            Means: No other <strong>sons</strong>
+                        </p>
+                        <p className="text-xs text-neutral-500">
+                            But there could be daughters! "Only son" doesn't mean "no siblings"
+                        </p>
+                    </div>
+                    <div className="p-5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl">
+                        <h4 className="text-emerald-400 font-bold mb-3">✓ "Only Child"</h4>
+                        <p className="text-sm text-neutral-300 mb-2">
+                            Means: No siblings at all
+                        </p>
+                        <p className="text-xs text-neutral-500">
+                            No brothers AND no sisters — truly alone!
+                        </p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl">
+                        <h4 className="text-amber-400 font-bold mb-3">"Only Daughter"</h4>
+                        <p className="text-sm text-neutral-300 mb-2">
+                            Means: No other daughters (sisters possible)
+                        </p>
+                    </div>
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl">
+                        <h4 className="text-amber-400 font-bold mb-3">"Only Brother"</h4>
+                        <p className="text-sm text-neutral-300 mb-2">
+                            Means: She has exactly one brother (no other brothers)
+                        </p>
+                    </div>
+                </div>
+
+                <ExampleCard
+                    number={4}
+                    difficulty="medium"
+                    question="'I am the only son of my father' — Does this mean the speaker has no siblings?"
+                    solution={
+                        <div className="space-y-2">
+                            <p><strong>Analysis:</strong> "Only son" means no other sons (brothers)</p>
+                            <p><strong>But:</strong> The speaker could have sisters!</p>
+                            <p className="text-amber-400"><strong>So NO — the speaker might have sisters.</strong></p>
+                        </div>
+                    }
+                    answer="No, might have sisters"
+                />
+            </ConceptSection>
+
+            {/* COMMON MISTAKES */}
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Assuming Gender</h4>
+                        <h4 className="text-red-400 font-bold">❌ Assuming Gender from Names</h4>
+                        <p className="text-sm text-neutral-400 mt-1">
+                            "Pat", "Sam", "Alex" can be male or female! Only explicit words like "he", "she",
+                            "husband", "wife" confirm gender.
+                        </p>
+                    </div>
+
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold">❌ Assuming Gender from Profession</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             "Doctor", "Engineer", "Teacher" → Can be male OR female!
-                            <br />Only explicit words like "he", "she", "husband", "wife" indicate gender.
+                            Don't assume gender from profession.
                         </p>
                     </div>
+
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ "Only Son" vs "Only Child"</h4>
+                        <h4 className="text-red-400 font-bold">❌ Confusing "Only Son" with "Only Child"</h4>
                         <p className="text-sm text-neutral-400 mt-1">
-                            "Only son" means no other sons (but daughters possible).
-                            <br />"Only child" means no siblings at all.
+                            "Only son" means no brothers (but sisters possible).
+                            "Only child" means no siblings at all.
                         </p>
                     </div>
+
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
                         <h4 className="text-red-400 font-bold">❌ Cousin Confusion</h4>
                         <p className="text-sm text-neutral-400 mt-1">
-                            Cousins can be male or female. "Cousin brother" or "Cousin sister" specifies gender.
+                            "Cousin" is gender-neutral! Use "cousin brother" or "cousin sister" if gender matters.
+                            Uncle's child = Cousin (could be male or female)
+                        </p>
+                    </div>
+
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold">❌ Not Drawing the Family Tree</h4>
+                        <p className="text-sm text-neutral-400 mt-1">
+                            This is the biggest mistake! Always draw — it takes seconds and prevents all confusion.
                         </p>
                     </div>
                 </div>
@@ -225,12 +508,16 @@ export default function BloodRelationsContent() {
                 <CheatSheet
                     title="Blood Relations Master Reference"
                     rows={[
-                        { concept: 'Symbols', formula: 'Square=Male, Circle=Female' },
-                        { concept: 'Paternal', formula: 'Father\'s side' },
-                        { concept: 'Maternal', formula: 'Mother\'s side' },
-                        { concept: 'Nephew', formula: 'Sibling\'s son' },
-                        { concept: 'Niece', formula: 'Sibling\'s daughter' },
-                        { concept: 'Always', formula: 'DRAW the family tree!' },
+                        { concept: 'Symbols', formula: '\\square = \\text{Male}, \\bigcirc = \\text{Female}' },
+                        { concept: 'Paternal', formula: "\\text{Father's side}" },
+                        { concept: 'Maternal', formula: "\\text{Mother's side}" },
+                        { concept: 'Nephew', formula: "\\text{Sibling's son}" },
+                        { concept: 'Niece', formula: "\\text{Sibling's daughter}" },
+                        { concept: 'Cousin', formula: "\\text{Uncle/Aunt's child}" },
+                        { concept: 'Brother-in-law', formula: "\\text{Spouse's brother OR Sister's husband}" },
+                        { concept: 'Only Son', formula: '\\text{No brothers (sisters possible)}' },
+                        { concept: 'Only Child', formula: '\\text{No siblings at all}' },
+                        { concept: 'Rule #1', formula: '\\text{ALWAYS DRAW THE TREE!}' },
                     ]}
                 />
             </ConceptSection>

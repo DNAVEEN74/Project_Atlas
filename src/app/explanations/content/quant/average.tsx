@@ -215,6 +215,32 @@ export default function AverageContent() {
                 />
             </ConceptSection>
 
+            {/* COMMON MISTAKES */}
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+                <div className="space-y-4 my-6">
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold">❌ Simple Average of Averages</h4>
+                        <p className="text-sm text-neutral-400 mt-1">
+                            (Avg1 + Avg2)/2 only works when groups are EQUAL size. Use weighted average otherwise!
+                        </p>
+                    </div>
+
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold">❌ Simple Average for Speed</h4>
+                        <p className="text-sm text-neutral-400 mt-1">
+                            (40 + 60)/2 ≠ Average speed! Use harmonic mean: 2×40×60/(40+60) = 48
+                        </p>
+                    </div>
+
+                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                        <h4 className="text-red-400 font-bold">❌ Confusing Sum with Average</h4>
+                        <p className="text-sm text-neutral-400 mt-1">
+                            Always check: Sum = Avg × Count. Read carefully what the question asks!
+                        </p>
+                    </div>
+                </div>
+            </ConceptSection>
+
             {/* CHEAT SHEET */}
             <ConceptSection id="summary" title="Cheat Sheet">
                 <CheatSheet
