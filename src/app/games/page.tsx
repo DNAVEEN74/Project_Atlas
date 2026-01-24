@@ -112,47 +112,7 @@ export default function GamesPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] relative overflow-hidden selection:bg-amber-500/30">
-            {/* Ambient Background */}
-            <div className="fixed inset-0 pointer-events-none z-0">
-                {/* Subtle Grid */}
-                <div
-                    className="absolute inset-0 opacity-[0.15]"
-                    style={{
-                        backgroundImage: `linear-gradient(to right, #333 1px, transparent 1px), linear-gradient(to bottom, #333 1px, transparent 1px)`,
-                        backgroundSize: '4rem 4rem',
-                        maskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)'
-                    }}
-                />
-
-                {/* Dynamic Glow - Changes based on tab */}
-                <div
-                    className={`absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] rounded-full blur-[120px] transition-colors duration-1000 ease-in-out ${activeTab === 'DASHBOARD' ? 'bg-amber-500/10' :
-                        activeTab === 'QUANT' ? 'bg-amber-500/10' : 'bg-violet-500/10'
-                        }`}
-                />
-
-                {/* Floating Background Icons - Decorative */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className={`absolute top-[10%] left-[5%] text-white/5 transform -rotate-12 transition-all duration-1000 ${activeTab === 'QUANT' ? 'scale-110 opacity-100' : 'scale-100 opacity-40'}`}>
-                        <FunctionsIcon sx={{ fontSize: '20rem' }} />
-                    </div>
-                    <div className={`absolute bottom-[10%] right-[5%] text-white/5 transform rotate-12 transition-all duration-1000 ${activeTab === 'REASONING' ? 'scale-110 opacity-100' : 'scale-100 opacity-40'}`}>
-                        <ExtensionIcon sx={{ fontSize: '24rem' }} />
-                    </div>
-                    <div className={`absolute top-[15%] right-[5%] text-white/5 transform rotate-6 transition-all duration-1000 ${activeTab === 'DASHBOARD' ? 'scale-110 opacity-100' : 'scale-100 opacity-40'}`}>
-                        <DashboardIcon sx={{ fontSize: '22rem' }} />
-                    </div>
-                    <div className="absolute top-[20%] right-[10%] text-white/5 transform rotate-45 opacity-20">
-                        <BoltIcon sx={{ fontSize: '12rem' }} />
-                    </div>
-                    <div className="absolute bottom-[20%] left-[10%] text-white/5 transform -rotate-6 opacity-20">
-                        <TrendingUpIcon sx={{ fontSize: '16rem' }} />
-                    </div>
-                </div>
-            </div>
-
-            {/* HEADER */}
+        <div className="min-h-screen bg-[#0f0f0f]">
             {/* HEADER */}
             <Header activePage="games" />
 
@@ -160,47 +120,37 @@ export default function GamesPage() {
             <div className="w-full px-6 lg:px-12 py-8">
                 <div className="max-w-7xl mx-auto">
 
-                    {/* Hero Text */}
-                    <div className="text-center mb-10">
-                        <h1 className="text-4xl md:text-6xl font-black text-white mb-4 tracking-tighter">
-                            SPEED <span className={`transition-colors duration-1000 ${activeTab === 'REASONING' ? 'text-violet-500' : 'text-amber-500'}`}>DRILLS</span>
-                        </h1>
-                        <p className="text-neutral-500 text-lg max-w-xl mx-auto leading-relaxed font-medium">
-                            Master your speed with focus-driven mini games. 10 questions, 10 seconds each.
-                        </p>
-                    </div>
-
-                    {/* Section Switcher (Consistent with Problems Page) */}
-                    <div className="flex justify-center mb-12">
-                        <div className="inline-flex p-1.5 bg-[#1a1a1a] rounded-[20px] border border-neutral-800 shadow-2xl">
+                    {/* Section Switcher (New Segmented Control Style) */}
+                    <div className="flex justify-start mb-10">
+                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-full p-1.5 inline-flex items-center gap-1">
                             <button
                                 onClick={() => setActiveTab('DASHBOARD')}
-                                className={`flex items-center gap-3 px-8 py-3 rounded-2xl text-base font-medium transition-all ${activeTab === 'DASHBOARD'
-                                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25'
-                                    : 'text-neutral-400 hover:text-white'
+                                className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${activeTab === 'DASHBOARD'
+                                    ? 'bg-neutral-800 text-white shadow-sm ring-1 ring-white/5'
+                                    : 'text-neutral-500 hover:text-neutral-300 hover:bg-white/5'
                                     }`}
                             >
-                                <DashboardIcon sx={{ fontSize: '1.4rem' }} />
+                                <DashboardIcon sx={{ fontSize: '1.1rem' }} />
                                 Stats
                             </button>
                             <button
                                 onClick={() => setActiveTab('QUANT')}
-                                className={`flex items-center gap-3 px-8 py-3 rounded-2xl text-base font-medium transition-all ${activeTab === 'QUANT'
-                                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25'
-                                    : 'text-neutral-400 hover:text-white'
+                                className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${activeTab === 'QUANT'
+                                    ? 'bg-neutral-800 text-white shadow-sm ring-1 ring-white/5'
+                                    : 'text-neutral-500 hover:text-neutral-300 hover:bg-white/5'
                                     }`}
                             >
-                                <CalculateOutlinedIcon sx={{ fontSize: '1.4rem' }} />
+                                <CalculateOutlinedIcon sx={{ fontSize: '1.1rem' }} />
                                 Quantitative
                             </button>
                             <button
                                 onClick={() => setActiveTab('REASONING')}
-                                className={`flex items-center gap-3 px-8 py-3 rounded-2xl text-base font-medium transition-all ${activeTab === 'REASONING'
-                                    ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-violet-500/25'
-                                    : 'text-neutral-400 hover:text-white'
+                                className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 ${activeTab === 'REASONING'
+                                    ? 'bg-neutral-800 text-white shadow-sm ring-1 ring-white/5'
+                                    : 'text-neutral-500 hover:text-neutral-300 hover:bg-white/5'
                                     }`}
                             >
-                                <PsychologyOutlinedIcon sx={{ fontSize: '1.4rem' }} />
+                                <PsychologyOutlinedIcon sx={{ fontSize: '1.1rem' }} />
                                 Reasoning
                             </button>
                         </div>
@@ -208,313 +158,274 @@ export default function GamesPage() {
 
                     {/* Stats Dashboard View */}
                     {activeTab === 'DASHBOARD' && dashStats ? (
-                        <div className="mb-16 animate-fade-in-up space-y-10">
+                        <div className="mb-16 animate-fade-in-up space-y-6">
 
-                            {/* 1. SECTION MASTERY (Quant vs Reasoning) */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {/* Quant Mastery */}
-                                <div className="bg-[#111]/80 backdrop-blur-2xl border border-amber-500/10 rounded-[2.5rem] p-8 relative overflow-hidden group hover:border-amber-500/30 transition-all duration-500">
-                                    <div className="absolute -top-10 -right-10 p-10 opacity-[0.03] group-hover:opacity-[0.08] transition-all group-hover:scale-110">
-                                        <CalculateIcon sx={{ fontSize: '15rem' }} className="text-amber-500" />
-                                    </div>
-
-                                    <div className="relative z-10 flex flex-col h-full">
-                                        <div className="flex items-center gap-3 mb-6">
-                                            <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center border border-amber-500/20">
-                                                <CalculateIcon sx={{ fontSize: '1.2rem' }} className="text-amber-500" />
-                                            </div>
-                                            <div>
-                                                <h4 className="text-lg font-black text-white uppercase tracking-wider">Quant Mastery</h4>
-                                                <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Mathematical Speed</p>
-                                            </div>
+                            {/* 1. TOP ROW: Key Metrics & Trend */}
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                {/* Key Metrics Grid */}
+                                <div className="lg:col-span-2 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                    {/* Card 1: Total Drills */}
+                                    <div className="bg-[#1a1a1a] border border-neutral-800 p-5 rounded-2xl flex flex-col justify-between hover:border-neutral-700 transition-colors group">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Sessions</p>
+                                            <TrophyIcon className="text-neutral-700 text-lg group-hover:text-amber-500 transition-colors" />
                                         </div>
-
-                                        <div className="grid grid-cols-2 gap-6 mb-8">
-                                            <div>
-                                                <p className="text-[10px] text-neutral-500 font-black uppercase tracking-widest mb-1">Drills Done</p>
-                                                <h3 className="text-3xl font-black text-white">{dashStats.sectionStats.QUANT.totalPlays}</h3>
-                                            </div>
-                                            <div>
-                                                <p className="text-[10px] text-neutral-500 font-black uppercase tracking-widest mb-1">Unique Games</p>
-                                                <h3 className="text-3xl font-black text-white">
-                                                    {dashStats.sectionStats.QUANT.uniqueGames}
-                                                    <span className="text-sm text-neutral-600 ml-1">/{QUANT_GAMES.length}</span>
-                                                </h3>
-                                            </div>
-                                        </div>
-
-                                        <div className="mt-auto">
-                                            <div className="flex justify-between items-end mb-2">
-                                                <span className="text-[10px] text-neutral-500 font-black uppercase tracking-widest">Overall Proficiency</span>
-                                                <span className="text-sm font-black text-amber-500">{Math.round((dashStats.sectionStats.QUANT.uniqueGames / QUANT_GAMES.length) * 100)}%</span>
-                                            </div>
-                                            <div className="w-full h-2.5 bg-neutral-900 rounded-full overflow-hidden border border-white/5 p-0.5">
-                                                <div
-                                                    className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full transition-all duration-1000 group-hover:shadow-[0_0_15px_rgba(245,158,11,0.5)]"
-                                                    style={{ width: `${(dashStats.sectionStats.QUANT.uniqueGames / QUANT_GAMES.length) * 100}%` }}
-                                                />
-                                            </div>
+                                        <div>
+                                            <h3 className="text-3xl font-bold text-white tracking-tight">{dashStats!.totalGamesPlayed}</h3>
+                                            <p className="text-[11px] text-neutral-500 mt-1 font-medium">Total Drills Completed</p>
                                         </div>
                                     </div>
-                                </div>
 
-                                {/* Reasoning Mastery */}
-                                <div className="bg-[#111]/80 backdrop-blur-2xl border border-violet-500/10 rounded-[2.5rem] p-8 relative overflow-hidden group hover:border-violet-500/30 transition-all duration-500">
-                                    <div className="absolute -top-10 -right-10 p-10 opacity-[0.03] group-hover:opacity-[0.08] transition-all group-hover:scale-110">
-                                        <PsychologyOutlinedIcon sx={{ fontSize: '15rem' }} className="text-violet-500" />
+                                    {/* Card 2: Accuracy */}
+                                    <div className="bg-[#1a1a1a] border border-neutral-800 p-5 rounded-2xl flex flex-col justify-between hover:border-neutral-700 transition-colors group">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Precision</p>
+                                            <CheckCircleOutlinedIcon className="text-neutral-700 text-lg group-hover:text-emerald-500 transition-colors" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-3xl font-bold text-white tracking-tight">{dashStats!.accuracy}%</h3>
+                                            <p className="text-[11px] text-neutral-500 mt-1 font-medium">Avg. Correct Answers</p>
+                                        </div>
                                     </div>
 
-                                    <div className="relative z-10 flex flex-col h-full">
-                                        <div className="flex items-center gap-3 mb-6">
-                                            <div className="w-10 h-10 rounded-xl bg-violet-500/20 flex items-center justify-center border border-violet-500/20">
-                                                <PsychologyOutlinedIcon sx={{ fontSize: '1.2rem' }} className="text-violet-500" />
-                                            </div>
-                                            <div>
-                                                <h4 className="text-lg font-black text-white uppercase tracking-wider">Reasoning Logic</h4>
-                                                <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Cognitive Agility</p>
-                                            </div>
+                                    {/* Card 3: Top Score */}
+                                    <div className="bg-[#1a1a1a] border border-neutral-800 p-5 rounded-2xl flex flex-col justify-between hover:border-neutral-700 transition-colors group">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Record</p>
+                                            <StarIcon className="text-neutral-700 text-lg group-hover:text-amber-500 transition-colors" />
                                         </div>
-
-                                        <div className="grid grid-cols-2 gap-6 mb-8">
-                                            <div>
-                                                <p className="text-[10px] text-neutral-500 font-black uppercase tracking-widest mb-1">Drills Done</p>
-                                                <h3 className="text-3xl font-black text-white">{dashStats.sectionStats.REASONING.totalPlays}</h3>
-                                            </div>
-                                            <div>
-                                                <p className="text-[10px] text-neutral-500 font-black uppercase tracking-widest mb-1">Unique Games</p>
-                                                <h3 className="text-3xl font-black text-white">
-                                                    {dashStats.sectionStats.REASONING.uniqueGames}
-                                                    <span className="text-sm text-neutral-600 ml-1">/{REASONING_GAMES.length}</span>
-                                                </h3>
-                                            </div>
+                                        <div>
+                                            <h3 className="text-3xl font-bold text-white tracking-tight">{dashStats!.highestScore}</h3>
+                                            <p className="text-[11px] text-neutral-500 mt-1 font-medium">All-Time Best Score</p>
                                         </div>
+                                    </div>
 
-                                        <div className="mt-auto">
-                                            <div className="flex justify-between items-end mb-2">
-                                                <span className="text-[10px] text-neutral-500 font-black uppercase tracking-widest">Overall Proficiency</span>
-                                                <span className="text-sm font-black text-violet-500">{Math.round((dashStats.sectionStats.REASONING.uniqueGames / REASONING_GAMES.length) * 100)}%</span>
-                                            </div>
-                                            <div className="w-full h-2.5 bg-neutral-900 rounded-full overflow-hidden border border-white/5 p-0.5">
-                                                <div
-                                                    className="h-full bg-gradient-to-r from-violet-500 to-purple-500 rounded-full transition-all duration-1000 group-hover:shadow-[0_0_15px_rgba(139,92,246,0.5)]"
-                                                    style={{ width: `${(dashStats.sectionStats.REASONING.uniqueGames / REASONING_GAMES.length) * 100}%` }}
-                                                />
-                                            </div>
+                                    {/* Card 4: Focus Time */}
+                                    <div className="bg-[#1a1a1a] border border-neutral-800 p-5 rounded-2xl flex flex-col justify-between hover:border-neutral-700 transition-colors group">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Volume</p>
+                                            <HistoryIcon className="text-neutral-700 text-lg group-hover:text-blue-500 transition-colors" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-3xl font-bold text-white tracking-tight">{Math.round(dashStats!.totalTime / 60)}<span className="text-sm font-medium text-neutral-500 ml-0.5">min</span></h3>
+                                            <p className="text-[11px] text-neutral-500 mt-1 font-medium">Total Practice Time</p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            {/* 2. PERFORMANCE TREND & GLOBAL STATS */}
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                                {/* Global Stats Circle Cards */}
-                                <div className="grid grid-cols-2 gap-4 lg:col-span-1">
-                                    <div className="bg-[#111]/40 backdrop-blur-md border border-white/[0.03] p-6 rounded-[2rem] text-center group hover:bg-neutral-800/40 transition-colors">
-                                        <p className="text-[9px] text-neutral-500 font-black uppercase tracking-widest mb-2">Accuracy</p>
-                                        <div className="relative inline-flex items-center justify-center mb-2">
-                                            <svg className="w-16 h-16 transform -rotate-90">
-                                                <circle cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="4" fill="transparent" className="text-neutral-900" />
-                                                <circle
-                                                    cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="4" fill="transparent"
-                                                    strokeDasharray={175.9} strokeDashoffset={175.9 * (1 - dashStats.accuracy / 100)}
-                                                    className="text-amber-500 transition-all duration-1000" strokeLinecap="round"
-                                                />
-                                            </svg>
-                                            <span className="absolute text-sm font-black text-white">{dashStats.accuracy}%</span>
+                                {/* Weekly Trend Chart */}
+                                <div className="bg-[#1a1a1a] border border-neutral-800 p-6 rounded-2xl flex flex-col justify-between relative overflow-hidden">
+                                    <div className="flex justify-between items-center mb-4 z-10">
+                                        <div>
+                                            <h4 className="text-sm font-bold text-white">Trend Analysis</h4>
+                                            <p className="text-[10px] text-neutral-500 mt-0.5 font-medium uppercase tracking-wide">Last 7 Days Performance</p>
                                         </div>
-                                        <p className="text-[10px] text-neutral-600 font-bold uppercase">{dashStats.totalCorrect} Correct</p>
-                                    </div>
-
-                                    <div className="bg-[#111]/40 backdrop-blur-md border border-white/[0.03] p-6 rounded-[2rem] text-center group hover:bg-neutral-800/40 transition-colors">
-                                        <p className="text-[9px] text-neutral-500 font-black uppercase tracking-widest mb-2">Best Score</p>
-                                        <div className="h-16 flex items-center justify-center">
-                                            <h3 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-br from-amber-400 to-orange-600">{dashStats.highestScore}</h3>
-                                        </div>
-                                        <p className="text-[10px] text-neutral-600 font-bold uppercase">All-Time Peak</p>
-                                    </div>
-
-                                    <div className="bg-[#111]/40 backdrop-blur-md border border-white/[0.03] p-6 rounded-[2rem] text-center group hover:bg-neutral-800/40 transition-colors">
-                                        <p className="text-[9px] text-neutral-500 font-black uppercase tracking-widest mb-2">Total Plays</p>
-                                        <div className="h-16 flex items-center justify-center">
-                                            <h3 className="text-3xl font-black text-white">{dashStats.totalGamesPlayed}</h3>
-                                        </div>
-                                        <p className="text-[10px] text-neutral-600 font-bold uppercase">Drills Completed</p>
-                                    </div>
-
-                                    <div className="bg-[#111]/40 backdrop-blur-md border border-white/[0.03] p-6 rounded-[2rem] text-center group hover:bg-neutral-800/40 transition-colors">
-                                        <p className="text-[9px] text-neutral-500 font-black uppercase tracking-widest mb-2">Drill Time</p>
-                                        <div className="h-16 flex items-center justify-center">
-                                            <h3 className="text-3xl font-black text-white">{Math.round(dashStats.totalTime / 60)}<span className="text-sm">m</span></h3>
-                                        </div>
-                                        <p className="text-[10px] text-neutral-600 font-bold uppercase">Active Focus</p>
-                                    </div>
-                                </div>
-
-                                {/* Performance Trend Sparkline */}
-                                <div className="bg-[#111]/40 backdrop-blur-md border border-white/[0.03] p-8 rounded-[3rem] lg:col-span-1">
-                                    <div className="flex items-center justify-between mb-8">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/10">
-                                                <BarChartIcon sx={{ fontSize: '1.2rem' }} className="text-emerald-500" />
+                                        {dashStats!.weeklyTrend.length > 0 && (
+                                            <div className="text-right">
+                                                <span className="text-xs font-bold text-emerald-400">
+                                                    {dashStats!.weeklyTrend[dashStats!.weeklyTrend.length - 1]?.avgScore || 0} pts
+                                                </span>
+                                                <p className="text-[10px] text-neutral-500">Current Avg</p>
                                             </div>
-                                            <h4 className="text-base font-black text-white uppercase tracking-wider">Performance Trend</h4>
-                                        </div>
+                                        )}
                                     </div>
 
-                                    {dashStats.weeklyTrend.length > 1 ? (
-                                        <div className="h-40 flex items-end gap-2 group/spark">
-                                            {dashStats.weeklyTrend.map((day, i) => {
-                                                const maxScore = Math.max(...dashStats.weeklyTrend.map(d => d.avgScore), 100);
-                                                const height = (day.avgScore / maxScore) * 100;
+                                    <div className="flex-1 flex items-end gap-2 min-h-[100px] z-10">
+                                        {dashStats!.weeklyTrend.length > 0 ? (
+                                            dashStats!.weeklyTrend.map((day, i) => {
+                                                const maxScore = Math.max(...dashStats!.weeklyTrend.map(d => d.avgScore), 100);
+                                                const height = Math.max((day.avgScore / maxScore) * 100, 10); // Min height 10%
                                                 return (
-                                                    <div key={day.date} className="flex-1 flex flex-col items-center gap-2 group/bar">
-                                                        <div className="relative w-full flex items-end justify-center h-full">
-                                                            <div
-                                                                className="w-full bg-gradient-to-t from-emerald-500/20 to-emerald-500/80 rounded-t-lg transition-all duration-500 group-hover/bar:brightness-125"
-                                                                style={{ height: `${height}%` }}
-                                                            />
+                                                    <div key={day.date} className="flex-1 flex flex-col justify-end group/bar h-full">
+                                                        <div className="relative w-full flex flex-col items-center">
+                                                            <div className="peer w-full bg-neutral-800 rounded-sm hover:bg-emerald-500/80 transition-all duration-300 relative" style={{ height: `${height}%` }}></div>
                                                             {/* Tooltip */}
-                                                            <div className="absolute bottom-full mb-2 opacity-0 group-hover/bar:opacity-100 transition-opacity whitespace-nowrap bg-neutral-800 text-[9px] font-black text-white px-2 py-1 rounded-md border border-white/10 z-20">
+                                                            <div className="absolute bottom-full mb-2 opacity-0 peer-hover:opacity-100 transition-opacity bg-black text-[10px] text-white px-2 py-1 rounded border border-neutral-800 whitespace-nowrap pointer-events-none z-20">
                                                                 {day.avgScore} pts
                                                             </div>
                                                         </div>
-                                                        <span className="text-[8px] text-neutral-600 font-black uppercase tracking-tighter">
-                                                            {new Date(day.date).toLocaleDateString(undefined, { weekday: 'short' })}
-                                                        </span>
+                                                        <div className="h-1 w-full bg-transparent mt-1"></div>
                                                     </div>
                                                 );
-                                            })}
+                                            })
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center text-xs text-neutral-600">
+                                                No recent trend data
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Subtle Overlay Grid */}
+                                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                                        style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px)', backgroundSize: '100% 20px' }}>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* 2. SKILL BREAKDOWN ROW */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                {/* Quant Card */}
+                                <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6 relative overflow-hidden group hover:border-amber-500/30 transition-colors">
+                                    <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+                                        <CalculateIcon className="text-6xl text-amber-500" />
+                                    </div>
+
+                                    <div className="relative z-10">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-500">
+                                                <CalculateIcon fontSize="small" />
+                                            </div>
+                                            <h4 className="text-sm font-bold text-neutral-200 uppercase tracking-wide">Quantitative</h4>
                                         </div>
+
+                                        <div className="space-y-5">
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <p className="text-[10px] text-neutral-500 uppercase font-bold">Games Played</p>
+                                                    <p className="text-2xl font-bold text-white">{dashStats!.sectionStats.QUANT.totalPlays}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] text-neutral-500 uppercase font-bold">Best Session</p>
+                                                    <p className="text-2xl font-bold text-amber-500">{dashStats!.sectionStats.QUANT.bestScore}</p>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="flex justify-between items-center mb-1.5">
+                                                    <span className="text-xs font-medium text-neutral-400">Coverage</span>
+                                                    <span className="text-xs font-bold text-white">{Math.round((dashStats!.sectionStats.QUANT.uniqueGames / QUANT_GAMES.length) * 100)}%</span>
+                                                </div>
+                                                <div className="w-full h-1.5 bg-neutral-800 rounded-full overflow-hidden">
+                                                    <div className="h-full bg-amber-500 rounded-full" style={{ width: `${(dashStats!.sectionStats.QUANT.uniqueGames / QUANT_GAMES.length) * 100}%` }} />
+                                                </div>
+                                                <p className="text-[10px] text-neutral-600 mt-1.5">{dashStats!.sectionStats.QUANT.uniqueGames} of {QUANT_GAMES.length} variations explored</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Reasoning Card */}
+                                <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6 relative overflow-hidden group hover:border-violet-500/30 transition-colors">
+                                    <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+                                        <PsychologyOutlinedIcon className="text-6xl text-violet-500" />
+                                    </div>
+
+                                    <div className="relative z-10">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className="w-8 h-8 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-500">
+                                                <PsychologyOutlinedIcon fontSize="small" />
+                                            </div>
+                                            <h4 className="text-sm font-bold text-neutral-200 uppercase tracking-wide">Reasoning</h4>
+                                        </div>
+
+                                        <div className="space-y-5">
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <p className="text-[10px] text-neutral-500 uppercase font-bold">Games Played</p>
+                                                    <p className="text-2xl font-bold text-white">{dashStats!.sectionStats.REASONING.totalPlays}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-[10px] text-neutral-500 uppercase font-bold">Best Session</p>
+                                                    <p className="text-2xl font-bold text-violet-500">{dashStats!.sectionStats.REASONING.bestScore}</p>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <div className="flex justify-between items-center mb-1.5">
+                                                    <span className="text-xs font-medium text-neutral-400">Coverage</span>
+                                                    <span className="text-xs font-bold text-white">{Math.round((dashStats!.sectionStats.REASONING.uniqueGames / REASONING_GAMES.length) * 100)}%</span>
+                                                </div>
+                                                <div className="w-full h-1.5 bg-neutral-800 rounded-full overflow-hidden">
+                                                    <div className="h-full bg-violet-500 rounded-full" style={{ width: `${(dashStats!.sectionStats.REASONING.uniqueGames / REASONING_GAMES.length) * 100}%` }} />
+                                                </div>
+                                                <p className="text-[10px] text-neutral-600 mt-1.5">{dashStats!.sectionStats.REASONING.uniqueGames} of {REASONING_GAMES.length} variations explored</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Difficulty Breakdown (New Visualization) */}
+                                <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6 flex flex-col">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <div className="w-8 h-8 rounded-lg bg-neutral-800 flex items-center justify-center text-neutral-400">
+                                            <TrendingUpIcon fontSize="small" />
+                                        </div>
+                                        <h4 className="text-sm font-bold text-neutral-200 uppercase tracking-wide">Intensity</h4>
+                                    </div>
+
+                                    <div className="flex-1 flex flex-col justify-center space-y-5">
+                                        <div>
+                                            <div className="flex justify-between text-xs mb-1.5">
+                                                <span className="font-bold text-rose-500">HARD</span>
+                                                <span className="text-neutral-400">{dashStats!.difficultyBreakdown.hard}</span>
+                                            </div>
+                                            <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
+                                                <div className="h-full bg-rose-500" style={{ width: `${(dashStats!.difficultyBreakdown.hard / (dashStats!.totalGamesPlayed || 1)) * 100}%` }}></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="flex justify-between text-xs mb-1.5">
+                                                <span className="font-bold text-amber-500">MEDIUM</span>
+                                                <span className="text-neutral-400">{dashStats!.difficultyBreakdown.medium}</span>
+                                            </div>
+                                            <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
+                                                <div className="h-full bg-amber-500" style={{ width: `${(dashStats!.difficultyBreakdown.medium / (dashStats!.totalGamesPlayed || 1)) * 100}%` }}></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="flex justify-between text-xs mb-1.5">
+                                                <span className="font-bold text-emerald-500">EASY</span>
+                                                <span className="text-neutral-400">{dashStats!.difficultyBreakdown.easy}</span>
+                                            </div>
+                                            <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
+                                                <div className="h-full bg-emerald-500" style={{ width: `${(dashStats!.difficultyBreakdown.easy / (dashStats!.totalGamesPlayed || 1)) * 100}%` }}></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* 3. RECENT SESSIONS TABLE (Clean List) */}
+                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl overflow-hidden">
+                                <div className="px-6 py-4 border-b border-neutral-800 flex items-center justify-between">
+                                    <h4 className="text-sm font-bold text-neutral-200 uppercase tracking-wide">Recent Activity</h4>
+                                    <Link href="/games/history" className="text-xs font-bold text-neutral-500 hover:text-white transition-colors">
+                                        VIEW HISTORY
+                                    </Link>
+                                </div>
+                                <div className="divide-y divide-neutral-800">
+                                    {dashStats!.recentGames.length > 0 ? (
+                                        dashStats!.recentGames.map((session, i) => (
+                                            <div key={`${session.gameId}-${i}`} className="px-6 py-3.5 flex items-center justify-between hover:bg-neutral-800/40 transition-colors group">
+                                                <div className="flex items-center gap-4">
+                                                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm ${session.category === 'QUANT' ? 'bg-amber-500/10 text-amber-500' : 'bg-violet-500/10 text-violet-500'}`}>
+                                                        {session.category === 'QUANT' ? <CalculateIcon fontSize="inherit" /> : <PsychologyOutlinedIcon fontSize="inherit" />}
+                                                    </div>
+                                                    <div>
+                                                        <h5 className="text-sm font-medium text-white group-hover:text-amber-500 transition-colors">{session.gameName}</h5>
+                                                        <p className="text-[10px] text-neutral-500">{new Date(session.lastPlayed).toLocaleDateString()}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-center gap-6">
+                                                    <div className="text-right">
+                                                        <span className="block text-sm font-bold text-white">{session.bestScore}</span>
+                                                        <span className="block text-[9px] text-neutral-600 uppercase">Score</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
                                     ) : (
-                                        <div className="h-40 flex flex-col items-center justify-center border border-white/5 rounded-2xl bg-white/[0.01]">
-                                            <p className="text-[10px] text-neutral-600 font-bold uppercase tracking-widest text-center px-6">Play more for trend analytics</p>
+                                        <div className="p-8 text-center text-neutral-500 text-sm">
+                                            No recent sessions recorded.
                                         </div>
                                     )}
                                 </div>
-
-                                {/* Difficulty Breakdown Card */}
-                                <div className="bg-[#111]/40 backdrop-blur-md border border-white/[0.03] p-8 rounded-[3rem] lg:col-span-2">
-                                    <div className="flex items-center justify-between mb-8">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center border border-orange-500/10">
-                                                <TrendingUpIcon sx={{ fontSize: '1.2rem' }} className="text-orange-500" />
-                                            </div>
-                                            <h4 className="text-base font-black text-white uppercase tracking-wider">Difficulty Focus</h4>
-                                        </div>
-                                        <span className="text-[10px] text-neutral-500 font-black uppercase tracking-widest">Session counts</span>
-                                    </div>
-
-                                    <div className="space-y-6">
-                                        {/* Easy */}
-                                        <div className="group">
-                                            <div className="flex justify-between items-end mb-2">
-                                                <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest group-hover:text-emerald-400 transition-colors">Beginner Drills (Easy)</span>
-                                                <span className="text-sm font-black text-white">{dashStats.difficultyBreakdown.easy}</span>
-                                            </div>
-                                            <div className="w-full h-2 bg-neutral-900 rounded-full overflow-hidden border border-white/5">
-                                                <div
-                                                    className="h-full bg-emerald-500 rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(16,185,129,0.3)]"
-                                                    style={{ width: `${(dashStats.difficultyBreakdown.easy / (dashStats.totalGamesPlayed || 1)) * 100}%` }}
-                                                />
-                                            </div>
-                                        </div>
-                                        {/* Medium */}
-                                        <div className="group">
-                                            <div className="flex justify-between items-end mb-2">
-                                                <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest group-hover:text-amber-400 transition-colors">Standard Drills (Medium)</span>
-                                                <span className="text-sm font-black text-white">{dashStats.difficultyBreakdown.medium}</span>
-                                            </div>
-                                            <div className="w-full h-2 bg-neutral-900 rounded-full overflow-hidden border border-white/5">
-                                                <div
-                                                    className="h-full bg-amber-500 rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(245,158,11,0.3)]"
-                                                    style={{ width: `${(dashStats.difficultyBreakdown.medium / (dashStats.totalGamesPlayed || 1)) * 100}%` }}
-                                                />
-                                            </div>
-                                        </div>
-                                        {/* Hard */}
-                                        <div className="group">
-                                            <div className="flex justify-between items-end mb-2">
-                                                <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest group-hover:text-rose-400 transition-colors">Pro Drills (Hard)</span>
-                                                <span className="text-sm font-black text-white">{dashStats.difficultyBreakdown.hard}</span>
-                                            </div>
-                                            <div className="w-full h-2 bg-neutral-900 rounded-full overflow-hidden border border-white/5">
-                                                <div
-                                                    className="h-full bg-rose-500 rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(244,63,94,0.3)]"
-                                                    style={{ width: `${(dashStats.difficultyBreakdown.hard / (dashStats.totalGamesPlayed || 1)) * 100}%` }}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
-                            {/* 3. RECENT ACTIVITY TABLE (Detailed) */}
-                            <div className="bg-[#111]/40 backdrop-blur-md border border-white/[0.03] rounded-[3rem] p-10 relative overflow-hidden">
-                                <div className="flex items-center justify-between mb-10">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 shadow-lg">
-                                            <HistoryIcon sx={{ fontSize: '1.5rem' }} className="text-neutral-400" />
-                                        </div>
-                                        <div>
-                                            <h4 className="text-lg font-black text-white uppercase tracking-wider">Session Timeline</h4>
-                                            <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Your journey of improvement</p>
-                                        </div>
-                                    </div>
-                                    <Link href="/games/history" className="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full text-[10px] text-neutral-400 font-black uppercase tracking-widest transition-all">
-                                        View All Activity
-                                    </Link>
-                                </div>
-
-                                {dashStats.recentGames.length > 0 ? (
-                                    <div className="space-y-4">
-                                        {dashStats.recentGames.map((session, i) => (
-                                            <div
-                                                key={`${session.gameId}-${i}`}
-                                                className="bg-[#1a1a1a]/40 border border-white/[0.02] p-5 rounded-3xl flex flex-wrap items-center justify-between gap-6 hover:border-white/10 transition-all duration-300 group"
-                                            >
-                                                <div className="flex items-center gap-5 flex-1 min-w-[200px]">
-                                                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border ${session.category === 'QUANT' ? 'bg-amber-500/10 border-amber-500/10' : 'bg-violet-500/10 border-violet-500/10'
-                                                        }`}>
-                                                        {session.category === 'QUANT' ? (
-                                                            <CalculateIcon sx={{ fontSize: '1.2rem' }} className="text-amber-500" />
-                                                        ) : (
-                                                            <PsychologyOutlinedIcon sx={{ fontSize: '1.2rem' }} className="text-violet-500" />
-                                                        )}
-                                                    </div>
-                                                    <div>
-                                                        <h5 className="text-sm font-black text-white group-hover:text-amber-500 transition-colors uppercase tracking-wide">{session.gameName}</h5>
-                                                        <p className="text-[10px] text-neutral-600 font-bold uppercase tracking-widest">
-                                                            {new Date(session.lastPlayed).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div className="flex items-center gap-12">
-                                                    <div className="text-center">
-                                                        <p className="text-[9px] text-neutral-600 font-black uppercase tracking-widest mb-1">Score</p>
-                                                        <p className="text-xl font-black text-white tracking-tight">{session.bestScore}</p>
-                                                    </div>
-                                                    <div className="text-center">
-                                                        <p className="text-[9px] text-neutral-600 font-black uppercase tracking-widest mb-1">Drills</p>
-                                                        <p className="text-xl font-black text-neutral-400 tracking-tight">{session.attempts}</p>
-                                                    </div>
-                                                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:scale-110 transition-all">
-                                                        <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <div className="text-center py-20 bg-white/[0.01] rounded-[2rem] border border-dashed border-white/5">
-                                        <p className="text-neutral-500 text-sm font-medium italic">No game sessions logged yet.</p>
-                                    </div>
-                                )}
-                            </div>
                         </div>
                     ) : activeTab === 'DASHBOARD' && (
                         <div className="text-center py-20 animate-pulse">
-                            <p className="text-neutral-500 font-medium">Analyzing your drill history...</p>
+                            <p className="text-neutral-500 font-medium">Loading statistics...</p>
                         </div>
                     )}
 

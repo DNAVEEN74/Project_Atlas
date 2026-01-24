@@ -113,63 +113,45 @@ export default function GamesHistoryPage() {
     if (!user) return null;
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] relative selection:bg-amber-500/30">
-            {/* Ambient Background */}
-            <div className="fixed inset-0 pointer-events-none z-0">
-                <div
-                    className="absolute inset-0 opacity-[0.1]"
-                    style={{
-                        backgroundImage: `linear-gradient(to right, #222 1px, transparent 1px), linear-gradient(to bottom, #222 1px, transparent 1px)`,
-                        backgroundSize: '4rem 4rem'
-                    }}
-                />
-                <div className="absolute top-0 right-0 w-[800px] h-[600px] bg-amber-500/5 rounded-full blur-[150px]" />
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-violet-500/5 rounded-full blur-[150px]" />
-            </div>
-
-            {/* HEADER */}
+        <div className="min-h-screen bg-[#0f0f0f]">
             {/* HEADER */}
             <Header activePage="games" />
 
-            <main className="relative z-10 w-full px-6 lg:px-12 py-12 max-w-7xl mx-auto">
+            <main className="w-full px-6 lg:px-12 py-12 max-w-7xl mx-auto">
                 {/* Hero Section */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                     <div>
-                        <Link href="/games" className="inline-flex items-center gap-2 text-neutral-500 hover:text-amber-500 transition-colors text-xs font-black uppercase tracking-widest mb-4 group">
+                        <Link href="/games" className="inline-flex items-center gap-2 text-neutral-500 hover:text-white transition-colors text-xs font-semibold uppercase tracking-wider mb-4 group">
                             <ArrowBackIcon sx={{ fontSize: '1rem' }} className="group-hover:-translate-x-1 transition-transform" />
                             Back to Library
                         </Link>
-                        <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter flex items-center gap-4">
-                            SESSION <span className="text-amber-500">HISTORY</span>
+                        <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight flex items-center gap-4">
+                            Session History
                         </h1>
                     </div>
 
-                    <div className="flex flex-wrap gap-4 bg-[#1a1a1a]/40 backdrop-blur-md border border-white/5 p-4 rounded-[2rem]">
-                        <div className="px-6 border-r border-white/5 last:border-0">
-                            <p className="text-[10px] text-neutral-500 font-black uppercase tracking-widest mb-1">Total Sessions</p>
-                            <h3 className="text-2xl font-black text-white">{stats.total}</h3>
-                        </div>
-                        <div className="px-6 last:border-0 hidden sm:block">
-                            <p className="text-[10px] text-neutral-500 font-black uppercase tracking-widest mb-1">Performance Level</p>
-                            <h3 className="text-2xl font-black text-emerald-500">OPTIMAL</h3>
+                    <div className="flex gap-4">
+                        <div className="bg-[#1a1a1a] border border-neutral-800 px-6 py-3 rounded-xl">
+                            <p className="text-xs text-neutral-500 font-medium uppercase tracking-wider mb-1">Total Sessions</p>
+                            <h3 className="text-xl font-bold text-white">{stats.total}</h3>
                         </div>
                     </div>
                 </div>
 
                 {/* Filters */}
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mb-10">
-                    <div className="flex flex-wrap items-center gap-4">
-                        <div className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-2xl border border-white/5 text-neutral-400 mr-2">
-                            <FilterIcon sx={{ fontSize: '1.2rem' }} />
-                            <span className="text-xs font-black uppercase tracking-widest">Filters</span>
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-6 mb-8">
+                    <div className="flex flex-wrap items-center gap-4 w-full lg:w-auto">
+                        <div className="flex items-center gap-2 px-4 py-2 bg-[#1a1a1a] rounded-full border border-neutral-800 text-neutral-400">
+                            <FilterIcon sx={{ fontSize: '1rem' }} />
+                            <span className="text-xs font-medium uppercase tracking-wider">Filters</span>
                         </div>
 
-                        <div className="flex p-1.5 bg-neutral-900/50 backdrop-blur-md border border-white/5 rounded-full">
+                        <div className="flex p-1 bg-[#1a1a1a] border border-neutral-800 rounded-full">
                             {(['ALL', 'QUANT', 'REASONING'] as const).map(cat => (
                                 <button
                                     key={cat}
                                     onClick={() => setCategoryFilter(cat)}
-                                    className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all ${categoryFilter === cat ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20' : 'text-neutral-500 hover:text-white'
+                                    className={`px-5 py-1.5 rounded-full text-xs font-medium transition-all ${categoryFilter === cat ? 'bg-neutral-800 text-white shadow-sm' : 'text-neutral-500 hover:text-white'
                                         }`}
                                 >
                                     {cat}
@@ -177,15 +159,15 @@ export default function GamesHistoryPage() {
                             ))}
                         </div>
 
-                        <div className="flex p-1.5 bg-neutral-900/50 backdrop-blur-md border border-white/5 rounded-full">
+                        <div className="flex p-1 bg-[#1a1a1a] border border-neutral-800 rounded-full">
                             {(['ALL', 'EASY', 'MEDIUM', 'HARD'] as const).map(diff => (
                                 <button
                                     key={diff}
                                     onClick={() => setDifficultyFilter(diff)}
-                                    className={`px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all ${difficultyFilter === diff
-                                        ? diff === 'EASY' ? 'bg-emerald-500 text-black shadow-emerald-500/20'
-                                            : diff === 'HARD' ? 'bg-rose-500 text-black shadow-rose-500/20'
-                                                : 'bg-amber-500 text-black shadow-amber-500/20'
+                                    className={`px-5 py-1.5 rounded-full text-xs font-medium transition-all ${difficultyFilter === diff
+                                        ? diff === 'EASY' ? 'bg-emerald-500/10 text-emerald-500'
+                                            : diff === 'HARD' ? 'bg-rose-500/10 text-rose-500'
+                                                : 'bg-amber-500/10 text-amber-500'
                                         : 'text-neutral-500 hover:text-white'
                                         }`}
                                 >
@@ -196,96 +178,125 @@ export default function GamesHistoryPage() {
                     </div>
 
                     <div className="relative group w-full lg:w-64">
-                        <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-600 group-hover:text-amber-500 transition-colors" sx={{ fontSize: '1.2rem' }} />
+                        <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500" sx={{ fontSize: '1.2rem' }} />
                         <input
                             type="text"
                             placeholder="Search Game Name..."
-                            className="bg-white/5 border border-white/5 text-sm rounded-2xl py-3 pl-12 pr-6 w-full focus:outline-none focus:border-amber-500/50 focus:bg-white/[0.08] transition-all text-white font-medium"
+                            className="bg-[#1a1a1a] border border-neutral-800 text-sm rounded-full py-2.5 pl-11 pr-4 w-full focus:outline-none focus:border-neutral-600 transition-all text-white placeholder:text-neutral-500"
                         />
                     </div>
                 </div>
 
-                {/* History Grid/List */}
-                {attempts.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                        {attempts.map((attempt) => (
-                            <div
-                                key={attempt._id}
-                                className="bg-[#1a1a1a]/60 backdrop-blur-xl border border-white/[0.05] p-8 rounded-[2.5rem] relative overflow-hidden group hover:border-white/10 transition-all duration-300 hover:-translate-y-1"
-                            >
-                                {/* Header */}
-                                <div className="flex items-start justify-between mb-8">
-                                    <div className="flex items-center gap-4">
-                                        <div
-                                            className={`w-12 h-12 rounded-2xl flex items-center justify-center border text-2xl ${attempt.category === 'QUANT' ? 'bg-amber-500/10 border-amber-500/10' : 'bg-violet-500/10 border-violet-500/10'
-                                                }`}
-                                        >
-                                            {GAMES.find(g => g.id === attempt.gameId)?.icon || (attempt.category === 'QUANT' ? '🧮' : '🧠')}
-                                        </div>
-                                        <div>
-                                            <h3 className="text-base font-black text-white group-hover:text-amber-400 transition-colors uppercase tracking-tight">{attempt.gameName}</h3>
-                                            <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">{attempt.category}</p>
-                                        </div>
-                                    </div>
-                                    <div className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${attempt.difficulty === 'EASY' ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-500' :
-                                        attempt.difficulty === 'HARD' ? 'border-rose-500/20 bg-rose-500/10 text-rose-500' :
-                                            'border-amber-500/20 bg-amber-500/10 text-amber-500'
-                                        }`}>
-                                        {attempt.difficulty}
-                                    </div>
-                                </div>
-
-                                {/* Metrics */}
-                                <div className="grid grid-cols-2 gap-4 mb-8">
-                                    <div className="bg-white/5 rounded-2xl p-4 border border-white/5 group-hover:border-white/10 transition-all">
-                                        <p className="text-[9px] text-neutral-600 font-black uppercase tracking-widest mb-1">Score</p>
-                                        <p className="text-2xl font-black text-white">{attempt.score}</p>
-                                    </div>
-                                    <div className="bg-white/5 rounded-2xl p-4 border border-white/5 group-hover:border-white/10 transition-all">
-                                        <p className="text-[9px] text-neutral-600 font-black uppercase tracking-widest mb-1">Accuracy</p>
-                                        <div className="flex items-center gap-2">
-                                            <p className="text-2xl font-black text-white">
-                                                {Math.round((attempt.metrics.correctAnswers / Math.max(attempt.metrics.totalQuestions, 1)) * 100)}%
-                                            </p>
-                                            <CheckCircleOutlinedIcon sx={{ fontSize: '1rem' }} className="text-emerald-500" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Footer Info */}
-                                <div className="flex items-center justify-between border-t border-white/5 pt-6">
-                                    <div className="flex items-center gap-2">
-                                        <TimerIcon sx={{ fontSize: '1rem' }} className="text-neutral-600" />
-                                        <span className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">{attempt.metrics.timeTaken}s Taken</span>
-                                    </div>
-                                    <span className="text-[10px] text-neutral-600 font-bold uppercase tracking-widest">
-                                        {new Date(attempt.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
-                                    </span>
-                                </div>
-
-                                {/* Subtle background icon */}
-                                <div className="absolute -bottom-6 -right-6 text-6xl opacity-5 transform group-hover:rotate-12 transition-transform pointer-events-none grayscale">
-                                    {GAMES.find(g => g.id === attempt.gameId)?.icon}
-                                </div>
+                {/* History List - Table Style */}
+                <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl overflow-hidden">
+                    {attempts.length > 0 ? (
+                        <>
+                            {/* Table Header */}
+                            <div className="hidden md:grid grid-cols-[300px_1fr_1fr_1fr_120px] gap-4 px-8 py-4 border-b border-neutral-800 bg-neutral-900/50 text-[10px] font-bold text-neutral-400 uppercase tracking-widest">
+                                <div>Game Focus</div>
+                                <div className="text-center">Score</div>
+                                <div className="text-center">Accuracy</div>
+                                <div className="text-center">Speed</div>
+                                <div className="text-right">Completed</div>
                             </div>
-                        ))}
-                    </div>
-                ) : !isFetching ? (
-                    <div className="text-center py-32 bg-[#1a1a1a]/40 backdrop-blur-md rounded-[3rem] border border-dashed border-white/10">
-                        <HistoryIcon sx={{ fontSize: '4rem' }} className="text-neutral-800 mb-6" />
-                        <h3 className="text-xl font-black text-white uppercase tracking-wider mb-2">No Records Found</h3>
-                        <p className="text-neutral-500 mb-8 max-w-sm mx-auto font-medium">We couldn't find any drill sessions matching your filters. Time to start practicing!</p>
-                        <Link href="/games" className="inline-flex items-center gap-3 px-10 py-4 bg-amber-500 text-black font-black uppercase tracking-[.2em] text-xs rounded-2xl shadow-xl shadow-amber-500/20 hover:scale-105 active:scale-95 transition-all">
-                            Start a Drill
-                        </Link>
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        {[1, 2, 3].map(i => (
-                            <div key={i} className="bg-white/5 rounded-[2.5rem] h-64 animate-pulse border border-white/5" />
-                        ))}
-                    </div>
-                )}
+
+                            <div className="divide-y divide-neutral-800/50">
+                                {attempts.map((attempt) => (
+                                    <div
+                                        key={attempt._id}
+                                        className="px-8 py-5 grid grid-cols-1 md:grid-cols-[300px_1fr_1fr_1fr_120px] gap-4 items-center hover:bg-neutral-800/30 transition-colors group"
+                                    >
+                                        {/* Game Info */}
+                                        <div className="flex items-center gap-4">
+                                            <div
+                                                className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg shadow-sm border border-white/5 ${attempt.category === 'QUANT' ? 'bg-amber-500/10 text-amber-500' : 'bg-violet-500/10 text-violet-500'}`}
+                                            >
+                                                {GAMES.find(g => g.id === attempt.gameId)?.icon || (attempt.category === 'QUANT' ? '🧮' : '🧠')}
+                                            </div>
+                                            <div>
+                                                <h3 className="text-sm font-bold text-white group-hover:text-amber-500 transition-colors">{attempt.gameName}</h3>
+                                                <div className="flex items-center gap-2 mt-1">
+                                                    <span className={`text-[9px] font-extrabold uppercase tracking-wider px-1.5 py-0.5 rounded border ${attempt.difficulty === 'EASY' ? 'bg-emerald-500/5 border-emerald-500/10 text-emerald-500' :
+                                                        attempt.difficulty === 'HARD' ? 'bg-rose-500/5 border-rose-500/10 text-rose-500' :
+                                                            'bg-amber-500/5 border-amber-500/10 text-amber-500'
+                                                        }`}>
+                                                        {attempt.difficulty}
+                                                    </span>
+                                                    <span className="text-[10px] text-neutral-500 font-semibold uppercase tracking-wider">{attempt.category}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Score */}
+                                        <div className="flex items-center justify-between md:justify-center">
+                                            <span className="md:hidden text-xs text-neutral-500 font-bold uppercase tracking-wider">Score</span>
+                                            <p className="text-base font-bold text-white tabular-nums">{attempt.score}</p>
+                                        </div>
+
+                                        {/* Accuracy */}
+                                        <div className="flex items-center justify-between md:justify-center">
+                                            <span className="md:hidden text-xs text-neutral-500 font-bold uppercase tracking-wider">Accuracy</span>
+                                            <div className="flex items-center gap-2">
+                                                <span className={`text-base font-bold tabular-nums ${Math.round((attempt.metrics.correctAnswers / Math.max(attempt.metrics.totalQuestions, 1)) * 100) >= 90 ? 'text-emerald-500' : 'text-white'
+                                                    }`}>
+                                                    {Math.round((attempt.metrics.correctAnswers / Math.max(attempt.metrics.totalQuestions, 1)) * 100)}%
+                                                </span>
+                                                {Math.round((attempt.metrics.correctAnswers / Math.max(attempt.metrics.totalQuestions, 1)) * 100) >= 90 && (
+                                                    <CheckCircleOutlinedIcon sx={{ fontSize: '0.875rem' }} className="text-emerald-500" />
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        {/* Time */}
+                                        <div className="flex items-center justify-between md:justify-center">
+                                            <span className="md:hidden text-xs text-neutral-500 font-bold uppercase tracking-wider">Time</span>
+                                            <div className="flex items-center gap-1.5">
+                                                <span className="text-base font-bold text-white tabular-nums">{attempt.metrics.timeTaken}s</span>
+                                                <TimerIcon sx={{ fontSize: '0.875rem' }} className="text-neutral-600" />
+                                            </div>
+                                        </div>
+
+                                        {/* Date */}
+                                        <div className="flex items-center justify-between md:justify-end">
+                                            <span className="md:hidden text-xs text-neutral-500 font-bold uppercase tracking-wider">Date</span>
+                                            <div className="text-right">
+                                                <p className="text-xs text-neutral-300 font-medium">
+                                                    {new Date(attempt.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                                                </p>
+                                                <p className="text-[10px] text-neutral-600 mt-0.5 font-medium">
+                                                    {new Date(attempt.createdAt).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    ) : !isFetching ? (
+                        <div className="text-center py-20">
+                            <HistoryIcon sx={{ fontSize: '3rem' }} className="text-neutral-800 mb-4" />
+                            <h3 className="text-lg font-semibold text-white mb-2">No Records Found</h3>
+                            <p className="text-neutral-500 mb-6 text-sm">No drill sessions match your filters.</p>
+                            <Link href="/games" className="inline-flex items-center px-6 py-2.5 bg-neutral-100 hover:bg-white text-black font-semibold text-sm rounded-lg transition-colors">
+                                Start a Drill
+                            </Link>
+                        </div>
+                    ) : (
+                        <div className="divide-y divide-neutral-800">
+                            {[1, 2, 3, 4, 5].map(i => (
+                                <div key={i} className="p-5 flex items-center justify-between gap-4 animate-pulse">
+                                    <div className="flex items-center gap-4 w-full">
+                                        <div className="w-10 h-10 rounded-lg bg-neutral-800" />
+                                        <div className="space-y-2 flex-1">
+                                            <div className="h-4 bg-neutral-800 rounded w-1/4" />
+                                            <div className="h-3 bg-neutral-800 rounded w-1/6" />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
 
                 {/* Pagination */}
                 {page < totalPages && (
@@ -293,9 +304,9 @@ export default function GamesHistoryPage() {
                         <button
                             onClick={handleLoadMore}
                             disabled={isFetching}
-                            className={`flex items-center gap-3 px-10 py-4 bg-white/5 border border-white/10 rounded-2xl text-[10px] font-black uppercase tracking-[.2em] text-neutral-400 hover:text-white hover:bg-neutral-800 transition-all ${isFetching ? 'opacity-50 cursor-wait' : ''}`}
+                            className={`flex items-center gap-2 px-6 py-2.5 bg-[#1a1a1a] border border-neutral-800 hover:bg-neutral-800 rounded-lg text-sm font-medium text-neutral-300 transition-all ${isFetching ? 'opacity-50 cursor-wait' : ''}`}
                         >
-                            {isFetching ? 'Loading...' : 'Load More Sessions'}
+                            {isFetching ? 'Loading...' : 'Load More'}
                             {!isFetching && <ExpandMoreIcon sx={{ fontSize: '1.2rem' }} />}
                         </button>
                     </div>
