@@ -16,6 +16,7 @@ import {
     ExpandMoreIcon,
 } from '@/components/icons';
 import Header from '@/components/layout/Header';
+import { AuthActionGuard } from '@/components/auth/AuthActionGuard';
 
 interface Topic {
     id: string;
@@ -76,6 +77,10 @@ function SprintSetupContent() {
 
         // Fetch Recent History
         const fetchRecentHistory = async () => {
+            if (!user) {
+                setHistory([]);
+                return;
+            }
             try {
                 const res = await fetch('/api/sprint/history?limit=3');
                 if (res.ok) {
@@ -87,7 +92,7 @@ function SprintSetupContent() {
             }
         };
         fetchRecentHistory();
-    }, [subject]);
+    }, [subject, user]);
 
     // Removed fetchTopics as we use static lists now
 
@@ -179,7 +184,7 @@ function SprintSetupContent() {
         );
     }
 
-    if (!user) return null;
+    // if (!user) return null; // Removed for public access
 
     const visibleTopics = showAllTopics ? topics : topics.slice(0, 16); // Show more initially
 
@@ -388,23 +393,25 @@ function SprintSetupContent() {
                             )}
 
                             {/* Start Button */}
-                            <button
-                                onClick={handleStartSprint}
-                                disabled={selectedTopics.length === 0 || isStarting}
-                                className={`w-full py-4 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${subject === 'QUANT'
-                                    ? 'bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 shadow-amber-500/25'
-                                    : 'bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-400 hover:to-purple-500 shadow-violet-500/25'
-                                    }`}
-                            >
-                                {isStarting ? (
-                                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                                ) : (
-                                    <>
-                                        <PlayArrowIcon sx={{ fontSize: '1.5rem' }} />
-                                        Start Sprint
-                                    </>
-                                )}
-                            </button>
+                            <AuthActionGuard>
+                                <button
+                                    onClick={handleStartSprint}
+                                    disabled={selectedTopics.length === 0 || isStarting}
+                                    className={`w-full py-4 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${subject === 'QUANT'
+                                        ? 'bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 shadow-amber-500/25'
+                                        : 'bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-400 hover:to-purple-500 shadow-violet-500/25'
+                                        }`}
+                                >
+                                    {isStarting ? (
+                                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                    ) : (
+                                        <>
+                                            <PlayArrowIcon sx={{ fontSize: '1.5rem' }} />
+                                            Start Sprint
+                                        </>
+                                    )}
+                                </button>
+                            </AuthActionGuard>
                             <p className="text-center text-xs text-neutral-600 mt-3">
                                 {selectedTopics.length === 0 ? 'Select at least one topic' : (selectedTopics.includes('ALL') ? 'All topics selected' : `${selectedTopics.length} topic${selectedTopics.length > 1 ? 's' : ''} selected`)}
                             </p>

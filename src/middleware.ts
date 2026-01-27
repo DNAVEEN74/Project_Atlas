@@ -6,7 +6,8 @@ export function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
     // Protected routes
-    const protectedRoutes = ['/dashboard', '/problems', '/sprint', '/performance'];
+    // Protected routes
+    const protectedRoutes = ['/dashboard', '/performance', '/settings', '/profile'];
     const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
 
     // Auth routes (redirect to dashboard if already logged in)

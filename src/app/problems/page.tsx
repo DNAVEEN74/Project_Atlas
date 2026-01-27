@@ -4,6 +4,7 @@ import React, { useEffect, useState, useCallback, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { AuthActionGuard } from '@/components/auth/AuthActionGuard';
 import { MathText } from '@/components/ui/MathText';
 import { CustomSelect } from '@/components/ui/CustomSelect';
 import {
@@ -140,11 +141,14 @@ function ProblemsPageContent() {
     }, [fetchProgress]);
 
     // Redirect if not authenticated
+    // Redirect removed for public access
+    /*
     useEffect(() => {
         if (!authLoading && !user) {
             router.push('/');
         }
     }, [user, authLoading, router]);
+    */
 
 
 
@@ -449,50 +453,52 @@ function ProblemsPageContent() {
                             <p className="text-xs text-neutral-400 mb-4 leading-relaxed">
                                 Complete your daily target of <strong className="text-white">{activeSection === 'QUANT' ? (user?.dailyQuantGoal || 5) : (user?.dailyReasoningGoal || 5)} questions</strong>. Resume where you left off!
                             </p>
-                            <button
-                                onClick={async () => {
-                                    try {
-                                        const res = await fetch(`/api/quick-practice?section=${activeSection}&topic=All`);
-                                        const data = await res.json();
+                            <AuthActionGuard>
+                                <button
+                                    onClick={async () => {
+                                        try {
+                                            const res = await fetch(`/api/quick-practice?section=${activeSection}&topic=All`);
+                                            const data = await res.json();
 
-                                        if (data.completed) {
-                                            // Already completed today
-                                            notifyInfo("🎉 You've completed today's practice! Select questions from the list.");
-                                            return;
-                                        }
-
-                                        if (data.success && data.questionIds?.length > 0) {
-                                            // Store practice session in sessionStorage for tracking
-                                            sessionStorage.setItem('practiceSession', JSON.stringify({
-                                                questionIds: data.questionIds,
-                                                currentIndex: data.currentIndex || 0,
-                                                section: activeSection,
-                                                topic: 'All',
-                                                resuming: data.resuming
-                                            }));
-
-                                            const nextId = data.nextQuestionId || data.questionIds[0];
-                                            if (data.resuming) {
-                                                notifyInfo(`Resuming practice: ${data.answered}/${data.total} completed`);
+                                            if (data.completed) {
+                                                // Already completed today
+                                                notifyInfo("🎉 You've completed today's practice! Select questions from the list.");
+                                                return;
                                             }
-                                            router.push(`/problems/${nextId}?section=${activeSection}&practice=true`);
-                                        } else if (data.questionIds?.length === 0) {
-                                            notifyInfo('No unattempted questions found in this category!');
-                                        } else {
+
+                                            if (data.success && data.questionIds?.length > 0) {
+                                                // Store practice session in sessionStorage for tracking
+                                                sessionStorage.setItem('practiceSession', JSON.stringify({
+                                                    questionIds: data.questionIds,
+                                                    currentIndex: data.currentIndex || 0,
+                                                    section: activeSection,
+                                                    topic: 'All',
+                                                    resuming: data.resuming
+                                                }));
+
+                                                const nextId = data.nextQuestionId || data.questionIds[0];
+                                                if (data.resuming) {
+                                                    notifyInfo(`Resuming practice: ${data.answered}/${data.total} completed`);
+                                                }
+                                                router.push(`/problems/${nextId}?section=${activeSection}&practice=true`);
+                                            } else if (data.questionIds?.length === 0) {
+                                                notifyInfo('No unattempted questions found in this category!');
+                                            } else {
+                                                notifyError('Failed to start practice session');
+                                            }
+                                        } catch (error) {
+                                            console.error('Quick practice failed:', error);
                                             notifyError('Failed to start practice session');
                                         }
-                                    } catch (error) {
-                                        console.error('Quick practice failed:', error);
-                                        notifyError('Failed to start practice session');
-                                    }
-                                }}
-                                className={`w-full py-2.5 text-white text-sm font-semibold rounded-xl transition-all shadow-lg ${activeSection === 'QUANT'
-                                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 shadow-amber-500/20'
-                                    : 'bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-400 hover:to-purple-400 shadow-violet-500/20'
-                                    }`}
-                            >
-                                Start Practice
-                            </button>
+                                    }}
+                                    className={`w-full py-2.5 text-white text-sm font-semibold rounded-xl transition-all shadow-lg ${activeSection === 'QUANT'
+                                        ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 shadow-amber-500/20'
+                                        : 'bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-400 hover:to-purple-400 shadow-violet-500/20'
+                                        }`}
+                                >
+                                    Start Practice
+                                </button>
+                            </AuthActionGuard>
                         </div>
 
                         {/* Legend */}

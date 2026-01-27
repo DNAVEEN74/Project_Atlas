@@ -113,9 +113,9 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-5 w-full justify-center animate-fade-in-up animation-delay-300">
-            <Link href="/register" className="group relative w-full sm:w-auto px-10 py-5 bg-amber-500 text-black font-bold text-lg rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(245,158,11,0.3)]">
+            <Link href="/problems" className="group relative w-full sm:w-auto px-10 py-5 bg-amber-500 text-black font-bold text-lg rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(245,158,11,0.3)]">
               <span className="relative z-10 flex items-center justify-center gap-2">
-                Start 7-Day Free Trial <ChevronRightIcon className="group-hover:translate-x-1 transition-transform" />
+                Start Solving Now <ChevronRightIcon className="group-hover:translate-x-1 transition-transform" />
               </span>
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
             </Link>
@@ -471,10 +471,10 @@ export default function Home() {
             7 days free. Cancel anytime.
           </p>
           <Link
-            href="/register"
+            href="/problems"
             className="inline-flex px-12 py-6 bg-white text-black font-black text-xl rounded-full hover:scale-105 transition-transform shadow-[0_0_50px_rgba(255,255,255,0.2)]"
           >
-            Start Free Trial
+            Start Practicing
           </Link>
           <p className="mt-8 text-sm text-neutral-600">No credit card required for trial.</p>
         </div>
@@ -482,11 +482,126 @@ export default function Home() {
         <div className="absolute inset-0 bg-[url('/noise.png')] opacity-5 mix-blend-overlay pointer-events-none"></div>
       </section>
 
+      {/* --- FAQ SECTION (SEO Optimized) --- */}
+      <section id="faq" className="py-24 px-6 bg-[#0a0a0a] border-t border-white/5">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-black text-white text-center mb-4">
+            Frequently Asked <span className="text-amber-500">Questions</span>
+          </h2>
+          <p className="text-neutral-400 text-center mb-16 text-lg">
+            Everything you need to know about PrepLeague
+          </p>
+
+          <div className="space-y-6">
+            {[
+              {
+                q: "What is PrepLeague?",
+                a: "PrepLeague is a free online platform for SSC CGL, SSC CHSL, and Bank exam preparation. We provide 10,000+ previous year questions (PYQs) from 2018-2024, conceptual explanations, speed drills, and timed mock tests to help aspirants crack competitive exams."
+              },
+              {
+                q: "Is PrepLeague free to use?",
+                a: "Yes! Our core features including concept explanations, problem practice, and basic analytics are completely free. You can access thousands of questions without any registration. Advanced features like detailed analytics and personalized recommendations are available with a premium subscription."
+              },
+              {
+                q: "What exams does PrepLeague cover?",
+                a: "PrepLeague primarily covers SSC CGL (Combined Graduate Level), SSC CHSL (Combined Higher Secondary Level), and various Bank exams including IBPS PO, IBPS Clerk, SBI PO, and RBI Assistant. Our question bank includes TCS-pattern questions from 2018 to 2024."
+              },
+              {
+                q: "How is PrepLeague different from other exam preparation platforms?",
+                a: "PrepLeague focuses on building intuition over memorization. Our unique approach includes visual mental models for concepts, adaptive daily targets based on your exam date, high-intensity Sprint Mode for speed training, and detailed analytics to identify your weak areas. Plus, our concept library is completely free."
+              },
+              {
+                q: "What topics are covered in Quantitative Aptitude?",
+                a: "We cover all major Quant topics including Percentage, Profit & Loss, Simple Interest, Compound Interest, Ratio & Proportion, Time & Work, Time Speed Distance, Number System, Algebra, Geometry, Mensuration, Trigonometry, and Data Interpretation."
+              },
+              {
+                q: "What topics are covered in Reasoning?",
+                a: "Our Reasoning section covers Coding-Decoding, Analogy, Series, Blood Relations, Direction Sense, Syllogism, Venn Diagrams, Sitting Arrangement, Mirror & Water Images, Paper Cutting, Dice & Cube, and Statement & Conclusion."
+              }
+            ].map((faq, i) => (
+              <details
+                key={i}
+                className="group bg-[#111] border border-neutral-800 rounded-2xl overflow-hidden hover:border-neutral-700 transition-colors"
+              >
+                <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                  <h3 className="text-lg font-bold text-white pr-4">{faq.q}</h3>
+                  <span className="text-amber-500 text-2xl group-open:rotate-45 transition-transform">+</span>
+                </summary>
+                <div className="px-6 pb-6 text-neutral-400 leading-relaxed">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+
+        {/* FAQ Schema JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "What is PrepLeague?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "PrepLeague is a free online platform for SSC CGL, SSC CHSL, and Bank exam preparation. We provide 10,000+ previous year questions (PYQs) from 2018-2024, conceptual explanations, speed drills, and timed mock tests to help aspirants crack competitive exams."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Is PrepLeague free to use?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! Our core features including concept explanations, problem practice, and basic analytics are completely free. You can access thousands of questions without any registration. Advanced features like detailed analytics and personalized recommendations are available with a premium subscription."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What exams does PrepLeague cover?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "PrepLeague primarily covers SSC CGL (Combined Graduate Level), SSC CHSL (Combined Higher Secondary Level), and various Bank exams including IBPS PO, IBPS Clerk, SBI PO, and RBI Assistant. Our question bank includes TCS-pattern questions from 2018 to 2024."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How is PrepLeague different from other exam preparation platforms?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "PrepLeague focuses on building intuition over memorization. Our unique approach includes visual mental models for concepts, adaptive daily targets based on your exam date, high-intensity Sprint Mode for speed training, and detailed analytics to identify your weak areas."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What topics are covered in Quantitative Aptitude?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We cover all major Quant topics including Percentage, Profit & Loss, Simple Interest, Compound Interest, Ratio & Proportion, Time & Work, Time Speed Distance, Number System, Algebra, Geometry, Mensuration, Trigonometry, and Data Interpretation."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What topics are covered in Reasoning?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Our Reasoning section covers Coding-Decoding, Analogy, Series, Blood Relations, Direction Sense, Syllogism, Venn Diagrams, Sitting Arrangement, Mirror & Water Images, Paper Cutting, Dice & Cube, and Statement & Conclusion."
+                  }
+                }
+              ]
+            })
+          }}
+        />
+      </section>
+
       {/* --- FOOTER --- */}
       <footer className="py-12 px-6 bg-[#0a0a0a] border-t border-neutral-900/50 text-neutral-500 text-sm">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2 opacity-50 hover:opacity-100 transition-opacity">
-            <Image src="/logo-final.png" alt="Logo" width={24} height={24} />
+            <Image src="/logo-final.png" alt="PrepLeague Logo" width={24} height={24} />
             <span>© 2025 PrepLeague</span>
           </div>
           <div className="flex gap-6">

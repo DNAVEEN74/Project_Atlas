@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Block admin and API routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /bookmarks/
+Disallow: /submissions/
+
+# Sitemap location
+Sitemap: https://project-atlas-jek8.vercel.app/sitemap.xml

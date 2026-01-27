@@ -28,12 +28,13 @@ import {
 import Header from '@/components/layout/Header';
 import { QUANT_GAMES, REASONING_GAMES, GameConfig } from '@/components/games/games-config';
 import { GameModal } from '@/components/games/GameModal';
+import { AuthActionGuard } from '@/components/auth/AuthActionGuard';
 
 export default function GamesPage() {
     const router = useRouter();
     const { user, loading, logout } = useAuth();
     const [selectedGame, setSelectedGame] = useState<GameConfig | null>(null);
-    const [activeTab, setActiveTab] = useState<'DASHBOARD' | 'QUANT' | 'REASONING'>('DASHBOARD');
+    const [activeTab, setActiveTab] = useState<'DASHBOARD' | 'QUANT' | 'REASONING'>('QUANT');
     const [gameScores, setGameScores] = useState<Record<string, number>>({});
     const [dashStats, setDashStats] = useState<{
         totalGamesPlayed: number;
@@ -76,11 +77,13 @@ export default function GamesPage() {
         }
     }, [user]);
 
+    /* Redirect removed for public access
     React.useEffect(() => {
         if (!loading && !user) {
             router.push('/');
         }
     }, [user, loading, router]);
+    */
     // ... (rest of code)
 
 
@@ -94,7 +97,7 @@ export default function GamesPage() {
         );
     }
 
-    if (!user) return null;
+    // if (!user) return null; // Removed for public access
 
     const currentGames = activeTab === 'QUANT' ? QUANT_GAMES : REASONING_GAMES;
 
@@ -424,9 +427,26 @@ export default function GamesPage() {
 
                         </div>
                     ) : activeTab === 'DASHBOARD' && (
-                        <div className="text-center py-20 animate-pulse">
-                            <p className="text-neutral-500 font-medium">Loading statistics...</p>
-                        </div>
+                        !user ? (
+                            <div className="text-center py-20">
+                                <div className="inline-block p-4 rounded-full bg-neutral-800 mb-4">
+                                    <DashboardIcon sx={{ fontSize: '2rem' }} className="text-neutral-500" />
+                                </div>
+                                <h3 className="text-lg font-bold text-white mb-2">Track Your Progress</h3>
+                                <p className="text-neutral-400 mb-6 max-w-sm mx-auto">
+                                    Log in to see detailed analytics, accuracy trends, and high scores.
+                                </p>
+                                <AuthActionGuard>
+                                    <button className="px-8 py-3 bg-amber-500 text-black font-bold rounded-full hover:bg-amber-400 transition-colors">
+                                        Log In / Sign Up
+                                    </button>
+                                </AuthActionGuard>
+                            </div>
+                        ) : (
+                            <div className="text-center py-20 animate-pulse">
+                                <p className="text-neutral-500 font-medium">Loading statistics...</p>
+                            </div>
+                        )
                     )}
 
                     {/* Games Grid View */}
@@ -436,62 +456,64 @@ export default function GamesPage() {
                                 const theme = getGameTheme(game.color);
 
                                 return (
-                                    <button
-                                        key={game.id}
-                                        onClick={() => setSelectedGame(game)}
-                                        className="group bg-[#111] rounded-[2.5rem] p-10 border border-white/[0.05] transition-all duration-500 hover:bg-neutral-900/40 hover:-translate-y-2 relative overflow-hidden text-left w-full h-auto shadow-2xl hover:border-white/10"
-                                    >
-                                        {/* Glass reflection effect */}
-                                        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                                        {/* Best Score Badge */}
-                                        <div className="absolute top-8 right-8 px-4 py-1.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full z-10 transition-all group-hover:bg-amber-500/10 group-hover:border-amber-500/30">
-                                            <div className="flex items-center gap-2">
-                                                <span className="text-[9px] uppercase tracking-[0.2em] font-black text-neutral-500 group-hover:text-amber-500/80 transition-colors">Best</span>
-                                                <span className="text-xs font-black text-white" style={{ color: theme.text === '#e5e5e5' ? 'white' : theme.text }}>
-                                                    {gameScores[game.id] !== undefined ? gameScores[game.id] : '--'}
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        {/* Background Decor Icon */}
-                                        <div className="absolute -top-10 -right-10 p-8 opacity-[0.02] group-hover:opacity-[0.05] group-hover:scale-110 group-hover:-rotate-12 transition-all duration-700 pointer-events-none">
-                                            <div className="text-[14rem] leading-none">
-                                                {game.icon}
-                                            </div>
-                                        </div>
-
-                                        {/* Icon Container with multi-layered shadow */}
-                                        <div
-                                            className="w-16 h-16 rounded-[1.5rem] flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-xl"
-                                            style={{
-                                                backgroundColor: `${theme.bg}44`,
-                                                border: `1px solid ${theme.bg}88`
-                                            }}
+                                    <AuthActionGuard key={game.id}>
+                                        <button
+                                            onClick={() => setSelectedGame(game)}
+                                            className="group bg-[#111] rounded-[2.5rem] p-10 border border-white/[0.05] transition-all duration-500 hover:bg-neutral-900/40 hover:-translate-y-2 relative overflow-hidden text-left w-full h-auto shadow-2xl hover:border-white/10"
                                         >
-                                            <div className="text-4xl drop-shadow-2xl" style={{ color: theme.text }}>
-                                                {game.icon}
+                                            {/* Glass reflection effect */}
+                                            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                                            {/* Best Score Badge */}
+                                            <div className="absolute top-8 right-8 px-4 py-1.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full z-10 transition-all group-hover:bg-amber-500/10 group-hover:border-amber-500/30">
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-[9px] uppercase tracking-[0.2em] font-black text-neutral-500 group-hover:text-amber-500/80 transition-colors">Best</span>
+                                                    <span className="text-xs font-black text-white" style={{ color: theme.text === '#e5e5e5' ? 'white' : theme.text }}>
+                                                        {gameScores[game.id] !== undefined ? gameScores[game.id] : '--'}
+                                                    </span>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        {/* Content */}
-                                        <h3 className="text-2xl font-black text-white mb-3 tracking-tight group-hover:text-amber-500 transition-colors">
-                                            {game.name}
-                                        </h3>
-                                        <p className="text-neutral-500 leading-relaxed text-sm h-12 line-clamp-2 font-medium group-hover:text-neutral-400 transition-colors">
-                                            {game.description}
-                                        </p>
+                                            {/* Background Decor Icon */}
+                                            <div className="absolute -top-10 -right-10 p-8 opacity-[0.02] group-hover:opacity-[0.05] group-hover:scale-110 group-hover:-rotate-12 transition-all duration-700 pointer-events-none">
+                                                <div className="text-[14rem] leading-none">
+                                                    {game.icon}
+                                                </div>
+                                            </div>
 
-                                        {/* Action indicator */}
-                                        <div className="mt-8 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-600 group-hover:text-amber-500 transition-all">
-                                            <span>Start Drill</span>
-                                            <ArrowForwardIcon sx={{ fontSize: '1rem' }} className="group-hover:translate-x-1 transition-transform" />
-                                        </div>
-                                    </button>
+                                            {/* Icon Container with multi-layered shadow */}
+                                            <div
+                                                className="w-16 h-16 rounded-[1.5rem] flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-xl"
+                                                style={{
+                                                    backgroundColor: `${theme.bg}44`,
+                                                    border: `1px solid ${theme.bg}88`
+                                                }}
+                                            >
+                                                <div className="text-4xl drop-shadow-2xl" style={{ color: theme.text }}>
+                                                    {game.icon}
+                                                </div>
+                                            </div>
+
+                                            {/* Content */}
+                                            <h3 className="text-2xl font-black text-white mb-3 tracking-tight group-hover:text-amber-500 transition-colors">
+                                                {game.name}
+                                            </h3>
+                                            <p className="text-neutral-500 leading-relaxed text-sm h-12 line-clamp-2 font-medium group-hover:text-neutral-400 transition-colors">
+                                                {game.description}
+                                            </p>
+
+                                            {/* Action indicator */}
+                                            <div className="mt-8 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-neutral-600 group-hover:text-amber-500 transition-all">
+                                                <span>Start Drill</span>
+                                                <ArrowForwardIcon sx={{ fontSize: '1rem' }} className="group-hover:translate-x-1 transition-transform" />
+                                            </div>
+                                        </button>
+                                    </AuthActionGuard>
                                 );
                             })}
                         </div>
-                    )}
+                    )
+                    }
                 </div>
             </div>
 
