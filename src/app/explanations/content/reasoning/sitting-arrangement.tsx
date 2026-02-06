@@ -1,9 +1,8 @@
-"use client";
 
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
+import { CancelIcon, WarningIcon } from '@/components/icons';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,31 +13,15 @@ import {
 
 export default function SittingArrangementContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">🪑</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-purple-500/20 text-purple-500 text-xs font-bold uppercase tracking-widest mb-2 border border-purple-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Sitting Arrangement</h1>
-                    <p className="text-neutral-400 text-lg">Linear lines & Round tables — master the map.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: LINEAR ARRANGEMENT */}
-            <ConceptSection id="linear" title="Linear Arrangement" icon="➡️">
+        <>
+            <ConceptSection id="linear" title="Linear Arrangement">
                 <p>
                     People sitting in a straight line. Direction matters!
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-6 bg-neutral-900 rounded-xl border border-purple-500/30">
-                        <h4 className="text-purple-400 font-bold mb-3">Facing NORTH (↑)</h4>
+                    <div className="p-6 bg-neutral-900 rounded-xl border border-violet-500/30">
+                        <h4 className="text-violet-400 font-bold mb-3">Facing NORTH (↑)</h4>
                         <p className="text-sm text-neutral-300">
                             <strong>Your Left</strong> is their Left.<br />
                             <strong>Your Right</strong> is their Right.
@@ -46,7 +29,7 @@ export default function SittingArrangementContent() {
                         <div className="mt-4 flex justify-center space-x-2 text-white font-mono text-sm">
                             <span>Left</span>
                             <span>←</span>
-                            <span className="bg-purple-900 px-2 rounded">Person</span>
+                            <span className="bg-violet-900 px-2 rounded">Person</span>
                             <span>→</span>
                             <span>Right</span>
                         </div>
@@ -70,22 +53,22 @@ export default function SittingArrangementContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: CIRCULAR ARRANGEMENT */}
-            <ConceptSection id="circular" title="Circular Arrangement" icon="⭕">
+            <ConceptSection id="circular" title="Circular Arrangement">
                 <p>
                     Sitting around a round table.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-6 bg-neutral-900 rounded-xl border border-emerald-500/30">
-                        <h4 className="text-emerald-400 font-bold mb-3">Facing CENTER (Inside)</h4>
+                    <div className="p-6 bg-neutral-900 rounded-xl border border-violet-500/30">
+                        <h4 className="text-violet-400 font-bold mb-3">Facing CENTER (Inside)</h4>
                         <ul className="text-sm text-neutral-300 space-y-1">
                             <li>Left = <strong>Clockwise</strong> Movement</li>
                             <li>Right = <strong>Anti-Clockwise</strong> Movement</li>
                         </ul>
                     </div>
 
-                    <div className="p-6 bg-neutral-900 rounded-xl border border-orange-500/30">
-                        <h4 className="text-orange-400 font-bold mb-3">Facing OUTSIDE</h4>
+                    <div className="p-6 bg-neutral-900 rounded-xl border border-fuchsia-500/30">
+                        <h4 className="text-fuchsia-400 font-bold mb-3">Facing OUTSIDE</h4>
                         <ul className="text-sm text-neutral-300 space-y-1">
                             <li>Left = <strong>Anti-Clockwise</strong> Movement</li>
                             <li>Right = <strong>Clockwise</strong> Movement</li>
@@ -99,7 +82,7 @@ export default function SittingArrangementContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: LANGUAGE DECODING */}
-            <ConceptSection id="language" title="Key Words: AND vs WHO" icon="🔑">
+            <ConceptSection id="language" title="Key Words: AND vs WHO">
                 <p>
                     Understanding standard connector words is critical.
                 </p>
@@ -145,19 +128,23 @@ export default function SittingArrangementContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Confusing Left/Right in Circle</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2">
+                            <WarningIcon className="text-red-400" /> Confusing Left/Right in Circle
+                        </h4>
                         <p className="text-sm text-neutral-400 mt-1">
-                            Don't rotate yourself! Just remember: <strong>Clockwise is Left</strong> (for center facing).
+                            Don&apos;t rotate yourself! Just remember: <strong>Clockwise is Left</strong> (for center facing).
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ "Between" Ambiguity</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2">
+                            <WarningIcon className="text-red-400" /> "Between" Ambiguity
+                        </h4>
                         <p className="text-sm text-neutral-400 mt-1">
-                            "A is between B and C" allows two orders: B-A-C or C-A-B. Don't assume one fixed order without checking other clues.
+                            &quot;A is between B and C&quot; allows two orders: B-A-C or C-A-B. Don&apos;t assume one fixed order without checking other clues.
                         </p>
                     </div>
                 </div>
@@ -176,6 +163,6 @@ export default function SittingArrangementContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

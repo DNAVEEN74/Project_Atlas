@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function MixturesAlligationContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">🧪</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-purple-500/20 text-purple-500 text-xs font-bold uppercase tracking-widest mb-2 border border-purple-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Mixtures & Alligation</h1>
-                    <p className="text-neutral-400 text-lg">Master the "Cross Method" — the most powerful shortcut in arithmetic!</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: RULE OF ALLIGATION */}
-            <ConceptSection id="alligation" title="The Rule of Alligation (Cross Method)" icon="✖️">
+        <>
+            <ConceptSection id="alligation" title="The Rule of Alligation (Cross Method)">
                 <p>
                     Use this when mixing two ingredients to get a mean price/value.
                 </p>
@@ -102,7 +85,7 @@ export default function MixturesAlligationContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: MIXTURE OF TWO MIXTURES */}
-            <ConceptSection id="two-mixtures" title="Mixing Two Mixtures" icon="⚗️">
+            <ConceptSection id="two-mixtures" title="Mixing Two Mixtures">
                 <p>
                     When mixing two alloys/vessels, focus on <strong>ONE component</strong> (e.g., Milk ONLY or Water ONLY).
                 </p>
@@ -128,7 +111,7 @@ export default function MixturesAlligationContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: REPLACEMENT / DILUTION */}
-            <ConceptSection id="replacement" title="Repeated Dilution Formula" icon="🔄">
+            <ConceptSection id="replacement" title="Repeated Dilution Formula">
                 <p>
                     Used when finding remaining pure quantity after "x" liters are taken out and replaced with water "n" times.
                 </p>
@@ -163,7 +146,7 @@ export default function MixturesAlligationContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: DISHONEST MILKMAN */}
-            <ConceptSection id="percent" title="Profit by Dilution" icon="💰">
+            <ConceptSection id="percent" title="Profit by Dilution">
                 <p>
                     If a milkman sells mixture at Cost Price but gains profit by adding water:
                 </p>
@@ -179,7 +162,7 @@ export default function MixturesAlligationContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
                         <h4 className="text-red-400 font-bold">❌ Mixing CP with SP</h4>
@@ -218,6 +201,6 @@ export default function MixturesAlligationContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

@@ -3,7 +3,16 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
+    MaleIcon,
+    FemaleIcon,
+    FavoriteIcon,
+    CloseIcon,
+    CheckIcon,
+    KeyIcon,
+    PeopleIcon,
+    WarningIcon
+} from '@/components/icons';
+import {
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,41 +23,10 @@ import {
 
 export default function BloodRelationsContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-rose-900/40 via-neutral-900 to-black" />
-
-                {/* Animated family tree */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="relative opacity-30">
-                        {/* Simple tree visualization */}
-                        <div className="flex gap-8 items-center">
-                            <div className="w-12 h-12 border-2 border-blue-500 rounded-sm flex items-center justify-center text-2xl">👨</div>
-                            <div className="w-8 h-0.5 bg-white" />
-                            <div className="w-12 h-12 border-2 border-pink-500 rounded-full flex items-center justify-center text-2xl">👩</div>
-                        </div>
-                        <div className="absolute left-1/2 top-full w-0.5 h-8 bg-white -translate-x-1/2" />
-                        <div className="absolute left-1/2 top-[calc(100%+2rem)] -translate-x-1/2 flex gap-4">
-                            <div className="w-10 h-10 border-2 border-blue-500/50 rounded-sm" />
-                            <div className="w-10 h-10 border-2 border-pink-500/50 rounded-full" />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-rose-500/20 text-rose-500 text-xs font-bold uppercase tracking-widest mb-2 border border-rose-500/20">
-                        Real World Logic
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Blood Relations</h1>
-                    <p className="text-neutral-400 text-lg">Master family tree problems — the key is to DRAW, never solve in your head!</p>
-                </div>
-            </div>
-
-            {/* THE GOLDEN RULE */}
-            <ConceptSection id="intro" title="Rule #1: ALWAYS Draw!" icon="✏️">
-                <div className="bg-gradient-to-r from-rose-900/20 to-transparent p-6 rounded-xl border-l-4 border-rose-500 mb-6">
-                    <p className="text-2xl font-bold text-rose-400 text-center">
+        <>
+            <ConceptSection id="intro" title="Rule #1: ALWAYS Draw!">
+                <div className="bg-gradient-to-r from-violet-900/20 to-transparent p-6 rounded-xl border-l-4 border-violet-500 mb-6">
+                    <p className="text-2xl font-bold text-violet-400 text-center">
                         NEVER Solve Blood Relations in Your Head!
                     </p>
                     <p className="text-center text-neutral-400 mt-2">
@@ -62,8 +40,8 @@ export default function BloodRelationsContent() {
                 </p>
 
                 {/* Standard symbols */}
-                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-rose-500/30">
-                    <h4 className="text-rose-400 font-bold mb-6 text-center text-lg">Standard Symbols to Use</h4>
+                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-violet-500/30">
+                    <h4 className="text-violet-400 font-bold mb-6 text-center text-lg">Standard Symbols to Use</h4>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         <div className="text-center">
                             <div className="w-16 h-16 border-4 border-blue-500 mx-auto flex items-center justify-center bg-blue-500/10">
@@ -111,14 +89,14 @@ export default function BloodRelationsContent() {
             </ConceptSection>
 
             {/* FAMILY RELATIONSHIPS */}
-            <ConceptSection id="relations" title="Complete Family Relationship Reference" icon="👨‍👩‍👧">
+            <ConceptSection id="relations" title="Complete Family Relationship Reference">
                 <p className="mb-6">Memorize these terms. They appear in EVERY exam!</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
                     {/* Paternal Side */}
                     <div className="p-5 bg-neutral-900 rounded-xl border border-blue-500/30">
                         <h4 className="text-blue-400 font-bold mb-4 flex items-center gap-2">
-                            <span className="w-8 h-8 border-2 border-blue-500 flex items-center justify-center text-xs">👨</span>
+                            <span className="w-8 h-8 flex items-center justify-center bg-blue-500/20 rounded-lg"><MaleIcon /></span>
                             Paternal Side (Father's)
                         </h4>
                         <ul className="space-y-2 text-sm">
@@ -148,7 +126,7 @@ export default function BloodRelationsContent() {
                     {/* Maternal Side */}
                     <div className="p-5 bg-neutral-900 rounded-xl border border-pink-500/30">
                         <h4 className="text-pink-400 font-bold mb-4 flex items-center gap-2">
-                            <span className="w-8 h-8 border-2 border-pink-500 rounded-full flex items-center justify-center text-xs">👩</span>
+                            <span className="w-8 h-8 flex items-center justify-center bg-pink-500/20 rounded-lg"><FemaleIcon /></span>
                             Maternal Side (Mother's)
                         </h4>
                         <ul className="space-y-2 text-sm">
@@ -177,7 +155,7 @@ export default function BloodRelationsContent() {
 
                     {/* In-Laws */}
                     <div className="p-5 bg-neutral-900 rounded-xl border border-amber-500/30">
-                        <h4 className="text-amber-400 font-bold mb-4">💍 In-Laws (By Marriage)</h4>
+                        <h4 className="text-amber-400 font-bold mb-4 flex items-center gap-2"><FavoriteIcon /> In-Laws (By Marriage)</h4>
                         <ul className="space-y-2 text-sm">
                             <li className="flex justify-between">
                                 <span className="text-neutral-400">Spouse's Father</span>
@@ -208,7 +186,7 @@ export default function BloodRelationsContent() {
 
                     {/* Siblings & Their Children */}
                     <div className="p-5 bg-neutral-900 rounded-xl border border-emerald-500/30">
-                        <h4 className="text-emerald-400 font-bold mb-4">👫 Siblings & Their Children</h4>
+                        <h4 className="text-emerald-400 font-bold mb-4 flex items-center gap-2"><PeopleIcon /> Siblings & Their Children</h4>
                         <ul className="space-y-2 text-sm">
                             <li className="flex justify-between">
                                 <span className="text-neutral-400">Brother's Son</span>
@@ -243,44 +221,44 @@ export default function BloodRelationsContent() {
             </ConceptSection>
 
             {/* POINTING PROBLEMS */}
-            <ConceptSection id="pointing" title="Solving 'Pointing' Problems" icon="👉">
+            <ConceptSection id="pointing" title="Solving 'Pointing' Problems">
                 <p className="mb-4">
                     The most common type: <strong>"Pointing to a photograph, A said..."</strong>
                 </p>
 
-                <div className="bg-gradient-to-r from-purple-900/20 to-transparent p-6 rounded-xl border-l-4 border-purple-500 mb-6">
-                    <h4 className="text-purple-400 font-bold mb-3">🔑 The Golden Technique</h4>
+                <div className="bg-gradient-to-r from-violet-900/20 to-transparent p-6 rounded-xl border-l-4 border-violet-500 mb-6">
+                    <h4 className="text-violet-400 font-bold mb-3 flex items-center gap-2"><KeyIcon /> The Golden Technique</h4>
                     <p className="text-lg">
                         Start from the <strong>END</strong> of the sentence and work <strong>BACKWARDS</strong> to "MY"!
                     </p>
                 </div>
 
                 <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <h4 className="text-rose-400 font-bold mb-4">Step-by-Step Process</h4>
+                    <h4 className="text-violet-400 font-bold mb-4">Step-by-Step Process</h4>
                     <div className="space-y-4">
                         <div className="flex gap-4 items-start">
-                            <div className="w-8 h-8 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400 font-bold shrink-0">1</div>
+                            <div className="w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-400 font-bold shrink-0">1</div>
                             <div>
                                 <p className="font-bold text-white">Read the FULL statement</p>
                                 <p className="text-sm text-neutral-400">Identify who is speaking (usually "I" or "A")</p>
                             </div>
                         </div>
                         <div className="flex gap-4 items-start">
-                            <div className="w-8 h-8 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400 font-bold shrink-0">2</div>
+                            <div className="w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-400 font-bold shrink-0">2</div>
                             <div>
                                 <p className="font-bold text-white">Start from "MY" or "I"</p>
                                 <p className="text-sm text-neutral-400">Draw yourself first, then build the tree from there</p>
                             </div>
                         </div>
                         <div className="flex gap-4 items-start">
-                            <div className="w-8 h-8 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400 font-bold shrink-0">3</div>
+                            <div className="w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-400 font-bold shrink-0">3</div>
                             <div>
                                 <p className="font-bold text-white">Work backwards through EACH relationship</p>
                                 <p className="text-sm text-neutral-400">"Brother's wife" → find brother first, then add wife</p>
                             </div>
                         </div>
                         <div className="flex gap-4 items-start">
-                            <div className="w-8 h-8 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-400 font-bold shrink-0">4</div>
+                            <div className="w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-400 font-bold shrink-0">4</div>
                             <div>
                                 <p className="font-bold text-white">Find the person in photo</p>
                                 <p className="text-sm text-neutral-400">Connect them to your tree and read the relationship</p>
@@ -299,7 +277,7 @@ export default function BloodRelationsContent() {
                             <p><strong>Step 2:</strong> "Only daughter of my mother" = The man's sister</p>
                             <p><strong>Step 3:</strong> "Her mother" = The woman's mother = Man's sister</p>
                             <p><strong>Step 4:</strong> So the woman is the daughter of man's sister</p>
-                            <p><strong>Step 5:</strong> Sister's daughter = <span className="text-rose-400 font-bold">NIECE</span></p>
+                            <p><strong>Step 5:</strong> Sister's daughter = <span className="text-violet-400 font-bold">NIECE</span></p>
                             <div className="mt-4 p-3 bg-black/50 rounded-lg">
                                 <p className="text-xs text-neutral-400">
                                     Man's Mother → Man's Sister (only daughter) → Woman (daughter)
@@ -339,13 +317,13 @@ export default function BloodRelationsContent() {
             </ConceptSection>
 
             {/* CODED RELATIONS */}
-            <ConceptSection id="coded" title="Coded Relations (A+B, A×B)" icon="🔢">
+            <ConceptSection id="coded" title="Coded Relations (A+B, A×B)">
                 <p className="mb-4">
                     Some questions use symbols like +, −, ×, ÷ to represent relationships. <strong>Decode them first!</strong>
                 </p>
 
                 <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <h4 className="text-rose-400 font-bold mb-4 text-center">Common Coding Patterns</h4>
+                    <h4 className="text-violet-400 font-bold mb-4 text-center">Common Coding Patterns</h4>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div className="p-4 bg-black/50 rounded-lg text-center">
                             <div className="text-3xl text-rose-400 font-bold mb-2">+</div>
@@ -407,7 +385,7 @@ export default function BloodRelationsContent() {
             </ConceptSection>
 
             {/* ONLY CHILD / ONLY SON */}
-            <ConceptSection id="only" title="'Only' Keyword — The Trap Word" icon="⚠️">
+            <ConceptSection id="only" title="'Only' Keyword — The Trap Word">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="p-5 bg-red-500/10 border border-red-500/30 rounded-xl">
                         <h4 className="text-red-400 font-bold mb-3">⚠️ "Only Son"</h4>
@@ -460,10 +438,10 @@ export default function BloodRelationsContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Assuming Gender from Names</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CloseIcon fontSize="small" /> Assuming Gender from Names</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             "Pat", "Sam", "Alex" can be male or female! Only explicit words like "he", "she",
                             "husband", "wife" confirm gender.
@@ -471,7 +449,7 @@ export default function BloodRelationsContent() {
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Assuming Gender from Profession</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CloseIcon fontSize="small" /> Assuming Gender from Profession</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             "Doctor", "Engineer", "Teacher" → Can be male OR female!
                             Don't assume gender from profession.
@@ -479,7 +457,7 @@ export default function BloodRelationsContent() {
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Confusing "Only Son" with "Only Child"</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CloseIcon fontSize="small" /> Confusing "Only Son" with "Only Child"</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             "Only son" means no brothers (but sisters possible).
                             "Only child" means no siblings at all.
@@ -487,7 +465,7 @@ export default function BloodRelationsContent() {
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Cousin Confusion</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CloseIcon fontSize="small" /> Cousin Confusion</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             "Cousin" is gender-neutral! Use "cousin brother" or "cousin sister" if gender matters.
                             Uncle's child = Cousin (could be male or female)
@@ -495,7 +473,7 @@ export default function BloodRelationsContent() {
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Not Drawing the Family Tree</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CloseIcon fontSize="small" /> Not Drawing the Family Tree</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             This is the biggest mistake! Always draw — it takes seconds and prevents all confusion.
                         </p>
@@ -521,6 +499,6 @@ export default function BloodRelationsContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

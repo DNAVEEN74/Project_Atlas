@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function HeightDistanceContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">🗼</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-orange-500/20 text-orange-500 text-xs font-bold uppercase tracking-widest mb-2 border border-orange-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Height & Distance</h1>
-                    <p className="text-neutral-400 text-lg">No more trigonometry tables — use the Ratio Method!</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: ANGLES */}
-            <ConceptSection id="angles" title="Terminology" icon="📐">
+        <>
+            <ConceptSection id="angles" title="Terminology">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-orange-500/30 text-center">
                         <div className="text-4xl mb-2">👀 ↖️ 🦅</div>
@@ -48,7 +31,7 @@ export default function HeightDistanceContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: RATIO METHOD */}
-            <ConceptSection id="ratios" title="The Golden Ratio Method" icon="✨">
+            <ConceptSection id="ratios" title="The Golden Ratio Method">
                 <p>
                     Forget sin/cos/tan. Memorize these triangle side ratios corresponding to angles.
                 </p>
@@ -103,7 +86,7 @@ export default function HeightDistanceContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: TWO ANGLES PROBLEM */}
-            <ConceptSection id="movement" title="Object Moving Towards Tower" icon="🏃">
+            <ConceptSection id="movement" title="Object Moving Towards Tower">
                 <p>
                     When angle changes from θ1 to θ2 as you move distance 'd' towards tower of height 'h':
                 </p>
@@ -137,7 +120,7 @@ export default function HeightDistanceContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
                         <h4 className="text-red-400 font-bold">❌ Wrong Ratio Order</h4>
@@ -168,6 +151,6 @@ export default function HeightDistanceContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

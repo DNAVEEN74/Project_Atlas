@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function BoatStreamContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">⛵</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-500 text-xs font-bold uppercase tracking-widest mb-2 border border-blue-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Boat & Stream</h1>
-                    <p className="text-neutral-400 text-lg">Don't fight the current — calculate it!</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: TERMINOLOGY */}
-            <ConceptSection id="basics" title="Upstream vs Downstream" icon="🌊">
+        <>
+            <ConceptSection id="basics" title="Upstream vs Downstream">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="p-6 bg-neutral-900 rounded-xl border border-blue-500/30 text-center">
                         <div className="flex justify-center mb-4 text-4xl">🌊🛶🌊</div>
@@ -59,7 +42,7 @@ export default function BoatStreamContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: DERIVED FORMULAS */}
-            <ConceptSection id="formulas" title="Finding Boat & Stream Speeds" icon="📐">
+            <ConceptSection id="formulas" title="Finding Boat & Stream Speeds">
                 <p>If you know Downstream (D) and Upstream (U) speeds, you can find B and S instantly.</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
@@ -90,7 +73,7 @@ export default function BoatStreamContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: AVERAGE SPEED */}
-            <ConceptSection id="average" title="Average Speed in Water" icon="⏱️">
+            <ConceptSection id="average" title="Average Speed in Water">
                 <p>
                     For a round trip (Distance constant), Average Speed formula applies.
                 </p>
@@ -115,7 +98,7 @@ export default function BoatStreamContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: DISTANCE & TIME RELATIONS */}
-            <ConceptSection id="applications" title="Common Problem Types" icon="🎯">
+            <ConceptSection id="applications" title="Common Problem Types">
                 <div className="space-y-6 my-6">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-800">
                         <h4 className="text-white font-bold mb-2">Distance Formula (Round Trip)</h4>
@@ -156,7 +139,7 @@ export default function BoatStreamContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
                         <h4 className="text-red-400 font-bold">❌ Confusing B and D</h4>
@@ -198,6 +181,6 @@ export default function BoatStreamContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

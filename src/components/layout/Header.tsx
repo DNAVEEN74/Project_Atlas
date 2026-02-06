@@ -56,24 +56,6 @@ export default function Header({ activePage }: HeaderProps) {
 
                         <nav className="hidden lg:flex items-center gap-1">
                             <Link
-                                href="/problems"
-                                className={`px-5 py-2 text-sm font-medium rounded-full transition-colors ${activePage === 'problems'
-                                    ? 'text-amber-500 bg-amber-500/10 font-semibold'
-                                    : 'text-neutral-400 hover:text-white hover:bg-neutral-800'
-                                    }`}
-                            >
-                                Problems
-                            </Link>
-                            <Link
-                                href="/games"
-                                className={`px-5 py-2 text-sm font-medium rounded-full transition-colors ${activePage === 'games'
-                                    ? 'text-amber-500 bg-amber-500/10 font-semibold'
-                                    : 'text-neutral-400 hover:text-white hover:bg-neutral-800'
-                                    }`}
-                            >
-                                Games
-                            </Link>
-                            <Link
                                 href="/explanations"
                                 className={`px-5 py-2 text-sm font-medium rounded-full transition-colors ${activePage === 'explanations'
                                     ? 'text-amber-500 bg-amber-500/10 font-semibold'
@@ -83,6 +65,15 @@ export default function Header({ activePage }: HeaderProps) {
                                 Explanations
                             </Link>
                             <Link
+                                href="/problems"
+                                className={`px-5 py-2 text-sm font-medium rounded-full transition-colors ${activePage === 'problems'
+                                    ? 'text-amber-500 bg-amber-500/10 font-semibold'
+                                    : 'text-neutral-400 hover:text-white hover:bg-neutral-800'
+                                    }`}
+                            >
+                                Problems
+                            </Link>
+                            <Link
                                 href="/sprint"
                                 className={`px-5 py-2 text-sm font-medium rounded-full transition-colors ${activePage === 'sprint'
                                     ? 'text-amber-500 bg-amber-500/10 font-semibold'
@@ -90,6 +81,15 @@ export default function Header({ activePage }: HeaderProps) {
                                     }`}
                             >
                                 Sprint Mode
+                            </Link>
+                            <Link
+                                href="/games"
+                                className={`px-5 py-2 text-sm font-medium rounded-full transition-colors ${activePage === 'games'
+                                    ? 'text-amber-500 bg-amber-500/10 font-semibold'
+                                    : 'text-neutral-400 hover:text-white hover:bg-neutral-800'
+                                    }`}
+                            >
+                                Games
                             </Link>
                             <Link
                                 href="/dashboard"

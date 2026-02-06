@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function VennDiagramContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">⭕</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-500 text-xs font-bold uppercase tracking-widest mb-2 border border-blue-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Venn Diagrams</h1>
-                    <p className="text-neutral-400 text-lg">Visualizing sets, subsets, and standard overlaps.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: STANDARD RELATIONS */}
-            <ConceptSection id="relations" title="The 3 Core Relationships" icon="🔗">
+        <>
+            <ConceptSection id="relations" title="The 3 Core Relationships">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
                     {/* All */}
                     <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
@@ -66,7 +49,7 @@ export default function VennDiagramContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: COMPLEX MAPPING */}
-            <ConceptSection id="complex" title="Complex Scenarios" icon="🧩">
+            <ConceptSection id="complex" title="Complex Scenarios">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
                         <h4 className="text-white font-bold mb-2">Scenario: A in B, C separate</h4>
@@ -98,7 +81,7 @@ export default function VennDiagramContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: MATHEMATICAL VENN */}
-            <ConceptSection id="math" title="Set Theory Formulas" icon="🔢">
+            <ConceptSection id="math" title="Set Theory Formulas">
                 <p>Sometimes they ask for numbers!</p>
 
                 <FormulaBox title="Union Formula">
@@ -130,6 +113,6 @@ export default function VennDiagramContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

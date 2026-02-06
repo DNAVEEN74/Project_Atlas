@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -11,43 +10,28 @@ import {
     CheckUnderstanding,
     CheatSheet
 } from '@/components/explanations';
+import { WarningIcon } from '@/components/icons';
 
 export default function AlgebraContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-900/30 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] font-bold text-violet-500/10 select-none font-mono">x² + y²</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-violet-500/20 text-violet-500 text-xs font-bold uppercase tracking-widest mb-2 border border-violet-500/20">
-                        Phase 04: Advanced Maths
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Algebra</h1>
-                    <p className="text-neutral-400 text-lg">Master identities to solve questions in seconds.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: WHY ALGEBRA MATTERS */}
-            <ConceptSection id="intro" title="Why Algebra is a Cheat Code" icon="🔑">
+        <>
+            <ConceptSection id="intro" title="Why Algebra is a Cheat Code">
                 <p>
-                    Algebra in SSC isn't about solving equations. It's about <strong>recognizing patterns</strong>
+                    Algebra in SSC isn&apos;t about solving equations. It&apos;s about <strong>recognizing patterns</strong>
                     and <strong>applying identities</strong> to simplify complex expressions instantly.
                 </p>
 
-                <div className="my-6 p-4 bg-violet-500/10 border border-violet-500/30 rounded-xl">
-                    <p className="text-violet-400 font-bold">The Secret:</p>
+                <div className="my-6 p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl">
+                    <p className="text-amber-400 font-bold">The Secret:</p>
                     <p className="text-neutral-300">
                         80% of SSC algebra questions can be solved by just knowing 5-6 identities.
-                        Don't expand blindly—pattern match first!
+                        Don&apos;t expand blindly—pattern match first!
                     </p>
                 </div>
             </ConceptSection>
 
             {/* CONCEPT 2: SQUARE IDENTITIES */}
-            <ConceptSection id="squares" title="The Square Identities" icon="²">
+            <ConceptSection id="squares" title="The Square Identities">
                 <p>These are your bread and butter. Know them forward AND backward.</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
@@ -74,7 +58,7 @@ export default function AlgebraContent() {
                             <p><strong>Recognize:</strong> This is a² − b² form!</p>
                             <p>= (103 + 97)(103 − 97)</p>
                             <p>= 200 × 6 = 1200</p>
-                            <p className="text-amber-400 text-xs mt-2">Without this, you'd compute 10609 − 9409 = 1200 (much slower!)</p>
+                            <p className="text-amber-400 text-xs mt-2">Without this, you&apos;d compute 10609 − 9409 = 1200 (much slower!)</p>
                         </div>
                     }
                     answer="1200"
@@ -89,7 +73,7 @@ export default function AlgebraContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: CUBE IDENTITIES */}
-            <ConceptSection id="cubes" title="The Cube Identities" icon="³">
+            <ConceptSection id="cubes" title="The Cube Identities">
                 <p>Slightly harder, but equally important for SSC Tier-II.</p>
 
                 <div className="space-y-4 my-6">
@@ -127,7 +111,7 @@ export default function AlgebraContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: x + 1/x PATTERN */}
-            <ConceptSection id="reciprocal" title="The x + 1/x Family" icon="🔄">
+            <ConceptSection id="reciprocal" title="The x + 1/x Family">
                 <p>
                     These patterns appear in <strong>90% of algebra questions</strong> in SSC. Master them completely!
                 </p>
@@ -141,26 +125,26 @@ export default function AlgebraContent() {
                                 <th className="px-4 py-3">Formula</th>
                             </tr>
                         </thead>
-                        <tbody className="text-neutral-400">
+                        <tbody className="text-white">
                             <tr className="border-b border-neutral-800">
-                                <td className="px-4 py-3"><MathText>{`x + \\frac{1}{x} = k`}</MathText></td>
-                                <td><MathText>{`x^2 + \\frac{1}{x^2}`}</MathText></td>
-                                <td className="text-violet-400"><MathText>{`k^2 - 2`}</MathText></td>
+                                <td className="px-4 py-3 font-mono">x + 1/x</td>
+                                <td className="px-4 py-3 font-mono">x² + 1/x²</td>
+                                <td className="px-4 py-3 text-amber-400 font-bold">k² − 2</td>
                             </tr>
                             <tr className="border-b border-neutral-800">
-                                <td className="px-4 py-3"><MathText>{`x + \\frac{1}{x} = k`}</MathText></td>
-                                <td><MathText>{`x^3 + \\frac{1}{x^3}`}</MathText></td>
-                                <td className="text-violet-400"><MathText>{`k^3 - 3k`}</MathText></td>
+                                <td className="px-4 py-3 font-mono">x − 1/x</td>
+                                <td className="px-4 py-3 font-mono">x² + 1/x²</td>
+                                <td className="px-4 py-3 text-amber-400 font-bold">k² + 2</td>
                             </tr>
                             <tr className="border-b border-neutral-800">
-                                <td className="px-4 py-3"><MathText>{`x - \\frac{1}{x} = k`}</MathText></td>
-                                <td><MathText>{`x^2 + \\frac{1}{x^2}`}</MathText></td>
-                                <td className="text-violet-400"><MathText>{`k^2 + 2`}</MathText></td>
+                                <td className="px-4 py-3 font-mono">x + 1/x</td>
+                                <td className="px-4 py-3 font-mono">x³ + 1/x³</td>
+                                <td className="px-4 py-3 text-amber-400 font-bold">k³ − 3k</td>
                             </tr>
                             <tr>
-                                <td className="px-4 py-3"><MathText>{`x - \\frac{1}{x} = k`}</MathText></td>
-                                <td><MathText>{`x^3 - \\frac{1}{x^3}`}</MathText></td>
-                                <td className="text-violet-400"><MathText>{`k^3 + 3k`}</MathText></td>
+                                <td className="px-4 py-3 font-mono">x − 1/x</td>
+                                <td className="px-4 py-3 font-mono">x³ − 1/x³</td>
+                                <td className="px-4 py-3 text-amber-400 font-bold">k³ + 3k</td>
                             </tr>
                         </tbody>
                     </table>
@@ -203,18 +187,18 @@ export default function AlgebraContent() {
             </ConceptSection>
 
             {/* CONCEPT 5: SPECIAL VALUES */}
-            <ConceptSection id="special" title="Special Values to Remember" icon="⭐">
+            <ConceptSection id="special" title="Special Values to Remember">
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <p className="text-violet-400 font-bold">x + 1/x = 2</p>
+                        <p className="text-amber-400 font-bold">x + 1/x = 2</p>
                         <p className="text-lg text-white mt-2">x = 1</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <p className="text-violet-400 font-bold">x + 1/x = −2</p>
+                        <p className="text-amber-400 font-bold">x + 1/x = −2</p>
                         <p className="text-lg text-white mt-2">x = −1</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <p className="text-violet-400 font-bold">x − 1/x = 0</p>
+                        <p className="text-amber-400 font-bold">x − 1/x = 0</p>
                         <p className="text-lg text-white mt-2">x = ±1</p>
                     </div>
                 </div>
@@ -226,31 +210,31 @@ export default function AlgebraContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ (a + b)² ≠ a² + b²</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> (a + b)² ≠ a² + b²</h4>
                         <p className="text-sm text-neutral-400 mt-1">
-                            Don't forget the middle term! (a + b)² = a² + <strong>2ab</strong> + b²
+                            Don&apos;t forget the middle term! (a + b)² = a² + <strong>2ab</strong> + b²
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Confusing k² − 2 vs k² + 2</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Confusing k² − 2 vs k² + 2</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             x + 1/x → use k² − 2 (minus). x − 1/x → use k² + 2 (plus). Notice the switch!
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Expanding Instead of Pattern Matching</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Expanding Instead of Pattern Matching</h4>
                         <p className="text-sm text-neutral-400 mt-1">
-                            103² − 97² → Don't calculate squares! Use (a+b)(a−b) = 200 × 6 = 1200
+                            103² − 97² → Don&apos;t calculate squares! Use (a+b)(a−b) = 200 × 6 = 1200
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Wrong Sign in Cube Identities</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Wrong Sign in Cube Identities</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             a³ + b³ = (a+b)(a² − ab + b²) has MINUS ab.<br />
                             a³ − b³ = (a−b)(a² + ab + b²) has PLUS ab.
@@ -274,6 +258,6 @@ export default function AlgebraContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,50 +13,34 @@ import {
 
 export default function HCFLCMContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/30 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[4rem] font-bold text-indigo-500/10 select-none">HCF ∩ LCM</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-500 text-xs font-bold uppercase tracking-widest mb-2 border border-indigo-500/20">
-                        Phase 01: Foundation
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">HCF & LCM</h1>
-                    <p className="text-neutral-400 text-lg">The Greatest Common Factor and Least Common Multiple explained.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: WHAT ARE THEY */}
-            <ConceptSection id="intro" title="Understanding HCF & LCM" icon="🔗">
+        <>
+            <ConceptSection id="intro" title="Understanding HCF & LCM">
                 <p>
                     Before formulas, understand <strong>what</strong> these concepts mean:
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-6 bg-neutral-900 rounded-xl border border-indigo-500/30">
-                        <h4 className="text-indigo-400 font-bold text-lg mb-3">HCF (Highest Common Factor)</h4>
+                    <div className="p-6 bg-neutral-900 rounded-xl border border-amber-500/30">
+                        <h4 className="text-amber-400 font-bold text-lg mb-3">HCF (Highest Common Factor)</h4>
                         <p className="text-neutral-300 text-sm mb-4">
                             The <strong>LARGEST number</strong> that divides both numbers exactly.
                         </p>
                         <div className="bg-black/50 p-4 rounded-lg">
                             <p className="font-mono text-sm">Factors of 12: 1, 2, 3, 4, 6, 12</p>
                             <p className="font-mono text-sm">Factors of 18: 1, 2, 3, 6, 9, 18</p>
-                            <p className="font-mono text-sm mt-2 text-indigo-400">Common: 1, 2, 3, 6 → HCF = 6</p>
+                            <p className="font-mono text-sm mt-2 text-amber-400">Common: 1, 2, 3, 6 → HCF = 6</p>
                         </div>
                         <p className="text-xs text-neutral-500 mt-3">Also called GCD (Greatest Common Divisor)</p>
                     </div>
-                    <div className="p-6 bg-neutral-900 rounded-xl border border-amber-500/30">
-                        <h4 className="text-amber-400 font-bold text-lg mb-3">LCM (Least Common Multiple)</h4>
+                    <div className="p-6 bg-neutral-900 rounded-xl border border-orange-500/30">
+                        <h4 className="text-orange-400 font-bold text-lg mb-3">LCM (Least Common Multiple)</h4>
                         <p className="text-neutral-300 text-sm mb-4">
                             The <strong>SMALLEST number</strong> that both numbers divide into exactly.
                         </p>
                         <div className="bg-black/50 p-4 rounded-lg">
                             <p className="font-mono text-sm">Multiples of 4: 4, 8, 12, 16, 20, 24...</p>
                             <p className="font-mono text-sm">Multiples of 6: 6, 12, 18, 24, 30...</p>
-                            <p className="font-mono text-sm mt-2 text-amber-400">Common: 12, 24... → LCM = 12</p>
+                            <p className="font-mono text-sm mt-2 text-orange-400">Common: 12, 24... → LCM = 12</p>
                         </div>
                         <p className="text-xs text-neutral-500 mt-3">Smallest number divisible by both</p>
                     </div>
@@ -71,7 +54,7 @@ export default function HCFLCMContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: THE GOLDEN RULE */}
-            <ConceptSection id="golden" title="The Golden Product Rule" icon="⭐">
+            <ConceptSection id="golden" title="The Golden Product Rule">
                 <p>This is the MOST important formula. Memorize it!</p>
 
                 <FormulaBox title="Product Rule">
@@ -106,30 +89,30 @@ export default function HCFLCMContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: FINDING HCF */}
-            <ConceptSection id="find-hcf" title="Methods to Find HCF" icon="🔍">
+            <ConceptSection id="find-hcf" title="Methods to Find HCF">
                 <p>Two powerful methods:</p>
 
                 <div className="space-y-6 my-6">
                     {/* Prime Factorization */}
                     <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-indigo-400 font-bold mb-4">Method 1: Prime Factorization</h4>
+                        <h4 className="text-amber-400 font-bold mb-4">Method 1: Prime Factorization</h4>
                         <p className="text-sm text-neutral-400 mb-4">Break both numbers into prime factors. Take common primes with LOWEST power.</p>
                         <div className="bg-black/50 p-4 rounded-lg font-mono text-sm">
                             <p>48 = 2⁴ × 3¹</p>
                             <p>60 = 2² × 3¹ × 5¹</p>
-                            <p className="mt-2 text-indigo-400">HCF = 2² × 3¹ = 4 × 3 = 12</p>
+                            <p className="mt-2 text-amber-400">HCF = 2² × 3¹ = 4 × 3 = 12</p>
                         </div>
                     </div>
 
                     {/* Division Method */}
                     <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-indigo-400 font-bold mb-4">Method 2: Division (Euclid's Algorithm)</h4>
+                        <h4 className="text-amber-400 font-bold mb-4">Method 2: Division (Euclid's Algorithm)</h4>
                         <p className="text-sm text-neutral-400 mb-4">Divide the larger by smaller. Repeat with remainder. HCF = last non-zero remainder.</p>
                         <div className="bg-black/50 p-4 rounded-lg font-mono text-sm">
                             <p>48 ÷ 18 = 2 remainder <strong>12</strong></p>
                             <p>18 ÷ 12 = 1 remainder <strong>6</strong></p>
                             <p>12 ÷ 6 = 2 remainder <strong>0</strong></p>
-                            <p className="mt-2 text-indigo-400">HCF = 6 (last non-zero remainder)</p>
+                            <p className="mt-2 text-amber-400">HCF = 6 (last non-zero remainder)</p>
                         </div>
                     </div>
                 </div>
@@ -150,7 +133,7 @@ export default function HCFLCMContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: FINDING LCM */}
-            <ConceptSection id="find-lcm" title="Methods to Find LCM" icon="🔍">
+            <ConceptSection id="find-lcm" title="Methods to Find LCM">
                 <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800 my-6">
                     <h4 className="text-amber-400 font-bold mb-4">Prime Factorization for LCM</h4>
                     <p className="text-sm text-neutral-400 mb-4">Take all primes with HIGHEST power.</p>
@@ -175,25 +158,25 @@ export default function HCFLCMContent() {
             </ConceptSection>
 
             {/* CONCEPT 5: SPECIAL CASES */}
-            <ConceptSection id="special" title="Special Cases & Shortcuts" icon="💡">
+            <ConceptSection id="special" title="Special Cases & Shortcuts">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-indigo-400 font-bold mb-2">Co-prime Numbers</h4>
+                        <h4 className="text-amber-400 font-bold mb-2">Co-prime Numbers</h4>
                         <p className="text-sm text-neutral-400">Numbers with HCF = 1</p>
                         <p className="text-xs text-neutral-500 mt-1">Example: 8 and 15 (no common factor)</p>
                         <p className="text-xs text-amber-400 mt-1">LCM = Product = 8 × 15 = 120</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-indigo-400 font-bold mb-2">Consecutive Numbers</h4>
+                        <h4 className="text-amber-400 font-bold mb-2">Consecutive Numbers</h4>
                         <p className="text-sm text-neutral-400">Always co-prime!</p>
                         <p className="text-xs text-neutral-500 mt-1">Example: 7 and 8 → HCF = 1</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-indigo-400 font-bold mb-2">HCF of Fractions</h4>
+                        <h4 className="text-amber-400 font-bold mb-2">HCF of Fractions</h4>
                         <MathText>{`\\frac{HCF(num)}{LCM(den)}`}</MathText>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-indigo-400 font-bold mb-2">LCM of Fractions</h4>
+                        <h4 className="text-amber-400 font-bold mb-2">LCM of Fractions</h4>
                         <MathText>{`\\frac{LCM(num)}{HCF(den)}`}</MathText>
                     </div>
                 </div>
@@ -228,6 +211,6 @@ export default function HCFLCMContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

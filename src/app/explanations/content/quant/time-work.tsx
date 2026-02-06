@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -11,40 +10,32 @@ import {
     CheckUnderstanding,
     CheatSheet
 } from '@/components/explanations';
+import {
+    CancelIcon,
+    CheckIcon,
+    WarningIcon,
+    LightbulbIcon,
+    WidgetsIcon,
+    WaterIcon,
+    RemoveCircleIcon,
+    RemoveIcon,
+    AddIcon
+} from '@/components/icons';
 
 export default function TimeWorkContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-900/40 via-neutral-900 to-black" />
-
-                {/* Animated gear */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[10rem] opacity-20" style={{ animation: 'spin 10s linear infinite' }}>⚙️</div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-orange-500/20 text-orange-500 text-xs font-bold uppercase tracking-widest mb-2 border border-orange-500/20">
-                        High Weightage Topic
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Time and Work</h1>
-                    <p className="text-neutral-400 text-lg">Master the LCM method — never deal with ugly fractions again!</p>
-                </div>
-            </div>
-
-            {/* WHY THIS MATTERS */}
-            <ConceptSection id="why" title="Why Time & Work Questions Feel Hard" icon="🤔">
-                <div className="bg-gradient-to-r from-red-900/20 to-transparent p-6 rounded-xl border-l-4 border-red-500 mb-6">
+        <>
+            <ConceptSection id="why" title="Why Time & Work Questions Feel Hard">
+                <div className="bg-gradient-to-r from-amber-900/20 to-transparent p-6 rounded-xl border-l-4 border-amber-500 mb-6">
                     <p className="text-lg">
                         <strong>The Problem:</strong> Schools teach us to assume Total Work = 1, which leads to
-                        <span className="text-red-400"> ugly fractions and slow calculations!</span>
+                        <span className="text-amber-400"> ugly fractions and slow calculations!</span>
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-5 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold mb-3">❌ The Old Way (Slow)</h4>
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl hover:border-red-500/30 transition-all">
+                        <h4 className="text-red-400 font-bold mb-3 flex items-center gap-2"><CancelIcon className="text-red-400" /> The Old Way (Slow)</h4>
                         <p className="text-sm text-neutral-300 mb-2">A does work in 10 days, B in 15 days...</p>
                         <p className="text-sm text-neutral-400">
                             A's 1 day work = 1/10<br />
@@ -55,8 +46,8 @@ export default function TimeWorkContent() {
                         <p className="text-red-400 text-xs mt-2">Too many fractions! 😫</p>
                     </div>
 
-                    <div className="p-5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl">
-                        <h4 className="text-emerald-400 font-bold mb-3">✓ The LCM Way (Fast)</h4>
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl hover:border-emerald-500/30 transition-all">
+                        <h4 className="text-emerald-400 font-bold mb-3 flex items-center gap-2"><CheckIcon className="text-emerald-400" /> The LCM Way (Fast)</h4>
                         <p className="text-sm text-neutral-300 mb-2">Total Work = LCM(10, 15) = 30 units</p>
                         <p className="text-sm text-neutral-400">
                             A's efficiency = 30/10 = 3 units/day<br />
@@ -70,22 +61,22 @@ export default function TimeWorkContent() {
             </ConceptSection>
 
             {/* THE LCM METHOD */}
-            <ConceptSection id="lcm" title="The LCM Method — Your Secret Weapon" icon="🍫">
-                <div className="bg-gradient-to-r from-orange-900/20 to-transparent p-6 rounded-xl border-l-4 border-orange-500 mb-6">
-                    <h4 className="text-orange-400 font-bold mb-3">🍫 The Chocolate Analogy</h4>
+            <ConceptSection id="lcm" title="The LCM Method — Your Secret Weapon">
+                <div className="bg-gradient-to-r from-amber-900/20 to-transparent p-6 rounded-xl border-l-4 border-amber-500 mb-6">
+                    <h4 className="text-amber-400 font-bold mb-3 flex items-center gap-2"><WidgetsIcon /> The Chocolate Analogy</h4>
                     <p className="text-lg">
                         Think of "Work" as <strong>eating chocolates!</strong><br />
                         If A takes 10 days and B takes 15 days to eat all chocolates,
-                        how many chocolates should we have? <span className="text-orange-400">LCM = 30 chocolates!</span>
+                        how many chocolates should we have? <span className="text-amber-400">LCM = 30 chocolates!</span>
                     </p>
                 </div>
 
-                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-orange-500/30">
-                    <h4 className="text-orange-400 font-bold mb-6 text-center text-lg">The 4-Step Algorithm</h4>
+                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-amber-500/30">
+                    <h4 className="text-amber-400 font-bold mb-6 text-center text-lg">The 4-Step Algorithm</h4>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex gap-4 items-start p-4 bg-black/50 rounded-lg">
-                            <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 font-bold shrink-0">1</div>
+                            <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold shrink-0">1</div>
                             <div>
                                 <h5 className="font-bold text-white">Find Total Work</h5>
                                 <p className="text-sm text-neutral-400">= LCM of all given days</p>
@@ -93,7 +84,7 @@ export default function TimeWorkContent() {
                         </div>
 
                         <div className="flex gap-4 items-start p-4 bg-black/50 rounded-lg">
-                            <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 font-bold shrink-0">2</div>
+                            <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold shrink-0">2</div>
                             <div>
                                 <h5 className="font-bold text-white">Find Each Efficiency</h5>
                                 <p className="text-sm text-neutral-400">= Total Work ÷ Days</p>
@@ -101,7 +92,7 @@ export default function TimeWorkContent() {
                         </div>
 
                         <div className="flex gap-4 items-start p-4 bg-black/50 rounded-lg">
-                            <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 font-bold shrink-0">3</div>
+                            <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold shrink-0">3</div>
                             <div>
                                 <h5 className="font-bold text-white">Combine Efficiencies</h5>
                                 <p className="text-sm text-neutral-400">Add if working together</p>
@@ -109,7 +100,7 @@ export default function TimeWorkContent() {
                         </div>
 
                         <div className="flex gap-4 items-start p-4 bg-black/50 rounded-lg">
-                            <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 font-bold shrink-0">4</div>
+                            <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold shrink-0">4</div>
                             <div>
                                 <h5 className="font-bold text-white">Find Time</h5>
                                 <p className="text-sm text-neutral-400">= Total Work ÷ Combined Efficiency</p>
@@ -120,7 +111,7 @@ export default function TimeWorkContent() {
 
                 {/* Visual example */}
                 <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <h4 className="text-orange-400 font-bold mb-4 text-center">Visual: A (10 days) + B (15 days)</h4>
+                    <h4 className="text-amber-400 font-bold mb-4 text-center">Visual: A (10 days) + B (15 days)</h4>
 
                     <div className="flex flex-col items-center gap-4">
                         {/* Total work bar */}
@@ -128,7 +119,7 @@ export default function TimeWorkContent() {
                             <p className="text-xs text-neutral-500 mb-1 text-center">Total Work = LCM(10,15) = 30 units</p>
                             <div className="h-8 bg-neutral-800 rounded-lg overflow-hidden flex">
                                 {[...Array(30)].map((_, i) => (
-                                    <div key={i} className="flex-1 border-r border-neutral-700 last:border-r-0 bg-orange-500/20" />
+                                    <div key={i} className="flex-1 border-r border-neutral-700 last:border-r-0 bg-amber-500/20" />
                                 ))}
                             </div>
                         </div>
@@ -186,7 +177,7 @@ export default function TimeWorkContent() {
             </ConceptSection>
 
             {/* NEGATIVE EFFICIENCY - PIPES */}
-            <ConceptSection id="pipes" title="Pipes & Cisterns — Negative Work" icon="🚰">
+            <ConceptSection id="pipes" title="Pipes & Cisterns — Negative Work">
                 <p className="mb-4">
                     When a <strong>pipe fills</strong> a tank, it does <span className="text-emerald-400">positive work</span>.
                     When a <strong>leak drains</strong> a tank, it does <span className="text-red-400">negative work</span>!
@@ -194,17 +185,17 @@ export default function TimeWorkContent() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="p-5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-center">
-                        <div className="text-4xl mb-2">🚿</div>
+                        <div className="text-4xl mb-2 flex justify-center"><WaterIcon className="text-emerald-400" fontSize="large" /></div>
                         <h4 className="text-emerald-400 font-bold mb-2">Inlet Pipe</h4>
                         <p className="text-sm text-neutral-300">Fills the tank</p>
-                        <p className="text-emerald-400 font-bold mt-2">+ Efficiency</p>
+                        <p className="text-emerald-400 font-bold mt-2 flex items-center justify-center gap-1"><AddIcon fontSize="small" /> Efficiency</p>
                     </div>
 
                     <div className="p-5 bg-red-500/10 border border-red-500/30 rounded-xl text-center">
-                        <div className="text-4xl mb-2">🕳️</div>
+                        <div className="text-4xl mb-2 flex justify-center"><RemoveCircleIcon className="text-red-400" fontSize="large" /></div>
                         <h4 className="text-red-400 font-bold mb-2">Outlet Pipe / Leak</h4>
                         <p className="text-sm text-neutral-300">Empties the tank</p>
-                        <p className="text-red-400 font-bold mt-2">− Efficiency</p>
+                        <p className="text-red-400 font-bold mt-2 flex items-center justify-center gap-1"><RemoveIcon fontSize="small" /> Efficiency</p>
                     </div>
                 </div>
 
@@ -246,7 +237,7 @@ export default function TimeWorkContent() {
             </ConceptSection>
 
             {/* MDH FORMULA */}
-            <ConceptSection id="mdh" title="The MDH Formula — For Groups" icon="👷">
+            <ConceptSection id="mdh" title="The MDH Formula — For Groups">
                 <p className="mb-4">
                     When dealing with groups (like "10 men" or "5 machines"), use the Chain Rule!
                 </p>
@@ -305,7 +296,7 @@ export default function TimeWorkContent() {
             </ConceptSection>
 
             {/* EFFICIENCY RATIOS */}
-            <ConceptSection id="efficiency" title="Efficiency Ratio Trick" icon="⚡">
+            <ConceptSection id="efficiency" title="Efficiency Ratio Trick">
                 <div className="bg-gradient-to-r from-purple-900/20 to-transparent p-6 rounded-xl border-l-4 border-purple-500 mb-6">
                     <p className="text-2xl font-bold text-purple-400 text-center">
                         Efficiency ∝ 1/Time
@@ -357,7 +348,7 @@ export default function TimeWorkContent() {
             </ConceptSection>
 
             {/* ALTERNATE DAY / LEAVING PROBLEMS */}
-            <ConceptSection id="alternate" title="Special Cases" icon="📆">
+            <ConceptSection id="alternate" title="Special Cases">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-blue-500/30">
                         <h4 className="text-blue-400 font-bold mb-3">📆 Alternate Day Working</h4>
@@ -405,10 +396,10 @@ export default function TimeWorkContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Adding Times Instead of Efficiencies</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CancelIcon className="text-red-400" /> Adding Times Instead of Efficiencies</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             A takes 10 days, B takes 15 days → Together is NOT 25 days!
                             Add efficiencies, not times.
@@ -416,21 +407,21 @@ export default function TimeWorkContent() {
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Forgetting Negative Efficiency for Leaks</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CancelIcon className="text-red-400" /> Forgetting Negative Efficiency for Leaks</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Outlet pipes and leaks do NEGATIVE work. Subtract their efficiency!
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Mixing Up Efficiency and Time Ratios</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CancelIcon className="text-red-400" /> Mixing Up Efficiency and Time Ratios</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             They are INVERSE! High efficiency = Less time.
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Using Fractions Instead of LCM</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CancelIcon className="text-red-400" /> Using Fractions Instead of LCM</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Always use LCM method — it's faster and less error-prone!
                         </p>
@@ -454,6 +445,6 @@ export default function TimeWorkContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

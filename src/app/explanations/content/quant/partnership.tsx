@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function PartnershipContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">🤝</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-500 text-xs font-bold uppercase tracking-widest mb-2 border border-emerald-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Partnership</h1>
-                    <p className="text-neutral-400 text-lg">Money × Time = Profit. Simple.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: PROFIT RATIO */}
-            <ConceptSection id="basic" title="The Golden Formula" icon="💰">
+        <>
+            <ConceptSection id="basic" title="The Golden Formula">
                 <FormulaBox>
                     <MathText>{`\\text{Profit Ratio} = (\\text{Capital}_A \\times \\text{Time}_A) : (\\text{Capital}_B \\times \\text{Time}_B)`}</MathText>
                 </FormulaBox>
@@ -63,7 +46,7 @@ export default function PartnershipContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: ADDITION & WITHDRAWAL */}
-            <ConceptSection id="change" title="Investment Changes" icon="🔄">
+            <ConceptSection id="change" title="Investment Changes">
                 <p>
                     If investment changes after X months, split the calculation.
                 </p>
@@ -92,7 +75,7 @@ export default function PartnershipContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: WORKING PARTNER */}
-            <ConceptSection id="types" title="Working vs Sleeping Partner" icon="👷">
+            <ConceptSection id="types" title="Working vs Sleeping Partner">
                 <div className="space-y-4 my-6">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-emerald-500/30">
                         <h4 className="text-emerald-400 font-bold mb-2">Scenario</h4>
@@ -112,7 +95,7 @@ export default function PartnershipContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: FINDING TIME/CAPITAL */}
-            <ConceptSection id="finding" title="Finding Missing Capital/Time" icon="🔍">
+            <ConceptSection id="finding" title="Finding Missing Capital/Time">
                 <p>
                     Use the formula in reverse: <MathText>{`$\\frac{C_1 T_1}{C_2 T_2} = \\frac{P_1}{P_2}$`}</MathText>
                 </p>
@@ -146,6 +129,6 @@ export default function PartnershipContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

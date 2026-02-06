@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -11,46 +10,29 @@ import {
     CheckUnderstanding,
     CheatSheet
 } from '@/components/explanations';
+import { WarningIcon } from '@/components/icons';
 
 export default function SimpleInterestContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-neutral-900 to-black" />
-
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[8rem] opacity-20">🏦</div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-500 text-xs font-bold uppercase tracking-widest mb-2 border border-blue-500/20">
-                        Financial Mathematics
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Simple Interest</h1>
-                    <p className="text-neutral-400 text-lg">Linear money growth — the bank gives you the same interest every year!</p>
-                </div>
-            </div>
-
-            {/* WHY THIS MATTERS */}
-            <ConceptSection id="why" title="Understanding Interest — The Rental Analogy" icon="🏠">
-                <div className="bg-gradient-to-r from-blue-900/20 to-transparent p-6 rounded-xl border-l-4 border-blue-500 mb-6">
+        <>
+            <ConceptSection id="why" title="Understanding Interest — The Rental Analogy">
+                <div className="bg-gradient-to-r from-amber-900/20 to-transparent p-6 rounded-xl border-l-4 border-amber-500 mb-6">
                     <p className="text-lg">
                         <strong>Think of it this way:</strong> When you rent a house, you pay rent every month.
-                        When you "rent" money to a bank, <span className="text-blue-400">interest is the rent they pay you!</span>
+                        When you "rent" money to a bank, <span className="text-amber-400">interest is the rent they pay you!</span>
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-blue-400 font-bold mb-3">When YOU Deposit 💰</h4>
+                        <h4 className="text-amber-400 font-bold mb-3">When YOU Deposit 💰</h4>
                         <p className="text-sm text-neutral-300">
                             You're lending money to the bank.<br />
                             Bank pays YOU interest (rent) for using your money.
                         </p>
                     </div>
                     <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-red-400 font-bold mb-3">When YOU Borrow 🏦</h4>
+                        <h4 className="text-orange-400 font-bold mb-3">When YOU Borrow 🏦</h4>
                         <p className="text-sm text-neutral-300">
                             Bank lends money to you.<br />
                             YOU pay the bank interest for using their money.
@@ -60,15 +42,15 @@ export default function SimpleInterestContent() {
             </ConceptSection>
 
             {/* THE TERMS */}
-            <ConceptSection id="terms" title="The 4 Key Terms" icon="📖">
+            <ConceptSection id="terms" title="The 4 Key Terms">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8">
-                    <div className="p-5 bg-blue-500/10 border border-blue-500/30 rounded-xl text-center">
-                        <div className="text-4xl font-black text-blue-400 mb-2">P</div>
+                    <div className="p-5 bg-amber-500/10 border border-amber-500/30 rounded-xl text-center">
+                        <div className="text-4xl font-black text-amber-400 mb-2">P</div>
                         <p className="text-neutral-300 font-bold">Principal</p>
                         <p className="text-xs text-neutral-500 mt-1">Initial amount deposited/borrowed</p>
                     </div>
-                    <div className="p-5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-center">
-                        <div className="text-4xl font-black text-emerald-400 mb-2">R</div>
+                    <div className="p-5 bg-orange-500/10 border border-orange-500/30 rounded-xl text-center">
+                        <div className="text-4xl font-black text-orange-400 mb-2">R</div>
                         <p className="text-neutral-300 font-bold">Rate</p>
                         <p className="text-xs text-neutral-500 mt-1">Interest % per year</p>
                     </div>
@@ -77,8 +59,8 @@ export default function SimpleInterestContent() {
                         <p className="text-neutral-300 font-bold">Time</p>
                         <p className="text-xs text-neutral-500 mt-1">Number of years</p>
                     </div>
-                    <div className="p-5 bg-purple-500/10 border border-purple-500/30 rounded-xl text-center">
-                        <div className="text-4xl font-black text-purple-400 mb-2">A</div>
+                    <div className="p-5 bg-orange-500/10 border border-orange-500/30 rounded-xl text-center">
+                        <div className="text-4xl font-black text-orange-400 mb-2">A</div>
                         <p className="text-neutral-300 font-bold">Amount</p>
                         <p className="text-xs text-neutral-500 mt-1">P + Interest = Final money</p>
                     </div>
@@ -86,7 +68,7 @@ export default function SimpleInterestContent() {
             </ConceptSection>
 
             {/* THE FORMULA */}
-            <ConceptSection id="formula" title="The Simple Interest Formula" icon="📐">
+            <ConceptSection id="formula" title="The Simple Interest Formula">
                 <FormulaBox title="The Master Formula" variant="primary">
                     <div className="text-center">
                         <MathText className="text-3xl">{`SI = \\frac{P \\times R \\times T}{100}`}</MathText>
@@ -98,14 +80,15 @@ export default function SimpleInterestContent() {
                 </FormulaBox>
 
                 {/* Visual: Linear growth */}
-                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-blue-500/30">
-                    <h4 className="text-blue-400 font-bold mb-4 text-center">Visual: SI Growth (P=₹1000, R=10%)</h4>
+                {/* Visual: Linear growth */}
+                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-amber-500/30">
+                    <h4 className="text-amber-400 font-bold mb-4 text-center">Visual: SI Growth (P=₹1000, R=10%)</h4>
 
                     <div className="flex items-end justify-center gap-4 h-48">
                         {[0, 1, 2, 3, 4, 5].map((year) => (
                             <div key={year} className="flex flex-col items-center">
                                 <div
-                                    className="w-12 bg-gradient-to-t from-blue-600 to-blue-400 rounded-t-lg"
+                                    className="w-12 bg-gradient-to-t from-amber-600 to-amber-400 rounded-t-lg"
                                     style={{ height: `${(1 + year * 0.1) * 100}px` }}
                                 >
                                     <div className="text-xs text-center pt-2 text-white font-bold">
@@ -117,7 +100,7 @@ export default function SimpleInterestContent() {
                         ))}
                     </div>
                     <p className="text-center text-neutral-400 text-sm mt-4">
-                        Notice: Same ₹100 increase each year — that's <strong className="text-blue-400">SIMPLE</strong> interest!
+                        Notice: Same ₹100 increase each year — that's <strong className="text-amber-400">SIMPLE</strong> interest!
                     </p>
                 </div>
 
@@ -150,7 +133,7 @@ export default function SimpleInterestContent() {
             </ConceptSection>
 
             {/* DERIVED FORMULAS */}
-            <ConceptSection id="derived" title="Finding P, R, or T (When SI is Given)" icon="🔄">
+            <ConceptSection id="derived" title="Finding P, R, or T (When SI is Given)">
                 <p className="mb-6">
                     Rearrange the SI formula to find any unknown variable!
                 </p>
@@ -190,8 +173,8 @@ export default function SimpleInterestContent() {
             </ConceptSection>
 
             {/* DOUBLING TIME */}
-            <ConceptSection id="doubling" title="Doubling / Tripling Questions" icon="📈">
-                <div className="bg-gradient-to-r from-emerald-900/20 to-transparent p-6 rounded-xl border-l-4 border-emerald-500 mb-6">
+            <ConceptSection id="doubling" title="Doubling / Tripling Questions">
+                <div className="bg-gradient-to-r from-amber-900/20 to-transparent p-6 rounded-xl border-l-4 border-amber-500 mb-6">
                     <p className="text-lg">
                         <strong>The Trick:</strong> "Sum doubles" means Amount = 2P, so Interest = P (100% of Principal)
                     </p>
@@ -246,7 +229,7 @@ export default function SimpleInterestContent() {
             </ConceptSection>
 
             {/* MIXED QUESTIONS */}
-            <ConceptSection id="mixed" title="Mixed Rate / Split Principal" icon="🔀">
+            <ConceptSection id="mixed" title="Mixed Rate / Split Principal">
                 <p className="mb-4">
                     Sometimes a sum is divided into parts at different rates, or invested for different times.
                 </p>
@@ -285,7 +268,7 @@ export default function SimpleInterestContent() {
             </ConceptSection>
 
             {/* INSTALLMENT */}
-            <ConceptSection id="installment" title="Equal Installment Problems" icon="📅">
+            <ConceptSection id="installment" title="Equal Installment Problems">
                 <p className="mb-4">
                     A loan is repaid in equal yearly installments including interest. This is a common SSC question!
                 </p>
@@ -320,31 +303,31 @@ export default function SimpleInterestContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Confusing SI with CI</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Confusing SI with CI</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             In SI, interest is always on ORIGINAL principal. In CI, it's on accumulated amount.
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Wrong Time Unit</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Wrong Time Unit</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             If rate is per year but time is in months, convert! 6 months = 0.5 years.
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Forgetting (n−1) in Multiplication</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Forgetting (n−1) in Multiplication</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             "Doubles" means n=2, not n=1. Interest = (n−1) × Principal.
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Confusing Amount with Interest</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Confusing Amount with Interest</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Amount = P + SI. If asked for SI, don't give Amount!
                         </p>
@@ -368,6 +351,6 @@ export default function SimpleInterestContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

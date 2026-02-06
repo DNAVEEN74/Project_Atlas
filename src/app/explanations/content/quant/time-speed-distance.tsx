@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -11,28 +10,27 @@ import {
     CheckUnderstanding,
     CheatSheet
 } from '@/components/explanations';
+import {
+    TrainIcon,
+    DirectionsCarIcon,
+    DirectionsRunIcon,
+    WaterIcon,
+    CancelIcon,
+    CheckIcon,
+    WarningIcon,
+    LightbulbIcon,
+    ArrowForwardIcon,
+    ArrowBackIcon,
+    TrendingUpIcon,
+    TrendingDownIcon,
+    LoopIcon
+} from '@/components/icons';
 
 export default function TimeSpeedDistanceContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">🚄</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-500 text-xs font-bold uppercase tracking-widest mb-2 border border-cyan-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Time, Speed & Distance</h1>
-                    <p className="text-neutral-400 text-lg">Master the D = S × T triangle — and dominate train/boat problems!</p>
-                </div>
-            </div>
-
-            {/* THE CORE FORMULA */}
-            <ConceptSection id="basics" title="The Triangle of Motion" icon="⚡">
-                <div className="bg-gradient-to-r from-cyan-900/20 to-transparent p-6 rounded-xl border-l-4 border-cyan-500 mb-6">
+        <>
+            <ConceptSection id="basics" title="The Triangle of Motion">
+                <div className="bg-gradient-to-r from-amber-900/20 to-transparent p-6 rounded-xl border-l-4 border-amber-500 mb-6">
                     <p className="text-lg">
                         <strong>One formula rules them all:</strong> Distance = Speed × Time.
                         Know how to rearrange it!
@@ -42,12 +40,12 @@ export default function TimeSpeedDistanceContent() {
                 {/* Visual Triangle */}
                 <div className="flex justify-center my-8">
                     <div className="relative w-52 h-52">
-                        <div className="absolute inset-0 border-2 border-cyan-500 rounded-full flex items-center justify-center bg-cyan-500/5">
+                        <div className="absolute inset-0 border-2 border-amber-500 rounded-full flex items-center justify-center bg-amber-500/5">
                             <div className="text-center">
                                 <div className="text-4xl font-bold text-white mb-2">D</div>
                                 <div className="w-32 h-0.5 bg-neutral-600 mx-auto mb-2" />
                                 <div className="flex justify-around w-full px-4">
-                                    <span className="text-3xl font-bold text-cyan-400">S</span>
+                                    <span className="text-3xl font-bold text-amber-400">S</span>
                                     <span className="text-2xl text-neutral-600">×</span>
                                     <span className="text-3xl font-bold text-amber-400">T</span>
                                 </div>
@@ -83,19 +81,19 @@ export default function TimeSpeedDistanceContent() {
             </ConceptSection>
 
             {/* UNIT CONVERSIONS */}
-            <ConceptSection id="units" title="Unit Conversion — Must Know!" icon="🔄">
+            <ConceptSection id="units" title="Unit Conversion — Must Know!">
                 <p className="mb-4">
                     Most questions mix km/h and m/s. Master these conversions!
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-5 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-center">
-                        <h4 className="text-cyan-400 font-bold mb-3">km/h → m/s</h4>
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl text-center hover:border-amber-500/50 transition-all">
+                        <h4 className="text-amber-400 font-bold mb-3 flex items-center justify-center gap-2"><DirectionsCarIcon /> km/h → m/s</h4>
                         <MathText className="text-2xl">{`\\times \\frac{5}{18}`}</MathText>
                         <p className="text-sm text-neutral-400 mt-3">Example: 36 km/h = 36 × 5/18 = 10 m/s</p>
                     </div>
-                    <div className="p-5 bg-amber-500/10 border border-amber-500/30 rounded-xl text-center">
-                        <h4 className="text-amber-400 font-bold mb-3">m/s → km/h</h4>
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl text-center hover:border-amber-500/50 transition-all">
+                        <h4 className="text-amber-400 font-bold mb-3 flex items-center justify-center gap-2"><DirectionsRunIcon /> m/s → km/h</h4>
                         <MathText className="text-2xl">{`\\times \\frac{18}{5}`}</MathText>
                         <p className="text-sm text-neutral-400 mt-3">Example: 10 m/s = 10 × 18/5 = 36 km/h</p>
                     </div>
@@ -119,21 +117,21 @@ export default function TimeSpeedDistanceContent() {
             </ConceptSection>
 
             {/* RELATIVE SPEED */}
-            <ConceptSection id="relative" title="Relative Speed — The Key to Train Problems" icon="🚄">
+            <ConceptSection id="relative" title="Relative Speed — The Key to Train Problems">
                 <p className="mb-4">
                     When two objects move, their <strong>relative speed</strong> determines how fast they approach or separate.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-center">
-                        <h4 className="text-emerald-400 font-bold mb-3">Opposite Directions</h4>
-                        <div className="text-2xl mb-2">← A &nbsp;&nbsp;&nbsp; B →</div>
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl text-center hover:border-amber-500/50 transition-all">
+                        <h4 className="text-amber-400 font-bold mb-3 flex items-center justify-center gap-2"><ArrowBackIcon /><ArrowForwardIcon /> Opposite Directions</h4>
+                        <div className="text-2xl mb-2 flex justify-center items-center gap-4"><DirectionsCarIcon /> <DirectionsCarIcon /></div>
                         <MathText className="text-xl">{`S_{rel} = S_1 + S_2`}</MathText>
                         <p className="text-sm text-neutral-400 mt-3">They approach each other faster!</p>
                     </div>
-                    <div className="p-5 bg-amber-500/10 border border-amber-500/30 rounded-xl text-center">
-                        <h4 className="text-amber-400 font-bold mb-3">Same Direction</h4>
-                        <div className="text-2xl mb-2">A → &nbsp;&nbsp;&nbsp; B →</div>
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl text-center hover:border-amber-500/50 transition-all">
+                        <h4 className="text-amber-400 font-bold mb-3 flex items-center justify-center gap-2"><ArrowForwardIcon /><ArrowForwardIcon /> Same Direction</h4>
+                        <div className="text-2xl mb-2 flex justify-center items-center gap-4"><DirectionsCarIcon /> <DirectionsCarIcon /></div>
                         <MathText className="text-xl">{`S_{rel} = |S_1 - S_2|`}</MathText>
                         <p className="text-sm text-neutral-400 mt-3">The gap changes slowly</p>
                     </div>
@@ -156,7 +154,7 @@ export default function TimeSpeedDistanceContent() {
             </ConceptSection>
 
             {/* TRAIN PROBLEMS */}
-            <ConceptSection id="trains" title="Train Problems — Distance Covered" icon="🚆">
+            <ConceptSection id="trains" title="Train Problems — Distance Covered">
                 <p className="mb-4">
                     The key insight: When a train crosses something, what's the <strong>TOTAL distance</strong> it covers?
                 </p>
@@ -228,19 +226,19 @@ export default function TimeSpeedDistanceContent() {
             </ConceptSection>
 
             {/* BOATS & STREAMS */}
-            <ConceptSection id="boats" title="Boats & Streams" icon="🚤">
+            <ConceptSection id="boats" title="Boats & Streams">
                 <p className="mb-4">
                     Same concept as relative speed, but with water current!
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-center">
-                        <h4 className="text-emerald-400 font-bold mb-3">⬇️ Downstream</h4>
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl text-center hover:border-amber-500/50 transition-all">
+                        <h4 className="text-amber-400 font-bold mb-3 flex items-center justify-center gap-2"><WaterIcon /> Downstream</h4>
                         <p className="text-sm text-neutral-300 mb-2">Boat + Current (same direction)</p>
                         <MathText className="text-xl">{`S_{down} = B + C`}</MathText>
                     </div>
-                    <div className="p-5 bg-red-500/10 border border-red-500/30 rounded-xl text-center">
-                        <h4 className="text-red-400 font-bold mb-3">⬆️ Upstream</h4>
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl text-center hover:border-amber-500/50 transition-all">
+                        <h4 className="text-amber-400 font-bold mb-3 flex items-center justify-center gap-2"><WaterIcon /> Upstream</h4>
                         <p className="text-sm text-neutral-300 mb-2">Boat − Current (opposite direction)</p>
                         <MathText className="text-xl">{`S_{up} = B - C`}</MathText>
                     </div>
@@ -276,31 +274,31 @@ export default function TimeSpeedDistanceContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Forgetting Unit Conversion</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CancelIcon className="text-red-400" /> Forgetting Unit Conversion</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             If speed is in km/h and length in meters, you MUST convert before dividing!
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Wrong Distance for Train Problems</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CancelIcon className="text-red-400" /> Wrong Distance for Train Problems</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Crossing a platform = Train + Platform. Crossing a pole = Train only.
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Adding Speeds When Same Direction</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CancelIcon className="text-red-400" /> Adding Speeds When Same Direction</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Same direction = SUBTRACT speeds. Opposite direction = ADD speeds.
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Average Speed ≠ Simple Average</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CancelIcon className="text-red-400" /> Average Speed ≠ Simple Average</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             For equal distances: Use 2S₁S₂/(S₁+S₂), not (S₁+S₂)/2!
                         </p>
@@ -326,6 +324,6 @@ export default function TimeSpeedDistanceContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

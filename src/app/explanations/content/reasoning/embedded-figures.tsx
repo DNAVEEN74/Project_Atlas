@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function EmbeddedFiguresContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">🔲</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-violet-500/20 text-violet-500 text-xs font-bold uppercase tracking-widest mb-2 border border-violet-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Embedded Figures</h1>
-                    <p className="text-neutral-400 text-lg">Spot the hidden shape in the chaos.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: THE STRATEGY */}
-            <ConceptSection id="strategy" title="Strategic Approach" icon="🎯">
+        <>
+            <ConceptSection id="strategy" title="Strategic Approach">
                 <p>
                     A simple shape (X) is hidden inside a complex geometric pattern.
                 </p>
@@ -57,7 +40,7 @@ export default function EmbeddedFiguresContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: ROTATION LOGIC */}
-            <ConceptSection id="rotation" title="Rotation Rules" icon="🔄">
+            <ConceptSection id="rotation" title="Rotation Rules">
                 <p>
                     SSC CGL instructions usually say "Rotation is NOT allowed".
                 </p>
@@ -76,7 +59,7 @@ export default function EmbeddedFiguresContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: COMPLEXITY TRAPS */}
-            <ConceptSection id="traps" title="Confusion Traps" icon="🕸️">
+            <ConceptSection id="traps" title="Confusion Traps">
                 <p>Exam figures are designed to mislead.</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
@@ -108,6 +91,6 @@ export default function EmbeddedFiguresContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

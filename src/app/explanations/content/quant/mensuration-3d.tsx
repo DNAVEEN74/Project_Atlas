@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function Mensuration3DContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">🧊</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-violet-500/20 text-violet-500 text-xs font-bold uppercase tracking-widest mb-2 border border-violet-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Mensuration 3D</h1>
-                    <p className="text-neutral-400 text-lg">Volume, CSA, TSA — conquer all 3D solids!</p>
-                </div>
-            </div>
-
-            {/* KEY CONCEPT */}
-            <ConceptSection id="basics" title="Volume vs Surface Area" icon="📦">
+        <>
+            <ConceptSection id="basics" title="Volume vs Surface Area">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="p-5 bg-violet-500/10 border border-violet-500/30 rounded-xl text-center">
                         <h4 className="text-violet-400 font-bold mb-3">Volume</h4>
@@ -49,7 +32,7 @@ export default function Mensuration3DContent() {
             </ConceptSection>
 
             {/* CUBE & CUBOID */}
-            <ConceptSection id="cube" title="Cube & Cuboid" icon="🟦">
+            <ConceptSection id="cube" title="Cube & Cuboid">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-violet-500/30">
                         <h4 className="text-violet-400 font-bold mb-4 text-center text-lg">Cube (side = a)</h4>
@@ -111,7 +94,7 @@ export default function Mensuration3DContent() {
             </ConceptSection>
 
             {/* CYLINDER */}
-            <ConceptSection id="cylinder" title="Cylinder" icon="🔵">
+            <ConceptSection id="cylinder" title="Cylinder">
                 <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
                     <h4 className="text-cyan-400 font-bold mb-4 text-center">Cylinder (radius r, height h)</h4>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -149,7 +132,7 @@ export default function Mensuration3DContent() {
             </ConceptSection>
 
             {/* CONE */}
-            <ConceptSection id="cone" title="Cone" icon="🔺">
+            <ConceptSection id="cone" title="Cone">
                 <div className="bg-gradient-to-r from-orange-900/20 to-transparent p-6 rounded-xl border-l-4 border-orange-500 mb-6">
                     <p className="text-lg">
                         <strong>Key relationship:</strong> l² = r² + h² (slant height, radius, height form a right triangle)
@@ -190,7 +173,7 @@ export default function Mensuration3DContent() {
             </ConceptSection>
 
             {/* SPHERE & HEMISPHERE */}
-            <ConceptSection id="sphere" title="Sphere & Hemisphere" icon="🔴">
+            <ConceptSection id="sphere" title="Sphere & Hemisphere">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-red-500/30">
                         <h4 className="text-red-400 font-bold mb-4 text-center">Sphere (radius r)</h4>
@@ -241,7 +224,7 @@ export default function Mensuration3DContent() {
             </ConceptSection>
 
             {/* FRUSTUM */}
-            <ConceptSection id="frustum" title="Frustum of a Cone" icon="🪣">
+            <ConceptSection id="frustum" title="Frustum of a Cone">
                 <p className="mb-4">
                     A frustum is a cone with its top cut off — like a bucket!
                 </p>
@@ -263,7 +246,7 @@ export default function Mensuration3DContent() {
             </ConceptSection>
 
             {/* MELTING & RECASTING */}
-            <ConceptSection id="melting" title="Melting & Recasting Problems" icon="🔥">
+            <ConceptSection id="melting" title="Melting & Recasting Problems">
                 <div className="bg-gradient-to-r from-orange-900/20 to-transparent p-6 rounded-xl border-l-4 border-orange-500 mb-6">
                     <p className="text-lg">
                         <strong>Golden Rule:</strong> When a solid is melted and recast,
@@ -294,7 +277,7 @@ export default function Mensuration3DContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
                         <h4 className="text-red-400 font-bold">❌ Confusing CSA with TSA</h4>
@@ -337,6 +320,6 @@ export default function Mensuration3DContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

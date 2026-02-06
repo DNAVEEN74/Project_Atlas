@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -11,42 +10,16 @@ import {
     CheckUnderstanding,
     CheatSheet
 } from '@/components/explanations';
+import { CasinoIcon, ViewInArIcon, WidgetsIcon, KeyIcon, WarningIcon, CompareArrowsIcon } from '@/components/icons';
 
 export default function DiceCubeContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-900/40 via-neutral-900 to-black" />
-
-                {/* Animated dice */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div
-                        className="relative w-32 h-32 preserve-3d"
-                        style={{
-                            animation: 'spin3d 4s infinite linear',
-                        }}
-                    >
-                        {/* Dice face visualization */}
-                        <div className="text-[8rem] select-none opacity-30">🎲</div>
-                    </div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-red-500/20 text-red-500 text-xs font-bold uppercase tracking-widest mb-2 border border-red-500/20">
-                        Visual Reasoning
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Dice & Cube</h1>
-                    <p className="text-neutral-400 text-lg">Master opposite faces where you can't see both at once!</p>
-                </div>
-            </div>
-
-            {/* WHY THIS TOPIC */}
-            <ConceptSection id="why" title="Why Dice Questions Seem Confusing" icon="🤔">
-                <div className="bg-gradient-to-r from-red-900/20 to-transparent p-6 rounded-xl border-l-4 border-red-500 mb-6">
+        <>
+            <ConceptSection id="why" title="Why Dice Questions Seem Confusing">
+                <div className="bg-gradient-to-r from-violet-900/20 to-transparent p-6 rounded-xl border-l-4 border-violet-500 mb-6">
                     <p className="text-lg">
                         <strong>The Problem:</strong> When you see a dice, you can only see <strong>3 faces</strong> at a time.
-                        The question asks about the face you <span className="text-red-400">CAN'T see!</span>
+                        The question asks about the face you <span className="text-violet-400">CAN'T see!</span>
                     </p>
                 </div>
 
@@ -55,43 +28,43 @@ export default function DiceCubeContent() {
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <div className="text-3xl mb-2">🎲</div>
-                        <h4 className="text-red-400 font-bold">Standard Dice</h4>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center hover:border-violet-500/50 transition-all">
+                        <div className="text-3xl mb-2 flex justify-center"><CasinoIcon className="text-violet-400" fontSize="large" /></div>
+                        <h4 className="text-violet-400 font-bold">Standard Dice</h4>
                         <p className="text-xs text-neutral-400">Opposite faces sum to 7</p>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <div className="text-3xl mb-2">📦</div>
-                        <h4 className="text-red-400 font-bold">Unfolded Nets</h4>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center hover:border-violet-500/50 transition-all">
+                        <div className="text-3xl mb-2 flex justify-center"><ViewInArIcon className="text-violet-400" fontSize="large" /></div>
+                        <h4 className="text-violet-400 font-bold">Unfolded Nets</h4>
                         <p className="text-xs text-neutral-400">11 different patterns</p>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <div className="text-3xl mb-2">🧊</div>
-                        <h4 className="text-red-400 font-bold">Painted Cubes</h4>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center hover:border-violet-500/50 transition-all">
+                        <div className="text-3xl mb-2 flex justify-center"><WidgetsIcon className="text-violet-400" fontSize="large" /></div>
+                        <h4 className="text-violet-400 font-bold">Painted Cubes</h4>
                         <p className="text-xs text-neutral-400">Cut into smaller cubes</p>
                     </div>
                 </div>
             </ConceptSection>
 
             {/* STANDARD DICE */}
-            <ConceptSection id="standard" title="The Standard Dice — Rule #1" icon="🎲">
-                <div className="bg-gradient-to-r from-emerald-900/20 to-transparent p-6 rounded-xl border-l-4 border-emerald-500 mb-6">
-                    <p className="text-2xl font-bold text-emerald-400 text-center">
+            <ConceptSection id="standard" title="The Standard Dice — Rule #1">
+                <div className="bg-gradient-to-r from-violet-900/20 to-transparent p-6 rounded-xl border-l-4 border-violet-500 mb-6">
+                    <p className="text-2xl font-bold text-violet-400 text-center">
                         Opposite Faces ALWAYS Sum to 7
                     </p>
                     <p className="text-center text-neutral-400 mt-2">This is TRUE for EVERY standard dice in the world!</p>
                 </div>
 
                 {/* Visual opposite faces */}
-                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-red-500/30">
-                    <h4 className="text-red-400 font-bold mb-6 text-center text-lg">The Three Opposite Pairs</h4>
+                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                    <h4 className="text-violet-400 font-bold mb-6 text-center text-lg">The Three Opposite Pairs</h4>
                     <div className="grid grid-cols-3 gap-6 text-center">
                         <div className="p-6 bg-black/50 rounded-lg hover:bg-red-500/10 transition-all group">
                             <div className="flex justify-center items-center gap-4">
                                 <div className="w-16 h-16 bg-neutral-800 rounded-lg flex items-center justify-center text-3xl font-bold text-white group-hover:bg-red-500/30 transition-all">
                                     1
                                 </div>
-                                <span className="text-2xl text-red-400">↔</span>
+                                <span className="text-2xl text-violet-400"><CompareArrowsIcon /></span>
                                 <div className="w-16 h-16 bg-neutral-800 rounded-lg flex items-center justify-center text-3xl font-bold text-white group-hover:bg-red-500/30 transition-all">
                                     6
                                 </div>
@@ -103,7 +76,7 @@ export default function DiceCubeContent() {
                                 <div className="w-16 h-16 bg-neutral-800 rounded-lg flex items-center justify-center text-3xl font-bold text-white group-hover:bg-amber-500/30 transition-all">
                                     2
                                 </div>
-                                <span className="text-2xl text-amber-400">↔</span>
+                                <span className="text-2xl text-amber-400"><CompareArrowsIcon /></span>
                                 <div className="w-16 h-16 bg-neutral-800 rounded-lg flex items-center justify-center text-3xl font-bold text-white group-hover:bg-amber-500/30 transition-all">
                                     5
                                 </div>
@@ -115,7 +88,7 @@ export default function DiceCubeContent() {
                                 <div className="w-16 h-16 bg-neutral-800 rounded-lg flex items-center justify-center text-3xl font-bold text-white group-hover:bg-blue-500/30 transition-all">
                                     3
                                 </div>
-                                <span className="text-2xl text-blue-400">↔</span>
+                                <span className="text-2xl text-blue-400"><CompareArrowsIcon /></span>
                                 <div className="w-16 h-16 bg-neutral-800 rounded-lg flex items-center justify-center text-3xl font-bold text-white group-hover:bg-blue-500/30 transition-all">
                                     4
                                 </div>
@@ -154,14 +127,14 @@ export default function DiceCubeContent() {
             </ConceptSection>
 
             {/* NON-STANDARD DICE */}
-            <ConceptSection id="opposite" title="Finding Opposites (Non-Standard Dice)" icon="🔍">
+            <ConceptSection id="opposite" title="Finding Opposites (Non-Standard Dice)">
                 <p className="mb-4">
                     What if the dice is NOT standard? Or has letters/colors instead of numbers?
                     Then we need to use <strong>multiple views</strong> to find opposites.
                 </p>
 
                 <div className="bg-gradient-to-r from-purple-900/20 to-transparent p-6 rounded-xl border-l-4 border-purple-500 mb-6">
-                    <h4 className="text-purple-400 font-bold mb-3">🔑 The Golden Rule</h4>
+                    <h4 className="text-purple-400 font-bold mb-3 flex items-center gap-2"><KeyIcon /> The Golden Rule</h4>
                     <p className="text-lg">
                         If two faces are <strong>NEVER shown adjacent</strong> in any view, they are <span className="text-purple-400">OPPOSITE!</span>
                     </p>
@@ -219,7 +192,7 @@ export default function DiceCubeContent() {
             </ConceptSection>
 
             {/* UNFOLDED DICE */}
-            <ConceptSection id="unfolded" title="Unfolded Dice (Nets)" icon="📦">
+            <ConceptSection id="unfolded" title="Unfolded Dice (Nets)">
                 <p className="mb-4">
                     A dice "net" is what you get when you unfold a cube flat. There are <strong>11 different ways</strong> to unfold a cube!
                 </p>
@@ -372,7 +345,7 @@ export default function DiceCubeContent() {
             </ConceptSection>
 
             {/* PAINTED CUBE PROBLEMS */}
-            <ConceptSection id="painted" title="Painted Cube Problems" icon="🧊">
+            <ConceptSection id="painted" title="Painted Cube Problems">
                 <p className="mb-4">
                     A large cube is painted on ALL faces, then cut into smaller identical cubes.
                     <strong> How many smaller cubes have 0, 1, 2, or 3 painted faces?</strong>
@@ -522,31 +495,31 @@ export default function DiceCubeContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Assuming All Dice are Standard</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Assuming All Dice are Standard</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Only use the "sum = 7" rule when the question explicitly says "standard" or "ordinary" dice!
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Wrong Net Folding</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Wrong Net Folding</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Remember: In a net, adjacent squares become ADJACENT faces when folded, not opposite!
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Forgetting the (n−2) Factor</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Forgetting the (n−2) Factor</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             In painted cube problems, subtract 2 from n to exclude corners when counting edges and faces.
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Counting Corners in Edge Formula</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Counting Corners in Edge Formula</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Corners have 3 painted faces, edges have 2. Don't double count!
                         </p>
@@ -570,6 +543,6 @@ export default function DiceCubeContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

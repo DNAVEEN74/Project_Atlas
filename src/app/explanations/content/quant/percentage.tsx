@@ -3,7 +3,18 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
+    RocketLaunchIcon,
+    CancelIcon,
+    ShoppingCartIcon,
+    AccountBalanceIcon,
+    BarChartIcon,
+    BoltIcon,
+    PsychologyIcon,
+    WarningIcon,
+    SpeedIcon,
+    BookIcon
+} from '@/components/icons';
+import {
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,48 +25,14 @@ import {
 
 export default function PercentageContent() {
     return (
-        <LessonLayout>
-            {/* HERO SECTION */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl group">
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-900/40 via-neutral-900 to-black" />
-
-                {/* Animated percentage wheel */}
-                <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                    <div className="relative w-64 h-64">
-                        <div
-                            className="absolute inset-0 rounded-full border-[20px] border-amber-500/20"
-                            style={{ clipPath: 'polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 50% 0%)' }}
-                        />
-                        <div
-                            className="absolute inset-0 rounded-full border-[20px] border-amber-500/50 animate-spin"
-                            style={{
-                                clipPath: 'polygon(50% 50%, 50% 0%, 75% 0%, 100% 25%, 100% 50%)',
-                                animationDuration: '10s'
-                            }}
-                        />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="text-6xl font-black text-amber-500/30">%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-amber-500 text-xs font-bold uppercase tracking-widest mb-2 border border-amber-500/20">
-                        Phase 01: The Foundation
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Percentage</h1>
-                    <p className="text-neutral-400 text-lg">Master the "per 100" mindset — the key to unlocking ALL arithmetic!</p>
-                </div>
-            </div>
-
-            {/* WHY PERCENTAGE MATTERS */}
-            <ConceptSection id="why" title="Why Percentage is EVERYWHERE" icon="🌍">
-                <div className="bg-gradient-to-r from-amber-900/20 to-transparent p-6 rounded-xl border-l-4 border-amber-500 mb-6">
-                    <p className="text-lg">
-                        <strong>Imagine:</strong> A shop says "50% OFF!" and another says "₹500 discount on ₹1000!"
+        <>
+            <ConceptSection id="why" title="Why Percentage is EVERYWHERE">
+                <FormulaBox title="Imagine">
+                    <p>
+                        A shop says "50% OFF!" and another says "₹500 discount on ₹1000!"
                         <span className="text-amber-400"> Both are the SAME thing!</span> Percentage is just a universal way to compare.
                     </p>
-                </div>
+                </FormulaBox>
 
                 <p className="mb-4">
                     Percentage appears in <strong>Profit/Loss, Interest, Tax, Discount, Data Interpretation, Elections, Statistics...</strong> — literally EVERYWHERE in SSC CGL!
@@ -63,25 +40,25 @@ export default function PercentageContent() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center hover:border-amber-500/50 transition-all">
-                        <div className="text-3xl mb-2">🛒</div>
-                        <h4 className="text-amber-400 font-bold">Shopping</h4>
+                        <div className="text-3xl mb-2 flex justify-center text-amber-400"><ShoppingCartIcon fontSize="large" /></div>
+                        <h4 className="text-white font-bold">Shopping</h4>
                         <p className="text-sm text-neutral-400">"30% OFF!"</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center hover:border-amber-500/50 transition-all">
-                        <div className="text-3xl mb-2">🏦</div>
-                        <h4 className="text-amber-400 font-bold">Banking</h4>
+                        <div className="text-3xl mb-2 flex justify-center text-amber-400"><AccountBalanceIcon fontSize="large" /></div>
+                        <h4 className="text-white font-bold">Banking</h4>
                         <p className="text-sm text-neutral-400">"8% interest rate"</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center hover:border-amber-500/50 transition-all">
-                        <div className="text-3xl mb-2">📊</div>
-                        <h4 className="text-amber-400 font-bold">Exams</h4>
+                        <div className="text-3xl mb-2 flex justify-center text-amber-400"><BarChartIcon fontSize="large" /></div>
+                        <h4 className="text-white font-bold">Exams</h4>
                         <p className="text-sm text-neutral-400">"85% marks"</p>
                     </div>
                 </div>
             </ConceptSection>
 
             {/* THE MENTAL MODEL */}
-            <ConceptSection id="intro" title="The Battery Mental Model" icon="🔋">
+            <ConceptSection id="intro" title="The Battery Mental Model">
                 <p className="mb-4">
                     To truly understand percentage, stop thinking of it as calculation.
                     <strong> Think of it as a BATTERY!</strong>
@@ -109,8 +86,8 @@ export default function PercentageContent() {
                     </div>
 
                     <div className="space-y-4">
-                        <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                            <h4 className="text-amber-400 font-bold mb-2">🔤 The Word Origin</h4>
+                        <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                            <h4 className="text-amber-400 font-bold mb-2 flex items-center gap-2"><BookIcon /> The Word Origin</h4>
                             <p className="text-sm text-neutral-300">
                                 <strong>"Per"</strong> = For each<br />
                                 <strong>"Cent"</strong> = 100 (like Century = 100 years)<br />
@@ -140,13 +117,17 @@ export default function PercentageContent() {
             </ConceptSection>
 
             {/* THE FRACTION SHORTCUT - EXAM POWER MOVE */}
-            <ConceptSection id="fractions" title="⚡ The Fraction Shortcut — Your Exam Weapon" icon="⚡">
-                <div className="bg-gradient-to-r from-rose-900/20 to-transparent p-6 rounded-xl border-l-4 border-rose-500 mb-6">
-                    <p className="text-lg">
-                        <strong>The Secret of Toppers:</strong> They NEVER calculate percentages in exams.
-                        They convert everything to <span className="text-rose-400">FRACTIONS</span> and calculate mentally!
-                    </p>
+            <ConceptSection id="fractions" title="The Fraction Shortcut — Your Exam Weapon">
+                <div className="flex items-center gap-2 mb-6">
+                    <BoltIcon className="text-yellow-400" />
+                    <h3 className="text-xl font-bold text-white">Speed Up Calculation</h3>
                 </div>
+                <FormulaBox title="The Secret of Toppers">
+                    <p>
+                        They NEVER calculate percentages in exams.
+                        They convert everything to <span className="text-amber-400">FRACTIONS</span> and calculate mentally!
+                    </p>
+                </FormulaBox>
 
                 <p className="mb-4">
                     Which is faster: <MathText>{`\\frac{16.66}{100} \\times 36`}</MathText> OR <MathText>{`\\frac{1}{6} \\times 36 = 6`}</MathText>?
@@ -157,30 +138,30 @@ export default function PercentageContent() {
                 {/* Fraction Grid with animations */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 my-8">
                     {[
-                        { f: '1/2', p: '50%', color: 'emerald' },
-                        { f: '1/3', p: '33.33%', color: 'blue' },
-                        { f: '2/3', p: '66.66%', color: 'blue' },
-                        { f: '1/4', p: '25%', color: 'purple' },
-                        { f: '3/4', p: '75%', color: 'purple' },
+                        { f: '1/2', p: '50%', color: 'amber' },
+                        { f: '1/3', p: '33.33%', color: 'amber' },
+                        { f: '2/3', p: '66.66%', color: 'amber' },
+                        { f: '1/4', p: '25%', color: 'amber' },
+                        { f: '3/4', p: '75%', color: 'amber' },
                         { f: '1/5', p: '20%', color: 'amber' },
                         { f: '2/5', p: '40%', color: 'amber' },
                         { f: '3/5', p: '60%', color: 'amber' },
                         { f: '4/5', p: '80%', color: 'amber' },
-                        { f: '1/6', p: '16.66%', color: 'rose' },
-                        { f: '5/6', p: '83.33%', color: 'rose' },
-                        { f: '1/7', p: '14.28%', color: 'cyan' },
-                        { f: '1/8', p: '12.5%', color: 'indigo' },
-                        { f: '3/8', p: '37.5%', color: 'indigo' },
-                        { f: '5/8', p: '62.5%', color: 'indigo' },
-                        { f: '7/8', p: '87.5%', color: 'indigo' },
-                        { f: '1/9', p: '11.11%', color: 'pink' },
-                        { f: '1/10', p: '10%', color: 'lime' },
-                        { f: '1/11', p: '9.09%', color: 'orange' },
-                        { f: '1/12', p: '8.33%', color: 'teal' },
-                        { f: '1/15', p: '6.66%', color: 'violet' },
-                        { f: '1/20', p: '5%', color: 'fuchsia' },
-                        { f: '1/25', p: '4%', color: 'sky' },
-                        { f: '1/50', p: '2%', color: 'red' },
+                        { f: '1/6', p: '16.66%', color: 'amber' },
+                        { f: '5/6', p: '83.33%', color: 'amber' },
+                        { f: '1/7', p: '14.28%', color: 'amber' },
+                        { f: '1/8', p: '12.5%', color: 'amber' },
+                        { f: '3/8', p: '37.5%', color: 'amber' },
+                        { f: '5/8', p: '62.5%', color: 'amber' },
+                        { f: '7/8', p: '87.5%', color: 'amber' },
+                        { f: '1/9', p: '11.11%', color: 'amber' },
+                        { f: '1/10', p: '10%', color: 'amber' },
+                        { f: '1/11', p: '9.09%', color: 'amber' },
+                        { f: '1/12', p: '8.33%', color: 'amber' },
+                        { f: '1/15', p: '6.66%', color: 'amber' },
+                        { f: '1/20', p: '5%', color: 'amber' },
+                        { f: '1/25', p: '4%', color: 'amber' },
+                        { f: '1/50', p: '2%', color: 'amber' },
                     ].map((item, i) => (
                         <div
                             key={i}
@@ -196,7 +177,7 @@ export default function PercentageContent() {
                     ))}
                 </div>
 
-                <TipBox variant="note" title="🧠 Memory Hacks">
+                <TipBox variant="note" title="Memory Hacks">
                     <div className="space-y-3 text-sm">
                         <div>
                             <strong>The 9-11 Symmetry:</strong>
@@ -243,7 +224,7 @@ export default function PercentageContent() {
             </ConceptSection>
 
             {/* PERCENTAGE CHANGE */}
-            <ConceptSection id="change" title="Percentage Change — The Core Skill" icon="📈">
+            <ConceptSection id="change" title="Percentage Change — The Core Skill">
                 <p className="mb-4">
                     "How much did the price increase?" This question has only ONE formula.
                 </p>
@@ -288,7 +269,7 @@ export default function PercentageContent() {
                     />
                 </div>
 
-                <TipBox variant="warning" title="⚠️ The Biggest Trap">
+                <TipBox variant="warning" title="The Biggest Trap">
                     <p className="mb-2">
                         <strong>Always divide by the ORIGINAL (Old) value!</strong>
                     </p>
@@ -300,17 +281,17 @@ export default function PercentageContent() {
             </ConceptSection>
 
             {/* MULTIPLYING FACTOR */}
-            <ConceptSection id="mf" title="The Multiplying Factor (MF) — Game Changer" icon="🚀">
-                <div className="bg-gradient-to-r from-violet-900/20 to-transparent p-6 rounded-xl border-l-4 border-violet-500 mb-6">
-                    <p className="text-lg">
+            <ConceptSection id="mf" title="The Multiplying Factor (MF) — Game Changer">
+                <FormulaBox>
+                    <p>
                         This single concept makes <strong>Compound Interest, Profit/Loss, and DI</strong> problems 10x faster.
                     </p>
-                </div>
+                </FormulaBox>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-8 items-center">
                     <div>
-                        <h4 className="text-violet-400 font-bold text-lg mb-4">The Old Way (Slow) 🐢</h4>
-                        <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
+                        <h4 className="text-violet-400 font-bold text-lg mb-4">The Old Way (Slow) <SpeedIcon className="text-neutral-500" /></h4>
+                        <div className="p-6 bg-neutral-900 rounded-xl border border-neutral-800 opacity-70">
                             <p className="text-sm text-neutral-400">
                                 "Increase by 20%"<br />
                                 → Find 20%: <MathText>{`\\frac{20}{100} \\times \\text{Amount}`}</MathText><br />
@@ -321,7 +302,7 @@ export default function PercentageContent() {
                     </div>
 
                     <div>
-                        <h4 className="text-emerald-400 font-bold text-lg mb-4">The MF Way (Fast) 🚀</h4>
+                        <h4 className="text-emerald-400 font-bold text-lg mb-4">The MF Way (Fast)</h4>
                         <div className="p-4 bg-neutral-900 rounded-xl border border-emerald-500/30">
                             <p className="text-sm text-neutral-300">
                                 "Increase by 20%"<br />
@@ -332,38 +313,46 @@ export default function PercentageContent() {
                     </div>
                 </div>
 
-                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-violet-500/30">
-                    <h4 className="text-violet-400 font-bold text-center mb-6">The MF Table</h4>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div className="text-center p-3 bg-emerald-500/10 rounded-lg">
+                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-amber-500/30">
+                    <h4 className="text-amber-400 font-bold text-center mb-6">The MF Table</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div className="p-4 bg-amber-500/10 rounded-xl border border-amber-500/20">
+                            <div className="text-3xl mb-2 flex justify-center text-amber-400"><AccountBalanceIcon fontSize="large" /></div>
+                            <h4 className="font-bold text-white">Interest (SI/CI)</h4>
+                        </div>
+                        <div className="p-4 bg-amber-500/10 rounded-xl border border-amber-500/20">
+                            <div className="text-3xl mb-2 flex justify-center text-amber-400"><ShoppingCartIcon fontSize="large" /></div>
+                            <h4 className="font-bold text-white">Profit & Loss</h4>
+                        </div>
+                        <div className="p-4 bg-emerald-500/10 rounded-lg">
                             <p className="text-neutral-400 text-sm">+10%</p>
                             <p className="text-2xl font-bold text-emerald-400">× 1.1</p>
                         </div>
-                        <div className="text-center p-3 bg-emerald-500/10 rounded-lg">
+                        <div className="p-4 bg-emerald-500/10 rounded-lg">
                             <p className="text-neutral-400 text-sm">+20%</p>
                             <p className="text-2xl font-bold text-emerald-400">× 1.2</p>
                         </div>
-                        <div className="text-center p-3 bg-emerald-500/10 rounded-lg">
+                        <div className="p-4 bg-emerald-500/10 rounded-lg">
                             <p className="text-neutral-400 text-sm">+25%</p>
                             <p className="text-2xl font-bold text-emerald-400">× 1.25</p>
                         </div>
-                        <div className="text-center p-3 bg-emerald-500/10 rounded-lg">
+                        <div className="p-4 bg-emerald-500/10 rounded-lg">
                             <p className="text-neutral-400 text-sm">+50%</p>
                             <p className="text-2xl font-bold text-emerald-400">× 1.5</p>
                         </div>
-                        <div className="text-center p-3 bg-red-500/10 rounded-lg">
+                        <div className="p-4 bg-red-500/10 rounded-lg">
                             <p className="text-neutral-400 text-sm">−10%</p>
                             <p className="text-2xl font-bold text-red-400">× 0.9</p>
                         </div>
-                        <div className="text-center p-3 bg-red-500/10 rounded-lg">
+                        <div className="p-4 bg-red-500/10 rounded-lg">
                             <p className="text-neutral-400 text-sm">−20%</p>
                             <p className="text-2xl font-bold text-red-400">× 0.8</p>
                         </div>
-                        <div className="text-center p-3 bg-red-500/10 rounded-lg">
+                        <div className="p-4 bg-red-500/10 rounded-lg">
                             <p className="text-neutral-400 text-sm">−25%</p>
                             <p className="text-2xl font-bold text-red-400">× 0.75</p>
                         </div>
-                        <div className="text-center p-3 bg-red-500/10 rounded-lg">
+                        <div className="p-4 bg-red-500/10 rounded-lg">
                             <p className="text-neutral-400 text-sm">−50%</p>
                             <p className="text-2xl font-bold text-red-400">× 0.5</p>
                         </div>
@@ -422,13 +411,15 @@ export default function PercentageContent() {
             </ConceptSection>
 
             {/* SUCCESSIVE PERCENTAGE */}
-            <ConceptSection id="successive" title="Successive Changes (AB Rule)" icon="🔄">
+            <ConceptSection id="successive" title="Successive Changes (AB Rule)">
                 <p className="mb-4">
                     What if a price increases by 10%, then <strong>again</strong> by 10%? Is the total increase 20%?
                 </p>
 
-                <div className="bg-red-500/10 p-4 rounded-xl border border-red-500/30 mb-6">
-                    <p className="text-red-400 font-bold text-center text-xl">❌ NO! It's NOT 20%!</p>
+                <div className="my-8 p-6 bg-red-500/10 border border-red-500/30 rounded-xl text-center">
+                    <p className="text-red-400 font-bold text-xl flex items-center justify-center gap-2">
+                        <CancelIcon /> NO! It's NOT 20%!
+                    </p>
                 </div>
 
                 {/* Visual explanation */}
@@ -520,7 +511,7 @@ export default function PercentageContent() {
             </ConceptSection>
 
             {/* A IS WHAT % OF B */}
-            <ConceptSection id="compare" title="Comparisons: 'A is what % of B?'" icon="⚖️">
+            <ConceptSection id="compare" title="Comparisons: 'A is what % of B?'">
                 <p className="mb-4">
                     This confuses many students, but it's simple once you understand the question format.
                 </p>
@@ -583,33 +574,41 @@ export default function PercentageContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
-                <div className="space-y-4 my-6">
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ +a% then −a% = 0%</h4>
-                        <p className="text-sm text-neutral-400 mt-1">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                    <div className="p-4 bg-neutral-900 border border-red-500/20 rounded-xl hover:border-red-500/50 transition-colors">
+                        <h4 className="text-red-400 font-bold flex items-center gap-2 mb-2">
+                            <CancelIcon fontSize="small" /> +a% then −a% = 0%
+                        </h4>
+                        <p className="text-sm text-neutral-400">
                             <strong className="text-white">Wrong!</strong> +10% then −10% is NOT zero.
                             Use AB formula: 10 + (−10) + (10×−10)/100 = −1% LOSS!
                         </p>
                     </div>
 
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Using wrong base in % change</h4>
-                        <p className="text-sm text-neutral-400 mt-1">
+                    <div className="p-4 bg-neutral-900 border border-red-500/20 rounded-xl hover:border-red-500/50 transition-colors">
+                        <h4 className="text-red-400 font-bold flex items-center gap-2 mb-2">
+                            <CancelIcon fontSize="small" /> Using wrong base in % change
+                        </h4>
+                        <p className="text-sm text-neutral-400">
                             "Price went from 80 to 100" →  Always divide by <strong className="text-white">OLD</strong> value (80).
                         </p>
                     </div>
 
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Confusing "more than" and "of"</h4>
-                        <p className="text-sm text-neutral-400 mt-1">
+                    <div className="p-4 bg-neutral-900 border border-red-500/20 rounded-xl hover:border-red-500/50 transition-colors">
+                        <h4 className="text-red-400 font-bold flex items-center gap-2 mb-2">
+                            <CancelIcon fontSize="small" /> Confusing "more than" and "of"
+                        </h4>
+                        <p className="text-sm text-neutral-400">
                             "A is 25% more than B" means A = 1.25B, NOT A = 0.25B!
                         </p>
                     </div>
 
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Forgetting to use fraction shortcuts</h4>
-                        <p className="text-sm text-neutral-400 mt-1">
+                    <div className="p-4 bg-neutral-900 border border-red-500/20 rounded-xl hover:border-red-500/50 transition-colors">
+                        <h4 className="text-red-400 font-bold flex items-center gap-2 mb-2">
+                            <CancelIcon fontSize="small" /> Forgetting to use fraction shortcuts
+                        </h4>
+                        <p className="text-sm text-neutral-400">
                             Calculating 33.33% × 99 the long way when you could just do (1/3) × 99 = 33!
                         </p>
                     </div>
@@ -634,6 +633,6 @@ export default function PercentageContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

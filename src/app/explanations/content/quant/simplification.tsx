@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function SimplificationContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-900/30 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[8rem] font-bold text-blue-500/10 select-none font-mono">BODMAS</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-blue-500/20 text-blue-500 text-xs font-bold uppercase tracking-widest mb-2 border border-blue-500/20">
-                        Phase 01: Foundation
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Simplification</h1>
-                    <p className="text-neutral-400 text-lg">Master the order of operations to solve any expression.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: BODMAS */}
-            <ConceptSection id="bodmas" title="The BODMAS Rule" icon="🔢">
+        <>
+            <ConceptSection id="bodmas" title="The BODMAS Rule">
                 <p>
                     <strong>BODMAS</strong> (or <strong>PEMDAS</strong> in the US) is the universal order for solving any mathematical expression.
                     If you follow this order, you will NEVER get the wrong answer.
@@ -85,7 +68,7 @@ export default function SimplificationContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: BRACKETS */}
-            <ConceptSection id="brackets" title="Nested Brackets" icon="🔲">
+            <ConceptSection id="brackets" title="Nested Brackets">
                 <p>
                     When you have multiple levels of brackets, ALWAYS solve the <strong>innermost bracket first</strong>.
                 </p>
@@ -131,27 +114,27 @@ export default function SimplificationContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: SPEED TRICKS */}
-            <ConceptSection id="tricks" title="Speed Tricks for Calculations" icon="⚡">
+            <ConceptSection id="tricks" title="Speed Tricks for Calculations">
                 <p>In competitive exams, speed matters. Here are some tricks to calculate faster.</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-blue-400 font-bold mb-2">Fraction Addition (Cross Multiply)</h4>
+                        <h4 className="text-amber-400 font-bold mb-2">Fraction Addition (Cross Multiply)</h4>
                         <MathText>{`\\frac{a}{b} + \\frac{c}{d} = \\frac{ad + bc}{bd}`}</MathText>
                         <p className="text-sm text-neutral-400 mt-2">Example: <MathText>{`\\frac{1}{3} + \\frac{1}{4} = \\frac{4+3}{12} = \\frac{7}{12}`}</MathText></p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-blue-400 font-bold mb-2">Squaring Numbers near 50</h4>
+                        <h4 className="text-amber-400 font-bold mb-2">Squaring Numbers near 50</h4>
                         <p className="text-sm text-neutral-400">n² = (n − 50) × 100 + 25 + (n − 50)²</p>
                         <p className="text-sm text-white mt-2">Example: 52² = 2×100 + 25 + 4 = 2704</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-blue-400 font-bold mb-2">Multiply by 11</h4>
+                        <h4 className="text-amber-400 font-bold mb-2">Multiply by 11</h4>
                         <p className="text-sm text-neutral-400">Split digits and add in middle</p>
                         <p className="text-sm text-white mt-2">Example: 36 × 11 = 3_(3+6)_6 = 396</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-blue-400 font-bold mb-2">Squaring Numbers near 100</h4>
+                        <h4 className="text-amber-400 font-bold mb-2">Squaring Numbers near 100</h4>
                         <p className="text-sm text-neutral-400">n² = (n + diff) | (diff)²</p>
                         <p className="text-sm text-white mt-2">Example: 97² = (97−3) | 3² = 94|09 = 9409</p>
                     </div>
@@ -174,7 +157,7 @@ export default function SimplificationContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: FRACTION TRICKS */}
-            <ConceptSection id="fractions" title="Fraction Simplification" icon="➗">
+            <ConceptSection id="fractions" title="Fraction Simplification">
                 <p>Many simplification questions involve complex fractions. Master these conversions:</p>
 
                 <div className="overflow-x-auto my-6">
@@ -219,6 +202,6 @@ export default function SimplificationContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

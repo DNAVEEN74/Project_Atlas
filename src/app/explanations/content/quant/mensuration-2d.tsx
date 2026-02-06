@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function Mensuration2DContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-pink-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">📐</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-pink-500/20 text-pink-500 text-xs font-bold uppercase tracking-widest mb-2 border border-pink-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Mensuration 2D</h1>
-                    <p className="text-neutral-400 text-lg">Area & Perimeter of flat shapes — formula-heavy but rewarding!</p>
-                </div>
-            </div>
-
-            {/* TRIANGLES */}
-            <ConceptSection id="triangles" title="Triangles" icon="🔺">
+        <>
+            <ConceptSection id="triangles" title="Triangles">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <FormulaBox title="Basic Triangle Area">
                         <div className="text-center">
@@ -88,7 +71,7 @@ export default function Mensuration2DContent() {
             </ConceptSection>
 
             {/* RECTANGLES & SQUARES */}
-            <ConceptSection id="rectangles" title="Rectangles & Squares" icon="⬜">
+            <ConceptSection id="rectangles" title="Rectangles & Squares">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-800">
                         <h4 className="text-pink-400 font-bold mb-4 text-center text-lg">Rectangle</h4>
@@ -136,7 +119,7 @@ export default function Mensuration2DContent() {
             </ConceptSection>
 
             {/* PARALLELOGRAM, RHOMBUS, TRAPEZIUM */}
-            <ConceptSection id="quadrilaterals" title="Other Quadrilaterals" icon="⬛">
+            <ConceptSection id="quadrilaterals" title="Other Quadrilaterals">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
                         <h4 className="text-amber-400 font-bold mb-3">Parallelogram</h4>
@@ -172,7 +155,7 @@ export default function Mensuration2DContent() {
             </ConceptSection>
 
             {/* CIRCLES */}
-            <ConceptSection id="circles" title="Circles, Sectors & Arcs" icon="⭕">
+            <ConceptSection id="circles" title="Circles, Sectors & Arcs">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-pink-500/30">
                         <h4 className="text-pink-400 font-bold mb-4 text-center">Full Circle</h4>
@@ -247,7 +230,7 @@ export default function Mensuration2DContent() {
             </ConceptSection>
 
             {/* PATHWAYS & BORDERS */}
-            <ConceptSection id="pathways" title="Pathways & Borders" icon="🛤️">
+            <ConceptSection id="pathways" title="Pathways & Borders">
                 <p className="mb-4">
                     Common in SSC: A path runs around a field. Find the path area = Outer area − Inner area.
                 </p>
@@ -286,7 +269,7 @@ export default function Mensuration2DContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
                         <h4 className="text-red-400 font-bold">❌ Confusing Perimeter with Area</h4>
@@ -336,6 +319,6 @@ export default function Mensuration2DContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

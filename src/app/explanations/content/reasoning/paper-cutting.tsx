@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function PaperCuttingContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-pink-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">✂️</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-pink-500/20 text-pink-500 text-xs font-bold uppercase tracking-widest mb-2 border border-pink-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Paper Cutting & Folding</h1>
-                    <p className="text-neutral-400 text-lg">Unfold the mystery with symmetry rules.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: THE MIRROR RULE */}
-            <ConceptSection id="mirror-rule" title="The Golden Rule: Mirror It!" icon="🪞">
+        <>
+            <ConceptSection id="mirror-rule" title="The Golden Rule: Mirror It!">
                 <p>
                     Every time you <strong>unfold</strong> a paper, the cut pattern is <strong>mirrored</strong> across the fold line.
                 </p>
@@ -56,7 +39,7 @@ export default function PaperCuttingContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: COUNTING HOLES */}
-            <ConceptSection id="counting" title="Predicting Number of Cuts" icon="🔢">
+            <ConceptSection id="counting" title="Predicting Number of Cuts">
                 <p>
                     How many holes will appear in the final paper?
                 </p>
@@ -82,7 +65,7 @@ export default function PaperCuttingContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: DIAGONAL FOLDS */}
-            <ConceptSection id="diagonal" title="Diagonal Folds" icon="📐">
+            <ConceptSection id="diagonal" title="Diagonal Folds">
                 <p>
                     Diagonal folds are tricky. The reflection happens across the 45° line.
                 </p>
@@ -107,7 +90,7 @@ export default function PaperCuttingContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
                         <h4 className="text-red-400 font-bold">❌ Forgetting to Mirror</h4>
@@ -137,6 +120,6 @@ export default function PaperCuttingContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

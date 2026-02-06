@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -11,28 +10,13 @@ import {
     CheckUnderstanding,
     CheatSheet
 } from '@/components/explanations';
+import { WarningIcon } from '@/components/icons';
 
 export default function GeometryContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-pink-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">📐</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-pink-500/20 text-pink-500 text-xs font-bold uppercase tracking-widest mb-2 border border-pink-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Geometry</h1>
-                    <p className="text-neutral-400 text-lg">Master triangles, circles, and theorems — visual logic at its best!</p>
-                </div>
-            </div>
-
-            {/* TRIANGLE BASICS */}
-            <ConceptSection id="triangles" title="Triangle Fundamentals" icon="🔺">
-                <div className="bg-gradient-to-r from-pink-900/20 to-transparent p-6 rounded-xl border-l-4 border-pink-500 mb-6">
+        <>
+            <ConceptSection id="triangles" title="Triangle Fundamentals">
+                <div className="bg-gradient-to-r from-amber-900/20 to-transparent p-6 rounded-xl border-l-4 border-amber-500 mb-6">
                     <p className="text-lg">
                         <strong>Rule #1:</strong> Sum of all angles = 180°. Always!
                     </p>
@@ -40,15 +24,15 @@ export default function GeometryContent() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <h4 className="text-pink-400 font-bold mb-2">Acute Triangle</h4>
+                        <h4 className="text-amber-400 font-bold mb-2">Acute Triangle</h4>
                         <p className="text-sm text-neutral-400">All angles &lt; 90°</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <h4 className="text-pink-400 font-bold mb-2">Right Triangle</h4>
+                        <h4 className="text-amber-400 font-bold mb-2">Right Triangle</h4>
                         <p className="text-sm text-neutral-400">One angle = 90°</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <h4 className="text-pink-400 font-bold mb-2">Obtuse Triangle</h4>
+                        <h4 className="text-amber-400 font-bold mb-2">Obtuse Triangle</h4>
                         <p className="text-sm text-neutral-400">One angle &gt; 90°</p>
                     </div>
                 </div>
@@ -68,14 +52,14 @@ export default function GeometryContent() {
             </ConceptSection>
 
             {/* TRIANGLE CENTERS */}
-            <ConceptSection id="centers" title="Centers of a Triangle" icon="⭐">
+            <ConceptSection id="centers" title="Centers of a Triangle">
                 <p className="mb-4">
                     Every triangle has 4 important centers. Know what creates each!
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-5 bg-neutral-900 rounded-xl border border-pink-500/30">
-                        <h4 className="text-pink-400 font-bold mb-3">Centroid (G)</h4>
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-amber-500/30">
+                        <h4 className="text-amber-400 font-bold mb-3">Centroid (G)</h4>
                         <p className="text-sm text-neutral-300">Intersection of <strong>Medians</strong></p>
                         <ul className="list-disc list-inside text-xs text-neutral-500 mt-2">
                             <li>Divides each median in 2:1 ratio</li>
@@ -84,8 +68,8 @@ export default function GeometryContent() {
                         </ul>
                     </div>
 
-                    <div className="p-5 bg-neutral-900 rounded-xl border border-emerald-500/30">
-                        <h4 className="text-emerald-400 font-bold mb-3">Incenter (I)</h4>
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-fuchsia-500/30">
+                        <h4 className="text-fuchsia-400 font-bold mb-3">Incenter (I)</h4>
                         <p className="text-sm text-neutral-300">Intersection of <strong>Angle Bisectors</strong></p>
                         <ul className="list-disc list-inside text-xs text-neutral-500 mt-2">
                             <li>Equidistant from all 3 sides</li>
@@ -94,8 +78,8 @@ export default function GeometryContent() {
                         </ul>
                     </div>
 
-                    <div className="p-5 bg-neutral-900 rounded-xl border border-blue-500/30">
-                        <h4 className="text-blue-400 font-bold mb-3">Circumcenter (O)</h4>
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-orange-500/30">
+                        <h4 className="text-orange-400 font-bold mb-3">Circumcenter (O)</h4>
                         <p className="text-sm text-neutral-300">Intersection of <strong>Perpendicular Bisectors</strong></p>
                         <ul className="list-disc list-inside text-xs text-neutral-500 mt-2">
                             <li>Equidistant from all 3 vertices</li>
@@ -133,10 +117,10 @@ export default function GeometryContent() {
             </ConceptSection>
 
             {/* SIMILARITY & CONGRUENCE */}
-            <ConceptSection id="similarity" title="Similar & Congruent Triangles" icon="≈">
+            <ConceptSection id="similarity" title="Similar & Congruent Triangles">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-5 bg-neutral-900 rounded-xl border border-emerald-500/30">
-                        <h4 className="text-emerald-400 font-bold mb-3">Similar (∼)</h4>
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-amber-500/30">
+                        <h4 className="text-amber-400 font-bold mb-3">Similar (∼)</h4>
                         <p className="text-sm text-neutral-300">Same SHAPE, different SIZE</p>
                         <ul className="list-disc list-inside text-xs text-neutral-500 mt-2">
                             <li>AAA (all angles equal)</li>
@@ -145,8 +129,8 @@ export default function GeometryContent() {
                         </ul>
                     </div>
 
-                    <div className="p-5 bg-neutral-900 rounded-xl border border-blue-500/30">
-                        <h4 className="text-blue-400 font-bold mb-3">Congruent (≅)</h4>
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-orange-500/30">
+                        <h4 className="text-orange-400 font-bold mb-3">Congruent (≅)</h4>
                         <p className="text-sm text-neutral-300">Same SHAPE and same SIZE</p>
                         <ul className="list-disc list-inside text-xs text-neutral-500 mt-2">
                             <li>SSS (all 3 sides equal)</li>
@@ -166,10 +150,10 @@ export default function GeometryContent() {
             </ConceptSection>
 
             {/* CIRCLE THEOREMS */}
-            <ConceptSection id="circles" title="Circle Theorems" icon="⭕">
+            <ConceptSection id="circles" title="Circle Theorems">
                 <div className="space-y-6 my-8">
-                    <div className="p-5 bg-neutral-900 rounded-xl border border-pink-500/30">
-                        <h4 className="text-pink-400 font-bold mb-3">Central Angle vs Inscribed Angle</h4>
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-amber-500/30">
+                        <h4 className="text-amber-400 font-bold mb-3">Central Angle vs Inscribed Angle</h4>
                         <p className="text-sm text-neutral-300">
                             Inscribed angle = ½ × Central angle (for same arc)
                         </p>
@@ -216,7 +200,7 @@ export default function GeometryContent() {
             </ConceptSection>
 
             {/* QUADRILATERAL PROPERTIES */}
-            <ConceptSection id="quad" title="Quadrilateral Properties" icon="⬛">
+            <ConceptSection id="quad" title="Quadrilateral Properties">
                 <div className="overflow-x-auto my-8">
                     <table className="w-full text-sm">
                         <thead className="bg-neutral-900">
@@ -265,24 +249,24 @@ export default function GeometryContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Confusing Median with Altitude</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Confusing Median with Altitude</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Median goes to MIDPOINT. Altitude is PERPENDICULAR to opposite side.
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Wrong Triangle Center</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Wrong Triangle Center</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Centroid ≠ Circumcenter. Medians → Centroid. Perpendicular bisectors → Circumcenter.
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Similar Areas Squared</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Similar Areas Squared</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             If sides ratio = k, then AREA ratio = k². Don't use k directly for areas!
                         </p>
@@ -306,6 +290,6 @@ export default function GeometryContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

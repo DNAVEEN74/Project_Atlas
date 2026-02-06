@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function CoordinateGeometryContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">📍</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-green-500/20 text-green-500 text-xs font-bold uppercase tracking-widest mb-2 border border-green-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Coordinate Geometry</h1>
-                    <p className="text-neutral-400 text-lg">Where Algebra meets Geometry.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: POINTS & LINES */}
-            <ConceptSection id="basics" title="Distance & Section Formulas" icon="📏">
+        <>
+            <ConceptSection id="basics" title="Distance & Section Formulas">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
                         <h4 className="text-green-400 font-bold mb-4">Distance Formula</h4>
@@ -49,7 +32,7 @@ export default function CoordinateGeometryContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: AREA OF TRIANGLE */}
-            <ConceptSection id="area" title="Area of Triangle" icon="📐">
+            <ConceptSection id="area" title="Area of Triangle">
                 <FormulaBox>
                     <MathText>{`\\text{Area} = \\frac{1}{2} | x_1(y_2 - y_3) + x_2(y_3 - y_1) + x_3(y_1 - y_2) |`}</MathText>
                 </FormulaBox>
@@ -79,7 +62,7 @@ export default function CoordinateGeometryContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: STRAIGHT LINES */}
-            <ConceptSection id="line" title="Equation of a Line" icon="📈">
+            <ConceptSection id="line" title="Equation of a Line">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6 text-center">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
                         <h4 className="text-white font-bold mb-2">Slope (Gradident m)</h4>
@@ -114,7 +97,7 @@ export default function CoordinateGeometryContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: TRIANGLE CENTERS */}
-            <ConceptSection id="centers" title="Triangle Centers Coordinates" icon="🎯">
+            <ConceptSection id="centers" title="Triangle Centers Coordinates">
                 <div className="space-y-4 my-6">
                     <FormulaBox title="Centroid (G)" variant="secondary">
                         <MathText>{`G = \\left( \\frac{x_1+x_2+x_3}{3}, \\frac{y_1+y_2+y_3}{3} \\right)`}</MathText>
@@ -140,6 +123,6 @@ export default function CoordinateGeometryContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

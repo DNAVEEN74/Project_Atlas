@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function DataInterpretationContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">📊</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-500 text-xs font-bold uppercase tracking-widest mb-2 border border-cyan-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Data Interpretation</h1>
-                    <p className="text-neutral-400 text-lg">Calculation is silver, approximation is gold.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: CALCULATION HACKS */}
-            <ConceptSection id="hacks" title="Calculation Speed Hacks" icon="⚡">
+        <>
+            <ConceptSection id="hacks" title="Calculation Speed Hacks">
                 <p>DI is not about finding the exact answer; it's about picking the right option.</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
@@ -61,7 +44,7 @@ export default function DataInterpretationContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: COMMON QUESTIONS */}
-            <ConceptSection id="patterns" title="Standard Question Patterns" icon="📝">
+            <ConceptSection id="patterns" title="Standard Question Patterns">
                 <div className="space-y-6 my-6">
                     {/* Pattern 1 */}
                     <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-800">
@@ -101,7 +84,7 @@ export default function DataInterpretationContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: PIE CHART LOGIC */}
-            <ConceptSection id="pie" title="Pie Chart Secrets" icon="🥧">
+            <ConceptSection id="pie" title="Pie Chart Secrets">
                 <p>
                     Usually comes as 2 Pie Charts or Pie + Table.
                 </p>
@@ -121,7 +104,7 @@ export default function DataInterpretationContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: MISSING DI */}
-            <ConceptSection id="missing" title="Missing Data DI" icon="🧩">
+            <ConceptSection id="missing" title="Missing Data DI">
                 <p>
                     A table with missing values. The strategy:
                 </p>
@@ -147,6 +130,6 @@ export default function DataInterpretationContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

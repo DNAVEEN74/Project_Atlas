@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -11,40 +10,25 @@ import {
     CheckUnderstanding,
     CheatSheet
 } from '@/components/explanations';
+import { AccessTimeIcon, CalculateIcon, WarningIcon } from '@/components/icons';
 
 export default function ClockCalendarContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-900/30 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] select-none">🕐📅</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-teal-500/20 text-teal-500 text-xs font-bold uppercase tracking-widest mb-2 border border-teal-500/20">
-                        Phase 04: Real World Logic
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Clock & Calendar</h1>
-                    <p className="text-neutral-400 text-lg">Master time angles and day calculations.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: CLOCK BASICS */}
-            <ConceptSection id="clock-basics" title="Clock Fundamentals" icon="🕐">
+        <>
+            <ConceptSection id="clock-basics" title="Clock Fundamentals">
                 <p>First, understand how clock hands move:</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-6 bg-neutral-900 rounded-xl border border-teal-500/30">
-                        <h4 className="text-teal-400 font-bold mb-4">Hour Hand</h4>
+                    <div className="p-6 bg-neutral-900 rounded-xl border border-violet-500/30">
+                        <h4 className="text-violet-400 font-bold mb-4 flex items-center gap-2"><AccessTimeIcon /> Hour Hand</h4>
                         <ul className="space-y-2 text-sm text-neutral-300">
                             <li>Completes 360° in <strong>12 hours</strong></li>
                             <li>Speed: <strong>0.5° per minute</strong></li>
                             <li>Speed: <strong>30° per hour</strong></li>
                         </ul>
                     </div>
-                    <div className="p-6 bg-neutral-900 rounded-xl border border-amber-500/30">
-                        <h4 className="text-amber-400 font-bold mb-4">Minute Hand</h4>
+                    <div className="p-6 bg-neutral-900 rounded-xl border border-fuchsia-500/30">
+                        <h4 className="text-fuchsia-400 font-bold mb-4 flex items-center gap-2"><AccessTimeIcon /> Minute Hand</h4>
                         <ul className="space-y-2 text-sm text-neutral-300">
                             <li>Completes 360° in <strong>1 hour</strong></li>
                             <li>Speed: <strong>6° per minute</strong></li>
@@ -54,7 +38,7 @@ export default function ClockCalendarContent() {
                 </div>
 
                 <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 my-6">
-                    <h4 className="text-teal-400 font-bold mb-2">Relative Speed</h4>
+                    <h4 className="text-violet-400 font-bold mb-2">Relative Speed</h4>
                     <p className="text-neutral-300">
                         Minute hand gains on hour hand: <strong>6° − 0.5° = 5.5° per minute</strong>
                     </p>
@@ -62,7 +46,7 @@ export default function ClockCalendarContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: ANGLE FORMULA */}
-            <ConceptSection id="angle" title="Angle Between Hands" icon="📐">
+            <ConceptSection id="angle" title="Angle Between Hands">
                 <FormulaBox title="The Master Formula">
                     <MathText>{`\\theta = \\left| 30H - 5.5M \\right|`}</MathText>
                     <p className="text-center text-neutral-400 text-sm mt-2">H = Hour, M = Minutes</p>
@@ -108,20 +92,20 @@ export default function ClockCalendarContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: SPECIAL ANGLES */}
-            <ConceptSection id="special-angles" title="Special Angle Times" icon="⚡">
+            <ConceptSection id="special-angles" title="Special Angle Times">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-teal-400 font-bold mb-2">Hands Overlap (0°)</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">Hands Overlap (0°)</h4>
                         <p className="text-sm text-neutral-400">22 times in 24 hours</p>
                         <p className="text-xs text-neutral-500 mt-1">11 times in 12 hours (not at 12:00)</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-teal-400 font-bold mb-2">Right Angle (90°)</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">Right Angle (90°)</h4>
                         <p className="text-sm text-neutral-400">44 times in 24 hours</p>
                         <p className="text-xs text-neutral-500 mt-1">22 times in 12 hours</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-teal-400 font-bold mb-2">Straight Line (180°)</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">Straight Line (180°)</h4>
                         <p className="text-sm text-neutral-400">22 times in 24 hours</p>
                         <p className="text-xs text-neutral-500 mt-1">11 times in 12 hours</p>
                     </div>
@@ -129,7 +113,7 @@ export default function ClockCalendarContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: CALENDAR BASICS */}
-            <ConceptSection id="calendar" title="Calendar: Odd Days Concept" icon="📅">
+            <ConceptSection id="calendar" title="Calendar: Odd Days Concept">
                 <p>
                     <strong>Odd days</strong> = Number of days beyond complete weeks.
                     7 days = 0 odd days, 8 days = 1 odd day, etc.
@@ -137,22 +121,22 @@ export default function ClockCalendarContent() {
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <p className="text-teal-400 font-bold">Ordinary Year</p>
+                        <p className="text-violet-400 font-bold">Ordinary Year</p>
                         <p className="text-2xl text-white font-bold mt-2">1</p>
                         <p className="text-xs text-neutral-500">odd day (365 = 52×7 + 1)</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <p className="text-teal-400 font-bold">Leap Year</p>
+                        <p className="text-violet-400 font-bold">Leap Year</p>
                         <p className="text-2xl text-white font-bold mt-2">2</p>
                         <p className="text-xs text-neutral-500">odd days (366 = 52×7 + 2)</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <p className="text-teal-400 font-bold">100 Years</p>
+                        <p className="text-violet-400 font-bold">100 Years</p>
                         <p className="text-2xl text-white font-bold mt-2">5</p>
                         <p className="text-xs text-neutral-500">odd days</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center">
-                        <p className="text-teal-400 font-bold">400 Years</p>
+                        <p className="text-violet-400 font-bold">400 Years</p>
                         <p className="text-2xl text-white font-bold mt-2">0</p>
                         <p className="text-xs text-neutral-500">odd days</p>
                     </div>
@@ -169,9 +153,9 @@ export default function ClockCalendarContent() {
             </ConceptSection>
 
             {/* CONCEPT 5: LEAP YEAR */}
-            <ConceptSection id="leap" title="Leap Year Rules" icon="🗓️">
+            <ConceptSection id="leap" title="Leap Year Rules">
                 <div className="my-6 p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <h4 className="text-teal-400 font-bold mb-4">A year is a leap year if:</h4>
+                    <h4 className="text-violet-400 font-bold mb-4">A year is a leap year if:</h4>
                     <ol className="list-decimal list-inside space-y-2 text-neutral-300">
                         <li>Divisible by 4 <strong>AND NOT</strong> divisible by 100</li>
                         <li><strong>OR</strong> Divisible by 400</li>
@@ -179,8 +163,8 @@ export default function ClockCalendarContent() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 my-6">
-                    <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl">
-                        <p className="text-emerald-400 font-bold">Leap Years</p>
+                    <div className="p-4 bg-green-500/10 border border-green-500/30 rounded-xl">
+                        <p className="text-green-400 font-bold">Leap Years</p>
                         <p className="text-sm text-neutral-400 mt-1">2000, 2004, 2020, 2024, 1600</p>
                     </div>
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
@@ -198,7 +182,7 @@ export default function ClockCalendarContent() {
             </ConceptSection>
 
             {/* CONCEPT 6: DAY CALCULATION */}
-            <ConceptSection id="day" title="Finding the Day" icon="📆">
+            <ConceptSection id="day" title="Finding the Day">
                 <p>To find what day a date falls on:</p>
 
                 <div className="my-6 p-4 bg-neutral-900 rounded-xl border border-neutral-800">
@@ -228,24 +212,24 @@ export default function ClockCalendarContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Assuming Every 4th Year is Leap</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Assuming Every 4th Year is Leap</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Century years (1700, 1800, 1900) are NOT leap years unless divisible by 400. 2000 was a leap year, 1900 was not!
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Angle Greater than 180°</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Angle Greater than 180°</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Clock angles are usually measured as the smaller angle. If your formula gives 250°, convert it: 360° − 250° = 110°.
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ 12:00 vs 00:00</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> 12:00 vs 00:00</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             In calculations, treat 12:00 as Hour = 0 (or 12), but be consistent. |30(12) − 5.5(0)| = 360 = 0°.
                         </p>
@@ -267,6 +251,6 @@ export default function ClockCalendarContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -11,28 +10,25 @@ import {
     CheckUnderstanding,
     CheatSheet
 } from '@/components/explanations';
+import {
+    ExploreIcon,
+    ArrowForwardIcon,
+    ArrowBackIcon,
+    RotateRightIcon,
+    RotateLeftIcon,
+    AccessibilityNewIcon,
+    WbSunnyIcon,
+    NightsStayIcon,
+    CancelIcon,
+    CheckIcon,
+    LightbulbIcon
+} from '@/components/icons';
 
 export default function DirectionSenseContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-sky-900/30 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">🧭</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-sky-500/20 text-sky-500 text-xs font-bold uppercase tracking-widest mb-2 border border-sky-500/20">
-                        Spatial Reasoning
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Direction Sense</h1>
-                    <p className="text-neutral-400 text-lg">Master the compass — never lose your way in direction problems!</p>
-                </div>
-            </div>
-
-            {/* THE COMPASS */}
-            <ConceptSection id="compass" title="Rule #1: Know Your Compass" icon="🧭">
-                <div className="bg-gradient-to-r from-sky-900/20 to-transparent p-6 rounded-xl border-l-4 border-sky-500 mb-6">
+        <>
+            <ConceptSection id="compass" title="Rule #1: Know Your Compass">
+                <div className="bg-gradient-to-r from-violet-900/20 to-transparent p-6 rounded-xl border-l-4 border-violet-500 mb-6">
                     <p className="text-lg">
                         <strong>Before solving ANY direction problem:</strong> Draw the compass!
                         It takes 2 seconds and prevents all confusion.
@@ -40,48 +36,48 @@ export default function DirectionSenseContent() {
                 </div>
 
                 <div className="my-8 flex justify-center">
-                    <div className="relative w-72 h-72 bg-neutral-900 rounded-full border-2 border-neutral-700">
+                    <div className="relative w-72 h-72 bg-neutral-900 rounded-full border-2 border-neutral-700 shadow-2xl shadow-violet-900/10">
                         {/* Cross lines */}
                         <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-neutral-700 -translate-y-1/2" />
                         <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-neutral-700 -translate-x-1/2" />
 
                         {/* North */}
                         <div className="absolute top-4 left-1/2 -translate-x-1/2 text-center">
-                            <div className="text-3xl font-bold text-sky-400">N</div>
+                            <div className="text-3xl font-bold text-violet-400">N</div>
                             <div className="text-xs text-neutral-500">↑</div>
                         </div>
                         {/* South */}
                         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center">
                             <div className="text-xs text-neutral-500">↓</div>
-                            <div className="text-3xl font-bold text-sky-400">S</div>
+                            <div className="text-3xl font-bold text-violet-400">S</div>
                         </div>
                         {/* East */}
                         <div className="absolute right-4 top-1/2 -translate-y-1/2 text-center flex items-center gap-1">
                             <div className="text-xs text-neutral-500">→</div>
-                            <div className="text-3xl font-bold text-sky-400">E</div>
+                            <div className="text-3xl font-bold text-violet-400">E</div>
                         </div>
                         {/* West */}
                         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-center flex items-center gap-1">
-                            <div className="text-3xl font-bold text-sky-400">W</div>
+                            <div className="text-3xl font-bold text-violet-400">W</div>
                             <div className="text-xs text-neutral-500">←</div>
                         </div>
                         {/* Diagonals */}
-                        <div className="absolute top-12 right-12 text-lg text-amber-400 font-bold">NE</div>
-                        <div className="absolute top-12 left-12 text-lg text-amber-400 font-bold">NW</div>
-                        <div className="absolute bottom-12 right-12 text-lg text-amber-400 font-bold">SE</div>
-                        <div className="absolute bottom-12 left-12 text-lg text-amber-400 font-bold">SW</div>
+                        <div className="absolute top-12 right-12 text-lg text-fuchsia-400 font-bold">NE</div>
+                        <div className="absolute top-12 left-12 text-lg text-fuchsia-400 font-bold">NW</div>
+                        <div className="absolute bottom-12 right-12 text-lg text-fuchsia-400 font-bold">SE</div>
+                        <div className="absolute bottom-12 left-12 text-lg text-fuchsia-400 font-bold">SW</div>
                         {/* Center */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-lg" />
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-lg items-center justify-center flex"><ExploreIcon fontSize="small" className="text-neutral-900" /></div>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
                     <TipBox title="Memory Trick #1: NEWS">
                         <p className="text-sm">
-                            <strong className="text-sky-400">N</strong>orth,
-                            <strong className="text-sky-400">E</strong>ast,
-                            <strong className="text-sky-400">W</strong>est,
-                            <strong className="text-sky-400">S</strong>outh
+                            <strong className="text-violet-400">N</strong>orth,
+                            <strong className="text-violet-400">E</strong>ast,
+                            <strong className="text-violet-400">W</strong>est,
+                            <strong className="text-violet-400">S</strong>outh
                         </p>
                     </TipBox>
                     <TipBox title="Memory Trick #2">
@@ -92,7 +88,7 @@ export default function DirectionSenseContent() {
                 </div>
 
                 <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <h4 className="text-sky-400 font-bold mb-4 text-center">Angle Reference</h4>
+                    <h4 className="text-violet-400 font-bold mb-4 text-center">Angle Reference</h4>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                         <div className="p-3 bg-black/50 rounded-lg">
                             <p className="text-neutral-500 text-xs">N to E</p>
@@ -115,54 +111,54 @@ export default function DirectionSenseContent() {
             </ConceptSection>
 
             {/* TURNS */}
-            <ConceptSection id="turns" title="Left Turn vs Right Turn" icon="🔄">
+            <ConceptSection id="turns" title="Left Turn vs Right Turn">
                 <p className="mb-4">
                     This is where most mistakes happen. Be crystal clear on turn directions!
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-6 bg-neutral-900 rounded-xl border border-sky-500/30">
-                        <h4 className="text-sky-400 font-bold mb-4 text-center text-lg">
-                            ➡️ Right Turn = Clockwise
+                    <div className="p-6 bg-neutral-900 rounded-xl border border-violet-500/30 hover:border-violet-500/50 transition-all">
+                        <h4 className="text-violet-400 font-bold mb-4 text-center text-lg flex items-center justify-center gap-2">
+                            <RotateRightIcon /> Right Turn = Clockwise
                         </h4>
                         <div className="space-y-3 text-sm">
-                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-sky-500/10 transition-all">
+                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-violet-500/10 transition-all">
                                 <span className="text-neutral-400">Facing North →</span>
                                 <span className="text-white font-bold">East</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-sky-500/10 transition-all">
+                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-violet-500/10 transition-all">
                                 <span className="text-neutral-400">Facing East →</span>
                                 <span className="text-white font-bold">South</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-sky-500/10 transition-all">
+                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-violet-500/10 transition-all">
                                 <span className="text-neutral-400">Facing South →</span>
                                 <span className="text-white font-bold">West</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-sky-500/10 transition-all">
+                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-violet-500/10 transition-all">
                                 <span className="text-neutral-400">Facing West →</span>
                                 <span className="text-white font-bold">North</span>
                             </div>
                         </div>
                     </div>
 
-                    <div className="p-6 bg-neutral-900 rounded-xl border border-amber-500/30">
-                        <h4 className="text-amber-400 font-bold mb-4 text-center text-lg">
-                            ⬅️ Left Turn = Anti-clockwise
+                    <div className="p-6 bg-neutral-900 rounded-xl border border-fuchsia-500/30 hover:border-fuchsia-500/50 transition-all">
+                        <h4 className="text-fuchsia-400 font-bold mb-4 text-center text-lg flex items-center justify-center gap-2">
+                            <RotateLeftIcon /> Left Turn = Anti-clockwise
                         </h4>
                         <div className="space-y-3 text-sm">
-                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-amber-500/10 transition-all">
+                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-fuchsia-500/10 transition-all">
                                 <span className="text-neutral-400">Facing North →</span>
                                 <span className="text-white font-bold">West</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-amber-500/10 transition-all">
+                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-fuchsia-500/10 transition-all">
                                 <span className="text-neutral-400">Facing East →</span>
                                 <span className="text-white font-bold">North</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-amber-500/10 transition-all">
+                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-fuchsia-500/10 transition-all">
                                 <span className="text-neutral-400">Facing South →</span>
                                 <span className="text-white font-bold">East</span>
                             </div>
-                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-amber-500/10 transition-all">
+                            <div className="flex justify-between items-center p-2 bg-black/50 rounded hover:bg-fuchsia-500/10 transition-all">
                                 <span className="text-neutral-400">Facing West →</span>
                                 <span className="text-white font-bold">South</span>
                             </div>
@@ -215,16 +211,16 @@ export default function DirectionSenseContent() {
             </ConceptSection>
 
             {/* TRACING PATH */}
-            <ConceptSection id="path" title="Tracing a Path — The Drawing Method" icon="🗺️">
-                <div className="bg-gradient-to-r from-emerald-900/20 to-transparent p-6 rounded-xl border-l-4 border-emerald-500 mb-6">
+            <ConceptSection id="path" title="Tracing a Path — The Drawing Method">
+                <div className="bg-gradient-to-r from-violet-900/20 to-transparent p-6 rounded-xl border-l-4 border-violet-500 mb-6">
                     <p className="text-lg">
                         <strong>Golden Rule:</strong> ALWAYS draw the path step by step.
-                        <span className="text-emerald-400"> Never try to solve in your head!</span>
+                        <span className="text-violet-400"> Never try to solve in your head!</span>
                     </p>
                 </div>
 
                 <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <h4 className="text-emerald-400 font-bold mb-4">The Method:</h4>
+                    <h4 className="text-violet-400 font-bold mb-4">The Method:</h4>
                     <ol className="list-decimal list-inside space-y-2 text-sm text-neutral-300">
                         <li>Draw a compass first (N pointing up)</li>
                         <li>Mark starting point as A</li>
@@ -280,34 +276,34 @@ export default function DirectionSenseContent() {
             </ConceptSection>
 
             {/* SHADOW PROBLEMS */}
-            <ConceptSection id="shadow" title="Shadow Problems — The Sun Rule" icon="☀️">
+            <ConceptSection id="shadow" title="Shadow Problems — The Sun Rule">
                 <p className="mb-4">
                     Shadow direction depends on where the Sun is. Master this simple rule:
                 </p>
 
                 <div className="bg-gradient-to-r from-amber-900/20 to-transparent p-6 rounded-xl border-l-4 border-amber-500 mb-6">
-                    <p className="text-2xl font-bold text-amber-400 text-center">
-                        Shadow falls OPPOSITE to the Sun
+                    <p className="text-2xl font-bold text-amber-400 text-center flex items-center justify-center gap-2">
+                        <WbSunnyIcon /> Shadow falls OPPOSITE to the Sun
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-amber-500/30 text-center">
-                        <div className="text-4xl mb-2">🌅</div>
+                        <div className="text-4xl mb-2 flex justify-center"><WbSunnyIcon className="text-amber-400" /></div>
                         <h4 className="text-amber-400 font-bold">Morning (6 AM - 12 PM)</h4>
                         <p className="text-sm text-neutral-300 mt-2">Sun in <strong>East</strong></p>
                         <p className="text-sm text-neutral-400">Shadow falls to <strong>West</strong></p>
                     </div>
 
                     <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-500/30 text-center">
-                        <div className="text-4xl mb-2">☀️</div>
+                        <div className="text-4xl mb-2 flex justify-center"><WbSunnyIcon className="text-yellow-200" /></div>
                         <h4 className="text-neutral-400 font-bold">Noon (12 PM)</h4>
                         <p className="text-sm text-neutral-300 mt-2">Sun <strong>overhead</strong></p>
                         <p className="text-sm text-neutral-400">Shadow <strong>shortest/below</strong></p>
                     </div>
 
                     <div className="p-5 bg-neutral-900 rounded-xl border border-orange-500/30 text-center">
-                        <div className="text-4xl mb-2">🌇</div>
+                        <div className="text-4xl mb-2 flex justify-center"><NightsStayIcon className="text-orange-400" /></div>
                         <h4 className="text-orange-400 font-bold">Evening (12 PM - 6 PM)</h4>
                         <p className="text-sm text-neutral-300 mt-2">Sun in <strong>West</strong></p>
                         <p className="text-sm text-neutral-400">Shadow falls to <strong>East</strong></p>
@@ -317,7 +313,7 @@ export default function DirectionSenseContent() {
                 <TipBox title="Solving Shadow + Person Direction">
                     <ol className="list-decimal list-inside text-sm space-y-1">
                         <li>First determine shadow direction (based on time)</li>
-                        <li>Then use person's orientation to find shadow position (left/right/front/back)</li>
+                        <li>Then use person&apos;s orientation to find shadow position (left/right/front/back)</li>
                         <li>When facing X, your right/left are RELATIVE to X</li>
                     </ol>
                 </TipBox>
@@ -332,7 +328,7 @@ export default function DirectionSenseContent() {
                             <p><strong>Step 2:</strong> Shadow falls to West (opposite of Sun)</p>
                             <p><strong>Step 3:</strong> Shadow is to his RIGHT</p>
                             <p><strong>Step 4:</strong> When facing South, your right is West ✓</p>
-                            <p className="text-sky-400"><strong>He is facing South</strong></p>
+                            <p className="text-violet-400"><strong>He is facing South</strong></p>
                         </div>
                     }
                     answer="South"
@@ -347,7 +343,7 @@ export default function DirectionSenseContent() {
                             <p><strong>Step 1:</strong> At 5 PM (evening), Sun is in West</p>
                             <p><strong>Step 2:</strong> Shadow falls to East</p>
                             <p><strong>Step 3:</strong> When facing North, East is to your RIGHT</p>
-                            <p className="text-sky-400"><strong>Shadow is to his Right</strong></p>
+                            <p className="text-violet-400"><strong>Shadow is to his Right</strong></p>
                         </div>
                     }
                     answer="To his Right"
@@ -359,13 +355,13 @@ export default function DirectionSenseContent() {
                     correctIndex={0}
                     explanation="At 7 AM, Sun is in East, shadow falls West. If facing West, shadow is in FRONT. Yes, it's possible!"
                 />
-            </ConceptSection>
+            </ConceptSection >
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            < ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" >
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Confusing Left/Right with Compass Directions</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CancelIcon className="text-red-400" /> Confusing Left/Right with Compass Directions</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Left/Right are RELATIVE to where you're facing. East/West are FIXED.
                             When facing North: Right = East. But facing South: Right = West!
@@ -373,31 +369,31 @@ export default function DirectionSenseContent() {
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Not Drawing the Diagram</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CancelIcon className="text-red-400" /> Not Drawing the Diagram</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             ALWAYS draw! It takes 10 seconds but prevents all calculation errors.
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Wrong Pythagoras Application</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CancelIcon className="text-red-400" /> Wrong Pythagoras Application</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Calculate NET N-S and NET E-W first, then apply √(a² + b²).
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Clockwise vs Anti-clockwise Confusion</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><CancelIcon className="text-red-400" /> Clockwise vs Anti-clockwise Confusion</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Think of a clock face. Right = clockwise = same as clock hands.
                             Left = anti-clockwise = opposite to clock hands.
                         </p>
                     </div>
                 </div>
-            </ConceptSection>
+            </ConceptSection >
 
             {/* CHEAT SHEET */}
-            <ConceptSection id="summary" title="Cheat Sheet">
+            < ConceptSection id="summary" title="Cheat Sheet" >
                 <CheatSheet
                     title="Direction Sense Master Reference"
                     rows={[
@@ -412,7 +408,7 @@ export default function DirectionSenseContent() {
                         { concept: 'Facing South: Right', formula: '\\text{West}' },
                     ]}
                 />
-            </ConceptSection>
-        </LessonLayout>
+            </ConceptSection >
+        </>
     );
 }

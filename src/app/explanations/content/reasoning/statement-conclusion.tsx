@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function StatementConclusionContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">💡</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-500 text-xs font-bold uppercase tracking-widest mb-2 border border-emerald-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Statement & Conclusion</h1>
-                    <p className="text-neutral-400 text-lg">Logic without emotion. Facts over feelings.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: CONCLUSION RULES */}
-            <ConceptSection id="conclusion" title="Statement & Conclusion" icon="📝">
+        <>
+            <ConceptSection id="conclusion" title="Statement & Conclusion">
                 <p>
                     A conclusion is a fact that can be <strong>100% derived</strong> from the statement.
                 </p>
@@ -61,7 +44,7 @@ export default function StatementConclusionContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: COURSE OF ACTION */}
-            <ConceptSection id="action" title="Course of Action" icon="🚀">
+            <ConceptSection id="action" title="Course of Action">
                 <p>
                     Given a problem, suggest a practical solution.
                 </p>
@@ -87,7 +70,7 @@ export default function StatementConclusionContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: ASSUMPTIONS */}
-            <ConceptSection id="assumption" title="Statement & Assumption" icon="💭">
+            <ConceptSection id="assumption" title="Statement & Assumption">
                 <p>
                     An assumption is the <strong>unspoken premise</strong> the speaker believes to be true.
                 </p>
@@ -106,7 +89,7 @@ export default function StatementConclusionContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: ARGUMENTS */}
-            <ConceptSection id="arguments" title="Strong vs Weak Arguments" icon="⚖️">
+            <ConceptSection id="arguments" title="Strong vs Weak Arguments">
                 <p>
                     "Should X be done?" Arguments must be evaluated for strength.
                 </p>
@@ -135,6 +118,6 @@ export default function StatementConclusionContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

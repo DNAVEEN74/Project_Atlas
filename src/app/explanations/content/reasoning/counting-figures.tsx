@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,24 +13,8 @@ import {
 
 export default function CountingFiguresContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">🔺</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-500 text-xs font-bold uppercase tracking-widest mb-2 border border-indigo-500/20">
-                        High Weightage
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Counting Figures</h1>
-                    <p className="text-neutral-400 text-lg">Don't count 1-by-1! Use the magic formulas.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: TRIANGLES */}
-            <ConceptSection id="triangles" title="Counting Triangles" icon="🔺">
+        <>
+            <ConceptSection id="triangles" title="Counting Triangles">
                 <p>Standard patterns appear in 90% of questions. Memorize these!</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
@@ -86,7 +69,7 @@ export default function CountingFiguresContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: SQUARES & RECTANGLES */}
-            <ConceptSection id="squares" title="Counting Squares & Rectangles" icon="⬜">
+            <ConceptSection id="squares" title="Counting Squares & Rectangles">
                 <p>For a Grid of size m × n:</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
@@ -116,7 +99,7 @@ export default function CountingFiguresContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: LINES & CIRCLES */}
-            <ConceptSection id="lines" title="Lines & Circles" icon="⚪">
+            <ConceptSection id="lines" title="Lines & Circles">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
                         <h4 className="text-white font-bold mb-2">Straight Lines</h4>
@@ -138,7 +121,7 @@ export default function CountingFiguresContent() {
             </ConceptSection>
 
             {/* EXAMPLE */}
-            <ConceptSection id="example" title="Solved Example" icon="📝">
+            <ConceptSection id="example" title="Solved Example">
                 <ExampleCard
                     number={1}
                     difficulty="hard"
@@ -176,6 +159,6 @@ export default function CountingFiguresContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

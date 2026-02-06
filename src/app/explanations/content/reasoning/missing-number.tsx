@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -11,34 +10,19 @@ import {
     CheckUnderstanding,
     CheatSheet
 } from '@/components/explanations';
+import { WarningIcon } from '@/components/icons';
 
 export default function MissingNumberContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-900/30 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] select-none">❓</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-500 text-xs font-bold uppercase tracking-widest mb-2 border border-yellow-500/20">
-                        Phase 01: Verbal Reasoning
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Missing Number in Figures</h1>
-                    <p className="text-neutral-400 text-lg">Decode the hidden pattern in geometric arrangements.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: THE APPROACH */}
-            <ConceptSection id="approach" title="The Universal Approach" icon="🧠">
+        <>
+            <ConceptSection id="approach" title="The Universal Approach">
                 <p>
                     These questions show numbers arranged in a pattern (triangle, circle, grid, etc.).
                     One number is replaced with "?" and you must find it.
                 </p>
 
-                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-yellow-500/30">
-                    <h4 className="text-yellow-400 font-bold mb-4 text-lg">The 3-Step Strategy</h4>
+                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-violet-500/30">
+                    <h4 className="text-violet-400 font-bold mb-4 text-lg">The 3-Step Strategy</h4>
                     <ol className="list-decimal list-inside space-y-4 text-neutral-300">
                         <li>
                             <strong>Identify the figure type:</strong> Is it a triangle, square, circle, or grid?
@@ -66,7 +50,7 @@ export default function MissingNumberContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: TRIANGLE PATTERNS */}
-            <ConceptSection id="triangle" title="Triangle Patterns" icon="🔺">
+            <ConceptSection id="triangle" title="Triangle Patterns">
                 <p>
                     Triangles typically have 3 numbers at corners and 1 at the center.
                     The center is usually derived from the corners.
@@ -74,28 +58,28 @@ export default function MissingNumberContent() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-yellow-400 font-bold mb-3">Pattern 1: Sum</h4>
+                        <h4 className="text-violet-400 font-bold mb-3">Pattern 1: Sum</h4>
                         <p className="text-sm text-neutral-400">Center = Sum of corners</p>
                         <div className="mt-3 text-center font-mono">
                             <div>3, 5, 7 → Center = 15</div>
                         </div>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-yellow-400 font-bold mb-3">Pattern 2: Sum ÷ Factor</h4>
+                        <h4 className="text-violet-400 font-bold mb-3">Pattern 2: Sum ÷ Factor</h4>
                         <p className="text-sm text-neutral-400">Center = (a + b + c) ÷ 3</p>
                         <div className="mt-3 text-center font-mono">
                             <div>9, 12, 15 → Center = 12</div>
                         </div>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-yellow-400 font-bold mb-3">Pattern 3: Sum of Squares</h4>
+                        <h4 className="text-violet-400 font-bold mb-3">Pattern 3: Sum of Squares</h4>
                         <p className="text-sm text-neutral-400">Center = a² + b² + c²</p>
                         <div className="mt-3 text-center font-mono">
                             <div>2, 3, 4 → Center = 29</div>
                         </div>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-yellow-400 font-bold mb-3">Pattern 4: Product</h4>
+                        <h4 className="text-violet-400 font-bold mb-3">Pattern 4: Product</h4>
                         <p className="text-sm text-neutral-400">Center = a × b × c</p>
                         <div className="mt-3 text-center font-mono">
                             <div>2, 3, 5 → Center = 30</div>
@@ -128,14 +112,14 @@ export default function MissingNumberContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: SQUARE/GRID PATTERNS */}
-            <ConceptSection id="grid" title="Square & Grid Patterns" icon="⬜">
+            <ConceptSection id="grid" title="Square & Grid Patterns">
                 <p>
                     Grids (3×3 or 2×2) often have row-wise, column-wise, or diagonal patterns.
                 </p>
 
                 <div className="my-6 space-y-4">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-yellow-400 font-bold mb-2">Common Grid Patterns</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">Common Grid Patterns</h4>
                         <ul className="text-sm text-neutral-300 space-y-2">
                             <li><strong>Row-wise Sum:</strong> Each row has same sum</li>
                             <li><strong>Col + Row:</strong> Each cell = Row sum + Col sum</li>
@@ -170,7 +154,7 @@ export default function MissingNumberContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: CIRCLE PATTERNS */}
-            <ConceptSection id="circle" title="Circle Patterns" icon="🔵">
+            <ConceptSection id="circle" title="Circle Patterns">
                 <p>
                     Circles usually have a center number with outer numbers arranged around.
                     The pattern typically involves the center as result of operations on outer numbers.
@@ -178,12 +162,12 @@ export default function MissingNumberContent() {
 
                 <div className="grid grid-cols-2 gap-4 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-yellow-400 font-bold mb-2">Opposite Relationship</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">Opposite Relationship</h4>
                         <p className="text-sm text-neutral-400">Numbers opposite to each other are related</p>
                         <p className="text-xs text-neutral-500 mt-1">E.g., Opposite sum = Center</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-yellow-400 font-bold mb-2">Rotational Pattern</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">Rotational Pattern</h4>
                         <p className="text-sm text-neutral-400">Numbers increase/decrease clockwise</p>
                         <p className="text-xs text-neutral-500 mt-1">E.g., +2 each step clockwise</p>
                     </div>
@@ -221,22 +205,22 @@ export default function MissingNumberContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes to Avoid" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes to Avoid">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Mistake 1: Testing only ONE figure</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Mistake 1: Testing only ONE figure</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Your pattern MUST work for ALL figures in the question, not just one.
                         </p>
                     </div>
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Mistake 2: Ignoring the figure structure</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Mistake 2: Ignoring the figure structure</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             The arrangement matters! Clock-wise, diagonal, or adjacent relationships differ.
                         </p>
                     </div>
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Mistake 3: Overcomplicating</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Mistake 3: Overcomplicating</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             SSC rarely uses patterns beyond: Sum, Product, Squares/Cubes, Simple arithmetic.
                         </p>
@@ -257,6 +241,6 @@ export default function MissingNumberContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

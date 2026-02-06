@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,28 +13,8 @@ import {
 
 export default function MirrorWaterImageContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-5xl select-none font-mono tracking-widest">
-                        <span className="text-white">F</span>
-                        <span className="text-neutral-600 mx-4">│</span>
-                        <span className="text-cyan-400" style={{ transform: 'scaleX(-1)', display: 'inline-block' }}>F</span>
-                    </div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-500 text-xs font-bold uppercase tracking-widest mb-2 border border-cyan-500/20">
-                        Phase 02: Visual Reasoning
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Mirror & Water Image</h1>
-                    <p className="text-neutral-400 text-lg">Master reflections like a pro.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: MIRROR IMAGE */}
-            <ConceptSection id="mirror" title="Mirror Image: The Rule" icon="🪞">
+        <>
+            <ConceptSection id="mirror" title="Mirror Image: The Rule">
                 <p>
                     When you stand before a mirror, your left hand appears as right, and vice versa.
                     <strong>But top and bottom stay the same.</strong>
@@ -100,7 +79,7 @@ export default function MirrorWaterImageContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: WATER IMAGE */}
-            <ConceptSection id="water" title="Water Image: The Rule" icon="💧">
+            <ConceptSection id="water" title="Water Image: The Rule">
                 <p>
                     A water image is like looking at a reflection in a pond.
                     <strong>Top and bottom swap, but left and right stay the same.</strong>
@@ -144,7 +123,7 @@ export default function MirrorWaterImageContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: KEY DIFFERENCES */}
-            <ConceptSection id="difference" title="Mirror vs Water: Quick Comparison" icon="🔍">
+            <ConceptSection id="difference" title="Mirror vs Water: Quick Comparison">
                 <div className="overflow-x-auto my-6">
                     <table className="w-full text-sm text-left">
                         <thead className="bg-neutral-900 text-neutral-300">
@@ -181,7 +160,7 @@ export default function MirrorWaterImageContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: CLOCK IN MIRROR */}
-            <ConceptSection id="clock" title="Clock in Mirror: Special Case" icon="🕐">
+            <ConceptSection id="clock" title="Clock in Mirror: Special Case">
                 <p>
                     Clocks in mirrors are a favorite exam question! Here's the trick:
                 </p>
@@ -246,6 +225,6 @@ export default function MirrorWaterImageContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

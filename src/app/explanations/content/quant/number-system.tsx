@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -11,166 +10,133 @@ import {
     CheckUnderstanding,
     CheatSheet
 } from '@/components/explanations';
+import {
+    TargetIcon,
+    KeyIcon,
+    LoopIcon,
+    StarIcon,
+    FlashIcon,
+    NumbersIcon,
+    CancelIcon,
+    CheckCircleIcon,
+    CheckIcon,
+    CloseIcon
+} from '@/components/icons';
 
 export default function NumberSystemContent() {
     return (
-        <LessonLayout>
-            {/* HERO SECTION */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl group">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/40 via-neutral-900 to-black" />
-
-                {/* Animated numbers background */}
-                <div className="absolute inset-0 overflow-hidden">
-                    {[...Array(20)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="absolute text-4xl font-bold text-indigo-500/10 animate-pulse"
-                            style={{
-                                left: `${Math.random() * 100}%`,
-                                top: `${Math.random() * 100}%`,
-                                animationDelay: `${i * 0.2}s`,
-                                animationDuration: `${2 + Math.random() * 2}s`
-                            }}
-                        >
-                            {Math.floor(Math.random() * 10)}
-                        </div>
-                    ))}
-                </div>
-
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[8rem] font-black text-indigo-500/20 select-none animate-bounce" style={{ animationDuration: '3s' }}>
-                        123
-                    </div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-500 text-xs font-bold uppercase tracking-widest mb-2 border border-indigo-500/20">
-                        Phase 01: The Foundation
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Number System</h1>
-                    <p className="text-neutral-400 text-lg">The building blocks of all mathematics — master these, master everything.</p>
-                </div>
-            </div>
-
-            {/* WHY THIS MATTERS */}
-            <ConceptSection id="why" title="Why Numbers Matter" icon="🌟">
-                <div className="bg-gradient-to-r from-indigo-900/20 to-transparent p-6 rounded-xl border-l-4 border-indigo-500 mb-6">
-                    <p className="text-lg">
-                        <strong>Imagine this:</strong> You're at a shop buying 3 chocolates worth ₹27 each.
+        <>
+            <ConceptSection id="why" title="Why Numbers Matter">
+                <FormulaBox title="Imagine this">
+                    <p>
+                        You're at a shop buying 3 chocolates worth ₹27 each.
                         The shopkeeper says "That's ₹82." Without number sense, you'd just pay.
-                        <span className="text-indigo-400"> But YOU will know instantly: 27 × 3 = 81, not 82!</span>
+                        <span className="text-amber-400 block mt-2">But YOU will know instantly: 27 × 3 = 81, not 82!</span>
                     </p>
-                </div>
+                </FormulaBox>
 
                 <p>
                     Numbers are everywhere — your phone number, your age, prices, distances, time. In SSC CGL,
                     <strong> 8-10 questions directly test number concepts</strong>, and almost ALL questions use numbers somehow.
                 </p>
 
-                <div className="mt-6 p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <h4 className="text-indigo-400 font-bold mb-2">🎯 What You'll Learn</h4>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-neutral-300">
-                        <li>✓ Types of numbers (Natural, Whole, Integers...)</li>
-                        <li>✓ Divisibility rules (check div by 3, 7, 11 instantly)</li>
-                        <li>✓ Finding unit digits (last digit of big powers)</li>
-                        <li>✓ Remainders and division tricks</li>
-                        <li>✓ Prime numbers and factorization</li>
-                        <li>✓ LCM & HCF shortcuts</li>
+                <div className="mt-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
+                    <div className="flex items-center gap-3 mb-4">
+                        <TargetIcon className="text-amber-400" />
+                        <h4 className="text-amber-400 font-bold">What You'll Learn</h4>
+                    </div>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-neutral-300">
+                        <li className="flex items-start gap-2"><CheckIcon className="text-emerald-500 shrink-0 mt-0.5" fontSize="small" /> Types of numbers (Natural, Whole, Integers...)</li>
+                        <li className="flex items-start gap-2"><CheckIcon className="text-emerald-500 shrink-0 mt-0.5" fontSize="small" /> Divisibility rules (check div by 3, 7, 11 instantly)</li>
+                        <li className="flex items-start gap-2"><CheckIcon className="text-emerald-500 shrink-0 mt-0.5" fontSize="small" /> Finding unit digits (last digit of big powers)</li>
+                        <li className="flex items-start gap-2"><CheckIcon className="text-emerald-500 shrink-0 mt-0.5" fontSize="small" /> Remainders and division tricks</li>
+                        <li className="flex items-start gap-2"><CheckIcon className="text-emerald-500 shrink-0 mt-0.5" fontSize="small" /> Prime numbers and factorization</li>
+                        <li className="flex items-start gap-2"><CheckIcon className="text-emerald-500 shrink-0 mt-0.5" fontSize="small" /> LCM & HCF shortcuts</li>
                     </ul>
                 </div>
             </ConceptSection>
 
             {/* TYPES OF NUMBERS */}
-            <ConceptSection id="types" title="The Number Family Tree" icon="🌳">
+            <ConceptSection id="types" title="The Number Family Tree">
                 <p className="mb-6">
                     Think of numbers like a family. Each generation adds new members:
                 </p>
 
                 {/* Animated family tree visualization */}
-                <div className="relative my-8 p-6 bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500" />
-
-                    <div className="space-y-6">
-                        {/* Natural Numbers */}
-                        <div className="relative pl-8 py-4 border-l-2 border-emerald-500 hover:bg-emerald-500/5 transition-colors rounded-r-xl">
-                            <div className="absolute -left-3 top-4 w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center text-xs font-bold text-white">1</div>
-                            <h4 className="text-emerald-400 font-bold text-lg">Natural Numbers (N)</h4>
-                            <p className="text-neutral-400 text-sm mb-2">The counting numbers you learned as a baby</p>
-                            <div className="flex flex-wrap gap-2">
-                                {[1, 2, 3, 4, 5].map(n => (
-                                    <span key={n} className="px-3 py-1 bg-emerald-500/20 rounded-full text-emerald-400 text-sm font-mono animate-pulse" style={{ animationDelay: `${n * 0.1}s` }}>
-                                        {n}
-                                    </span>
-                                ))}
-                                <span className="px-3 py-1 text-neutral-500">... ∞</span>
-                            </div>
-                            <p className="text-xs text-neutral-500 mt-2 italic">"One apple, two apples, three apples..."</p>
+                {/* Animated family tree visualization - Amber Theme */}
+                <div className="my-8 space-y-4">
+                    {/* Natural Numbers */}
+                    <div className="p-4 bg-neutral-900 rounded-lg border border-neutral-800 hover:border-amber-500/30 transition-colors">
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="text-xs font-bold text-neural-500 uppercase tracking-wider">01</span>
+                            <h4 className="font-medium text-amber-400">Natural Numbers (N)</h4>
                         </div>
-
-                        {/* Whole Numbers */}
-                        <div className="relative pl-8 py-4 border-l-2 border-blue-500 hover:bg-blue-500/5 transition-colors rounded-r-xl">
-                            <div className="absolute -left-3 top-4 w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center text-xs font-bold text-white">2</div>
-                            <h4 className="text-blue-400 font-bold text-lg">Whole Numbers (W)</h4>
-                            <p className="text-neutral-400 text-sm mb-2">Natural numbers + zero (when you have nothing)</p>
-                            <div className="flex flex-wrap gap-2">
-                                <span className="px-3 py-1 bg-blue-500/30 rounded-full text-blue-300 text-sm font-mono border border-blue-500">0</span>
-                                {[1, 2, 3, 4, 5].map(n => (
-                                    <span key={n} className="px-3 py-1 bg-blue-500/20 rounded-full text-blue-400 text-sm font-mono">
-                                        {n}
-                                    </span>
-                                ))}
-                                <span className="px-3 py-1 text-neutral-500">... ∞</span>
-                            </div>
-                            <p className="text-xs text-neutral-500 mt-2 italic">"I have zero chocolates left 😢"</p>
+                        <p className="text-neutral-400 text-sm mb-3 pl-6">The counting numbers you learned as a baby.</p>
+                        <div className="flex flex-wrap gap-2 pl-6">
+                            {[1, 2, 3, 4, 5].map(n => (
+                                <span key={n} className="font-mono text-sm text-neutral-300">{n}</span>
+                            ))}
+                            <span className="text-neutral-500 text-sm">...</span>
                         </div>
+                    </div>
 
-                        {/* Integers */}
-                        <div className="relative pl-8 py-4 border-l-2 border-purple-500 hover:bg-purple-500/5 transition-colors rounded-r-xl">
-                            <div className="absolute -left-3 top-4 w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-xs font-bold text-white">3</div>
-                            <h4 className="text-purple-400 font-bold text-lg">Integers (Z)</h4>
-                            <p className="text-neutral-400 text-sm mb-2">Whole numbers + negative numbers (for debt, temperature below zero)</p>
-                            <div className="flex flex-wrap gap-2">
-                                <span className="px-3 py-1 text-neutral-500">-∞ ...</span>
-                                {[-3, -2, -1, 0, 1, 2, 3].map(n => (
-                                    <span key={n} className={`px-3 py-1 rounded-full text-sm font-mono ${n < 0 ? 'bg-red-500/20 text-red-400' : n === 0 ? 'bg-purple-500/30 text-purple-300 border border-purple-500' : 'bg-purple-500/20 text-purple-400'}`}>
-                                        {n > 0 ? `+${n}` : n}
-                                    </span>
-                                ))}
-                                <span className="px-3 py-1 text-neutral-500">... +∞</span>
-                            </div>
-                            <p className="text-xs text-neutral-500 mt-2 italic">"It's -5°C outside!" or "I owe ₹100 (-100)"</p>
+                    {/* Whole Numbers */}
+                    <div className="p-4 bg-neutral-900 rounded-lg border border-neutral-800 hover:border-amber-500/30 transition-colors">
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="text-xs font-bold text-neutral-500 uppercase tracking-wider">02</span>
+                            <h4 className="font-medium text-amber-400">Whole Numbers (W)</h4>
                         </div>
-
-                        {/* Rational Numbers */}
-                        <div className="relative pl-8 py-4 border-l-2 border-amber-500 hover:bg-amber-500/5 transition-colors rounded-r-xl">
-                            <div className="absolute -left-3 top-4 w-6 h-6 rounded-full bg-amber-500 flex items-center justify-center text-xs font-bold text-white">4</div>
-                            <h4 className="text-amber-400 font-bold text-lg">Rational Numbers (Q)</h4>
-                            <p className="text-neutral-400 text-sm mb-2">Any number that can be written as a fraction p/q (q ≠ 0)</p>
-                            <div className="flex flex-wrap gap-3">
-                                {['1/2', '3/4', '-2/3', '0.5', '0.333...', '7'].map((n, i) => (
-                                    <span key={i} className="px-3 py-1 bg-amber-500/20 rounded-full text-amber-400 text-sm font-mono">
-                                        {n}
-                                    </span>
-                                ))}
-                            </div>
-                            <p className="text-xs text-neutral-500 mt-2 italic">"Half a pizza = 1/2 = 0.5"</p>
+                        <p className="text-neutral-400 text-sm mb-3 pl-6">Natural numbers + zero.</p>
+                        <div className="flex flex-wrap gap-2 pl-6">
+                            <span className="font-mono text-sm text-amber-500 font-bold">0</span>
+                            {[1, 2, 3, 4, 5].map(n => (
+                                <span key={n} className="font-mono text-sm text-neutral-300">{n}</span>
+                            ))}
+                            <span className="text-neutral-500 text-sm">...</span>
                         </div>
+                    </div>
 
-                        {/* Irrational Numbers */}
-                        <div className="relative pl-8 py-4 border-l-2 border-rose-500 hover:bg-rose-500/5 transition-colors rounded-r-xl">
-                            <div className="absolute -left-3 top-4 w-6 h-6 rounded-full bg-rose-500 flex items-center justify-center text-xs font-bold text-white">5</div>
-                            <h4 className="text-rose-400 font-bold text-lg">Irrational Numbers</h4>
-                            <p className="text-neutral-400 text-sm mb-2">Numbers that CANNOT be written as simple fractions (infinite non-repeating decimals)</p>
-                            <div className="flex flex-wrap gap-3">
-                                {['√2', '√3', 'π', 'e'].map((n, i) => (
-                                    <span key={i} className="px-3 py-1 bg-rose-500/20 rounded-full text-rose-400 text-sm font-mono">
-                                        {n}
-                                    </span>
-                                ))}
-                            </div>
-                            <p className="text-xs text-neutral-500 mt-2">
-                                <span className="font-mono">√2 = 1.41421356...</span> (goes on forever, never repeats!)
-                            </p>
+                    {/* Integers */}
+                    <div className="p-4 bg-neutral-900 rounded-lg border border-neutral-800 hover:border-amber-500/30 transition-colors">
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="text-xs font-bold text-neutral-500 uppercase tracking-wider">03</span>
+                            <h4 className="font-medium text-amber-400">Integers (Z)</h4>
+                        </div>
+                        <p className="text-neutral-400 text-sm mb-3 pl-6">Whole numbers + negative numbers.</p>
+                        <div className="flex flex-wrap gap-2 pl-6">
+                            <span className="text-neutral-500 text-sm">...</span>
+                            {[-2, -1, 0, 1, 2].map(n => (
+                                <span key={n} className="font-mono text-sm text-neutral-300">{n}</span>
+                            ))}
+                            <span className="text-neutral-500 text-sm">...</span>
+                        </div>
+                    </div>
+
+                    {/* Rational Numbers */}
+                    <div className="p-4 bg-neutral-900 rounded-lg border border-neutral-800 hover:border-amber-500/30 transition-colors">
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="text-xs font-bold text-neutral-500 uppercase tracking-wider">04</span>
+                            <h4 className="font-medium text-amber-400">Rational Numbers (Q)</h4>
+                        </div>
+                        <p className="text-neutral-400 text-sm mb-3 pl-6">Can be written as p/q.</p>
+                        <div className="flex flex-wrap gap-3 pl-6">
+                            {['1/2', '0.5', '-2/3', '7'].map((n, i) => (
+                                <span key={i} className="font-mono text-sm text-neutral-300 bg-neutral-800 px-1.5 rounded">{n}</span>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Irrational Numbers */}
+                    <div className="p-4 bg-neutral-900 rounded-lg border border-neutral-800 hover:border-amber-500/30 transition-colors">
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="text-xs font-bold text-neutral-500 uppercase tracking-wider">05</span>
+                            <h4 className="font-medium text-amber-400">Irrational Numbers</h4>
+                        </div>
+                        <p className="text-neutral-400 text-sm mb-3 pl-6">Cannot be written as fractions. Infinite non-repeating.</p>
+                        <div className="flex flex-wrap gap-3 pl-6">
+                            {['√2', 'π', 'e'].map((n, i) => (
+                                <span key={i} className="font-mono text-sm text-neutral-300 bg-neutral-800 px-1.5 rounded">{n}</span>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -191,7 +157,7 @@ export default function NumberSystemContent() {
             </ConceptSection>
 
             {/* DIVISIBILITY RULES */}
-            <ConceptSection id="divisibility" title="Divisibility Rules — Your Superpowers" icon="⚡">
+            <ConceptSection id="divisibility" title="Divisibility Rules — Your Superpowers">
                 <p className="mb-4">
                     Imagine you're in an exam. You see <strong>7284</strong>. Is it divisible by 4? By 9? By 11?
                     You can't use a calculator. But with these rules, <span className="text-indigo-400">you'll know in SECONDS!</span>
@@ -199,120 +165,98 @@ export default function NumberSystemContent() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-8">
                     {/* Div by 2 */}
-                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-emerald-500/50 transition-all hover:transform hover:scale-105">
+                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-amber-500/50 transition-all hover:transform hover:scale-105">
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-lg">2</div>
-                            <h4 className="text-emerald-400 font-bold">Divisible by 2</h4>
+                            <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-amber-400 font-bold text-lg border border-neutral-700">2</div>
+                            <h4 className="text-white font-bold">Divisible by 2</h4>
                         </div>
                         <p className="text-sm text-neutral-400 mb-3">Last digit is <strong className="text-white">even</strong> (0, 2, 4, 6, 8)</p>
                         <div className="flex gap-2 flex-wrap">
-                            <span className="px-2 py-1 bg-emerald-500/20 text-emerald-400 text-xs rounded">1234 ✓</span>
-                            <span className="px-2 py-1 bg-red-500/20 text-red-400 text-xs rounded">1235 ✗</span>
+                            <span className="px-2 py-1 bg-emerald-900/30 text-emerald-400 text-xs rounded border border-emerald-900/50">1234 ✓</span>
+                            <span className="px-2 py-1 bg-red-900/30 text-red-400 text-xs rounded border border-red-900/50">1235 ✗</span>
                         </div>
                     </div>
 
                     {/* Div by 3 */}
-                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-blue-500/50 transition-all hover:transform hover:scale-105">
+                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-amber-500/50 transition-all hover:transform hover:scale-105">
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold text-lg">3</div>
-                            <h4 className="text-blue-400 font-bold">Divisible by 3</h4>
+                            <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-amber-400 font-bold text-lg border border-neutral-700">3</div>
+                            <h4 className="text-white font-bold">Divisible by 3</h4>
                         </div>
                         <p className="text-sm text-neutral-400 mb-3">Sum of digits divisible by 3</p>
-                        <div className="text-xs space-y-1">
-                            <p><span className="text-white">123</span> → 1+2+3 = 6 (÷3 ✓)</p>
-                            <p><span className="text-white">124</span> → 1+2+4 = 7 (÷3 ✗)</p>
+                        <div className="text-xs space-y-1 font-mono text-neutral-400">
+                            <p>123 → 1+2+3 = 6 (✓)</p>
+                            <p>124 → 1+2+4 = 7 (✗)</p>
                         </div>
                     </div>
 
                     {/* Div by 4 */}
-                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-purple-500/50 transition-all hover:transform hover:scale-105">
+                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-amber-500/50 transition-all hover:transform hover:scale-105">
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold text-lg">4</div>
-                            <h4 className="text-purple-400 font-bold">Divisible by 4</h4>
+                            <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-amber-400 font-bold text-lg border border-neutral-700">4</div>
+                            <h4 className="text-white font-bold">Divisible by 4</h4>
                         </div>
                         <p className="text-sm text-neutral-400 mb-3">Last <strong className="text-white">2 digits</strong> divisible by 4</p>
-                        <div className="text-xs space-y-1">
-                            <p><span className="text-white">7316</span> → 16 ÷ 4 = 4 ✓</p>
-                            <p><span className="text-white">7318</span> → 18 ÷ 4 = 4.5 ✗</p>
+                        <div className="text-xs space-y-1 font-mono text-neutral-400">
+                            <p>7316 → 16 ÷ 4 = 4 ✓</p>
                         </div>
                     </div>
 
                     {/* Div by 5 */}
                     <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-amber-500/50 transition-all hover:transform hover:scale-105">
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-lg">5</div>
-                            <h4 className="text-amber-400 font-bold">Divisible by 5</h4>
+                            <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-amber-400 font-bold text-lg border border-neutral-700">5</div>
+                            <h4 className="text-white font-bold">Divisible by 5</h4>
                         </div>
                         <p className="text-sm text-neutral-400 mb-3">Last digit is <strong className="text-white">0 or 5</strong></p>
-                        <div className="flex gap-2 flex-wrap">
-                            <span className="px-2 py-1 bg-amber-500/20 text-amber-400 text-xs rounded">145 ✓</span>
-                            <span className="px-2 py-1 bg-amber-500/20 text-amber-400 text-xs rounded">280 ✓</span>
-                        </div>
                     </div>
 
                     {/* Div by 6 */}
-                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-pink-500/50 transition-all hover:transform hover:scale-105">
+                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-amber-500/50 transition-all hover:transform hover:scale-105">
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center text-pink-400 font-bold text-lg">6</div>
-                            <h4 className="text-pink-400 font-bold">Divisible by 6</h4>
+                            <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-amber-400 font-bold text-lg border border-neutral-700">6</div>
+                            <h4 className="text-white font-bold">Divisible by 6</h4>
                         </div>
                         <p className="text-sm text-neutral-400 mb-3">Divisible by <strong className="text-white">BOTH 2 AND 3</strong></p>
-                        <div className="text-xs">
-                            <p><span className="text-white">126</span> → Even ✓ AND 1+2+6=9 (÷3) ✓</p>
-                        </div>
                     </div>
 
                     {/* Div by 8 */}
-                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-cyan-500/50 transition-all hover:transform hover:scale-105">
+                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-amber-500/50 transition-all hover:transform hover:scale-105">
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold text-lg">8</div>
-                            <h4 className="text-cyan-400 font-bold">Divisible by 8</h4>
+                            <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-amber-400 font-bold text-lg border border-neutral-700">8</div>
+                            <h4 className="text-white font-bold">Divisible by 8</h4>
                         </div>
                         <p className="text-sm text-neutral-400 mb-3">Last <strong className="text-white">3 digits</strong> divisible by 8</p>
-                        <div className="text-xs space-y-1">
-                            <p><span className="text-white">7120</span> → 120 ÷ 8 = 15 ✓</p>
-                            <p><span className="text-white">7124</span> → 124 ÷ 8 = 15.5 ✗</p>
-                        </div>
                     </div>
 
                     {/* Div by 9 */}
-                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-orange-500/50 transition-all hover:transform hover:scale-105">
+                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-amber-500/50 transition-all hover:transform hover:scale-105">
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center text-orange-400 font-bold text-lg">9</div>
-                            <h4 className="text-orange-400 font-bold">Divisible by 9</h4>
+                            <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-amber-400 font-bold text-lg border border-neutral-700">9</div>
+                            <h4 className="text-white font-bold">Divisible by 9</h4>
                         </div>
                         <p className="text-sm text-neutral-400 mb-3">Sum of digits divisible by <strong className="text-white">9</strong></p>
-                        <div className="text-xs space-y-1">
-                            <p><span className="text-white">729</span> → 7+2+9 = 18 (÷9 ✓)</p>
-                            <p><span className="text-white">724</span> → 7+2+4 = 13 (÷9 ✗)</p>
-                        </div>
                     </div>
 
                     {/* Div by 10 */}
-                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-lime-500/50 transition-all hover:transform hover:scale-105">
+                    <div className="group p-5 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-amber-500/50 transition-all hover:transform hover:scale-105">
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="w-10 h-10 rounded-lg bg-lime-500/20 flex items-center justify-center text-lime-400 font-bold text-lg">10</div>
-                            <h4 className="text-lime-400 font-bold">Divisible by 10</h4>
+                            <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-amber-400 font-bold text-lg border border-neutral-700">10</div>
+                            <h4 className="text-white font-bold">Divisible by 10</h4>
                         </div>
                         <p className="text-sm text-neutral-400 mb-3">Last digit is <strong className="text-white">0</strong></p>
-                        <div className="flex gap-2 flex-wrap">
-                            <span className="px-2 py-1 bg-lime-500/20 text-lime-400 text-xs rounded">1230 ✓</span>
-                            <span className="px-2 py-1 bg-red-500/20 text-red-400 text-xs rounded">1235 ✗</span>
-                        </div>
                     </div>
 
                     {/* Div by 11 - IMPORTANT */}
-                    <div className="group p-5 bg-neutral-900 rounded-xl border border-indigo-500/50 hover:border-indigo-500 transition-all hover:transform hover:scale-105 relative overflow-hidden">
-                        <div className="absolute top-2 right-2 px-2 py-0.5 bg-indigo-500 text-xs text-white rounded font-bold">SSC FAVORITE</div>
+                    <div className="group p-5 bg-neutral-900 rounded-xl border border-amber-500/50 transition-all hover:transform hover:scale-105 relative overflow-hidden">
+                        <div className="absolute top-2 right-2 px-2 py-0.5 bg-amber-500 text-xs text-black rounded font-bold">SSC FAVORITE</div>
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold text-lg">11</div>
-                            <h4 className="text-indigo-400 font-bold">Divisible by 11</h4>
+                            <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 font-bold text-lg border border-amber-500/50">11</div>
+                            <h4 className="text-amber-400 font-bold">Divisible by 11</h4>
                         </div>
                         <p className="text-sm text-neutral-400 mb-3">(Sum of odd positions) − (Sum of even positions) = 0 or 11</p>
-                        <div className="text-xs space-y-2 font-mono">
-                            <p><span className="text-white">1 2 1 → (1+1) - (2) = 0 ✓</span></p>
-                            <p className="text-neutral-500">Positions: 1st, 2nd, 3rd</p>
-                        </div>
+                        <span className="px-2 py-1 bg-emerald-900/30 text-emerald-400 text-xs rounded border border-emerald-900/50 flex items-center gap-1">1234 <CheckIcon fontSize="inherit" /></span>
+                        <span className="px-2 py-1 bg-red-900/30 text-red-400 text-xs rounded border border-red-900/50 flex items-center gap-1">1235 <CloseIcon fontSize="inherit" /></span>
                     </div>
                 </div>
 
@@ -324,7 +268,7 @@ export default function NumberSystemContent() {
                         <div className="space-y-2">
                             <p><strong>For divisibility by 6:</strong> Must be divisible by BOTH 2 AND 3</p>
                             <p><strong>Check div by 2:</strong> Last digit = 0 (even) ✓</p>
-                            <p><strong>Check div by 3:</strong> Sum = 9+1+8+7+2+0 = 27, and 27÷3 = 9 ✓</p>
+                            <p><strong>Check div by 3:</strong> Sum = 9+1+8+7+2+0 = 27, and 27÷3 = 9 <CheckIcon fontSize="inherit" className="text-emerald-500 inline align-middle" /></p>
                             <p className="text-emerald-400">Both conditions satisfied → <strong>YES!</strong></p>
                         </div>
                     }
@@ -342,8 +286,8 @@ export default function NumberSystemContent() {
                             <p><strong>Even positions (2nd, 4th, 6th):</strong> * + 4 + 2 = * + 6</p>
                             <p><strong>Difference:</strong> 18 − (* + 6) = 12 − *</p>
                             <p>For div by 11: 12 − * = 0 or 11</p>
-                            <p>If 12 − * = 0 → * = 12 (not a single digit ✗)</p>
-                            <p>If 12 − * = 11 → * = 1 ✓</p>
+                            <p>If 12 − * = 0 → * = 12 (not a single digit <CloseIcon fontSize="inherit" className="text-red-500 inline align-middle" />)</p>
+                            <p>If 12 − * = 11 → * = 1 <CheckIcon fontSize="inherit" className="text-emerald-500 inline align-middle" /></p>
                         </div>
                     }
                     answer="* = 1"
@@ -358,26 +302,33 @@ export default function NumberSystemContent() {
             </ConceptSection>
 
             {/* UNIT DIGIT - CYCLICITY */}
-            <ConceptSection id="unit-digit" title="The Magic of Unit Digits" icon="🔮">
+            <ConceptSection id="unit-digit" title="The Magic of Unit Digits">
                 <p className="mb-4">
                     What's the last digit of <MathText>{`7^{92}`}</MathText>? It looks impossible, but there's a beautiful pattern!
                 </p>
 
-                <div className="bg-gradient-to-r from-purple-900/20 to-transparent p-6 rounded-xl border-l-4 border-purple-500 mb-8">
-                    <h4 className="text-purple-400 font-bold mb-2">🔑 The Key Insight</h4>
-                    <p>
-                        When you multiply numbers, the <strong>unit digit of the result</strong> only depends on the
-                        <strong> unit digits of the numbers being multiplied!</strong>
-                    </p>
-                    <p className="mt-2 text-neutral-400 text-sm">
-                        7 × 7 = 49 (unit digit 9) <br />
-                        17 × 27 = 459 (unit digit 9) — same!
-                    </p>
-                </div>
+                <FormulaBox title="The Key Insight">
+                    <div className="flex items-start gap-2">
+                        <KeyIcon className="text-amber-500 mt-1 shrink-0" />
+                        <div>
+                            <p>
+                                When you multiply numbers, the <strong>unit digit of the result</strong> only depends on the
+                                <strong> unit digits of the numbers being multiplied!</strong>
+                            </p>
+                            <p className="mt-2 text-neutral-400 text-sm">
+                                7 × 7 = 49 (unit digit 9) <br />
+                                17 × 27 = 459 (unit digit 9) — same!
+                            </p>
+                        </div>
+                    </div>
+                </FormulaBox>
 
                 {/* Cyclicity table */}
                 <div className="my-8">
-                    <h4 className="text-lg font-bold text-white mb-4 text-center">🔄 The Cyclicity Pattern</h4>
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                        <LoopIcon className="text-white" />
+                        <h4 className="text-lg font-bold text-white text-center">The Cyclicity Pattern</h4>
+                    </div>
                     <p className="text-center text-neutral-400 mb-6">Unit digits repeat in cycles. Memorize these!</p>
 
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -394,14 +345,13 @@ export default function NumberSystemContent() {
                                     <span className="text-white font-mono">4</span>
                                 </div>
                                 <div className="flex justify-between px-4">
-                                    <span className="text-neutral-500">2³</span>
                                     <span className="text-white font-mono">8</span>
                                 </div>
                                 <div className="flex justify-between px-4">
                                     <span className="text-neutral-500">2⁴</span>
                                     <span className="text-white font-mono">6</span>
                                 </div>
-                                <div className="flex justify-between px-4 text-emerald-400">
+                                <div className="flex justify-between px-4 text-amber-400">
                                     <span>2⁵</span>
                                     <span className="font-mono">2 ↺</span>
                                 </div>
@@ -464,7 +414,10 @@ export default function NumberSystemContent() {
 
                         {/* Special: 0, 1, 5, 6 */}
                         <div className="p-4 bg-neutral-900 rounded-xl border border-amber-500/50 transition-colors col-span-2">
-                            <div className="text-amber-400 font-bold text-center mb-2">🌟 SPECIAL: Cycle = 1</div>
+                            <div className="flex items-center justify-center gap-2 mb-2 text-amber-400 font-bold">
+                                <StarIcon />
+                                <span>SPECIAL: Cycle = 1</span>
+                            </div>
                             <p className="text-neutral-400 text-sm text-center mb-3">These digits NEVER change!</p>
                             <div className="flex justify-center gap-4">
                                 {[0, 1, 5, 6].map(n => (
@@ -515,12 +468,12 @@ export default function NumberSystemContent() {
             </ConceptSection>
 
             {/* PRIME NUMBERS */}
-            <ConceptSection id="primes" title="Prime Numbers — The Atoms of Math" icon="⚛️">
-                <div className="bg-gradient-to-r from-rose-900/20 to-transparent p-6 rounded-xl border-l-4 border-rose-500 mb-6">
-                    <p className="text-lg">
-                        Just like atoms are building blocks of matter, <strong className="text-rose-400">prime numbers are building blocks of all numbers!</strong>
+            <ConceptSection id="primes" title="Prime Numbers — The Atoms of Math">
+                <FormulaBox>
+                    <p>
+                        Just like atoms are building blocks of matter, <strong className="text-amber-400">prime numbers are building blocks of all numbers!</strong>
                     </p>
-                </div>
+                </FormulaBox>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-800">
@@ -555,7 +508,10 @@ export default function NumberSystemContent() {
                 </TipBox>
 
                 <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-indigo-500/30">
-                    <h4 className="text-indigo-400 font-bold mb-4 text-center">⚡ Quick Prime Check (6k±1 Rule)</h4>
+                    <div className="flex items-center justify-center gap-2 mb-4">
+                        <FlashIcon className="text-indigo-400" />
+                        <h4 className="text-indigo-400 font-bold text-center">Quick Prime Check (6k±1 Rule)</h4>
+                    </div>
                     <p className="text-center text-neutral-300 mb-4">
                         Every prime greater than 3 is of the form <MathText>{`6k \\pm 1`}</MathText>
                     </p>
@@ -605,7 +561,7 @@ export default function NumberSystemContent() {
             </ConceptSection>
 
             {/* REMAINDERS */}
-            <ConceptSection id="remainders" title="The Power of Remainders" icon="🎯">
+            <ConceptSection id="remainders" title="The Power of Remainders">
                 <p className="mb-4">
                     When 17 is divided by 5, we get 3 with remainder 2. This simple concept solves MANY tricky questions!
                 </p>
@@ -620,7 +576,10 @@ export default function NumberSystemContent() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-indigo-400 font-bold mb-3">🔢 Same Remainder Family</h4>
+                        <div className="flex items-center gap-2 mb-3">
+                            <NumbersIcon className="text-indigo-400" />
+                            <h4 className="text-indigo-400 font-bold">Same Remainder Family</h4>
+                        </div>
                         <p className="text-sm text-neutral-400 mb-3">
                             Numbers that give the same remainder when divided by d are in the same "family"
                         </p>
@@ -631,7 +590,10 @@ export default function NumberSystemContent() {
                     </div>
 
                     <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-amber-400 font-bold mb-3">⚡ Negative Remainder Trick</h4>
+                        <div className="flex items-center gap-2 mb-3">
+                            <FlashIcon className="text-amber-400" />
+                            <h4 className="text-amber-400 font-bold">Negative Remainder Trick</h4>
+                        </div>
                         <p className="text-sm text-neutral-400 mb-3">
                             Sometimes using negative remainder is faster!
                         </p>
@@ -667,33 +629,45 @@ export default function NumberSystemContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
-                <div className="space-y-4 my-6">
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Thinking 1 is Prime</h4>
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                    <div className="p-4 bg-neutral-900 border border-red-900/40 rounded-xl hover:border-red-500/50 transition-colors">
+                        <div className="flex items-center gap-2 mb-2">
+                            <CancelIcon className="text-red-400" />
+                            <h4 className="text-red-400 font-bold">Thinking 1 is Prime</h4>
+                        </div>
                         <p className="text-sm text-neutral-400 mt-1">
                             1 has only ONE divisor (itself). Primes need EXACTLY two divisors.
                         </p>
                     </div>
 
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Wrong Divisibility by 4 (Checking Last Digit Only)</h4>
+                    <div className="p-4 bg-neutral-900 border border-red-900/40 rounded-xl hover:border-red-500/50 transition-colors">
+                        <div className="flex items-center gap-2 mb-2">
+                            <CancelIcon className="text-red-400" />
+                            <h4 className="text-red-400 font-bold">Wrong Divisibility by 4</h4>
+                        </div>
                         <p className="text-sm text-neutral-400 mt-1">
                             For 4, check last TWO digits, not just the last digit.
-                            <span className="text-white"> 112 → 12÷4=3 ✓</span>, but <span className="text-white">118 → 18÷4=4.5 ✗</span>
+                            <span className="text-white"> 112 → 12÷4=3 <CheckIcon fontSize="inherit" className="text-emerald-500 inline align-middle" /></span>, but <span className="text-white">118 → 18÷4=4.5 <CloseIcon fontSize="inherit" className="text-red-500 inline align-middle" /></span>
                         </p>
                     </div>
 
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Forgetting Cycle of 4 Exception</h4>
+                    <div className="p-4 bg-neutral-900 border border-red-900/40 rounded-xl hover:border-red-500/50 transition-colors">
+                        <div className="flex items-center gap-2 mb-2">
+                            <CancelIcon className="text-red-400" />
+                            <h4 className="text-red-400 font-bold">Forgetting Cycle of 4 Exception</h4>
+                        </div>
                         <p className="text-sm text-neutral-400 mt-1">
                             When power is exactly divisible by 4 (remainder 0), use the 4th power, not the 0th!
                             <span className="text-white"> 2⁸ mod 10 → 8÷4=2 r0 → use 2⁴=16 → unit digit 6</span>
                         </p>
                     </div>
 
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Confusing Divisibility of 6</h4>
+                    <div className="p-4 bg-neutral-900 border border-red-900/40 rounded-xl hover:border-red-500/50 transition-colors">
+                        <div className="flex items-center gap-2 mb-2">
+                            <CancelIcon className="text-red-400" />
+                            <h4 className="text-red-400 font-bold">Confusing Divisibility of 6</h4>
+                        </div>
                         <p className="text-sm text-neutral-400 mt-1">
                             A number divisible by 6 must be divisible by BOTH 2 AND 3, not just one!
                         </p>
@@ -720,6 +694,6 @@ export default function NumberSystemContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

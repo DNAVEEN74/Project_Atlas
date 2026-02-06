@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
+import { RocketLaunchIcon, CheckIcon, CancelIcon } from '@/components/icons';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,82 +14,78 @@ import {
 
 export default function CodingDecodingContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] font-mono opacity-20 tracking-widest select-none">cipher</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-violet-500/20 text-violet-500 text-xs font-bold uppercase tracking-widest mb-2 border border-violet-500/20">
-                        Pattern Recognition
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Coding & Decoding</h1>
-                    <p className="text-neutral-400 text-lg">Crack the code — every cipher has a pattern!</p>
-                </div>
-            </div>
-
+        <>
             {/* THE ALPHABET TABLE */}
-            <ConceptSection id="alpha" title="Step 1: Master the Alphabet Numbers" icon="🔤">
-                <div className="bg-gradient-to-r from-violet-900/20 to-transparent p-6 rounded-xl border-l-4 border-violet-500 mb-6">
-                    <p className="text-lg">
-                        <strong>The #1 skill:</strong> Instantly convert letters to numbers and back!
-                        If you see <span className="text-violet-400 font-bold">T</span>, think <span className="text-violet-400 font-bold">20</span> immediately.
-                    </p>
+            <ConceptSection id="alpha" title="Step 1: Master the Alphabet Numbers">
+                <div className="mb-8">
+                    <TipBox variant="note" title="The #1 skill">
+                        <p className="text-base text-neutral-300">
+                            Instantly convert letters to numbers and back! If you see <span className="text-white font-semibold">T</span>, think <span className="text-white font-semibold">20</span> immediately.
+                        </p>
+                    </TipBox>
                 </div>
 
-                {/* Full Alphabet Reference */}
-                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800 overflow-x-auto">
-                    <h4 className="text-violet-400 font-bold mb-4 text-center">Complete Alphabet → Number Map</h4>
-                    <div className="grid grid-cols-13 gap-1 text-center text-xs sm:text-sm">
-                        {[
-                            { l: 'A', n: 1 }, { l: 'B', n: 2 }, { l: 'C', n: 3 }, { l: 'D', n: 4 },
-                            { l: 'E', n: 5 }, { l: 'F', n: 6 }, { l: 'G', n: 7 }, { l: 'H', n: 8 },
-                            { l: 'I', n: 9 }, { l: 'J', n: 10 }, { l: 'K', n: 11 }, { l: 'L', n: 12 }, { l: 'M', n: 13 },
-                        ].map(({ l, n }) => (
-                            <div key={l} className="p-2 bg-black/50 rounded">
-                                <div className="text-violet-400 font-bold">{l}</div>
-                                <div className="text-neutral-500">{n}</div>
-                            </div>
-                        ))}
+                {/* Full Alphabet Reference - Tabular Grid */}
+                <div className="my-8">
+                    <div className="flex items-center justify-between mb-4 px-1">
+                        <h4 className="text-sm font-medium text-neutral-400 uppercase tracking-wider">Alphabet Index</h4>
+                        <span className="text-xs text-neutral-500">Row 1: 1-13 • Row 2: 14-26</span>
                     </div>
-                    <div className="grid grid-cols-13 gap-1 text-center text-xs sm:text-sm mt-1">
-                        {[
-                            { l: 'N', n: 14 }, { l: 'O', n: 15 }, { l: 'P', n: 16 }, { l: 'Q', n: 17 },
-                            { l: 'R', n: 18 }, { l: 'S', n: 19 }, { l: 'T', n: 20 }, { l: 'U', n: 21 },
-                            { l: 'V', n: 22 }, { l: 'W', n: 23 }, { l: 'X', n: 24 }, { l: 'Y', n: 25 }, { l: 'Z', n: 26 },
-                        ].map(({ l, n }) => (
-                            <div key={l} className="p-2 bg-black/50 rounded">
-                                <div className="text-violet-400 font-bold">{l}</div>
-                                <div className="text-neutral-500">{n}</div>
-                            </div>
-                        ))}
+
+                    <div className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-4 overflow-x-auto">
+                        <div className="min-w-max grid grid-cols-[repeat(13,minmax(0,1fr))] gap-3">
+                            {/* Row 1: A-M */}
+                            {[
+                                { l: 'A', n: 1 }, { l: 'B', n: 2 }, { l: 'C', n: 3 }, { l: 'D', n: 4 },
+                                { l: 'E', n: 5 }, { l: 'F', n: 6 }, { l: 'G', n: 7 }, { l: 'H', n: 8 },
+                                { l: 'I', n: 9 }, { l: 'J', n: 10 }, { l: 'K', n: 11 }, { l: 'L', n: 12 }, { l: 'M', n: 13 },
+                            ].map(({ l, n }) => (
+                                <div key={l} className="flex flex-col items-center justify-center w-10 h-14 rounded-lg bg-neutral-900 border border-neutral-800 hover:border-violet-500/50 hover:bg-neutral-800 transition-all group cursor-default">
+                                    <span className="text-lg font-bold text-white group-hover:text-violet-400">{l}</span>
+                                    <span className="text-[10px] text-neutral-300 group-hover:text-white font-mono">{n}</span>
+                                </div>
+                            ))}
+
+                            {/* Row 2: N-Z */}
+                            {[
+                                { l: 'N', n: 14 }, { l: 'O', n: 15 }, { l: 'P', n: 16 }, { l: 'Q', n: 17 },
+                                { l: 'R', n: 18 }, { l: 'S', n: 19 }, { l: 'T', n: 20 }, { l: 'U', n: 21 },
+                                { l: 'V', n: 22 }, { l: 'W', n: 23 }, { l: 'X', n: 24 }, { l: 'Y', n: 25 }, { l: 'Z', n: 26 },
+                            ].map(({ l, n }) => (
+                                <div key={l} className="flex flex-col items-center justify-center w-10 h-14 rounded-lg bg-neutral-900 border border-neutral-800 hover:border-violet-500/50 hover:bg-neutral-800 transition-all group cursor-default">
+                                    <span className="text-lg font-bold text-white group-hover:text-violet-400">{l}</span>
+                                    <span className="text-[10px] text-neutral-300 group-hover:text-white font-mono">{n}</span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
-                {/* EJOTY Trick */}
-                <div className="my-8 p-6 bg-violet-500/10 border border-violet-500/30 rounded-xl">
-                    <h4 className="text-violet-400 font-bold mb-4 text-center text-lg">🚀 EJOTY — The Speed Trick</h4>
-                    <p className="text-center text-neutral-300 mb-4">
+                {/* EJOTY Trick - Minimal */}
+                <div className="my-8">
+                    <h4 className="flex items-center gap-2 text-lg font-semibold text-white mb-4">
+                        <RocketLaunchIcon className="text-violet-500" />
+                        EJOTY — The Speed Trick
+                    </h4>
+                    <p className="text-neutral-400 mb-6 max-w-2xl">
                         Memorize these 5 reference points. Find any letter by counting from the nearest EJOTY!
                     </p>
-                    <div className="grid grid-cols-5 gap-4 text-center">
+                    <div className="grid grid-cols-5 gap-4">
                         {[{ l: 'E', n: 5 }, { l: 'J', n: 10 }, { l: 'O', n: 15 }, { l: 'T', n: 20 }, { l: 'Y', n: 25 }].map(({ l, n }) => (
-                            <div key={l} className="p-4 bg-black/50 rounded-xl hover:bg-violet-500/20 transition-all">
-                                <div className="text-4xl font-black text-violet-400">{l}</div>
-                                <div className="text-lg text-white font-bold mt-1">{n}</div>
+                            <div key={l} className="p-4 border border-neutral-800 rounded-lg text-center hover:border-violet-500/50 transition-colors group">
+                                <div className="text-2xl font-bold text-neutral-300 group-hover:text-violet-400">{l}</div>
+                                <div className="text-sm text-neutral-500 mt-1">{n}</div>
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <TipBox title="More Memory Tricks">
-                    <ul className="list-disc list-inside text-sm space-y-1">
-                        <li><strong>M = 13</strong> (M for Middle of 26)</li>
-                        <li><strong>T = 20</strong> (T-20 Cricket)</li>
-                        <li><strong>R = 18</strong> (Right to Vote age!)</li>
-                        <li><strong>G = 7</strong> (G looks like 7)</li>
+                <TipBox variant="tip" title="More Memory Tricks">
+                    <ul className="list-disc list-inside text-sm space-y-2 text-neutral-400">
+                        <li><strong className="text-neutral-200">M = 13</strong> (M for Middle of 26)</li>
+                        <li><strong className="text-neutral-200">T = 20</strong> (T-20 Cricket)</li>
+                        <li><strong className="text-neutral-200">R = 18</strong> (Right to Vote age!)</li>
+                        <li><strong className="text-neutral-200">G = 7</strong> (G looks like 7)</li>
                     </ul>
                 </TipBox>
 
@@ -102,7 +98,7 @@ export default function CodingDecodingContent() {
             </ConceptSection>
 
             {/* TYPE 1: SHIFTING */}
-            <ConceptSection id="shifting" title="Type 1: Shifting Patterns (+/- N)" icon="🔄">
+            <ConceptSection id="shifting" title="Type 1: Shifting Patterns (+/- N)">
                 <p className="mb-4">
                     The most common type! Each letter shifts forward or backward by a fixed number.
                 </p>
@@ -151,13 +147,13 @@ export default function CodingDecodingContent() {
             </ConceptSection>
 
             {/* TYPE 2: VARIABLE SHIFT */}
-            <ConceptSection id="variable" title="Type 2: Variable Shifting (+1, +2, +3...)" icon="📈">
+            <ConceptSection id="variable" title="Type 2: Variable Shifting (+1, +2, +3...)">
                 <p className="mb-4">
                     Each position has a different shift! The shift often increases or follows a pattern.
                 </p>
 
                 <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <h4 className="text-amber-400 font-bold mb-4 text-center">Common Patterns</h4>
+                    <h4 className="text-violet-400 font-bold mb-4 text-center">Common Patterns</h4>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="p-4 bg-black/50 rounded-lg text-center">
                             <p className="text-sm text-neutral-500">Increasing</p>
@@ -203,7 +199,7 @@ export default function CodingDecodingContent() {
             </ConceptSection>
 
             {/* TYPE 3: REVERSE PAIRS */}
-            <ConceptSection id="reverse" title="Type 3: Reverse Pairs (A↔Z, B↔Y)" icon="🪞">
+            <ConceptSection id="reverse" title="Type 3: Reverse Pairs (A↔Z, B↔Y)">
                 <p className="mb-4">
                     A is coded as Z, B as Y, and so on. This is the "mirror" or "opposite" coding.
                 </p>
@@ -248,7 +244,12 @@ export default function CodingDecodingContent() {
                     solution={
                         <div className="space-y-2">
                             <p><strong>Verify pattern in KING → PRMT:</strong></p>
-                            <p className="text-sm">K(11)+P(16)=27 ✓, I(9)+R(18)=27 ✓, N(14)+M(13)=27 ✓, G(7)+T(20)=27 ✓</p>
+                            <p className="text-sm flex items-center gap-1">
+                                K(11)+P(16)=27 <CheckIcon className="text-emerald-500" fontSize="small" />,
+                                I(9)+R(18)=27 <CheckIcon className="text-emerald-500" fontSize="small" />,
+                                N(14)+M(13)=27 <CheckIcon className="text-emerald-500" fontSize="small" />,
+                                G(7)+T(20)=27 <CheckIcon className="text-emerald-500" fontSize="small" />
+                            </p>
                             <p>It's <strong>Reverse Pair (27 Rule)</strong></p>
                             <p><strong>Apply to RAIN:</strong></p>
                             <p className="font-mono">R↔I, A↔Z, I↔R, N↔M = <strong className="text-violet-400">IZRM</strong></p>
@@ -259,26 +260,26 @@ export default function CodingDecodingContent() {
             </ConceptSection>
 
             {/* TYPE 4: LETTER-NUMBER */}
-            <ConceptSection id="letter-number" title="Type 4: Letter-Number Codes" icon="🔢">
+            <ConceptSection id="letter-number" title="Type 4: Letter-Number Codes">
                 <p className="mb-4">
                     Letters are converted to numbers using some formula or pattern.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-5 bg-neutral-900 rounded-xl border border-blue-500/30">
-                        <h4 className="text-blue-400 font-bold mb-3">Direct Position</h4>
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-violet-500/30">
+                        <h4 className="text-violet-400 font-bold mb-3">Direct Position</h4>
                         <p className="text-sm text-neutral-300">CAT = 3, 1, 20</p>
                     </div>
-                    <div className="p-5 bg-neutral-900 rounded-xl border border-emerald-500/30">
-                        <h4 className="text-emerald-400 font-bold mb-3">Reverse Position</h4>
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-violet-500/30">
+                        <h4 className="text-violet-400 font-bold mb-3">Reverse Position</h4>
                         <p className="text-sm text-neutral-300">CAT = 24, 26, 7 (using 27−pos)</p>
                     </div>
-                    <div className="p-5 bg-neutral-900 rounded-xl border border-amber-500/30">
-                        <h4 className="text-amber-400 font-bold mb-3">Sum of Positions</h4>
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-violet-500/30">
+                        <h4 className="text-violet-400 font-bold mb-3">Sum of Positions</h4>
                         <p className="text-sm text-neutral-300">CAT = 3+1+20 = 24</p>
                     </div>
-                    <div className="p-5 bg-neutral-900 rounded-xl border border-purple-500/30">
-                        <h4 className="text-purple-400 font-bold mb-3">Product</h4>
+                    <div className="p-5 bg-neutral-900 rounded-xl border border-violet-500/30">
+                        <h4 className="text-violet-400 font-bold mb-3">Product</h4>
                         <p className="text-sm text-neutral-300">AB = 1×2 = 2</p>
                     </div>
                 </div>
@@ -289,8 +290,8 @@ export default function CodingDecodingContent() {
                     question="If CAT = 24 and DOG = 26, what is BAT?"
                     solution={
                         <div className="space-y-2">
-                            <p><strong>Check CAT:</strong> C(3) + A(1) + T(20) = 24 ✓</p>
-                            <p><strong>Check DOG:</strong> D(4) + O(15) + G(7) = 26 ✓</p>
+                            <p className="flex items-center gap-2"><strong>Check CAT:</strong> C(3) + A(1) + T(20) = 24 <CheckIcon className="text-emerald-500" fontSize="small" /></p>
+                            <p className="flex items-center gap-2"><strong>Check DOG:</strong> D(4) + O(15) + G(7) = 26 <CheckIcon className="text-emerald-500" fontSize="small" /></p>
                             <p>Pattern: <strong>Sum of positions</strong></p>
                             <p><strong>BAT:</strong> B(2) + A(1) + T(20) = <strong>23</strong></p>
                         </div>
@@ -300,13 +301,13 @@ export default function CodingDecodingContent() {
             </ConceptSection>
 
             {/* TYPE 5: WORD/SENTENCE CODING */}
-            <ConceptSection id="word" title="Type 5: Word-Based Coding" icon="📝">
+            <ConceptSection id="word" title="Type 5: Word-Based Coding">
                 <p className="mb-4">
                     Full words are coded as other words. Find which word maps to which!
                 </p>
 
                 <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <h4 className="text-amber-400 font-bold mb-4">The Method:</h4>
+                    <h4 className="text-violet-400 font-bold mb-4">The Method:</h4>
                     <ol className="list-decimal list-inside space-y-2 text-sm text-neutral-300">
                         <li>Compare sentences that have words in common</li>
                         <li>Identify which code word stays the same</li>
@@ -333,32 +334,40 @@ export default function CodingDecodingContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
-                <div className="space-y-4 my-6">
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Counting Letters Wrong</h4>
-                        <p className="text-sm text-neutral-400 mt-1">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                    <div className="p-4 bg-neutral-900 border border-red-500/20 rounded-xl hover:border-red-500/50 transition-colors">
+                        <h4 className="text-red-400 font-bold flex items-center gap-2 mb-2">
+                            <CancelIcon fontSize="small" /> Counting Letters Wrong
+                        </h4>
+                        <p className="text-sm text-neutral-400">
                             Use EJOTY! Don't count on fingers — it's slow and error-prone.
                         </p>
                     </div>
 
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Forgetting Circular Alphabet</h4>
-                        <p className="text-sm text-neutral-400 mt-1">
+                    <div className="p-4 bg-neutral-900 border border-red-500/20 rounded-xl hover:border-red-500/50 transition-colors">
+                        <h4 className="text-red-400 font-bold flex items-center gap-2 mb-2">
+                            <CancelIcon fontSize="small" /> Forgetting Circular Alphabet
+                        </h4>
+                        <p className="text-sm text-neutral-400">
                             After Z comes A! Y + 3 = B (not some imaginary letter).
                         </p>
                     </div>
 
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Assuming One Pattern Fits All</h4>
-                        <p className="text-sm text-neutral-400 mt-1">
+                    <div className="p-4 bg-neutral-900 border border-red-500/20 rounded-xl hover:border-red-500/50 transition-colors">
+                        <h4 className="text-red-400 font-bold flex items-center gap-2 mb-2">
+                            <CancelIcon fontSize="small" /> Assuming One Pattern Fits All
+                        </h4>
+                        <p className="text-sm text-neutral-400">
                             Check EVERY letter before concluding the pattern. Variable shifts are common traps!
                         </p>
                     </div>
 
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Confusing +N with −N</h4>
-                        <p className="text-sm text-neutral-400 mt-1">
+                    <div className="p-4 bg-neutral-900 border border-red-500/20 rounded-xl hover:border-red-500/50 transition-colors">
+                        <h4 className="text-red-400 font-bold flex items-center gap-2 mb-2">
+                            <CancelIcon fontSize="small" /> Confusing +N with −N
+                        </h4>
+                        <p className="text-sm text-neutral-400">
                             If A→D, that's +3. If D→A, that's −3. Direction matters!
                         </p>
                     </div>
@@ -379,6 +388,6 @@ export default function CodingDecodingContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

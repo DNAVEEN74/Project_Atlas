@@ -10,8 +10,7 @@ import {
     SpeedIcon,
     ExpandMoreIcon,
     ExpandLessIcon,
-    QuizOutlinedIcon,
-    FormatListBulletedIcon
+    QuizOutlinedIcon
 } from '@/components/icons';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -20,15 +19,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 // ============================================
 export function LessonLayout({ children }: { children: React.ReactNode }) {
     const [activeSection, setActiveSection] = useState<string>('');
-
-    // Auto-detect sections for TOC
     const [sections, setSections] = useState<{ id: string, title: string }[]>([]);
 
     useEffect(() => {
         const headers = document.querySelectorAll('section[id] h2');
         const secs = Array.from(headers).map(h => ({
             id: h.parentElement?.id || '',
-            title: h.textContent || ''
+            // Strip emojis and trim whitespace
+            title: (h.textContent || '')
+                .replace(/[\u{1F600}-\u{1F6FF}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{2300}-\u{23FF}]/gu, '')
+                .trim()
         }));
         setSections(secs);
 
@@ -45,47 +45,32 @@ export function LessonLayout({ children }: { children: React.ReactNode }) {
     }, []);
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8 relative">
-            {/* Main Content */}
-            <div className="min-w-0 space-y-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-12 relative">
+            {/* Main Content - Constrained Width for Readability */}
+            <div className="min-w-0 space-y-12 max-w-[65ch] lg:max-w-[75ch] mx-auto">
                 {children}
             </div>
 
-            {/* Sidebar TOC (Desktop) */}
-            <div className="hidden lg:block relative">
-                <div className="sticky top-24 space-y-6">
-                    <div className="bg-[#121212] border border-neutral-800 rounded-2xl p-6 shadow-2xl backdrop-blur-xl">
-                        <div className="flex items-center gap-2 mb-4 text-neutral-400 uppercase tracking-widest text-xs font-bold">
-                            <FormatListBulletedIcon sx={{ fontSize: '1rem' }} />
-                            On this page
-                        </div>
-                        <nav className="space-y-1 relative">
-                            {/* Running Line */}
-                            <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-neutral-800 rounded-full ml-1" />
-
-                            {sections.map(section => (
-                                <a
-                                    key={section.id}
-                                    href={`#${section.id}`}
-                                    className={`block pl-4 py-1.5 text-sm transition-all duration-300 border-l-2 -ml-[1px] ${activeSection === section.id
-                                            ? 'border-amber-500 text-amber-500 font-medium translate-x-1'
-                                            : 'border-transparent text-neutral-500 hover:text-neutral-300 hover:border-neutral-600'
-                                        }`}
-                                >
-                                    {section.title}
-                                </a>
-                            ))}
-                        </nav>
+            {/* Sidebar TOC (Desktop) - Minimal Stedi Style */}
+            <div className="hidden lg:block relative pl-6 border-l border-neutral-800">
+                <div className="sticky top-8 space-y-4">
+                    <div className="text-[11px] font-bold text-neutral-500 uppercase tracking-wider mb-3 pl-3">
+                        On this page
                     </div>
-
-                    {/* Quick Stats or Promo could go here */}
-                    <div className="bg-gradient-to-br from-amber-500/10 to-orange-600/10 border border-amber-500/20 rounded-2xl p-6">
-                        <h4 className="text-amber-500 font-bold mb-2">Mastery Check</h4>
-                        <p className="text-xs text-neutral-400 mb-4">Complete this lesson to unlock practice problems.</p>
-                        <div className="w-full bg-neutral-800 h-1.5 rounded-full overflow-hidden">
-                            <div className="bg-amber-500 h-full w-[0%]" /> {/* Dynamic later */}
-                        </div>
-                    </div>
+                    <nav className="space-y-1">
+                        {sections.map(section => (
+                            <a
+                                key={section.id}
+                                href={`#${section.id}`}
+                                className={`block text-xs py-1 leading-relaxed transition-all duration-200 border-l-2 pl-3 -ml-[26px] ${activeSection === section.id
+                                    ? 'border-neutral-200 text-white font-medium'
+                                    : 'border-transparent text-neutral-500 hover:text-neutral-300'
+                                    }`}
+                            >
+                                {section.title}
+                            </a>
+                        ))}
+                    </nav>
                 </div>
             </div>
         </div>
@@ -104,12 +89,11 @@ interface ConceptSectionProps {
 
 export function ConceptSection({ id, title, icon, children }: ConceptSectionProps) {
     return (
-        <section id={id} className="scroll-mt-32">
-            <h2 className="flex items-center gap-3 text-3xl font-bold text-white mb-8 pb-4 border-b border-neutral-800">
-                {icon && <span className="text-amber-500">{icon}</span>}
+        <section id={id} className="scroll-mt-32 mb-16">
+            <h2 className="text-2xl font-bold text-white mb-8">
                 {title}
             </h2>
-            <div className="text-neutral-300 text-lg leading-relaxed space-y-6">
+            <div className="text-neutral-300 text-lg leading-8 space-y-6">
                 {children}
             </div>
         </section>
@@ -117,89 +101,69 @@ export function ConceptSection({ id, title, icon, children }: ConceptSectionProp
 }
 
 // ============================================
-// FORMULA BOX
+// FORMULA BOX - Clean Callout Style
 // ============================================
 export function FormulaBox({ title, children, variant = 'primary' }: { title?: string, children: React.ReactNode, variant?: 'primary' | 'secondary' }) {
-    const isPrimary = variant === 'primary';
-
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`relative overflow-hidden rounded-2xl border p-6 my-8 ${isPrimary
-                    ? 'bg-amber-500/5 border-amber-500/20 shadow-[0_0_30px_-10px_rgba(245,158,11,0.1)]'
-                    : 'bg-blue-500/5 border-blue-500/20 shadow-[0_0_30px_-10px_rgba(59,130,246,0.1)]'
-                }`}
-        >
-            {/* Glass Shine Effect */}
-            <div className="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 bg-white/5 blur-3xl rounded-full pointer-events-none" />
-
+        <div className="my-8 rounded-lg border border-neutral-800 bg-neutral-900/20 p-6 pl-6 border-l-2 border-l-amber-500">
             {title && (
-                <div className={`text-xs font-bold uppercase tracking-widest mb-3 ${isPrimary ? 'text-amber-500' : 'text-blue-400'}`}>
+                <div className="text-xs font-bold uppercase tracking-wider text-amber-500 mb-3">
                     {title}
                 </div>
             )}
-            <div className="text-xl md:text-2xl text-white font-serif italic text-center py-4">
+            <div className="text-lg text-white font-medium font-serif italic leading-relaxed">
                 {children}
-            </div>
-        </motion.div>
-    );
-}
-
-// ============================================
-// TIP BOX
-// ============================================
-export function TipBox({ title, children, variant = 'tip' }: { title?: string, children: React.ReactNode, variant?: 'tip' | 'warning' | 'note' }) {
-    const styles = {
-        tip: { border: 'border-emerald-500/20', bg: 'bg-emerald-500/5', text: 'text-emerald-400', icon: <LightbulbOutlinedIcon /> },
-        warning: { border: 'border-rose-500/20', bg: 'bg-rose-500/5', text: 'text-rose-400', icon: <WarningAmberOutlinedIcon /> },
-        note: { border: 'border-blue-500/20', bg: 'bg-blue-500/5', text: 'text-blue-400', icon: <MenuBookOutlinedIcon /> },
-    };
-    const s = styles[variant];
-
-    return (
-        <div className={`flex gap-4 p-5 rounded-xl border ${s.border} ${s.bg} my-6 backdrop-blur-sm`}>
-            <div className={`shrink-0 mt-0.5 ${s.text}`}>{s.icon}</div>
-            <div>
-                <h4 className={`font-bold text-sm uppercase tracking-wide mb-1 ${s.text}`}>{title || variant}</h4>
-                <div className="text-neutral-300 text-sm leading-relaxed">{children}</div>
             </div>
         </div>
     );
 }
 
 // ============================================
-// EXAMPLE CARD
+// TIP BOX - Minimal Stedi Card Style
+// ============================================
+export function TipBox({ title, children, variant = 'tip' }: { title?: string, children: React.ReactNode, variant?: 'tip' | 'warning' | 'note' }) {
+    const styles = {
+        tip: { border: 'border-emerald-900/50 hover:border-emerald-800', bg: 'bg-transparent', text: 'text-emerald-400', icon: <LightbulbOutlinedIcon fontSize="small" /> },
+        warning: { border: 'border-rose-900/50 hover:border-rose-800', bg: 'bg-transparent', text: 'text-rose-400', icon: <WarningAmberOutlinedIcon fontSize="small" /> },
+        note: { border: 'border-neutral-800 hover:border-neutral-700', bg: 'bg-transparent', text: 'text-blue-400', icon: <MenuBookOutlinedIcon fontSize="small" /> },
+    };
+    const s = styles[variant];
+
+    return (
+        <div className={`flex items-start gap-4 p-5 rounded-xl my-8 ${s.bg} border ${s.border} transition-colors duration-200 group`}>
+            <div className={`shrink-0 mt-0.5 ${s.text} opacity-90 group-hover:opacity-100 transition-opacity`}>{s.icon}</div>
+            <div className="space-y-1.5">
+                {title && <h4 className="font-semibold text-sm text-white tracking-tight">{title}</h4>}
+                <div className="text-neutral-400 text-sm leading-7 group-hover:text-neutral-300 transition-colors">{children}</div>
+            </div>
+        </div>
+    );
+}
+
+// ============================================
+// EXAMPLE CARD - Minimal Accordion
 // ============================================
 export function ExampleCard({ number, question, solution, answer, difficulty = 'medium' }: { number: number, question: string, solution: React.ReactNode, answer?: string, difficulty?: 'easy' | 'medium' | 'hard' }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="group border border-neutral-800 bg-[#151515] rounded-2xl overflow-hidden my-8 transition-all hover:border-neutral-700">
-            <div
+        <div className="border border-neutral-800 rounded-lg overflow-hidden my-8 transition-colors hover:border-neutral-700">
+            <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-6 cursor-pointer flex items-start gap-4"
+                className="w-full text-left p-4 flex items-start gap-3 bg-neutral-900/30 hover:bg-neutral-900/50 transition-colors"
             >
-                <div className="shrink-0 w-8 h-8 rounded-lg bg-neutral-800 flex items-center justify-center text-sm font-bold text-neutral-400 group-hover:bg-amber-500 group-hover:text-black transition-colors">
+                <div className="shrink-0 w-6 h-6 rounded flex items-center justify-center text-xs font-bold bg-neutral-800 text-neutral-400 mt-0.5">
                     {number}
                 </div>
                 <div className="grow">
-                    <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-bold text-neutral-500 uppercase tracking-wider">Example Problem</span>
-                        <span className={`text-[10px] px-2 py-0.5 rounded border uppercase ${difficulty === 'easy' ? 'border-emerald-500/30 text-emerald-500' :
-                                difficulty === 'medium' ? 'border-amber-500/30 text-amber-500' :
-                                    'border-rose-500/30 text-rose-500'
-                            }`}>{difficulty}</span>
-                    </div>
-                    <div className="text-lg text-white font-medium mb-1">
+                    <div className="text-neutral-200 font-medium leading-relaxed">
                         <MathText>{question}</MathText>
                     </div>
                 </div>
-                <div className="shrink-0 pt-1 text-neutral-500">
+                <div className="shrink-0 text-neutral-500">
                     {isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                 </div>
-            </div>
+            </button>
 
             <AnimatePresence>
                 {isOpen && (
@@ -207,20 +171,18 @@ export function ExampleCard({ number, question, solution, answer, difficulty = '
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        className="bg-neutral-900/50 border-t border-neutral-800"
+                        transition={{ duration: 0.2 }}
+                        className="bg-black/20 border-t border-neutral-800"
                     >
-                        <div className="p-6 pl-16 space-y-4">
-                            <div className="text-sm text-neutral-300 space-y-4 leading-relaxed relative">
-                                <div className="absolute left-[-26px] top-0 bottom-0 w-[2px] bg-neutral-800" />
+                        <div className="p-4 pl-[3.25rem] space-y-3">
+                            <div className="text-sm text-neutral-400 space-y-3 leading-relaxed">
                                 {solution}
                             </div>
 
                             {answer && (
-                                <div className="flex items-center gap-3 pt-4">
-                                    <div className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400 text-sm font-bold flex items-center gap-2">
-                                        <CheckCircleOutlinedIcon sx={{ fontSize: '1rem' }} />
-                                        Answer: <MathText>{answer}</MathText>
-                                    </div>
+                                <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded bg-emerald-500/10 text-emerald-500 text-sm font-medium">
+                                    <CheckCircleOutlinedIcon sx={{ fontSize: '0.9rem' }} />
+                                    <span>Answer: <MathText>{answer ?? ''}</MathText></span>
                                 </div>
                             )}
                         </div>
@@ -260,20 +222,20 @@ export function CheckUnderstanding({ question, options, correctIndex, explanatio
                         onClick={() => handleSelect(idx)}
                         disabled={selected !== null}
                         className={`w-full text-left p-4 rounded-xl border transition-all ${selected === null
-                                ? 'border-neutral-800 bg-neutral-900/50 hover:bg-neutral-800 hover:border-neutral-700'
-                                : selected === idx
-                                    ? idx === correctIndex
-                                        ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-100' // Correct selection
-                                        : 'border-rose-500/50 bg-rose-500/10 text-rose-100' // Wrong selection
-                                    : idx === correctIndex
-                                        ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-100' // Show correct if wrong selected
-                                        : 'border-neutral-800 bg-neutral-900/50 opacity-50'
+                            ? 'border-neutral-800 bg-neutral-900/50 hover:bg-neutral-800 hover:border-neutral-700'
+                            : selected === idx
+                                ? idx === correctIndex
+                                    ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-100' // Correct selection
+                                    : 'border-rose-500/50 bg-rose-500/10 text-rose-100' // Wrong selection
+                                : idx === correctIndex
+                                    ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-100' // Show correct if wrong selected
+                                    : 'border-neutral-800 bg-neutral-900/50 opacity-50'
                             }`}
                     >
                         <div className="flex items-center gap-3">
                             <div className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs font-bold ${selected === idx
-                                    ? idx === correctIndex ? 'border-emerald-500 bg-emerald-500 text-black' : 'border-rose-500 bg-rose-500 text-white'
-                                    : 'border-neutral-600'
+                                ? idx === correctIndex ? 'border-emerald-500 bg-emerald-500 text-black' : 'border-rose-500 bg-rose-500 text-white'
+                                : 'border-neutral-600'
                                 }`}>
                                 {String.fromCharCode(65 + idx)}
                             </div>

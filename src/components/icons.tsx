@@ -11,6 +11,7 @@ export { default as MenuIcon } from '@mui/icons-material/Menu';
 export { default as CloseIcon } from '@mui/icons-material/Close';
 export { default as ArrowBackIcon } from '@mui/icons-material/ArrowBack';
 export { default as ArrowForwardIcon } from '@mui/icons-material/ArrowForward';
+export { default as RocketLaunchIcon } from '@mui/icons-material/RocketLaunch';
 export { default as ExpandMoreIcon } from '@mui/icons-material/ExpandMore';
 export { default as ExpandLessIcon } from '@mui/icons-material/ExpandLess';
 export { default as ChevronLeftIcon } from '@mui/icons-material/ChevronLeft';
@@ -30,6 +31,11 @@ export { default as EmailOutlinedIcon } from '@mui/icons-material/EmailOutlined'
 export { default as LockOutlinedIcon } from '@mui/icons-material/LockOutlined';
 export { default as BookmarkIcon } from '@mui/icons-material/Bookmark';
 export { default as BookmarkBorderIcon } from '@mui/icons-material/BookmarkBorder';
+export { default as MaleIcon } from '@mui/icons-material/Male';
+export { default as FemaleIcon } from '@mui/icons-material/Female';
+export { default as PeopleIcon } from '@mui/icons-material/People';
+export { default as FavoriteIcon } from '@mui/icons-material/Favorite';
+export { default as DiversityIcon } from '@mui/icons-material/Diversity1';
 
 // ========== LEARNING & EDUCATION ICONS ==========
 export { default as SchoolIcon } from '@mui/icons-material/School';
@@ -59,8 +65,10 @@ export { default as GradeIcon } from '@mui/icons-material/Grade';
 // ========== ACTION ICONS ==========
 export { default as AddIcon } from '@mui/icons-material/Add';
 export { default as RemoveIcon } from '@mui/icons-material/Remove';
+export { default as RemoveCircleIcon } from '@mui/icons-material/RemoveCircle';
 export { default as EditIcon } from '@mui/icons-material/Edit';
 export { default as DeleteIcon } from '@mui/icons-material/Delete';
+export { default as WidgetsIcon } from '@mui/icons-material/Widgets';
 export { default as SaveIcon } from '@mui/icons-material/Save';
 export { default as CancelIcon } from '@mui/icons-material/Cancel';
 export { default as CheckIcon } from '@mui/icons-material/Check';
@@ -85,9 +93,13 @@ export { default as VerifiedIcon } from '@mui/icons-material/Verified';
 export { default as BlockIcon } from '@mui/icons-material/Block';
 export { default as LockIcon } from '@mui/icons-material/Lock';
 export { default as LockOpenIcon } from '@mui/icons-material/LockOpen';
+export { default as AccessibilityNewIcon } from '@mui/icons-material/AccessibilityNew';
+export { default as WbSunnyIcon } from '@mui/icons-material/WbSunny';
+export { default as NightsStayIcon } from '@mui/icons-material/NightsStay';
 
 // ========== TIME & DATE ICONS ==========
 export { default as ClockIcon } from '@mui/icons-material/AccessTime';
+export { default as AccessTimeIcon } from '@mui/icons-material/AccessTime';
 export { default as TodayIcon } from '@mui/icons-material/Today';
 export { default as CalendarIcon } from '@mui/icons-material/CalendarToday';
 export { default as DateRangeIcon } from '@mui/icons-material/DateRange';
@@ -130,6 +142,7 @@ export { default as FlashIcon } from '@mui/icons-material/FlashOn';
 
 // ========== MISCELLANEOUS ICONS ==========
 export { default as PlayArrowIcon } from '@mui/icons-material/PlayArrow';
+export { default as RestaurantIcon } from '@mui/icons-material/Restaurant';
 export { default as EmojiEventsIcon } from '@mui/icons-material/EmojiEvents';
 export { default as TargetIcon } from '@mui/icons-material/TrackChanges';
 export { default as DarkModeIcon } from '@mui/icons-material/DarkMode';
@@ -140,13 +153,36 @@ export { default as BugIcon } from '@mui/icons-material/BugReport';
 export { default as ExtensionIcon } from '@mui/icons-material/Extension';
 export { default as BuildIcon } from '@mui/icons-material/Build';
 export { default as TuneIcon } from '@mui/icons-material/Tune';
-export { default as WidgetsIcon } from '@mui/icons-material/Widgets';
 export { default as AppsIcon } from '@mui/icons-material/Apps';
 export { default as GridIcon } from '@mui/icons-material/GridView';
 export { default as ListIcon } from '@mui/icons-material/ViewList';
 export { default as TableIcon } from '@mui/icons-material/TableChart';
 export { default as ExploreIcon } from '@mui/icons-material/Explore';
 export { default as FlipIcon } from '@mui/icons-material/Flip';
+export { default as ShoppingCartIcon } from '@mui/icons-material/ShoppingCart';
+export { default as AccountBalanceIcon } from '@mui/icons-material/AccountBalance';
+export { default as ReceiptLongIcon } from '@mui/icons-material/ReceiptLong';
+
+export { default as BookIcon } from '@mui/icons-material/MenuBook';
+export { default as KeyIcon } from '@mui/icons-material/Key';
+export { default as NumbersIcon } from '@mui/icons-material/Numbers';
+export { default as LoopIcon } from '@mui/icons-material/Loop';
+export { default as DirectionsRunIcon } from '@mui/icons-material/DirectionsRun';
+export { default as DirectionsCarIcon } from '@mui/icons-material/DirectionsCar';
+export { default as TrainIcon } from '@mui/icons-material/Train';
+export { default as OpacityIcon } from '@mui/icons-material/Opacity';
+export { default as WaterIcon } from '@mui/icons-material/Water';
+export { default as RotateRightIcon } from '@mui/icons-material/RotateRight';
+export { default as RotateLeftIcon } from '@mui/icons-material/RotateLeft';
+export { default as RuleIcon } from '@mui/icons-material/Rule';
+export { default as DangerousIcon } from '@mui/icons-material/Dangerous';
+export { default as CasinoIcon } from '@mui/icons-material/Casino';
+export { default as ViewInArIcon } from '@mui/icons-material/ViewInAr';
+export { default as CompareArrowsIcon } from '@mui/icons-material/CompareArrows';
+export { default as SwapVertIcon } from '@mui/icons-material/SwapVert';
+export { default as HeightIcon } from '@mui/icons-material/Height';
+export { default as WidthNormalIcon } from '@mui/icons-material/WidthNormal';
+export { default as LayersIcon } from '@mui/icons-material/Layers';
 
 // ========== OUTLINED ICONS ==========
 export { default as CalculateOutlinedIcon } from '@mui/icons-material/CalculateOutlined';

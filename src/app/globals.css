@@ -15,17 +15,17 @@
 
   :root {
     /* ========== COLOR PALETTE ========== */
-    /* Background Colors - Deep Navy/Slate Theme */
-    --bg-primary: 222 47% 11%;
-    /* #1a1f2e - Main background */
-    --bg-secondary: 220 39% 15%;
-    /* #252d3d - Card/Panel background */
-    --bg-tertiary: 218 33% 19%;
-    /* #303947 - Hover states */
-    --bg-elevated: 220 39% 18%;
-    /* #2a3241 - Elevated surfaces */
-    --bg-overlay: 222 47% 8%;
-    /* #0f1419 - Modal overlays */
+    /* Background Colors - Neutral Dark Theme (User Requested) */
+    --bg-primary: 240 3% 6%;
+    /* #0f0f10 - Main background */
+    --bg-secondary: 240 3% 10%;
+    /* #18181a - Card/Panel background */
+    --bg-tertiary: 240 3% 14%;
+    /* #232326 - Hover states */
+    --bg-elevated: 240 3% 12%;
+    /* #1e1e21 - Elevated surfaces */
+    --bg-overlay: 240 3% 6%;
+    /* #0f0f10 - Modal overlays */
 
     /* Text Colors */
     --text-primary: 210 20% 98%;
@@ -89,8 +89,8 @@
 
     /* ========== TYPOGRAPHY SYSTEM ========== */
     /* Font Families */
-    --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-    --font-mono: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+    --font-primary: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    --font-mono: var(--font-jetbrains-mono), 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
 
     /* Font Sizes */
     --text-xs: 0.75rem;
@@ -206,34 +206,34 @@
   }
 
   body {
-    @apply font-[var(--font-primary)] text-[length:var(--text-base)] font-[var(--font-normal)] leading-[var(--leading-normal)];
+    @apply font-sans text-[length:var(--text-base)] font-[var(--font-normal)] leading-[var(--leading-normal)];
     @apply bg-[hsl(var(--bg-primary))] text-[hsl(var(--text-primary))];
     @apply antialiased;
   }
 
   /* Headings */
   h1 {
-    @apply text-[length:var(--text-4xl)] font-[var(--font-bold)] leading-[var(--leading-tight)];
+    @apply text-[length:var(--text-4xl)] font-[var(--font-semibold)] leading-[var(--leading-tight)] tracking-tight;
   }
 
   h2 {
-    @apply text-[length:var(--text-3xl)] font-[var(--font-bold)] leading-[var(--leading-tight)];
+    @apply text-[length:var(--text-3xl)] font-[var(--font-semibold)] leading-[var(--leading-tight)] tracking-tight;
   }
 
   h3 {
-    @apply text-[length:var(--text-2xl)] font-[var(--font-semibold)] leading-[var(--leading-snug)];
+    @apply text-[length:var(--text-2xl)] font-[var(--font-medium)] leading-[var(--leading-snug)] tracking-tight;
   }
 
   h4 {
-    @apply text-[length:var(--text-xl)] font-[var(--font-semibold)] leading-[var(--leading-snug)];
+    @apply text-[length:var(--text-xl)] font-[var(--font-medium)] leading-[var(--leading-snug)] tracking-tight;
   }
 
   h5 {
-    @apply text-[length:var(--text-lg)] font-[var(--font-medium)] leading-[var(--leading-normal)];
+    @apply text-[length:var(--text-lg)] font-[var(--font-medium)] leading-[var(--leading-normal)] tracking-tight;
   }
 
   h6 {
-    @apply text-[length:var(--text-base)] font-[var(--font-medium)] leading-[var(--leading-normal)];
+    @apply text-[length:var(--text-base)] font-[var(--font-medium)] leading-[var(--leading-normal)] tracking-tight;
   }
 
   /* Code blocks */

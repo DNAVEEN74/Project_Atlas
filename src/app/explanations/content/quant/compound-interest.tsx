@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -11,42 +10,27 @@ import {
     CheckUnderstanding,
     CheatSheet
 } from '@/components/explanations';
+import { WarningIcon, TrendingUpIcon, TrendingDownIcon } from '@/components/icons';
 
 export default function CompoundInterestContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/40 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] opacity-20 select-none">📈</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-500 text-xs font-bold uppercase tracking-widest mb-2 border border-emerald-500/20">
-                        Financial Mathematics
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Compound Interest</h1>
-                    <p className="text-neutral-400 text-lg">"The eighth wonder of the world" — Albert Einstein</p>
-                </div>
-            </div>
-
-            {/* WHY CI MATTERS */}
-            <ConceptSection id="why" title="SI vs CI — The Big Difference" icon="💡">
-                <div className="bg-gradient-to-r from-emerald-900/20 to-transparent p-6 rounded-xl border-l-4 border-emerald-500 mb-6">
+        <>
+            <ConceptSection id="why" title="SI vs CI — The Big Difference">
+                <div className="bg-gradient-to-r from-amber-900/20 to-transparent p-6 rounded-xl border-l-4 border-amber-500 mb-6">
                     <p className="text-lg">
                         <strong>SI:</strong> Interest only on original Principal.<br />
-                        <strong>CI:</strong> Interest on Principal <span className="text-emerald-400">+ Interest earned so far!</span>
+                        <strong>CI:</strong> Interest on Principal <span className="text-amber-400">+ Interest earned so far!</span>
                     </p>
                 </div>
 
                 {/* Visual comparison */}
                 <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <h4 className="text-emerald-400 font-bold mb-4 text-center">₹1000 at 10% for 3 years</h4>
+                    <h4 className="text-amber-400 font-bold mb-4 text-center">₹1000 at 10% for 3 years</h4>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* SI Column */}
-                        <div className="p-4 bg-blue-500/10 border border-blue-500/30 rounded-xl">
-                            <h5 className="text-blue-400 font-bold text-center mb-4">Simple Interest</h5>
+                        <div className="p-4 bg-orange-500/10 border border-orange-500/30 rounded-xl">
+                            <h5 className="text-orange-400 font-bold text-center mb-4">Simple Interest</h5>
                             <div className="space-y-2 text-sm">
                                 <div className="flex justify-between">
                                     <span className="text-neutral-400">Year 1:</span>
@@ -60,16 +44,16 @@ export default function CompoundInterestContent() {
                                     <span className="text-neutral-400">Year 3:</span>
                                     <span className="text-white">1200 → 1300 (+100)</span>
                                 </div>
-                                <div className="border-t border-blue-500/30 pt-2 mt-2">
-                                    <p className="text-center text-blue-400 font-bold">Total SI = ₹300</p>
+                                <div className="border-t border-orange-500/30 pt-2 mt-2">
+                                    <p className="text-center text-orange-400 font-bold">Total SI = ₹300</p>
                                     <p className="text-center text-xs text-neutral-500">Same ₹100 every year</p>
                                 </div>
                             </div>
                         </div>
 
                         {/* CI Column */}
-                        <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl">
-                            <h5 className="text-emerald-400 font-bold text-center mb-4">Compound Interest</h5>
+                        <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl">
+                            <h5 className="text-amber-400 font-bold text-center mb-4">Compound Interest</h5>
                             <div className="space-y-2 text-sm">
                                 <div className="flex justify-between">
                                     <span className="text-neutral-400">Year 1:</span>
@@ -77,14 +61,14 @@ export default function CompoundInterestContent() {
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-neutral-400">Year 2:</span>
-                                    <span className="text-white">1100 → 1210 (+<span className="text-emerald-400">110</span>)</span>
+                                    <span className="text-white">1100 → 1210 (+<span className="text-amber-400">110</span>)</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-neutral-400">Year 3:</span>
-                                    <span className="text-white">1210 → 1331 (+<span className="text-emerald-400">121</span>)</span>
+                                    <span className="text-white">1210 → 1331 (+<span className="text-amber-400">121</span>)</span>
                                 </div>
-                                <div className="border-t border-emerald-500/30 pt-2 mt-2">
-                                    <p className="text-center text-emerald-400 font-bold">Total CI = ₹331</p>
+                                <div className="border-t border-amber-500/30 pt-2 mt-2">
+                                    <p className="text-center text-amber-400 font-bold">Total CI = ₹331</p>
                                     <p className="text-center text-xs text-neutral-500">Interest grows each year!</p>
                                 </div>
                             </div>
@@ -98,7 +82,7 @@ export default function CompoundInterestContent() {
             </ConceptSection>
 
             {/* THE FORMULA */}
-            <ConceptSection id="formula" title="The CI Formula" icon="📐">
+            <ConceptSection id="formula" title="The CI Formula">
                 <FormulaBox title="Compound Interest Formula" variant="primary">
                     <div className="text-center">
                         <MathText className="text-2xl">{`A = P \\left(1 + \\frac{R}{100}\\right)^n`}</MathText>
@@ -135,7 +119,7 @@ export default function CompoundInterestContent() {
             </ConceptSection>
 
             {/* CI-SI DIFFERENCE */}
-            <ConceptSection id="diff" title="CI − SI Difference (Shortcut!)" icon="⚡">
+            <ConceptSection id="diff" title="CI − SI Difference (Shortcut!)">
                 <p className="mb-4">
                     Many questions ask: "Find the difference between CI and SI". Use these shortcuts!
                 </p>
@@ -177,7 +161,7 @@ export default function CompoundInterestContent() {
             </ConceptSection>
 
             {/* HALF-YEARLY / QUARTERLY */}
-            <ConceptSection id="frequency" title="Compounding Frequency" icon="📅">
+            <ConceptSection id="frequency" title="Compounding Frequency">
                 <p className="mb-4">
                     Interest can compound more than once a year. This increases the effective amount!
                 </p>
@@ -199,13 +183,13 @@ export default function CompoundInterestContent() {
                             </tr>
                             <tr className="border-b border-neutral-800">
                                 <td className="px-4 py-4 text-white">Half-yearly</td>
-                                <td className="px-4 py-4 text-emerald-400">(R/2)%</td>
-                                <td className="px-4 py-4 text-emerald-400">2n periods</td>
+                                <td className="px-4 py-4 text-amber-400">(R/2)%</td>
+                                <td className="px-4 py-4 text-amber-400">2n periods</td>
                             </tr>
                             <tr>
                                 <td className="px-4 py-4 text-white">Quarterly</td>
-                                <td className="px-4 py-4 text-emerald-400">(R/4)%</td>
-                                <td className="px-4 py-4 text-emerald-400">4n periods</td>
+                                <td className="px-4 py-4 text-amber-400">(R/4)%</td>
+                                <td className="px-4 py-4 text-amber-400">4n periods</td>
                             </tr>
                         </tbody>
                     </table>
@@ -234,7 +218,7 @@ export default function CompoundInterestContent() {
             </ConceptSection>
 
             {/* DIFFERENT RATES */}
-            <ConceptSection id="different" title="Different Rates for Different Years" icon="🔢">
+            <ConceptSection id="different" title="Different Rates for Different Years">
                 <p className="mb-4">
                     When rate changes each year, multiply the factors!
                 </p>
@@ -262,19 +246,19 @@ export default function CompoundInterestContent() {
             </ConceptSection>
 
             {/* POPULATION PROBLEMS */}
-            <ConceptSection id="population" title="Population Growth & Depreciation" icon="📊">
+            <ConceptSection id="population" title="Population Growth & Depreciation">
                 <p className="mb-4">
                     CI formula applies to anything that grows/decreases by a percentage each year!
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                    <div className="p-5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl">
-                        <h4 className="text-emerald-400 font-bold mb-3">📈 Growth</h4>
+                    <div className="p-5 bg-amber-500/10 border border-amber-500/30 rounded-xl">
+                        <h4 className="text-amber-400 font-bold mb-3 flex items-center gap-2"><TrendingUpIcon /> Growth</h4>
                         <MathText>{`P_{final} = P_{initial} \\left(1 + \\frac{R}{100}\\right)^n`}</MathText>
                         <p className="text-sm text-neutral-400 mt-2">Population, Bacteria, Investment</p>
                     </div>
                     <div className="p-5 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold mb-3">📉 Depreciation</h4>
+                        <h4 className="text-red-400 font-bold mb-3 flex items-center gap-2"><TrendingDownIcon /> Depreciation</h4>
                         <MathText>{`V_{final} = V_{initial} \\left(1 - \\frac{R}{100}\\right)^n`}</MathText>
                         <p className="text-sm text-neutral-400 mt-2">Car value, Machine value</p>
                     </div>
@@ -303,31 +287,31 @@ export default function CompoundInterestContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
                 <div className="space-y-4 my-6">
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Confusing CI with SI</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Confusing CI with SI</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             SI = PRT/100 (linear). CI = P(1+R/100)ⁿ − P (exponential). They're different!
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Forgetting Half-Yearly Adjustments</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Forgetting Half-Yearly Adjustments</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Half-yearly = Rate÷2, Time×2. Don't use annual values!
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Finding CI Instead of Amount (or vice versa)</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Finding CI Instead of Amount (or vice versa)</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Amount = P + CI. Read the question carefully — what's being asked?
                         </p>
                     </div>
 
                     <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Using + for Depreciation</h4>
+                        <h4 className="text-red-400 font-bold flex items-center gap-2"><WarningIcon className="text-red-400" /> Using + for Depreciation</h4>
                         <p className="text-sm text-neutral-400 mt-1">
                             Depreciation means DECREASE. Use (1 − R/100), not (1 + R/100)!
                         </p>
@@ -351,6 +335,6 @@ export default function CompoundInterestContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

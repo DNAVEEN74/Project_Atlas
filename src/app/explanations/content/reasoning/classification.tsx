@@ -3,7 +3,12 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
+    CancelIcon,
+    CheckIcon,
+    WarningIcon,
+    LightbulbIcon
+} from '@/components/icons';
+import {
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,31 +19,15 @@ import {
 
 export default function ClassificationContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-rose-900/30 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[6rem] select-none">🔍</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-rose-500/20 text-rose-500 text-xs font-bold uppercase tracking-widest mb-2 border border-rose-500/20">
-                        Phase 01: Verbal Reasoning
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Classification</h1>
-                    <p className="text-neutral-400 text-lg">Master the art of finding the "Odd One Out".</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: THE MENTAL MODEL */}
-            <ConceptSection id="approach" title="The Mental Model" icon="🧠">
+        <>
+            <ConceptSection id="approach" title="The Mental Model">
                 <p>
                     Classification questions give you 4-5 items. Three or four share a common property.
                     One is the <strong>"Odd One Out"</strong>. Your job is to find that hidden pattern.
                 </p>
 
                 <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
-                    <h4 className="text-rose-400 font-bold mb-4 text-lg">The Quick Scan Technique</h4>
+                    <h4 className="text-violet-400 font-bold mb-4 text-lg">The Quick Scan Technique</h4>
                     <ol className="list-decimal list-inside space-y-3 text-neutral-300">
                         <li><strong>First glance:</strong> Are they all numbers? Letters? Words? Mixed?</li>
                         <li><strong>Find the majority:</strong> What do 3-4 items have in common?</li>
@@ -53,32 +42,32 @@ export default function ClassificationContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: NUMBER CLASSIFICATION */}
-            <ConceptSection id="numbers" title="Number Classification" icon="🔢">
+            <ConceptSection id="numbers" title="Number Classification">
                 <p>The most common type. Look for these patterns:</p>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-6">
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <div className="text-rose-400 font-bold">Prime Numbers</div>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-violet-500/30 transition-all">
+                        <div className="text-violet-400 font-bold">Prime Numbers</div>
                         <div className="text-xs text-neutral-500 mt-1">2, 3, 5, 7, 11, 13...</div>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <div className="text-rose-400 font-bold">Even / Odd</div>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-violet-500/30 transition-all">
+                        <div className="text-violet-400 font-bold">Even / Odd</div>
                         <div className="text-xs text-neutral-500 mt-1">Divisibility by 2</div>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <div className="text-rose-400 font-bold">Perfect Squares</div>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-violet-500/30 transition-all">
+                        <div className="text-violet-400 font-bold">Perfect Squares</div>
                         <div className="text-xs text-neutral-500 mt-1">1, 4, 9, 16, 25...</div>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <div className="text-rose-400 font-bold">Perfect Cubes</div>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-violet-500/30 transition-all">
+                        <div className="text-violet-400 font-bold">Perfect Cubes</div>
                         <div className="text-xs text-neutral-500 mt-1">1, 8, 27, 64...</div>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <div className="text-rose-400 font-bold">Divisibility</div>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-violet-500/30 transition-all">
+                        <div className="text-violet-400 font-bold">Divisibility</div>
                         <div className="text-xs text-neutral-500 mt-1">By 3, 5, 7, etc.</div>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <div className="text-rose-400 font-bold">Sum of Digits</div>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-violet-500/30 transition-all">
+                        <div className="text-violet-400 font-bold">Sum of Digits</div>
                         <div className="text-xs text-neutral-500 mt-1">123 → 1+2+3=6</div>
                     </div>
                 </div>
@@ -123,7 +112,7 @@ export default function ClassificationContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: LETTER CLASSIFICATION */}
-            <ConceptSection id="letters" title="Letter Classification" icon="🔤">
+            <ConceptSection id="letters" title="Letter Classification">
                 <p>Use the <strong>EJOTY</strong> rule to quickly find letter positions!</p>
 
                 <div className="my-6 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
@@ -132,7 +121,7 @@ export default function ClassificationContent() {
                             { l: 'E', n: 5 }, { l: 'J', n: 10 }, { l: 'O', n: 15 }, { l: 'T', n: 20 }, { l: 'Y', n: 25 }
                         ].map(({ l, n }) => (
                             <div key={l}>
-                                <div className="text-3xl font-bold text-rose-400">{l}</div>
+                                <div className="text-3xl font-bold text-violet-400">{l}</div>
                                 <div className="text-sm text-neutral-500">{n}</div>
                             </div>
                         ))}
@@ -167,24 +156,24 @@ export default function ClassificationContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: WORD CLASSIFICATION */}
-            <ConceptSection id="words" title="Word Classification" icon="📝">
+            <ConceptSection id="words" title="Word Classification">
                 <p>Look for categories, relationships, or linguistic patterns:</p>
 
                 <div className="grid grid-cols-2 gap-4 my-6">
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <div className="text-rose-400 font-bold">Categories</div>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-violet-500/30 transition-all">
+                        <div className="text-violet-400 font-bold">Categories</div>
                         <div className="text-xs text-neutral-400 mt-1">Fruits vs Vegetables, Mammals vs Birds</div>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <div className="text-rose-400 font-bold">Relationships</div>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-violet-500/30 transition-all">
+                        <div className="text-violet-400 font-bold">Relationships</div>
                         <div className="text-xs text-neutral-400 mt-1">Part of body, Types of transport</div>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <div className="text-rose-400 font-bold">Countries & Capitals</div>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-violet-500/30 transition-all">
+                        <div className="text-violet-400 font-bold">Countries & Capitals</div>
                         <div className="text-xs text-neutral-400 mt-1">All capitals except one country</div>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <div className="text-rose-400 font-bold">Synonyms / Antonyms</div>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 hover:border-violet-500/30 transition-all">
+                        <div className="text-violet-400 font-bold">Synonyms / Antonyms</div>
                         <div className="text-xs text-neutral-400 mt-1">Similar meanings vs opposite</div>
                     </div>
                 </div>
@@ -220,6 +209,6 @@ export default function ClassificationContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

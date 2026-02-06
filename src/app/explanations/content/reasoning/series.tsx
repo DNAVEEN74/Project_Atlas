@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,30 +13,14 @@ import {
 
 export default function SeriesContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-900/30 via-neutral-900 to-black" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[4rem] font-bold text-green-500/10 select-none font-mono">2, 4, 8, 16, ?</div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-green-500/20 text-green-500 text-xs font-bold uppercase tracking-widest mb-2 border border-green-500/20">
-                        Phase 01: Verbal Reasoning
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Series</h1>
-                    <p className="text-neutral-400 text-lg">Master number, letter, and mixed series patterns.</p>
-                </div>
-            </div>
-
-            {/* CONCEPT 1: THE APPROACH */}
-            <ConceptSection id="approach" title="The Universal Approach" icon="🧠">
+        <>
+            <ConceptSection id="approach" title="The Universal Approach">
                 <p>
                     Every series question follows a pattern. Your job is to <strong>FIND the pattern</strong>, then apply it to find the missing term.
                 </p>
 
-                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-green-500/30">
-                    <h4 className="text-green-400 font-bold mb-4 text-lg">The 4-Step Method</h4>
+                <div className="my-8 p-6 bg-neutral-900 rounded-xl border border-violet-500/30">
+                    <h4 className="text-violet-400 font-bold mb-4 text-lg">The 4-Step Method</h4>
                     <ol className="list-decimal list-inside space-y-3 text-neutral-300">
                         <li><strong>Calculate differences:</strong> Find gaps between consecutive terms</li>
                         <li><strong>Check for patterns</strong> in differences (constant, increasing, decreasing)</li>
@@ -48,47 +31,47 @@ export default function SeriesContent() {
             </ConceptSection>
 
             {/* CONCEPT 2: NUMBER SERIES TYPES */}
-            <ConceptSection id="number-types" title="Number Series Patterns" icon="🔢">
+            <ConceptSection id="number-types" title="Number Series Patterns">
                 <p>Memorize these common patterns. They cover 95% of exam questions.</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-green-400 font-bold mb-2">1. Arithmetic (Constant Difference)</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">1. Arithmetic (Constant Difference)</h4>
                         <p className="font-mono text-sm text-neutral-400">3, 7, 11, 15, 19...</p>
                         <p className="text-xs text-neutral-500 mt-1">+4, +4, +4, +4</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-green-400 font-bold mb-2">2. Geometric (Constant Ratio)</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">2. Geometric (Constant Ratio)</h4>
                         <p className="font-mono text-sm text-neutral-400">2, 6, 18, 54, 162...</p>
                         <p className="text-xs text-neutral-500 mt-1">×3, ×3, ×3, ×3</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-green-400 font-bold mb-2">3. Squares</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">3. Squares</h4>
                         <p className="font-mono text-sm text-neutral-400">1, 4, 9, 16, 25, 36...</p>
                         <p className="text-xs text-neutral-500 mt-1">1², 2², 3², 4², 5²...</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-green-400 font-bold mb-2">4. Cubes</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">4. Cubes</h4>
                         <p className="font-mono text-sm text-neutral-400">1, 8, 27, 64, 125...</p>
                         <p className="text-xs text-neutral-500 mt-1">1³, 2³, 3³, 4³, 5³...</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-green-400 font-bold mb-2">5. Increasing Difference</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">5. Increasing Difference</h4>
                         <p className="font-mono text-sm text-neutral-400">2, 3, 5, 8, 12, 17...</p>
                         <p className="text-xs text-neutral-500 mt-1">+1, +2, +3, +4, +5</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-green-400 font-bold mb-2">6. Two-Level Difference</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">6. Two-Level Difference</h4>
                         <p className="font-mono text-sm text-neutral-400">1, 2, 5, 10, 17, 26...</p>
                         <p className="text-xs text-neutral-500 mt-1">Diff: 1,3,5,7,9 (odd numbers)</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-green-400 font-bold mb-2">7. n² + n or n² − n</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">7. n² + n or n² − n</h4>
                         <p className="font-mono text-sm text-neutral-400">2, 6, 12, 20, 30...</p>
                         <p className="text-xs text-neutral-500 mt-1">n(n+1): 1×2, 2×3, 3×4...</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-green-400 font-bold mb-2">8. Alternating Operations</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">8. Alternating Operations</h4>
                         <p className="font-mono text-sm text-neutral-400">2, 6, 4, 12, 6, 18...</p>
                         <p className="text-xs text-neutral-500 mt-1">×3, −2, ×3, −6, ×3...</p>
                     </div>
@@ -120,7 +103,7 @@ export default function SeriesContent() {
             </ConceptSection>
 
             {/* CONCEPT 3: LETTER SERIES */}
-            <ConceptSection id="letter" title="Letter Series" icon="🔤">
+            <ConceptSection id="letter" title="Letter Series">
                 <p>Use <strong>EJOTY</strong> (E=5, J=10, O=15, T=20, Y=25) as your reference!</p>
 
                 <div className="my-6 p-6 bg-neutral-900 rounded-xl border border-neutral-800">
@@ -129,7 +112,7 @@ export default function SeriesContent() {
                             { l: 'E', n: 5 }, { l: 'J', n: 10 }, { l: 'O', n: 15 }, { l: 'T', n: 20 }, { l: 'Y', n: 25 }
                         ].map(({ l, n }) => (
                             <div key={l}>
-                                <div className="text-3xl font-bold text-green-400">{l}</div>
+                                <div className="text-3xl font-bold text-violet-400">{l}</div>
                                 <div className="text-sm text-neutral-500">{n}</div>
                             </div>
                         ))}
@@ -138,12 +121,12 @@ export default function SeriesContent() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-green-400 font-bold mb-2">Skip Pattern</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">Skip Pattern</h4>
                         <p className="font-mono text-sm text-neutral-400">A, C, E, G, I...</p>
                         <p className="text-xs text-neutral-500 mt-1">Skip 1 letter (+2 positions)</p>
                     </div>
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
-                        <h4 className="text-green-400 font-bold mb-2">Increasing Skip</h4>
+                        <h4 className="text-violet-400 font-bold mb-2">Increasing Skip</h4>
                         <p className="font-mono text-sm text-neutral-400">A, B, D, G, K...</p>
                         <p className="text-xs text-neutral-500 mt-1">+1, +2, +3, +4...</p>
                     </div>
@@ -172,7 +155,7 @@ export default function SeriesContent() {
             </ConceptSection>
 
             {/* CONCEPT 4: WRONG TERM PROBLEMS */}
-            <ConceptSection id="wrong" title="Find the Wrong Term" icon="❌">
+            <ConceptSection id="wrong" title="Find the Wrong Term">
                 <p>
                     Some questions ask: "Which term doesn't fit?" Find the pattern, then find the outlier.
                 </p>
@@ -194,7 +177,7 @@ export default function SeriesContent() {
             </ConceptSection>
 
             {/* CONCEPT 5: MIXED SERIES */}
-            <ConceptSection id="mixed" title="Mixed (Alpha-Numeric) Series" icon="🔣">
+            <ConceptSection id="mixed" title="Mixed (Alpha-Numeric) Series">
                 <p>
                     These combine letters and numbers. Look for SEPARATE patterns in each.
                 </p>
@@ -227,6 +210,6 @@ export default function SeriesContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

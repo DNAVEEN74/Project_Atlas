@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -14,7 +13,7 @@ import {
 
 export default function PowerIndicesSurdsContent() {
     return (
-        <LessonLayout>
+        <>
             <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-red-900/30 via-neutral-900 to-black" />
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -29,7 +28,7 @@ export default function PowerIndicesSurdsContent() {
                 </div>
             </div>
 
-            <ConceptSection id="indices" title="Laws of Indices" icon="📊">
+            <ConceptSection id="indices" title="Laws of Indices">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
                     <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800">
                         <MathText>{`a^m \\times a^n = a^{m+n}`}</MathText>
@@ -46,7 +45,7 @@ export default function PowerIndicesSurdsContent() {
                 </div>
             </ConceptSection>
 
-            <ConceptSection id="surds" title="Surds (Radicals)" icon="√">
+            <ConceptSection id="surds" title="Surds (Radicals)">
                 <p>A surd is an irrational root like √2, √3, ∛5.</p>
 
                 <TipBox title="Rationalizing the Denominator">
@@ -55,7 +54,7 @@ export default function PowerIndicesSurdsContent() {
                 </TipBox>
             </ConceptSection>
 
-            <ConceptSection id="common" title="Common Values" icon="📝">
+            <ConceptSection id="common" title="Common Values">
                 <div className="grid grid-cols-4 gap-2 my-6 text-center font-mono text-sm">
                     <div className="p-2 bg-neutral-900 rounded">√2 ≈ 1.41</div>
                     <div className="p-2 bg-neutral-900 rounded">√3 ≈ 1.73</div>
@@ -74,6 +73,6 @@ export default function PowerIndicesSurdsContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }

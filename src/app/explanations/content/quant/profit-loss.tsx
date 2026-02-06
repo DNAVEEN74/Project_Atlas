@@ -3,7 +3,6 @@
 import React from 'react';
 import { MathText } from '@/components/ui/MathText';
 import {
-    LessonLayout,
     ConceptSection,
     FormulaBox,
     TipBox,
@@ -11,87 +10,69 @@ import {
     CheckUnderstanding,
     CheatSheet
 } from '@/components/explanations';
+import { ShoppingCartIcon, BarChartIcon, ReceiptLongIcon, CancelIcon } from '@/components/icons';
 
 export default function ProfitLossContent() {
     return (
-        <LessonLayout>
-            {/* HERO */}
-            <div className="relative w-full aspect-[21/9] rounded-2xl overflow-hidden mb-12 border border-neutral-800 shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/40 via-neutral-900 to-black" />
-
-                {/* Visual coins/money */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-[8rem] opacity-20">💰</div>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
-                    <span className="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-500 text-xs font-bold uppercase tracking-widest mb-2 border border-emerald-500/20">
-                        Business Mathematics
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">Profit & Loss</h1>
-                    <p className="text-neutral-400 text-lg">Master the language of business — CP, SP, MP, and their relationships!</p>
-                </div>
-            </div>
-
-            {/* WHY THIS MATTERS */}
-            <ConceptSection id="why" title="Why Profit & Loss is Everywhere" icon="🏪">
-                <div className="bg-gradient-to-r from-emerald-900/20 to-transparent p-6 rounded-xl border-l-4 border-emerald-500 mb-6">
-                    <p className="text-lg">
-                        <strong>Real Life:</strong> Every shop, every sale, every discount — it's all Profit & Loss!
-                        <span className="text-emerald-400"> Understanding this topic helps you think like a businessperson.</span>
+        <>
+            <ConceptSection id="why" title="Why Profit & Loss is Everywhere">
+                <FormulaBox title="Real Life Impact">
+                    <p>
+                        Every shop, every sale, every discount — it's all Profit & Loss!
+                        <span className="text-amber-400"> Understanding this topic helps you think like a businessperson.</span>
                     </p>
-                </div>
+                </FormulaBox>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center hover:border-emerald-500/50 transition-all">
-                        <div className="text-3xl mb-2">🛍️</div>
-                        <h4 className="text-emerald-400 font-bold">Shopping</h4>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center hover:border-amber-500/50 transition-all">
+                        <div className="text-3xl mb-2 flex justify-center text-amber-400"><ShoppingCartIcon fontSize="large" /></div>
+                        <h4 className="text-white font-bold">Shopping</h4>
                         <p className="text-xs text-neutral-400">Is 50% off + 20% off = 70% off?</p>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center hover:border-emerald-500/50 transition-all">
-                        <div className="text-3xl mb-2">📊</div>
-                        <h4 className="text-emerald-400 font-bold">DI Problems</h4>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center hover:border-amber-500/50 transition-all">
+                        <div className="text-3xl mb-2 flex justify-center text-amber-400"><BarChartIcon fontSize="large" /></div>
+                        <h4 className="text-white font-bold">DI Problems</h4>
                         <p className="text-xs text-neutral-400">Profit margins in charts</p>
                     </div>
-                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center hover:border-emerald-500/50 transition-all">
-                        <div className="text-3xl mb-2">🧾</div>
-                        <h4 className="text-emerald-400 font-bold">Word Problems</h4>
+                    <div className="p-4 bg-neutral-900 rounded-xl border border-neutral-800 text-center hover:border-amber-500/50 transition-all">
+                        <div className="text-3xl mb-2 flex justify-center text-amber-400"><ReceiptLongIcon fontSize="large" /></div>
+                        <h4 className="text-white font-bold">Word Problems</h4>
                         <p className="text-xs text-neutral-400">2-3 questions guaranteed!</p>
                     </div>
                 </div>
             </ConceptSection>
 
             {/* THE TERMINOLOGY */}
-            <ConceptSection id="terms" title="The 4 Key Terms" icon="📖">
+            <ConceptSection id="terms" title="The 4 Key Terms">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-8">
-                    <div className="p-5 bg-blue-500/10 border border-blue-500/30 rounded-xl text-center hover:border-blue-500 transition-all">
-                        <div className="text-4xl font-black text-blue-400 mb-2">CP</div>
-                        <p className="text-neutral-300 font-bold">Cost Price</p>
-                        <p className="text-xs text-neutral-500 mt-2">What the shopkeeper PAYS to buy the item</p>
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl text-center hover:border-amber-500 transition-all">
+                        <div className="text-4xl font-black text-amber-400 mb-2">CP</div>
+                        <p className="text-white font-bold">Cost Price</p>
+                        <p className="text-xs text-neutral-400 mt-2">What the shopkeeper PAYS to buy the item</p>
                     </div>
 
-                    <div className="p-5 bg-amber-500/10 border border-amber-500/30 rounded-xl text-center hover:border-amber-500 transition-all">
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl text-center hover:border-amber-500 transition-all">
                         <div className="text-4xl font-black text-amber-400 mb-2">MP</div>
-                        <p className="text-neutral-300 font-bold">Marked Price</p>
-                        <p className="text-xs text-neutral-500 mt-2">The price TAG on the item (also called MRP)</p>
+                        <p className="text-white font-bold">Marked Price</p>
+                        <p className="text-xs text-neutral-400 mt-2">The price TAG on the item (also called MRP)</p>
                     </div>
 
-                    <div className="p-5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-center hover:border-emerald-500 transition-all">
-                        <div className="text-4xl font-black text-emerald-400 mb-2">SP</div>
-                        <p className="text-neutral-300 font-bold">Selling Price</p>
-                        <p className="text-xs text-neutral-500 mt-2">What the customer actually PAYS</p>
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl text-center hover:border-amber-500 transition-all">
+                        <div className="text-4xl font-black text-amber-400 mb-2">SP</div>
+                        <p className="text-white font-bold">Selling Price</p>
+                        <p className="text-xs text-neutral-400 mt-2">What the customer actually PAYS</p>
                     </div>
 
-                    <div className="p-5 bg-purple-500/10 border border-purple-500/30 rounded-xl text-center hover:border-purple-500 transition-all">
-                        <div className="text-4xl font-black text-purple-400 mb-2">P/L</div>
-                        <p className="text-neutral-300 font-bold">Profit or Loss</p>
-                        <p className="text-xs text-neutral-500 mt-2">SP − CP (positive = profit, negative = loss)</p>
+                    <div className="p-5 bg-neutral-900 border border-neutral-800 rounded-xl text-center hover:border-amber-500 transition-all">
+                        <div className="text-4xl font-black text-amber-400 mb-2">P/L</div>
+                        <p className="text-white font-bold">Profit or Loss</p>
+                        <p className="text-xs text-neutral-400 mt-2">SP − CP (positive = profit, negative = loss)</p>
                     </div>
                 </div>
             </ConceptSection>
 
             {/* THE FLOW */}
-            <ConceptSection id="flow" title="The Shopkeeper's Journey" icon="🛒">
+            <ConceptSection id="flow" title="The Shopkeeper's Journey">
                 <p className="mb-4">
                     Every P&L problem follows this <strong>exact sequence</strong>. Visualize it!
                 </p>
@@ -154,7 +135,7 @@ export default function ProfitLossContent() {
             </ConceptSection>
 
             {/* BASIC FORMULAS */}
-            <ConceptSection id="formulas" title="The Essential Formulas" icon="📐">
+            <ConceptSection id="formulas" title="The Essential Formulas">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <FormulaBox title="Profit %" variant="primary">
                         <div className="text-center">
@@ -216,12 +197,12 @@ export default function ProfitLossContent() {
             </ConceptSection>
 
             {/* THE GOLDEN FORMULA */}
-            <ConceptSection id="golden" title="The Golden Formula — MP to CP" icon="⭐">
-                <div className="bg-gradient-to-r from-amber-900/20 to-transparent p-6 rounded-xl border-l-4 border-amber-500 mb-6">
-                    <p className="text-lg">
+            <ConceptSection id="golden" title="The Golden Formula — MP to CP">
+                <FormulaBox>
+                    <p>
                         This single formula connects <strong>all three prices</strong> and solves most complex problems!
                     </p>
-                </div>
+                </FormulaBox>
 
                 <FormulaBox title="The Golden Relation" variant="secondary">
                     <div className="text-center">
@@ -275,12 +256,12 @@ export default function ProfitLossContent() {
             </ConceptSection>
 
             {/* SUCCESSIVE DISCOUNT */}
-            <ConceptSection id="successive" title="Successive Discounts" icon="🔢">
-                <div className="bg-gradient-to-r from-red-900/20 to-transparent p-6 rounded-xl border-l-4 border-red-500 mb-6">
-                    <p className="text-lg">
-                        <strong>Warning:</strong> 20% off + 10% off is <span className="text-red-400">NOT 30% off!</span>
+            <ConceptSection id="successive" title="Successive Discounts">
+                <FormulaBox title="Warning">
+                    <p>
+                        20% off + 10% off is <span className="text-red-400">NOT 30% off!</span>
                     </p>
-                </div>
+                </FormulaBox>
 
                 <p className="mb-4">
                     Each discount is applied on the <strong>REDUCED price</strong>, not the original!
@@ -345,7 +326,7 @@ export default function ProfitLossContent() {
             </ConceptSection>
 
             {/* FALSE WEIGHT */}
-            <ConceptSection id="false-weight" title="Cheating Problems — False Weights" icon="⚖️">
+            <ConceptSection id="false-weight" title="Cheating Problems — False Weights">
                 <p className="mb-4">
                     A dishonest shopkeeper uses faulty weights (gives less than promised). This is a type of <strong>hidden profit</strong>.
                 </p>
@@ -380,7 +361,7 @@ export default function ProfitLossContent() {
             </ConceptSection>
 
             {/* BUYING AND SELLING TOGETHER */}
-            <ConceptSection id="combined" title="Combined Profit/Loss" icon="↔️">
+            <ConceptSection id="combined" title="Combined Profit/Loss">
                 <p className="mb-4">
                     When someone sells two items — one at profit, one at loss — finding net result can be tricky.
                 </p>
@@ -414,32 +395,40 @@ export default function ProfitLossContent() {
             </ConceptSection>
 
             {/* COMMON MISTAKES */}
-            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!" icon="⚠️">
-                <div className="space-y-4 my-6">
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Calculating Profit on SP</h4>
-                        <p className="text-sm text-neutral-400 mt-1">
+            <ConceptSection id="mistakes" title="Common Mistakes — Avoid These!">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                    <div className="p-4 bg-neutral-900 border border-red-500/20 rounded-xl hover:border-red-500/50 transition-colors">
+                        <h4 className="text-red-400 font-bold flex items-center gap-2 mb-2">
+                            <CancelIcon fontSize="small" /> Calculating Profit on SP
+                        </h4>
+                        <p className="text-sm text-neutral-400">
                             Profit % is ALWAYS on CP, not SP! "20% profit on SP" is a different formula.
                         </p>
                     </div>
 
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Adding Successive Discounts Directly</h4>
-                        <p className="text-sm text-neutral-400 mt-1">
+                    <div className="p-4 bg-neutral-900 border border-red-500/20 rounded-xl hover:border-red-500/50 transition-colors">
+                        <h4 className="text-red-400 font-bold flex items-center gap-2 mb-2">
+                            <CancelIcon fontSize="small" /> Adding Successive Discounts Directly
+                        </h4>
+                        <p className="text-sm text-neutral-400">
                             20% + 10% ≠ 30%! Use: a + b − ab/100 = 28%
                         </p>
                     </div>
 
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ Confusing MP and SP</h4>
-                        <p className="text-sm text-neutral-400 mt-1">
+                    <div className="p-4 bg-neutral-900 border border-red-500/20 rounded-xl hover:border-red-500/50 transition-colors">
+                        <h4 className="text-red-400 font-bold flex items-center gap-2 mb-2">
+                            <CancelIcon fontSize="small" /> Confusing MP and SP
+                        </h4>
+                        <p className="text-sm text-neutral-400">
                             MP is the tagged price. SP is after discount. They're only equal when discount = 0!
                         </p>
                     </div>
 
-                    <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                        <h4 className="text-red-400 font-bold">❌ False Weight — Wrong Denominator</h4>
-                        <p className="text-sm text-neutral-400 mt-1">
+                    <div className="p-4 bg-neutral-900 border border-red-500/20 rounded-xl hover:border-red-500/50 transition-colors">
+                        <h4 className="text-red-400 font-bold flex items-center gap-2 mb-2">
+                            <CancelIcon fontSize="small" /> False Weight — Wrong Denominator
+                        </h4>
+                        <p className="text-sm text-neutral-400">
                             In 900g/1kg problem, profit is Error/False Weight, not Error/True Weight!
                         </p>
                     </div>
@@ -463,6 +452,6 @@ export default function ProfitLossContent() {
                     ]}
                 />
             </ConceptSection>
-        </LessonLayout>
+        </>
     );
 }
