@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next';
-import { getAllPatternSlugs } from '@/data/explanations-data';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://project-atlas-jek8.vercel.app';
 
@@ -31,12 +30,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.8,
         },
         {
-            url: `${BASE_URL}/explanations`,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.9,
-        },
-        {
             url: `${BASE_URL}/pricing`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
@@ -56,17 +49,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
     ];
 
-    // Dynamic Explanation pages
-    const explanationSlugs = getAllPatternSlugs();
-    const explanationPages: MetadataRoute.Sitemap = explanationSlugs.map((slug) => ({
-        url: `${BASE_URL}/explanations/${slug}`,
-        lastModified: new Date(),
-        changeFrequency: 'monthly' as const,
-        priority: 0.8,
-    }));
-
     // Note: For dynamic problem pages, you could fetch IDs from DB here
     // For now, we'll rely on internal linking for discovery
 
-    return [...staticPages, ...explanationPages];
+    return [...staticPages];
 }

@@ -92,7 +92,6 @@ export default function Home() {
             <span className="font-bold text-lg tracking-tight text-white">PrepLeague</span>
           </Link>
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/explanations" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Explanations</Link>
             <Link href="/problems" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Problems</Link>
             <Link href="/sprint" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Sprint</Link>
             <Link href="/pricing" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Pricing</Link>
@@ -213,8 +212,8 @@ export default function Home() {
             <p className="text-lg text-neutral-400 mb-8 leading-relaxed">
               Our entire concept library is completely free. Visual proofs, mental models, real-world analogies. Zero barriers.
             </p>
-            <Link href="/explanations" className="inline-flex items-center gap-2 text-violet-400 font-semibold hover:gap-3 transition-all">
-              Explore Concepts <ChevronRightIcon />
+            <Link href="/problems" className="inline-flex items-center gap-2 text-violet-400 font-semibold hover:gap-3 transition-all">
+              Start Practicing <ChevronRightIcon />
             </Link>
           </div>
         </div>

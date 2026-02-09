@@ -38,6 +38,6 @@ export const config = {
          * - design-system-example (public page)
          * - / (home page)
          */
-        '/((?!api|_next/static|_next/image|favicon.ico|design-system-example|explanations|$).*)',
+        '/((?!api|_next/static|_next/image|favicon.ico|design-system-example|$).*)',
     ],
 };
