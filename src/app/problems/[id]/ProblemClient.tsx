@@ -30,35 +30,30 @@ import { ReportModal } from '@/components/ui/ReportModal';
 interface QuestionOption {
     id: string;
     text: string;
-    is_correct: boolean;
     image?: string;
 }
 
 interface QuestionData {
     id: string;
-    content: {
-        text: string;
-        options: QuestionOption[];
-        correct_option_id: string;
-        image?: string;
-    };
-    pattern: {
-        name: string;
-        code: string;
-        topic: string;
-        subtopic: string;
-    } | null;
+    text: string;
+    image?: string;
+    options: QuestionOption[];
+    correct_option: string; // "A", "B", "C", or "D"
+    solution?: string;
+    pattern: string | null;
+    subject: string;
     source: {
         exam: string;
         year: number;
-        paper: string;
-        section: string;
-        question_number: number;
+        shift?: string;
     };
     difficulty: 'EASY' | 'MEDIUM' | 'HARD';
-    status: string;
-    acceptance: string;
-    is_verified: boolean;
+    stats?: {
+        attempt_count: number;
+        accuracy_rate: number;
+        avg_time_ms: number;
+    };
+    is_live: boolean;
 }
 
 interface PaginationInfo {
@@ -75,21 +70,9 @@ interface NavigationData {
     section: string;
 }
 
-function formatPaperInfo(paper: string): { tier: string; date: string } {
-    const dateMatch = paper.match(/(\d{2})\.(\d{2})\.(\d{4})/);
-    let formattedDate = '';
-    if (dateMatch) {
-        const [, day, month, year] = dateMatch;
-        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const monthName = monthNames[parseInt(month) - 1];
-        formattedDate = `${day} ${monthName} ${year}`;
-    }
-
-    // Extract tier from paper name (e.g., "Tier 1" or "Tier I")
-    const tierMatch = paper.match(/Tier\s*([1I]|[2II])/i);
-    const tier = tierMatch ? `Tier ${tierMatch[1].toUpperCase() === 'I' || tierMatch[1] === '1' ? '1' : '2'}` : 'Tier 1';
-
-    return { tier, date: formattedDate };
+function formatShiftInfo(shift: string | undefined): string {
+    if (!shift) return '';
+    return shift;
 }
 
 function QuestionContent({ text, image, onImageClick }: { text: string; image?: string; onImageClick?: (url: string) => void }) {
@@ -135,7 +118,13 @@ function QuestionContent({ text, image, onImageClick }: { text: string; image?: 
     );
 }
 
-export default function QuestionPage() {
+export default function QuestionPage({
+    initialQuestion = null,
+    initialNavigation = null
+}: {
+    initialQuestion?: QuestionData | null;
+    initialNavigation?: NavigationData | null;
+}) {
     const params = useParams();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -143,9 +132,9 @@ export default function QuestionPage() {
     const questionId = params.id as string;
     const section = searchParams.get('section') || 'QUANT';
 
-    const [question, setQuestion] = useState<QuestionData | null>(null);
-    const [navigation, setNavigation] = useState<NavigationData | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [question, setQuestion] = useState<QuestionData | null>(initialQuestion);
+    const [navigation, setNavigation] = useState<NavigationData | null>(initialNavigation);
+    const [loading, setLoading] = useState(!initialQuestion);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [showSolution, setShowSolution] = useState(false);
@@ -265,8 +254,8 @@ export default function QuestionPage() {
                                 const data = await res.json();
                                 return {
                                     id: qId,
-                                    text: data.question.content.text,
-                                    difficulty: data.question.difficulty,
+                                    text: data.data?.text || '',
+                                    difficulty: data.data?.difficulty || 'MEDIUM',
                                     isAttempted: false
                                 };
                             }
@@ -283,10 +272,10 @@ export default function QuestionPage() {
                 // If we stored full questions in session, use them
                 if (sprintSession.questions) {
                     const details = sprintSession.questions.map((q: any) => ({
-                        id: q._id,
-                        text: q.content.text,
+                        id: q._id || q.id,
+                        text: q.text || '',
                         difficulty: q.difficulty,
-                        isAttempted: false // We could track this if needed
+                        isAttempted: false
                     }));
                     setSidebarQuestions(details);
                     return;
@@ -305,22 +294,60 @@ export default function QuestionPage() {
             setShowSolution(false);
 
             try {
-                const [questionRes, navRes, bookmarksRes, attemptRes] = await Promise.all([
-                    fetch(`/api/questions/${questionId}`),
-                    fetch(`/api/questions/${questionId}/navigation?section=${section}`),
-                    fetch('/api/user/bookmarks'),
-                    fetch(`/api/attempts?questionId=${questionId}&limit=1`)
-                ]);
+                // If we have initial data and it matches the current request, skip fetching
+                if (initialQuestion && initialQuestion.id === questionId &&
+                    // Verify section matches for navigation? Navigation depends on section.
+                    // If initialNavigation is present, assume it matches.
+                    (!navigation || (navigation && question))) { // Logic: if we have data, maybe we don't need to fetch?
+                    // Actually, if we navigated client-side to a new ID, initialQuestion will be stale (from the server load of previous page).
+                    // Wait, initialQuestion comes from props. When navigating client-side, the PAGE component doesn't re-run/remount if it's the same layout segment?
+                    // Next.js App Router: navigating between dynamic routes [id] DOES re-render the Page component if it's a hard navigation or if params change?
+                    // Yes, params change -> Page changes -> Client Component re-renders with new props? 
+                    // No, Client Component receives new props. 
 
-                const questionData = await questionRes.json();
-                const navData = await navRes.json();
-                const bookmarksData = await bookmarksRes.json();
-                const attemptData = await attemptRes.json();
+                    // So if initialQuestion.id === questionId, we use it.
+                    // But if we navigated to a new ID via client router, 'params.id' changes.
+                    // 'initialQuestion' prop might NOT change if it was passed from Server Component which only ran on first load?
+                    // NO. In Next.js App Router, navigating to a new URL triggers a server request for the RSC payload unless soft nav.
+                    // But usually, standard <Link> nav or router.push will trigger RSC refresh for the new param.
 
-                if (questionData.data) setQuestion(questionData.data);
-                if (navData.data) setNavigation(navData.data);
-                if (bookmarksData.success) {
-                    setIsBookmarked(bookmarksData.bookmarks.includes(questionId));
+                    // HOWEVER, to be safe and simple:
+                    // If initialQuestion.id === questionId, set loading false and return.
+                }
+
+                if (initialQuestion && initialQuestion.id === questionId) {
+                    setLoading(false);
+                    // We still might need to fetch user specific stuff like bookmarks/attempts if they weren't passed?
+                    // Attempts are user-specific. Metadata/Question is public.
+                    // We should fetch bookmarks/attempts separately if not passed.
+                    // The original code fetched EVERYTHING in parallel.
+                    // Let's keep fetching bookmarks/attempts, but skip question/nav if we have it.
+                }
+
+                const promises: Promise<any>[] = [];
+                const fetchQuestion = !initialQuestion || initialQuestion.id !== questionId;
+
+                if (fetchQuestion) {
+                    promises.push(fetch(`/api/questions/${questionId}`).then(r => r.json()));
+                    promises.push(fetch(`/api/questions/${questionId}/navigation?section=${section}`).then(r => r.json()));
+                } else {
+                    promises.push(Promise.resolve({ data: initialQuestion })); // Mock response
+                    promises.push(Promise.resolve({ data: initialNavigation }));
+                }
+
+                promises.push(fetch(`/api/bookmarks?limit=100`).then(r => r.ok ? r.json() : { data: [] }));
+                promises.push(fetch(`/api/attempts?questionId=${questionId}&limit=1`).then(r => r.json()));
+
+                const [questionData, navData, bookmarksData, attemptData] = await Promise.all(promises);
+
+                if (fetchQuestion) {
+                    if (questionData.data) setQuestion(questionData.data);
+                    if (navData.data) setNavigation(navData.data);
+                }
+
+                if (bookmarksData.data) {
+                    const bookmarkedIds = bookmarksData.data.map((b: any) => b.question?._id?.toString() || b.question?.toString());
+                    setIsBookmarked(bookmarkedIds.includes(questionId));
                 }
 
                 // Pre-populate previous attempt if exists (but NOT in sprint mode - each sprint is independent)
@@ -336,8 +363,8 @@ export default function QuestionPage() {
             setLoading(false);
         }
 
-        if (questionId) fetchQuestionAndNavigation();
-    }, [questionId, section]);
+        fetchQuestionAndNavigation();
+    }, [questionId, section, initialQuestion, initialNavigation]);
 
     // Load practice session from sessionStorage
     useEffect(() => {
@@ -668,17 +695,14 @@ export default function QuestionPage() {
 
     const handleBookmarkToggle = async () => {
         try {
-            const action = isBookmarked ? 'remove' : 'add';
-            const res = await fetch('/api/user/bookmarks', {
-                method: 'PUT',
+            const res = await fetch('/api/bookmarks', {
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ questionId, action }),
+                body: JSON.stringify({ questionId }),
             });
             const data = await res.json();
-            if (data.success) {
-                setIsBookmarked(!isBookmarked);
-                refreshUser();
-            }
+            setIsBookmarked(data.bookmarked);
+            refreshUser();
         } catch (error) {
             console.error('Failed to toggle bookmark:', error);
         }
@@ -736,10 +760,10 @@ export default function QuestionPage() {
             }
 
             // Number keys 1-4 for option selection
-            if (!isSubmitted && question?.content.options) {
+            if (!isSubmitted && question?.options) {
                 const keyNum = parseInt(e.key);
-                if (keyNum >= 1 && keyNum <= question.content.options.length) {
-                    const option = question.content.options[keyNum - 1];
+                if (keyNum >= 1 && keyNum <= question.options.length) {
+                    const option = question.options[keyNum - 1];
                     setSelectedOption(option.id);
                 }
             }
@@ -791,10 +815,10 @@ export default function QuestionPage() {
         }
 
         // Normal mode: Show correct/incorrect feedback
-        if (option.is_correct) {
+        if (option.id === question?.correct_option) {
             return `${baseStyle} border-emerald-500/50 bg-emerald-500/10`;
         }
-        if (selectedOption === option.id && !option.is_correct) {
+        if (selectedOption === option.id && option.id !== question?.correct_option) {
             return `${baseStyle} border-rose-500/50 bg-rose-500/10`;
         }
         return `${baseStyle} border-neutral-800 bg-neutral-900/50 opacity-50`;
@@ -839,7 +863,7 @@ export default function QuestionPage() {
         );
     }
 
-    const isCorrect = isSubmitted && selectedOption === question.content.correct_option_id;
+    const isCorrect = isSubmitted && selectedOption === question.correct_option;
     const hasPrevious = !!navigation?.prevId;
     const hasNext = !!navigation?.nextId;
 
@@ -953,8 +977,8 @@ export default function QuestionPage() {
                                                 {getDifficultyBadge(question.difficulty)}
                                             </div>
                                             <p className="text-xs text-neutral-400 line-clamp-3">
-                                                {question.content.text.replace(/\[IMAGE\]/g, '').substring(0, 150)}
-                                                {question.content.text.length > 150 ? '...' : ''}
+                                                {question.text.replace(/\[IMAGE\]/g, '').substring(0, 150)}
+                                                {question.text.length > 150 ? '...' : ''}
                                             </p>
                                         </div>
                                     </div>
@@ -1022,12 +1046,16 @@ export default function QuestionPage() {
                         >
                             <TimerIcon sx={{ fontSize: '1.25rem' }} />
                             {isTimerEnabled ? (
-                                <div className="flex items-center gap-1">
-                                    <span className="text-base font-mono font-bold tracking-wider">
+                                <div className={`flex items-center gap-1 font-mono font-bold tracking-wider ${elapsedTime >= 120 ? 'text-rose-500 animate-pulse' :
+                                    elapsedTime >= 60 ? 'text-orange-500' : 'text-neutral-200'
+                                    }`}>
+                                    <span className="text-base">
                                         {Math.floor(elapsedTime / 60).toString().padStart(2, '0')}
                                     </span>
-                                    <span className="text-amber-500">:</span>
-                                    <span className="text-base font-mono font-bold tracking-wider">
+                                    <span className={`mx-0.5 ${elapsedTime >= 120 ? 'text-rose-500' :
+                                        elapsedTime >= 60 ? 'text-orange-500' : 'text-neutral-500'
+                                        }`}>:</span>
+                                    <span className="text-base">
                                         {(elapsedTime % 60).toString().padStart(2, '0')}
                                     </span>
                                 </div>
@@ -1075,24 +1103,28 @@ export default function QuestionPage() {
             </header>
 
             {/* Main Content */}
-            <div className="flex flex-1 overflow-hidden">
+            <div className="flex flex-col lg:flex-row flex-1 lg:h-[calc(100vh-56px)] overflow-hidden">
                 {/* Left Panel - Question */}
-                <div className="flex-1 overflow-y-auto">
+                <div className="flex-1 lg:overflow-y-auto overflow-visible scroll-smooth order-1 pb-[40vh] lg:pb-0">
                     <div className="p-6 lg:p-8 max-w-4xl">
                         {/* Metadata Tags */}
                         <div className="flex flex-wrap items-center gap-3 mb-6">
                             {getDifficultyBadge(question.difficulty)}
                             <div className="w-px h-5 bg-neutral-700"></div>
-                            <span className="text-neutral-300 text-sm font-medium">SSC CGL {question.source.year}</span>
-                            <div className="w-px h-5 bg-neutral-700"></div>
-                            <span className="text-neutral-400 text-sm">
-                                {formatPaperInfo(question.source.paper).tier} · {formatPaperInfo(question.source.paper).date} · Q.{question.source.question_number}
-                            </span>
+                            <span className="text-neutral-300 text-sm font-medium">{question.source.exam} {question.source.year}</span>
+                            {question.source.shift && (
+                                <>
+                                    <div className="w-px h-5 bg-neutral-700"></div>
+                                    <span className="text-neutral-400 text-sm">
+                                        {question.source.shift}
+                                    </span>
+                                </>
+                            )}
                             {question.pattern && (
                                 <>
                                     <div className="w-px h-5 bg-neutral-700"></div>
                                     <span className="px-3 py-1 bg-violet-500/15 text-violet-400 border border-violet-500/30 rounded-lg text-sm font-medium">
-                                        {question.pattern.name}
+                                        {question.pattern}
                                     </span>
                                 </>
                             )}
@@ -1119,8 +1151,8 @@ export default function QuestionPage() {
                         {/* Question Content */}
                         <div className="mb-8">
                             <QuestionContent
-                                text={question.content.text}
-                                image={question.content.image}
+                                text={question.text}
+                                image={question.image}
                                 onImageClick={setZoomedImage}
                             />
                         </div>
@@ -1135,12 +1167,18 @@ export default function QuestionPage() {
                                     <p className="mb-2">
                                         <span className="text-neutral-500">Correct Answer:</span>{' '}
                                         <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 font-bold rounded-lg">
-                                            Option {getOptionLabel(question.content.options.findIndex(o => o.is_correct))}
+                                            Option {question.correct_option}
                                         </span>
                                     </p>
-                                    <p className="text-neutral-500 mt-4 text-sm">
-                                        Detailed explanation coming soon.
-                                    </p>
+                                    {question.solution ? (
+                                        <div className="mt-4 text-neutral-300 leading-relaxed">
+                                            <MathText>{question.solution}</MathText>
+                                        </div>
+                                    ) : (
+                                        <p className="text-neutral-500 mt-4 text-sm">
+                                            Detailed explanation coming soon.
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                         )}
@@ -1148,32 +1186,31 @@ export default function QuestionPage() {
                 </div>
 
                 {/* Right Panel - Options */}
-                <div className="w-[420px] bg-[#1a1a1a] border-l border-neutral-800 flex flex-col shrink-0">
+                <div className="w-full lg:w-[420px] bg-[#1a1a1a] border-t lg:border-t-0 lg:border-l border-neutral-800 flex flex-col shrink-0 order-2 lg:order-2 fixed bottom-0 left-0 right-0 z-20 lg:static max-h-[40vh] lg:max-h-full shadow-2xl lg:shadow-none">
                     {/* Header */}
-                    <div className="px-5 py-4 border-b border-neutral-800">
-                        <h3 className="text-lg font-bold text-white">Choose Your Answer</h3>
-                        <p className="text-sm text-neutral-500 mt-0.5">Select one option below</p>
+                    <div className="hidden lg:block px-5 py-4 border-b border-neutral-800">
+                        <h3 className="text-lg font-bold text-white">Answer Options</h3>
                     </div>
 
                     {/* Options */}
                     <div className="flex-1 overflow-y-auto p-4 space-y-3">
-                        {question.content.options.map((option, index) => (
+                        {question.options.map((option, index) => (
                             <div
                                 key={option.id}
                                 onClick={() => handleOptionSelect(option.id)}
                                 className={getOptionStyle(option)}
                             >
                                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm shrink-0
-                                    ${isSubmitted && option.is_correct
+                                    ${isSubmitted && option.id === question.correct_option
                                         ? 'bg-emerald-500 text-white'
-                                        : isSubmitted && selectedOption === option.id && !option.is_correct
+                                        : isSubmitted && selectedOption === option.id && option.id !== question.correct_option
                                             ? 'bg-rose-500 text-white'
                                             : selectedOption === option.id
                                                 ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
                                                 : 'bg-neutral-700 text-neutral-300'
                                     }`}
                                 >
-                                    {isSubmitted && option.is_correct ? (
+                                    {isSubmitted && option.id === question.correct_option ? (
                                         <CheckCircleOutlinedIcon sx={{ fontSize: '1.1rem' }} />
                                     ) : (
                                         getOptionLabel(index)
@@ -1203,13 +1240,25 @@ export default function QuestionPage() {
 
                     {/* Actions */}
                     <div className="p-4 bg-neutral-900/50 border-t border-neutral-800 space-y-3">
-                        {/* Result */}
+                        {/* Result & Stats */}
                         {isSubmitted && (
-                            <div className={`text-center py-3 rounded-xl font-bold text-sm ${isCorrect
-                                ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
-                                : 'bg-rose-500/15 text-rose-400 border border-rose-500/30'
-                                }`}>
-                                {isCorrect ? '✓ Correct Answer!' : '✗ Incorrect Answer'}
+                            <div className="space-y-3">
+                                <div className={`text-center py-3 rounded-xl font-bold text-sm ${isCorrect
+                                    ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+                                    : 'bg-rose-500/15 text-rose-400 border border-rose-500/30'
+                                    }`}>
+                                    {isCorrect ? '✓ Correct Answer!' : '✗ Incorrect Answer'}
+                                </div>
+                                <div className="grid grid-cols-2 gap-2 text-xs text-neutral-400">
+                                    <div className="bg-neutral-800/50 rounded-lg p-2 text-center border border-neutral-800">
+                                        <span className="block text-neutral-500 mb-0.5">Time Taken</span>
+                                        <span className="font-mono text-neutral-200 font-medium">{Math.floor((isTimerEnabled ? elapsedTime : (Date.now() - startTime) / 1000) / 60)}:{(Math.floor(isTimerEnabled ? elapsedTime : (Date.now() - startTime) / 1000) % 60).toString().padStart(2, '0')}</span>
+                                    </div>
+                                    <div className="bg-neutral-800/50 rounded-lg p-2 text-center border border-neutral-800">
+                                        <span className="block text-neutral-500 mb-0.5">Accuracy</span>
+                                        <span className="font-mono text-neutral-200 font-medium">{question.stats?.accuracy_rate ? `${Math.round(question.stats.accuracy_rate * 100)}%` : 'N/A'}</span>
+                                    </div>
+                                </div>
                             </div>
                         )}
 
@@ -1237,16 +1286,16 @@ export default function QuestionPage() {
                             ) : (
                                 <>
                                     <button
-                                        onClick={handleReset}
-                                        className="flex-1 py-3 border border-neutral-700 text-neutral-300 font-bold rounded-xl hover:border-amber-500/50 hover:text-amber-400 transition-colors"
+                                        onClick={goToNext}
+                                        className="flex-1 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-xl hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg shadow-amber-500/20"
                                     >
-                                        Try Again
+                                        Next Question →
                                     </button>
                                     <button
                                         onClick={() => setShowSolution(!showSolution)}
-                                        className="flex-1 py-3 bg-violet-600 text-white font-bold rounded-xl hover:bg-violet-500 transition-colors"
+                                        className="px-4 py-3 border border-violet-500/50 text-violet-400 font-bold rounded-xl hover:bg-violet-500/10 transition-colors"
                                     >
-                                        {showSolution ? 'Hide Solution' : 'View Solution'}
+                                        {showSolution ? 'Hide' : 'Solution'}
                                     </button>
                                 </>
                             )}
@@ -1397,7 +1446,8 @@ export default function QuestionPage() {
                 isOpen={showReportModal}
                 onClose={() => setShowReportModal(false)}
                 questionId={questionId}
-                questionTitle={question?.content?.text?.replace(/\[IMAGE\]/g, '').substring(0, 100)}
+                questionDisplayId={navigation?.currentPosition ? `${navigation.currentPosition}` : undefined}
+                questionTitle={question?.text?.replace(/\[IMAGE\]/g, '').substring(0, 100)}
             />
         </div>
     );

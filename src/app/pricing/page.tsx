@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import StarIcon from '@mui/icons-material/Star';
+import { CheckCircleOutlinedIcon, StarIcon } from '@/components/icons';
 import Link from 'next/link';
 
 export default function PricingPage() {
@@ -26,7 +25,7 @@ export default function PricingPage() {
                 {/* Hero Section */}
                 <div className="text-center mb-16 max-w-3xl mx-auto">
                     <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-bold uppercase tracking-widest mb-6 animate-fade-in">
-                        <CheckCircleOutlineIcon fontSize="inherit" />
+                        <CheckCircleOutlinedIcon className="text-base" />
                         First 7 Days Free
                     </div>
                     <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-6 bg-gradient-to-b from-white to-neutral-500 bg-clip-text text-transparent">
@@ -130,7 +129,7 @@ export default function PricingPage() {
 function FeatureItem({ text, highlight = false }: { text: string; highlight?: boolean }) {
     return (
         <div className="flex items-start gap-3">
-            <CheckCircleOutlineIcon className={`text-xl ${highlight ? 'text-amber-500' : 'text-neutral-600'}`} />
+            <CheckCircleOutlinedIcon className={`text-xl ${highlight ? 'text-amber-500' : 'text-neutral-600'}`} />
             <span className={`text-sm ${highlight ? 'text-white font-medium' : 'text-neutral-400'}`}>{text}</span>
         </div>
     );

@@ -1,61 +1,37 @@
-
 import { IUser } from "@/core/models/User";
 
 /**
- * Validates and updates user streak based on activity history.
+ * Validates and updates user streak based on last activity date.
  * Returns true if the user object was modified (streak reset), false otherwise.
- * 
- * Logic:
- * 1. Get "Today" and "Yesterday" in UTC (consistent with attempts route).
- * 2. Check the last activity date from the heatmap.
- * 3. If last activity was before yesterday, the streak is broken -> reset to 0.
- * 
- * Note: We do not increment streak here. Streak increments only happen on active submission.
- * We only handle breaking the streak lazily.
  */
 export function validateUserStreak(user: IUser): boolean {
-    if (!user.dash || !user.dash.heatmap || user.dash.heatmap.length === 0) {
-        if (user.dash.streak > 0) {
-            user.dash.streak = 0;
+    if (!user.stats || !user.stats.last_active_date) {
+        if (user.stats && user.stats.current_streak > 0) {
+            user.stats.current_streak = 0;
             return true;
         }
         return false;
     }
 
-    // Sort heatmap by date descending to find last active date
-    // (Assuming heatmap might not be sorted, though typically it is appended to)
-    // Actually, finding the max date string is safer.
-    const dates = user.dash.heatmap.map(h => h.date).sort();
-    const lastActiveDateStr = dates[dates.length - 1];
+    const lastActiveDateStr = user.stats.last_active_date;
 
-    if (!lastActiveDateStr) {
-        if (user.dash.streak > 0) {
-            user.dash.streak = 0;
-            return true;
-        }
-        return false;
-    }
-
-    const lastActive = new Date(lastActiveDateStr);
-
-    // Normalize to UTC midnight for comparison
+    // Normalize "today" to YYYY-MM-DD
     const now = new Date();
     const todayStr = now.toISOString().split('T')[0];
-    const today = new Date(todayStr); // UTC midnight
 
-    const yesterday = new Date(today);
+    // Calculate "yesterday"
+    const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     const yesterdayStr = yesterday.toISOString().split('T')[0];
 
-    // If active today or yesterday, streak is kept.
-    // So if lastActive < yesterday, streak is broken.
+    // If active today or yesterday, streak is valid
     if (lastActiveDateStr === todayStr || lastActiveDateStr === yesterdayStr) {
         return false;
     }
 
-    // Streak broken
-    if (user.dash.streak !== 0) {
-        user.dash.streak = 0;
+    // Otherwise, streak is broken
+    if (user.stats.current_streak > 0) {
+        user.stats.current_streak = 0;
         return true;
     }
 

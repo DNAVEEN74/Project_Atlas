@@ -1,18 +1,26 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface IPattern extends Document {
-    p_code: string; // Unique human-readable code e.g. "QUANT_PERC"
-    name: string;   // The pattern/topic name e.g. "Percentage"
-    trick_ids: string[]; // Array of strings (Trick IDs)
+    code: string;             // "percentage" — unique slug
+    name: string;             // "Percentage" — display name
+    subject: 'QUANT' | 'REASONING';
+    question_count: number;   // denormalized, updated on import
+    display_order: number;
 }
 
 const PatternSchema: Schema = new Schema(
     {
-        p_code: { type: String, required: true, unique: true, index: true },
-        name: { type: String, required: true, unique: true, index: true },
-        trick_ids: [{ type: String }],
+        code: { type: String, required: true, unique: true, index: true },
+        name: { type: String, required: true },
+        subject: {
+            type: String,
+            enum: ['QUANT', 'REASONING'],
+            required: true
+        },
+        question_count: { type: Number, default: 0 },
+        display_order: { type: Number, default: 0 },
     },
-    { timestamps: true }
+    { timestamps: false }
 );
 
 const Pattern: Model<IPattern> =

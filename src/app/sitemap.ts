@@ -1,56 +1,55 @@
 import { MetadataRoute } from 'next';
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://project-atlas-jek8.vercel.app';
+import dbConnect from '@/core/db/connect';
+import Question from '@/core/models/Question';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    // Static pages
-    const staticPages: MetadataRoute.Sitemap = [
-        {
-            url: BASE_URL,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 1.0,
-        },
-        {
-            url: `${BASE_URL}/problems`,
-            lastModified: new Date(),
-            changeFrequency: 'daily',
-            priority: 0.9,
-        },
-        {
-            url: `${BASE_URL}/games`,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.8,
-        },
-        {
-            url: `${BASE_URL}/sprint`,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.8,
-        },
-        {
-            url: `${BASE_URL}/pricing`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.5,
-        },
-        {
-            url: `${BASE_URL}/login`,
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.3,
-        },
-        {
-            url: `${BASE_URL}/register`,
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.3,
-        },
-    ];
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://prepleague.com';
 
-    // Note: For dynamic problem pages, you could fetch IDs from DB here
-    // For now, we'll rely on internal linking for discovery
+    // Static routes
+    const routes = [
+        '',
+        '/problems',
+        '/sprint',
+        '/games',
+        '/dashboard',
+        '/pricing',
+        '/login',
+        '/register',
+    ].map((route) => ({
+        url: `${baseUrl}${route}`,
+        lastModified: new Date(),
+        changeFrequency: 'daily' as const,
+        priority: route === '' ? 1 : 0.8,
+    }));
 
-    return [...staticPages];
+    let questionRoutes: MetadataRoute.Sitemap = [];
+
+    try {
+        await dbConnect();
+
+        // Fetch last 5000 active questions
+        // Using 'status' or 'is_live' depending on schema. 
+        // Based on recent refactor plan: "Remove benchmarks, calibration, status (replace with is_live)"
+        // So I should look for is_live.
+        // But if I haven't verified if migration ran, I'll check both or just 'is_live' if schema was updated.
+        // Schema file view will confirm.
+
+        const questions = await Question.find({ is_live: true })
+            .select('_id updatedAt')
+            .sort({ createdAt: -1 })
+            .limit(5000)
+            .lean();
+
+        questionRoutes = questions.map((q: any) => ({
+            url: `${baseUrl}/problems/${q._id}`,
+            lastModified: q.updatedAt || new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.6,
+        }));
+
+    } catch (error) {
+        console.error('Error generating sitemap:', error);
+    }
+
+    return [...routes, ...questionRoutes];
 }

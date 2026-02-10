@@ -12,12 +12,9 @@ export async function POST(req: NextRequest) {
             email,
             password,
             name,
-            targetExam,
-            targetYear,
-            dailyQuantGoal,
-            dailyReasoningGoal
+            targetExam, // Optional in UI, default SSC_CGL
+            dailyGoal   // Unified goal
         } = body;
-
 
         // Validation
         if (!email || !password || !name) {
@@ -43,6 +40,11 @@ export async function POST(req: NextRequest) {
             );
         }
 
+        // Generate username (simple for now)
+        const baseUsername = email.split('@')[0];
+        const uniqueSuffix = Math.floor(Math.random() * 10000);
+        const username = `${baseUsername}${uniqueSuffix}`;
+
         // Hash password
         const password_hash = await hashPassword(password);
 
@@ -52,26 +54,24 @@ export async function POST(req: NextRequest) {
             password_hash,
             profile: {
                 name,
+                username,
+                avatar_url: '' // optional
             },
-            target: {
-                exam: targetExam || 'SSC_CGL',
-                year: targetYear || 2025,
+            target_exam: 'SSC_CGL', // Currently only one supported
+            config: {
+                is_premium: false
             },
             preferences: {
-                notifications_enabled: true,
-                email_digest: false,
-                daily_quant_goal: Math.min(Math.max(dailyQuantGoal || 5, 1), 50),
-                daily_reasoning_goal: Math.min(Math.max(dailyReasoningGoal || 5, 1), 50),
+                daily_goal: Math.min(Math.max(dailyGoal || 5, 5), 100),
             },
-            dash: {
+            stats: {
                 total_solved: 0,
                 total_correct: 0,
-                streak: 0,
+                current_streak: 0,
                 max_streak: 0,
-                heatmap: [],
-                last_active: new Date(),
+                last_active_date: new Date().toISOString().split('T')[0]
             },
-            bookmarks: [],
+            role: 'USER'
         });
 
         // Generate JWT token
@@ -89,10 +89,9 @@ export async function POST(req: NextRequest) {
                 id: user._id,
                 email: user.email,
                 name: user.profile.name,
-                targetExam: user.target.exam,
-                targetYear: user.target.year,
-                dailyQuantGoal: user.preferences.daily_quant_goal,
-                dailyReasoningGoal: user.preferences.daily_reasoning_goal,
+                username: user.profile.username,
+                targetExam: user.target_exam,
+                dailyGoal: user.preferences.daily_goal,
             },
         });
     } catch (error) {

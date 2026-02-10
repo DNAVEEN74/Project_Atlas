@@ -32,18 +32,39 @@ export async function generateMetadata(
     }
 
     // Create a snippet for the title (first 50 chars)
-    const snippet = question.content.text.replace(/<[^>]*>/g, '').substring(0, 50) + '...';
+    const snippet = (question.text || '').replace(/<[^>]*>/g, '').substring(0, 50) + '...';
 
     return {
         title: `Question: ${snippet} - PrepLeague`,
-        description: `Practice this SSC CGL question on PrepLeague. Topic: ${question.pattern?.topic || 'General'}.`,
+        description: `Practice this SSC CGL question on PrepLeague. Topic: ${question.pattern || 'General'}.`,
     };
 }
 
-export default async function ProblemPage({ params }: Props) {
+export default async function ProblemPage({ params, searchParams }: Props) {
     const { id } = await params;
-    // We can pre-fetch data here if we want to pass initial data to Client Component
-    // For now, the Client Component does its own fetching, but we handle the SEO shell here.
+    const searchParamsValue = await searchParams;
+    const section = (searchParamsValue?.section as string) || 'QUANT';
 
-    return <ProblemClient />;
+    // Fetch data server-side
+    // We already have getQuestion from metadata, but we should reuse or call it
+    const question = await getQuestion(id);
+
+    // We also need navigation data ideally, but that might be complex to dup here without API logic.
+    // For now, let's just pass the question which is the critical part for Immediate Content Paint + SEO.
+    // Client will fetch navigation if missing or we can try to fetch it here if we import logic.
+    // Since navigation depends on query params/filters, it's easier to let client fetch it or stub it.
+    // If we pass null for navigation, client will fetch it.
+
+    // Transform _id to id if necessary (lean() returns _id)
+    let initialQuestion: any = null;
+    if (question) {
+        initialQuestion = {
+            ...question,
+            id: (question as any)._id.toString(),
+        };
+        // Ensure other ObjectIds are strings if needed, or rely on serialization
+        if (initialQuestion._id) delete initialQuestion._id;
+    }
+
+    return <ProblemClient initialQuestion={initialQuestion} />;
 }

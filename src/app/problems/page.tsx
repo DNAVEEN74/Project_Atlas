@@ -22,7 +22,6 @@ import {
     BookmarkIcon,
     TrendingUpIcon,
     ExpandMoreIcon,
-    ExpandLessIcon,
 } from '@/components/icons';
 import Header from '@/components/layout/Header';
 import { useToast } from '@/contexts/ToastContext';
@@ -54,7 +53,8 @@ function ProblemsPageContent() {
     const [pagination, setPagination] = useState<PaginationInfo>({ total: 0, page: 1, totalPages: 1 });
     const [loading, setLoading] = useState(true);
     const [activeSection, setActiveSection] = useState<'QUANT' | 'REASONING'>('QUANT');
-    const [showAllTopics, setShowAllTopics] = useState(false);
+    const [topicDropdownOpen, setTopicDropdownOpen] = useState(false);
+    const topicDropdownRef = React.useRef<HTMLDivElement>(null);
 
     const [solvedCorrect, setSolvedCorrect] = useState<string[]>([]);
     const [solvedWrong, setSolvedWrong] = useState<string[]>([]);
@@ -67,26 +67,76 @@ function ProblemsPageContent() {
         bookmarkedCount: 0,
     });
 
-    const quantTopics = [
-        'All', 'Percentage', 'Profit & Loss', 'Simple Interest', 'Compound Interest', 'Ratio & Proportion',
-        'Mixtures & Alligation', 'Partnership', 'Average', 'Time & Work', 'Pipe & Cistern',
-        'Time Speed Distance', 'Boat & Stream', 'Number System', 'HCF & LCM', 'Simplification',
-        'Power Indices Surds', 'Algebra', 'Trigonometry', 'Height & Distance', 'Geometry',
-        'Mensuration 2D', 'Mensuration 3D', 'Coordinate Geometry', 'Data Interpretation'
+    const quantTopicGroups = [
+        {
+            label: 'Arithmetic',
+            topics: ['Percentage', 'Profit & Loss', 'Simple Interest', 'Compound Interest', 'Ratio & Proportion', 'Mixtures & Alligation', 'Partnership', 'Average'],
+        },
+        {
+            label: 'Time & Work',
+            topics: ['Time & Work', 'Pipe & Cistern'],
+        },
+        {
+            label: 'Speed & Distance',
+            topics: ['Time Speed Distance', 'Boat & Stream'],
+        },
+        {
+            label: 'Number System',
+            topics: ['Number System', 'HCF & LCM', 'Simplification', 'Power Indices Surds'],
+        },
+        {
+            label: 'Algebra & Trigonometry',
+            topics: ['Algebra', 'Trigonometry', 'Height & Distance'],
+        },
+        {
+            label: 'Geometry & Mensuration',
+            topics: ['Geometry', 'Mensuration 2D', 'Mensuration 3D', 'Coordinate Geometry'],
+        },
+        {
+            label: 'Data',
+            topics: ['Data Interpretation'],
+        },
     ];
 
-    const reasoningTopics = [
-        'All', 'Analogy', 'Classification', 'Coding-Decoding', 'Series', 'Missing Number',
-        'Blood Relations', 'Direction Sense', 'Order & Ranking', 'Sitting Arrangement',
-        'Syllogism', 'Venn Diagram', 'Dice & Cube', 'Clock & Calendar', 'Counting Figures',
-        'Mirror & Water Image', 'Paper Cutting', 'Embedded Figures', 'Matrix', 'Statement & Conclusion'
+    const reasoningTopicGroups = [
+        {
+            label: 'Verbal Reasoning',
+            topics: ['Analogy', 'Classification', 'Coding-Decoding', 'Series', 'Missing Number'],
+        },
+        {
+            label: 'Logical Reasoning',
+            topics: ['Blood Relations', 'Direction Sense', 'Order & Ranking', 'Sitting Arrangement', 'Syllogism', 'Venn Diagram'],
+        },
+        {
+            label: 'Non-Verbal Reasoning',
+            topics: ['Dice & Cube', 'Clock & Calendar', 'Counting Figures', 'Mirror & Water Image', 'Paper Cutting', 'Embedded Figures', 'Matrix'],
+        },
+        {
+            label: 'Analytical',
+            topics: ['Statement & Conclusion'],
+        },
     ];
+
+    const topicGroups = activeSection === 'QUANT' ? quantTopicGroups : reasoningTopicGroups;
+    const topics = ['All', ...topicGroups.flatMap(g => g.topics)];
 
     const [activeTopic, setActiveTopic] = useState('All');
     const [difficulty, setDifficulty] = useState('All');
     const [extraFilter, setExtraFilter] = useState('all'); // 'all', 'bookmarked', 'wrong'
+    const [yearFilter, setYearFilter] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
     const ITEMS_PER_PAGE = 20;
+
+    // Close topic dropdown on outside click
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (topicDropdownRef.current && !topicDropdownRef.current.contains(e.target as Node)) {
+                setTopicDropdownOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     const updatePage = useCallback((newPage: number) => {
         const params = new URLSearchParams(searchParams.toString());
@@ -102,6 +152,9 @@ function ProblemsPageContent() {
                 if (extraFilter !== 'all') {
                     url += `&filter=${extraFilter}`;
                 }
+                if (yearFilter !== 'All') {
+                    url += `&year=${yearFilter}`;
+                }
                 if (searchQuery) {
                     url += `&query=${encodeURIComponent(searchQuery)}`;
                 }
@@ -116,7 +169,7 @@ function ProblemsPageContent() {
             }
         };
         fetchQuestions();
-    }, [pagination.page, activeSection, activeTopic, difficulty, extraFilter, searchQuery]); // Added deps
+    }, [pagination.page, activeSection, activeTopic, difficulty, extraFilter, yearFilter, searchQuery]);
 
     const fetchProgress = useCallback(async () => {
         try {
@@ -140,18 +193,6 @@ function ProblemsPageContent() {
         return () => window.removeEventListener('focus', onFocus);
     }, [fetchProgress]);
 
-    // Redirect if not authenticated
-    // Redirect removed for public access
-    /*
-    useEffect(() => {
-        if (!authLoading && !user) {
-            router.push('/');
-        }
-    }, [user, authLoading, router]);
-    */
-
-
-
     const getDifficultyBadge = (difficulty: string) => {
         switch (difficulty) {
             case 'EASY':
@@ -165,8 +206,6 @@ function ProblemsPageContent() {
         }
     };
 
-    const topics = activeSection === 'QUANT' ? quantTopics : reasoningTopics;
-    const visibleTopics = showAllTopics ? topics : topics.slice(0, 12);
 
     const getPageNumbers = () => {
         const totalPages = pagination.totalPages;
@@ -185,12 +224,7 @@ function ProblemsPageContent() {
     const startItem = (pagination.page - 1) * ITEMS_PER_PAGE + 1;
     const endItem = Math.min(pagination.page * ITEMS_PER_PAGE, pagination.total);
 
-    // Soft dark palette - easy on eyes
-    // Background: #0f0f0f (near black)
-    // Cards: #1a1a1a (soft dark)
-    // Borders: #2a2a2a (subtle)
-    // Text: #e5e5e5 (soft white)
-    // Muted: #737373 (neutral gray)
+    const accentColor = activeSection === 'QUANT' ? 'amber' : 'violet';
 
     return (
         <div className="min-h-screen bg-[#0f0f0f]">
@@ -226,39 +260,96 @@ function ProblemsPageContent() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 xl:grid-cols-[1fr_380px] gap-8">
-                    {/* LEFT */}
+                <div className="grid grid-cols-1 gap-8">
+                    {/* Main Content */}
                     <div className="space-y-4">
-                        {/* Topic Filters */}
-                        <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 p-4">
-                            <div className="flex flex-wrap gap-2">
-                                {visibleTopics.map((topic) => (
-                                    <button
-                                        key={topic}
-                                        onClick={() => setActiveTopic(topic)}
-                                        className={`px-4 py-2 text-sm font-medium rounded-full transition-all ${activeTopic === topic
-                                            ? activeSection === 'QUANT'
-                                                ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                                                : 'bg-violet-500/20 text-violet-400 border border-violet-500/30'
-                                            : 'bg-neutral-800/50 text-neutral-400 border border-transparent hover:bg-neutral-800 hover:text-neutral-200'
-                                            }`}
-                                    >
-                                        {topic}
-                                    </button>
-                                ))}
-                                {topics.length > 12 && (
-                                    <button
-                                        onClick={() => setShowAllTopics(!showAllTopics)}
-                                        className="px-3 py-1.5 text-sm font-medium text-amber-500 hover:text-amber-400 flex items-center gap-1 transition-colors"
-                                    >
-                                        {showAllTopics ? <>Less <ExpandLessIcon sx={{ fontSize: '1rem' }} /></> : <>+{topics.length - 12} more <ExpandMoreIcon sx={{ fontSize: '1rem' }} /></>}
-                                    </button>
-                                )}
-                            </div>
+                        {/* Topic Dropdown Filter */}
+                        <div className="relative" ref={topicDropdownRef}>
+                            <button
+                                onClick={() => setTopicDropdownOpen(!topicDropdownOpen)}
+                                className={`flex items-center justify-between w-full sm:w-auto sm:min-w-[280px] px-5 py-3 bg-[#1a1a1a] border rounded-xl transition-all text-sm font-medium ${topicDropdownOpen
+                                    ? accentColor === 'amber'
+                                        ? 'border-amber-500/50 ring-1 ring-amber-500/20'
+                                        : 'border-violet-500/50 ring-1 ring-violet-500/20'
+                                    : 'border-neutral-800 hover:border-neutral-700'
+                                    }`}
+                            >
+                                <div className="flex items-center gap-2">
+                                    <MenuBookOutlinedIcon sx={{ fontSize: '1.1rem' }} className="text-neutral-500" />
+                                    <span className="text-neutral-400">Topic:</span>
+                                    <span className={`font-semibold ${activeTopic === 'All'
+                                        ? 'text-neutral-200'
+                                        : accentColor === 'amber'
+                                            ? 'text-amber-400'
+                                            : 'text-violet-400'
+                                        }`}>
+                                        {activeTopic}
+                                    </span>
+                                </div>
+                                <ExpandMoreIcon
+                                    sx={{ fontSize: '1.2rem' }}
+                                    className={`text-neutral-500 transition-transform duration-200 ml-3 ${topicDropdownOpen ? 'rotate-180' : ''}`}
+                                />
+                            </button>
+
+                            {/* Dropdown Panel */}
+                            {topicDropdownOpen && (
+                                <div className="absolute z-50 top-full left-0 right-0 sm:right-auto sm:min-w-[620px] mt-2 bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden">
+                                    <div className="p-3 max-h-[420px] overflow-y-auto">
+                                        {/* All Topics Button */}
+                                        <button
+                                            onClick={() => {
+                                                setActiveTopic('All');
+                                                setTopicDropdownOpen(false);
+                                                updatePage(1);
+                                            }}
+                                            className={`w-full px-4 py-2.5 mb-2 text-sm text-left rounded-xl transition-all font-medium ${activeTopic === 'All'
+                                                ? accentColor === 'amber'
+                                                    ? 'bg-amber-500/15 text-amber-400'
+                                                    : 'bg-violet-500/15 text-violet-400'
+                                                : 'text-neutral-300 hover:bg-neutral-800/80 hover:text-neutral-100'
+                                                }`}
+                                        >
+                                            All Topics
+                                        </button>
+
+                                        <div className="h-px bg-neutral-800 mb-3" />
+
+                                        {/* Categorized Groups */}
+                                        <div className="space-y-4">
+                                            {topicGroups.map((group) => (
+                                                <div key={group.label}>
+                                                    <div className="px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-neutral-600">
+                                                        {group.label}
+                                                    </div>
+                                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-0.5">
+                                                        {group.topics.map((topic) => (
+                                                            <button
+                                                                key={topic}
+                                                                onClick={() => {
+                                                                    setActiveTopic(topic);
+                                                                    setTopicDropdownOpen(false);
+                                                                    updatePage(1);
+                                                                }}
+                                                                className={`px-3 py-2 text-sm text-left rounded-lg transition-all ${activeTopic === topic
+                                                                    ? accentColor === 'amber'
+                                                                        ? 'bg-amber-500/15 text-amber-400 font-semibold'
+                                                                        : 'bg-violet-500/15 text-violet-400 font-semibold'
+                                                                    : 'text-neutral-400 hover:bg-neutral-800/60 hover:text-neutral-200'
+                                                                    }`}
+                                                            >
+                                                                {topic}
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
-                        {/* Search */}
-                        {/* Search and Filter */}
                         {/* Search and Filter */}
                         <div className="flex flex-col sm:flex-row gap-4">
                             <div className="relative flex-1">
@@ -283,6 +374,20 @@ function ProblemsPageContent() {
                                     ]}
                                 />
                             </div>
+                            <div className="w-full sm:w-[140px]">
+                                <CustomSelect
+                                    value={yearFilter}
+                                    onChange={(val) => { setYearFilter(val); updatePage(1); }}
+                                    options={[
+                                        { value: 'All', label: 'Year' },
+                                        { value: '2024', label: '2024' },
+                                        { value: '2023', label: '2023' },
+                                        { value: '2022', label: '2022' },
+                                        { value: '2021', label: '2021' },
+                                        { value: '2020', label: '2020' },
+                                    ]}
+                                />
+                            </div>
                             <div className="w-full sm:w-[180px]">
                                 <CustomSelect
                                     value={extraFilter}
@@ -299,11 +404,12 @@ function ProblemsPageContent() {
                         </div>
 
                         <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 overflow-hidden">
-                            <div className="grid grid-cols-12 gap-4 px-6 py-5 text-base font-medium text-neutral-300 uppercase tracking-wide bg-neutral-900/50 border-b border-neutral-800">
+                            <div className="hidden md:grid md:grid-cols-12 gap-4 px-6 py-5 text-base font-medium text-neutral-300 uppercase tracking-wide bg-neutral-900/50 border-b border-neutral-800">
+                                <div className="col-span-1 text-center">#</div>
                                 <div className="col-span-1 text-center">Status</div>
-                                <div className="col-span-8">Question</div>
+                                <div className="col-span-7">Question</div>
                                 <div className="col-span-2 text-center">Level</div>
-                                <div className="col-span-1 text-center">Source</div>
+                                <div className="col-span-1 text-center">Year</div>
                             </div>
 
                             <div className="divide-y divide-neutral-800/50">
@@ -311,9 +417,10 @@ function ProblemsPageContent() {
                                     Array.from({ length: 8 }).map((_, i) => (
                                         <div key={i} className="grid grid-cols-12 gap-3 px-5 py-4 animate-pulse">
                                             <div className="col-span-1 flex justify-center"><div className="w-5 h-5 bg-neutral-800 rounded-full"></div></div>
+                                            <div className="col-span-1 flex justify-center"><div className="w-5 h-5 bg-neutral-800 rounded-full"></div></div>
                                             <div className="col-span-7"><div className="h-4 bg-neutral-800 rounded w-3/4"></div></div>
                                             <div className="col-span-2 flex justify-center"><div className="h-5 bg-neutral-800 rounded w-14"></div></div>
-                                            <div className="col-span-2 flex justify-center"><div className="h-4 bg-neutral-800 rounded w-20"></div></div>
+                                            <div className="col-span-1 flex justify-center"><div className="h-4 bg-neutral-800 rounded w-10"></div></div>
                                         </div>
                                     ))
                                 ) : questions.length === 0 ? (
@@ -331,32 +438,53 @@ function ProblemsPageContent() {
                                             <Link
                                                 href={`/problems/${q.id}?section=${activeSection}`}
                                                 key={q.id}
-                                                className="grid grid-cols-12 gap-4 px-6 py-4 items-center hover:bg-neutral-800/30 transition-colors group"
+                                                className="flex flex-col gap-3 p-4 md:grid md:grid-cols-12 md:gap-4 md:px-6 md:py-4 md:items-center hover:bg-neutral-800/30 transition-colors group border-b border-neutral-800/50 md:border-none"
                                             >
-                                                <div className="col-span-1 flex justify-center">
-                                                    {solvedCorrect.includes(q.id) ? (
-                                                        <div className="w-7 h-7 bg-emerald-500/15 rounded-full flex items-center justify-center">
-                                                            <CheckCircleOutlinedIcon sx={{ fontSize: '1.1rem' }} className="text-emerald-400" />
-                                                        </div>
-                                                    ) : solvedWrong.includes(q.id) ? (
-                                                        <div className="w-7 h-7 bg-amber-500/15 rounded-full flex items-center justify-center">
-                                                            <AccessTimeOutlinedIcon sx={{ fontSize: '1.1rem' }} className="text-amber-400" />
-                                                        </div>
-                                                    ) : userBookmarks.includes(q.id) ? (
-                                                        <div className="w-7 h-7 bg-violet-500/15 rounded-full flex items-center justify-center">
-                                                            <BookmarkIcon sx={{ fontSize: '1rem' }} className="text-violet-400" />
-                                                        </div>
-                                                    ) : (
-                                                        <RadioButtonUncheckedOutlinedIcon sx={{ fontSize: '1.4rem' }} className="text-neutral-700" />
-                                                    )}
+                                                <div className="flex items-center gap-3 md:contents">
+                                                    <div className="text-sm font-mono text-neutral-500 md:col-span-1 md:text-center min-w-[24px]">
+                                                        {globalIndex}
+                                                    </div>
+                                                    <div className="md:col-span-1 flex justify-center">
+                                                        {solvedCorrect.includes(q.id) ? (
+                                                            <div className="w-7 h-7 bg-emerald-500/15 rounded-full flex items-center justify-center">
+                                                                <CheckCircleOutlinedIcon sx={{ fontSize: '1.1rem' }} className="text-emerald-400" />
+                                                            </div>
+                                                        ) : solvedWrong.includes(q.id) ? (
+                                                            <div className="w-7 h-7 bg-amber-500/15 rounded-full flex items-center justify-center">
+                                                                <AccessTimeOutlinedIcon sx={{ fontSize: '1.1rem' }} className="text-amber-400" />
+                                                            </div>
+                                                        ) : userBookmarks.includes(q.id) ? (
+                                                            <div className="w-7 h-7 bg-violet-500/15 rounded-full flex items-center justify-center">
+                                                                <BookmarkIcon sx={{ fontSize: '1rem' }} className="text-violet-400" />
+                                                            </div>
+                                                        ) : (
+                                                            <RadioButtonUncheckedOutlinedIcon sx={{ fontSize: '1.4rem' }} className="text-neutral-700" />
+                                                        )}
+                                                    </div>
+
+                                                    {/* Mobile Badges */}
+                                                    <div className="flex-1 md:hidden"></div>
+                                                    <div className="md:hidden flex items-center gap-2">
+                                                        {getDifficultyBadge(q.difficulty)}
+                                                        <span className="px-2 py-1 text-xs font-medium text-neutral-400 bg-neutral-800/50 rounded-md">
+                                                            {q.source?.split(' ').pop() || ''}
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                                <div className="col-span-8 overflow-hidden">
-                                                    <div className="text-neutral-100 group-hover:text-amber-400 transition-colors text-lg line-clamp-2">
+
+                                                <div className="md:col-span-7 overflow-hidden">
+                                                    <div className="text-neutral-100 group-hover:text-amber-400 transition-colors text-base md:text-lg line-clamp-3 md:line-clamp-2 leading-relaxed">
                                                         <MathText>{q.title}</MathText>
                                                     </div>
                                                 </div>
-                                                <div className="col-span-2 flex justify-center">{getDifficultyBadge(q.difficulty)}</div>
-                                                <div className="col-span-1 text-center text-base text-neutral-400">{q.source}</div>
+
+                                                {/* Desktop Badges */}
+                                                <div className="hidden md:flex md:col-span-2 md:justify-center">{getDifficultyBadge(q.difficulty)}</div>
+                                                <div className="hidden md:block md:col-span-1 md:text-center">
+                                                    <span className="px-2 py-1 text-xs font-medium text-neutral-400 bg-neutral-800/50 rounded-md">
+                                                        {q.source?.split(' ').pop() || ''}
+                                                    </span>
+                                                </div>
                                             </Link>
                                         );
                                     })
@@ -366,7 +494,7 @@ function ProblemsPageContent() {
                             {/* Pagination */}
                             <div className="flex items-center justify-between px-5 py-3 bg-neutral-900/50 border-t border-neutral-800">
                                 <p className="text-sm text-neutral-500">
-                                    <span className="text-neutral-300">{pagination.total > 0 ? startItem : 0}-{endItem}</span> of <span className="text-neutral-300">{pagination.total}</span>
+                                    Showing <span className="text-neutral-300">{pagination.total > 0 ? startItem : 0}-{endItem}</span> of <span className="text-neutral-300">{pagination.total}</span> questions
                                 </p>
                                 <div className="flex gap-1">
                                     <button
@@ -400,145 +528,6 @@ function ProblemsPageContent() {
                                         <ChevronRightIcon sx={{ fontSize: '1.2rem' }} />
                                     </button>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* RIGHT SIDEBAR */}
-                    <div className="space-y-4">
-                        {/* Progress */}
-                        <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 overflow-hidden">
-                            <div className="px-5 py-4 border-b border-neutral-800 flex items-center gap-2">
-                                <div className="w-8 h-8 bg-emerald-500/15 rounded-lg flex items-center justify-center">
-                                    <TrendingUpIcon sx={{ fontSize: '1rem' }} className="text-emerald-400" />
-                                </div>
-                                <h3 className="text-sm font-semibold text-neutral-200">Your Progress</h3>
-                            </div>
-                            <div className="p-4 grid grid-cols-2 gap-3">
-                                <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-center">
-                                    <p className="text-2xl font-bold text-emerald-400">{userStats.totalCorrect}</p>
-                                    <p className="text-[11px] text-emerald-400/70 font-medium mt-1">Solved</p>
-                                </div>
-                                <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 text-center">
-                                    <p className="text-2xl font-bold text-blue-400">{userStats.accuracy}%</p>
-                                    <p className="text-[11px] text-blue-400/70 font-medium mt-1">Accuracy</p>
-                                </div>
-                                <div className="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4 text-center">
-                                    <p className="text-2xl font-bold text-orange-400">{user?.streak || 0}</p>
-                                    <p className="text-[11px] text-orange-400/70 font-medium mt-1">Day Streak</p>
-                                </div>
-                                <div className="bg-violet-500/10 border border-violet-500/20 rounded-xl p-4 text-center">
-                                    <p className="text-2xl font-bold text-violet-400">{userStats.bookmarkedCount}</p>
-                                    <p className="text-[11px] text-violet-400/70 font-medium mt-1">Bookmarked</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Quick Practice */}
-                        <div className={`border rounded-2xl p-5 transition-all duration-300 ${activeSection === 'QUANT'
-                            ? 'bg-gradient-to-br from-amber-600/20 to-orange-600/20 border-amber-500/20'
-                            : 'bg-gradient-to-br from-violet-600/20 to-purple-600/20 border-violet-500/20'
-                            }`}>
-                            <div className="flex items-center gap-2 mb-3">
-                                <TrackChangesOutlinedIcon sx={{ fontSize: '1.2rem' }} className={activeSection === 'QUANT' ? 'text-amber-400' : 'text-violet-400'} />
-                                <h3 className="text-sm font-semibold text-white">Daily Practice</h3>
-                                <span className={`text-[10px] px-2 py-0.5 rounded-full ${activeSection === 'QUANT'
-                                    ? 'bg-amber-500/20 text-amber-400'
-                                    : 'bg-violet-500/20 text-violet-400'
-                                    }`}>
-                                    {activeSection === 'QUANT' ? 'Quant' : 'Reasoning'}
-                                </span>
-                            </div>
-
-                            <p className="text-xs text-neutral-400 mb-4 leading-relaxed">
-                                Complete your daily target of <strong className="text-white">{activeSection === 'QUANT' ? (user?.dailyQuantGoal || 5) : (user?.dailyReasoningGoal || 5)} questions</strong>. Resume where you left off!
-                            </p>
-                            <AuthActionGuard>
-                                <button
-                                    onClick={async () => {
-                                        try {
-                                            const res = await fetch(`/api/quick-practice?section=${activeSection}&topic=All`);
-                                            const data = await res.json();
-
-                                            if (data.completed) {
-                                                // Already completed today
-                                                notifyInfo("🎉 You've completed today's practice! Select questions from the list.");
-                                                return;
-                                            }
-
-                                            if (data.success && data.questionIds?.length > 0) {
-                                                // Store practice session in sessionStorage for tracking
-                                                sessionStorage.setItem('practiceSession', JSON.stringify({
-                                                    questionIds: data.questionIds,
-                                                    currentIndex: data.currentIndex || 0,
-                                                    section: activeSection,
-                                                    topic: 'All',
-                                                    resuming: data.resuming
-                                                }));
-
-                                                const nextId = data.nextQuestionId || data.questionIds[0];
-                                                if (data.resuming) {
-                                                    notifyInfo(`Resuming practice: ${data.answered}/${data.total} completed`);
-                                                }
-                                                router.push(`/problems/${nextId}?section=${activeSection}&practice=true`);
-                                            } else if (data.questionIds?.length === 0) {
-                                                notifyInfo('No unattempted questions found in this category!');
-                                            } else {
-                                                notifyError('Failed to start practice session');
-                                            }
-                                        } catch (error) {
-                                            console.error('Quick practice failed:', error);
-                                            notifyError('Failed to start practice session');
-                                        }
-                                    }}
-                                    className={`w-full py-2.5 text-white text-sm font-semibold rounded-xl transition-all shadow-lg ${activeSection === 'QUANT'
-                                        ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 shadow-amber-500/20'
-                                        : 'bg-gradient-to-r from-violet-500 to-purple-500 hover:from-violet-400 hover:to-purple-400 shadow-violet-500/20'
-                                        }`}
-                                >
-                                    Start Practice
-                                </button>
-                            </AuthActionGuard>
-                        </div>
-
-                        {/* Legend */}
-                        <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 p-5">
-                            <h3 className="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider mb-4">Status Legend</h3>
-                            <div className="space-y-3">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-6 h-6 bg-emerald-500/15 rounded-full flex items-center justify-center">
-                                        <CheckCircleOutlinedIcon sx={{ fontSize: '0.9rem' }} className="text-emerald-400" />
-                                    </div>
-                                    <span className="text-sm text-neutral-400">Solved</span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-6 h-6 bg-amber-500/15 rounded-full flex items-center justify-center">
-                                        <AccessTimeOutlinedIcon sx={{ fontSize: '0.9rem' }} className="text-amber-400" />
-                                    </div>
-                                    <span className="text-sm text-neutral-400">Attempted</span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-6 h-6 bg-violet-500/15 rounded-full flex items-center justify-center">
-                                        <BookmarkIcon sx={{ fontSize: '0.8rem' }} className="text-violet-400" />
-                                    </div>
-                                    <span className="text-sm text-neutral-400">Bookmarked</span>
-                                </div>
-                                <div className="flex items-center gap-3">
-                                    <RadioButtonUncheckedOutlinedIcon sx={{ fontSize: '1.2rem' }} className="text-neutral-700 ml-0.5" />
-                                    <span className="text-sm text-neutral-400">Not Attempted</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Exam */}
-                        <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 p-5">
-                            <div className="flex items-center justify-between mb-3">
-                                <h3 className="text-[11px] font-semibold text-neutral-500 uppercase tracking-wider">Target</h3>
-                                <span className="text-xs font-medium text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20">SSC CGL 2025</span>
-                            </div>
-                            <div className="text-center py-2">
-                                <p className="text-4xl font-bold text-white">145</p>
-                                <p className="text-sm text-neutral-500 mt-1">Days Left</p>
                             </div>
                         </div>
                     </div>

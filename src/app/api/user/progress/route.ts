@@ -1,103 +1,106 @@
-import { NextRequest, NextResponse } from "next/server";
-import mongoose from "mongoose";
-import dbConnect from "@/core/db/connect";
-import Attempt from "@/core/models/Attempt";
-import Question from "@/core/models/Question";
-import User from "@/core/models/User";
-import { getCurrentUser } from "@/lib/auth";
+import { NextRequest, NextResponse } from 'next/server';
+import dbConnect from '@/core/db/connect';
+import Attempt from '@/core/models/Attempt';
+import Bookmark from '@/core/models/Bookmark';
+import Question from '@/core/models/Question';
+import { getCurrentUser } from '@/lib/auth';
 
-/**
- * GET /api/user/progress
- * Returns user's progress including:
- * - Question IDs by status (solved correctly, solved wrongly, bookmarked)
- * - Stats by section and difficulty
- * - Overall progress
- */
 export async function GET(req: NextRequest) {
     try {
-        const authUser = await getCurrentUser();
-        if (!authUser) {
-            return NextResponse.json(
-                { error: "Authentication required" },
-                { status: 401 }
-            );
-        }
-
         await dbConnect();
 
-        const { searchParams } = new URL(req.url);
-        const section = searchParams.get('section'); // Optional: QUANT or REASONING
-
-        // Convert userId string to ObjectId for aggregation
-        const userObjectId = new mongoose.Types.ObjectId(authUser.userId);
-
-        // Get all user's attempts with question details (section + difficulty)
-        const attempts = await Attempt.aggregate([
-            { $match: { u_id: userObjectId } },
-            {
-                $lookup: {
-                    from: 'questions',
-                    localField: 'q_id',
-                    foreignField: '_id',
-                    as: 'question'
-                }
-            },
-            { $unwind: '$question' },
-            // Only include verified questions
-            { $match: { 'question.is_verified': true } },
-            ...(section ? [{ $match: { 'question.source.section': section } }] : []),
-            {
-                $group: {
-                    _id: '$q_id',
-                    is_correct: { $last: '$is_correct' },
-                    attempts_count: { $sum: 1 },
-                    section: { $first: '$question.source.section' },
-                    difficulty: { $first: '$question.difficulty' }
-                }
-            }
-        ]);
-
-        // Categorize questions by status and difficulty
-        const solvedCorrect: string[] = [];
-        const solvedWrong: string[] = [];
-        const attempted: string[] = [];
-
-        const difficultyBreakdown = {
-            EASY: { solved: 0, wrong: 0 },
-            MEDIUM: { solved: 0, wrong: 0 },
-            HARD: { solved: 0, wrong: 0 }
-        };
-
-        for (const attempt of attempts) {
-            const qId = attempt._id.toString();
-            const difficulty = attempt.difficulty as 'EASY' | 'MEDIUM' | 'HARD';
-            attempted.push(qId);
-
-            if (attempt.is_correct) {
-                solvedCorrect.push(qId);
-                if (difficultyBreakdown[difficulty]) {
-                    difficultyBreakdown[difficulty].solved += 1;
-                }
-            } else {
-                solvedWrong.push(qId);
-                if (difficultyBreakdown[difficulty]) {
-                    difficultyBreakdown[difficulty].wrong += 1;
-                }
-            }
+        const currentUser = await getCurrentUser();
+        if (!currentUser) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        // Get total verified questions count by difficulty (for progress bars)
-        const sectionFilter = section ? { 'source.section': section } : {};
-        const totalQuestions = await Question.aggregate([
-            { $match: { is_verified: true, ...sectionFilter } },
-            {
-                $group: {
-                    _id: '$difficulty',
-                    count: { $sum: 1 }
+        const user = { id: currentUser.userId }; // Map to structure used below
+
+        const { searchParams } = new URL(req.url);
+        const section = searchParams.get('section') || 'ALL';
+
+        // 1. Build Match Query for Attempts
+        const matchQuery: any = { user_id: user.id };
+        if (section !== 'ALL') {
+            matchQuery.subject = section; // 'QUANT' or 'REASONING'
+        }
+
+        // 2. Fetch Attempts
+        const attempts = await Attempt.find(matchQuery).lean();
+
+        // 3. Process Attempts for Stats & Lists
+        const solvedCorrectSet = new Set<string>();
+        const solvedWrongSet = new Set<string>();
+        let totalTime = 0;
+
+        // Group by Difficulty for Dashboard
+        const difficultyStats = {
+            EASY: { solved: 0, total: 0, attempted: 0 },
+            MEDIUM: { solved: 0, total: 0, attempted: 0 },
+            HARD: { solved: 0, total: 0, attempted: 0 }
+        };
+
+        attempts.forEach((att: any) => {
+            const qId = att.question_id.toString();
+            const diff = att.difficulty as 'EASY' | 'MEDIUM' | 'HARD';
+
+            if (att.is_correct) {
+                solvedCorrectSet.add(qId);
+                // Also remove from wrong set if they eventually got it right
+                solvedWrongSet.delete(qId);
+
+                if (diff && difficultyStats[diff]) {
+                    // We need to count unique solved per difficulty? 
+                    // The set ensures uniqueness globally, but for difficulty breakdown we iterate attempts.
+                    // Ideally we track unique solved questions per difficulty.
+                }
+            } else {
+                if (!solvedCorrectSet.has(qId)) {
+                    solvedWrongSet.add(qId);
                 }
             }
-        ]);
+            totalTime += att.time_ms || 0;
 
+            // For simple attempted count per difficulty (non-unique? or unique?)
+            // Dashboard expects "Solved / Total".
+        });
+
+        const solvedCorrect = Array.from(solvedCorrectSet);
+        const solvedWrong = Array.from(solvedWrongSet);
+        const totalCorrect = solvedCorrect.length;
+        const totalWrong = solvedWrong.length; // Approximate (unique questions wrong and never solved)
+        const totalAttempted = totalCorrect + totalWrong; // Unique questions attempted
+
+        // Re-calculate unique solved per difficulty
+        // This requires looking up the difficulty of each unique solved question.
+        // Attempts have filtered fields 'subject', 'pattern', 'difficulty'.
+        // So we can use the attempt data.
+        // We iterate unique solved IDs and find their difficulty from any attempt (assume constant).
+        const uniqueSolvedMap = new Map<string, string>(); // qId -> difficulty
+        attempts.forEach((att: any) => {
+            if (att.is_correct) uniqueSolvedMap.set(att.question_id.toString(), att.difficulty || 'MEDIUM');
+        });
+
+        uniqueSolvedMap.forEach((diff) => {
+            if (difficultyStats[diff as 'EASY' | 'MEDIUM' | 'HARD']) {
+                difficultyStats[diff as 'EASY' | 'MEDIUM' | 'HARD'].solved++;
+            }
+        });
+
+
+        // 4. Fetch Bookmarks
+        // Bookmark model stores one document per bookmark, not a list in one doc.
+        const bookmarkDocs = await Bookmark.find({ user_id: user.id }).lean();
+        const bookmarks = bookmarkDocs.map((bm: any) => bm.question_id.toString());
+        const bookmarkedCount = bookmarks.length;
+
+        // 5. Fetch Totals (Active Questions Count) for Difficulty Breakdown (Dashboard)
+        const totalQuery: any = { is_live: true };
+        if (section !== 'ALL') {
+            totalQuery.subject = section;
+        }
+
+        // We need totals by difficulty
         const totalsByDifficulty = {
             EASY: 0,
             MEDIUM: 0,
@@ -105,49 +108,45 @@ export async function GET(req: NextRequest) {
             ALL: 0
         };
 
-        for (const t of totalQuestions) {
-            if (t._id && totalsByDifficulty.hasOwnProperty(t._id)) {
-                totalsByDifficulty[t._id as 'EASY' | 'MEDIUM' | 'HARD'] = t.count;
-                totalsByDifficulty.ALL += t.count;
+        // Use aggregation to count by difficulty
+        const totalAgg = await Question.aggregate([
+            { $match: totalQuery },
+            { $group: { _id: '$difficulty', count: { $sum: 1 } } }
+        ]);
+
+        totalAgg.forEach((grp) => {
+            if (grp._id && totalsByDifficulty[grp._id as 'EASY' | 'MEDIUM' | 'HARD'] !== undefined) {
+                totalsByDifficulty[grp._id as 'EASY' | 'MEDIUM' | 'HARD'] = grp.count;
             }
-        }
+        });
+        totalsByDifficulty.ALL = totalsByDifficulty.EASY + totalsByDifficulty.MEDIUM + totalsByDifficulty.HARD;
 
-        // Get user's bookmarks and heatmap
-        const user = await User.findById(authUser.userId).select('bookmarks dash.heatmap').lean();
-        const bookmarks = ((user as any)?.bookmarks || []).map((b: any) => b.toString());
 
-        const currentMonth = new Date().toISOString().slice(0, 7);
-        const activityDates = ((user as any)?.dash?.heatmap || [])
-            .filter((h: any) => h.date.startsWith(currentMonth))
-            .map((h: any) => h.date);
-
-        // Calculate stats
-        const stats = {
-            totalAttempted: attempted.length,
-            totalCorrect: solvedCorrect.length,
-            totalWrong: solvedWrong.length,
-            accuracy: attempted.length > 0
-                ? Math.round((solvedCorrect.length / attempted.length) * 100)
-                : 0,
-            bookmarkedCount: bookmarks.length,
-        };
-
+        // Response Assembly
         return NextResponse.json({
+            success: true,
             data: {
                 solvedCorrect,
                 solvedWrong,
                 bookmarks,
-                activityDates,
-                stats,
-                difficultyBreakdown,
-                totalsByDifficulty,
-            },
+                stats: {
+                    totalAttempted,
+                    totalCorrect,
+                    totalWrong,
+                    accuracy: totalAttempted > 0 ? Math.round((totalCorrect / totalAttempted) * 100) : 0,
+                    bookmarkedCount
+                },
+                difficultyBreakdown: {
+                    EASY: { solved: difficultyStats.EASY.solved },
+                    MEDIUM: { solved: difficultyStats.MEDIUM.solved },
+                    HARD: { solved: difficultyStats.HARD.solved }
+                },
+                totalsByDifficulty
+            }
         });
+
     } catch (error) {
-        console.error("Get progress error:", error);
-        return NextResponse.json(
-            { error: "Failed to get progress" },
-            { status: 500 }
-        );
+        console.error('Progress API Error:', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }

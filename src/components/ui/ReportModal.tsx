@@ -7,10 +7,11 @@ interface ReportModalProps {
     isOpen: boolean;
     onClose: () => void;
     questionId: string;
+    questionDisplayId?: string;
     questionTitle?: string;
 }
 
-export function ReportModal({ isOpen, onClose, questionId, questionTitle }: ReportModalProps) {
+export function ReportModal({ isOpen, onClose, questionId, questionDisplayId, questionTitle }: ReportModalProps) {
     const { success, error: notifyError } = useToast();
     const [reason, setReason] = useState<string>('Content Error');
     const [description, setDescription] = useState('');
@@ -85,8 +86,11 @@ export function ReportModal({ isOpen, onClose, questionId, questionTitle }: Repo
                 <form onSubmit={handleSubmit} className="p-6 space-y-5">
 
                     <div className="p-4 bg-neutral-900/50 rounded-xl border border-neutral-800">
-                        <p className="text-xs text-neutral-500 uppercase font-semibold mb-1">Question ID</p>
-                        <p className="text-neutral-300 font-mono text-sm">{questionId}</p>
+                        <div className="flex justify-between items-start mb-1">
+                            <p className="text-xs text-neutral-500 uppercase font-semibold">Question</p>
+                            <p className="text-[10px] text-neutral-600 font-mono" title="Internal ID">{questionId.slice(-6)}</p>
+                        </div>
+                        <p className="text-neutral-300 font-mono text-sm font-bold">{questionDisplayId ? `Question #${questionDisplayId}` : questionId}</p>
                         {questionTitle && (
                             <p className="text-neutral-400 text-sm mt-1 line-clamp-2">{questionTitle}</p>
                         )}

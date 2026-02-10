@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/core/db/connect";
 import Question from "@/core/models/Question";
-import Pattern from "@/core/models/Pattern";
 
 export async function GET(
     req: NextRequest,
@@ -10,14 +9,9 @@ export async function GET(
     try {
         await dbConnect();
 
-        // Force Pattern model registration
-        void Pattern;
-
         const { id } = await params;
 
-        const question = await Question.findById(id)
-            .populate("p_id", "name p_code topic subtopic")
-            .lean();
+        const question = await Question.findById(id).lean();
 
         if (!question) {
             return NextResponse.json(
@@ -26,30 +20,30 @@ export async function GET(
             );
         }
 
-        // Format response
+        const q = question as any;
+
+        // Format response using the new flat schema
         const formattedQuestion = {
-            id: (question as any)._id,
-            content: {
-                text: (question as any).content.text,
-                options: (question as any).content.options,
-                correct_option_id: (question as any).content.correct_option_id,
-                image: (question as any).content.image,
-            },
-            pattern: (question as any).p_id ? {
-                name: (question as any).p_id.name,
-                code: (question as any).p_id.p_code,
-                topic: (question as any).p_id.topic,
-                subtopic: (question as any).p_id.subtopic,
-            } : null,
+            id: q._id,
+            text: q.text,
+            image: q.image || null,
+            options: q.options, // [{ id: "A", text: "...", image?: "..." }, ...]
+            correct_option: q.correct_option, // "A", "B", "C", or "D"
+            solution: q.solution || null,
+            pattern: q.pattern || null, // string like "percentage"
+            subject: q.subject, // "QUANT" or "REASONING"
+            difficulty: q.difficulty,
             source: {
-                exam: (question as any).source.exam,
-                year: (question as any).source.year,
-                paper: (question as any).source.paper,
-                section: (question as any).source.section,
-                question_number: (question as any).source.question_number,
+                exam: q.source?.exam || "SSC CGL",
+                year: q.source?.year,
+                shift: q.source?.shift || null,
             },
-            difficulty: (question as any).difficulty,
-            is_verified: (question as any).is_verified,
+            stats: {
+                attempt_count: q.stats?.attempt_count || 0,
+                accuracy_rate: q.stats?.accuracy_rate || 0,
+                avg_time_ms: q.stats?.avg_time_ms || 0,
+            },
+            is_live: q.is_live,
         };
 
         return NextResponse.json({ data: formattedQuestion });

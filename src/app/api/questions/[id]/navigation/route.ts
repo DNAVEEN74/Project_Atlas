@@ -28,9 +28,9 @@ export async function GET(
         }
 
         // Build base query for section filtering
-        const baseQuery: any = { is_verified: true };
+        const baseQuery: any = { is_live: true };
         if (section) {
-            baseQuery['source.section'] = section;
+            baseQuery.subject = section;
         }
 
         // Find previous question (created before current, sorted descending)

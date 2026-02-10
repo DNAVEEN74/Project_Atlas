@@ -38,8 +38,32 @@ export async function POST(req: NextRequest) {
         }
 
         // Update last active and validate streak
-        user.dash.last_active = new Date();
-        validateUserStreak(user); // Validate streak here
+        // Normalize today to YYYY-MM-DD
+        const today = new Date().toISOString().split('T')[0];
+
+        if (user.stats) {
+            user.stats.last_active_date = today;
+            // Validate streak
+            validateUserStreak(user);
+        } else {
+            // Fallback init if stats missing
+            user.stats = {
+                total_solved: 0,
+                total_correct: 0,
+                current_streak: 0,
+                max_streak: 0,
+                last_active_date: today
+            };
+        }
+
+        // Backfill username if missing (Lazy Migration)
+        if (!user.profile?.username) {
+            const baseUsername = user.email.split('@')[0];
+            const uniqueSuffix = Math.floor(Math.random() * 10000);
+            if (!user.profile) user.profile = { name: 'User' } as any;
+            user.profile.username = `${baseUsername}${uniqueSuffix}`;
+        }
+
         await user.save();
 
         // Generate JWT token
@@ -57,11 +81,11 @@ export async function POST(req: NextRequest) {
                 id: user._id,
                 email: user.email,
                 name: user.profile.name,
-                targetExam: user.target.exam,
-                targetYear: user.target.year,
-                totalSolved: user.dash.total_solved,
-                streak: user.dash.streak,
-                maxStreak: user.dash.max_streak || 0,
+                username: user.profile.username,
+                targetExam: user.target_exam,
+                totalSolved: user.stats.total_solved,
+                streak: user.stats.current_streak,
+                maxStreak: user.stats.max_streak || 0,
             },
         });
     } catch (error) {

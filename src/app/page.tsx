@@ -172,52 +172,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- FEATURE 1: CONCEPTS --- */}
+      {/* --- FEATURE 1: CONCEPTS (REMOVED) --- */}
+      {/* 
       <section
         ref={(el) => registerElement(el, 'concepts')}
         className="py-32 px-6 border-t border-white/5"
       >
-        <div className={`max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center transition-all duration-1000 ${isRevealed('concepts') ? 'opacity-100 blur-0 translate-y-0' : 'opacity-0 blur-md translate-y-8'
-          }`}>
-          {/* Visual */}
-          <div className="relative">
-            <div className="bg-[#111] border border-white/10 rounded-2xl p-8 shadow-2xl">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="px-3 py-1 bg-violet-500/15 text-violet-400 text-xs font-bold rounded-md">Mental Model</span>
-                <span className="text-neutral-500 text-xs">Profit & Loss</span>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">The Multiplying Factor</h3>
-              <div className="bg-[#0a0a0a] rounded-xl p-5 border border-white/5 font-mono text-sm text-neutral-300 mb-6">
-                Final = Initial × (1 ± r/100)
-              </div>
-              <div className="flex gap-2">
-                <div className="h-1.5 bg-violet-500 rounded-full w-10" />
-                <div className="h-1.5 bg-white/10 rounded-full w-10" />
-                <div className="h-1.5 bg-white/10 rounded-full w-10" />
-              </div>
-            </div>
-          </div>
-
-          {/* Text */}
-          <div>
-            <div className="w-12 h-12 bg-violet-500/10 rounded-xl flex items-center justify-center text-violet-400 mb-6">
-              <MenuBookOutlinedIcon sx={{ fontSize: '1.5rem' }} />
-            </div>
-            <div className="inline-block px-3 py-1 mb-4 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wide">
-              Free for Everyone
-            </div>
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
-              Intuition over<br /><span className="text-violet-400">memorization.</span>
-            </h2>
-            <p className="text-lg text-neutral-400 mb-8 leading-relaxed">
-              Our entire concept library is completely free. Visual proofs, mental models, real-world analogies. Zero barriers.
-            </p>
-            <Link href="/problems" className="inline-flex items-center gap-2 text-violet-400 font-semibold hover:gap-3 transition-all">
-              Start Practicing <ChevronRightIcon />
-            </Link>
-          </div>
-        </div>
-      </section>
+        ...
+      </section> 
+      */}
 
       {/* --- FEATURE 2: PROBLEMS --- */}
       <section
