@@ -15,6 +15,8 @@ export interface IQuestion extends Document {
     pattern: string;                    // "percentage", "geometry_circles"
     difficulty: 'EASY' | 'MEDIUM' | 'HARD';
 
+    question_number: number;              // sequential number within pattern for navigation
+
     source: {
         exam: string;                     // "SSC CGL 2024"
         year: number;
@@ -58,6 +60,8 @@ const QuestionSchema: Schema = new Schema(
             required: true
         },
 
+        question_number: { type: Number, index: true },
+
         source: {
             exam: { type: String, required: true },
             year: { type: Number, required: true },
@@ -83,6 +87,8 @@ QuestionSchema.index({ is_live: 1, subject: 1, pattern: 1, difficulty: 1 });
 QuestionSchema.index({ is_live: 1, 'source.year': -1 });
 // { needs_review: 1, is_live: 1 }                         — admin queue
 QuestionSchema.index({ needs_review: 1, is_live: 1 });
+// { pattern: 1, question_number: 1 }                      — pattern navigation
+QuestionSchema.index({ pattern: 1, question_number: 1 });
 
 const Question: Model<IQuestion> =
     mongoose.models.Question || mongoose.model<IQuestion>('Question', QuestionSchema);

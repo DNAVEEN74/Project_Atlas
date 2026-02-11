@@ -95,8 +95,8 @@ export async function GET() {
                 lastActive: (userLean as any).stats?.last_active_date,
 
                 // Config/Prefs
-                dailyQuantGoal: (userLean as any).preferences?.daily_goal || 5, // merged goal or just single goal? Docs say "daily_goal: number"
-                dailyReasoningGoal: (userLean as any).preferences?.daily_goal || 5, // mapping single goal to both for backward compat if needed
+                dailyQuantGoal: (userLean as any).preferences?.daily_quant_goal || 5,
+                dailyReasoningGoal: (userLean as any).preferences?.daily_reasoning_goal || 5,
                 isPremium: (userLean as any).config?.is_premium,
                 targetExam: (userLean as any).target_exam
             },

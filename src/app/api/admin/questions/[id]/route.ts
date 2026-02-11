@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/core/db/connect';
 import Question from '@/core/models/Question';
+import { requireAdmin } from '@/lib/auth';
 
 // PATCH /api/admin/questions/[id] - Update question
 export async function PATCH(
@@ -8,6 +9,10 @@ export async function PATCH(
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        // Admin role check
+        const { error: authError } = await requireAdmin();
+        if (authError) return authError;
+
         await dbConnect();
 
         const body = await request.json();

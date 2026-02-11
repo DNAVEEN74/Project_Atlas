@@ -13,7 +13,8 @@ export async function POST(req: NextRequest) {
             password,
             name,
             targetExam, // Optional in UI, default SSC_CGL
-            dailyGoal   // Unified goal
+            dailyQuantGoal,
+            dailyReasoningGoal,
         } = body;
 
         // Validation
@@ -62,7 +63,8 @@ export async function POST(req: NextRequest) {
                 is_premium: false
             },
             preferences: {
-                daily_goal: Math.min(Math.max(dailyGoal || 5, 5), 100),
+                daily_quant_goal: Math.min(Math.max(dailyQuantGoal || 5, 5), 100),
+                daily_reasoning_goal: Math.min(Math.max(dailyReasoningGoal || 5, 5), 100),
             },
             stats: {
                 total_solved: 0,
@@ -91,7 +93,8 @@ export async function POST(req: NextRequest) {
                 name: user.profile.name,
                 username: user.profile.username,
                 targetExam: user.target_exam,
-                dailyGoal: user.preferences.daily_goal,
+                dailyQuantGoal: user.preferences.daily_quant_goal,
+                dailyReasoningGoal: user.preferences.daily_reasoning_goal,
             },
         });
     } catch (error) {

@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/core/db/connect';
 import Question from '@/core/models/Question';
+import { requireAdmin } from '@/lib/auth';
 
 // GET /api/admin/questions - List questions with filters
 export async function GET(request: NextRequest) {
     try {
+        // Admin role check
+        const { error: authError } = await requireAdmin();
+        if (authError) return authError;
+
         console.log('[API] Connecting to database...');
         await dbConnect();
         console.log('[API] Connected successfully');

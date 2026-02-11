@@ -14,6 +14,7 @@ import {
     ChevronRightIcon,
     BookmarkIcon,
     HistoryEduOutlinedIcon,
+    BoltIcon,
 } from '@/components/icons';
 import Header from '@/components/layout/Header';
 import { useToast } from '@/contexts/ToastContext';
@@ -346,6 +347,11 @@ export default function DashboardPage() {
                         {/* Quick Actions */}
                         <div className="bg-[#1a1a1a] rounded-xl border border-neutral-800 p-4">
                             <div className="space-y-1">
+                                <Link href="/sprint" className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-neutral-800 transition-colors group">
+                                    <BoltIcon sx={{ fontSize: '1rem' }} className="text-amber-500" />
+                                    <span className="text-sm text-neutral-400 group-hover:text-white">Quick Practice</span>
+                                    <ChevronRightIcon sx={{ fontSize: '1rem' }} className="ml-auto text-neutral-600" />
+                                </Link>
                                 <Link href="/bookmarks" className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-neutral-800 transition-colors group">
                                     <BookmarkIcon sx={{ fontSize: '1rem' }} className="text-yellow-500" />
                                     <span className="text-sm text-neutral-400 group-hover:text-white">Bookmarks</span>

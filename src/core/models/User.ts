@@ -10,7 +10,10 @@ export interface IUser extends Document {
     };
     target_exam: 'SSC_CGL';
     config: { is_premium: boolean; };
-    preferences: { daily_goal: number; };  // 5-100
+    preferences: {
+        daily_quant_goal: number;       // 5-100
+        daily_reasoning_goal: number;   // 5-100
+    };
     stats: {
         total_solved: number;
         total_correct: number;
@@ -52,7 +55,8 @@ const UserSchema: Schema = new Schema(
         },
 
         preferences: {
-            daily_goal: { type: Number, default: 5, min: 5, max: 100 },
+            daily_quant_goal: { type: Number, default: 5, min: 5, max: 100 },
+            daily_reasoning_goal: { type: Number, default: 5, min: 5, max: 100 },
         },
 
         stats: {
