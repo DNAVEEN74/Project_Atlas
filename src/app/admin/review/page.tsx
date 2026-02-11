@@ -13,29 +13,29 @@ import { compressImage } from '@/lib/imageCompression';
 import OCRModal from '@/components/ui/OCRModal';
 
 interface QuestionOption {
-    id: string;
+    id: string;   // "A","B","C","D"
     text: string;
-    is_correct: boolean;
     image?: string;
 }
 
 interface Question {
     _id: string;
-    content: {
-        text: string;
-        options: QuestionOption[];
-        correct_option_id: string;
-        image?: string;
-    };
+    text: string;
+    image?: string;
+    options: QuestionOption[];
+    correct_option: string;      // "A"|"B"|"C"|"D"
+    solution?: string;
+    subject: 'QUANT' | 'REASONING';
+    pattern: string;
+    difficulty: 'EASY' | 'MEDIUM' | 'HARD';
+    question_number: number;
     source: {
         exam: string;
         year: number;
-        paper: string;
-        section: string;
-        question_number: number;
-        file_name: string;
+        shift: string;
     };
-    is_verified: boolean;
+    is_live: boolean;
+    needs_review: boolean;
     needs_image_review: boolean;
 }
 
@@ -63,14 +63,12 @@ function ImageUpload({
 
         setUploading(true);
         try {
-            // Reject files larger than 5MB before processing
             if (file.size > 5 * 1024 * 1024) {
                 notifyError('File too large! Max size is 5MB.');
                 setUploading(false);
                 return;
             }
 
-            // Compress image before upload (WebP, max 800px, 75% quality)
             const compressedFile = await compressImage(file, {
                 maxWidth: 800,
                 maxHeight: 800,
@@ -116,7 +114,7 @@ function ImageUpload({
                     />
                     <button
                         onClick={() => inputRef.current?.click()}
-                        className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 
+                        className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100
                                    transition flex items-center justify-center text-white text-sm rounded-lg"
                     >
                         Change Image
@@ -152,7 +150,7 @@ import { useToast } from '@/contexts/ToastContext';
 export default function AdminReviewPage() {
     const [questions, setQuestions] = useState<Question[]>([]);
     const { error: notifyError } = useToast();
-    const [filter, setFilter] = useState<'all' | 'verified' | 'unverified' | 'needs_review'>('needs_review');
+    const [filter, setFilter] = useState<'all' | 'live' | 'not_live' | 'needs_image_review'>('needs_image_review');
     const [sectionFilter, setSectionFilter] = useState<'all' | 'REASONING' | 'QUANT'>('all');
     const [editingId, setEditingId] = useState<string | null>(null);
     const [editedQuestion, setEditedQuestion] = useState<Question | null>(null);
@@ -188,12 +186,12 @@ export default function AdminReviewPage() {
         setLoading(true);
         const params = new URLSearchParams();
 
-        if (filter === 'verified') {
-            params.append('verified', 'true');
-        } else if (filter === 'unverified') {
-            params.append('verified', 'false');
-        } else if (filter === 'needs_review') {
-            params.append('needs_review', 'true');
+        if (filter === 'live') {
+            params.append('is_live', 'true');
+        } else if (filter === 'not_live') {
+            params.append('is_live', 'false');
+        } else if (filter === 'needs_image_review') {
+            params.append('needs_image_review', 'true');
         }
 
         try {
@@ -204,7 +202,7 @@ export default function AdminReviewPage() {
             // Client-side section filter
             if (sectionFilter !== 'all') {
                 filteredQuestions = filteredQuestions.filter(
-                    (q: Question) => q.source.section === sectionFilter
+                    (q: Question) => q.subject === sectionFilter
                 );
             }
 
@@ -216,11 +214,11 @@ export default function AdminReviewPage() {
         setLoading(false);
     };
 
-    const toggleVerify = async (questionId: string, currentStatus: boolean) => {
+    const toggleLive = async (questionId: string, currentStatus: boolean) => {
         await fetch(`/api/admin/questions/${questionId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ is_verified: !currentStatus }),
+            body: JSON.stringify({ is_live: !currentStatus }),
         });
         fetchQuestions();
     };
@@ -229,13 +227,10 @@ export default function AdminReviewPage() {
         await fetch(`/api/admin/questions/${questionId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 'content.image': imageUrl }),
+            body: JSON.stringify({ image: imageUrl }),
         });
-        // Update local state instead of full refresh
         setQuestions(prev => prev.map(q =>
-            q._id === questionId
-                ? { ...q, content: { ...q.content, image: imageUrl } }
-                : q
+            q._id === questionId ? { ...q, image: imageUrl } : q
         ));
     };
 
@@ -243,20 +238,17 @@ export default function AdminReviewPage() {
         const question = questions.find(q => q._id === questionId);
         if (!question) return;
 
-        const updatedOptions = question.content.options.map(opt =>
+        const updatedOptions = question.options.map(opt =>
             opt.id === optionId ? { ...opt, image: imageUrl } : opt
         );
 
         await fetch(`/api/admin/questions/${questionId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 'content.options': updatedOptions }),
+            body: JSON.stringify({ options: updatedOptions }),
         });
-        // Update local state instead of full refresh
         setQuestions(prev => prev.map(q =>
-            q._id === questionId
-                ? { ...q, content: { ...q.content, options: updatedOptions } }
-                : q
+            q._id === questionId ? { ...q, options: updatedOptions } : q
         ));
     };
 
@@ -277,7 +269,9 @@ export default function AdminReviewPage() {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                content: editedQuestion.content,
+                text: editedQuestion.text,
+                options: editedQuestion.options,
+                correct_option: editedQuestion.correct_option,
             }),
         });
 
@@ -288,22 +282,16 @@ export default function AdminReviewPage() {
 
     const updateQuestionText = (newText: string) => {
         if (!editedQuestion) return;
-        setEditedQuestion({
-            ...editedQuestion,
-            content: { ...editedQuestion.content, text: newText }
-        });
+        setEditedQuestion({ ...editedQuestion, text: newText });
     };
 
     const updateOptionText = (optionId: string, newText: string) => {
         if (!editedQuestion) return;
         setEditedQuestion({
             ...editedQuestion,
-            content: {
-                ...editedQuestion.content,
-                options: editedQuestion.content.options.map(opt =>
-                    opt.id === optionId ? { ...opt, text: newText } : opt
-                ),
-            },
+            options: editedQuestion.options.map(opt =>
+                opt.id === optionId ? { ...opt, text: newText } : opt
+            ),
         });
     };
 
@@ -311,14 +299,7 @@ export default function AdminReviewPage() {
         if (!editedQuestion) return;
         setEditedQuestion({
             ...editedQuestion,
-            content: {
-                ...editedQuestion.content,
-                correct_option_id: optionId,
-                options: editedQuestion.content.options.map(opt => ({
-                    ...opt,
-                    is_correct: opt.id === optionId
-                })),
-            },
+            correct_option: optionId,
         });
     };
 
@@ -336,6 +317,10 @@ export default function AdminReviewPage() {
         } else if (ocrTarget === 'option' && ocrOptionId) {
             updateOptionText(ocrOptionId, text);
         }
+    };
+
+    const isCorrectOption = (question: Question, optionId: string) => {
+        return question.correct_option === optionId;
     };
 
     return (
@@ -380,21 +365,21 @@ export default function AdminReviewPage() {
                     </div>
                     <div className="bg-gradient-to-br from-green-900/50 to-gray-900 rounded-xl p-4 border border-green-800/50">
                         <div className="text-3xl font-bold text-green-400">{collectionStats.verified}</div>
-                        <div className="text-gray-400 text-sm">Verified ✓</div>
+                        <div className="text-gray-400 text-sm">Live</div>
                     </div>
                     <div className="bg-gradient-to-br from-yellow-900/50 to-gray-900 rounded-xl p-4 border border-yellow-800/50">
                         <div className="text-3xl font-bold text-yellow-400">{collectionStats.unverified}</div>
-                        <div className="text-gray-400 text-sm">Pending Review</div>
+                        <div className="text-gray-400 text-sm">Not Live</div>
                     </div>
                     <div className="bg-gradient-to-br from-orange-900/50 to-gray-900 rounded-xl p-4 border border-orange-800/50">
                         <div className="text-3xl font-bold text-orange-400">{collectionStats.needImages}</div>
-                        <div className="text-gray-400 text-sm">Need Images 📷</div>
+                        <div className="text-gray-400 text-sm">Need Images</div>
                     </div>
                 </div>
 
                 {/* Filters */}
                 <div className="flex gap-2 mb-6">
-                    {(['all', 'needs_review', 'unverified', 'verified'] as const).map((f) => (
+                    {(['all', 'needs_image_review', 'not_live', 'live'] as const).map((f) => (
                         <button
                             key={f}
                             onClick={() => setFilter(f)}
@@ -403,9 +388,9 @@ export default function AdminReviewPage() {
                                 : 'bg-gray-800 text-gray-400 hover:bg-gray-700 border border-gray-700'
                                 }`}
                         >
-                            {f === 'needs_review' ? '📷 Need Images' :
-                                f === 'verified' ? '✓ Verified' :
-                                    f === 'unverified' ? '⏳ Pending' : '📋 All'}
+                            {f === 'needs_image_review' ? 'Need Images' :
+                                f === 'live' ? 'Live' :
+                                    f === 'not_live' ? 'Not Live' : 'All'}
                         </button>
                     ))}
                 </div>
@@ -421,7 +406,6 @@ export default function AdminReviewPage() {
                 {/* Empty State */}
                 {!loading && questions.length === 0 && (
                     <div className="text-center py-12 bg-gray-800/50 rounded-xl border border-gray-700">
-                        <div className="text-5xl mb-4">📭</div>
                         <p className="text-gray-400">No questions found for this filter</p>
                     </div>
                 )}
@@ -431,7 +415,7 @@ export default function AdminReviewPage() {
                     {questions.map((question) => (
                         <div
                             key={question._id}
-                            className={`bg-gray-800/80 rounded-2xl overflow-hidden border transition-all hover:shadow-xl ${question.is_verified
+                            className={`bg-gray-800/80 rounded-2xl overflow-hidden border transition-all hover:shadow-xl ${question.is_live
                                 ? 'border-green-500/30 hover:border-green-500/50'
                                 : question.needs_image_review
                                     ? 'border-orange-500/30 hover:border-orange-500/50'
@@ -442,22 +426,29 @@ export default function AdminReviewPage() {
                             <div className="bg-gray-900/50 px-6 py-4 flex justify-between items-center border-b border-gray-700">
                                 <div className="flex items-center gap-3">
                                     <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold">
-                                        Q.{question.source.question_number}
+                                        Q.{question.question_number || '?'}
                                     </span>
-                                    <span className={`px-2 py-1 rounded text-xs font-medium ${question.source.section === 'REASONING'
+                                    <span className={`px-2 py-1 rounded text-xs font-medium ${question.subject === 'REASONING'
                                         ? 'bg-purple-500/20 text-purple-400'
                                         : 'bg-cyan-500/20 text-cyan-400'
                                         }`}>
-                                        {question.source.section}
+                                        {question.subject}
+                                    </span>
+                                    <span className={`px-2 py-1 rounded text-xs font-medium ${
+                                        question.difficulty === 'EASY' ? 'bg-emerald-500/20 text-emerald-400' :
+                                        question.difficulty === 'MEDIUM' ? 'bg-amber-500/20 text-amber-400' :
+                                        'bg-rose-500/20 text-rose-400'
+                                    }`}>
+                                        {question.difficulty}
                                     </span>
                                     {question.needs_image_review && (
                                         <span className="px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded font-medium animate-pulse">
-                                            📷 Needs Image
+                                            Needs Image
                                         </span>
                                     )}
-                                    {question.is_verified && (
+                                    {question.is_live && (
                                         <span className="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded font-medium">
-                                            ✓ Verified
+                                            Live
                                         </span>
                                     )}
                                 </div>
@@ -489,14 +480,14 @@ export default function AdminReviewPage() {
                                                 <EditIcon className="w-4 h-4" />
                                             </button>
                                             <button
-                                                onClick={() => toggleVerify(question._id, question.is_verified)}
-                                                className={`p-2 rounded-lg transition ${question.is_verified
+                                                onClick={() => toggleLive(question._id, question.is_live)}
+                                                className={`p-2 rounded-lg transition ${question.is_live
                                                     ? 'bg-green-600 hover:bg-green-700'
                                                     : 'bg-gray-700 hover:bg-gray-600'
                                                     }`}
-                                                title={question.is_verified ? 'Unverify' : 'Verify'}
+                                                title={question.is_live ? 'Set Not Live' : 'Set Live'}
                                             >
-                                                {question.is_verified ? (
+                                                {question.is_live ? (
                                                     <CheckCircleIcon className="w-4 h-4" />
                                                 ) : (
                                                     <CancelIcon className="w-4 h-4" />
@@ -511,8 +502,11 @@ export default function AdminReviewPage() {
                             <div className="p-6">
                                 {/* Source Info */}
                                 <div className="text-xs text-gray-500 mb-4 flex items-center gap-2">
-                                    <span>📄</span>
-                                    <span className="truncate">{question.source.file_name}</span>
+                                    <span>{question.source.exam} {question.source.year}</span>
+                                    <span>-</span>
+                                    <span>{question.source.shift}</span>
+                                    <span>-</span>
+                                    <span>{question.pattern}</span>
                                 </div>
 
                                 {/* Question Text & Image */}
@@ -521,7 +515,7 @@ export default function AdminReviewPage() {
                                         {editingId === question._id ? (
                                             <div className="relative">
                                                 <textarea
-                                                    value={editedQuestion?.content.text || ''}
+                                                    value={editedQuestion?.text || ''}
                                                     onChange={(e) => updateQuestionText(e.target.value)}
                                                     className="w-full bg-gray-900 border border-gray-600 rounded-lg p-4 text-white focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
                                                     rows={4}
@@ -536,18 +530,18 @@ export default function AdminReviewPage() {
                                             </div>
                                         ) : (
                                             <MathText className="text-gray-200 leading-relaxed block whitespace-pre-line">
-                                                {question.content.text}
+                                                {question.text}
                                             </MathText>
                                         )}
                                     </div>
 
-                                    {/* Question Image Upload - Always show for flexibility */}
+                                    {/* Question Image Upload */}
                                     <div>
                                         <label className="text-xs text-gray-400 mb-2 block">Question Image (optional)</label>
                                         <ImageUpload
                                             questionId={question._id}
                                             type="question"
-                                            currentImage={question.content.image}
+                                            currentImage={question.image}
                                             onUpload={(url) => updateQuestionImage(question._id, url)}
                                         />
                                     </div>
@@ -555,77 +549,81 @@ export default function AdminReviewPage() {
 
                                 {/* Options Grid */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {question.content.options.map((option) => (
-                                        <div
-                                            key={option.id}
-                                            className={`rounded-xl p-4 transition ${option.is_correct
-                                                ? 'bg-gradient-to-br from-green-900/30 to-green-900/10 border-2 border-green-500/50'
-                                                : 'bg-gray-900/50 border border-gray-700'
-                                                }`}
-                                        >
-                                            <div className="flex items-center gap-2 mb-2">
-                                                {/* Option number - clickable in edit mode to set as correct */}
-                                                {editingId === question._id ? (
-                                                    <button
-                                                        onClick={() => setCorrectOption(option.id)}
-                                                        className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold transition-all ${editedQuestion?.content.options.find(o => o.id === option.id)?.is_correct
-                                                            ? 'bg-green-500 text-white ring-2 ring-green-300'
-                                                            : 'bg-gray-700 text-gray-300 hover:bg-green-600 hover:text-white'
-                                                            }`}
-                                                        title="Click to set as correct answer"
-                                                    >
-                                                        {option.id.replace('opt_', '')}
-                                                    </button>
-                                                ) : (
-                                                    <span className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold ${option.is_correct
-                                                        ? 'bg-green-500 text-white'
-                                                        : 'bg-gray-700 text-gray-300'
-                                                        }`}>
-                                                        {option.id.replace('opt_', '')}
-                                                    </span>
-                                                )}
-                                                {(editingId === question._id
-                                                    ? editedQuestion?.content.options.find(o => o.id === option.id)?.is_correct
-                                                    : option.is_correct) && (
+                                    {question.options.map((option) => {
+                                        const isCorrect = editingId === question._id
+                                            ? editedQuestion?.correct_option === option.id
+                                            : isCorrectOption(question, option.id);
+
+                                        return (
+                                            <div
+                                                key={option.id}
+                                                className={`rounded-xl p-4 transition ${isCorrect
+                                                    ? 'bg-gradient-to-br from-green-900/30 to-green-900/10 border-2 border-green-500/50'
+                                                    : 'bg-gray-900/50 border border-gray-700'
+                                                    }`}
+                                            >
+                                                <div className="flex items-center gap-2 mb-2">
+                                                    {editingId === question._id ? (
+                                                        <button
+                                                            onClick={() => setCorrectOption(option.id)}
+                                                            className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
+                                                                editedQuestion?.correct_option === option.id
+                                                                    ? 'bg-green-500 text-white ring-2 ring-green-300'
+                                                                    : 'bg-gray-700 text-gray-300 hover:bg-green-600 hover:text-white'
+                                                                }`}
+                                                            title="Click to set as correct answer"
+                                                        >
+                                                            {option.id}
+                                                        </button>
+                                                    ) : (
+                                                        <span className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold ${isCorrect
+                                                            ? 'bg-green-500 text-white'
+                                                            : 'bg-gray-700 text-gray-300'
+                                                            }`}>
+                                                            {option.id}
+                                                        </span>
+                                                    )}
+                                                    {isCorrect && (
                                                         <CheckCircleIcon className="w-4 h-4 text-green-400" />
                                                     )}
-                                            </div>
-
-                                            {/* Option Text */}
-                                            {editingId === question._id ? (
-                                                <div className="flex gap-2">
-                                                    <input
-                                                        type="text"
-                                                        value={editedQuestion?.content.options.find(o => o.id === option.id)?.text || ''}
-                                                        onChange={(e) => updateOptionText(option.id, e.target.value)}
-                                                        className="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-sm focus:border-blue-500"
-                                                    />
-                                                    <button
-                                                        onClick={() => openOCR('option', option.id)}
-                                                        className="px-2 bg-gray-700 text-gray-300 rounded hover:bg-blue-600 hover:text-white transition text-xs font-bold"
-                                                        title="OCR"
-                                                    >
-                                                        OCR
-                                                    </button>
                                                 </div>
-                                            ) : (
-                                                <MathText className="text-gray-300 text-sm block">
-                                                    {option.text}
-                                                </MathText>
-                                            )}
 
-                                            {/* Option Image Upload - Always show for flexibility */}
-                                            <div className="mt-3">
-                                                <ImageUpload
-                                                    questionId={question._id}
-                                                    type="option"
-                                                    optionId={option.id}
-                                                    currentImage={option.image}
-                                                    onUpload={(url) => updateOptionImage(question._id, option.id, url)}
-                                                />
+                                                {/* Option Text */}
+                                                {editingId === question._id ? (
+                                                    <div className="flex gap-2">
+                                                        <input
+                                                            type="text"
+                                                            value={editedQuestion?.options.find(o => o.id === option.id)?.text || ''}
+                                                            onChange={(e) => updateOptionText(option.id, e.target.value)}
+                                                            className="w-full bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-sm focus:border-blue-500"
+                                                        />
+                                                        <button
+                                                            onClick={() => openOCR('option', option.id)}
+                                                            className="px-2 bg-gray-700 text-gray-300 rounded hover:bg-blue-600 hover:text-white transition text-xs font-bold"
+                                                            title="OCR"
+                                                        >
+                                                            OCR
+                                                        </button>
+                                                    </div>
+                                                ) : (
+                                                    <MathText className="text-gray-300 text-sm block">
+                                                        {option.text}
+                                                    </MathText>
+                                                )}
+
+                                                {/* Option Image Upload */}
+                                                <div className="mt-3">
+                                                    <ImageUpload
+                                                        questionId={question._id}
+                                                        type="option"
+                                                        optionId={option.id}
+                                                        currentImage={option.image}
+                                                        onUpload={(url) => updateOptionImage(question._id, option.id, url)}
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </div>

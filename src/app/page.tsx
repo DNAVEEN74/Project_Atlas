@@ -155,7 +155,7 @@ export default function Home() {
           <p className="text-xs text-neutral-600 uppercase tracking-widest mb-5">What you get</p>
           <div className="flex items-center justify-center gap-8 sm:gap-14">
             <div className="text-center">
-              <div className="text-lg sm:text-xl font-semibold text-white tracking-tight">10,000+</div>
+              <div className="text-lg sm:text-xl font-semibold text-white tracking-tight">1,000+</div>
               <div className="text-[11px] text-neutral-500 mt-1">TCS Pattern PYQs</div>
             </div>
             <div className="w-px h-8 bg-neutral-800" />
@@ -198,7 +198,7 @@ export default function Home() {
               Daily practice.<br /><span className="text-emerald-400">Unstoppable growth.</span>
             </h2>
             <p className="text-lg text-neutral-400 mb-8 leading-relaxed">
-              Consistency beats intensity. Dynamic daily targets based on your exam date. 10,000+ TCS-pattern questions from 2018-2024.
+              Consistency beats intensity. Dynamic daily targets based on your exam date. 1,000+ TCS-pattern questions from 2018-2024.
             </p>
             <ul className="space-y-3 mb-8">
               {['Adaptive daily targets', 'Step-by-step solutions', 'Pattern-wise coverage'].map(item => (
@@ -394,7 +394,7 @@ export default function Home() {
             {[
               {
                 q: "What is PrepLeague?",
-                a: "PrepLeague is a free platform for SSC CGL and Bank exam prep. 10,000+ PYQs from 2018-2024, concept explanations, speed drills, and analytics."
+                a: "PrepLeague is a free platform for SSC CGL and Bank exam prep. 1,000+ PYQs from 2018-2024, concept explanations, speed drills, and analytics."
               },
               {
                 q: "Is PrepLeague free to use?",
@@ -433,7 +433,7 @@ export default function Home() {
               "@context": "https://schema.org",
               "@type": "FAQPage",
               "mainEntity": [
-                { "@type": "Question", "name": "What is PrepLeague?", "acceptedAnswer": { "@type": "Answer", "text": "PrepLeague is a free platform for SSC CGL and Bank exam prep with 10,000+ PYQs." } },
+                { "@type": "Question", "name": "What is PrepLeague?", "acceptedAnswer": { "@type": "Answer", "text": "PrepLeague is a free platform for SSC CGL and Bank exam prep with 1,000+ PYQs." } },
                 { "@type": "Question", "name": "Is PrepLeague free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! Core features are free. Premium unlocks advanced analytics." } }
               ]
             })

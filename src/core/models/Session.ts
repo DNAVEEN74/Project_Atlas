@@ -18,6 +18,7 @@ export interface ISession extends Document {
     total_time_ms: number;
     status: 'IN_PROGRESS' | 'COMPLETED' | 'ABANDONED';
     current_index: number;              // for browser-close resumption
+    started_at: Date;                   // server-side timer anchor
 
     created_at: Date;
     completed_at?: Date;
@@ -58,6 +59,7 @@ const SessionSchema: Schema = new Schema(
             default: 'IN_PROGRESS'
         },
         current_index: { type: Number, default: 0 },
+        started_at: { type: Date, default: Date.now },
 
         completed_at: { type: Date },
     },

@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-in-production';
 const JWT_EXPIRES_IN = '7d';
@@ -81,4 +82,34 @@ export async function getCurrentUser(): Promise<JWTPayload | null> {
     const token = await getAuthCookie();
     if (!token) return null;
     return verifyToken(token);
+}
+
+/**
+ * Verify the current user is an admin. Returns { user, error? }.
+ * If error is set, return it directly as the route response.
+ */
+export async function requireAdmin(): Promise<{ user: JWTPayload | null; error: NextResponse | null }> {
+    const authUser = await getCurrentUser();
+    if (!authUser) {
+        return {
+            user: null,
+            error: NextResponse.json({ error: "Authentication required" }, { status: 401 }),
+        };
+    }
+
+    // Lazy import to avoid circular deps — only needed for admin check
+    const dbConnect = (await import('@/core/db/connect')).default;
+    const User = (await import('@/core/models/User')).default;
+
+    await dbConnect();
+    const user = await User.findById(authUser.userId).select('role').lean();
+
+    if (!user || (user as any).role !== 'ADMIN') {
+        return {
+            user: null,
+            error: NextResponse.json({ error: "Admin access required" }, { status: 403 }),
+        };
+    }
+
+    return { user: authUser, error: null };
 }

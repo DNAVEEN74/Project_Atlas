@@ -45,6 +45,35 @@ export async function POST(req: NextRequest) {
         const is_correct = (question as any).correct_option === optionSelected;
         const userObjectId = new mongoose.Types.ObjectId(authUser.userId);
 
+        // Server-side timer validation for sprint sessions
+        if (sessionId) {
+            const session = await Session.findById(sessionId).lean();
+            if (session) {
+                if ((session as any).status !== 'IN_PROGRESS') {
+                    return NextResponse.json(
+                        { error: "Session is no longer active" },
+                        { status: 400 }
+                    );
+                }
+                const timeLimitMs = (session as any).config?.time_limit_ms;
+                const startedAt = (session as any).started_at || (session as any).created_at;
+                if (timeLimitMs && startedAt) {
+                    const elapsed = Date.now() - new Date(startedAt).getTime();
+                    // Allow 5s grace period for network latency
+                    if (elapsed > timeLimitMs + 5000) {
+                        // Auto-abandon the expired session
+                        await Session.findByIdAndUpdate(sessionId, {
+                            $set: { status: 'ABANDONED', completed_at: new Date() }
+                        });
+                        return NextResponse.json(
+                            { error: "Session time has expired" },
+                            { status: 400 }
+                        );
+                    }
+                }
+            }
+        }
+
         // Create the Attempt record
         const attempt = await Attempt.create({
             user_id: userObjectId,

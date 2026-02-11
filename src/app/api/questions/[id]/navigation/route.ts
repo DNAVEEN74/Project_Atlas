@@ -5,7 +5,7 @@ import Question from "@/core/models/Question";
 /**
  * GET /api/questions/[id]/navigation
  * Returns the previous and next question IDs for navigation
- * Supports section filtering (QUANT, REASONING)
+ * Supports section filtering (QUANT, REASONING) and pattern filtering
  */
 export async function GET(
     req: NextRequest,
@@ -17,6 +17,7 @@ export async function GET(
         const { id } = await params;
         const { searchParams } = new URL(req.url);
         const section = searchParams.get('section') || null;
+        const pattern = searchParams.get('pattern') || null;
 
         // Get the current question to find its position
         const currentQuestion = await Question.findById(id).lean();
@@ -27,38 +28,69 @@ export async function GET(
             );
         }
 
-        // Build base query for section filtering
+        // Build base query for section + pattern filtering
         const baseQuery: any = { is_live: true };
         if (section) {
             baseQuery.subject = section;
         }
+        if (pattern) {
+            baseQuery.pattern = pattern;
+        }
 
-        // Find previous question (created before current, sorted descending)
-        const prevQuestion = await Question.findOne({
-            ...baseQuery,
-            _id: { $lt: id }
-        })
-            .sort({ _id: -1 })
-            .select('_id')
-            .lean();
+        // If pattern-based navigation is requested and question_number exists,
+        // use question_number ordering for deterministic navigation within a pattern
+        const useQuestionNumber = pattern && (currentQuestion as any).question_number != null;
 
-        // Find next question (created after current, sorted ascending)
-        const nextQuestion = await Question.findOne({
-            ...baseQuery,
-            _id: { $gt: id }
-        })
-            .sort({ _id: 1 })
-            .select('_id')
-            .lean();
+        let prevQuestion, nextQuestion, totalCount, currentPosition;
 
-        // Get total count for progress display
-        const totalCount = await Question.countDocuments(baseQuery);
+        if (useQuestionNumber) {
+            const qNum = (currentQuestion as any).question_number;
 
-        // Get current position (count of questions before this one + 1)
-        const currentPosition = await Question.countDocuments({
-            ...baseQuery,
-            _id: { $lte: id }
-        });
+            prevQuestion = await Question.findOne({
+                ...baseQuery,
+                question_number: { $lt: qNum }
+            })
+                .sort({ question_number: -1 })
+                .select('_id')
+                .lean();
+
+            nextQuestion = await Question.findOne({
+                ...baseQuery,
+                question_number: { $gt: qNum }
+            })
+                .sort({ question_number: 1 })
+                .select('_id')
+                .lean();
+
+            totalCount = await Question.countDocuments(baseQuery);
+            currentPosition = await Question.countDocuments({
+                ...baseQuery,
+                question_number: { $lte: qNum }
+            });
+        } else {
+            // Fallback: _id-based ordering
+            prevQuestion = await Question.findOne({
+                ...baseQuery,
+                _id: { $lt: id }
+            })
+                .sort({ _id: -1 })
+                .select('_id')
+                .lean();
+
+            nextQuestion = await Question.findOne({
+                ...baseQuery,
+                _id: { $gt: id }
+            })
+                .sort({ _id: 1 })
+                .select('_id')
+                .lean();
+
+            totalCount = await Question.countDocuments(baseQuery);
+            currentPosition = await Question.countDocuments({
+                ...baseQuery,
+                _id: { $lte: id }
+            });
+        }
 
         return NextResponse.json({
             data: {
@@ -66,7 +98,8 @@ export async function GET(
                 nextId: nextQuestion ? (nextQuestion as any)._id.toString() : null,
                 currentPosition,
                 totalCount,
-                section: section || 'ALL'
+                section: section || 'ALL',
+                pattern: pattern || null
             }
         });
     } catch (error) {

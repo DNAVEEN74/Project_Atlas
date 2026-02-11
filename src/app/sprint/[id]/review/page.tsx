@@ -21,12 +21,10 @@ import {
 interface ReviewQuestion {
     index: number;
     questionId: string;
-    content: {
-        text: string;
-        options: Array<{ id: string; text: string; is_correct: boolean; image?: string }>;
-        correct_option_id: string;
-        image?: string;
-    };
+    text: string;
+    image?: string;
+    options: Array<{ id: string; text: string; image?: string }>;
+    correct_option: string;            // "A"|"B"|"C"|"D"
     difficulty: string;
     userAnswer: string | null;
     isCorrect: boolean;
@@ -93,13 +91,14 @@ export default function SprintReviewPage() {
         }
     };
 
-    const getOptionStyle = (option: { id: string; is_correct: boolean }, userAnswer: string | null) => {
+    const getOptionStyle = (option: { id: string }, correctOption: string, userAnswer: string | null) => {
         const baseStyle = "p-4 rounded-xl border transition-all flex items-center gap-4";
+        const isCorrect = option.id === correctOption;
 
-        if (option.is_correct) {
+        if (isCorrect) {
             return `${baseStyle} border-emerald-500/50 bg-emerald-500/10`;
         }
-        if (userAnswer === option.id && !option.is_correct) {
+        if (userAnswer === option.id && !isCorrect) {
             return `${baseStyle} border-rose-500/50 bg-rose-500/10`;
         }
         return `${baseStyle} border-neutral-800 bg-neutral-900/50 opacity-50`;
@@ -226,7 +225,7 @@ export default function SprintReviewPage() {
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <p className="text-xs text-neutral-400 truncate">
-                                        {q.content?.text?.substring(0, 50) || 'Question'}...
+                                        {q.text?.substring(0, 50) || 'Question'}...
                                     </p>
                                 </div>
                                 {q.isCorrect ? (
@@ -251,12 +250,12 @@ export default function SprintReviewPage() {
                         {/* Question Content */}
                         <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6 mb-6">
                             <div className="text-lg leading-relaxed text-neutral-200">
-                                <MathText>{currentQuestion.content?.text || ''}</MathText>
+                                <MathText>{currentQuestion.text || ''}</MathText>
                             </div>
-                            {currentQuestion.content?.image && (
+                            {currentQuestion.image && (
                                 <div className="mt-4 flex justify-center">
                                     <img
-                                        src={currentQuestion.content.image}
+                                        src={currentQuestion.image}
                                         alt="Question"
                                         className="rounded-xl border border-neutral-700 bg-white p-2 max-w-full"
                                     />
@@ -266,34 +265,37 @@ export default function SprintReviewPage() {
 
                         {/* Options */}
                         <div className="space-y-3">
-                            {currentQuestion.content?.options?.map((option, idx) => (
-                                <div
-                                    key={option.id}
-                                    className={getOptionStyle(option, currentQuestion.userAnswer)}
-                                >
-                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold ${option.is_correct
-                                        ? 'bg-emerald-500/20 text-emerald-400'
-                                        : currentQuestion.userAnswer === option.id
-                                            ? 'bg-rose-500/20 text-rose-400'
-                                            : 'bg-neutral-800 text-neutral-500'
-                                        }`}>
-                                        {getOptionLabel(idx)}
+                            {currentQuestion.options?.map((option, idx) => {
+                                const isCorrect = option.id === currentQuestion.correct_option;
+                                return (
+                                    <div
+                                        key={option.id}
+                                        className={getOptionStyle(option, currentQuestion.correct_option, currentQuestion.userAnswer)}
+                                    >
+                                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold ${isCorrect
+                                            ? 'bg-emerald-500/20 text-emerald-400'
+                                            : currentQuestion.userAnswer === option.id
+                                                ? 'bg-rose-500/20 text-rose-400'
+                                                : 'bg-neutral-800 text-neutral-500'
+                                            }`}>
+                                            {getOptionLabel(idx)}
+                                        </div>
+                                        <div className="flex-1">
+                                            <MathText>{option.text}</MathText>
+                                        </div>
+                                        {isCorrect && (
+                                            <span className="text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">
+                                                Correct
+                                            </span>
+                                        )}
+                                        {currentQuestion.userAnswer === option.id && !isCorrect && (
+                                            <span className="text-xs font-medium text-rose-400 bg-rose-500/10 px-2 py-1 rounded">
+                                                Your Answer
+                                            </span>
+                                        )}
                                     </div>
-                                    <div className="flex-1">
-                                        <MathText>{option.text}</MathText>
-                                    </div>
-                                    {option.is_correct && (
-                                        <span className="text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">
-                                            Correct
-                                        </span>
-                                    )}
-                                    {currentQuestion.userAnswer === option.id && !option.is_correct && (
-                                        <span className="text-xs font-medium text-rose-400 bg-rose-500/10 px-2 py-1 rounded">
-                                            Your Answer
-                                        </span>
-                                    )}
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
 
                         {/* Time Taken */}

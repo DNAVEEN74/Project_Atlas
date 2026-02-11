@@ -20,6 +20,25 @@ export async function POST(req: NextRequest) {
 
         await dbConnect();
 
+        // Check for existing in-progress sessions and auto-abandon expired ones
+        const existingSessions = await Session.find({
+            user_id: new mongoose.Types.ObjectId(authUser.userId),
+            status: 'IN_PROGRESS'
+        });
+
+        for (const existing of existingSessions) {
+            const timeLimitMs = existing.config?.time_limit_ms;
+            const startedAt = existing.started_at || existing.created_at;
+            if (timeLimitMs && startedAt) {
+                const elapsed = Date.now() - new Date(startedAt).getTime();
+                if (elapsed > timeLimitMs) {
+                    await Session.findByIdAndUpdate(existing._id, {
+                        $set: { status: 'ABANDONED', completed_at: new Date() }
+                    });
+                }
+            }
+        }
+
         const body = await req.json();
         const {
             type = 'SPRINT',
@@ -119,15 +138,39 @@ export async function GET(req: NextRequest) {
         const { searchParams } = new URL(req.url);
         const limit = parseInt(searchParams.get('limit') || '20');
         const offset = parseInt(searchParams.get('offset') || '0');
+        const status = searchParams.get('status');
 
-        const sessions = await Session.find({ user_id: authUser.userId })
+        const query: any = { user_id: authUser.userId };
+        if (status) {
+            query.status = status;
+        }
+
+        const sessions = await Session.find(query)
             .sort({ created_at: -1 })
             .skip(offset)
             .limit(limit)
+            .populate(status === 'IN_PROGRESS' ? 'question_ids' : '')
             .lean();
 
+        // Auto-abandon expired in-progress sessions before returning
+        const now = Date.now();
+        const result = sessions.map((s: any) => {
+            if (s.status === 'IN_PROGRESS' && s.config?.time_limit_ms) {
+                const startedAt = s.started_at || s.created_at;
+                const elapsed = now - new Date(startedAt).getTime();
+                if (elapsed > s.config.time_limit_ms) {
+                    // Mark as abandoned (async, fire-and-forget)
+                    Session.findByIdAndUpdate(s._id, {
+                        $set: { status: 'ABANDONED', completed_at: new Date() }
+                    }).exec();
+                    return { ...s, status: 'ABANDONED' };
+                }
+            }
+            return s;
+        });
+
         return NextResponse.json({
-            data: sessions
+            data: result
         });
     } catch (error) {
         console.error("Get sessions error:", error);
