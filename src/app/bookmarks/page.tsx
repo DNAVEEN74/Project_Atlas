@@ -15,17 +15,13 @@ import {
 
 interface Question {
     _id: string;
-    content: {
-        text: string;
-    };
+    text: string;
     difficulty: string;
+    subject: string;
+    pattern: string;
     source: {
-        section: string;
-        year: number;
         exam: string;
-    };
-    pattern?: {
-        topic: string;
+        year: number;
     };
 }
 
@@ -51,10 +47,10 @@ export default function BookmarksPage() {
         const fetchBookmarks = async () => {
             setPageLoading(true);
             try {
-                const res = await fetch('/api/user/bookmarks?full=true');
+                const res = await fetch('/api/bookmarks?limit=200');
                 const data = await res.json();
-                if (data.success && data.questions) {
-                    setBookmarks(data.questions);
+                if (data.data) {
+                    setBookmarks(data.data.map((b: any) => b.question).filter(Boolean));
                 }
             } catch (error) {
                 console.error('Failed to fetch bookmarks:', error);
@@ -96,13 +92,13 @@ export default function BookmarksPage() {
         if (confirm('Are you sure you want to remove this bookmark?')) {
             setRemovingId(questionId);
             try {
-                const res = await fetch('/api/user/bookmarks', {
-                    method: 'PUT',
+                const res = await fetch('/api/bookmarks', {
+                    method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ questionId, action: 'remove' }),
+                    body: JSON.stringify({ questionId }),
                 });
                 const data = await res.json();
-                if (data.success) {
+                if (data.bookmarked === false) {
                     setBookmarks(prev => prev.filter(q => q._id !== questionId));
                     refreshUser();
                 }
@@ -164,7 +160,7 @@ export default function BookmarksPage() {
                                 filteredBookmarks.map((question) => (
                                     <Link
                                         key={question._id}
-                                        href={`/problems/${question._id}?section=${question.source.section}`}
+                                        href={`/problems/${question._id}?section=${question.subject}`}
                                         className="block px-6 py-4 hover:bg-neutral-800/30 transition-colors group relative"
                                     >
                                         <div className="flex items-start justify-between gap-4">
@@ -182,14 +178,14 @@ export default function BookmarksPage() {
                                                     </span>
                                                 </div>
                                                 <p className="text-neutral-200 group-hover:text-amber-400 transition-colors line-clamp-2">
-                                                    <MathText>{question.content.text}</MathText>
+                                                    <MathText>{question.text}</MathText>
                                                 </p>
                                                 <div className="mt-2 flex items-center gap-4 text-xs text-neutral-500">
-                                                    <span>{question.pattern?.topic || 'General'}</span>
+                                                    <span>{question.pattern || 'General'}</span>
                                                     <span>•</span>
                                                     <span>{question.source.exam} {question.source.year}</span>
                                                     <span>•</span>
-                                                    <span>{question.source.section}</span>
+                                                    <span>{question.subject}</span>
                                                 </div>
                                             </div>
                                             <button

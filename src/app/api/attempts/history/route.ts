@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
             .sort({ created_at: -1 })
             .skip(offset)
             .limit(limit)
-            .populate('question_id', 'text difficulty source content.text') // Populate question details
+            .populate('question_id', 'text difficulty source subject pattern') // Populate question details
             .lean();
 
         return NextResponse.json({

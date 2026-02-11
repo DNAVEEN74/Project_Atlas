@@ -15,17 +15,13 @@ import {
 
 interface Question {
     _id: string;
-    content: {
-        text: string;
-    };
+    text: string;
     difficulty: string;
+    subject: string;
+    pattern: string;
     source: {
-        section: string;
-        year: number;
         exam: string;
-    };
-    pattern?: {
-        topic: string;
+        year: number;
     };
 }
 
@@ -58,15 +54,32 @@ export default function SubmissionsPage() {
         const fetchAttempts = async () => {
             setPageLoading(true);
             try {
-                let url = `/api/submissions?page=${pagination.page}&limit=${ITEMS_PER_PAGE}`;
-                if (resultFilter !== 'all') url += `&result=${resultFilter}`;
-                if (difficultyFilter !== 'all') url += `&difficulty=${difficultyFilter}`;
-
-                const res = await fetch(url);
+                const offset = (pagination.page - 1) * ITEMS_PER_PAGE;
+                const res = await fetch(`/api/attempts/history?limit=${ITEMS_PER_PAGE}&offset=${offset}`);
                 const data = await res.json();
-                if (data.success) {
-                    setAttempts(data.data);
-                    setPagination(data.pagination);
+                if (data.data) {
+                    let items = data.data;
+
+                    // Client-side filtering
+                    if (resultFilter === 'correct') items = items.filter((a: any) => a.isCorrect);
+                    else if (resultFilter === 'wrong') items = items.filter((a: any) => !a.isCorrect);
+                    if (difficultyFilter !== 'all') items = items.filter((a: any) => a.difficulty === difficultyFilter);
+
+                    // Map to Attempt shape expected by template
+                    setAttempts(items.map((a: any) => ({
+                        _id: a.id,
+                        q_id: {
+                            _id: a.questionId,
+                            text: a.questionTitle,
+                            difficulty: a.difficulty,
+                            subject: a.subject || '',
+                            pattern: a.pattern || '',
+                            source: { exam: '', year: 0 },
+                        },
+                        is_correct: a.isCorrect,
+                        time_ms: a.timeMs,
+                        createdAt: a.createdAt,
+                    })));
                 }
             } catch (error) {
                 console.error('Failed to fetch submissions:', error);
@@ -150,7 +163,7 @@ export default function SubmissionsPage() {
                                 attempts.map((attempt) => (
                                     <Link
                                         key={attempt._id}
-                                        href={`/problems/${attempt.q_id._id}?section=${attempt.q_id.source.section}`}
+                                        href={`/problems/${attempt.q_id._id}?section=${attempt.q_id.subject}`}
                                         className="block px-6 py-4 hover:bg-neutral-800/30 transition-colors group"
                                     >
                                         <div className="flex items-start justify-between gap-4">
@@ -172,10 +185,10 @@ export default function SubmissionsPage() {
                                                     </span>
                                                 </div>
                                                 <p className="text-neutral-200 group-hover:text-amber-400 transition-colors line-clamp-2">
-                                                    <MathText>{attempt.q_id.content.text}</MathText>
+                                                    <MathText>{attempt.q_id.text}</MathText>
                                                 </p>
                                                 <div className="mt-2 flex items-center gap-4 text-xs text-neutral-500">
-                                                    <span>{attempt.q_id.pattern?.topic || 'General'}</span>
+                                                    <span>{attempt.q_id.pattern || 'General'}</span>
                                                     <span>•</span>
                                                     <span>{new Date(attempt.createdAt).toLocaleDateString()}</span>
                                                     <span>•</span>
