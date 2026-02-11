@@ -31,6 +31,7 @@ export interface IQuestion extends Document {
 
     is_live: boolean;                   // replaces COLD/OBSERVATION/CALIBRATION/VERIFIED
     needs_review: boolean;
+    needs_image_review: boolean;        // question has image content needing manual review
     created_at: Date;
 }
 
@@ -76,6 +77,7 @@ const QuestionSchema: Schema = new Schema(
 
         is_live: { type: Boolean, default: false, index: true },
         needs_review: { type: Boolean, default: true, index: true },
+        needs_image_review: { type: Boolean, default: false, index: true },
     },
     { timestamps: { createdAt: 'created_at', updatedAt: false } }
 );

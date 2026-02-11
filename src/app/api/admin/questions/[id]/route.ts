@@ -16,31 +16,24 @@ export async function PATCH(
         await dbConnect();
 
         const body = await request.json();
-        const { id } = await params;  // Await params in Next.js 13+
-
-        console.log('[API] Updating question:', id);
+        const { id } = await params;
 
         const updateData: any = {};
 
-        if (body.is_verified !== undefined) {
-            updateData.is_verified = body.is_verified;
-        }
+        // Boolean flags
+        if (body.is_live !== undefined) updateData.is_live = body.is_live;
+        if (body.needs_review !== undefined) updateData.needs_review = body.needs_review;
+        if (body.needs_image_review !== undefined) updateData.needs_image_review = body.needs_image_review;
 
-        // Handle direct content.image update
-        if (body['content.image'] !== undefined) {
-            updateData['content.image'] = body['content.image'];
-        }
-
-        // Handle direct content.options update
-        if (body['content.options'] !== undefined) {
-            updateData['content.options'] = body['content.options'];
-        }
-
-        if (body.content) {
-            updateData.content = body.content;
-            // Increment version on content updates
-            updateData.$inc = { version: 1 };
-        }
+        // Flat question fields
+        if (body.text !== undefined) updateData.text = body.text;
+        if (body.image !== undefined) updateData.image = body.image;
+        if (body.options !== undefined) updateData.options = body.options;
+        if (body.correct_option !== undefined) updateData.correct_option = body.correct_option;
+        if (body.solution !== undefined) updateData.solution = body.solution;
+        if (body.subject !== undefined) updateData.subject = body.subject;
+        if (body.pattern !== undefined) updateData.pattern = body.pattern;
+        if (body.difficulty !== undefined) updateData.difficulty = body.difficulty;
 
         const question = await Question.findByIdAndUpdate(
             id,
