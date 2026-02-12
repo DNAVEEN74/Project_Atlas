@@ -61,8 +61,13 @@ export default async function ProblemPage({ params, searchParams }: Props) {
         initialQuestion = {
             ...question,
             id: (question as any)._id.toString(),
+            options: question.options?.map((opt: any) => ({
+                id: opt.id,
+                text: opt.text,
+                image: opt.image || ''
+            })) || []
         };
-        // Ensure other ObjectIds are strings if needed, or rely on serialization
+        // Ensure other ObjectIds are strings if needed
         if (initialQuestion._id) delete initialQuestion._id;
     }
 

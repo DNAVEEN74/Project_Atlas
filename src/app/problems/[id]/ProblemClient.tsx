@@ -54,6 +54,7 @@ interface QuestionData {
         avg_time_ms: number;
     };
     is_live: boolean;
+    question_number?: number;
 }
 
 interface PaginationInfo {
@@ -118,6 +119,64 @@ function QuestionContent({ text, image, onImageClick }: { text: string; image?: 
     );
 }
 
+function SolutionContent({ solution }: { solution: string }) {
+    // Parse solution into structured blocks
+    const lines = solution.split('\n').filter(line => line.trim());
+
+    return (
+        <div className="space-y-2">
+            {lines.map((line, idx) => {
+                const trimmedLine = line.trim();
+
+                // Check if line contains bold header pattern (e.g., **Step 1:** or **Given:**)
+                const boldHeaderMatch = trimmedLine.match(/^\*\*([^*]+)\*\*:?\s*(.*)/);
+                if (boldHeaderMatch) {
+                    const [, headerText, remainingText] = boldHeaderMatch;
+                    return (
+                        <div key={idx} className="mt-3 first:mt-0">
+                            <div className="text-amber-400 font-bold text-sm mb-1">
+                                {headerText}
+                            </div>
+                            {remainingText && (
+                                <div className="text-neutral-300 text-sm leading-relaxed ml-2">
+                                    <MathText>{remainingText}</MathText>
+                                </div>
+                            )}
+                        </div>
+                    );
+                }
+
+                // Bullet points (lines starting with -)
+                if (trimmedLine.startsWith('- ')) {
+                    const bulletText = trimmedLine.substring(2);
+                    return (
+                        <div key={idx} className="flex gap-2 text-neutral-300 text-sm ml-2">
+                            <span className="text-amber-400 shrink-0">•</span>
+                            <MathText>{bulletText}</MathText>
+                        </div>
+                    );
+                }
+
+                // Display math ($$...$$)
+                if (trimmedLine.startsWith('$$') && trimmedLine.endsWith('$$')) {
+                    return (
+                        <div key={idx} className="my-1 pl-2">
+                            <MathText>{trimmedLine}</MathText>
+                        </div>
+                    );
+                }
+
+                // Regular text with potential inline math
+                return (
+                    <div key={idx} className="text-neutral-300 text-sm leading-relaxed pl-2">
+                        <MathText>{trimmedLine}</MathText>
+                    </div>
+                );
+            })}
+        </div>
+    );
+}
+
 export default function QuestionPage({
     initialQuestion = null,
     initialNavigation = null
@@ -138,6 +197,7 @@ export default function QuestionPage({
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [showSolution, setShowSolution] = useState(false);
+    const [submittedTime, setSubmittedTime] = useState<number>(0); // Time in seconds when answer was submitted
     const { info: notifyInfo, warning: notifyWarning } = useToast();
     const [startTime, setStartTime] = useState<number>(Date.now());
     const [isBookmarked, setIsBookmarked] = useState(false);
@@ -294,55 +354,35 @@ export default function QuestionPage({
             setShowSolution(false);
 
             try {
-                // If we have initial data and it matches the current request, skip fetching
-                if (initialQuestion && initialQuestion.id === questionId &&
-                    // Verify section matches for navigation? Navigation depends on section.
-                    // If initialNavigation is present, assume it matches.
-                    (!navigation || (navigation && question))) { // Logic: if we have data, maybe we don't need to fetch?
-                    // Actually, if we navigated client-side to a new ID, initialQuestion will be stale (from the server load of previous page).
-                    // Wait, initialQuestion comes from props. When navigating client-side, the PAGE component doesn't re-run/remount if it's the same layout segment?
-                    // Next.js App Router: navigating between dynamic routes [id] DOES re-render the Page component if it's a hard navigation or if params change?
-                    // Yes, params change -> Page changes -> Client Component re-renders with new props? 
-                    // No, Client Component receives new props. 
-
-                    // So if initialQuestion.id === questionId, we use it.
-                    // But if we navigated to a new ID via client router, 'params.id' changes.
-                    // 'initialQuestion' prop might NOT change if it was passed from Server Component which only ran on first load?
-                    // NO. In Next.js App Router, navigating to a new URL triggers a server request for the RSC payload unless soft nav.
-                    // But usually, standard <Link> nav or router.push will trigger RSC refresh for the new param.
-
-                    // HOWEVER, to be safe and simple:
-                    // If initialQuestion.id === questionId, set loading false and return.
-                }
-
-                if (initialQuestion && initialQuestion.id === questionId) {
-                    setLoading(false);
-                    // We still might need to fetch user specific stuff like bookmarks/attempts if they weren't passed?
-                    // Attempts are user-specific. Metadata/Question is public.
-                    // We should fetch bookmarks/attempts separately if not passed.
-                    // The original code fetched EVERYTHING in parallel.
-                    // Let's keep fetching bookmarks/attempts, but skip question/nav if we have it.
-                }
-
                 const promises: Promise<any>[] = [];
-                const fetchQuestion = !initialQuestion || initialQuestion.id !== questionId;
 
-                if (fetchQuestion) {
+                // Determine if we need to fetch question data
+                const needsQuestionFetch = !initialQuestion || initialQuestion.id !== questionId;
+
+                // Always fetch navigation unless we have valid initialNavigation for this questionId
+                const needsNavigationFetch = !initialNavigation || !navigation || navigation.currentPosition === undefined;
+
+                if (needsQuestionFetch) {
                     promises.push(fetch(`/api/questions/${questionId}`).then(r => r.json()));
-                    promises.push(fetch(`/api/questions/${questionId}/navigation?section=${section}`).then(r => r.json()));
                 } else {
-                    promises.push(Promise.resolve({ data: initialQuestion })); // Mock response
-                    promises.push(Promise.resolve({ data: initialNavigation }));
+                    promises.push(Promise.resolve({ data: initialQuestion }));
                 }
+
+                // Always fetch navigation to ensure buttons work
+                promises.push(fetch(`/api/questions/${questionId}/navigation?section=${section}`).then(r => r.json()));
 
                 promises.push(fetch(`/api/bookmarks?limit=100`).then(r => r.ok ? r.json() : { data: [] }));
-                promises.push(fetch(`/api/attempts?questionId=${questionId}&limit=1`).then(r => r.json()));
+                promises.push(
+                    fetch(`/api/attempts?questionId=${questionId}&limit=1`)
+                        .then(r => r.ok ? r.json() : { data: [] })
+                        .catch(() => ({ data: [] }))
+                );
 
                 const [questionData, navData, bookmarksData, attemptData] = await Promise.all(promises);
 
-                if (fetchQuestion) {
-                    if (questionData.data) setQuestion(questionData.data);
-                    if (navData.data) setNavigation(navData.data);
+                if (questionData.data) setQuestion(questionData.data);
+                if (navData.data) {
+                    setNavigation(navData.data);
                 }
 
                 if (bookmarksData.data) {
@@ -364,7 +404,27 @@ export default function QuestionPage({
         }
 
         fetchQuestionAndNavigation();
-    }, [questionId, section, initialQuestion, initialNavigation]);
+    }, [questionId, section]);
+
+    // Reset timer states when question changes
+    useEffect(() => {
+        // Reset start time for non-timer mode tracking
+        setStartTime(Date.now());
+
+        // Reset submitted time
+        setSubmittedTime(0);
+
+        // Reset elapsed time unless we have a saved time for this question
+        if (!isTimerEnabled) {
+            setElapsedTime(0);
+        } else {
+            // For timer mode, load saved time or start at 0
+            setElapsedTime(questionTimes[questionId] || 0);
+        }
+
+        // Clear selection and submission state for new question (unless prepopulated from attempt)
+        // This will be handled by the fetch effect above
+    }, [questionId]);
 
     // Load practice session from sessionStorage
     useEffect(() => {
@@ -382,8 +442,13 @@ export default function QuestionPage({
                     sessionStorage.setItem('practiceSession', JSON.stringify(session));
                     setPracticeSession(session);
                 }
+            } else {
+                // Session data not found but param is present - might be stale
+                console.warn('Practice mode enabled but no session data found');
+                setIsPracticeMode(false);
             }
-        } else {
+        } else if (practiceParam === null || practiceParam === 'false') {
+            // Only clear if explicitly not in practice mode
             setIsPracticeMode(false);
             setPracticeSession(null);
         }
@@ -405,8 +470,13 @@ export default function QuestionPage({
                     sessionStorage.setItem('sprintSession', JSON.stringify(session));
                     setSprintSession(session);
                 }
+            } else {
+                // Session data not found but param is present - might be stale
+                console.warn('Sprint mode enabled but no session data found');
+                setIsSprintMode(false);
             }
-        } else {
+        } else if (sprintParam === null || sprintParam === 'false') {
+            // Only clear if explicitly not in sprint mode
             setIsSprintMode(false);
             setSprintSession(null);
         }
@@ -588,8 +658,14 @@ export default function QuestionPage({
 
     const handleSubmit = async () => {
         if (selectedOption && question) {
-            // Use tracked time if timer is enabled, otherwise use basic time
-            const timeMs = isTimerEnabled ? elapsedTime * 1000 : Date.now() - startTime;
+            // Only track time if timer is enabled
+            const timeMs = isTimerEnabled ? elapsedTime * 1000 : 0;
+            const timeSeconds = Math.floor(timeMs / 1000);
+
+            // Store submitted time for display (only if timer enabled)
+            if (isTimerEnabled) {
+                setSubmittedTime(timeSeconds);
+            }
 
             // In Sprint Mode: Don't show result, navigate immediately
             if (isSprintMode && sprintSession) {
@@ -645,6 +721,12 @@ export default function QuestionPage({
                 timerRef.current = null;
             }
 
+            // Auto-show solution if answer is wrong
+            const isAnswerCorrect = selectedOption === question.correct_option;
+            if (!isAnswerCorrect) {
+                setShowSolution(true);
+            }
+
             try {
                 // Record the attempt
                 await fetch('/api/attempts', {
@@ -687,6 +769,17 @@ export default function QuestionPage({
         setIsSubmitted(false);
         setShowSolution(false);
         setStartTime(Date.now());
+        setSubmittedTime(0);
+
+        // Reset elapsed time based on timer mode
+        if (isTimerEnabled) {
+            setElapsedTime(0);
+            // Clear saved time for this question
+            const newTimes = { ...questionTimes };
+            delete newTimes[questionId];
+            setQuestionTimes(newTimes);
+            sessionStorage.setItem('questionTimes', JSON.stringify(newTimes));
+        }
     };
 
     const handleClearSelection = () => {
@@ -783,6 +876,14 @@ export default function QuestionPage({
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [question, selectedOption, isSubmitted, goToNext, goToPrevious, showSidebar, sprintSession, practiceSession, focusedSidebarIndex]);
 
+    // Helper function to convert snake_case or SCREAMING_SNAKE_CASE to Title Case
+    const formatLabel = (text: string) => {
+        return text
+            .split('_')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .join(' ');
+    };
+
     const getDifficultyBadge = (difficulty: string) => {
         const styles = {
             EASY: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
@@ -790,20 +891,20 @@ export default function QuestionPage({
             HARD: 'bg-rose-500/15 text-rose-400 border-rose-500/30',
         };
         return (
-            <span className={`px-3 py-1 text-sm font-semibold rounded-lg border ${styles[difficulty as keyof typeof styles] || styles.MEDIUM}`}>
-                {difficulty}
+            <span className={`px-3 py-1 text-sm font-semibold rounded-full border ${styles[difficulty as keyof typeof styles] || styles.MEDIUM}`}>
+                {formatLabel(difficulty)}
             </span>
         );
     };
 
     const getOptionStyle = (option: QuestionOption) => {
-        const baseStyle = "p-4 rounded-xl border transition-all cursor-pointer flex items-center gap-4";
+        const baseStyle = "p-4 rounded-xl border transition-all duration-200 cursor-pointer flex items-center gap-4";
 
         if (!isSubmitted) {
             if (selectedOption === option.id) {
-                return `${baseStyle} border-amber-500/50 bg-amber-500/10 shadow-lg shadow-amber-500/10`;
+                return `${baseStyle} border-amber-500/50 bg-amber-500/10 shadow-lg shadow-amber-500/10 ring-2 ring-amber-500/20`;
             }
-            return `${baseStyle} border-neutral-700 bg-neutral-800/50 hover:border-amber-500/30 hover:bg-neutral-800`;
+            return `${baseStyle} border-neutral-700 bg-neutral-800/50 hover:border-amber-500/40 hover:bg-amber-500/5 hover:translate-x-1 hover:shadow-md hover:shadow-amber-500/5`;
         }
 
         // In Sprint Mode: Don't reveal correct/incorrect - just show submitted state
@@ -816,12 +917,12 @@ export default function QuestionPage({
 
         // Normal mode: Show correct/incorrect feedback
         if (option.id === question?.correct_option) {
-            return `${baseStyle} border-emerald-500/50 bg-emerald-500/10`;
+            return `${baseStyle} border-emerald-500/50 bg-emerald-500/10 shadow-lg shadow-emerald-500/10`;
         }
         if (selectedOption === option.id && option.id !== question?.correct_option) {
-            return `${baseStyle} border-rose-500/50 bg-rose-500/10`;
+            return `${baseStyle} border-rose-500/50 bg-rose-500/10 shadow-lg shadow-rose-500/10`;
         }
-        return `${baseStyle} border-neutral-800 bg-neutral-900/50 opacity-50`;
+        return `${baseStyle} border-neutral-800 bg-neutral-900/50 opacity-40`;
     };
 
     const getOptionLabel = (index: number) => String.fromCharCode(65 + index);
@@ -868,17 +969,22 @@ export default function QuestionPage({
     const hasNext = !!navigation?.nextId;
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] flex flex-col relative">
-            {/* Sidebar Toggle Button */}
-            <button
-                onClick={() => setShowSidebar(!showSidebar)}
-                className={`fixed left-0 top-1/2 -translate-y-1/2 z-50 p-2 rounded-r-xl transition-all duration-300 ${showSidebar ? 'bg-amber-500 text-white translate-x-[520px]' : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-white'}`}
-                title="Toggle Question List"
-            >
-                <SplitscreenIcon sx={{ fontSize: '1.5rem' }} />
-            </button>
+        <div className="h-screen bg-[#0f0f0f] flex flex-col relative overflow-hidden">
+            {/* Sidebar Toggle Button - Only show in Practice/Sprint mode */}
+            {(isPracticeMode || isSprintMode) && (
+                <button
+                    onClick={() => setShowSidebar(!showSidebar)}
+                    className={`fixed left-0 top-1/2 -translate-y-1/2 z-50 p-2 rounded-r-xl transition-all duration-300 shadow-lg ${showSidebar
+                        ? 'bg-amber-500 text-white translate-x-[520px] shadow-amber-500/20'
+                        : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-white hover:shadow-neutral-700/30'}`}
+                    title={showSidebar ? 'Hide question list' : 'Show question list'}
+                >
+                    <SplitscreenIcon sx={{ fontSize: '1.5rem' }} />
+                </button>
+            )}
 
-            {/* Question Navigation Sidebar */}
+            {/* Question Navigation Sidebar - Only render in Practice/Sprint mode */}
+            {(isPracticeMode || isSprintMode) && (
             <div className={`fixed left-0 top-0 h-full w-[520px] bg-[#1a1a1a] border-r border-neutral-800 z-40 transform transition-transform duration-300 ${showSidebar ? 'translate-x-0' : '-translate-x-full'}`}>
                 {/* Header */}
                 <div className="p-4 border-b border-neutral-800 flex items-center justify-between">
@@ -992,139 +1098,133 @@ export default function QuestionPage({
                     )}
                 </div>
             </div>
+            )}
 
-            {/* Top Bar */}
-            <header className="bg-[#1a1a1a] border-b border-neutral-800 h-14 flex items-center px-4 lg:px-6 justify-between shrink-0">
-                <Link href={isSprintMode ? "/sprint" : "/problems"} className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors">
-                    <ChevronLeftIcon sx={{ fontSize: '1.25rem' }} />
-                    <span className="font-medium text-sm">Back to {isSprintMode ? 'Sprint Setup' : 'Problems'}</span>
-                </Link>
+            {/* Top Bar - FIXED LAYOUT */}
+            <header className="bg-[#1a1a1a] border-b border-neutral-800 h-14 flex items-center px-4 lg:px-6 shrink-0">
+                {/* Left: Back + Timer */}
+                <div className="flex items-center gap-4">
+                    <Link href={isSprintMode ? "/sprint" : "/problems"} className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors">
+                        <ChevronLeftIcon sx={{ fontSize: '1.25rem' }} />
+                        <span className="font-medium text-sm hidden sm:inline">Back</span>
+                    </Link>
 
-                {/* Timer Display (center) */}
-                {/* Timer Display (center) */}
-                <div className="flex items-center gap-2">
-                    {/* Sprint Timer Display */}
+                    {/* Timer - Moved to Left */}
                     {isSprintMode && sprintSession ? (() => {
                         const totalTimeAllowedSec = Math.floor(sprintSession.totalTimeAllowed / 1000);
                         const remainingTime = Math.max(0, totalTimeAllowedSec - elapsedTime);
                         return (
-                            <div className={`flex items-center gap-2.5 px-4 py-2 rounded-xl transition-all border shadow-lg ${remainingTime < 60
-                                ? 'bg-rose-500/20 text-rose-400 border-rose-500/30 shadow-rose-500/10 animate-pulse'
-                                : 'bg-neutral-800 text-neutral-300 border-neutral-700'
+                            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all border text-sm ${remainingTime < 60
+                                ? 'bg-rose-500/20 text-rose-400 border-rose-500/30 animate-pulse'
+                                : 'bg-neutral-800/50 text-neutral-300 border-neutral-700'
                                 }`}>
-                                <TimerIcon sx={{ fontSize: '1.25rem' }} />
-                                <div className="flex items-center gap-1 font-mono font-bold tracking-wider text-base">
-                                    <span>{Math.floor(remainingTime / 60).toString().padStart(2, '0')}</span>
-                                    <span className="opacity-50">:</span>
-                                    <span>{(remainingTime % 60).toString().padStart(2, '0')}</span>
-                                </div>
+                                <TimerIcon sx={{ fontSize: '1rem' }} />
+                                <span className="font-mono font-bold">
+                                    {Math.floor(remainingTime / 60)}:{(remainingTime % 60).toString().padStart(2, '0')}
+                                </span>
                             </div>
                         );
-                    })() : (
-                        /* Standard Timer Button */
+                    })() : isTimerEnabled ? (
                         <button
                             onClick={() => {
-                                if (!isTimerEnabled) {
-                                    setShowTimerPrompt(true);
-                                } else {
-                                    setIsTimerEnabled(false);
-                                    sessionStorage.setItem('timerEnabled', 'false');
-                                    setQuestionTimes({});
-                                    sessionStorage.removeItem('questionTimes');
-                                    setElapsedTime(0);
-                                    if (timerRef.current) {
-                                        clearInterval(timerRef.current);
-                                        timerRef.current = null;
-                                    }
+                                setIsTimerEnabled(false);
+                                sessionStorage.setItem('timerEnabled', 'false');
+                                setQuestionTimes({});
+                                sessionStorage.removeItem('questionTimes');
+                                setElapsedTime(0);
+                                if (timerRef.current) {
+                                    clearInterval(timerRef.current);
+                                    timerRef.current = null;
                                 }
                             }}
-                            className={`flex items-center gap-2.5 px-4 py-2 rounded-xl transition-all duration-300 ${isTimerEnabled
-                                ? 'bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-400 border border-amber-500/30 shadow-lg shadow-amber-500/10'
-                                : 'text-neutral-500 hover:bg-neutral-800 hover:text-neutral-300 border border-transparent'
-                                }`}
-                            title={isTimerEnabled ? 'Click to stop tracking time' : 'Click to track time'}
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30 text-sm hover:bg-amber-500/20 transition-colors"
+                            title="Click to stop timer"
                         >
-                            <TimerIcon sx={{ fontSize: '1.25rem' }} />
-                            {isTimerEnabled ? (
-                                <div className={`flex items-center gap-1 font-mono font-bold tracking-wider ${elapsedTime >= 120 ? 'text-rose-500 animate-pulse' :
-                                    elapsedTime >= 60 ? 'text-orange-500' : 'text-neutral-200'
-                                    }`}>
-                                    <span className="text-base">
-                                        {Math.floor(elapsedTime / 60).toString().padStart(2, '0')}
-                                    </span>
-                                    <span className={`mx-0.5 ${elapsedTime >= 120 ? 'text-rose-500' :
-                                        elapsedTime >= 60 ? 'text-orange-500' : 'text-neutral-500'
-                                        }`}>:</span>
-                                    <span className="text-base">
-                                        {(elapsedTime % 60).toString().padStart(2, '0')}
-                                    </span>
-                                </div>
-                            ) : (
-                                <span className="text-sm font-medium">Timer</span>
-                            )}
+                            <TimerIcon sx={{ fontSize: '1rem' }} />
+                            <span className={`font-mono font-bold ${elapsedTime >= 120 ? 'text-rose-400 animate-pulse' : elapsedTime >= 60 ? 'text-orange-400' : ''}`}>
+                                {Math.floor(elapsedTime / 60)}:{(elapsedTime % 60).toString().padStart(2, '0')}
+                            </span>
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() => setShowTimerPrompt(true)}
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-full text-neutral-500 hover:bg-neutral-800 hover:text-neutral-300 transition-colors text-sm"
+                            title="Enable timer"
+                        >
+                            <TimerIcon sx={{ fontSize: '1rem' }} />
+                            <span className="text-xs hidden sm:inline">Timer</span>
                         </button>
                     )}
                 </div>
 
-                <div className="flex items-center gap-2">
+                {/* Center: Empty for now - will add progress in sprint mode later */}
+                <div className="flex-1"></div>
+
+                {/* Right: Navigation */}
+                <div className="flex items-center gap-1">
                     <button
-                        onClick={goToPrevious}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            goToPrevious();
+                        }}
                         disabled={isSprintMode ? (sprintSession?.currentIndex === 0) : (isPracticeMode ? (practiceSession?.currentIndex === 0) : !hasPrevious)}
-                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg hover:bg-neutral-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-neutral-400 hover:text-white"
+                        className="p-2 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed text-neutral-400 hover:text-white hover:bg-neutral-800"
+                        style={{ position: 'relative', zIndex: 50, pointerEvents: 'auto' }}
+                        title={isSprintMode || isPracticeMode ? 'Previous question' : hasPrevious ? 'Previous question' : 'No previous questions'}
                     >
-                        <ChevronLeftIcon sx={{ fontSize: '1.1rem' }} />
-                        <span className="text-sm font-medium">Previous</span>
+                        <ChevronLeftIcon sx={{ fontSize: '1.5rem' }} />
                     </button>
-                    {isSprintMode && sprintSession && (
-                        <span className="text-sm font-medium text-amber-400 px-2">
-                            {sprintSession.currentIndex + 1} / {sprintSession.questionIds.length}
-                        </span>
-                    )}
-                    {isPracticeMode && practiceSession && (
-                        <span className="text-sm font-medium text-amber-400 px-2">
-                            {practiceSession.currentIndex + 1} / {practiceSession.questionIds.length}
-                        </span>
-                    )}
                     <button
-                        onClick={goToNext}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            goToNext();
+                        }}
                         disabled={!isPracticeMode && !isSprintMode && !hasNext}
-                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg hover:bg-neutral-800 transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-neutral-400 hover:text-white"
+                        className="p-2 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed text-neutral-400 hover:text-white hover:bg-neutral-800"
+                        style={{ position: 'relative', zIndex: 50, pointerEvents: 'auto' }}
+                        title={!isPracticeMode && !isSprintMode && !hasNext ? 'No more questions' : 'Next question'}
                     >
-                        <span className="text-sm font-medium">
-                            {isSprintMode && sprintSession?.currentIndex === (sprintSession?.questionIds?.length ?? 0) - 1
-                                ? 'Finish Sprint'
-                                : (isPracticeMode && practiceSession?.currentIndex === (practiceSession?.questionIds?.length ?? 0) - 1
-                                    ? 'Finish'
-                                    : 'Next')}
-                        </span>
-                        <ChevronRightIcon sx={{ fontSize: '1.1rem' }} />
+                        <ChevronRightIcon sx={{ fontSize: '1.5rem' }} />
                     </button>
                 </div>
             </header>
 
-            {/* Main Content */}
-            <div className="flex flex-col lg:flex-row flex-1 lg:h-[calc(100vh-56px)] overflow-hidden">
-                {/* Left Panel - Question */}
-                <div className="flex-1 lg:overflow-y-auto overflow-visible scroll-smooth order-1 pb-[40vh] lg:pb-0">
+            {/* Main Content - 2 COLUMN GRID */}
+            <div className="flex flex-col lg:flex-row h-[calc(100vh-56px)] overflow-hidden">
+                {/* LEFT COLUMN - Question + Solution (SCROLLABLE) */}
+                <div className="flex-1 overflow-y-auto overflow-x-hidden" style={{ scrollbarWidth: 'thin', scrollbarColor: '#525252 transparent' }}>
                     <div className="p-6 lg:p-8 max-w-4xl">
-                        {/* Metadata Tags */}
+                        {/* Question Number */}
+                        {question.question_number && (
+                            <div className="mb-4">
+                                <span className="text-2xl font-bold text-white">
+                                    Question #{question.question_number}
+                                </span>
+                            </div>
+                        )}
+
+                        {/* Metadata Tags - CLEANED UP */}
                         <div className="flex flex-wrap items-center gap-3 mb-6">
                             {getDifficultyBadge(question.difficulty)}
-                            <div className="w-px h-5 bg-neutral-700"></div>
-                            <span className="text-neutral-300 text-sm font-medium">{question.source.exam} {question.source.year}</span>
+                            <span className="text-neutral-400 text-sm">•</span>
+                            <span className="text-neutral-300 text-sm font-medium">
+                                {question.source.exam.includes(question.source.year.toString())
+                                    ? question.source.exam
+                                    : `${question.source.exam} ${question.source.year}`}
+                            </span>
                             {question.source.shift && (
                                 <>
-                                    <div className="w-px h-5 bg-neutral-700"></div>
-                                    <span className="text-neutral-400 text-sm">
-                                        {question.source.shift}
-                                    </span>
+                                    <span className="text-neutral-400 text-sm">•</span>
+                                    <span className="text-neutral-400 text-sm">{question.source.shift.split(' - ')[0]}</span>
                                 </>
                             )}
                             {question.pattern && (
                                 <>
-                                    <div className="w-px h-5 bg-neutral-700"></div>
-                                    <span className="px-3 py-1 bg-violet-500/15 text-violet-400 border border-violet-500/30 rounded-lg text-sm font-medium">
-                                        {question.pattern}
+                                    <span className="text-neutral-400 text-sm">•</span>
+                                    <span className="px-3 py-1 bg-violet-500/15 text-violet-400 border border-violet-500/30 rounded-full text-xs font-semibold">
+                                        {formatLabel(question.pattern)}
                                     </span>
                                 </>
                             )}
@@ -1132,16 +1232,18 @@ export default function QuestionPage({
                                 <AuthActionGuard>
                                     <button
                                         onClick={handleBookmarkToggle}
-                                        className={`p-2 rounded-lg transition-colors ${isBookmarked ? 'text-yellow-500 bg-yellow-500/10' : 'text-neutral-500 hover:text-yellow-500 hover:bg-neutral-800'}`}
-                                        title={isBookmarked ? 'Remove Bookmark' : 'Bookmark Question'}
+                                        className={`p-2 rounded-lg transition-all duration-200 ${isBookmarked
+                                            ? 'text-yellow-500 bg-yellow-500/10 scale-110 shadow-lg shadow-yellow-500/20'
+                                            : 'text-neutral-500 hover:text-yellow-500 hover:bg-neutral-800 hover:scale-105'}`}
+                                        title={isBookmarked ? 'Bookmarked - Click to remove' : 'Bookmark this question'}
                                     >
                                         <BookmarkIcon sx={{ fontSize: '1.25rem' }} />
                                     </button>
                                 </AuthActionGuard>
                                 <button
                                     onClick={() => setShowReportModal(true)}
-                                    className="p-2 rounded-lg text-neutral-500 hover:text-rose-500 hover:bg-neutral-800 transition-colors"
-                                    title="Report Issue"
+                                    className="p-2 rounded-lg text-neutral-500 hover:text-rose-500 hover:bg-neutral-800 hover:scale-105 transition-all duration-200"
+                                    title="Report an issue with this question"
                                 >
                                     <WarningIcon sx={{ fontSize: '1.25rem' }} />
                                 </button>
@@ -1157,43 +1259,69 @@ export default function QuestionPage({
                             />
                         </div>
 
-                        {/* Solution Panel */}
-                        {showSolution && (
-                            <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-6 mt-6">
-                                <h3 className="text-lg font-bold text-amber-400 mb-3 flex items-center gap-2">
-                                    💡 Solution
-                                </h3>
-                                <div className="text-neutral-300">
-                                    <p className="mb-2">
-                                        <span className="text-neutral-500">Correct Answer:</span>{' '}
-                                        <span className="px-3 py-1 bg-emerald-500/20 text-emerald-400 font-bold rounded-lg">
-                                            Option {question.correct_option}
-                                        </span>
-                                    </p>
-                                    {question.solution ? (
-                                        <div className="mt-4 text-neutral-300 leading-relaxed">
-                                            <MathText>{question.solution}</MathText>
-                                        </div>
-                                    ) : (
-                                        <p className="text-neutral-500 mt-4 text-sm">
-                                            Detailed explanation coming soon.
-                                        </p>
-                                    )}
+                        {/* Solution Panel - ENHANCED PARSING */}
+                        {showSolution && question.solution && (
+                            <div className="bg-neutral-800/50 border border-neutral-700 rounded-xl p-4 mt-4">
+                                <div className="flex items-center justify-between mb-3">
+                                    <h3 className="text-base font-bold text-amber-400 flex items-center gap-2">
+                                        <span>💡</span> Solution
+                                    </h3>
+                                    <button
+                                        onClick={() => setShowSolution(false)}
+                                        className="text-neutral-500 hover:text-neutral-300 transition-colors"
+                                        title="Hide solution"
+                                    >
+                                        <CloseIcon sx={{ fontSize: '1rem' }} />
+                                    </button>
+                                </div>
+                                <div className="mb-3 p-2 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center gap-2">
+                                    <CheckCircleOutlinedIcon className="text-emerald-400" sx={{ fontSize: '1rem' }} />
+                                    <span className="text-xs text-neutral-400">Correct:</span>
+                                    <span className="text-xs px-2 py-0.5 bg-emerald-500/20 text-emerald-400 font-bold rounded-full">
+                                        Option {question.correct_option}
+                                    </span>
+                                </div>
+                                <div>
+                                    <SolutionContent solution={question.solution} />
                                 </div>
                             </div>
                         )}
                     </div>
                 </div>
 
-                {/* Right Panel - Options */}
-                <div className="w-full lg:w-[420px] bg-[#1a1a1a] border-t lg:border-t-0 lg:border-l border-neutral-800 flex flex-col shrink-0 order-2 lg:order-2 fixed bottom-0 left-0 right-0 z-20 lg:static max-h-[40vh] lg:max-h-full shadow-2xl lg:shadow-none">
-                    {/* Header */}
-                    <div className="hidden lg:block px-5 py-4 border-b border-neutral-800">
-                        <h3 className="text-lg font-bold text-white">Answer Options</h3>
-                    </div>
+                {/* RIGHT COLUMN - Answer UI (FIXED WIDTH, NO SCROLL) */}
+                <div className="bg-[#1a1a1a] border-t lg:border-t-0 lg:border-l border-neutral-800 flex flex-col fixed bottom-0 left-0 right-0 z-20 lg:relative lg:w-[420px] max-h-[40vh] lg:max-h-full lg:h-full shadow-2xl lg:shadow-none flex-shrink-0">
 
-                    {/* Options */}
-                    <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                    {/* Result & Stats - AT TOP */}
+                    {isSubmitted && (
+                        <div className="p-4 border-b border-neutral-800 space-y-3 shrink-0">
+                            <div className={`text-center py-3 rounded-xl font-bold text-sm ${isCorrect
+                                ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+                                : 'bg-rose-500/15 text-rose-400 border border-rose-500/30'
+                                }`}>
+                                {isCorrect ? '✓ Correct Answer!' : '✗ Incorrect Answer'}
+                            </div>
+                            <div className={`grid ${isTimerEnabled ? 'grid-cols-2' : 'grid-cols-1'} gap-2 text-xs text-neutral-400`}>
+                                {isTimerEnabled && (
+                                    <div className="bg-neutral-800/50 rounded-lg p-2 text-center border border-neutral-800">
+                                        <span className="block text-neutral-500 mb-0.5">Time Taken</span>
+                                        <span className="font-mono text-neutral-200 font-medium">
+                                            {Math.floor(submittedTime / 60)}:{(submittedTime % 60).toString().padStart(2, '0')}
+                                        </span>
+                                    </div>
+                                )}
+                                <div className="bg-neutral-800/50 rounded-lg p-2 text-center border border-neutral-800">
+                                    <span className="block text-neutral-500 mb-0.5">Accuracy</span>
+                                    <span className="font-mono text-neutral-200 font-medium">
+                                        {question.stats?.accuracy_rate ? `${Math.round(question.stats.accuracy_rate * 100)}%` : '--'}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Options - SCROLLABLE */}
+                    <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-0" style={{ scrollbarWidth: 'thin', scrollbarColor: '#525252 transparent' }}>
                         {question.options.map((option, index) => (
                             <div
                                 key={option.id}
@@ -1239,29 +1367,7 @@ export default function QuestionPage({
                     </div>
 
                     {/* Actions */}
-                    <div className="p-4 bg-neutral-900/50 border-t border-neutral-800 space-y-3">
-                        {/* Result & Stats */}
-                        {isSubmitted && (
-                            <div className="space-y-3">
-                                <div className={`text-center py-3 rounded-xl font-bold text-sm ${isCorrect
-                                    ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
-                                    : 'bg-rose-500/15 text-rose-400 border border-rose-500/30'
-                                    }`}>
-                                    {isCorrect ? '✓ Correct Answer!' : '✗ Incorrect Answer'}
-                                </div>
-                                <div className="grid grid-cols-2 gap-2 text-xs text-neutral-400">
-                                    <div className="bg-neutral-800/50 rounded-lg p-2 text-center border border-neutral-800">
-                                        <span className="block text-neutral-500 mb-0.5">Time Taken</span>
-                                        <span className="font-mono text-neutral-200 font-medium">{Math.floor((isTimerEnabled ? elapsedTime : (Date.now() - startTime) / 1000) / 60)}:{(Math.floor(isTimerEnabled ? elapsedTime : (Date.now() - startTime) / 1000) % 60).toString().padStart(2, '0')}</span>
-                                    </div>
-                                    <div className="bg-neutral-800/50 rounded-lg p-2 text-center border border-neutral-800">
-                                        <span className="block text-neutral-500 mb-0.5">Accuracy</span>
-                                        <span className="font-mono text-neutral-200 font-medium">{question.stats?.accuracy_rate ? `${Math.round(question.stats.accuracy_rate * 100)}%` : 'N/A'}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
+                    <div className="p-4 bg-neutral-900/50 border-t border-neutral-800 space-y-3 shrink-0">
                         {/* Buttons */}
                         <div className="flex gap-2">
                             {!isSubmitted ? (
@@ -1271,6 +1377,7 @@ export default function QuestionPage({
                                             onClick={handleSubmit}
                                             disabled={!selectedOption}
                                             className="flex-1 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-xl hover:from-amber-400 hover:to-orange-400 transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-amber-500/20"
+                                            title={!selectedOption ? 'Select an answer first' : undefined}
                                         >
                                             Submit Answer
                                         </button>
@@ -1340,24 +1447,27 @@ export default function QuestionPage({
                 </div>
             )}
 
-            {/* Timer Enable Prompt Modal */}
+            {/* Timer Enable Prompt Modal - IMPROVED COPY */}
             {showTimerPrompt && (
                 <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
                     <div className="bg-[#1a1a1a] border border-neutral-700 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
                         <div className="text-center">
-                            <div className="w-16 h-16 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <div className="w-16 h-16 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <TimerIcon sx={{ fontSize: '2rem' }} className="text-amber-400" />
                             </div>
-                            <h2 className="text-2xl font-bold text-white mb-2">Track Your Time?</h2>
-                            <p className="text-neutral-400 mb-6">
-                                Would you like to track how long you spend on each question? The timer will persist as you navigate between questions.
+                            <h2 className="text-2xl font-bold text-white mb-3">⏱️ Enable Practice Timer?</h2>
+                            <p className="text-neutral-300 mb-2 leading-relaxed">
+                                Track your speed on each question to improve time management.
+                            </p>
+                            <p className="text-neutral-500 text-sm mb-6">
+                                Timer is for your reference only and doesn't affect your score.
                             </p>
                             <div className="flex gap-3">
                                 <button
                                     onClick={() => setShowTimerPrompt(false)}
-                                    className="flex-1 py-3 px-4 bg-neutral-700 hover:bg-neutral-600 text-white font-medium rounded-xl transition-colors"
+                                    className="flex-1 py-3 px-4 bg-neutral-800 hover:bg-neutral-700 text-neutral-300 font-medium rounded-xl transition-colors border border-neutral-700"
                                 >
-                                    No Thanks
+                                    Maybe Later
                                 </button>
                                 <button
                                     onClick={() => {
@@ -1366,9 +1476,9 @@ export default function QuestionPage({
                                         setShowTimerPrompt(false);
                                         setElapsedTime(questionTimes[questionId] || 0);
                                     }}
-                                    className="flex-1 py-3 px-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-semibold rounded-xl transition-all"
+                                    className="flex-1 py-3 px-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-semibold rounded-xl transition-all shadow-lg shadow-amber-500/20"
                                 >
-                                    Start Timer
+                                    Enable Timer
                                 </button>
                             </div>
                         </div>

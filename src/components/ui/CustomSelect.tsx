@@ -15,9 +15,10 @@ interface CustomSelectProps {
     placeholder?: string;
     className?: string;
     icon?: React.ReactNode;
+    prefix?: string;
 }
 
-export function CustomSelect({ value, onChange, options, placeholder, className, icon }: CustomSelectProps) {
+export function CustomSelect({ value, onChange, options, placeholder, className, icon, prefix }: CustomSelectProps) {
     const [isOpen, setIsOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -39,10 +40,11 @@ export function CustomSelect({ value, onChange, options, placeholder, className,
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex items-center justify-between px-4 py-3 bg-[#1a1a1a] border border-neutral-800 rounded-xl text-neutral-200 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-all text-sm group"
+                className="w-full h-[48px] flex items-center justify-between px-4 bg-[#1a1a1a] border border-neutral-800 rounded-xl text-neutral-200 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-all text-sm group"
             >
                 <span className={`flex items-center gap-2 ${!options.find(opt => opt.value === value) && placeholder ? 'text-neutral-400' : ''}`}>
                     {icon && <span className="text-neutral-500">{icon}</span>}
+                    {prefix && <span className="text-neutral-500">{prefix}</span>}
                     {selectedLabel}
                 </span>
                 <span className={`text-neutral-500 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
@@ -51,7 +53,7 @@ export function CustomSelect({ value, onChange, options, placeholder, className,
             </button>
 
             {isOpen && (
-                <div className="absolute top-[calc(100%+8px)] left-0 w-full bg-[#1a1a1a] border border-neutral-800 rounded-xl shadow-xl shadow-black/50 overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200">
+                <div className="absolute top-[calc(100%+8px)] left-0 w-full bg-[#1a1a1a] border border-neutral-800 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.7)] overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200">
                     <div className="py-1 max-h-60 overflow-y-auto custom-scrollbar">
                         {options.map((option) => (
                             <button

@@ -17,6 +17,7 @@ interface User {
     avatar_url?: string;
     dailyQuantGoal: number;
     dailyReasoningGoal: number;
+    totalQuestions: number;
 }
 
 interface AuthContextType {

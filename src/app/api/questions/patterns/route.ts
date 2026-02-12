@@ -14,7 +14,6 @@ export async function GET() {
 
         // Fetch all patterns
         const patterns = await Pattern.find({})
-            .sort({ display_order: 1 })
             .lean();
 
         // Optionally, we could aggregate live question counts here to be strictly accurate,

@@ -99,7 +99,11 @@ export async function POST(req: NextRequest) {
         }
 
         // Update DailyActivity
-        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+        // Use local date instead of UTC to avoid timezone issues
+        const now = new Date();
+        const today = new Date(now.getTime() - (now.getTimezoneOffset() * 60000))
+            .toISOString()
+            .split('T')[0]; // YYYY-MM-DD in local timezone
 
         await DailyActivity.findOneAndUpdate(
             { user_id: userObjectId, date: today },
@@ -148,19 +152,30 @@ export async function POST(req: NextRequest) {
             const lastDate = user.stats?.last_active_date;
 
             if (lastDate !== today) {
-                const yesterday = new Date();
-                yesterday.setDate(yesterday.getDate() - 1);
-                const yesterdayStr = yesterday.toISOString().split('T')[0];
+                // Calculate yesterday in local timezone
+                const yesterdayDate = new Date();
+                yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+                const yesterdayStr = new Date(yesterdayDate.getTime() - (yesterdayDate.getTimezoneOffset() * 60000))
+                    .toISOString()
+                    .split('T')[0];
 
                 if (lastDate === yesterdayStr) {
+                    // Continue streak - last activity was yesterday
                     userUpdate.$inc = {
                         ...(userUpdate.$inc || {}),
                         'stats.current_streak': 1
                     };
+                    // Update max streak if current becomes greater
+                    const newStreak = (user.stats?.current_streak || 0) + 1;
+                    if (newStreak > (user.stats?.max_streak || 0)) {
+                        userUpdate.$set['stats.max_streak'] = newStreak;
+                    }
                 } else {
+                    // Streak broken - reset to 1
                     userUpdate.$set['stats.current_streak'] = 1;
                 }
             }
+            // If lastDate === today, don't update streak (already counted for today)
         }
 
         await User.findByIdAndUpdate(authUser.userId, userUpdate);

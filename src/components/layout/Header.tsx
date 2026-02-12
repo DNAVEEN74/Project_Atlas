@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuth } from '@/contexts/AuthContext';
@@ -10,6 +10,7 @@ import {
     BookmarkIcon,
     LogoutIcon,
     ExpandMoreIcon,
+    DocumentIcon,
 } from '@/components/icons';
 
 interface HeaderProps {
@@ -20,6 +21,25 @@ export default function Header({ activePage }: HeaderProps) {
     const { user, logout } = useAuth();
     const router = useRouter();
     const [showUserMenu, setShowUserMenu] = useState(false);
+    const userMenuRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+                setShowUserMenu(false);
+            }
+        };
+
+        if (showUserMenu) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [showUserMenu]);
 
     const handleLogout = async () => {
         await logout();
@@ -99,17 +119,54 @@ export default function Header({ activePage }: HeaderProps) {
                         {user ? (
                             <>
                                 <div className="hidden md:flex items-center gap-3">
-                                    <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
-                                        <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
-                                        <span className="text-xs font-medium text-emerald-400">{user.totalCorrect || 0} Solved</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 px-3 py-1.5 bg-orange-500/10 border border-orange-500/20 rounded-full">
+                                    {/* Solved Stats Pill */}
+                                    <Link
+                                        href="/submissions"
+                                        className="group relative flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full hover:bg-emerald-500/15 hover:border-emerald-500/30 transition-all cursor-pointer"
+                                    >
+                                        <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
+                                        <span className="text-xs font-semibold text-emerald-400">
+                                            {user.totalCorrect === 0 ? (
+                                                "🎯 Start Solving!"
+                                            ) : (
+                                                <>
+                                                    {user.totalCorrect}/{user.totalQuestions} Solved ({Math.round((user.totalCorrect / (user.totalQuestions || 1)) * 100)}%)
+                                                </>
+                                            )}
+                                        </span>
+                                        {/* Tooltip */}
+                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-4 py-2 bg-neutral-900 border border-neutral-800 text-neutral-200 text-xs font-medium rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.4)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                                            {user.totalCorrect === 0
+                                                ? "You haven't solved any questions yet. Start your journey today!"
+                                                : `You've solved ${user.totalCorrect} questions. Keep going!`}
+                                        </div>
+                                    </Link>
+
+                                    {/* Streak Stats Pill */}
+                                    <Link
+                                        href="/dashboard"
+                                        className="group relative flex items-center gap-2 px-4 py-2 bg-orange-500/10 border border-orange-500/20 rounded-full hover:bg-orange-500/15 hover:border-orange-500/30 transition-all cursor-pointer"
+                                    >
                                         <span className="text-sm">🔥</span>
-                                        <span className="text-xs font-medium text-orange-400">{user.streak || 0} Days</span>
-                                    </div>
+                                        <span className="text-xs font-semibold text-orange-400">
+                                            {user.streak === 0 ? (
+                                                "Build Your Streak!"
+                                            ) : (
+                                                <>
+                                                    {user.streak} Day Streak {user.streak >= 7 && "⚡"}
+                                                </>
+                                            )}
+                                        </span>
+                                        {/* Tooltip */}
+                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-4 py-2 bg-neutral-900 border border-neutral-800 text-neutral-200 text-xs font-medium rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.4)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                                            {user.streak === 0
+                                                ? "Solve at least 1 question today to start your streak!"
+                                                : `${user.streak}-day streak! Solve 1 question today to maintain it`}
+                                        </div>
+                                    </Link>
                                 </div>
 
-                                <div className="relative">
+                                <div className="relative" ref={userMenuRef}>
                                     <button
                                         onClick={() => setShowUserMenu(!showUserMenu)}
                                         className="flex items-center gap-3 p-1.5 hover:bg-neutral-800 rounded-xl transition-colors"
@@ -129,31 +186,57 @@ export default function Header({ activePage }: HeaderProps) {
                                     </button>
 
                                     {showUserMenu && (
-                                        <>
-                                            <div className="fixed inset-0 z-40" onClick={() => setShowUserMenu(false)}></div>
-                                            <div className="absolute right-0 top-full mt-2 w-60 bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl z-50 overflow-hidden">
-                                                <div className="px-4 py-3 bg-neutral-800/50 border-b border-neutral-800">
-                                                    <p className="text-sm font-medium text-white">{user?.name}</p>
-                                                    <p className="text-xs text-neutral-500">{user?.email}</p>
-                                                </div>
-                                                <div className="py-1">
-                                                    <Link href="/dashboard" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
-                                                        <DashboardIcon sx={{ fontSize: '1.1rem' }} />
-                                                        Dashboard
-                                                    </Link>
-                                                    <Link href="/bookmarks" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
-                                                        <BookmarkIcon sx={{ fontSize: '1.1rem' }} />
-                                                        Bookmarks
-                                                    </Link>
-                                                </div>
-                                                <div className="border-t border-neutral-800 py-1">
-                                                    <button onClick={handleLogout} className="flex items-center gap-3 px-4 py-2.5 text-sm text-rose-400 hover:bg-neutral-800 transition-colors w-full">
-                                                        <LogoutIcon sx={{ fontSize: '1.1rem' }} />
-                                                        Sign Out
-                                                    </button>
-                                                </div>
+                                        <div className="absolute right-0 top-full mt-2 w-60 bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.7)] z-50 overflow-hidden">
+                                            <div className="px-4 py-3 bg-neutral-800/50 border-b border-neutral-800">
+                                                <p className="text-sm font-medium text-white">{user?.name}</p>
+                                                <p className="text-xs text-neutral-500">{user?.email}</p>
                                             </div>
-                                        </>
+                                            <div className="py-1">
+                                                <Link href="/dashboard" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
+                                                    <DashboardIcon sx={{ fontSize: '1.1rem' }} />
+                                                    Dashboard
+                                                </Link>
+                                                <Link href="/submissions" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
+                                                    <DocumentIcon sx={{ fontSize: '1.1rem' }} />
+                                                    My Submissions
+                                                </Link>
+                                                <Link href="/bookmarks" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
+                                                    <BookmarkIcon sx={{ fontSize: '1.1rem' }} />
+                                                    Bookmarks
+                                                </Link>
+                                                <Link href="/sprint/history" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
+                                                    <span className="text-lg leading-none">⚡</span>
+                                                    Sprint History
+                                                </Link>
+
+                                                <div className="h-px bg-neutral-800 my-1 mx-4"></div>
+
+                                                <Link href="/profile" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
+                                                    <div className="w-[18px] h-[18px] rounded-full border border-current flex items-center justify-center">
+                                                        <span className="text-[10px] font-bold">U</span>
+                                                    </div>
+                                                    My Profile
+                                                </Link>
+                                                <Link href="/settings" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
+                                                    <div className="w-[18px] h-[18px] border border-current rounded overflow-hidden flex items-center justify-center">
+                                                        <div className="w-2 h-2 bg-current rounded-full"></div>
+                                                    </div>
+                                                    Settings
+                                                </Link>
+                                                <Link href="/support" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
+                                                    <div className="w-[18px] h-[18px] flex items-center justify-center">
+                                                        <span className="text-sm font-bold">?</span>
+                                                    </div>
+                                                    Help & Support
+                                                </Link>
+                                            </div>
+                                            <div className="border-t border-neutral-800 py-1">
+                                                <button onClick={handleLogout} className="flex items-center gap-3 px-4 py-2.5 text-sm text-rose-400 hover:bg-neutral-800 transition-colors w-full">
+                                                    <LogoutIcon sx={{ fontSize: '1.1rem' }} />
+                                                    Sign Out
+                                                </button>
+                                            </div>
+                                        </div>
                                     )}
                                 </div>
                             </>
@@ -176,6 +259,6 @@ export default function Header({ activePage }: HeaderProps) {
                     </div>
                 </div>
             </div>
-        </header>
+        </header >
     );
 }

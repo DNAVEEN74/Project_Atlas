@@ -1,12 +1,14 @@
 "use client"
 
-import React, { useEffect, useState, useCallback, Suspense } from 'react';
+import React, { useEffect, useState, useCallback, Suspense, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { AuthActionGuard } from '@/components/auth/AuthActionGuard';
 import { MathText } from '@/components/ui/MathText';
 import { CustomSelect } from '@/components/ui/CustomSelect';
+import { ActiveFilters } from './ActiveFilters';
 import {
     CalculateOutlinedIcon,
     PsychologyOutlinedIcon,
@@ -22,18 +24,23 @@ import {
     BookmarkIcon,
     TrendingUpIcon,
     ExpandMoreIcon,
+    CloseIcon,
+    FilterIcon,
+    GridIcon
 } from '@/components/icons';
 import Header from '@/components/layout/Header';
+import { getTopicName, getPatternCode } from '@/lib/topicMapping';
 import { useToast } from '@/contexts/ToastContext';
 
 interface QuestionItem {
     id: string;
     title: string;
-    pattern_code: string;
+    pattern: string;
     difficulty: 'EASY' | 'MEDIUM' | 'HARD';
     status: string;
     acceptance: string;
     source: string;
+    questionNumber?: number;
 }
 
 interface PaginationInfo {
@@ -42,55 +49,54 @@ interface PaginationInfo {
     totalPages: number;
 }
 
+
 function ProblemsPageContent() {
-    const { error: notifyError, info: notifyInfo } = useToast();
-    const router = useRouter();
-    const pathname = usePathname();
     const searchParams = useSearchParams();
-    const { user, loading: authLoading, logout } = useAuth();
+    const { user, loading: authLoading } = useAuth();
+    // Removed unused router, pathname, toast
 
+    // State
     const [questions, setQuestions] = useState<QuestionItem[]>([]);
-    const [pagination, setPagination] = useState<PaginationInfo>({ total: 0, page: 1, totalPages: 1 });
     const [loading, setLoading] = useState(true);
-    const [activeSection, setActiveSection] = useState<'QUANT' | 'REASONING'>('QUANT');
-    const [topicDropdownOpen, setTopicDropdownOpen] = useState(false);
-    const topicDropdownRef = React.useRef<HTMLDivElement>(null);
+    const [pagination, setPagination] = useState<PaginationInfo>({
+        total: 0,
+        page: parseInt(searchParams.get('page') || '1'),
+        totalPages: 1
+    });
 
+    // Filters from URL or default
+    const [activeSection, setActiveSection] = useState<'QUANT' | 'REASONING'>(
+        (searchParams.get('section') as 'QUANT' | 'REASONING') || 'QUANT'
+    );
+
+    // Stats state
     const [solvedCorrect, setSolvedCorrect] = useState<string[]>([]);
     const [solvedWrong, setSolvedWrong] = useState<string[]>([]);
     const [userBookmarks, setUserBookmarks] = useState<string[]>([]);
     const [userStats, setUserStats] = useState({
+        totalSolved: 0,
         totalAttempted: 0,
         totalCorrect: 0,
-        totalWrong: 0,
-        accuracy: 0,
-        bookmarkedCount: 0,
+        accuracy: 0
     });
 
+    const [topicDropdownOpen, setTopicDropdownOpen] = useState(false);
+    const topicDropdownRef = useRef<HTMLDivElement>(null);
+
+
+    // Constants
     const quantTopicGroups = [
         {
             label: 'Arithmetic',
-            topics: ['Percentage', 'Profit & Loss', 'Simple Interest', 'Compound Interest', 'Ratio & Proportion', 'Mixtures & Alligation', 'Partnership', 'Average'],
-        },
-        {
-            label: 'Time & Work',
-            topics: ['Time & Work', 'Pipe & Cistern'],
-        },
-        {
-            label: 'Speed & Distance',
-            topics: ['Time Speed Distance', 'Boat & Stream'],
+            topics: ['Percentage', 'Profit & Loss', 'Simple Interest', 'Compound Interest', 'Ratio & Proportion', 'Mixture & Alligation', 'Average', 'Time & Work', 'Pipe & Cistern', 'Time Speed & Distance', 'Train', 'Boat & Stream'],
         },
         {
             label: 'Number System',
-            topics: ['Number System', 'HCF & LCM', 'Simplification', 'Power Indices Surds'],
+            topics: ['Number System', 'HCF & LCM', 'Simplification', 'Power Indices & Surds'],
         },
         {
-            label: 'Algebra & Trigonometry',
-            topics: ['Algebra', 'Trigonometry', 'Height & Distance'],
-        },
-        {
-            label: 'Geometry & Mensuration',
-            topics: ['Geometry', 'Mensuration 2D', 'Mensuration 3D', 'Coordinate Geometry'],
+            label: 'Advanced Maths',
+            topics: ['Algebra', 'Trigonometry', 'Geometry', 'Mensuration 2D', 'Mensuration 3D', 'Coordinate Geometry', 'Height & Distance'],
         },
         {
             label: 'Data',
@@ -118,14 +124,35 @@ function ProblemsPageContent() {
     ];
 
     const topicGroups = activeSection === 'QUANT' ? quantTopicGroups : reasoningTopicGroups;
-    const topics = ['All', ...topicGroups.flatMap(g => g.topics)];
+    // const topics = ['All', ...topicGroups.flatMap(g => g.topics)]; // Removed unused 'topics' array if not needed or kept for reference
 
+    // State for filters
     const [activeTopic, setActiveTopic] = useState('All');
     const [difficulty, setDifficulty] = useState('All');
-    const [extraFilter, setExtraFilter] = useState('all'); // 'all', 'bookmarked', 'wrong'
     const [yearFilter, setYearFilter] = useState('All');
+    const [statusFilter, setStatusFilter] = useState('all'); // 'all', 'unattempted', 'bookmarked', 'wrong', 'correct'
     const [searchQuery, setSearchQuery] = useState('');
+    const [topicSearchQuery, setTopicSearchQuery] = useState('');
+
     const ITEMS_PER_PAGE = 20;
+
+    // Derived state for Active Filters
+    const activeFilters = [
+        ...(activeTopic !== 'All' ? [{ type: 'Topic', value: activeTopic, label: activeTopic, onRemove: () => setActiveTopic('All') }] : []),
+        ...(difficulty !== 'All' ? [{ type: 'Difficulty', value: difficulty, label: difficulty === 'EASY' ? 'Easy' : difficulty === 'MEDIUM' ? 'Medium' : 'Hard', onRemove: () => setDifficulty('All') }] : []),
+        ...(yearFilter !== 'All' ? [{ type: 'Year', value: yearFilter, label: yearFilter, onRemove: () => setYearFilter('All') }] : []),
+        ...(statusFilter !== 'all' ? [{ type: 'Status', value: statusFilter, label: statusFilter === 'unattempted' ? 'Unattempted' : statusFilter === 'bookmarked' ? 'Bookmarked' : statusFilter === 'wrong' ? 'Incorrect' : 'Solved', onRemove: () => setStatusFilter('all') }] : []),
+        ...(searchQuery ? [{ type: 'Search', value: searchQuery, label: `"${searchQuery}"`, onRemove: () => setSearchQuery('') }] : [])
+    ] as any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
+
+    const clearAllFilters = () => {
+        setActiveTopic('All');
+        setDifficulty('All');
+        setYearFilter('All');
+        setStatusFilter('all');
+        setSearchQuery('');
+        updatePage(1);
+    };
 
     // Close topic dropdown on outside click
     useEffect(() => {
@@ -138,27 +165,49 @@ function ProblemsPageContent() {
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
-    const updatePage = useCallback((newPage: number) => {
+    const updatePage = useCallback((newPage: number, resetFilters = false) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set('page', newPage.toString());
-        router.push(`${pathname}?${params.toString()}`);
-    }, [searchParams, router, pathname]);
+        if (resetFilters) {
+            // Logic to clear params if needed, but we rely on state
+        }
+        // We push state changes which trigger fetch, URL sync is optional for now or can be added
+        // For now, just updating state is enough as logic relies on state
+        setPagination(prev => ({ ...prev, page: newPage }));
+    }, [searchParams]);
 
     useEffect(() => {
         const fetchQuestions = async () => {
             setLoading(true);
             try {
-                let url = `/api/questions?page=${pagination.page}&limit=${ITEMS_PER_PAGE}&section=${activeSection}&topic=${activeTopic === 'All' ? '' : activeTopic}&difficulty=${difficulty === 'All' ? '' : difficulty.toUpperCase()}`;
-                if (extraFilter !== 'all') {
-                    url += `&filter=${extraFilter}`;
+                const params = new URLSearchParams();
+                params.set('page', pagination.page.toString());
+                params.set('limit', ITEMS_PER_PAGE.toString());
+                params.set('section', activeSection);
+
+                if (activeTopic !== 'All') {
+                    const patternCode = getPatternCode(activeTopic);
+                    // console.log(`Filtering by topic: ${activeTopic} -> ${patternCode}`);
+                    params.set('pattern', patternCode);
                 }
+
+                if (difficulty !== 'All') {
+                    params.set('difficulty', difficulty.toUpperCase());
+                }
+
+                if (statusFilter !== 'all') {
+                    params.set('filter', statusFilter);
+                }
+
                 if (yearFilter !== 'All') {
-                    url += `&year=${yearFilter}`;
+                    params.set('year', yearFilter);
                 }
+
                 if (searchQuery) {
-                    url += `&query=${encodeURIComponent(searchQuery)}`;
+                    params.set('query', searchQuery);
                 }
-                const res = await fetch(url);
+
+                const res = await fetch(`/api/questions?${params.toString()}`);
                 const data = await res.json();
                 setQuestions(data.data || []);
                 setPagination(data.pagination);
@@ -168,8 +217,10 @@ function ProblemsPageContent() {
                 setLoading(false);
             }
         };
-        fetchQuestions();
-    }, [pagination.page, activeSection, activeTopic, difficulty, extraFilter, yearFilter, searchQuery]);
+        // Debounce search
+        const timeoutId = setTimeout(() => fetchQuestions(), 300);
+        return () => clearTimeout(timeoutId);
+    }, [pagination.page, activeSection, activeTopic, difficulty, statusFilter, yearFilter, searchQuery]);
 
     const fetchProgress = useCallback(async () => {
         try {
@@ -196,16 +247,15 @@ function ProblemsPageContent() {
     const getDifficultyBadge = (difficulty: string) => {
         switch (difficulty) {
             case 'EASY':
-                return <span className="px-4 py-2 text-base font-medium text-emerald-400 bg-emerald-400/10 rounded-full">Easy</span>;
+                return <span className="px-3 py-1 text-xs font-semibold text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded-full">Easy</span>;
             case 'MEDIUM':
-                return <span className="px-4 py-2 text-base font-medium text-amber-400 bg-amber-400/10 rounded-full">Medium</span>;
+                return <span className="px-3 py-1 text-xs font-semibold text-amber-400 bg-amber-400/10 border border-amber-400/20 rounded-full">Medium</span>;
             case 'HARD':
-                return <span className="px-4 py-2 text-base font-medium text-rose-400 bg-rose-400/10 rounded-full">Hard</span>;
+                return <span className="px-3 py-1 text-xs font-semibold text-rose-400 bg-rose-400/10 border border-rose-400/20 rounded-full">Hard</span>;
             default:
-                return <span className="px-4 py-2 text-base font-medium text-neutral-500 bg-neutral-500/10 rounded-full">-</span>;
+                return <span className="px-3 py-1 text-xs font-semibold text-neutral-500 bg-neutral-500/10 border border-neutral-500/20 rounded-full">-</span>;
         }
     };
-
 
     const getPageNumbers = () => {
         const totalPages = pagination.totalPages;
@@ -226,6 +276,12 @@ function ProblemsPageContent() {
 
     const accentColor = activeSection === 'QUANT' ? 'amber' : 'violet';
 
+    // Filter topics based on search
+    const filteredTopicGroups = topicGroups.map(group => ({
+        ...group,
+        topics: group.topics.filter(t => t.toLowerCase().includes(topicSearchQuery.toLowerCase()))
+    })).filter(group => group.topics.length > 0);
+
     return (
         <div className="min-h-screen bg-[#0f0f0f]">
             {/* HEADER */}
@@ -234,164 +290,251 @@ function ProblemsPageContent() {
             {/* Main Content */}
             <div className="w-full px-6 lg:px-12 py-8">
 
-                {/* Section Switcher */}
-                <div className="mb-8">
-                    <div className="inline-flex p-1.5 bg-[#1a1a1a] rounded-[20px] border border-neutral-800">
-                        <button
-                            onClick={() => { setActiveSection('QUANT'); setActiveTopic('All'); updatePage(1); }}
-                            className={`flex items-center gap-3 px-6 py-3 rounded-2xl text-base font-medium transition-all ${activeSection === 'QUANT'
-                                ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25'
-                                : 'text-neutral-400 hover:text-white'
-                                }`}
-                        >
-                            <CalculateOutlinedIcon sx={{ fontSize: '1.4rem' }} />
-                            Quantitative Aptitude
-                        </button>
-                        <button
-                            onClick={() => { setActiveSection('REASONING'); setActiveTopic('All'); updatePage(1); }}
-                            className={`flex items-center gap-3 px-6 py-3 rounded-2xl text-base font-medium transition-all ${activeSection === 'REASONING'
-                                ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-violet-500/25'
-                                : 'text-neutral-400 hover:text-white'
-                                }`}
-                        >
-                            <PsychologyOutlinedIcon sx={{ fontSize: '1.4rem' }} />
-                            Reasoning
-                        </button>
+                {/* Section Switcher & Status */}
+                <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 mb-8">
+                    <div className="inline-flex p-1.5 bg-[#1a1a1a] rounded-[22px] border border-neutral-800 self-start relative">
+                        {['QUANT', 'REASONING'].map((section) => (
+                            <button
+                                key={section}
+                                onClick={() => { setActiveSection(section as 'QUANT' | 'REASONING'); setActiveTopic('All'); updatePage(1); }}
+                                className={`relative flex items-center gap-3 px-6 py-3 rounded-[16px] text-base font-medium transition-colors z-10 ${activeSection === section ? 'text-white' : 'text-neutral-400 hover:text-neutral-200'
+                                    }`}
+                            >
+                                {section === 'QUANT' ? (
+                                    <>
+                                        <CalculateOutlinedIcon sx={{ fontSize: '1.4rem' }} />
+                                        Quantitative Aptitude
+                                    </>
+                                ) : (
+                                    <>
+                                        <PsychologyOutlinedIcon sx={{ fontSize: '1.4rem' }} />
+                                        Reasoning
+                                    </>
+                                )}
+
+                                {activeSection === section && (
+                                    <motion.div
+                                        layoutId="activeTabPill"
+                                        className={`absolute inset-0 rounded-[16px] -z-10 ${section === 'QUANT'
+                                            ? 'bg-gradient-to-r from-amber-500 to-orange-500 shadow-lg shadow-amber-500/25'
+                                            : 'bg-gradient-to-r from-violet-500 to-purple-500 shadow-lg shadow-violet-500/25'
+                                            }`}
+                                        transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+                                    />
+                                )}
+                            </button>
+                        ))}
                     </div>
+
+                    {/* Stats Display - Only show if user has activity */}
+                    {!authLoading && user && userStats.totalAttempted > 0 && (
+                        <div className="flex items-center gap-3 sm:gap-6 bg-[#1a1a1a] p-2 pr-6 rounded-[20px] border border-neutral-800 self-start xl:self-auto">
+                            <div className="hidden sm:flex items-center gap-3 pl-4 border-r border-neutral-800 pr-6">
+                                <div className="text-right">
+                                    <p className="text-xs text-neutral-500 font-medium">Accuracy</p>
+                                    <p className={`text-sm font-bold ${userStats.accuracy >= 80 ? 'text-emerald-400' : userStats.accuracy >= 50 ? 'text-amber-400' : 'text-neutral-300'}`}>
+                                        {userStats.accuracy}%
+                                    </p>
+                                </div>
+                                <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center relative ${userStats.accuracy >= 80 ? 'border-emerald-500/20' : userStats.accuracy >= 50 ? 'border-amber-500/20' : 'border-neutral-800'}`}>
+                                    <TrackChangesOutlinedIcon sx={{ fontSize: '1rem' }} className={userStats.accuracy >= 80 ? 'text-emerald-400' : userStats.accuracy >= 50 ? 'text-amber-400' : 'text-neutral-500'} />
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-4 pl-2">
+                                <div className="space-y-1">
+                                    <div className="flex items-center gap-2 text-xs text-neutral-400 font-medium">
+                                        <TrendingUpIcon sx={{ fontSize: '1rem' }} className={activeSection === 'QUANT' ? 'text-amber-400' : 'text-violet-400'} />
+                                        <span>Solved</span>
+                                        <span className={activeSection === 'QUANT' ? 'text-amber-400 font-bold' : 'text-violet-400 font-bold'}>
+                                            {userStats.totalCorrect}
+                                        </span>
+                                        <span className="text-neutral-600">/</span>
+                                        <span className="text-neutral-500">{userStats.totalAttempted} attempted</span>
+                                    </div>
+                                    <div className="w-32 sm:w-40 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
+                                        <div
+                                            className={`h-full rounded-full transition-all duration-1000 ${activeSection === 'QUANT' ? 'bg-amber-500' : 'bg-violet-500'}`}
+                                            style={{ width: `${userStats.totalAttempted > 0 ? (userStats.totalCorrect / userStats.totalAttempted) * 100 : 0}%` }}
+                                        ></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <div className="grid grid-cols-1 gap-8">
                     {/* Main Content */}
                     <div className="space-y-4">
-                        {/* Topic Dropdown Filter */}
-                        <div className="relative" ref={topicDropdownRef}>
-                            <button
-                                onClick={() => setTopicDropdownOpen(!topicDropdownOpen)}
-                                className={`flex items-center justify-between w-full sm:w-auto sm:min-w-[280px] px-5 py-3 bg-[#1a1a1a] border rounded-xl transition-all text-sm font-medium ${topicDropdownOpen
-                                    ? accentColor === 'amber'
-                                        ? 'border-amber-500/50 ring-1 ring-amber-500/20'
-                                        : 'border-violet-500/50 ring-1 ring-violet-500/20'
-                                    : 'border-neutral-800 hover:border-neutral-700'
-                                    }`}
-                            >
-                                <div className="flex items-center gap-2">
-                                    <MenuBookOutlinedIcon sx={{ fontSize: '1.1rem' }} className="text-neutral-500" />
-                                    <span className="text-neutral-400">Topic:</span>
-                                    <span className={`font-semibold ${activeTopic === 'All'
-                                        ? 'text-neutral-200'
-                                        : accentColor === 'amber'
-                                            ? 'text-amber-400'
-                                            : 'text-violet-400'
-                                        }`}>
-                                        {activeTopic}
-                                    </span>
-                                </div>
-                                <ExpandMoreIcon
-                                    sx={{ fontSize: '1.2rem' }}
-                                    className={`text-neutral-500 transition-transform duration-200 ml-3 ${topicDropdownOpen ? 'rotate-180' : ''}`}
-                                />
-                            </button>
+                        {/* Filters Row */}
+                        {/* Unified Filter Bar Grid */}
+                        <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
+                            {/* 1. Topic Dropdown (2 cols) */}
+                            <div className="xl:col-span-2 relative z-50" ref={topicDropdownRef}>
+                                <button
+                                    onClick={() => setTopicDropdownOpen(!topicDropdownOpen)}
+                                    className={`flex items-center justify-between w-full h-[48px] px-3 bg-[#1a1a1a] border rounded-xl transition-all text-sm font-medium ${topicDropdownOpen
+                                        ? accentColor === 'amber'
+                                            ? 'border-amber-500/50 ring-1 ring-amber-500/20'
+                                            : 'border-violet-500/50 ring-1 ring-violet-500/20'
+                                        : 'border-neutral-800 hover:border-neutral-700'
+                                        }`}
+                                >
+                                    <div className="flex items-center gap-2 truncate">
+                                        <MenuBookOutlinedIcon sx={{ fontSize: '1.1rem' }} className="text-neutral-500 shrink-0" />
+                                        <span className={`font-semibold truncate ${activeTopic === 'All'
+                                            ? 'text-neutral-200'
+                                            : accentColor === 'amber'
+                                                ? 'text-amber-400'
+                                                : 'text-violet-400'
+                                            }`}>
+                                            {activeTopic === 'All' ? 'Topic: All' : activeTopic}
+                                        </span>
+                                    </div>
+                                    <ExpandMoreIcon
+                                        sx={{ fontSize: '1.2rem' }}
+                                        className={`text-neutral-500 transition-transform duration-200 ml-1 shrink-0 ${topicDropdownOpen ? 'rotate-180' : ''}`}
+                                    />
+                                </button>
 
-                            {/* Dropdown Panel */}
-                            {topicDropdownOpen && (
-                                <div className="absolute z-50 top-full left-0 right-0 sm:right-auto sm:min-w-[620px] mt-2 bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden">
-                                    <div className="p-3 max-h-[420px] overflow-y-auto">
-                                        {/* All Topics Button */}
-                                        <button
-                                            onClick={() => {
-                                                setActiveTopic('All');
-                                                setTopicDropdownOpen(false);
-                                                updatePage(1);
-                                            }}
-                                            className={`w-full px-4 py-2.5 mb-2 text-sm text-left rounded-xl transition-all font-medium ${activeTopic === 'All'
-                                                ? accentColor === 'amber'
-                                                    ? 'bg-amber-500/15 text-amber-400'
-                                                    : 'bg-violet-500/15 text-violet-400'
-                                                : 'text-neutral-300 hover:bg-neutral-800/80 hover:text-neutral-100'
-                                                }`}
-                                        >
-                                            All Topics
-                                        </button>
+                                {/* Dropdown Panel */}
+                                {topicDropdownOpen && (
+                                    <div className="absolute z-50 top-full left-0 min-w-[320px] sm:min-w-[500px] mt-2 bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.7)] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                                        <div className="p-3 border-b border-neutral-800/50">
+                                            <div className="relative">
+                                                <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 w-4 h-4" />
+                                                <input
+                                                    type="text"
+                                                    placeholder="Search topics..."
+                                                    value={topicSearchQuery}
+                                                    onChange={(e) => setTopicSearchQuery(e.target.value)}
+                                                    className="w-full bg-neutral-900 border border-neutral-800 rounded-lg pl-9 pr-3 py-2 text-sm text-neutral-200 focus:outline-none focus:border-neutral-600 transition-colors"
+                                                    autoFocus
+                                                />
+                                            </div>
+                                        </div>
 
-                                        <div className="h-px bg-neutral-800 mb-3" />
+                                        <div className="p-3 max-h-[400px] overflow-y-auto custom-scrollbar">
+                                            {/* All Topics Button */}
+                                            {!topicSearchQuery && (
+                                                <button
+                                                    onClick={() => {
+                                                        setActiveTopic('All');
+                                                        setTopicDropdownOpen(false);
+                                                        setPagination(prev => ({ ...prev, page: 1 }));
+                                                    }}
+                                                    className={`w-full flex items-center gap-3 px-4 py-3 mb-2 text-sm text-left rounded-xl transition-all font-medium ${activeTopic === 'All'
+                                                        ? accentColor === 'amber'
+                                                            ? 'bg-amber-500/15 text-amber-400'
+                                                            : 'bg-violet-500/15 text-violet-400'
+                                                        : 'text-neutral-300 hover:bg-neutral-800/80 hover:text-neutral-100'
+                                                        }`}
+                                                >
+                                                    <GridIcon className="w-4 h-4" />
+                                                    All Topics
+                                                </button>
+                                            )}
 
-                                        {/* Categorized Groups */}
-                                        <div className="space-y-4">
-                                            {topicGroups.map((group) => (
-                                                <div key={group.label}>
-                                                    <div className="px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-wider text-neutral-600">
-                                                        {group.label}
+                                            {!topicSearchQuery && <div className="h-px bg-neutral-800 mb-3" />}
+
+                                            {/* Categorized Groups */}
+                                            <div className="space-y-5">
+                                                {filteredTopicGroups.map((group) => (
+                                                    <div key={group.label}>
+                                                        <div className="px-3 mb-2 text-[10px] font-bold uppercase tracking-widest text-neutral-600/80">
+                                                            {group.label}
+                                                        </div>
+                                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+                                                            {group.topics.map((topic) => (
+                                                                <button
+                                                                    key={topic}
+                                                                    onClick={() => {
+                                                                        setActiveTopic(topic);
+                                                                        setTopicDropdownOpen(false);
+                                                                        setPagination(prev => ({ ...prev, page: 1 }));
+                                                                    }}
+                                                                    className={`px-3 py-2 text-sm text-left rounded-lg transition-all truncate ${activeTopic === topic
+                                                                        ? accentColor === 'amber'
+                                                                            ? 'bg-amber-500/15 text-amber-400 font-semibold'
+                                                                            : 'bg-violet-500/15 text-violet-400 font-semibold'
+                                                                        : 'text-neutral-400 hover:bg-neutral-800/60 hover:text-neutral-200'
+                                                                        }`}
+                                                                >
+                                                                    {topic}
+                                                                </button>
+                                                            ))}
+                                                        </div>
                                                     </div>
-                                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-0.5">
-                                                        {group.topics.map((topic) => (
-                                                            <button
-                                                                key={topic}
-                                                                onClick={() => {
-                                                                    setActiveTopic(topic);
-                                                                    setTopicDropdownOpen(false);
-                                                                    updatePage(1);
-                                                                }}
-                                                                className={`px-3 py-2 text-sm text-left rounded-lg transition-all ${activeTopic === topic
-                                                                    ? accentColor === 'amber'
-                                                                        ? 'bg-amber-500/15 text-amber-400 font-semibold'
-                                                                        : 'bg-violet-500/15 text-violet-400 font-semibold'
-                                                                    : 'text-neutral-400 hover:bg-neutral-800/60 hover:text-neutral-200'
-                                                                    }`}
-                                                            >
-                                                                {topic}
-                                                            </button>
-                                                        ))}
+                                                ))}
+                                                {filteredTopicGroups.length === 0 && (
+                                                    <div className="py-8 text-center text-neutral-500 text-sm">
+                                                        No topics found matching &quot;{topicSearchQuery}&quot;
                                                     </div>
-                                                </div>
-                                            ))}
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )}
-                        </div>
+                                )}
+                            </div>
 
-                        {/* Search and Filter */}
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <div className="relative flex-1">
-                                <SearchIcon sx={{ fontSize: '1.2rem' }} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500" />
+                            {/* 2. Search Bar (3 cols) */}
+                            <div className="xl:col-span-3 relative group">
+                                <SearchIcon sx={{ fontSize: '1.2rem' }} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 z-10" />
                                 <input
                                     type="text"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    placeholder="Search questions..."
-                                    className="w-full pl-12 pr-4 py-3 bg-[#1a1a1a] border border-neutral-800 rounded-xl text-neutral-200 placeholder-neutral-600 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-all text-sm"
+                                    placeholder="Search..."
+                                    className="w-full h-[48px] pl-10 pr-10 bg-[#1a1a1a] border border-neutral-800 rounded-xl text-neutral-200 placeholder-neutral-600 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-all text-sm"
                                 />
+                                {searchQuery && (
+                                    <button
+                                        onClick={() => setSearchQuery('')}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors z-10"
+                                    >
+                                        <CloseIcon sx={{ fontSize: '1.1rem' }} />
+                                    </button>
+                                )}
                             </div>
-                            <div className="w-full sm:w-[160px]">
+
+                            {/* 3. Difficulty (3 cols) */}
+                            <div className="xl:col-span-3">
                                 <CustomSelect
                                     value={difficulty}
-                                    onChange={(val) => { setDifficulty(val); updatePage(1); }}
+                                    onChange={(val) => { setDifficulty(val); setPagination(prev => ({ ...prev, page: 1 })); }}
                                     options={[
-                                        { value: 'All', label: 'Difficulty' },
+                                        { value: 'All', label: 'All Difficulties' },
                                         { value: 'EASY', label: 'Easy' },
                                         { value: 'MEDIUM', label: 'Medium' },
                                         { value: 'HARD', label: 'Hard' },
                                     ]}
+                                    prefix="Difficulty: "
                                 />
                             </div>
-                            <div className="w-full sm:w-[140px]">
+
+                            {/* 4. Year (2 cols) */}
+                            <div className="xl:col-span-2">
                                 <CustomSelect
                                     value={yearFilter}
-                                    onChange={(val) => { setYearFilter(val); updatePage(1); }}
+                                    onChange={(val) => { setYearFilter(val); setPagination(prev => ({ ...prev, page: 1 })); }}
                                     options={[
-                                        { value: 'All', label: 'Year' },
+                                        { value: 'All', label: 'All Years' },
                                         { value: '2024', label: '2024' },
                                         { value: '2023', label: '2023' },
                                         { value: '2022', label: '2022' },
                                         { value: '2021', label: '2021' },
                                         { value: '2020', label: '2020' },
                                     ]}
+                                    prefix="Year: "
                                 />
                             </div>
-                            <div className="w-full sm:w-[180px]">
+
+                            {/* 5. Status (2 cols) */}
+                            <div className="xl:col-span-2">
                                 <CustomSelect
-                                    value={extraFilter}
-                                    onChange={(val) => { setExtraFilter(val); updatePage(1); }}
+                                    value={statusFilter}
+                                    onChange={(val) => { setStatusFilter(val); setPagination(prev => ({ ...prev, page: 1 })); }}
                                     options={[
                                         { value: 'all', label: 'All Questions' },
                                         { value: 'unattempted', label: 'Unattempted' },
@@ -399,91 +542,248 @@ function ProblemsPageContent() {
                                         { value: 'wrong', label: 'Incorrect' },
                                         { value: 'correct', label: 'Solved' },
                                     ]}
+                                    prefix="Status: "
                                 />
                             </div>
                         </div>
 
-                        <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 overflow-hidden">
-                            <div className="hidden md:grid md:grid-cols-12 gap-4 px-6 py-5 text-base font-medium text-neutral-300 uppercase tracking-wide bg-neutral-900/50 border-b border-neutral-800">
-                                <div className="col-span-1 text-center">#</div>
-                                <div className="col-span-1 text-center">Status</div>
-                                <div className="col-span-7">Question</div>
-                                <div className="col-span-2 text-center">Level</div>
-                                <div className="col-span-1 text-center">Year</div>
+                        {/* Active Filters */}
+                        <div className="flex items-center justify-between gap-4 mt-6">
+                            <ActiveFilters filters={activeFilters} onClearAll={clearAllFilters} />
+                        </div>
+
+                        {/* Table */}
+                        <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 overflow-hidden mt-6">
+                            <div className="hidden md:grid md:grid-cols-[50px_50px_1fr_160px_110px_70px] gap-4 px-6 py-4 text-xs font-semibold text-neutral-400 uppercase tracking-wider bg-neutral-900/50 border-b border-neutral-800">
+                                <div className="text-center">#</div>
+                                <div className="text-center flex items-center justify-center gap-1 group/status">
+                                    Status
+                                    <div className="relative cursor-help">
+                                        <div className="w-3.5 h-3.5 rounded-full border border-neutral-500 text-neutral-500 flex items-center justify-center text-[8px] font-bold opacity-60 hover:opacity-100 transition-opacity">?</div>
+
+                                        {/* Status Guide Tooltip */}
+                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 p-4 bg-neutral-900 border border-neutral-800 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.7)] text-xs lowercase tracking-normal space-y-3 opacity-0 group-hover/status:opacity-100 transition-opacity pointer-events-none z-50">
+                                            <p className="text-neutral-400 uppercase font-bold tracking-widest text-[10px] border-b border-neutral-800 pb-2 mb-2">Status Guide</p>
+                                            <div className="flex items-center gap-3 text-neutral-300">
+                                                <div className="w-6 h-6 flex items-center justify-center">
+                                                    <div className="w-2 h-2 rounded-full border border-neutral-600 bg-neutral-600/20"></div>
+                                                </div>
+                                                <span className="font-medium">Unattempted</span>
+                                            </div>
+                                            <div className="flex items-center gap-3 text-emerald-400">
+                                                <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                                                    <CheckCircleOutlinedIcon sx={{ fontSize: '0.9rem' }} />
+                                                </div>
+                                                <span className="font-medium">Solved</span>
+                                            </div>
+                                            <div className="flex items-center gap-3 text-rose-400">
+                                                <div className="w-6 h-6 rounded-full bg-rose-500/20 flex items-center justify-center">
+                                                    <CloseIcon sx={{ fontSize: '0.9rem' }} />
+                                                </div>
+                                                <span className="font-medium">Wrong</span>
+                                            </div>
+                                            <div className="flex items-center gap-3 text-violet-400">
+                                                <div className="w-6 h-6 rounded-full bg-violet-500/20 flex items-center justify-center">
+                                                    <BookmarkIcon sx={{ fontSize: '0.8rem' }} />
+                                                </div>
+                                                <span className="font-medium">Saved</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>Question</div>
+                                <div className="hidden md:block text-center">Topic</div>
+                                <div className="text-center">Difficulty</div>
+                                <div className="text-center">Year</div>
                             </div>
 
                             <div className="divide-y divide-neutral-800/50">
                                 {loading ? (
                                     Array.from({ length: 8 }).map((_, i) => (
-                                        <div key={i} className="grid grid-cols-12 gap-3 px-5 py-4 animate-pulse">
-                                            <div className="col-span-1 flex justify-center"><div className="w-5 h-5 bg-neutral-800 rounded-full"></div></div>
-                                            <div className="col-span-1 flex justify-center"><div className="w-5 h-5 bg-neutral-800 rounded-full"></div></div>
-                                            <div className="col-span-7"><div className="h-4 bg-neutral-800 rounded w-3/4"></div></div>
-                                            <div className="col-span-2 flex justify-center"><div className="h-5 bg-neutral-800 rounded w-14"></div></div>
-                                            <div className="col-span-1 flex justify-center"><div className="h-4 bg-neutral-800 rounded w-10"></div></div>
+                                        <div key={i} className="grid grid-cols-1 md:grid-cols-[50px_50px_1fr_160px_110px_70px] gap-3 px-5 py-4 animate-pulse">
+                                            <div className="hidden md:flex justify-center"><div className="w-5 h-5 bg-neutral-800 rounded-full"></div></div>
+                                            <div className="hidden md:flex justify-center"><div className="w-5 h-5 bg-neutral-800 rounded-full"></div></div>
+                                            <div><div className="h-4 bg-neutral-800 rounded w-3/4"></div></div>
+                                            <div className="hidden md:block justify-center"><div className="h-4 bg-neutral-800 rounded w-1/2"></div></div>
+                                            <div className="hidden md:flex justify-center"><div className="h-5 bg-neutral-800 rounded w-14"></div></div>
+                                            <div className="hidden md:flex justify-center"><div className="h-4 bg-neutral-800 rounded w-10"></div></div>
                                         </div>
                                     ))
                                 ) : questions.length === 0 ? (
-                                    <div className="px-8 py-16 text-center">
-                                        <div className="w-14 h-14 mx-auto mb-4 bg-neutral-800 rounded-2xl flex items-center justify-center">
-                                            <DocumentIcon sx={{ fontSize: '1.5rem' }} className="text-neutral-600" />
+                                    <div className="px-8 py-20 text-center">
+                                        <div className="w-16 h-16 mx-auto mb-6 bg-neutral-800/50 rounded-2xl flex items-center justify-center border border-neutral-700/50">
+                                            <DocumentIcon sx={{ fontSize: '2rem' }} className="text-neutral-600" />
                                         </div>
-                                        <p className="text-neutral-300 font-medium mb-1">No Questions Found</p>
-                                        <p className="text-neutral-600 text-sm">Try selecting a different topic</p>
+                                        <h3 className="text-xl font-bold text-neutral-200 mb-2">No Questions Found</h3>
+
+                                        <div className="max-w-md mx-auto mt-6 bg-neutral-900/50 rounded-xl border border-neutral-800 p-6 text-left">
+                                            <p className="text-neutral-400 text-sm mb-4 font-medium">Current Filters:</p>
+                                            <ul className="space-y-2 mb-6">
+                                                <li className="flex items-center justify-between text-sm">
+                                                    <span className="text-neutral-500">Section</span>
+                                                    <span className="text-neutral-300 font-medium">{activeSection === 'QUANT' ? 'Quantitative Aptitude' : 'Reasoning'}</span>
+                                                </li>
+                                                <li className="flex items-center justify-between text-sm">
+                                                    <span className="text-neutral-500">Topic</span>
+                                                    <span className="text-neutral-300 font-medium">{activeTopic}</span>
+                                                </li>
+                                                <li className="flex items-center justify-between text-sm">
+                                                    <span className="text-neutral-500">Difficulty</span>
+                                                    <span className="text-neutral-300 font-medium">{difficulty}</span>
+                                                </li>
+                                                <li className="flex items-center justify-between text-sm">
+                                                    <span className="text-neutral-500">Year</span>
+                                                    <span className="text-neutral-300 font-medium">{yearFilter}</span>
+                                                </li>
+                                                <li className="flex items-center justify-between text-sm">
+                                                    <span className="text-neutral-500">Status</span>
+                                                    <span className="text-neutral-300 font-medium">{statusFilter}</span>
+                                                </li>
+                                            </ul>
+
+                                            <div className="space-y-3">
+                                                <p className="text-neutral-400 text-sm font-medium">Suggestions:</p>
+                                                <button
+                                                    onClick={() => setActiveSection(activeSection === 'QUANT' ? 'REASONING' : 'QUANT')}
+                                                    className="w-full text-left px-3 py-2 text-sm text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-lg transition-colors flex items-center gap-2"
+                                                >
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                                                    Switch to {activeSection === 'QUANT' ? 'Reasoning' : 'Quantitative Aptitude'}
+                                                </button>
+                                                <button
+                                                    onClick={() => { setActiveTopic('All'); setTopicDropdownOpen(true); }}
+                                                    className="w-full text-left px-3 py-2 text-sm text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-lg transition-colors flex items-center gap-2"
+                                                >
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                                    Select a different topic
+                                                </button>
+                                            </div>
+
+                                            <button
+                                                onClick={clearAllFilters}
+                                                className="w-full mt-6 py-2.5 px-4 bg-amber-500 hover:bg-amber-600 text-black font-bold text-sm rounded-lg transition-colors shadow-lg shadow-amber-500/10"
+                                            >
+                                                Clear All Filters
+                                            </button>
+                                        </div>
                                     </div>
                                 ) : (
                                     questions.map((q, index) => {
                                         const globalIndex = startItem + index;
+                                        const isCorrect = solvedCorrect.includes(q.id);
+                                        const isWrong = solvedWrong.includes(q.id) && !isCorrect;
+                                        const isBookmarked = userBookmarks.includes(q.id);
+
                                         return (
                                             <Link
                                                 href={`/problems/${q.id}?section=${activeSection}`}
                                                 key={q.id}
-                                                className="flex flex-col gap-3 p-4 md:grid md:grid-cols-12 md:gap-4 md:px-6 md:py-4 md:items-center hover:bg-neutral-800/30 transition-colors group border-b border-neutral-800/50 md:border-none"
+                                                className="block hover:bg-neutral-800/30 transition-colors group border-b border-neutral-800/50 md:border-none"
                                             >
-                                                <div className="flex items-center gap-3 md:contents">
-                                                    <div className="text-sm font-mono text-neutral-500 md:col-span-1 md:text-center min-w-[24px]">
-                                                        {globalIndex}
-                                                    </div>
-                                                    <div className="md:col-span-1 flex justify-center">
-                                                        {solvedCorrect.includes(q.id) ? (
-                                                            <div className="w-7 h-7 bg-emerald-500/15 rounded-full flex items-center justify-center">
-                                                                <CheckCircleOutlinedIcon sx={{ fontSize: '1.1rem' }} className="text-emerald-400" />
-                                                            </div>
-                                                        ) : solvedWrong.includes(q.id) ? (
-                                                            <div className="w-7 h-7 bg-amber-500/15 rounded-full flex items-center justify-center">
-                                                                <AccessTimeOutlinedIcon sx={{ fontSize: '1.1rem' }} className="text-amber-400" />
-                                                            </div>
-                                                        ) : userBookmarks.includes(q.id) ? (
-                                                            <div className="w-7 h-7 bg-violet-500/15 rounded-full flex items-center justify-center">
-                                                                <BookmarkIcon sx={{ fontSize: '1rem' }} className="text-violet-400" />
-                                                            </div>
-                                                        ) : (
-                                                            <RadioButtonUncheckedOutlinedIcon sx={{ fontSize: '1.4rem' }} className="text-neutral-700" />
-                                                        )}
+                                                <div className="grid grid-cols-1 md:grid-cols-[50px_50px_1fr_160px_110px_70px] gap-3 md:gap-4 px-5 py-4 items-center">
+                                                    {/* Index - Desktop */}
+                                                    <div className="hidden md:block text-center text-base text-neutral-500 font-mono">
+                                                        {q.questionNumber ?? globalIndex}
                                                     </div>
 
-                                                    {/* Mobile Badges */}
-                                                    <div className="flex-1 md:hidden"></div>
-                                                    <div className="md:hidden flex items-center gap-2">
-                                                        {getDifficultyBadge(q.difficulty)}
-                                                        <span className="px-2 py-1 text-xs font-medium text-neutral-400 bg-neutral-800/50 rounded-md">
+                                                    {/* Status/Icon */}
+                                                    <div className="flex items-center gap-2 md:justify-center">
+                                                        <div className="hidden md:flex">
+                                                            {isCorrect ? (
+                                                                <div className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center">
+                                                                    <CheckCircleOutlinedIcon sx={{ fontSize: '1rem' }} />
+                                                                </div>
+                                                            ) : isWrong ? (
+                                                                <div className="w-6 h-6 rounded-full bg-rose-500/20 text-rose-500 flex items-center justify-center">
+                                                                    <CloseIcon sx={{ fontSize: '1rem' }} />
+                                                                </div>
+                                                            ) : userBookmarks.includes(q.id) ? (
+                                                                <div className="w-6 h-6 rounded-full bg-violet-500/20 text-violet-500 flex items-center justify-center">
+                                                                    <BookmarkIcon sx={{ fontSize: '0.9rem' }} />
+                                                                </div>
+                                                            ) : (
+                                                                <div className="w-6 h-6 rounded-full border-2 border-neutral-700 text-neutral-700 flex items-center justify-center">
+                                                                    <div className="w-1.5 h-1.5 rounded-full bg-current opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                        {/* Mobile Status Header */}
+                                                        <div className="md:hidden flex items-center justify-between w-full mb-1">
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="text-neutral-500 font-mono text-sm font-medium">#{q.questionNumber ?? globalIndex}</span>
+                                                                {isCorrect ? (
+                                                                    <span className="text-xs text-emerald-500 font-medium flex items-center gap-1">
+                                                                        <CheckCircleOutlinedIcon sx={{ fontSize: '0.9rem' }} /> Solved
+                                                                    </span>
+                                                                ) : isWrong ? (
+                                                                    <span className="text-xs text-rose-500 font-medium flex items-center gap-1">
+                                                                        <CloseIcon sx={{ fontSize: '0.9rem' }} /> Attempted
+                                                                    </span>
+                                                                ) : (
+                                                                    <span className="text-xs text-neutral-500 font-medium">Unattempted</span>
+                                                                )}
+                                                            </div>
+                                                            {isBookmarked && <BookmarkIcon sx={{ fontSize: '1rem' }} className="text-amber-500" />}
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Question Title */}
+                                                    <div className="relative group/title min-w-0">
+                                                        <div className="flex flex-col">
+                                                            <div className="md:hidden mb-2">
+                                                                {/* Spacer for mobile layout if needed or just use gap */}
+                                                            </div>
+                                                            <div className="text-base font-medium text-neutral-200 group-hover:text-white transition-colors truncate">
+                                                                <MathText>{q.title}</MathText>
+                                                            </div>
+                                                            {/* Mobile-only additional info */}
+                                                            <div className="flex items-center gap-2 mt-2 md:hidden">
+                                                                <span className="text-[10px] text-neutral-400 bg-neutral-800 px-1.5 py-0.5 rounded border border-neutral-700">
+                                                                    {getTopicName(q.pattern)}
+                                                                </span>
+                                                                <span className={`text-[11px] px-2 py-0.5 rounded uppercase font-bold ${q.difficulty === 'EASY' ? 'text-emerald-500 bg-emerald-500/10' : q.difficulty === 'MEDIUM' ? 'text-amber-500 bg-amber-500/10' : 'text-rose-500 bg-rose-500/10'}`}>
+                                                                    {q.difficulty}
+                                                                </span>
+                                                                <span className="text-[10px] text-neutral-500">
+                                                                    {q.source?.split(' ').pop()}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        {/* Desktop Bookmark Indicator */}
+                                                        {isBookmarked && (
+                                                            <div className="absolute -left-8 top-1/2 -translate-y-1/2 text-amber-500 md:block hidden">
+                                                                <BookmarkIcon sx={{ fontSize: '0.9rem' }} />
+                                                            </div>
+                                                        )}
+                                                        {/* Tooltip for full text - Improved Readability & Dynamic Positioning */}
+                                                        <div className={`absolute left-0 ${index < 3 ? 'top-full mt-2' : 'bottom-full mb-2'} hidden md:group-hover/title:block w-[500px] lg:w-[700px] p-5 bg-neutral-900/95 backdrop-blur-sm text-base font-medium text-neutral-200 rounded-xl shadow-[0_0_40px_rgba(0,0,0,0.6)] ring-1 ring-white/10 border border-neutral-700/50 z-50 pointer-events-none whitespace-normal leading-relaxed`}>
+                                                            <MathText>{q.title}</MathText>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Topic Column */}
+                                                    <div className="hidden md:flex items-center justify-center">
+                                                        <span className="text-sm text-neutral-400 truncate">
+                                                            {getTopicName(q.pattern)}
+                                                        </span>
+                                                    </div>
+
+                                                    {/* Desktop Difficulty */}
+                                                    <div className="hidden md:flex justify-center">
+                                                        <span className={`px-3 py-1.5 rounded-full text-xs uppercase font-bold tracking-wide
+                                                            ${q.difficulty === 'EASY' ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' :
+                                                                q.difficulty === 'MEDIUM' ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20' :
+                                                                    'bg-rose-500/10 text-rose-500 border border-rose-500/20'}`}>
+                                                            {q.difficulty}
+                                                        </span>
+                                                    </div>
+
+                                                    {/* Desktop Year */}
+                                                    <div className="hidden md:flex justify-center">
+                                                        <span className="text-sm text-neutral-400 font-medium bg-neutral-800/50 px-2.5 py-1 rounded">
                                                             {q.source?.split(' ').pop() || ''}
                                                         </span>
                                                     </div>
-                                                </div>
-
-                                                <div className="md:col-span-7 overflow-hidden">
-                                                    <div className="text-neutral-100 group-hover:text-amber-400 transition-colors text-base md:text-lg line-clamp-3 md:line-clamp-2 leading-relaxed">
-                                                        <MathText>{q.title}</MathText>
-                                                    </div>
-                                                </div>
-
-                                                {/* Desktop Badges */}
-                                                <div className="hidden md:flex md:col-span-2 md:justify-center">{getDifficultyBadge(q.difficulty)}</div>
-                                                <div className="hidden md:block md:col-span-1 md:text-center">
-                                                    <span className="px-2 py-1 text-xs font-medium text-neutral-400 bg-neutral-800/50 rounded-md">
-                                                        {q.source?.split(' ').pop() || ''}
-                                                    </span>
                                                 </div>
                                             </Link>
                                         );
@@ -491,49 +791,64 @@ function ProblemsPageContent() {
                                 )}
                             </div>
 
-                            {/* Pagination */}
-                            <div className="flex items-center justify-between px-5 py-3 bg-neutral-900/50 border-t border-neutral-800">
-                                <p className="text-sm text-neutral-500">
-                                    Showing <span className="text-neutral-300">{pagination.total > 0 ? startItem : 0}-{endItem}</span> of <span className="text-neutral-300">{pagination.total}</span> questions
-                                </p>
-                                <div className="flex gap-1">
-                                    <button
-                                        onClick={() => updatePage(pagination.page - 1)}
-                                        disabled={pagination.page <= 1}
-                                        className="p-2 text-neutral-500 hover:text-white hover:bg-neutral-800 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                                    >
-                                        <ChevronLeftIcon sx={{ fontSize: '1.2rem' }} />
-                                    </button>
-                                    {getPageNumbers().map((pageNum, idx) => (
-                                        pageNum === '...' ? (
-                                            <span key={`e-${idx}`} className="px-3 py-2 text-neutral-600">...</span>
-                                        ) : (
-                                            <button
-                                                key={pageNum}
-                                                onClick={() => updatePage(pageNum as number)}
-                                                className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors ${pageNum === pagination.page
-                                                    ? 'bg-amber-500/20 text-amber-400'
-                                                    : 'text-neutral-500 hover:bg-neutral-800 hover:text-white'
-                                                    }`}
-                                            >
-                                                {pageNum}
-                                            </button>
-                                        )
-                                    ))}
-                                    <button
-                                        onClick={() => updatePage(pagination.page + 1)}
-                                        disabled={pagination.page >= pagination.totalPages}
-                                        className="p-2 text-neutral-500 hover:text-white hover:bg-neutral-800 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                                    >
-                                        <ChevronRightIcon sx={{ fontSize: '1.2rem' }} />
-                                    </button>
+                            {/* Pagination with Context */}
+                            {questions.length > 0 && (
+                                <div className="p-4 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                                    <p className="text-xs text-neutral-500">
+                                        Showing <span className="font-medium text-neutral-300">{startItem}</span> to <span className="font-medium text-neutral-300">{endItem}</span> of <span className="font-medium text-neutral-300">{pagination.total}</span> questions
+                                    </p>
+
+                                    <div className="flex items-center gap-2">
+                                        <button
+                                            onClick={() => updatePage(pagination.page - 1)}
+                                            disabled={pagination.page === 1}
+                                            className="p-2 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                        >
+                                            <ChevronLeftIcon sx={{ fontSize: '1.2rem' }} />
+                                        </button>
+
+                                        <div className="hidden sm:flex items-center gap-1 px-2">
+                                            {Array.from({ length: Math.min(5, pagination.totalPages) }, (_, i) => {
+                                                let p = pagination.page;
+                                                // Simplified pagination logic for display
+                                                if (pagination.totalPages <= 5) p = i + 1;
+                                                else if (pagination.page <= 3) p = 1 + i;
+                                                else if (pagination.page >= pagination.totalPages - 2) p = pagination.totalPages - 4 + i;
+                                                else p = pagination.page - 2 + i;
+
+                                                if (p > 0 && p <= pagination.totalPages) {
+                                                    return (
+                                                        <button
+                                                            key={p}
+                                                            onClick={() => updatePage(p)}
+                                                            className={`w-8 h-8 rounded-lg text-sm font-medium transition-all ${pagination.page === p
+                                                                ? 'bg-neutral-800 text-white border border-neutral-700'
+                                                                : 'text-neutral-500 hover:bg-neutral-800/50 hover:text-neutral-300'
+                                                                }`}
+                                                        >
+                                                            {p}
+                                                        </button>
+                                                    );
+                                                }
+                                                return null;
+                                            })}
+                                        </div>
+
+                                        <button
+                                            onClick={() => updatePage(pagination.page + 1)}
+                                            disabled={pagination.page === pagination.totalPages}
+                                            className="p-2 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                        >
+                                            <ChevronRightIcon sx={{ fontSize: '1.2rem' }} />
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 }
 

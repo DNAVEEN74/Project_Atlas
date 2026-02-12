@@ -401,7 +401,6 @@ interface IPattern {
     name: string;                     // display name: "Percentage", "Profit & Loss"
     subject: 'QUANT' | 'REASONING';  // patterns are exclusive to one subject
     question_count: number;           // denormalized, updated on import
-    display_order: number;            // for UI sorting
 }
 
 // Indexes:
@@ -413,7 +412,6 @@ interface IPattern {
 - `code` is stored in `Question.pattern` and `Attempt.pattern`
 - `name` is used as the display label (called "topic" in the UI)
 - `question_count` is updated when new questions are imported
-- `display_order` controls the sort order in topic dropdowns
 
 **Topics by Subject:**
 

@@ -87,7 +87,7 @@ export async function GET(req: NextRequest) {
 
         const formattedQuestions = questions.map((q: any) => ({
             id: q._id,
-            title: q.text.substring(0, 100) + (q.text.length > 100 ? "..." : ""),
+            title: q.text,
             pattern: q.pattern,
             difficulty: q.difficulty,
             subject: q.subject,
@@ -95,7 +95,8 @@ export async function GET(req: NextRequest) {
                 ? `${Math.round(q.stats.accuracy_rate * 100)}%`
                 : "N/A",
             source: `${q.source.exam} ${q.source.year}`,
-            is_live: q.is_live
+            is_live: q.is_live,
+            questionNumber: q.question_number
         }));
 
         return NextResponse.json({

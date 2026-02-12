@@ -1,0 +1,260 @@
+[
+  {
+    "code": "percentage",
+    "name": "Percentage",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "profit_loss",
+    "name": "Profit & Loss",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "simple_interest",
+    "name": "Simple Interest",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "compound_interest",
+    "name": "Compound Interest",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "ratio_proportion",
+    "name": "Ratio & Proportion",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "mixture_alligation",
+    "name": "Mixture & Alligation",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "partnership",
+    "name": "Partnership",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "average",
+    "name": "Average",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "time_work",
+    "name": "Time & Work",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "pipes_cistern",
+    "name": "Pipes & Cistern",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "speed_distance_time",
+    "name": "Speed Distance & Time",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "boat_stream",
+    "name": "Boat & Stream",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "number_system",
+    "name": "Number System",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "hcf_lcm",
+    "name": "HCF & LCM",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "simplification",
+    "name": "Simplification",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "power_indices",
+    "name": "Power & Indices",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "algebra",
+    "name": "Algebra",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "trigonometry",
+    "name": "Trigonometry",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "height_distance",
+    "name": "Height & Distance",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "geometry",
+    "name": "Geometry",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "mensuration_2d",
+    "name": "Mensuration 2D",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "mensuration_3d",
+    "name": "Mensuration 3D",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "coordinate_geometry",
+    "name": "Coordinate Geometry",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "data_interpretation",
+    "name": "Data Interpretation",
+    "subject": "QUANT",
+    "question_count": 0
+  },
+  {
+    "code": "analogy",
+    "name": "Analogy",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "classification",
+    "name": "Classification",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "coding_decoding",
+    "name": "Coding-Decoding",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "series",
+    "name": "Series",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "missing_number",
+    "name": "Missing Number",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "blood_relations",
+    "name": "Blood Relations",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "direction_sense",
+    "name": "Direction Sense",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "order_ranking",
+    "name": "Order & Ranking",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "sitting_arrangement",
+    "name": "Sitting Arrangement",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "syllogism",
+    "name": "Syllogism",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "venn_diagram",
+    "name": "Venn Diagram",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "dice_cube",
+    "name": "Dice & Cube",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "clock_calendar",
+    "name": "Clock & Calendar",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "counting_figures",
+    "name": "Counting Figures",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "mirror_water_image",
+    "name": "Mirror & Water Image",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "paper_cutting",
+    "name": "Paper Cutting",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "embedded_figures",
+    "name": "Embedded Figures",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "matrix",
+    "name": "Matrix",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "statement_conclusion",
+    "name": "Statement & Conclusion",
+    "subject": "REASONING",
+    "question_count": 0
+  }
+]
