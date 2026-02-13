@@ -24,8 +24,9 @@ export function validateUserStreak(user: IUser): boolean {
     yesterday.setDate(yesterday.getDate() - 1);
     const yesterdayStr = yesterday.toISOString().split('T')[0];
 
-    // If active today or yesterday, streak is valid
-    if (lastActiveDateStr === todayStr || lastActiveDateStr === yesterdayStr) {
+    // If active today or yesterday (or in the future due to timezone differences), streak is valid
+    // We allow future dates because a user might be in a timezone ahead of the server
+    if (lastActiveDateStr >= yesterdayStr) {
         return false;
     }
 

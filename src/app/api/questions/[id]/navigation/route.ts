@@ -18,9 +18,26 @@ export async function GET(
         const { searchParams } = new URL(req.url);
         const section = searchParams.get('section') || null;
         const pattern = searchParams.get('pattern') || null;
+        const difficulty = searchParams.get('difficulty') || null;
+        const year = searchParams.get('year') || null;
+        const query = searchParams.get('query') || null;
 
-        // Get the current question to find its position
-        const currentQuestion = await Question.findById(id).lean();
+        // Determine if input is a question number (numeric)
+        const isNumericId = /^\d+$/.test(id);
+        let currentQuestion;
+
+        if (isNumericId) {
+            currentQuestion = await Question.findOne({ question_number: parseInt(id) }).lean();
+        } else {
+            // Fallback to ID lookup
+            try {
+                currentQuestion = await Question.findById(id).lean();
+            } catch {
+                // Invalid ObjectId format
+                return NextResponse.json({ error: "Invalid Question ID" }, { status: 400 });
+            }
+        }
+
         if (!currentQuestion) {
             return NextResponse.json(
                 { error: "Question not found" },
@@ -28,7 +45,7 @@ export async function GET(
             );
         }
 
-        // Build base query for section + pattern filtering
+        // Build base query for filtered navigation
         const baseQuery: any = { is_live: true };
         if (section) {
             baseQuery.subject = section;
@@ -36,66 +53,81 @@ export async function GET(
         if (pattern) {
             baseQuery.pattern = pattern;
         }
+        if (difficulty) {
+            baseQuery.difficulty = difficulty;
+        }
+        if (year) {
+            baseQuery['source.year'] = parseInt(year);
+        }
+        if (query) {
+            baseQuery.text = { $regex: query, $options: 'i' };
+        }
 
-        // If pattern-based navigation is requested and question_number exists,
-        // use question_number ordering for deterministic navigation within a pattern
-        const useQuestionNumber = pattern && (currentQuestion as any).question_number != null;
+        // Use question_number for ordering if available
+        const useQuestionNumber = (currentQuestion as any).question_number != null;
+        const currentQNum = (currentQuestion as any).question_number;
+        const currentId = (currentQuestion as any)._id;
 
         let prevQuestion, nextQuestion, totalCount, currentPosition;
 
         if (useQuestionNumber) {
-            const qNum = (currentQuestion as any).question_number;
-
+            // Logic for Question Number based navigation
             prevQuestion = await Question.findOne({
                 ...baseQuery,
-                question_number: { $lt: qNum }
+                question_number: { $lt: currentQNum }
             })
                 .sort({ question_number: -1 })
-                .select('_id')
+                .select('_id question_number')
                 .lean();
 
             nextQuestion = await Question.findOne({
                 ...baseQuery,
-                question_number: { $gt: qNum }
+                question_number: { $gt: currentQNum }
             })
                 .sort({ question_number: 1 })
-                .select('_id')
+                .select('_id question_number')
                 .lean();
 
             totalCount = await Question.countDocuments(baseQuery);
             currentPosition = await Question.countDocuments({
                 ...baseQuery,
-                question_number: { $lte: qNum }
+                question_number: { $lte: currentQNum }
             });
         } else {
             // Fallback: _id-based ordering
             prevQuestion = await Question.findOne({
                 ...baseQuery,
-                _id: { $lt: id }
+                _id: { $lt: currentId }
             })
                 .sort({ _id: -1 })
-                .select('_id')
+                .select('_id question_number')
                 .lean();
 
             nextQuestion = await Question.findOne({
                 ...baseQuery,
-                _id: { $gt: id }
+                _id: { $gt: currentId }
             })
                 .sort({ _id: 1 })
-                .select('_id')
+                .select('_id question_number')
                 .lean();
 
             totalCount = await Question.countDocuments(baseQuery);
             currentPosition = await Question.countDocuments({
                 ...baseQuery,
-                _id: { $lte: id }
+                _id: { $lte: currentId }
             });
         }
 
+        // helper to get the best ID to return
+        const getReturnId = (q: any) => {
+            if (!q) return null;
+            return q.question_number != null ? q.question_number.toString() : q._id.toString();
+        };
+
         return NextResponse.json({
             data: {
-                prevId: prevQuestion ? (prevQuestion as any)._id.toString() : null,
-                nextId: nextQuestion ? (nextQuestion as any)._id.toString() : null,
+                prevId: getReturnId(prevQuestion),
+                nextId: getReturnId(nextQuestion),
                 currentPosition,
                 totalCount,
                 section: section || 'ALL',

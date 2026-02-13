@@ -120,59 +120,103 @@ function QuestionContent({ text, image, onImageClick }: { text: string; image?: 
 }
 
 function SolutionContent({ solution }: { solution: string }) {
-    // Parse solution into structured blocks
     const lines = solution.split('\n').filter(line => line.trim());
 
+    // Group lines into blocks
+    const blocks: { header?: string; content: string[] }[] = [];
+    let currentBlock: { header?: string; content: string[] } | null = null;
+
+    lines.forEach(line => {
+        const trimmedLine = line.trim();
+        const boldHeaderMatch = trimmedLine.match(/^\*\*([^*]+)\*\*:?\s*(.*)/);
+
+        if (boldHeaderMatch) {
+            const [, headerText, remainingText] = boldHeaderMatch;
+            currentBlock = { header: headerText, content: [] };
+            if (remainingText) currentBlock.content.push(remainingText);
+            blocks.push(currentBlock);
+        } else {
+            if (!currentBlock) {
+                currentBlock = { content: [] };
+                blocks.push(currentBlock);
+            }
+            currentBlock.content.push(trimmedLine);
+        }
+    });
+
     return (
-        <div className="space-y-2">
-            {lines.map((line, idx) => {
-                const trimmedLine = line.trim();
+        <div className="space-y-12 py-4">
+            {blocks.map((block, bIdx) => (
+                <div key={bIdx} className="relative pl-10 group">
+                    {/* Vertical Connector Line */}
+                    {bIdx !== blocks.length - 1 && (
+                        <div className="absolute left-[7px] top-8 bottom-[-48px] w-px bg-neutral-800 group-hover:bg-amber-500/30 transition-colors" />
+                    )}
 
-                // Check if line contains bold header pattern (e.g., **Step 1:** or **Given:**)
-                const boldHeaderMatch = trimmedLine.match(/^\*\*([^*]+)\*\*:?\s*(.*)/);
-                if (boldHeaderMatch) {
-                    const [, headerText, remainingText] = boldHeaderMatch;
-                    return (
-                        <div key={idx} className="mt-3 first:mt-0">
-                            <div className="text-amber-400 font-bold text-sm mb-1">
-                                {headerText}
-                            </div>
-                            {remainingText && (
-                                <div className="text-neutral-300 text-sm leading-relaxed ml-2">
-                                    <MathText>{remainingText}</MathText>
-                                </div>
-                            )}
-                        </div>
-                    );
-                }
-
-                // Bullet points (lines starting with -)
-                if (trimmedLine.startsWith('- ')) {
-                    const bulletText = trimmedLine.substring(2);
-                    return (
-                        <div key={idx} className="flex gap-2 text-neutral-300 text-sm ml-2">
-                            <span className="text-amber-400 shrink-0">•</span>
-                            <MathText>{bulletText}</MathText>
-                        </div>
-                    );
-                }
-
-                // Display math ($$...$$)
-                if (trimmedLine.startsWith('$$') && trimmedLine.endsWith('$$')) {
-                    return (
-                        <div key={idx} className="my-1 pl-2">
-                            <MathText>{trimmedLine}</MathText>
-                        </div>
-                    );
-                }
-
-                // Regular text with potential inline math
-                return (
-                    <div key={idx} className="text-neutral-300 text-sm leading-relaxed pl-2">
-                        <MathText>{trimmedLine}</MathText>
+                    {/* Step Indicator Dot */}
+                    <div className="absolute left-0 top-1 w-4 h-4 rounded-full border-2 border-neutral-700 bg-[#0f0f0f] z-10 group-hover:border-amber-500 transition-colors flex items-center justify-center">
+                        <div className="w-1 h-1 rounded-full bg-neutral-700 group-hover:bg-amber-500 transition-colors" />
                     </div>
-                );
-            })}
+
+                    {block.header && (
+                        <h3 className="text-amber-500 text-xs font-black uppercase tracking-[0.2em] mb-4">
+                            {block.header}
+                        </h3>
+                    )}
+
+                    <div className="space-y-4">
+                        {block.content.map((item, iIdx) => {
+                            const trimmedItem = item.trim();
+
+                            if (trimmedItem.startsWith('- ') || trimmedItem.startsWith('• ')) {
+                                const bulletText = trimmedItem.substring(2);
+                                return (
+                                    <div key={iIdx} className="flex gap-4 text-neutral-300 text-[15px] leading-relaxed">
+                                        <div className="mt-2.5 w-1 h-1 rounded-full bg-neutral-600 shrink-0" />
+                                        <MathText>{bulletText}</MathText>
+                                    </div>
+                                );
+                            }
+
+                            if (trimmedItem.startsWith('$$') && trimmedItem.endsWith('$$')) {
+                                return (
+                                    <div key={iIdx} className="my-8 py-4 flex justify-center items-center overflow-x-auto custom-scrollbar-horizontal">
+                                        <MathText>{trimmedItem}</MathText>
+                                    </div>
+                                );
+                            }
+
+                            return (
+                                <div key={iIdx} className="text-neutral-200 text-[16px] leading-relaxed font-medium">
+                                    <MathText>{trimmedItem}</MathText>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+function Tooltip({ children, text, position = 'bottom' }: { children: React.ReactNode; text: string; position?: 'top' | 'bottom' | 'left' | 'right' }) {
+    if (!text) return <>{children}</>;
+
+    const positionClasses = {
+        top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',
+        bottom: 'top-full left-1/2 -translate-x-1/2 mt-2',
+        left: 'right-full top-1/2 -translate-y-1/2 mr-2',
+        right: 'left-full top-1/2 -translate-y-1/2 ml-2'
+    };
+
+    return (
+        <div className="relative group/tooltip inline-block">
+            {children}
+            <div className={`absolute ${positionClasses[position]} hidden group-hover/tooltip:block z-[100] pointer-events-none transition-all`}>
+                <div className="bg-neutral-900 border border-neutral-800 text-neutral-200 text-xs px-3 py-1.5 rounded-lg shadow-2xl whitespace-nowrap">
+                    {text}
+                </div>
+            </div>
         </div>
     );
 }
@@ -369,7 +413,22 @@ export default function QuestionPage({
                 }
 
                 // Always fetch navigation to ensure buttons work
-                promises.push(fetch(`/api/questions/${questionId}/navigation?section=${section}`).then(r => r.json()));
+                // Pass all filter params to navigation API
+                const navParams = new URLSearchParams();
+                navParams.set('section', section);
+                const pattern = searchParams.get('pattern');
+                const difficulty = searchParams.get('difficulty');
+                const year = searchParams.get('year');
+                const status = searchParams.get('status');
+                const query = searchParams.get('query');
+
+                if (pattern) navParams.set('pattern', pattern);
+                if (difficulty) navParams.set('difficulty', difficulty);
+                if (year) navParams.set('year', year);
+                if (status) navParams.set('status', status);
+                if (query) navParams.set('query', query);
+
+                promises.push(fetch(`/api/questions/${questionId}/navigation?${navParams.toString()}`).then(r => r.json()));
 
                 promises.push(fetch(`/api/bookmarks?limit=100`).then(r => r.ok ? r.json() : { data: [] }));
                 promises.push(
@@ -396,6 +455,10 @@ export default function QuestionPage({
                     const previousAttempt = attemptData.data[0];
                     setSelectedOption(previousAttempt.option_selected);
                     setIsSubmitted(true);
+                    setShowSolution(true);
+                    if (previousAttempt.time_ms > 0) {
+                        setSubmittedTime(Math.floor(previousAttempt.time_ms / 1000));
+                    }
                 }
             } catch (error) {
                 console.error('Error fetching question:', error);
@@ -553,7 +616,10 @@ export default function QuestionPage({
                 router.push(`/problems/${prevId}?section=${sprintSession.subject}&sprint=true`);
             }
         } else if (navigation?.prevId) {
-            router.push(`/problems/${navigation.prevId}?section=${section}`);
+            const params = new URLSearchParams(searchParams.toString());
+            // Ensure section is preserved or updated if changed (though usually same)
+            params.set('section', section);
+            router.push(`/problems/${navigation.prevId}?${params.toString()}`);
         }
     };
 
@@ -616,7 +682,10 @@ export default function QuestionPage({
             if (isTimerEnabled && !isSubmitted) {
                 setQuestionTimes(prev => ({ ...prev, [questionId]: elapsedTime }));
             }
-            router.push(`/problems/${navigation.nextId}?section=${section}`);
+            const params = new URLSearchParams(searchParams.toString());
+            // Ensure section is preserved or updated if changed
+            params.set('section', section);
+            router.push(`/problems/${navigation.nextId}?${params.toString()}`);
         }
     };
 
@@ -690,6 +759,7 @@ export default function QuestionPage({
                         optionSelected: selectedOption,
                         timeMs,
                         isSprint: true,
+                        localDate: new Date().toLocaleDateString('en-CA')
                     }),
                 }).catch(err => console.error('Failed to record attempt:', err));
 
@@ -729,6 +799,9 @@ export default function QuestionPage({
 
             try {
                 // Record the attempt
+                // Send local date to ensure streak updates correctly for user's timezone
+                const localDate = new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD
+
                 await fetch('/api/attempts', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -736,6 +809,7 @@ export default function QuestionPage({
                         questionId: question.id,
                         optionSelected: selectedOption,
                         timeMs,
+                        localDate
                     }),
                 });
 
@@ -972,132 +1046,133 @@ export default function QuestionPage({
         <div className="h-screen bg-[#0f0f0f] flex flex-col relative overflow-hidden">
             {/* Sidebar Toggle Button - Only show in Practice/Sprint mode */}
             {(isPracticeMode || isSprintMode) && (
-                <button
-                    onClick={() => setShowSidebar(!showSidebar)}
-                    className={`fixed left-0 top-1/2 -translate-y-1/2 z-50 p-2 rounded-r-xl transition-all duration-300 shadow-lg ${showSidebar
-                        ? 'bg-amber-500 text-white translate-x-[520px] shadow-amber-500/20'
-                        : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-white hover:shadow-neutral-700/30'}`}
-                    title={showSidebar ? 'Hide question list' : 'Show question list'}
-                >
-                    <SplitscreenIcon sx={{ fontSize: '1.5rem' }} />
-                </button>
+                <Tooltip text={showSidebar ? 'Hide List' : 'Show List'} position="right">
+                    <button
+                        onClick={() => setShowSidebar(!showSidebar)}
+                        className={`fixed left-0 top-1/2 -translate-y-1/2 z-50 p-2 rounded-xl transition-all duration-300 shadow-lg ${showSidebar
+                            ? 'bg-amber-500 text-white translate-x-[520px] shadow-amber-500/20'
+                            : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-white hover:shadow-neutral-700/30'}`}
+                    >
+                        <SplitscreenIcon sx={{ fontSize: '1.5rem' }} />
+                    </button>
+                </Tooltip>
             )}
 
             {/* Question Navigation Sidebar - Only render in Practice/Sprint mode */}
             {(isPracticeMode || isSprintMode) && (
-            <div className={`fixed left-0 top-0 h-full w-[520px] bg-[#1a1a1a] border-r border-neutral-800 z-40 transform transition-transform duration-300 ${showSidebar ? 'translate-x-0' : '-translate-x-full'}`}>
-                {/* Header */}
-                <div className="p-4 border-b border-neutral-800 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <h3 className="text-lg font-bold text-white">
-                            {isSprintMode ? 'Sprint Questions' : (isPracticeMode ? 'Practice Questions' : 'Problem List')}
-                        </h3>
-                        <ChevronRightIcon sx={{ fontSize: '1.25rem' }} className="text-neutral-500" />
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <span className="text-sm text-neutral-400">
-                            {isSprintMode && sprintSession
-                                ? `${sprintSession.currentIndex + 1}/${sprintSession.questionIds.length}`
-                                : (isPracticeMode && practiceSession
-                                    ? `${practiceSession.currentIndex + 1}/${practiceSession.questionIds.length}`
-                                    : navigation ? `${navigation.currentPosition}/${navigation.totalCount}` : '')
-                            }
-                        </span>
-                        <button
-                            onClick={() => setShowSidebar(false)}
-                            className="p-1.5 rounded-lg hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors"
-                        >
-                            <CloseIcon sx={{ fontSize: '1.25rem' }} />
-                        </button>
-                    </div>
-                </div>
-
-                {/* Question List */}
-                <div ref={sidebarListRef} className="overflow-y-auto max-h-[calc(100vh-80px)]">
-                    {(isPracticeMode && practiceSession) || (isSprintMode && sprintSession) ? (
-                        <div className="divide-y divide-neutral-800">
-                            {(isSprintMode ? sprintSession!.questionIds : practiceSession!.questionIds).map((qId, idx) => {
-                                const isCurrent = qId === questionId;
-                                const isFocused = idx === focusedSidebarIndex;
-                                const qDetails = sidebarQuestions.find(q => q.id === qId);
-                                const diffStyles: Record<string, string> = {
-                                    'EASY': 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-                                    'MEDIUM': 'bg-amber-500/15 text-amber-400 border-amber-500/30',
-                                    'HARD': 'bg-rose-500/15 text-rose-400 border-rose-500/30'
-                                };
-                                const diffLabels: Record<string, string> = { 'EASY': 'Easy', 'MEDIUM': 'Med.', 'HARD': 'Hard' };
-
-                                return (
-                                    <button
-                                        id={`sidebar-item-${idx}`}
-                                        key={qId}
-                                        onClick={() => {
-                                            const sec = isSprintMode ? sprintSession!.subject : practiceSession!.section;
-                                            router.push(`/problems/${qId}?section=${sec}&${isSprintMode ? 'sprint' : 'practice'}=true`);
-                                            // Close sidebar on mobile/smaller screens if needed, but keeping open for quick nav is good
-                                            // setShowSidebar(false); 
-                                        }}
-                                        className={`w-full p-4 text-left transition-all flex items-start gap-4 hover:bg-neutral-800/80 group ${isCurrent
-                                            ? 'bg-amber-500/10 border-l-4 border-l-amber-500'
-                                            : 'border-l-4 border-l-transparent'
-                                            } ${isFocused && !isCurrent ? 'ring-2 ring-amber-500/50 bg-neutral-800/60' : ''}`}
-                                    >
-                                        {/* Number Badge */}
-                                        <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold transition-transform group-hover:scale-110 ${isCurrent ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20' : 'bg-neutral-800 text-neutral-400 border border-neutral-700'
-                                            }`}>
-                                            {idx + 1}
-                                        </div>
-
-                                        {/* Question Info */}
-                                        <div className="flex-1 min-w-0">
-                                            <div className="flex items-center gap-2 mb-1.5">
-                                                <span className={`text-sm font-semibold tracking-wide ${isCurrent ? 'text-amber-400' : 'text-neutral-300'}`}>
-                                                    Question {idx + 1}
-                                                </span>
-                                                <span className={`px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider rounded border ${diffStyles[qDetails?.difficulty || 'MEDIUM']}`}>
-                                                    {diffLabels[qDetails?.difficulty || 'MEDIUM']}
-                                                </span>
-                                            </div>
-                                            <p className={`text-sm line-clamp-2 leading-relaxed ${isCurrent ? 'text-neutral-200' : 'text-neutral-300'}`}>
-                                                {qDetails?.text?.replace(/\[IMAGE\]/g, '📷 ').substring(0, 150) || 'Loading question...'}
-                                            </p>
-                                        </div>
-                                    </button>
-                                );
-                            })}
+                <div className={`fixed left-0 top-0 h-full w-[520px] bg-[#1a1a1a] border-r border-neutral-800 z-40 transform transition-transform duration-300 ${showSidebar ? 'translate-x-0' : '-translate-x-full'}`}>
+                    {/* Header */}
+                    <div className="p-4 border-b border-neutral-800 flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            <h3 className="text-lg font-bold text-white">
+                                {isSprintMode ? 'Sprint Questions' : (isPracticeMode ? 'Practice Questions' : 'Problem List')}
+                            </h3>
+                            <ChevronRightIcon sx={{ fontSize: '1.25rem' }} className="text-neutral-500" />
                         </div>
-                    ) : (
-                        <div className="divide-y divide-neutral-800">
-                            {/* Show current question in normal mode */}
-                            {question && (
-                                <div className="p-4 bg-amber-500/10 border-l-2 border-l-amber-500">
-                                    <div className="flex items-start gap-3">
-                                        <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 bg-amber-500 text-white">
-                                            <span className="text-xs font-bold">{navigation?.currentPosition || 1}</span>
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <div className="flex items-center gap-2 mb-1">
-                                                <span className="text-sm font-medium text-amber-400">
-                                                    Current Question
-                                                </span>
-                                                {getDifficultyBadge(question.difficulty)}
+                        <div className="flex items-center gap-3">
+                            <span className="text-sm text-neutral-400">
+                                {isSprintMode && sprintSession
+                                    ? `${sprintSession.currentIndex + 1}/${sprintSession.questionIds.length}`
+                                    : (isPracticeMode && practiceSession
+                                        ? `${practiceSession.currentIndex + 1}/${practiceSession.questionIds.length}`
+                                        : navigation ? `${navigation.currentPosition}/${navigation.totalCount}` : '')
+                                }
+                            </span>
+                            <button
+                                onClick={() => setShowSidebar(false)}
+                                className="p-1.5 rounded-lg hover:bg-neutral-700 text-neutral-400 hover:text-white transition-colors"
+                            >
+                                <CloseIcon sx={{ fontSize: '1.25rem' }} />
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Question List */}
+                    <div ref={sidebarListRef} className="overflow-y-auto max-h-[calc(100vh-80px)]">
+                        {(isPracticeMode && practiceSession) || (isSprintMode && sprintSession) ? (
+                            <div className="divide-y divide-neutral-800">
+                                {(isSprintMode ? sprintSession!.questionIds : practiceSession!.questionIds).map((qId, idx) => {
+                                    const isCurrent = qId === questionId;
+                                    const isFocused = idx === focusedSidebarIndex;
+                                    const qDetails = sidebarQuestions.find(q => q.id === qId);
+                                    const diffStyles: Record<string, string> = {
+                                        'EASY': 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
+                                        'MEDIUM': 'bg-amber-500/15 text-amber-400 border-amber-500/30',
+                                        'HARD': 'bg-rose-500/15 text-rose-400 border-rose-500/30'
+                                    };
+                                    const diffLabels: Record<string, string> = { 'EASY': 'Easy', 'MEDIUM': 'Med.', 'HARD': 'Hard' };
+
+                                    return (
+                                        <button
+                                            id={`sidebar-item-${idx}`}
+                                            key={qId}
+                                            onClick={() => {
+                                                const sec = isSprintMode ? sprintSession!.subject : practiceSession!.section;
+                                                router.push(`/problems/${qId}?section=${sec}&${isSprintMode ? 'sprint' : 'practice'}=true`);
+                                                // Close sidebar on mobile/smaller screens if needed, but keeping open for quick nav is good
+                                                // setShowSidebar(false); 
+                                            }}
+                                            className={`w-full p-4 text-left transition-all flex items-start gap-4 hover:bg-neutral-800/80 group ${isCurrent
+                                                ? 'bg-amber-500/10 border-l-4 border-l-amber-500'
+                                                : 'border-l-4 border-l-transparent'
+                                                } ${isFocused && !isCurrent ? 'ring-2 ring-amber-500/50 bg-neutral-800/60' : ''}`}
+                                        >
+                                            {/* Number Badge */}
+                                            <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold transition-transform group-hover:scale-110 ${isCurrent ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20' : 'bg-neutral-800 text-neutral-400 border border-neutral-700'
+                                                }`}>
+                                                {idx + 1}
                                             </div>
-                                            <p className="text-xs text-neutral-400 line-clamp-3">
-                                                {question.text.replace(/\[IMAGE\]/g, '').substring(0, 150)}
-                                                {question.text.length > 150 ? '...' : ''}
-                                            </p>
+
+                                            {/* Question Info */}
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-center gap-2 mb-1.5">
+                                                    <span className={`text-sm font-semibold tracking-wide ${isCurrent ? 'text-amber-400' : 'text-neutral-300'}`}>
+                                                        Question {idx + 1}
+                                                    </span>
+                                                    <span className={`px-2 py-0.5 text-[10px] uppercase font-bold tracking-wider rounded border ${diffStyles[qDetails?.difficulty || 'MEDIUM']}`}>
+                                                        {diffLabels[qDetails?.difficulty || 'MEDIUM']}
+                                                    </span>
+                                                </div>
+                                                <p className={`text-sm line-clamp-2 leading-relaxed ${isCurrent ? 'text-neutral-200' : 'text-neutral-300'}`}>
+                                                    {qDetails?.text?.replace(/\[IMAGE\]/g, '📷 ').substring(0, 150) || 'Loading question...'}
+                                                </p>
+                                            </div>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        ) : (
+                            <div className="divide-y divide-neutral-800">
+                                {/* Show current question in normal mode */}
+                                {question && (
+                                    <div className="p-4 bg-amber-500/10 border-l-2 border-l-amber-500">
+                                        <div className="flex items-start gap-3">
+                                            <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 bg-amber-500 text-white">
+                                                <span className="text-xs font-bold">{navigation?.currentPosition || 1}</span>
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <div className="flex items-center gap-2 mb-1">
+                                                    <span className="text-sm font-medium text-amber-400">
+                                                        Current Question
+                                                    </span>
+                                                    {getDifficultyBadge(question.difficulty)}
+                                                </div>
+                                                <p className="text-xs text-neutral-400 line-clamp-3">
+                                                    {question.text.replace(/\[IMAGE\]/g, '').substring(0, 150)}
+                                                    {question.text.length > 150 ? '...' : ''}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
+                                )}
+                                <div className="p-4 text-center text-neutral-500 text-sm">
+                                    <p>Question {navigation?.currentPosition} of {navigation?.totalCount}</p>
+                                    <p className="text-xs mt-1">Use ← Previous / Next → to navigate</p>
                                 </div>
-                            )}
-                            <div className="p-4 text-center text-neutral-500 text-sm">
-                                <p>Question {navigation?.currentPosition} of {navigation?.totalCount}</p>
-                                <p className="text-xs mt-1">Use ← Previous / Next → to navigate</p>
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
-            </div>
             )}
 
             {/* Top Bar - FIXED LAYOUT */}
@@ -1146,14 +1221,15 @@ export default function QuestionPage({
                             </span>
                         </button>
                     ) : (
-                        <button
-                            onClick={() => setShowTimerPrompt(true)}
-                            className="flex items-center gap-2 px-3 py-1.5 rounded-full text-neutral-500 hover:bg-neutral-800 hover:text-neutral-300 transition-colors text-sm"
-                            title="Enable timer"
-                        >
-                            <TimerIcon sx={{ fontSize: '1rem' }} />
-                            <span className="text-xs hidden sm:inline">Timer</span>
-                        </button>
+                        <Tooltip text="Enable Timer">
+                            <button
+                                onClick={() => setShowTimerPrompt(true)}
+                                className="flex items-center gap-2 px-3 py-1.5 rounded-full text-neutral-500 hover:bg-neutral-800 hover:text-neutral-300 transition-colors text-sm"
+                            >
+                                <TimerIcon sx={{ fontSize: '1rem' }} />
+                                <span className="text-xs hidden sm:inline">Timer</span>
+                            </button>
+                        </Tooltip>
                     )}
                 </div>
 
@@ -1162,32 +1238,34 @@ export default function QuestionPage({
 
                 {/* Right: Navigation */}
                 <div className="flex items-center gap-1">
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            goToPrevious();
-                        }}
-                        disabled={isSprintMode ? (sprintSession?.currentIndex === 0) : (isPracticeMode ? (practiceSession?.currentIndex === 0) : !hasPrevious)}
-                        className="p-2 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed text-neutral-400 hover:text-white hover:bg-neutral-800"
-                        style={{ position: 'relative', zIndex: 50, pointerEvents: 'auto' }}
-                        title={isSprintMode || isPracticeMode ? 'Previous question' : hasPrevious ? 'Previous question' : 'No previous questions'}
-                    >
-                        <ChevronLeftIcon sx={{ fontSize: '1.5rem' }} />
-                    </button>
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            goToNext();
-                        }}
-                        disabled={!isPracticeMode && !isSprintMode && !hasNext}
-                        className="p-2 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed text-neutral-400 hover:text-white hover:bg-neutral-800"
-                        style={{ position: 'relative', zIndex: 50, pointerEvents: 'auto' }}
-                        title={!isPracticeMode && !isSprintMode && !hasNext ? 'No more questions' : 'Next question'}
-                    >
-                        <ChevronRightIcon sx={{ fontSize: '1.5rem' }} />
-                    </button>
+                    <Tooltip text={isSprintMode || isPracticeMode ? 'Previous Question' : hasPrevious ? 'Previous Question' : 'No Previous'}>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                goToPrevious();
+                            }}
+                            disabled={isSprintMode ? (sprintSession?.currentIndex === 0) : (isPracticeMode ? (practiceSession?.currentIndex === 0) : !hasPrevious)}
+                            className="p-2 rounded-xl border border-neutral-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-neutral-400 hover:text-white hover:bg-neutral-800"
+                            style={{ position: 'relative', zIndex: 50, pointerEvents: 'auto' }}
+                        >
+                            <ChevronLeftIcon sx={{ fontSize: '1.25rem' }} />
+                        </button>
+                    </Tooltip>
+                    <Tooltip text={!isPracticeMode && !isSprintMode && !hasNext ? 'End of List' : 'Next Question'}>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                goToNext();
+                            }}
+                            disabled={!isPracticeMode && !isSprintMode && !hasNext}
+                            className="p-2 rounded-xl border border-neutral-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-neutral-400 hover:text-white hover:bg-neutral-800"
+                            style={{ position: 'relative', zIndex: 50, pointerEvents: 'auto' }}
+                        >
+                            <ChevronRightIcon sx={{ fontSize: '1.25rem' }} />
+                        </button>
+                    </Tooltip>
                 </div>
             </header>
 
@@ -1230,23 +1308,25 @@ export default function QuestionPage({
                             )}
                             <div className="ml-auto flex items-center gap-2">
                                 <AuthActionGuard>
-                                    <button
-                                        onClick={handleBookmarkToggle}
-                                        className={`p-2 rounded-lg transition-all duration-200 ${isBookmarked
-                                            ? 'text-yellow-500 bg-yellow-500/10 scale-110 shadow-lg shadow-yellow-500/20'
-                                            : 'text-neutral-500 hover:text-yellow-500 hover:bg-neutral-800 hover:scale-105'}`}
-                                        title={isBookmarked ? 'Bookmarked - Click to remove' : 'Bookmark this question'}
-                                    >
-                                        <BookmarkIcon sx={{ fontSize: '1.25rem' }} />
-                                    </button>
+                                    <Tooltip text={isBookmarked ? 'Remove Bookmark' : 'Bookmark Question'}>
+                                        <button
+                                            onClick={handleBookmarkToggle}
+                                            className={`p-2 rounded-xl border border-neutral-800/50 transition-all duration-200 ${isBookmarked
+                                                ? 'text-yellow-500 bg-yellow-500/10 scale-110 shadow-lg shadow-yellow-500/20'
+                                                : 'text-neutral-500 hover:text-yellow-500 hover:bg-neutral-800 hover:scale-105'}`}
+                                        >
+                                            <BookmarkIcon sx={{ fontSize: '1.25rem' }} />
+                                        </button>
+                                    </Tooltip>
                                 </AuthActionGuard>
-                                <button
-                                    onClick={() => setShowReportModal(true)}
-                                    className="p-2 rounded-lg text-neutral-500 hover:text-rose-500 hover:bg-neutral-800 hover:scale-105 transition-all duration-200"
-                                    title="Report an issue with this question"
-                                >
-                                    <WarningIcon sx={{ fontSize: '1.25rem' }} />
-                                </button>
+                                <Tooltip text="Report Question">
+                                    <button
+                                        onClick={() => setShowReportModal(true)}
+                                        className="p-2 rounded-xl border border-neutral-800/50 text-neutral-500 hover:text-rose-500 hover:bg-neutral-800 hover:scale-105 transition-all duration-200"
+                                    >
+                                        <WarningIcon sx={{ fontSize: '1.25rem' }} />
+                                    </button>
+                                </Tooltip>
                             </div>
                         </div>
 
@@ -1260,19 +1340,20 @@ export default function QuestionPage({
                         </div>
 
                         {/* Solution Panel - ENHANCED PARSING */}
-                        {showSolution && question.solution && (
+                        {showSolution && (
                             <div className="bg-neutral-800/50 border border-neutral-700 rounded-xl p-4 mt-4">
                                 <div className="flex items-center justify-between mb-3">
                                     <h3 className="text-base font-bold text-amber-400 flex items-center gap-2">
                                         <span>💡</span> Solution
                                     </h3>
-                                    <button
-                                        onClick={() => setShowSolution(false)}
-                                        className="text-neutral-500 hover:text-neutral-300 transition-colors"
-                                        title="Hide solution"
-                                    >
-                                        <CloseIcon sx={{ fontSize: '1rem' }} />
-                                    </button>
+                                    <Tooltip text="Hide Solution">
+                                        <button
+                                            onClick={() => setShowSolution(false)}
+                                            className="text-neutral-500 hover:text-neutral-300 transition-colors"
+                                        >
+                                            <CloseIcon sx={{ fontSize: '1rem' }} />
+                                        </button>
+                                    </Tooltip>
                                 </div>
                                 <div className="mb-3 p-2 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center gap-2">
                                     <CheckCircleOutlinedIcon className="text-emerald-400" sx={{ fontSize: '1rem' }} />
@@ -1281,9 +1362,15 @@ export default function QuestionPage({
                                         Option {question.correct_option}
                                     </span>
                                 </div>
-                                <div>
-                                    <SolutionContent solution={question.solution} />
-                                </div>
+                                {question.solution ? (
+                                    <div>
+                                        <SolutionContent solution={question.solution} />
+                                    </div>
+                                ) : (
+                                    <div className="text-neutral-500 text-sm italic py-2">
+                                        Detailed explanation is currently being reviewed.
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>
@@ -1301,22 +1388,16 @@ export default function QuestionPage({
                                 }`}>
                                 {isCorrect ? '✓ Correct Answer!' : '✗ Incorrect Answer'}
                             </div>
-                            <div className={`grid ${isTimerEnabled ? 'grid-cols-2' : 'grid-cols-1'} gap-2 text-xs text-neutral-400`}>
-                                {isTimerEnabled && (
+                            {isTimerEnabled && (
+                                <div className="grid grid-cols-1 gap-2 text-xs text-neutral-400">
                                     <div className="bg-neutral-800/50 rounded-lg p-2 text-center border border-neutral-800">
                                         <span className="block text-neutral-500 mb-0.5">Time Taken</span>
                                         <span className="font-mono text-neutral-200 font-medium">
                                             {Math.floor(submittedTime / 60)}:{(submittedTime % 60).toString().padStart(2, '0')}
                                         </span>
                                     </div>
-                                )}
-                                <div className="bg-neutral-800/50 rounded-lg p-2 text-center border border-neutral-800">
-                                    <span className="block text-neutral-500 mb-0.5">Accuracy</span>
-                                    <span className="font-mono text-neutral-200 font-medium">
-                                        {question.stats?.accuracy_rate ? `${Math.round(question.stats.accuracy_rate * 100)}%` : '--'}
-                                    </span>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     )}
 

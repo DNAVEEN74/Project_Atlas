@@ -35,36 +35,42 @@ export async function GET(req: NextRequest) {
             }
         }
 
-        if (authUser && filterType === 'bookmarked') {
-            const userBookmarks = await Bookmark.find({ user_id: authUser.userId }).distinct('question_id');
-            if (userBookmarks.length) {
-                filter._id = { $in: userBookmarks };
-            } else {
-                return NextResponse.json({ data: [], pagination: { total: 0, page, totalPages: 0 } });
-            }
-        } else if (authUser && filterType === 'wrong') {
-            const wrongAttempts = await Attempt.find({
-                user_id: authUser.userId,
-                is_correct: false
-            }).distinct('question_id');
+        if (authUser && filterType) {
+            const userId = authUser.userId;
 
-            // We should also exclude questions solely answered correctly later?
-            // "Wrong" usually means "I got this wrong at some point" or "My last attempt was wrong".
-            // Let's stick to "Has a wrong attempt" for now, or maybe "Last attempt was wrong".
-            // Simplest interpretation: Questions I have ever gotten wrong.
+            if (filterType === 'bookmarked') {
+                const userBookmarks = await Bookmark.find({ user_id: userId }).distinct('question_id');
+                if (userBookmarks.length) {
+                    filter._id = { $in: userBookmarks };
+                } else {
+                    return NextResponse.json({ data: [], pagination: { total: 0, page, totalPages: 0 } });
+                }
+            } else if (filterType === 'correct') {
+                const solvedQuestions = await Attempt.find({ user_id: userId, is_correct: true }).distinct('question_id');
+                if (solvedQuestions.length) {
+                    filter._id = { $in: solvedQuestions };
+                } else {
+                    return NextResponse.json({ data: [], pagination: { total: 0, page, totalPages: 0 } });
+                }
+            } else if (filterType === 'wrong') {
+                // Questions attempted but NOT currently solved
+                const solvedQuestions = await Attempt.find({ user_id: userId, is_correct: true }).distinct('question_id');
+                const allAttempted = await Attempt.find({ user_id: userId }).distinct('question_id');
 
-            if (wrongAttempts.length > 0) {
-                filter._id = { $in: wrongAttempts };
-            } else {
-                return NextResponse.json({ data: [], pagination: { total: 0, page, totalPages: 0 } });
-            }
-        } else if (authUser && filterType === 'unanswered') {
-            const allAttempts = await Attempt.find({
-                user_id: authUser.userId
-            }).distinct('question_id');
+                // Convert to strings for comparison
+                const solvedSet = new Set(solvedQuestions.map(id => id.toString()));
+                const wrongIds = allAttempted.filter(id => !solvedSet.has(id.toString()));
 
-            if (allAttempts.length > 0) {
-                filter._id = { $nin: allAttempts };
+                if (wrongIds.length) {
+                    filter._id = { $in: wrongIds };
+                } else {
+                    return NextResponse.json({ data: [], pagination: { total: 0, page, totalPages: 0 } });
+                }
+            } else if (filterType === 'unanswered' || filterType === 'unattempted') {
+                const allAttempts = await Attempt.find({ user_id: userId }).distinct('question_id');
+                if (allAttempts.length > 0) {
+                    filter._id = { $nin: allAttempts };
+                }
             }
         }
 

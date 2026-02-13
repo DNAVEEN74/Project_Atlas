@@ -11,6 +11,10 @@ import {
     LogoutIcon,
     ExpandMoreIcon,
     DocumentIcon,
+    FireIcon,
+    PersonIcon,
+    SettingsIcon,
+    HelpIcon,
 } from '@/components/icons';
 
 interface HeaderProps {
@@ -126,19 +130,19 @@ export default function Header({ activePage }: HeaderProps) {
                                     >
                                         <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></div>
                                         <span className="text-xs font-semibold text-emerald-400">
-                                            {user.totalCorrect === 0 ? (
+                                            {user.totalSolved === 0 ? (
                                                 "🎯 Start Solving!"
                                             ) : (
                                                 <>
-                                                    {user.totalCorrect}/{user.totalQuestions} Solved ({Math.round((user.totalCorrect / (user.totalQuestions || 1)) * 100)}%)
+                                                    {user.totalSolved}/{user.totalQuestions} Solved ({Math.round((user.totalSolved / (user.totalQuestions || 1)) * 100)}%)
                                                 </>
                                             )}
                                         </span>
                                         {/* Tooltip */}
                                         <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-4 py-2 bg-neutral-900 border border-neutral-800 text-neutral-200 text-xs font-medium rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.4)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
-                                            {user.totalCorrect === 0
+                                            {user.totalSolved === 0
                                                 ? "You haven't solved any questions yet. Start your journey today!"
-                                                : `You've solved ${user.totalCorrect} questions. Keep going!`}
+                                                : `You've solved ${user.totalSolved} questions. Keep going!`}
                                         </div>
                                     </Link>
 
@@ -204,29 +208,23 @@ export default function Header({ activePage }: HeaderProps) {
                                                     <BookmarkIcon sx={{ fontSize: '1.1rem' }} />
                                                     Bookmarks
                                                 </Link>
-                                                <Link href="/sprint/history" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
-                                                    <span className="text-lg leading-none">⚡</span>
+                                                <Link href="/sprint/history" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors group">
+                                                    <FireIcon sx={{ fontSize: '1.1rem' }} className="text-orange-500 group-hover:animate-pulse" />
                                                     Sprint History
                                                 </Link>
 
                                                 <div className="h-px bg-neutral-800 my-1 mx-4"></div>
 
                                                 <Link href="/profile" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
-                                                    <div className="w-[18px] h-[18px] rounded-full border border-current flex items-center justify-center">
-                                                        <span className="text-[10px] font-bold">U</span>
-                                                    </div>
+                                                    <PersonIcon sx={{ fontSize: '1.1rem' }} />
                                                     My Profile
                                                 </Link>
                                                 <Link href="/settings" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
-                                                    <div className="w-[18px] h-[18px] border border-current rounded overflow-hidden flex items-center justify-center">
-                                                        <div className="w-2 h-2 bg-current rounded-full"></div>
-                                                    </div>
+                                                    <SettingsIcon sx={{ fontSize: '1.1rem' }} />
                                                     Settings
                                                 </Link>
                                                 <Link href="/support" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
-                                                    <div className="w-[18px] h-[18px] flex items-center justify-center">
-                                                        <span className="text-sm font-bold">?</span>
-                                                    </div>
+                                                    <HelpIcon sx={{ fontSize: '1.1rem' }} />
                                                     Help & Support
                                                 </Link>
                                             </div>

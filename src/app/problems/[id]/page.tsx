@@ -12,8 +12,14 @@ interface Props {
 async function getQuestion(id: string) {
     try {
         await connectDB();
-        const question = await Question.findById(id).lean();
-        return question;
+        const isNumeric = /^\d+$/.test(id);
+        if (isNumeric) {
+            return await Question.findOne({ question_number: parseInt(id) }).lean();
+        }
+        if (id.match(/^[0-9a-fA-F]{24}$/)) {
+            return await Question.findById(id).lean();
+        }
+        return null;
     } catch {
         return null;
     }

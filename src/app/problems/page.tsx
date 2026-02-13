@@ -82,6 +82,17 @@ function ProblemsPageContent() {
 
     const [topicDropdownOpen, setTopicDropdownOpen] = useState(false);
     const topicDropdownRef = useRef<HTMLDivElement>(null);
+    const [topicCounts, setTopicCounts] = useState<Record<string, number>>({});
+
+    // Fetch topic counts
+    useEffect(() => {
+        fetch('/api/stats/topics')
+            .then(res => res.json())
+            .then(data => {
+                if (data.data) setTopicCounts(data.data);
+            })
+            .catch(err => console.error('Failed to fetch topic stats:', err));
+    }, []);
 
 
     // Constants
@@ -127,11 +138,14 @@ function ProblemsPageContent() {
     // const topics = ['All', ...topicGroups.flatMap(g => g.topics)]; // Removed unused 'topics' array if not needed or kept for reference
 
     // State for filters
-    const [activeTopic, setActiveTopic] = useState('All');
-    const [difficulty, setDifficulty] = useState('All');
-    const [yearFilter, setYearFilter] = useState('All');
-    const [statusFilter, setStatusFilter] = useState('all'); // 'all', 'unattempted', 'bookmarked', 'wrong', 'correct'
-    const [searchQuery, setSearchQuery] = useState('');
+    const [activeTopic, setActiveTopic] = useState(() => {
+        const p = searchParams.get('pattern');
+        return p ? getTopicName(p) : 'All';
+    });
+    const [difficulty, setDifficulty] = useState(searchParams.get('difficulty') || 'All');
+    const [yearFilter, setYearFilter] = useState(searchParams.get('year') || 'All');
+    const [statusFilter, setStatusFilter] = useState(searchParams.get('status') || 'all');
+    const [searchQuery, setSearchQuery] = useState(searchParams.get('query') || '');
     const [topicSearchQuery, setTopicSearchQuery] = useState('');
 
     const ITEMS_PER_PAGE = 20;
@@ -180,34 +194,47 @@ function ProblemsPageContent() {
         const fetchQuestions = async () => {
             setLoading(true);
             try {
-                const params = new URLSearchParams();
-                params.set('page', pagination.page.toString());
-                params.set('limit', ITEMS_PER_PAGE.toString());
-                params.set('section', activeSection);
+                const apiParams = new URLSearchParams();
+                apiParams.set('page', pagination.page.toString());
+                apiParams.set('limit', ITEMS_PER_PAGE.toString());
+                apiParams.set('section', activeSection);
+
+                // URL Display Params
+                const urlParams = new URLSearchParams();
+                urlParams.set('page', pagination.page.toString());
+                urlParams.set('section', activeSection);
 
                 if (activeTopic !== 'All') {
                     const patternCode = getPatternCode(activeTopic);
                     // console.log(`Filtering by topic: ${activeTopic} -> ${patternCode}`);
-                    params.set('pattern', patternCode);
+                    apiParams.set('pattern', patternCode);
+                    urlParams.set('pattern', patternCode);
                 }
 
                 if (difficulty !== 'All') {
-                    params.set('difficulty', difficulty.toUpperCase());
+                    apiParams.set('difficulty', difficulty.toUpperCase());
+                    urlParams.set('difficulty', difficulty);
                 }
 
                 if (statusFilter !== 'all') {
-                    params.set('filter', statusFilter);
+                    apiParams.set('filter', statusFilter);
+                    urlParams.set('status', statusFilter);
                 }
 
                 if (yearFilter !== 'All') {
-                    params.set('year', yearFilter);
+                    apiParams.set('year', yearFilter);
+                    urlParams.set('year', yearFilter);
                 }
 
                 if (searchQuery) {
-                    params.set('query', searchQuery);
+                    apiParams.set('query', searchQuery);
+                    urlParams.set('query', searchQuery);
                 }
 
-                const res = await fetch(`/api/questions?${params.toString()}`);
+                // Sync to browser URL silently
+                window.history.replaceState(null, '', `?${urlParams.toString()}`);
+
+                const res = await fetch(`/api/questions?${apiParams.toString()}`);
                 const data = await res.json();
                 setQuestions(data.data || []);
                 setPagination(data.pagination);
@@ -446,24 +473,35 @@ function ProblemsPageContent() {
                                                             {group.label}
                                                         </div>
                                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
-                                                            {group.topics.map((topic) => (
-                                                                <button
-                                                                    key={topic}
-                                                                    onClick={() => {
-                                                                        setActiveTopic(topic);
-                                                                        setTopicDropdownOpen(false);
-                                                                        setPagination(prev => ({ ...prev, page: 1 }));
-                                                                    }}
-                                                                    className={`px-3 py-2 text-sm text-left rounded-lg transition-all truncate ${activeTopic === topic
-                                                                        ? accentColor === 'amber'
-                                                                            ? 'bg-amber-500/15 text-amber-400 font-semibold'
-                                                                            : 'bg-violet-500/15 text-violet-400 font-semibold'
-                                                                        : 'text-neutral-400 hover:bg-neutral-800/60 hover:text-neutral-200'
-                                                                        }`}
-                                                                >
-                                                                    {topic}
-                                                                </button>
-                                                            ))}
+                                                            {group.topics.map((topic) => {
+                                                                const count = topicCounts[getPatternCode(topic)] || 0;
+                                                                return (
+                                                                    <button
+                                                                        key={topic}
+                                                                        onClick={() => {
+                                                                            setActiveTopic(topic);
+                                                                            setTopicDropdownOpen(false);
+                                                                            setPagination(prev => ({ ...prev, page: 1 }));
+                                                                        }}
+                                                                        className={`px-3 py-2 text-sm text-left rounded-lg transition-all truncate flex items-center justify-between group/item ${activeTopic === topic
+                                                                            ? accentColor === 'amber'
+                                                                                ? 'bg-amber-500/15 text-amber-400 font-semibold'
+                                                                                : 'bg-violet-500/15 text-violet-400 font-semibold'
+                                                                            : 'text-neutral-400 hover:bg-neutral-800/60 hover:text-neutral-200'
+                                                                            }`}
+                                                                    >
+                                                                        <span>{topic}</span>
+                                                                        {count > 0 && (
+                                                                            <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${activeTopic === topic
+                                                                                ? accentColor === 'amber' ? 'bg-amber-500/20 text-amber-300' : 'bg-violet-500/20 text-violet-300'
+                                                                                : 'bg-neutral-800 text-neutral-500 group-hover/item:text-neutral-400'
+                                                                                }`}>
+                                                                                {count}
+                                                                            </span>
+                                                                        )}
+                                                                    </button>
+                                                                );
+                                                            })}
                                                         </div>
                                                     </div>
                                                 ))}
@@ -676,7 +714,7 @@ function ProblemsPageContent() {
 
                                         return (
                                             <Link
-                                                href={`/problems/${q.id}?section=${activeSection}`}
+                                                href={`/problems/${q.questionNumber || q.id}?section=${activeSection}${activeTopic !== 'All' ? `&pattern=${getPatternCode(activeTopic)}` : ''}${difficulty !== 'All' ? `&difficulty=${difficulty}` : ''}${yearFilter !== 'All' ? `&year=${yearFilter}` : ''}${statusFilter !== 'all' ? `&status=${statusFilter}` : ''}${searchQuery ? `&query=${encodeURIComponent(searchQuery)}` : ''}`}
                                                 key={q.id}
                                                 className="block hover:bg-neutral-800/30 transition-colors group border-b border-neutral-800/50 md:border-none"
                                             >
@@ -792,52 +830,46 @@ function ProblemsPageContent() {
                             </div>
 
                             {/* Pagination with Context */}
-                            {questions.length > 0 && (
+                            {questions.length > 0 && pagination.totalPages > 1 && (
                                 <div className="p-4 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                                    <p className="text-xs text-neutral-500">
-                                        Showing <span className="font-medium text-neutral-300">{startItem}</span> to <span className="font-medium text-neutral-300">{endItem}</span> of <span className="font-medium text-neutral-300">{pagination.total}</span> questions
+                                    <p className="text-xs text-neutral-500 font-medium">
+                                        Showing <span className="text-neutral-300 font-bold">{startItem}</span> to <span className="text-neutral-300 font-bold">{endItem}</span> of <span className="text-neutral-300 font-bold">{pagination.total}</span> questions
                                     </p>
 
                                     <div className="flex items-center gap-2">
                                         <button
                                             onClick={() => updatePage(pagination.page - 1)}
                                             disabled={pagination.page === 1}
-                                            className="p-2 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                            className="p-2 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                                         >
                                             <ChevronLeftIcon sx={{ fontSize: '1.2rem' }} />
                                         </button>
 
-                                        <div className="hidden sm:flex items-center gap-1 px-2">
-                                            {Array.from({ length: Math.min(5, pagination.totalPages) }, (_, i) => {
-                                                let p = pagination.page;
-                                                // Simplified pagination logic for display
-                                                if (pagination.totalPages <= 5) p = i + 1;
-                                                else if (pagination.page <= 3) p = 1 + i;
-                                                else if (pagination.page >= pagination.totalPages - 2) p = pagination.totalPages - 4 + i;
-                                                else p = pagination.page - 2 + i;
-
-                                                if (p > 0 && p <= pagination.totalPages) {
-                                                    return (
-                                                        <button
-                                                            key={p}
-                                                            onClick={() => updatePage(p)}
-                                                            className={`w-8 h-8 rounded-lg text-sm font-medium transition-all ${pagination.page === p
-                                                                ? 'bg-neutral-800 text-white border border-neutral-700'
-                                                                : 'text-neutral-500 hover:bg-neutral-800/50 hover:text-neutral-300'
-                                                                }`}
-                                                        >
-                                                            {p}
-                                                        </button>
-                                                    );
-                                                }
-                                                return null;
-                                            })}
+                                        <div className="flex items-center gap-1">
+                                            {getPageNumbers().map((p, i) => (
+                                                p === '...' ? (
+                                                    <span key={i} className="px-2 text-neutral-600 text-sm">...</span>
+                                                ) : (
+                                                    <button
+                                                        key={i}
+                                                        onClick={() => updatePage(p as number)}
+                                                        className={`w-9 h-9 flex items-center justify-center rounded-xl text-sm font-bold transition-all ${pagination.page === p
+                                                            ? accentColor === 'amber'
+                                                                ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
+                                                                : 'bg-violet-500 text-white shadow-lg shadow-violet-500/20'
+                                                            : 'text-neutral-400 hover:bg-neutral-800 hover:text-neutral-200 border border-transparent hover:border-neutral-800'
+                                                            }`}
+                                                    >
+                                                        {p}
+                                                    </button>
+                                                )
+                                            ))}
                                         </div>
 
                                         <button
                                             onClick={() => updatePage(pagination.page + 1)}
                                             disabled={pagination.page === pagination.totalPages}
-                                            className="p-2 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                            className="p-2 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                                         >
                                             <ChevronRightIcon sx={{ fontSize: '1.2rem' }} />
                                         </button>
