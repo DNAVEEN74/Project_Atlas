@@ -5,7 +5,6 @@ export interface IPattern extends Document {
     name: string;             // "Percentage" — display name
     subject: 'QUANT' | 'REASONING';
     question_count: number;   // denormalized, updated on import
-    display_order: number;
 }
 
 const PatternSchema: Schema = new Schema(
@@ -18,7 +17,6 @@ const PatternSchema: Schema = new Schema(
             required: true
         },
         question_count: { type: Number, default: 0 },
-        display_order: { type: Number, default: 0 },
     },
     { timestamps: false }
 );

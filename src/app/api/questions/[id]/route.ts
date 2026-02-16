@@ -11,7 +11,17 @@ export async function GET(
 
         const { id } = await params;
 
-        const question = await Question.findById(id).lean();
+        let question;
+        const isNumeric = /^\d+$/.test(id);
+
+        if (isNumeric) {
+            question = await Question.findOne({ question_number: parseInt(id) }).lean();
+        } else {
+            // Validate Object ID to prevent cast errors
+            if (id.match(/^[0-9a-fA-F]{24}$/)) {
+                question = await Question.findById(id).lean();
+            }
+        }
 
         if (!question) {
             return NextResponse.json(

@@ -12,8 +12,14 @@ interface Props {
 async function getQuestion(id: string) {
     try {
         await connectDB();
-        const question = await Question.findById(id).lean();
-        return question;
+        const isNumeric = /^\d+$/.test(id);
+        if (isNumeric) {
+            return await Question.findOne({ question_number: parseInt(id) }).lean();
+        }
+        if (id.match(/^[0-9a-fA-F]{24}$/)) {
+            return await Question.findById(id).lean();
+        }
+        return null;
     } catch {
         return null;
     }
@@ -61,8 +67,13 @@ export default async function ProblemPage({ params, searchParams }: Props) {
         initialQuestion = {
             ...question,
             id: (question as any)._id.toString(),
+            options: question.options?.map((opt: any) => ({
+                id: opt.id,
+                text: opt.text,
+                image: opt.image || ''
+            })) || []
         };
-        // Ensure other ObjectIds are strings if needed, or rely on serialization
+        // Ensure other ObjectIds are strings if needed
         if (initialQuestion._id) delete initialQuestion._id;
     }
 

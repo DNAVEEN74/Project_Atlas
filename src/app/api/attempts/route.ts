@@ -99,7 +99,14 @@ export async function POST(req: NextRequest) {
         }
 
         // Update DailyActivity
-        const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+        // Use provided localDate if available, otherwise calculate from server time
+        // This ensures the activity is recorded for the USER'S "today"
+        const { localDate } = body;
+        const now = new Date();
+
+        const today = localDate || new Date(now.getTime() - (now.getTimezoneOffset() * 60000))
+            .toISOString()
+            .split('T')[0]; // YYYY-MM-DD
 
         await DailyActivity.findOneAndUpdate(
             { user_id: userObjectId, date: today },
@@ -147,17 +154,31 @@ export async function POST(req: NextRequest) {
         if (user) {
             const lastDate = user.stats?.last_active_date;
 
+            // If lastDate is today, we don't need to do anything with streak
             if (lastDate !== today) {
-                const yesterday = new Date();
-                yesterday.setDate(yesterday.getDate() - 1);
-                const yesterdayStr = yesterday.toISOString().split('T')[0];
+                // Calculate "yesterday" relative to the "today" we just determined
+                // This correctly handles the timezone-adjusted date
+                const todayDate = new Date(today);
+                const yesterdayDate = new Date(todayDate);
+                yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+                const yesterdayStr = yesterdayDate.toISOString().split('T')[0];
 
                 if (lastDate === yesterdayStr) {
+                    // Continue streak - last activity was yesterday
                     userUpdate.$inc = {
                         ...(userUpdate.$inc || {}),
                         'stats.current_streak': 1
                     };
+                    // Update max streak if current becomes greater
+                    const newStreak = (user.stats?.current_streak || 0) + 1;
+                    if (newStreak > (user.stats?.max_streak || 0)) {
+                        userUpdate.$set['stats.max_streak'] = newStreak;
+                    }
+                } else if (lastDate && lastDate > today) {
+                    // If last active date is in future relative to "today" (weird edge case, maybe travel back in time?)
+                    // Don't break streak, just keep it.
                 } else {
+                    // Streak broken - reset to 1 (since we just did an activity today)
                     userUpdate.$set['stats.current_streak'] = 1;
                 }
             }
@@ -178,6 +199,56 @@ export async function POST(req: NextRequest) {
         console.error("Create attempt error:", error);
         return NextResponse.json(
             { error: "Failed to record attempt" },
+            { status: 500 }
+        );
+    }
+}
+
+/**
+ * GET /api/attempts - Get previous attempts
+ */
+export async function GET(req: NextRequest) {
+    try {
+        const authUser = await getCurrentUser();
+        if (!authUser) {
+            return NextResponse.json(
+                { error: "Authentication required" },
+                { status: 401 }
+            );
+        }
+
+        await dbConnect();
+
+        const { searchParams } = new URL(req.url);
+        const questionId = searchParams.get('questionId');
+        const limit = parseInt(searchParams.get('limit') || '10');
+
+        const query: any = { user_id: authUser.userId };
+        if (questionId) {
+            query.question_id = questionId;
+        }
+
+        const attempts = await Attempt.find(query)
+            .sort({ created_at: -1 })
+            .limit(limit)
+            .lean();
+
+        return NextResponse.json({
+            success: true,
+            data: attempts.map((attempt: any) => ({
+                id: attempt._id,
+                question_id: attempt.question_id,
+                option_selected: attempt.selected_option,
+                is_correct: attempt.is_correct,
+                created_at: attempt.created_at,
+                time_ms: attempt.time_ms
+            }))
+        });
+
+    } catch (error) {
+        console.error("Get attempts error:", error);
+        return NextResponse.json(
+            { error: "Failed to fetch attempts" },
             { status: 500 }
         );
     }
