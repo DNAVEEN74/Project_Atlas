@@ -9,6 +9,8 @@ interface QuestionContentProps {
     imageUrl?: string;
     /** CSS class for the container */
     className?: string;
+    /** Optional click handler for image zoom */
+    onImageClick?: (url: string) => void;
 }
 
 /**
@@ -17,13 +19,10 @@ interface QuestionContentProps {
  * Place [IMAGE] in the text where the image should appear.
  * The component will split the text and render the image at that position.
  * 
- * Usage:
- * <QuestionContent 
- *   text="The table shows data: [IMAGE] What is the total?"
  *   imageUrl="https://r2.dev/image.png"
  * />
  */
-export function QuestionContent({ text, imageUrl, className = '' }: QuestionContentProps) {
+export function QuestionContent({ text, imageUrl, className = '', onImageClick }: QuestionContentProps) {
     // Check if text contains [IMAGE] placeholder
     const hasPlaceholder = text.includes('[IMAGE]');
 
@@ -36,7 +35,8 @@ export function QuestionContent({ text, imageUrl, className = '' }: QuestionCont
                     <img
                         src={imageUrl}
                         alt="Question diagram"
-                        className="max-w-full rounded-lg my-4"
+                        className={`max-w-full rounded-lg my-4 ${onImageClick ? 'cursor-zoom-in hover:opacity-90 transition-opacity' : ''}`}
+                        onClick={() => onImageClick?.(imageUrl)}
                     />
                 )}
             </div>
@@ -56,7 +56,8 @@ export function QuestionContent({ text, imageUrl, className = '' }: QuestionCont
                         <img
                             src={imageUrl}
                             alt="Question diagram"
-                            className="max-w-full rounded-lg my-4 mx-auto"
+                            className={`max-w-full rounded-lg my-4 mx-auto ${onImageClick ? 'cursor-zoom-in hover:opacity-90 transition-opacity' : ''}`}
+                            onClick={() => onImageClick?.(imageUrl)}
                         />
                     )}
                 </span>

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { CircularProgress } from '@/components/ui/CircularProgress';
 import {
@@ -35,80 +35,55 @@ interface SprintResult {
     }[];
 }
 
-export default function SprintSummaryPage() {
+export default function SprintSummaryByIdPage() {
     const router = useRouter();
+    const params = useParams();
     const { user, loading, logout } = useAuth();
 
     const [result, setResult] = useState<SprintResult | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-
-
     const [history, setHistory] = useState<any[]>([]);
+
+    const sprintId = params?.id as string;
 
     useEffect(() => {
         const fetchResults = async () => {
-            const stored = sessionStorage.getItem('sprintResults');
-            if (!stored) {
-                router.push('/sprint');
+            if (!sprintId) {
+                router.push('/sprint/history');
                 return;
             }
 
             try {
-                const { sprintId, totalTimeSpent, timedOut, correctCount, totalQuestions, subject, difficulty, topics } = JSON.parse(stored);
+                // Fetch sprint details/summary by ID
+                const res = await fetch(`/api/sprint/${sprintId}/summary`);
 
-                // Try to get session data to populate result details
-                const sessionProto = sessionStorage.getItem('sprintSession');
-                const sessionData = sessionProto ? JSON.parse(sessionProto) : {};
+                if (res.ok) {
+                    const apiRes = await res.json();
 
-                // If we have a valid sprintId (MongoDB ObjectId), fetch from API
-                if (sprintId && sprintId.match(/^[0-9a-fA-F]{24}$/)) {
-                    const res = await fetch(`/api/sprint/${sprintId}/summary`);
-
-                    if (res.ok) {
-                        const data = await res.json();
-                        setResult({
-                            sprintId,
-                            correctCount: data.correctCount || 0,
-                            totalQuestions: data.totalQuestions || sessionData.questionIds?.length || 0,
-                            totalTimeSpent: data.totalTimeSpent || totalTimeSpent,
-                            accuracy: data.accuracy || 0,
-                            subject: data.subject || sessionData.subject || 'QUANT',
-                            difficulty: data.difficulty || sessionData.difficulty || 'MEDIUM',
-                            topics: data.topics || [],
-                            timedOut: timedOut || false,
-                            topicPerformance: data.topicPerformance || []
-                        });
-                    } else {
-                        console.error("Failed to fetch summary from server, using fallback data");
-                        // Use fallback data from sessionStorage
-                        setResult({
-                            sprintId: sprintId || 'unknown',
-                            correctCount: correctCount || 0,
-                            totalQuestions: totalQuestions || sessionData.questionIds?.length || 0,
-                            totalTimeSpent,
-                            accuracy: totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0,
-                            subject: subject || sessionData.subject || 'QUANT',
-                            difficulty: difficulty || sessionData.difficulty || 'MEDIUM',
-                            topics: topics || [],
-                            timedOut: timedOut || false,
-                            topicPerformance: []
-                        });
+                    if (!apiRes.success || !apiRes.summary) {
+                        throw new Error("Invalid response format");
                     }
-                } else {
-                    // No valid sprintId, use data from sessionStorage
-                    console.warn("No valid sprintId, using sessionStorage data");
+
+                    const { summary } = apiRes;
+                    const stats = summary.stats || {};
+                    const config = summary.config || {};
+
                     setResult({
-                        sprintId: 'unsaved',
-                        correctCount: correctCount || 0,
-                        totalQuestions: totalQuestions || sessionData.questionIds?.length || 0,
-                        totalTimeSpent,
-                        accuracy: totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0,
-                        subject: subject || sessionData.subject || 'QUANT',
-                        difficulty: difficulty || sessionData.difficulty || 'MEDIUM',
-                        topics: topics || [],
-                        timedOut: timedOut || false,
-                        topicPerformance: []
+                        sprintId,
+                        correctCount: stats.correct || 0,
+                        totalQuestions: stats.total_questions || 0,
+                        totalTimeSpent: stats.total_time_ms || 0,
+                        accuracy: stats.accuracy || 0,
+                        subject: config.subject || 'QUANT',
+                        difficulty: config.difficulty || 'MEDIUM',
+                        topics: config.patterns || [],
+                        timedOut: summary.expired || false,
+                        topicPerformance: summary.topic_performance || []
                     });
+                } else {
+                    console.error("Failed to fetch summary from server");
+                    router.push('/sprint/history');
+                    return;
                 }
 
                 // Fetch history for trend (limit 5)
@@ -118,22 +93,21 @@ export default function SprintSummaryPage() {
                     setHistory(histData.reverse()); // Show oldest to newest
                 }
 
-                // Clear session storage
-                sessionStorage.removeItem('sprintSession');
-                sessionStorage.removeItem('sprintResults');
             } catch (error) {
-                console.error('Failed to fetch results:', error);
+                console.error("Error fetching sprint summary:", error);
+                router.push('/sprint/history');
             } finally {
                 setIsLoading(false);
             }
         };
 
         fetchResults();
-    }, [router]);
+    }, [sprintId, router]);
 
-    const handleLogout = async () => {
-        await logout();
-        router.push('/');
+    const formatTime = (ms: number) => {
+        const mins = Math.floor(ms / 60000);
+        const secs = Math.floor((ms % 60000) / 1000);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
     };
 
     const handleRetrySprint = async () => {
@@ -169,87 +143,51 @@ export default function SprintSummaryPage() {
         }
     };
 
-    const getUserInitials = () => {
-        if (!user?.name) return 'U';
-        const names = user.name.split(' ');
-        if (names.length >= 2) return `${names[0][0]}${names[1][0]}`.toUpperCase();
-        return names[0][0].toUpperCase();
-    };
-
-    const formatTime = (ms: number) => {
-        const totalSeconds = Math.floor(ms / 1000);
-        const minutes = Math.floor(totalSeconds / 60);
-        const seconds = totalSeconds % 60;
-        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    };
-
     const getAvgTimePerQuestion = () => {
         if (!result || result.totalQuestions === 0) return '0s';
         const avgMs = result.totalTimeSpent / result.totalQuestions;
-        return `${(avgMs / 1000).toFixed(1)}s`;
-    };
-
-    const getPerformanceLevel = () => {
-        if (!result) return { label: 'N/A', color: 'text-neutral-500' };
-        if (result.accuracy >= 90) return { label: 'Legendary', color: 'text-amber-500' };
-        if (result.accuracy >= 80) return { label: 'Excellent', color: 'text-emerald-500' };
-        if (result.accuracy >= 60) return { label: 'Good', color: 'text-blue-500' };
-        if (result.accuracy >= 40) return { label: 'Average', color: 'text-neutral-400' };
-        return { label: 'Needs Practice', color: 'text-rose-500' };
-    };
-
-    const getEncouragementMessage = () => {
-        if (!result) return "Well done!";
-        if (result.accuracy >= 81) return "Excellent! You crushed it! 🔥";
-        if (result.accuracy >= 61) return "Great work! You're getting there.";
-        if (result.accuracy >= 31) return "Good effort! Focus on your weak topics.";
-        return "Keep practicing! Every attempt makes you stronger.";
+        return `${Math.round(avgMs / 1000)}s`;
     };
 
     if (loading || isLoading) {
         return (
             <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-10 w-10 border-2 border-amber-500 border-t-transparent"></div>
+                <div className="w-12 h-12 border-4 border-amber-500/30 border-t-amber-500 rounded-full animate-spin"></div>
             </div>
         );
     }
 
-    if (!result) return null;
-    if (!user) return null;
+    if (!result) {
+        return null;
+    }
 
-    const performance = getPerformanceLevel();
     const isQuant = result.subject === 'QUANT';
     const primaryColor = isQuant ? 'text-amber-500' : 'text-violet-500';
-    const primaryBg = isQuant ? 'bg-amber-500' : 'bg-violet-500';
+
+    const performance = result.accuracy >= 80
+        ? { label: 'Excellent', color: 'text-emerald-400' }
+        : result.accuracy >= 50
+            ? { label: 'Good', color: 'text-amber-400' }
+            : { label: 'Needs Practice', color: 'text-rose-400' };
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] text-neutral-200 font-sans selection:bg-amber-500/30">
-            {/* Header */}
+        <div className="min-h-screen bg-[#0f0f0f] text-neutral-200 font-sans">
             <Header activePage="sprint" />
 
-            <main className="w-full px-6 lg:px-12 py-8">
-                {/* Encouragement Header */}
-                <div className="text-center mb-10">
-                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-800/50 border border-neutral-700/50 mb-4">
-                        <BoltIcon sx={{ fontSize: '1rem' }} className={primaryColor} />
-                        <span className="text-xs font-medium text-neutral-300">Sprint Completed</span>
-                    </div>
-                    <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
-                        {getEncouragementMessage()}
-                    </h1>
-                    <p className="text-neutral-400 max-w-2xl mx-auto">
-                        You finished <span className="text-white font-medium">{result.totalQuestions} questions</span> in <span className="text-white font-medium font-mono">{formatTime(result.totalTimeSpent)}</span>.
-                        <br className="hidden sm:block" />
-                        Check your topic-wise performance below to identify weak areas.
-                    </p>
-                </div>
+            <main className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
+                {/* Back Link */}
+                <Link href="/sprint/history" className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-white mb-6 transition-colors">
+                    <ArrowBackIcon sx={{ fontSize: '1rem' }} />
+                    Back to Sprint History
+                </Link>
 
-                <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    {/* LEFT COLUMN - Stats & Score (5 cols) */}
-                    <div className="lg:col-span-4 space-y-6">
-                        {/* Main Score Card */}
-                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-8 flex flex-col items-center justify-center relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-4 opacity-5">
+                {/* Main Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    {/* LEFT COLUMN - Score Circle (4 cols) */}
+                    <div className="lg:col-span-4 flex flex-col">
+                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-8 flex flex-col items-center justify-center relative overflow-hidden h-full">
+                            {/* Background decoration */}
+                            <div className="absolute inset-0 opacity-5">
                                 <EmojiEventsIcon sx={{ fontSize: '8rem' }} className="text-white" />
                             </div>
 
@@ -277,7 +215,7 @@ export default function SprintSummaryPage() {
                         </div>
 
                         {/* Quick Stats Grid */}
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="grid grid-cols-2 gap-3 mt-3">
                             <div className="bg-[#1a1a1a] border border-neutral-800 rounded-xl p-4">
                                 <p className="text-xs text-neutral-500 uppercase tracking-wide mb-1">Avg Time</p>
                                 <div className="flex items-baseline gap-1">
@@ -348,55 +286,10 @@ export default function SprintSummaryPage() {
 
                             <div className="mt-8 pt-6 border-t border-neutral-800">
                                 <p className="text-xs text-neutral-500 italic text-center">
-                                    💡 Tip: Focus on topics with {`<`} 50% accuracy in your next practice.
+                                    💡 Tip: Focus on topics with {'<'} 50% accuracy in your next practice.
                                 </p>
                             </div>
                         </div>
-
-                        {/* Performance Trend (New) */}
-                        {history.length > 0 && (
-                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6 mt-6">
-                                <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-6">Performance Trend</h3>
-                                <div className="h-32 flex items-end justify-between gap-2 px-2">
-                                    {history.map((h, i) => {
-                                        const height = Math.max(h.accuracy, 10); // Min 10% height
-                                        const isCurrent = i === history.length - 1; // Assuming last is current if fetched history includes it? 
-                                        // Wait, fetching history usually returns past sessions. 
-                                        // If we just finished, it might be in history if API is fast, or we might need to append current result.
-                                        // Let's assume fetching history returns *previous* sessions usually, but let's check.
-                                        // If we rely on API, it depends on when we save.
-                                        // Let's just render what we get.
-
-                                        let barColor = 'bg-neutral-700';
-                                        if (h.accuracy >= 80) barColor = 'bg-emerald-500/50';
-                                        else if (h.accuracy >= 50) barColor = 'bg-amber-500/50';
-                                        else barColor = 'bg-rose-500/50';
-
-                                        if (h.id === result.sprintId) { // Highlight current if present
-                                            barColor = isQuant ? 'bg-amber-500' : 'bg-violet-500';
-                                        }
-
-                                        return (
-                                            <div key={i} className="flex flex-col items-center gap-2 flex-1 group">
-                                                <div className="relative w-full flex items-end justify-center h-full">
-                                                    <div
-                                                        className={`w-full max-w-[20px] rounded-t-sm transition-all duration-500 ${barColor} group-hover:opacity-100 hover:scale-105`}
-                                                        style={{ height: `${height}%` }}
-                                                    ></div>
-                                                    {/* Tooltip on hover */}
-                                                    <div className="absolute -top-8 bg-black/90 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10 pointer-events-none">
-                                                        {h.accuracy}%
-                                                    </div>
-                                                </div>
-                                                <div className="text-[10px] text-neutral-500">
-                                                    #{i + 1}
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                        )}
                     </div>
 
                     {/* RIGHT COLUMN - Actions (3 cols) */}
@@ -433,11 +326,11 @@ export default function SprintSummaryPage() {
                         </Link>
 
                         <Link
-                            href="/problems"
+                            href="/sprint/history"
                             className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-neutral-400 hover:text-white transition-all hover:bg-neutral-900/50"
                         >
                             <ArrowBackIcon sx={{ fontSize: '1rem' }} />
-                            <span className="text-sm">Back to Problems</span>
+                            <span className="text-sm">Back to History</span>
                         </Link>
                     </div>
                 </div>

@@ -6,9 +6,9 @@ const rateLimit = new Map<string, { count: number; startTime: number }>();
 
 const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
 const LIMITS = {
-    GLOBAL: 60,      // Default: 60 req/min
-    AUTH: 10,        // Auth routes: 10 req/min (doc said 5, giving some buffer)
-    API: 120         // API: 120 req/min
+    GLOBAL: 300,     // Default: 300 req/min (5 per second)
+    AUTH: 30,        // Auth routes: 30 req/min
+    API: 600         // API: 600 req/min (10 per second) - allows rapid sprint/practice navigation
 };
 
 function checkRateLimit(ip: string, limit: number): boolean {

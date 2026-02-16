@@ -12,16 +12,54 @@ export interface ISession extends Document {
         time_limit_ms: number;
     };
 
-    question_ids: mongoose.Types.ObjectId[];           // fetched at session start
-    attempt_ids: mongoose.Types.ObjectId[];            // populated as user answers
-    correct_count: number;
-    total_time_ms: number;
-    status: 'IN_PROGRESS' | 'COMPLETED' | 'ABANDONED';
-    current_index: number;              // for browser-close resumption
-    started_at: Date;                   // server-side timer anchor
+    // Questions & Attempts
+    question_ids: mongoose.Types.ObjectId[];
+    attempt_ids: mongoose.Types.ObjectId[];
 
-    created_at: Date;
+    // ✅ NEW: Per-Question Status Tracking
+    question_status: {
+        question_id: mongoose.Types.ObjectId;
+        status: 'NOT_ATTEMPTED' | 'CORRECT' | 'INCORRECT' | 'SKIPPED';
+        attempt_id?: mongoose.Types.ObjectId;
+        time_ms: number;
+        order: number;
+    }[];
+
+    // ✅ NEW: Pre-computed Stats
+    stats: {
+        total_questions: number;
+        attempted: number;
+        correct: number;
+        incorrect: number;
+        skipped: number;
+        not_attempted: number;
+        accuracy: number;
+        avg_time_ms: number;
+        total_time_ms: number;
+    };
+
+    topic_performance: {
+        topic: string;
+        total: number;
+        correct: number;
+        incorrect: number;  // Added incorrect
+        skipped: number;    // Added skipped
+        accuracy: number;
+        avg_time_ms: number;
+    }[];
+
+    status: 'IN_PROGRESS' | 'COMPLETED' | 'ABANDONED';
+    current_index: number;
+    started_at: Date;
     completed_at?: Date;
+    expired: boolean;   // Added
+
+    // Legacy fields
+    correct_count?: number;
+    total_time_ms?: number;
+
+    created_at?: Date;
+    updated_at?: Date;
 }
 
 const SessionSchema: Schema = new Schema(
@@ -51,8 +89,48 @@ const SessionSchema: Schema = new Schema(
 
         question_ids: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
         attempt_ids: [{ type: Schema.Types.ObjectId, ref: 'Attempt' }],
+
+        question_status: [{
+            question_id: { type: Schema.Types.ObjectId, required: true },
+            status: {
+                type: String,
+                enum: ['NOT_ATTEMPTED', 'CORRECT', 'INCORRECT', 'SKIPPED'],
+                required: true
+            },
+            attempt_id: { type: Schema.Types.ObjectId },
+            time_ms: { type: Number, default: 0 },
+            order: { type: Number, required: true }
+        }],
+
+        stats: {
+            total_questions: { type: Number, default: 0 },
+            attempted: { type: Number, default: 0 },
+            correct: { type: Number, default: 0 },
+            incorrect: { type: Number, default: 0 },
+            skipped: { type: Number, default: 0 },
+            not_attempted: { type: Number, default: 0 },
+            accuracy: { type: Number, default: 0 },
+            avg_time_ms: { type: Number, default: 0 },
+            total_time_ms: { type: Number, default: 0 }
+        },
+
+        // Legacy fields for backward compatibility (optional, or remove if fully migrating)
         correct_count: { type: Number, default: 0 },
         total_time_ms: { type: Number, default: 0 },
+
+        topic_performance: {
+            type: [{
+                topic: { type: String, required: true },
+                total: { type: Number, required: true },
+                correct: { type: Number, required: true },
+                incorrect: { type: Number, required: true },
+                skipped: { type: Number, default: 0 },
+                accuracy: { type: Number, required: true },
+                avg_time_ms: { type: Number, required: true }
+            }],
+            default: []
+        },
+
         status: {
             type: String,
             enum: ['IN_PROGRESS', 'COMPLETED', 'ABANDONED'],
@@ -60,14 +138,16 @@ const SessionSchema: Schema = new Schema(
         },
         current_index: { type: Number, default: 0 },
         started_at: { type: Date, default: Date.now },
-
         completed_at: { type: Date },
+        expired: { type: Boolean, default: false },
     },
     { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 );
 
-// Index: { user_id: 1, created_at: -1 }  — session history
+// Indexes
 SessionSchema.index({ user_id: 1, created_at: -1 });
+SessionSchema.index({ user_id: 1, status: 1 });
+SessionSchema.index({ user_id: 1, 'config.subject': 1, created_at: -1 });
 
 const Session: Model<ISession> =
     mongoose.models.Session || mongoose.model<ISession>('Session', SessionSchema);

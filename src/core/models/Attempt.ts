@@ -55,6 +55,10 @@ AttemptSchema.index({ user_id: 1, subject: 1, is_correct: 1 });
 AttemptSchema.index({ question_id: 1, is_correct: 1 });
 // { session_id: 1 }                            — sprint results
 AttemptSchema.index({ session_id: 1 });
+// { user_id: 1, session_id: 1 }                — check if user attempted in this session
+AttemptSchema.index({ user_id: 1, session_id: 1 });
+// { session_id: 1, pattern: 1, is_correct: 1 } — session-specific topic performance
+AttemptSchema.index({ session_id: 1, pattern: 1, is_correct: 1 });
 
 const Attempt: Model<IAttempt> =
     mongoose.models.Attempt || mongoose.model<IAttempt>('Attempt', AttemptSchema);

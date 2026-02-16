@@ -24,6 +24,8 @@ import {
     WarningIcon,
 } from '@/components/icons';
 import { ReportModal } from '@/components/ui/ReportModal';
+import { SprintSessionLayout } from './SprintSessionLayout';
+import { QuestionContent } from '@/components/ui/QuestionContent';
 
 // ... (interfaces remain same) -> RESTORING MISSING CODE
 
@@ -74,49 +76,6 @@ interface NavigationData {
 function formatShiftInfo(shift: string | undefined): string {
     if (!shift) return '';
     return shift;
-}
-
-function QuestionContent({ text, image, onImageClick }: { text: string; image?: string; onImageClick?: (url: string) => void }) {
-    if (text.includes('[IMAGE]') && image) {
-        const parts = text.split('[IMAGE]');
-        return (
-            <div className="text-lg leading-relaxed text-neutral-200">
-                {parts.map((part, index) => (
-                    <React.Fragment key={index}>
-                        <MathText>{part}</MathText>
-                        {index < parts.length - 1 && (
-                            <div className="my-6 flex justify-center">
-                                <img
-                                    src={image}
-                                    alt="Question illustration"
-                                    className="rounded-xl border border-neutral-700 shadow-lg bg-white p-2 cursor-zoom-in hover:opacity-90 transition-opacity"
-                                    style={{ minWidth: '500px', maxWidth: '100%' }}
-                                    onClick={() => image && onImageClick?.(image)}
-                                />
-                            </div>
-                        )}
-                    </React.Fragment>
-                ))}
-            </div>
-        );
-    }
-
-    return (
-        <div className="text-lg leading-relaxed text-neutral-200">
-            <MathText>{text}</MathText>
-            {image && (
-                <div className="mt-6 flex justify-center">
-                    <img
-                        src={image}
-                        alt="Question illustration"
-                        className="rounded-xl border border-neutral-700 shadow-lg bg-white p-2 cursor-zoom-in hover:opacity-90 transition-opacity"
-                        style={{ minWidth: '500px', maxWidth: '100%' }}
-                        onClick={() => image && onImageClick?.(image)}
-                    />
-                </div>
-            )}
-        </div>
-    );
 }
 
 function SolutionContent({ solution }: { solution: string }) {
@@ -288,6 +247,7 @@ export default function QuestionPage({
         currentIndex: number;
         subject: string;
         difficulty: string;
+        topics?: string[]; // Topics/patterns for this sprint
         totalTimeAllowed: number;
         startTime: number;
     } | null>(null);
@@ -623,6 +583,100 @@ export default function QuestionPage({
         }
     };
 
+
+
+    const finishSprint = async (timedOut = false) => {
+        if (!sprintSession) return;
+
+        const totalTimeSpent = Date.now() - sprintSession.startTime;
+
+        // Calculate stats from stored attempts
+        const storedAttempts = JSON.parse(sessionStorage.getItem('sprintAttempts') || '{}');
+        const correctCount = Object.values(storedAttempts).filter((a: any) => a.isCorrect).length;
+
+        // Save to Backend with detailed attempt data
+        let dbSessionId = null;
+        console.log("Saving sprint results...", { correctCount, totalTimeSpent, attempts: Object.keys(storedAttempts).length });
+        try {
+            const res = await fetch('/api/sprint/save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    sprintId: sprintSession.sprintId,
+                    subject: sprintSession.subject,
+                    difficulty: sprintSession.difficulty,
+                    topics: sprintSession.topics || [],
+                    totalQuestions: sprintSession.questionIds.length,
+                    correctCount,
+                    timeSpent: totalTimeSpent,
+                    status: timedOut ? 'COMPLETED' : 'ABANDONED',
+                    questionIds: sprintSession.questionIds,
+                    attempts: storedAttempts // Send all attempt details
+                })
+            });
+            const data = await res.json();
+            console.log("Save response:", data);
+            if (data.success && data.sessionId) {
+                dbSessionId = data.sessionId;
+                console.log("Sprint saved with ID:", dbSessionId);
+            } else {
+                console.error("Save failed or no sessionId returned", data);
+            }
+        } catch (err) {
+            console.error("Failed to save sprint", err);
+        }
+
+        // Save results for summary page - ONLY if we got a valid DB session ID
+        if (dbSessionId) {
+            sessionStorage.setItem('sprintResults', JSON.stringify({
+                sprintId: dbSessionId, // Use MongoDB ID
+                totalTimeSpent,
+                timedOut,
+                correctCount,
+                totalQuestions: sprintSession.questionIds.length
+            }));
+        } else {
+            // Fallback: save minimal data without sprintId
+            console.warn("No DB session ID, saving minimal results");
+            sessionStorage.setItem('sprintResults', JSON.stringify({
+                sprintId: null,
+                totalTimeSpent,
+                timedOut,
+                correctCount,
+                totalQuestions: sprintSession.questionIds.length,
+                subject: sprintSession.subject,
+                difficulty: sprintSession.difficulty,
+                topics: sprintSession.topics || []
+            }));
+        }
+
+        router.push('/sprint/summary');
+    };
+
+    const handleEndSprint = () => {
+        // User manually ended
+        finishSprint(false); // Should we mark as ABANDONED? 
+        // For now, let's treat manual end as 'Submitted what I have'.
+    };
+
+    const handleSkip = () => {
+        // In sprint mode, record skip with 'SKIPPED' as selectedOption
+        if (isSprintMode && sprintSession && question) {
+            const currentAttempts = JSON.parse(sessionStorage.getItem('sprintAttempts') || '{}');
+            currentAttempts[questionId] = {
+                questionId: questionId,
+                selectedOption: 'SKIPPED',
+                isCorrect: false,
+                timeMs: elapsedTime * 1000,
+                topic: question.pattern || 'Unknown',
+                difficulty: question.difficulty
+            };
+            sessionStorage.setItem('sprintAttempts', JSON.stringify(currentAttempts));
+            notifyInfo('Question Skipped');
+        }
+        goToNext();
+    };
+
     const goToNext = () => {
         if (isPracticeMode && practiceSession) {
             const nextIndex = practiceSession.currentIndex + 1;
@@ -645,33 +699,24 @@ export default function QuestionPage({
             const nextId = practiceSession.questionIds[nextIndex];
             router.push(`/problems/${nextId}?section=${practiceSession.section}&practice=true`);
         } else if (isSprintMode && sprintSession) {
+            // Save Sprint Attempt locally with complete data
+            if (selectedOption && question) {
+                const currentAttempts = JSON.parse(sessionStorage.getItem('sprintAttempts') || '{}');
+                currentAttempts[questionId] = {
+                    questionId: questionId,
+                    selectedOption: selectedOption,
+                    isCorrect: selectedOption === question.correct_option,
+                    timeMs: elapsedTime * 1000,
+                    topic: question.pattern || 'Unknown',
+                    difficulty: question.difficulty
+                };
+                sessionStorage.setItem('sprintAttempts', JSON.stringify(currentAttempts));
+            }
+
             const nextIndex = sprintSession.currentIndex + 1;
             // Finish Sprint logic
             if (nextIndex >= sprintSession.questionIds.length) {
-                // Submit final stats logic could go here, or just redirect
-                // We'll redirect to summary which handles "completing" the sprint based on session data?
-                // Actually summary page expects 'sprintResults' and 'currentSprint'.
-                // 'currentSprint' logic in summary page seems to expect data there.
-                // But wait, setup page set 'sprintSession'.
-                // I need to align the storage keys. The new Setup used 'sprintSession'.
-                // The OLD summary page used 'sprintResults' and 'currentSprint'.
-                // I need to REFACTOR Summary page to use 'sprintSession' or convert here.
-
-                // Let's assume I will refactor Summary page to look for 'completedSprint' or just read 'sprintSession'.
-                // For now, let's redirect to summary.
-
-                // Calculate total time
-                const totalTimeSpent = Date.now() - sprintSession.startTime;
-
-                // Save results for summary page
-                sessionStorage.setItem('sprintResults', JSON.stringify({
-                    sprintId: sprintSession.sprintId,
-                    totalTimeSpent,
-                    timedOut: false
-                }));
-                // We also leave 'sprintSession' there so Summary can read question count etc if needed
-
-                router.push('/sprint/summary');
+                finishSprint();
                 return;
             }
 
@@ -738,19 +783,18 @@ export default function QuestionPage({
 
             // In Sprint Mode: Don't show result, navigate immediately
             if (isSprintMode && sprintSession) {
-                // Record attempt in background (don't await)
-                fetch('/api/sprint', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        sprintId: sprintSession.sprintId,
-                        questionId: question.id,
-                        selectedOption: selectedOption,
-                        timeTaken: timeMs
-                    })
-                }).catch(err => console.error('Failed to record sprint attempt:', err));
+                // Save locally for Sprint Summary
+                const currentAttempts = JSON.parse(sessionStorage.getItem('sprintAttempts') || '{}');
+                currentAttempts[sprintSession.currentIndex] = {
+                    questionId: question.id,
+                    selectedOption: selectedOption,
+                    isCorrect: selectedOption === question.correct_option,
+                    timeSpent: timeMs
+                };
+                sessionStorage.setItem('sprintAttempts', JSON.stringify(currentAttempts));
 
-                // Also record as regular attempt in background
+                // Record attempt in background (for global stats)
+                // We keep this to track question difficulty stats over time
                 fetch('/api/attempts', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -763,23 +807,10 @@ export default function QuestionPage({
                     }),
                 }).catch(err => console.error('Failed to record attempt:', err));
 
-                // Navigate immediately - no delay, no visual feedback
-                const nextIndex = sprintSession.currentIndex + 1;
-                if (nextIndex >= sprintSession.questionIds.length) {
-                    // Sprint complete - go to summary
-                    const totalTimeSpent = Date.now() - sprintSession.startTime;
-                    sessionStorage.setItem('sprintResults', JSON.stringify({
-                        sprintId: sprintSession.sprintId,
-                        totalTimeSpent,
-                        timedOut: false
-                    }));
-                    router.push('/sprint/summary');
-                } else {
-                    // Go to next question
-                    const nextId = sprintSession.questionIds[nextIndex];
-                    router.push(`/problems/${nextId}?section=${sprintSession.subject}&sprint=true`);
-                }
-                return; // Exit early - don't set isSubmitted
+                // Hand off to navigation logic (which now handles finishing sprint)
+                // calls finishSprint() if last question
+                goToNext();
+                return;
             }
 
             // Normal mode: Show result
@@ -1041,6 +1072,52 @@ export default function QuestionPage({
     const isCorrect = isSubmitted && selectedOption === question.correct_option;
     const hasPrevious = !!navigation?.prevId;
     const hasNext = !!navigation?.nextId;
+    const isQuant = section === 'QUANT';
+
+    // Conditional Render: Sprint Mode
+    if (isSprintMode && sprintSession && question) {
+        // Calculate remaining time for the specific sprint timer prop format
+        const totalTimeAllowedSec = Math.floor(sprintSession.totalTimeAllowed / 1000);
+        const remaining = Math.max(0, totalTimeAllowedSec - elapsedTime);
+
+        return (
+            <SprintSessionLayout
+                question={question}
+                session={sprintSession}
+                timer={{
+                    elapsed: elapsedTime,
+                    totalAllowed: totalTimeAllowedSec,
+                    remaining: remaining
+                }}
+                selectedOption={selectedOption}
+                onSelectOption={setSelectedOption}
+                onSubmit={() => {
+                    // Basic check if correct option is selected (sprint mode usually auto-submits or just records)
+                    // Here we just mark submitted and record attempt?
+                    // Verify if we should save attempt here
+                    setIsSubmitted(true);
+                    // If we want to record the attempt:
+                    // saveAttempt(question.id, selectedOption); 
+                    // But for sprint speed, maybe we just wait for 'Next'? 
+                    // The UI calls onSubmit, then usually we go Next.
+                    // Let's call goToNext() which handles logic?
+                    // Wait, SprintSessionLayout has explicit "Submit" button which triggers onSubmit.
+                    // Logic:
+                    if (selectedOption) {
+                        goToNext();
+                    }
+                }}
+                onSkip={handleSkip}
+                onEndSprint={handleEndSprint}
+                currentQuestionIndex={sprintSession.currentIndex}
+                totalQuestions={sprintSession.questionIds.length}
+                zoomedImage={zoomedImage}
+                setZoomedImage={setZoomedImage}
+                setZoomLevel={setZoomLevel}
+                zoomLevel={zoomLevel}
+            />
+        );
+    }
 
     return (
         <div className="h-screen bg-[#0f0f0f] flex flex-col relative overflow-hidden">
@@ -1179,7 +1256,16 @@ export default function QuestionPage({
             <header className="bg-[#1a1a1a] border-b border-neutral-800 h-14 flex items-center px-4 lg:px-6 shrink-0">
                 {/* Left: Back + Timer */}
                 <div className="flex items-center gap-4">
-                    <Link href={isSprintMode ? "/sprint" : "/problems"} className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors">
+                    <Link
+                        href={
+                            searchParams.get('from') === 'sprint-review' && searchParams.get('sprintId')
+                                ? `/sprint/${searchParams.get('sprintId')}/review`
+                                : isSprintMode
+                                    ? "/sprint"
+                                    : "/problems"
+                        }
+                        className="flex items-center gap-2 text-neutral-400 hover:text-white transition-colors"
+                    >
                         <ChevronLeftIcon sx={{ fontSize: '1.25rem' }} />
                         <span className="font-medium text-sm hidden sm:inline">Back</span>
                     </Link>
@@ -1334,7 +1420,7 @@ export default function QuestionPage({
                         <div className="mb-8">
                             <QuestionContent
                                 text={question.text}
-                                image={question.image}
+                                imageUrl={question.image}
                                 onImageClick={setZoomedImage}
                             />
                         </div>

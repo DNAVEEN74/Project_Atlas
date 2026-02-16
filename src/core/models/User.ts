@@ -21,6 +21,15 @@ export interface IUser extends Document {
         max_streak: number;
         last_active_date: string;       // "YYYY-MM-DD"
     };
+    sprint_configs: {
+        name: string;
+        subject: 'QUANT' | 'REASONING';
+        topics: string[];
+        difficulty: 'EASY' | 'MEDIUM' | 'HARD' | 'MIXED';
+        question_count: number;
+        created_at: Date;
+        last_used?: Date;
+    }[];
     role: 'USER' | 'ADMIN';
     created_at: Date;
     updated_at: Date;
@@ -65,6 +74,25 @@ const UserSchema: Schema = new Schema(
             current_streak: { type: Number, default: 0 },
             max_streak: { type: Number, default: 0 },
             last_active_date: { type: String, default: () => new Date().toISOString().split('T')[0] },
+        },
+
+        sprint_configs: {
+            type: [{
+                name: { type: String, required: true },
+                subject: { type: String, enum: ['QUANT', 'REASONING'], required: true },
+                topics: [{ type: String }],
+                difficulty: { type: String, enum: ['EASY', 'MEDIUM', 'HARD', 'MIXED'], required: true },
+                question_count: { type: Number, required: true, min: 5, max: 20 },
+                created_at: { type: Date, default: Date.now },
+                last_used: { type: Date }
+            }],
+            default: [],
+            validate: {
+                validator: function (configs: any[]) {
+                    return configs.length <= 5;
+                },
+                message: 'Maximum 5 sprint configurations allowed'
+            }
         },
 
         role: {

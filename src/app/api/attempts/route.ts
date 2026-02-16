@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
         await dbConnect();
 
         const body = await req.json();
-        const { questionId, optionSelected, timeMs, sessionId } = body;
+        const { questionId, optionSelected, timeMs, sessionId, isSprint } = body;
 
         if (!questionId || !optionSelected) {
             return NextResponse.json(
@@ -138,15 +138,21 @@ export async function POST(req: NextRequest) {
             $set: { 'stats.last_active_date': today }
         };
 
+
         if (is_correct && !alreadySolved) {
-            userUpdate.$inc = {
-                'stats.total_solved': 1,
-                'stats.total_correct': 1
-            };
+            // Only update global stats if NOT a sprint (or if we want sprint to count, but user requested otherwise)
+            if (!isSprint) {
+                userUpdate.$inc = {
+                    'stats.total_solved': 1,
+                    'stats.total_correct': 1
+                };
+            }
         } else if (is_correct) {
-            userUpdate.$inc = {
-                'stats.total_correct': 1
-            };
+            if (!isSprint) {
+                userUpdate.$inc = {
+                    'stats.total_correct': 1
+                };
+            }
         }
 
         // Streak logic
