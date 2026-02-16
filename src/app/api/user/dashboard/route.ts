@@ -8,7 +8,7 @@ import { getCurrentUser } from "@/lib/auth";
 
 /**
  * GET /api/user/dashboard
- * Single call: stats + heatmap + recent + topic accuracy
+ * Single call: stats + heatmap + recent + topic accuracy + daily goal progress
  */
 export async function GET(req: NextRequest) {
     try {
@@ -23,30 +23,29 @@ export async function GET(req: NextRequest) {
         await dbConnect();
         const userObjectId = new mongoose.Types.ObjectId(authUser.userId);
 
-        // 1. Fetch User Stats (basic totals) AND Profile
+        // 1. Fetch User
         const user = await User.findById(userObjectId).lean();
         if (!user) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
 
-        // 2. Fetch Heatmap (Last 365 days of DailyActivity)
-        const oneYearAgo = new Date();
-        oneYearAgo.setDate(oneYearAgo.getDate() - 365);
-        const oneYearAgoStr = oneYearAgo.toISOString().split('T')[0];
+        const userAny = user as any;
 
-        const activities = await DailyActivity.find({
+        // 2. Today's daily activity (for daily goal progress)
+        const todayStr = new Date().toISOString().split('T')[0];
+        const todayActivity = await DailyActivity.findOne({
             user_id: userObjectId,
-            date: { $gte: oneYearAgoStr }
-        }).sort({ date: 1 }).lean();
+            date: todayStr
+        }).lean();
 
-        // 3. Recent Activity (Last 5 attempts)
+        // 3. Recent Activity (Last 10 attempts)
         const recentAttempts = await Attempt.find({ user_id: userObjectId })
             .sort({ created_at: -1 })
-            .limit(5)
-            .populate('question_id', 'text difficulty')
+            .limit(10)
+            .populate('question_id', 'text difficulty subject pattern')
             .lean();
 
-        // 4. Topic Accuracy (Aggregation)
+        // 4. Topic Accuracy (Top 5 active topics)
         const topicStats = await Attempt.aggregate([
             { $match: { user_id: userObjectId } },
             {
@@ -57,33 +56,35 @@ export async function GET(req: NextRequest) {
                 }
             },
             { $sort: { total: -1 } },
-            { $limit: 5 } // Top 5 active topics
+            { $limit: 5 }
         ]);
 
         return NextResponse.json({
-            user: {
-                name: (user as any).profile.name,
-                username: (user as any).profile.username,
-                avatar_url: (user as any).profile.avatar_url,
-                stats: (user as any).stats,
-                preferences: (user as any).preferences
+            success: true,
+            dailyProgress: {
+                quantSolved: (todayActivity as any)?.quant_solved || 0,
+                reasoningSolved: (todayActivity as any)?.reasoning_solved || 0,
+                quantGoal: userAny.preferences?.daily_quant_goal || 5,
+                reasoningGoal: userAny.preferences?.daily_reasoning_goal || 5,
+                totalToday: (todayActivity as any)?.questions_solved || 0,
+                correctToday: (todayActivity as any)?.questions_correct || 0,
             },
-            heatmap: activities.map((a: any) => ({
-                date: a.date,
-                count: a.questions_solved + a.games_played // Intensity metric
-            })),
             recentActivity: recentAttempts.map((a: any) => ({
                 id: a._id,
-                type: 'ATTEMPT', // could be 'SESSION' or 'GAME' in a unified feed
-                title: a.question_id?.text?.substring(0, 50) + "...",
+                questionId: a.question_id?._id,
+                questionText: a.question_id?.text || 'Unknown Question',
+                difficulty: a.question_id?.difficulty || a.difficulty,
+                subject: a.question_id?.subject || a.subject,
                 isCorrect: a.is_correct,
-                date: a.created_at
+                timeMs: a.time_ms,
+                createdAt: a.created_at
             })),
             topicStats: topicStats.map((t: any) => ({
                 pattern: t._id,
                 accuracy: Math.round((t.correct / t.total) * 100),
                 count: t.total
-            }))
+            })),
+            targetExam: userAny.target_exam,
         });
 
     } catch (error) {

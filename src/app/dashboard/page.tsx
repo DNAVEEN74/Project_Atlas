@@ -19,42 +19,79 @@ import {
 import Header from '@/components/layout/Header';
 import { useToast } from '@/contexts/ToastContext';
 
+interface DailyProgress {
+    quantSolved: number;
+    reasoningSolved: number;
+    quantGoal: number;
+    reasoningGoal: number;
+    totalToday: number;
+    correctToday: number;
+}
+
+interface RecentAttempt {
+    id: string;
+    questionId: string;
+    questionText: string;
+    difficulty: string;
+    subject: string;
+    isCorrect: boolean;
+    timeMs: number;
+    createdAt: string;
+}
+
+interface BookmarkedQuestion {
+    _id: string;
+    text: string;
+    difficulty: string;
+    subject: string;
+    pattern: string;
+}
+
 export default function DashboardPage() {
     const router = useRouter();
     const { user, loading, logout, refreshUser } = useAuth();
     const { success, error: notifyError } = useToast();
-    const [recentActivity, setRecentActivity] = React.useState<any[]>([]);
+    const [recentActivity, setRecentActivity] = React.useState<RecentAttempt[]>([]);
     const [activeTab, setActiveTab] = React.useState<'recent' | 'bookmarks'>('recent');
+    const [bookmarkedQuestions, setBookmarkedQuestions] = React.useState<BookmarkedQuestion[]>([]);
+    const [dailyProgress, setDailyProgress] = React.useState<DailyProgress>({
+        quantSolved: 0, reasoningSolved: 0, quantGoal: 5, reasoningGoal: 5, totalToday: 0, correctToday: 0
+    });
 
-    const [bookmarkedQuestions, setBookmarkedQuestions] = React.useState<any[]>([]);
-
+    // Fetch dashboard data (daily progress + recent activity) from unified API
     React.useEffect(() => {
-        const fetchHistory = async () => {
+        const fetchDashboard = async () => {
             try {
-                const res = await fetch('/api/submissions?limit=10');
+                const res = await fetch('/api/user/dashboard');
                 const data = await res.json();
-                if (data.success && data.data) setRecentActivity(data.data);
+                if (data.success) {
+                    setDailyProgress(data.dailyProgress);
+                    setRecentActivity(data.recentActivity || []);
+                }
             } catch (error) {
-                console.error("Failed to fetch history", error);
+                console.error("Failed to fetch dashboard data", error);
             }
         };
-        fetchHistory();
-    }, []);
+        if (user) fetchDashboard();
+    }, [user]);
 
+    // Fetch bookmarks from actual API
     React.useEffect(() => {
         const fetchBookmarks = async () => {
             try {
-                const res = await fetch('/api/user/bookmarks?full=true');
+                const res = await fetch('/api/bookmarks?limit=6');
                 const data = await res.json();
-                if (data.success && data.questions) {
-                    setBookmarkedQuestions(data.questions.slice(0, 6));
+                if (data.data) {
+                    setBookmarkedQuestions(
+                        data.data.map((b: any) => b.question).filter(Boolean).slice(0, 6)
+                    );
                 }
             } catch (error) {
                 console.error('Failed to fetch bookmarks:', error);
             }
         };
-        fetchBookmarks();
-    }, []);
+        if (user) fetchBookmarks();
+    }, [user]);
 
     // Redirect if not authenticated
     React.useEffect(() => {
@@ -63,7 +100,7 @@ export default function DashboardPage() {
         }
     }, [user, loading, router]);
 
-    // Dynamic stats (calculated from actual attempts, not cached user.dash)
+    // Dynamic stats (calculated from actual attempts)
     const [dynamicStats, setDynamicStats] = React.useState({
         totalCorrect: 0,
         totalWrong: 0,
@@ -118,10 +155,6 @@ export default function DashboardPage() {
         if (user) fetchDynamicStats();
     }, [user, selectedSection]);
 
-    React.useEffect(() => {
-        if (!loading && !user) router.push('/login');
-    }, [user, loading, router]);
-
     const fileInputRef = React.useRef<HTMLInputElement>(null);
     const [uploadingAvatar, setUploadingAvatar] = React.useState(false);
 
@@ -141,15 +174,6 @@ export default function DashboardPage() {
 
             const data = await res.json();
             if (data.success) {
-                // Determine functionality to refresh user or update local state
-                // Since this context updates the user, calling logout then login is too heavy
-                // But refreshUser() should handle it if it fetches fresh data
-                // Assuming refreshUser is available from useAuth based on context definition
-                // We'll reload the page or trigger a refresh if the context exposes it.
-                // Looking at useAuth, it does expose refreshUser!
-                // Wait, I need to check if I can access refreshUser from the hook.
-                // let's assume I check the context file and it exports it.
-                // If not, a window.location.reload() is a safe fallback.
                 await refreshUser();
                 success('Profile picture updated!');
             }
@@ -160,8 +184,6 @@ export default function DashboardPage() {
             setUploadingAvatar(false);
         }
     };
-
-
 
     if (loading) {
         return (
@@ -180,33 +202,36 @@ export default function DashboardPage() {
         return names[0][0].toUpperCase();
     };
 
-    // Circular Progress Component - Larger for better readability
+    // Exam Countdown
+    const getExamCountdown = () => {
+        const targetYear = (user as any).targetYear || new Date().getFullYear();
+        // SSC CGL Tier 1 typically Aug-Sep
+        const examDate = new Date(targetYear, 7, 15); // Aug 15 of target year
+        const today = new Date();
+        const diffMs = examDate.getTime() - today.getTime();
+        const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+        return diffDays > 0 ? diffDays : 0;
+    };
+
+    // Daily goal progress helpers
+    const quantProgress = Math.min((dailyProgress.quantSolved / dailyProgress.quantGoal) * 100, 100);
+    const reasoningProgress = Math.min((dailyProgress.reasoningSolved / dailyProgress.reasoningGoal) * 100, 100);
+    const quantGoalMet = dailyProgress.quantSolved >= dailyProgress.quantGoal;
+    const reasoningGoalMet = dailyProgress.reasoningSolved >= dailyProgress.reasoningGoal;
+
+    // Circular Progress Component
     const CircularProgress = ({ solved, total }: { solved: number; total: number }) => {
         const percentage = total > 0 ? (solved / total) * 100 : 0;
-        const circumference = 2 * Math.PI * 58; // radius = 58 (larger)
+        const circumference = 2 * Math.PI * 58;
         const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
         return (
             <div className="relative w-44 h-44">
                 <svg className="w-full h-full -rotate-90" viewBox="0 0 176 176">
+                    <circle cx="88" cy="88" r="58" stroke="#2a2a2a" strokeWidth="10" fill="none" />
                     <circle
-                        cx="88"
-                        cy="88"
-                        r="58"
-                        stroke="#2a2a2a"
-                        strokeWidth="10"
-                        fill="none"
-                    />
-                    <circle
-                        cx="88"
-                        cy="88"
-                        r="58"
-                        stroke="url(#gradient)"
-                        strokeWidth="10"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeDasharray={circumference}
-                        strokeDashoffset={strokeDashoffset}
+                        cx="88" cy="88" r="58" stroke="url(#gradient)" strokeWidth="10" fill="none"
+                        strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={strokeDashoffset}
                         className="transition-all duration-1000"
                     />
                     <defs>
@@ -244,16 +269,10 @@ export default function DashboardPage() {
     const totalActiveDays = heatmapData.length;
     const totalSubmissions = heatmapData.reduce((sum, h) => sum + h.count, 0);
 
-
-
-
     return (
         <div className="min-h-screen bg-[#0f0f0f]">
-            {/* Header */}
-            {/* Header */}
             <Header activePage="dashboard" />
 
-            {/* Main Content */}
             <main className="w-full px-6 lg:px-12 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8">
 
@@ -272,8 +291,6 @@ export default function DashboardPage() {
                                         ) : (
                                             getUserInitials()
                                         )}
-
-                                        {/* Overlay for hover */}
                                         <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover/avatar:opacity-100 transition-opacity">
                                             {uploadingAvatar ? (
                                                 <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -283,14 +300,10 @@ export default function DashboardPage() {
                                         </div>
                                     </div>
                                     <input
-                                        type="file"
-                                        ref={fileInputRef}
-                                        onChange={handleAvatarUpload}
-                                        accept="image/*"
-                                        className="hidden"
+                                        type="file" ref={fileInputRef} onChange={handleAvatarUpload}
+                                        accept="image/*" className="hidden"
                                     />
                                 </div>
-
                                 <div className="min-w-0">
                                     <h2 className="text-xl font-bold text-white truncate">{user.name}</h2>
                                     <p className="text-sm text-neutral-400 truncate" title={user.email}>{user.email}</p>
@@ -300,7 +313,7 @@ export default function DashboardPage() {
                             {/* Target Badge */}
                             <div className="flex items-center gap-2 mb-5">
                                 <span className="px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-full text-sm font-medium text-amber-400">
-                                    🎯 {user.targetExam?.replace('_', ' ')} {user.targetYear}
+                                    {user.targetExam?.replace('_', ' ')}
                                 </span>
                             </div>
 
@@ -309,7 +322,88 @@ export default function DashboardPage() {
                             </Link>
                         </div>
 
-                        {/* Community Stats Style */}
+                        {/* Daily Goal Progress */}
+                        <div className="bg-[#1a1a1a] rounded-xl border border-neutral-800 p-6">
+                            <h3 className="text-lg font-semibold text-neutral-200 mb-4">Today's Goals</h3>
+
+                            {/* Quant Goal */}
+                            <div className="mb-4">
+                                <div className="flex items-center justify-between mb-2">
+                                    <div className="flex items-center gap-2">
+                                        <CalculateOutlinedIcon sx={{ fontSize: '1.1rem' }} className="text-amber-400" />
+                                        <span className="text-sm font-medium text-neutral-300">Quant</span>
+                                    </div>
+                                    <span className={`text-sm font-bold ${quantGoalMet ? 'text-emerald-400' : 'text-amber-400'}`}>
+                                        {dailyProgress.quantSolved}/{dailyProgress.quantGoal}
+                                    </span>
+                                </div>
+                                <div className="w-full h-2.5 bg-neutral-800 rounded-full overflow-hidden">
+                                    <div
+                                        className={`h-full rounded-full transition-all duration-500 ${quantGoalMet ? 'bg-emerald-500' : 'bg-amber-500'}`}
+                                        style={{ width: `${quantProgress}%` }}
+                                    />
+                                </div>
+                                {quantGoalMet && (
+                                    <p className="text-xs text-emerald-400 mt-1 flex items-center gap-1">
+                                        <CheckCircleOutlinedIcon sx={{ fontSize: '0.8rem' }} /> Goal complete!
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Reasoning Goal */}
+                            <div className="mb-4">
+                                <div className="flex items-center justify-between mb-2">
+                                    <div className="flex items-center gap-2">
+                                        <PsychologyOutlinedIcon sx={{ fontSize: '1.1rem' }} className="text-violet-400" />
+                                        <span className="text-sm font-medium text-neutral-300">Reasoning</span>
+                                    </div>
+                                    <span className={`text-sm font-bold ${reasoningGoalMet ? 'text-emerald-400' : 'text-violet-400'}`}>
+                                        {dailyProgress.reasoningSolved}/{dailyProgress.reasoningGoal}
+                                    </span>
+                                </div>
+                                <div className="w-full h-2.5 bg-neutral-800 rounded-full overflow-hidden">
+                                    <div
+                                        className={`h-full rounded-full transition-all duration-500 ${reasoningGoalMet ? 'bg-emerald-500' : 'bg-violet-500'}`}
+                                        style={{ width: `${reasoningProgress}%` }}
+                                    />
+                                </div>
+                                {reasoningGoalMet && (
+                                    <p className="text-xs text-emerald-400 mt-1 flex items-center gap-1">
+                                        <CheckCircleOutlinedIcon sx={{ fontSize: '0.8rem' }} /> Goal complete!
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Continue Practice CTA */}
+                            {(!quantGoalMet || !reasoningGoalMet) && (
+                                <Link
+                                    href="/sprint"
+                                    className="mt-2 flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-medium rounded-xl transition-all"
+                                >
+                                    <BoltIcon sx={{ fontSize: '1.1rem' }} />
+                                    Continue Practice
+                                </Link>
+                            )}
+                            {quantGoalMet && reasoningGoalMet && (
+                                <div className="mt-2 text-center py-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                                    <p className="text-emerald-400 font-medium text-sm">All goals met today!</p>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Exam Countdown */}
+                        {getExamCountdown() > 0 && (
+                            <div className="bg-gradient-to-br from-amber-900/30 to-orange-900/20 rounded-xl border border-amber-500/20 p-5">
+                                <div className="flex items-center gap-3 mb-2">
+                                    <MenuBookOutlinedIcon sx={{ fontSize: '1.3rem' }} className="text-amber-400" />
+                                    <span className="text-sm font-medium text-amber-300">Exam Countdown</span>
+                                </div>
+                                <div className="text-4xl font-bold text-white mb-1">{getExamCountdown()}</div>
+                                <p className="text-xs text-neutral-400">days until {user.targetExam?.replace('_', ' ')}</p>
+                            </div>
+                        )}
+
+                        {/* Statistics */}
                         <div className="bg-[#1a1a1a] rounded-xl border border-neutral-800 p-6">
                             <h3 className="text-lg font-semibold text-neutral-200 mb-5">Statistics</h3>
                             <div className="space-y-4">
@@ -332,14 +426,14 @@ export default function DashboardPage() {
                                         <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                                         <span className="text-lg text-neutral-200">Bookmarks</span>
                                     </div>
-                                    <span className="text-lg font-semibold text-white">{user.bookmarks?.length || 0}</span>
+                                    <span className="text-lg font-semibold text-white">{bookmarkedQuestions.length}</span>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-3">
                                         <div className="w-3 h-3 rounded-full bg-orange-500"></div>
                                         <span className="text-lg text-neutral-200">Max Streak</span>
                                     </div>
-                                    <span className="text-lg font-semibold text-white">{user.maxStreak || user.streak} 🔥</span>
+                                    <span className="text-lg font-semibold text-white">{user.maxStreak || user.streak}</span>
                                 </div>
                             </div>
                         </div>
@@ -390,7 +484,7 @@ export default function DashboardPage() {
                                             <div className="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
                                                 <div
                                                     className="h-full bg-emerald-500 rounded-full transition-all"
-                                                    style={{ width: `${(difficultyStats.easy.solved / difficultyStats.easy.total) * 100}%` }}
+                                                    style={{ width: `${difficultyStats.easy.total > 0 ? (difficultyStats.easy.solved / difficultyStats.easy.total) * 100 : 0}%` }}
                                                 />
                                             </div>
                                         </div>
@@ -405,7 +499,7 @@ export default function DashboardPage() {
                                             <div className="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
                                                 <div
                                                     className="h-full bg-amber-500 rounded-full transition-all"
-                                                    style={{ width: `${(difficultyStats.medium.solved / difficultyStats.medium.total) * 100}%` }}
+                                                    style={{ width: `${difficultyStats.medium.total > 0 ? (difficultyStats.medium.solved / difficultyStats.medium.total) * 100 : 0}%` }}
                                                 />
                                             </div>
                                         </div>
@@ -420,7 +514,7 @@ export default function DashboardPage() {
                                             <div className="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
                                                 <div
                                                     className="h-full bg-rose-500 rounded-full transition-all"
-                                                    style={{ width: `${(difficultyStats.hard.solved / difficultyStats.hard.total) * 100}%` }}
+                                                    style={{ width: `${difficultyStats.hard.total > 0 ? (difficultyStats.hard.solved / difficultyStats.hard.total) * 100 : 0}%` }}
                                                 />
                                             </div>
                                         </div>
@@ -502,103 +596,78 @@ export default function DashboardPage() {
 
                             <div className="w-full overflow-x-auto pb-4">
                                 <div className="min-w-[800px] flex items-end gap-4 px-1">
-                                    {/* Generate last 12 months */}
                                     {Array.from({ length: 13 }).map((_, monthIndex) => {
-                                        // Calculate the specific month to display
-                                        // Start from 12 months ago to current month
                                         const today = new Date();
                                         const currentYear = today.getFullYear();
                                         const currentMonth = today.getMonth();
 
-                                        // Logic to go back 12 months
-                                        // monthIndex 0 = 12 months ago
-                                        // monthIndex 12 = current month
                                         const targetDate = new Date(currentYear, currentMonth - 12 + monthIndex, 1);
                                         const targetMonth = targetDate.getMonth();
                                         const targetYear = targetDate.getFullYear();
 
                                         const daysInMonth = new Date(targetYear, targetMonth + 1, 0).getDate();
-                                        const startDayOfWeek = new Date(targetYear, targetMonth, 1).getDay(); // 0 = Sun
+                                        const startDayOfWeek = new Date(targetYear, targetMonth, 1).getDay();
 
                                         const getEntryForDay = (day: number) => {
                                             const dateStr = `${targetYear}-${String(targetMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                                            // Check if future
                                             if (new Date(dateStr) > new Date()) return null;
-
                                             return user.heatmap?.find(h => h.date === dateStr);
                                         };
 
-                                        // Helper to get attempt data
                                         const getIntensityForDay = (day: number) => {
                                             const entry = getEntryForDay(day);
                                             return entry ? entry.intensity : 0;
                                         };
 
-                                        // Calculate columns needed: (start offset + days) / 7
                                         const totalSlots = startDayOfWeek + daysInMonth;
                                         const columns = Math.ceil(totalSlots / 7);
 
                                         return (
                                             <div key={monthIndex} className="flex flex-col gap-2 relative group">
-                                                {/* Grid for this month */}
                                                 <div className="flex gap-1">
                                                     {Array.from({ length: columns }).map((_, colIndex) => (
                                                         <div key={colIndex} className="flex flex-col gap-1">
                                                             {Array.from({ length: 7 }).map((_, rowIndex) => {
-                                                                // Calculate actual day number
                                                                 const slotIndex = (colIndex * 7) + rowIndex;
                                                                 const dayNumber = slotIndex - startDayOfWeek + 1;
-
                                                                 const isValidDay = dayNumber > 0 && dayNumber <= daysInMonth;
 
                                                                 if (!isValidDay) {
-                                                                    return <div key={rowIndex} className="w-3.5 h-3.5" />; // Empty placeholder
+                                                                    return <div key={rowIndex} className="w-3.5 h-3.5" />;
                                                                 }
 
                                                                 const intensity = getIntensityForDay(dayNumber);
-
-                                                                // Future days check - simple date comparison
                                                                 const dateStr = `${targetYear}-${String(targetMonth + 1).padStart(2, '0')}-${String(dayNumber).padStart(2, '0')}`;
                                                                 const isFuture = new Date(dateStr) > new Date();
 
                                                                 if (isFuture) {
-                                                                    return <div key={rowIndex} className="w-3.5 h-3.5 bg-neutral-900/30 rounded-sm" />; // Faint placeholder for future
+                                                                    return <div key={rowIndex} className="w-3.5 h-3.5 bg-neutral-900/30 rounded-sm" />;
                                                                 }
 
                                                                 const dayEntry = getEntryForDay(dayNumber);
                                                                 const submissionCount = dayEntry ? dayEntry.count : 0;
-
-                                                                // Custom Tooltip Implementation
-                                                                const isTopRow = rowIndex < 2; // Position below for top 2 rows to prevent cutoff
+                                                                const isTopRow = rowIndex < 2;
 
                                                                 return (
                                                                     <div key={rowIndex} className="relative group/item hover:z-50">
                                                                         <div
                                                                             className={`w-3.5 h-3.5 rounded-sm transition-all duration-300 group-hover/item:scale-110 ${getIntensityColor(intensity)} cursor-default`}
                                                                         />
-                                                                        {/* Custom Tooltip */}
                                                                         <div className={`absolute left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 transition-all duration-200 pointer-events-none transform z-50 flex flex-col items-center
                                                                             ${isTopRow
                                                                                 ? 'top-full mt-2 translate-y-[-8px] group-hover/item:translate-y-0'
                                                                                 : 'bottom-full mb-2 translate-y-2 group-hover/item:translate-y-0'
                                                                             }`}>
-
-                                                                            {/* Tooltip Content */}
                                                                             <div className={`bg-[#1a1a1a] border border-neutral-700 text-white text-xs px-3 py-2 rounded-xl shadow-2xl whitespace-nowrap min-w-max flex flex-col items-center gap-0.5 relative z-50 ${isTopRow ? 'order-2' : ''}`}>
-
-                                                                                {/* Arrow for Bottom Tooltip (Top Row) - Points Up */}
                                                                                 {isTopRow && (
                                                                                     <div className="w-2.5 h-2.5 bg-[#1a1a1a] border-l border-t border-neutral-700 rotate-45 absolute -top-1.5 left-1/2 -translate-x-1/2 -z-10"></div>
                                                                                 )}
-
                                                                                 <div className="font-bold text-neutral-100">
                                                                                     {submissionCount} {submissionCount === 1 ? 'submission' : 'submissions'}
                                                                                 </div>
                                                                                 <div className="text-[10px] text-neutral-400 font-medium bg-neutral-800/50 px-1.5 py-0.5 rounded-md mt-0.5">
                                                                                     {targetDate.toLocaleString('default', { month: 'short' })} {dayNumber}, {targetYear}
                                                                                 </div>
-
-                                                                                {/* Arrow for Top Tooltip (Bottom Rows) - Points Down */}
                                                                                 {!isTopRow && (
                                                                                     <div className="w-2.5 h-2.5 bg-[#1a1a1a] border-r border-b border-neutral-700 rotate-45 absolute -bottom-1.5 left-1/2 -translate-x-1/2 -z-10"></div>
                                                                                 )}
@@ -610,7 +679,6 @@ export default function DashboardPage() {
                                                         </div>
                                                     ))}
                                                 </div>
-                                                {/* Month Label */}
                                                 <span className="text-xs text-neutral-400 text-center block w-full truncate">
                                                     {targetDate.toLocaleString('default', { month: 'short' })}
                                                 </span>
@@ -660,11 +728,11 @@ export default function DashboardPage() {
                                 </button>
                                 {activeTab === 'recent' ? (
                                     <Link href="/submissions" className="ml-auto text-xs font-medium text-amber-500 hover:text-amber-400">
-                                        View all submissions →
+                                        View all submissions
                                     </Link>
                                 ) : (
                                     <Link href="/bookmarks" className="ml-auto text-xs font-medium text-amber-500 hover:text-amber-400">
-                                        View all bookmarks →
+                                        View all bookmarks
                                     </Link>
                                 )}
                             </div>
@@ -679,20 +747,20 @@ export default function DashboardPage() {
                                     ) : (
                                         recentActivity.slice(0, 6).map((attempt) => (
                                             <Link
-                                                key={attempt._id}
-                                                href={`/problems/${attempt.q_id?._id}?section=${attempt.q_id?.source?.section}`}
+                                                key={attempt.id}
+                                                href={`/problems/${attempt.questionId}?section=${attempt.subject}`}
                                                 className="px-5 py-3.5 hover:bg-neutral-800/30 transition-colors flex items-center justify-between group block"
                                             >
                                                 <div className="min-w-0 flex-1">
                                                     <div className="font-medium text-neutral-300 group-hover:text-amber-400 transition-colors text-sm truncate">
-                                                        <MathText>{attempt.q_id?.content?.text?.slice(0, 100) || 'Question'}</MathText>
+                                                        <MathText>{attempt.questionText?.slice(0, 100) || 'Question'}</MathText>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-center gap-4 ml-4">
                                                     <span className="text-xs text-neutral-600">
                                                         {new Date(attempt.createdAt).toLocaleDateString()}
                                                     </span>
-                                                    <span className={`w-2 h-2 rounded-full ${attempt.is_correct ? 'bg-emerald-500' : 'bg-rose-500'}`}></span>
+                                                    <span className={`w-2 h-2 rounded-full ${attempt.isCorrect ? 'bg-emerald-500' : 'bg-rose-500'}`}></span>
                                                 </div>
                                             </Link>
                                         ))
@@ -706,12 +774,12 @@ export default function DashboardPage() {
                                         bookmarkedQuestions.map((question) => (
                                             <Link
                                                 key={question._id}
-                                                href={`/problems/${question._id}?section=${question.source?.section}`}
+                                                href={`/problems/${question._id}?section=${question.subject}`}
                                                 className="px-5 py-3.5 hover:bg-neutral-800/30 transition-colors flex items-center justify-between group block"
                                             >
                                                 <div className="min-w-0 flex-1">
                                                     <div className="font-medium text-neutral-300 group-hover:text-amber-400 transition-colors text-sm truncate">
-                                                        <MathText>{question.content?.text?.slice(0, 100) || 'Question'}</MathText>
+                                                        <MathText>{question.text?.slice(0, 100) || 'Question'}</MathText>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-center gap-4 ml-4">
