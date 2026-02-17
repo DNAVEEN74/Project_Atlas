@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { redirect } from 'next/navigation';
+import mongoose from 'mongoose';
 import dbConnect from '@/core/db/connect';
 import Session from '@/core/models/Session';
 import Question from '@/core/models/Question';
@@ -20,6 +21,11 @@ export default async function SprintSessionPage({ params }: PageProps) {
 
     await dbConnect();
     const { id: sessionId } = await params;
+
+    // Validate that sessionId is a valid MongoDB ObjectId (prevents CastError for routes like /sprint/setup)
+    if (!mongoose.Types.ObjectId.isValid(sessionId)) {
+        redirect('/sprint');
+    }
 
     // Fetch Session
     const session = await Session.findOne({ _id: sessionId, user_id: user.userId }).lean();

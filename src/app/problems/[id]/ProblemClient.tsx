@@ -216,7 +216,8 @@ export default function QuestionPage({
         return false;
     });
     const [showTimerPrompt, setShowTimerPrompt] = useState(false);
-    const [elapsedTime, setElapsedTime] = useState(0); // Current question elapsed time in seconds
+    const [elapsedTime, setElapsedTime] = useState(0); // For normal mode: question time. For sprint mode: total sprint time.
+    const [questionElapsed, setQuestionElapsed] = useState(0); // Specifically for current question time in sprint mode
     const [questionTimes, setQuestionTimes] = useState<Record<string, number>>(() => {
         // Restore question times from sessionStorage
         if (typeof window !== 'undefined') {
@@ -440,6 +441,7 @@ export default function QuestionPage({
         // Reset elapsed time unless we have a saved time for this question
         if (!isTimerEnabled) {
             setElapsedTime(0);
+            setQuestionElapsed(0);
         } else {
             // For timer mode, load saved time or start at 0
             setElapsedTime(questionTimes[questionId] || 0);
@@ -533,8 +535,11 @@ export default function QuestionPage({
                     return;
                 }
 
-                // Update general elapsed time for display if needed, 
-                // but we mostly care about question-specific time or remaining time
+                // Update per-question time for display in SprintSessionLayout
+                const qElapsedSinceLastAction = Math.floor((now - startTime) / 1000);
+                setQuestionElapsed(qElapsedSinceLastAction);
+
+                // Update general elapsed time for display if needed
                 setElapsedTime(totalElapsed);
             };
 
@@ -1084,6 +1089,7 @@ export default function QuestionPage({
             <SprintSessionLayout
                 question={question}
                 session={sprintSession}
+                questionElapsed={questionElapsed}
                 timer={{
                     elapsed: elapsedTime,
                     totalAllowed: totalTimeAllowedSec,

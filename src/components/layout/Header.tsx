@@ -18,7 +18,7 @@ import {
 } from '@/components/icons';
 
 interface HeaderProps {
-    activePage?: 'problems' | 'games' | 'sprint' | 'dashboard';
+    activePage?: 'problems' | 'games' | 'sprint' | 'dashboard' | 'submissions' | 'bookmarks';
 }
 
 export default function Header({ activePage }: HeaderProps) {

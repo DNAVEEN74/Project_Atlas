@@ -19,15 +19,45 @@ export async function GET(req: NextRequest) {
         await dbConnect();
 
         const { searchParams } = new URL(req.url);
-        const limit = parseInt(searchParams.get('limit') || '50');
+        const limit = parseInt(searchParams.get('limit') || '20');
         const offset = parseInt(searchParams.get('offset') || '0');
+        const subject = searchParams.get('subject');
+        const pattern = searchParams.get('pattern');
+        const difficulty = searchParams.get('difficulty');
+        const status = searchParams.get('status'); // correct, wrong
 
-        const attempts = await Attempt.find({ user_id: authUser.userId })
-            .sort({ created_at: -1 })
-            .skip(offset)
-            .limit(limit)
-            .populate('question_id', 'text difficulty source subject pattern') // Populate question details
-            .lean();
+        // Build Query
+        const query: any = { user_id: authUser.userId };
+
+        if (subject && subject !== 'all') {
+            query.subject = subject;
+        }
+
+        if (pattern && pattern !== 'all') {
+            query.pattern = pattern;
+        }
+
+        if (difficulty && difficulty !== 'all') {
+            query.difficulty = difficulty;
+        }
+
+        if (status) {
+            if (status === 'correct') {
+                query.is_correct = true;
+            } else if (status === 'wrong') {
+                query.is_correct = false;
+            }
+        }
+
+        const [attempts, total] = await Promise.all([
+            Attempt.find(query)
+                .sort({ created_at: -1 })
+                .skip(offset)
+                .limit(limit)
+                .populate('question_id', 'text difficulty source subject pattern')
+                .lean(),
+            Attempt.countDocuments(query)
+        ]);
 
         return NextResponse.json({
             data: attempts.map((a: any) => ({
@@ -42,6 +72,11 @@ export async function GET(req: NextRequest) {
                 subject: a.subject,
                 pattern: a.pattern
             })),
+            pagination: {
+                total,
+                page: Math.floor(offset / limit) + 1,
+                totalPages: Math.ceil(total / limit)
+            }
         });
     } catch (error) {
         console.error("Get attempts history error:", error);
