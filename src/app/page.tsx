@@ -15,6 +15,7 @@ import {
   TrendingUpIcon,
   PsychologyIcon,
 } from '@/components/icons';
+import Footer from '@/components/Footer';
 
 // --- Scroll Reveal Hook ---
 function useScrollReveal() {
@@ -92,8 +93,10 @@ export default function Home() {
             <span className="font-bold text-lg tracking-tight text-white">PrepLeague</span>
           </Link>
           <nav className="hidden md:flex items-center gap-8">
+            <Link href="/" className="text-sm font-medium text-white transition-colors">Home</Link>
             <Link href="/problems" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Problems</Link>
             <Link href="/sprint" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Sprint</Link>
+            <Link href="/games" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Games</Link>
             <Link href="/pricing" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Pricing</Link>
           </nav>
           <div className="flex items-center gap-4">
@@ -105,31 +108,72 @@ export default function Home() {
         </div>
       </header>
 
-      {/* --- HERO SECTION (Stedi-inspired) --- */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-6">
-        {/* Subtle gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 via-transparent to-transparent pointer-events-none" />
+      {/* --- HERO SECTION (Animated Grid + Formulas) --- */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
 
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 opacity-[0.02]" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
-          backgroundSize: '40px 40px'
-        }} />
+        {/* Animated Grid Background */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Perspective Grid */}
+          <div className="absolute inset-0 opacity-[0.15]"
+            style={{
+              backgroundImage: `linear-gradient(to right, #444 1px, transparent 1px),
+                                    linear-gradient(to bottom, #444 1px, transparent 1px)`,
+              backgroundSize: '24px 24px',
+              maskImage: 'radial-gradient(circle at center, black 0%, transparent 70%)',
+            }}
+          />
 
-        <div className={`max-w-5xl mx-auto text-center relative z-10 transition-all duration-1000 ease-out ${heroLoaded ? 'opacity-100 blur-0 translate-y-0' : 'opacity-0 blur-sm translate-y-4'
+          {/* Floating Formulas */}
+          <div className="absolute inset-0 overflow-hidden opacity-10 select-none">
+            {[
+              { text: "SI = (P × R × T) / 100", top: "20%", left: "10%", delay: "0s" },
+              { text: "Profit% = (Profit / CP) × 100", top: "15%", left: "65%", delay: "2s" },
+              { text: "Speed = Distance / Time", top: "60%", left: "5%", delay: "4s" },
+              { text: "Area = πr²", top: "70%", left: "80%", delay: "1s" },
+              { text: "a² + b² = c²", top: "30%", left: "85%", delay: "3s" },
+            ].map((item, i) => (
+              <div key={i}
+                className="absolute text-neutral-500 font-serif italic text-xl md:text-2xl animate-float"
+                style={{
+                  top: item.top,
+                  left: item.left,
+                  animationDelay: item.delay,
+                  animationDuration: '6s',
+                  animationIterationCount: 'infinite',
+                  animationDirection: 'alternate',
+                  animationName: 'float'
+                }}
+              >
+                {item.text}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Global Styles for Float Animation */}
+        <style jsx global>{`
+          @keyframes float {
+            0% { transform: translateY(0px); opacity: 0.3; }
+            100% { transform: translateY(-20px); opacity: 0.6; }
+          }
+        `}</style>
+
+
+        <div className={`max-w-4xl mx-auto text-center relative z-10 transition-all duration-1000 ease-out ${heroLoaded ? 'opacity-100 blur-0 translate-y-0' : 'opacity-0 blur-sm translate-y-4'
           }`}>
 
           {/* Main headline */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold tracking-[-0.02em] mb-8 leading-[1.1]" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
-            Preparation meets
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] mb-8 leading-[1.1]" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
+            Stop guessing. <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-500">Start scoring.</span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-500">precision</span>
+            <span className="block text-2xl md:text-3xl mt-6 text-white tracking-[-0.02em] font-bold">The fastest way to improve your SSC CGL score.</span>
           </h1>
 
           {/* Tagline */}
           <p className={`text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto mb-14 leading-relaxed transition-all duration-1000 delay-200 ${heroLoaded ? 'opacity-100 blur-0' : 'opacity-0 blur-sm'
             }`}>
-            Stop guessing. Start engineering your success. Adaptive drills, mental models, and relentless analytics.
+            1,000+ real exam questions. Track weak topics <br />
+            See exactly where you're losing marks.
           </p>
 
           {/* CTA Section */}
@@ -156,7 +200,7 @@ export default function Home() {
           <div className="flex items-center justify-center gap-8 sm:gap-14">
             <div className="text-center">
               <div className="text-lg sm:text-xl font-semibold text-white tracking-tight">1,000+</div>
-              <div className="text-[11px] text-neutral-500 mt-1">TCS Pattern PYQs</div>
+              <div className="text-[11px] text-neutral-500 mt-1">SSC CGL PYQs</div>
             </div>
             <div className="w-px h-8 bg-neutral-800" />
             <div className="text-center">
@@ -166,7 +210,7 @@ export default function Home() {
             <div className="w-px h-8 bg-neutral-800" />
             <div className="text-center">
               <div className="text-lg sm:text-xl font-semibold text-amber-400 tracking-tight">Free</div>
-              <div className="text-[11px] text-neutral-500 mt-1">Concept Library</div>
+              <div className="text-[11px] text-neutral-500 mt-1">To Start</div>
             </div>
           </div>
         </div>
@@ -198,7 +242,7 @@ export default function Home() {
               Daily practice.<br /><span className="text-emerald-400">Unstoppable growth.</span>
             </h2>
             <p className="text-lg text-neutral-400 mb-8 leading-relaxed">
-              Consistency beats intensity. Dynamic daily targets based on your exam date. 1,000+ TCS-pattern questions from 2018-2024.
+              Consistency beats intensity. 1,000+ SSC CGL pattern questions from 2018-2024.
             </p>
             <ul className="space-y-3 mb-8">
               {['Adaptive daily targets', 'Step-by-step solutions', 'Pattern-wise coverage'].map(item => (
@@ -239,7 +283,7 @@ export default function Home() {
                     <span>Reasoning</span><span className="text-white">4/10</span>
                   </div>
                   <div className="w-full bg-neutral-800 h-1.5 rounded-full">
-                    <div className="w-2/5 h-full bg-violet-500 rounded-full" />
+                    <div className="w-2/5 h-full bg-amber-500 rounded-full" />
                   </div>
                 </div>
               </div>
@@ -262,9 +306,8 @@ export default function Home() {
                 <span className="text-neutral-500 text-sm font-mono uppercase">Sprint: Algebra</span>
                 <div className="font-mono text-3xl font-bold text-amber-500">00:14<span className="text-sm text-neutral-600 ml-1">s</span></div>
               </div>
-              <div className="space-y-3 mb-8">
-                <div className="h-3 bg-white/10 rounded w-3/4" />
-                <div className="h-3 bg-white/10 rounded w-1/2" />
+              <div className="mb-8">
+                <div className="text-white text-lg font-medium">If 2x + 5 = 15, then x = ?</div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {[1, 2, 3, 4].map(opt => (
@@ -288,7 +331,7 @@ export default function Home() {
               The exam isn't just about knowing—it's about knowing fast. High-intensity Sprint Mode builds mental reflexes under pressure.
             </p>
             <ul className="space-y-3 mb-8">
-              {['Timed sets (10-60 mins)', 'Category-specific drills', 'Instant speed analytics'].map(item => (
+              {['Timed sets (10-15 mins)', 'Category-specific drills', 'Instant speed analytics'].map(item => (
                 <li key={item} className="flex items-center gap-3 text-neutral-300 text-sm">
                   <CheckCircleOutlinedIcon className="text-amber-400" sx={{ fontSize: '1rem' }} /> {item}
                 </li>
@@ -304,7 +347,7 @@ export default function Home() {
       {/* --- FEATURE 4: ANALYTICS --- */}
       <section
         ref={(el) => registerElement(el, 'analytics')}
-        className="py-32 px-6 bg-[#0c0c0c] border-t border-white/5"
+        className="pt-32 pb-20 px-6 bg-[#0c0c0c] border-t border-white/5"
       >
         <div className={`max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center transition-all duration-1000 ${isRevealed('analytics') ? 'opacity-100 blur-0 translate-y-0' : 'opacity-0 blur-md translate-y-8'
           }`}>
@@ -329,13 +372,19 @@ export default function Home() {
             <div className="bg-[#111] border border-white/10 rounded-2xl p-8 shadow-2xl">
               <div className="flex justify-between items-end mb-8 h-28 gap-2">
                 {[40, 70, 30, 85, 50, 90, 60].map((h, i) => (
-                  <div key={i} className="w-full bg-white/5 rounded-t relative" style={{ height: `${h}%` }}>
+                  <div key={i} className="w-full bg-white/5 rounded-t relative group" style={{ height: `${h}%` }}>
                     {h === 30 && (
-                      <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-rose-500 text-white text-[9px] font-bold px-2 py-0.5 rounded">
+                      <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-rose-500 text-white text-[9px] font-bold px-2 py-0.5 rounded z-10">
                         Weak
                       </div>
                     )}
+                    {h === 90 && (
+                      <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-[9px] font-bold px-2 py-0.5 rounded z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                        Strong
+                      </div>
+                    )}
                     {h === 30 && <div className="absolute inset-0 bg-rose-500/40 rounded-t" />}
+                    {h === 90 && <div className="absolute inset-0 bg-emerald-500/20 rounded-t" />}
                   </div>
                 ))}
               </div>
@@ -369,11 +418,11 @@ export default function Home() {
             Ready to <span className="text-amber-400">ascend?</span>
           </h2>
           <p className="text-lg text-neutral-400 mb-10 max-w-xl mx-auto">
-            Join thousands who upgraded their preparation. Free to start. Cancel anytime.
+            Be among the first to prepare smarter. Free to start. No credit card needed.
           </p>
           <Link
             href="/register"
-            className="inline-flex px-10 py-5 bg-white text-black font-bold text-lg rounded-lg hover:bg-neutral-200 transition-all shadow-lg"
+            className="inline-flex px-10 py-5 bg-amber-500 text-black font-bold text-lg rounded-full hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/20"
           >
             Start Free Today
           </Link>
@@ -402,7 +451,7 @@ export default function Home() {
               },
               {
                 q: "What exams does PrepLeague cover?",
-                a: "SSC CGL, SSC CHSL, IBPS PO, SBI PO, and more. TCS-pattern questions from 2018-2024."
+                a: "Currently focused on SSC CGL, with plans to expand."
               },
               {
                 q: "How is PrepLeague different?",
@@ -442,19 +491,7 @@ export default function Home() {
       </section>
 
       {/* --- FOOTER --- */}
-      <footer className="py-10 px-6 bg-[#0a0a0a] border-t border-neutral-900/50 text-neutral-500 text-sm">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2 opacity-60">
-            <Image src="/logo-final.png" alt="PrepLeague Logo" width={20} height={20} />
-            <span>© 2025 PrepLeague</span>
-          </div>
-          <div className="flex gap-6">
-            <Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

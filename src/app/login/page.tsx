@@ -76,7 +76,7 @@ export default function LoginPage() {
 
                 {/* Login Card */}
                 <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl p-8 backdrop-blur-sm">
-                    <h2 className="text-xl font-bold text-white text-center mb-6">Login to Account</h2>
+                    <h2 className="text-xl font-bold text-white text-center mb-6">Welcome back!</h2>
 
                     {error && (
                         <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm flex items-center gap-2">
@@ -106,7 +106,12 @@ export default function LoginPage() {
 
                         {/* Password */}
                         <div>
-                            <label className="block text-sm font-medium text-neutral-400 mb-2">Password</label>
+                            <div className="flex items-center justify-between mb-2">
+                                <label className="block text-sm font-medium text-neutral-400">Password</label>
+                                <button type="button" className="text-sm text-neutral-500 hover:text-amber-500 transition-colors">
+                                    Forgot password?
+                                </button>
+                            </div>
                             <div className="relative group">
                                 <LockOutlinedIcon
                                     sx={{ fontSize: '1.25rem' }}

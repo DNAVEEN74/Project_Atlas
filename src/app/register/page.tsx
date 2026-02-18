@@ -43,12 +43,13 @@ export default function RegisterPage() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [targetExam, setTargetExam] = useState('SSC_CGL');
     const [targetYear, setTargetYear] = useState(2025);
-    const [dailyQuantGoal, setDailyQuantGoal] = useState(5);
-    const [dailyReasoningGoal, setDailyReasoningGoal] = useState(5);
+    const [dailyQuantGoal, setDailyQuantGoal] = useState(10);
+    const [dailyReasoningGoal, setDailyReasoningGoal] = useState(10);
     const [customQuantGoal, setCustomQuantGoal] = useState('');
     const [customReasoningGoal, setCustomReasoningGoal] = useState('');
     const [showCustomQuant, setShowCustomQuant] = useState(false);
     const [showCustomReasoning, setShowCustomReasoning] = useState(false);
+    const [agreedToTerms, setAgreedToTerms] = useState(false);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -70,6 +71,11 @@ export default function RegisterPage() {
 
         if (password.length < 6) {
             setError('Password must be at least 6 characters');
+            return;
+        }
+
+        if (!agreedToTerms) {
+            setError('You must agree to the Terms of Service and Privacy Policy');
             return;
         }
 
@@ -183,7 +189,8 @@ export default function RegisterPage() {
                                     value={targetExam}
                                     onChange={(value) => {
                                         if (value !== 'SSC_CGL') {
-                                            setPendingExam(value);
+                                            const selectedOption = EXAM_OPTIONS.find(opt => opt.value === value);
+                                            setPendingExam(selectedOption ? selectedOption.label : value);
                                             setShowExamRequestModal(true);
                                             return;
                                         }
@@ -212,7 +219,7 @@ export default function RegisterPage() {
                                 <TrackChangesOutlinedIcon className="text-amber-500" sx={{ fontSize: '2rem' }} />
                                 <div>
                                     <span className="text-sm font-semibold text-white">Daily Practice Goals</span>
-                                    <p className="text-[11px] text-neutral-500">Set your daily question targets</p>
+                                    <p className="text-[11px] text-neutral-500">We'll remind you to practice this many questions each day.</p>
                                 </div>
                             </div>
 
@@ -350,6 +357,23 @@ export default function RegisterPage() {
                                     required
                                 />
                             </div>
+                        </div>
+
+                        {/* Terms & Privacy Checkbox */}
+                        <div className="flex items-start gap-3">
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                checked={agreedToTerms}
+                                onChange={(e) => setAgreedToTerms(e.target.checked)}
+                                className="mt-1 w-4 h-4 rounded border-gray-600 bg-neutral-800 text-amber-500 focus:ring-amber-500 focus:ring-offset-neutral-900"
+                            />
+                            <label htmlFor="terms" className="text-sm text-neutral-400">
+                                I agree to PrepLeague's{' '}
+                                <Link href="/terms" className="text-amber-500 hover:text-amber-400">Terms of Service</Link>
+                                {' '}and{' '}
+                                <Link href="/privacy" className="text-amber-500 hover:text-amber-400">Privacy Policy</Link>
+                            </label>
                         </div>
 
                         {/* Submit Button */}
