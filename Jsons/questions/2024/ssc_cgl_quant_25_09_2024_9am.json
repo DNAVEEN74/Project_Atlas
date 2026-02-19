@@ -1,0 +1,717 @@
+[
+    {
+        "text": "Find the value of (cosec θ - sin θ)(sec θ - cos θ)(tan θ + cot θ).",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "1",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "2",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "0",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "-1",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Simplify Expression:**\n$(1/\\sin - \\sin)(1/\\cos - \\cos)(\\sin/\\cos + \\cos/\\sin)$\n$= \\frac{1-\\sin^2}{\\sin} \\times \\frac{1-\\cos^2}{\\cos} \\times \\frac{\\sin^2+\\cos^2}{\\sin\\cos}$\n$= \\frac{\\cos^2}{\\sin} \\times \\frac{\\sin^2}{\\cos} \\times \\frac{1}{\\sin\\cos}$\n$= \\frac{\\cos^2 \\sin^2}{\\sin^2 \\cos^2}$\n$= 1$\n\n**Answer:** Option A (1)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "trigonometry",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "The salaries of P and Q together amount to ₹9,60,000. P and Q save 64% and 44%, respectively of their individual salaries. If P’s expenditure is 1.5 times Q’s expenditure, then what is the ratio of P’s salary to Q’s salary?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "2 : 3",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "3 : 2",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "3 : 7",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "7 : 3",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "**Given:**\n$P_{sav} = 64\\% \\Rightarrow P_{exp} = 36\\%$\n$Q_{sav} = 44\\% \\Rightarrow Q_{exp} = 56\\%$\n$P_{exp} = 1.5 \\times Q_{exp}$\n\n**Equation:**\n$0.36 P = 1.5 \\times 0.56 Q$\n$0.36 P = 0.84 Q$\n$36 P = 84 Q$\n$P/Q = 84 / 36$\n$P/Q = 7 / 3$\n\n**Answer:** Option D (7 : 3)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "ratio_and_proportion",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE]",
+        "image": "",
+        "options": [],
+        "correct_option": null,
+        "solution": "Question content unavailable.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "unknown",
+        "difficulty": "UNKNOWN",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE]",
+        "image": "",
+        "options": [],
+        "correct_option": null,
+        "solution": "Question content unavailable.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "unknown",
+        "difficulty": "UNKNOWN",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "Study the given table and answer the question. The table displays the number of cars produced (in lakhs) by six different brands between 2018 and 2023. Find the difference in the average production of B and D during 2018-2023.\n\n[MISSING TABLE]",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "5.5 lakhs",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "6 lakhs",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "5 lakhs",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "4 lakhs",
+                "image": ""
+            }
+        ],
+        "correct_option": "C",
+        "solution": "Data table is missing from extraction. Requires table values.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "data_interpretation",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE]",
+        "image": "",
+        "options": [],
+        "correct_option": null,
+        "solution": "Question content unavailable.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "unknown",
+        "difficulty": "UNKNOWN",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "The following table shows the number of pages printed by 3 printers (P, Q and R) for 3 days.\n\n[MISSING TABLE]\n\nWhat is the ratio of the total number of pages printed by printer P over the course of three days to the total number of pages printed by printer Q during the same three days?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "11 : 10",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "10 : 9",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "10 : 11",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "9 : 10",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "Data table missing.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "data_interpretation",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "Ramesh purchased 130 books at the rate of ₹200 each and sold half of them at the rate of ₹300 each, one-fifth of them at the rate of ₹350 each and the rest at the cost price. Find his profit percentage.",
+        "image": "",
+        "options": [],
+        "correct_option": null,
+        "solution": "**Calculations:**\nTotal Cost (CP) = $130 \\times 200 = 26000$.\n\n**Sales:**\n1. Half ($65$) @ 300 = $65 \\times 300 = 19500$.\n2. One-fifth ($130/5 = 26$) @ 350 = $26 \\times 350 = 9100$.\n3. Rest ($130 - 65 - 26 = 39$) @ 200 = $39 \\times 200 = 7800$.\n\nTotal SP = $19500 + 9100 + 7800 = 36400$.\nProfit = $36400 - 26000 = 10400$.\n\nProfit % = $(10400 / 26000) \\times 100$\n$= 104 / 260 \\times 100$\n$= 0.4 \\times 100 = 40\\%$.\n\n**Answer:** 40% (Options missing in source)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "profit_and_loss",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "The centres of two circles are 36 cm apart. If the radii of these two circles are 15 cm and 9 cm, respectively, then what is the sum of the lengths (in cm) of a direct common tangent and a transverse common tangent of these two circles?",
+        "image": "",
+        "options": [],
+        "correct_option": null,
+        "solution": "**Given:**\nd = 36, R = 15, r = 9.\n\n**Direct Common Tangent (DCT):**\n$L_{DCT} = \\sqrt{d^2 - (R-r)^2} = \\sqrt{36^2 - 6^2} = \\sqrt{1296 - 36} = \\sqrt{1260} = 6\\sqrt{35}$.\n\n**Transverse Common Tangent (TCT):**\n$L_{TCT} = \\sqrt{d^2 - (R+r)^2} = \\sqrt{36^2 - 24^2} = \\sqrt{1296 - 576} = \\sqrt{720} = 12\\sqrt{5}$.\n\n**Sum:**\n$6\\sqrt{35} + 12\\sqrt{5}$.\n\n**Answer:** Options missing in source.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "geometry",
+        "difficulty": "HARD",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "The side BC of ∆ABC is produced to a point D. If AC = BC and ∠BAC = 70°, then find the value of ∠ACD − ∠ABC.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "60°",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "70°",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "45°",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "75°",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "**Triangle ABC:**\n$AC = BC \\Rightarrow \\angle B = \\angle A$.\nGiven $\\angle BAC = 70^\\circ \\Rightarrow \\angle ABC = 70^\\circ$.\n$\\angle ACB = 180 - (70+70) = 40^\\circ$.\n\n**External Angle ACD:**\nAngle on straight line BCD: $\\angle ACD = 180 - 40 = 140^\\circ$ (Or Sum of Opp Interior $\\angle A + \\angle B = 140$).\n\n**Calculation:**\n$\\angle ACD - \\angle ABC = 140^\\circ - 70^\\circ = 70^\\circ$.\n\n**Answer:** Option B (70°)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "geometry",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "Rohini buys a Bluetooth headphone set for ₹1,700 from a wholesale shop and marks it at ₹2,000. Later on, she allows a discount of 40% on its sale. What is her loss or gain percentage (correct up to two decimal places)?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "29.41% gain",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "25.19% loss",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "25.19% gain",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "29.41% loss",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "**Given:**\nCP = 1700\nMP = 2000\nDiscount = 40%\n\n**Selling Price:**\n$SP = 2000 \\times (1 - 0.4) = 2000 \\times 0.6 = 1200$.\n\n**Profit/Loss:**\n$Loss = CP - SP = 1700 - 1200 = 500$.\n$Loss \\% = (500 / 1700) \\times 100 = 500 / 17 \\approx 29.41\\%$.\n\n**Answer:** Option D (29.41% loss)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "profit_and_loss",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "It is always possible to draw a circle passing through ______ non-collinear points in a plane.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "3",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "6",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "5",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "4",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Theory:**\nA unique circle can satisfy exactly 3 non-collinear points.\n\n**Answer:** Option A (3)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "geometry",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "The simple interest on a sum for 6 years is three-fifth of the sum. The rate of interest per annum is:",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "3%",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "7%",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "10%",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "5%",
+                "image": ""
+            }
+        ],
+        "correct_option": "C",
+        "solution": "**Formula:**\n$SI = 3/5 P$\n$T = 6$\n$SI = P \\times R \\times T / 100$\n\n**Solve:**\n$3/5 P = P \\times R \\times 6 / 100$\n$0.6 = 6R / 100$\n$60 = 6R$\n$R = 10\\%$\n\n**Answer:** Option C (10%)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "simple_interest",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "The average of the squares of the first 48 natural numbers is",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "792.17",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "793.17",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "794.17",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "791.17",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Formula:**\nAvg of squares = $(n+1)(2n+1) / 6$\n$n = 48$\n\n**Calculation:**\nAvg = $(49 \\times 97) / 6$\n$49 \\times 97 = 4753$\n$4753 / 6 = 792.166...$\n\n**Answer:** Option A (792.17)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "average",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "Nihira is 25 years old and Punith is 30 years old. How many years ago was the ratio of their ages 3 : 4?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "10 years",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "15 years",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "5 years",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "20 years",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Equation:**\nLet $x$ be years ago.\n$(25-x) / (30-x) = 3/4$\n$4(25-x) = 3(30-x)$\n$100 - 4x = 90 - 3x$\n$10 = x$\n\n**Answer:** Option A (10 years)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "ratio_and_proportion",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "Which of the following fractions is the largest?\n\n[MISSING FRACTIONS]",
+        "image": "",
+        "options": [],
+        "correct_option": null,
+        "solution": "Content missing.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "number_system",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "An inlet pipe can fill a water storage tank in 11 hours and an outlet pipe can empty the completely filled tank in 15 hours. If both pipes opened simultaneously. The time taken to fill the empty tank (in hrs) is :",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "40",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "[MISSING]",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "[MISSING]",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "[MISSING]",
+                "image": ""
+            }
+        ],
+        "correct_option": null,
+        "solution": "**Calculation:**\nRate Fill = 1/11\nRate Empty = 1/15\nNet Rate = $1/11 - 1/15 = (15-11)/165 = 4/165$.\nTime = $165/4 = 41.25$ hours.\n\nNote: Source Option 1 is 40, which discrepancy. Solved as 41.25.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "pipes_and_cistern",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE]",
+        "image": "",
+        "options": [],
+        "correct_option": null,
+        "solution": "Question content unavailable.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "unknown",
+        "difficulty": "UNKNOWN",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE]",
+        "image": "",
+        "options": [],
+        "correct_option": null,
+        "solution": "Question content unavailable.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "unknown",
+        "difficulty": "UNKNOWN",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "Suppose P starts walking at a speed of 8 km/h. After 8 hours B started travelling on a bicycle at a speed of 24 km/h. The distance from the starting B can catch A is:",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "88 km",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "96 km",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "72 km",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "64 km",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "**Given:**\nP speed = 8 km/h. P travels 8 hours implies Distance = 64 km.\nB speed = 24 km/h.\nRelative speed = $24 - 8 = 16$ km/h.\ntime to catch = $64 / 16 = 4$ hours.\nDistance traveled by B = $4 \\times 24 = 96$ km.\n\n**Answer:** Option B (96 km)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "time_speed_distance",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "Find the values of 'a' and 'b' for which the system of equations 3x+y=3 and (a-b)x+(a+b)y=3a+b-3 has infinite solutions.",
+        "image": "",
+        "options": [],
+        "correct_option": null,
+        "solution": "**Condition for infinite solutions:**\n$a_1/a_2 = b_1/b_2 = c_1/c_2$\n$3/(a-b) = 1/(a+b) = 3/(3a+b-3)$\n\n**1. From first part:**\n$3(a+b) = a-b \\Rightarrow 3a+3b = a-b \\Rightarrow 2a = -4b \\Rightarrow a = -2b$.\n\n**2. From last part:**\n$1/(a+b) = 3/(3a+b-3) \\Rightarrow 3a+b-3 = 3a+3b \\Rightarrow b-3 = 3b \\Rightarrow -3 = 2b \\Rightarrow b = -1.5$.\n$a = -2(-1.5) = 3$.\n\n**Values:** $a=3, b=-1.5$.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "algebra",
+        "difficulty": "HARD",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE]",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "2.439",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "9.244",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "4.329",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "3.924",
+                "image": ""
+            }
+        ],
+        "correct_option": null,
+        "solution": "Missing Question Text.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "unknown",
+        "difficulty": "UNKNOWN",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "If the lengths of two sides of an isosceles triangle are 6 cm and 12 cm, then find the length of the third side.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "8 cm",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "12 cm",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "14 cm",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "6 cm",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "**Triangle Inequality:**\nSides $a, b, c$.\n$6, 12, x$.\n$12-6 < x < 12+6 \\Rightarrow 6 < x < 18$.\nPossible values for isosceles: 6 or 12.\nIf $x=6$, then $6+6=12$ (Sum of two sides not greater than third). **Invalid**.\nSo $x$ must be 12.\n$6+12 > 12$ holds.\n\n**Answer:** Option B (12 cm)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "geometry",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE]",
+        "image": "",
+        "options": [],
+        "correct_option": null,
+        "solution": "Question content unavailable.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "unknown",
+        "difficulty": "UNKNOWN",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    },
+    {
+        "text": "The given bar graph shows sugar imports of a country (in thousand tonnes) over the years. Study the graph and answer the question that follows. The average imports (in thousand tonnes) of all the years is:",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "6469",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "6603",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "6433",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "6306",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "Bar graph image missing. Unable to calculate average.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "data_interpretation",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": null
+    }
+]

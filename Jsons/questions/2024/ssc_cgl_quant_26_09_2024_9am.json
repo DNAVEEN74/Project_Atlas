@@ -1,0 +1,1077 @@
+[
+    {
+        "text": "[MISSING TEXT/IMAGE] - Question content not extracted.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "11 : 9",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "13 : 7",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "11 : 7",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "13 : 9",
+                "image": ""
+            }
+        ],
+        "correct_option": null,
+        "solution": "Content missing from source.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "ratio_and_proportion",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "In a class of 150 students (boys and girls only), the girls are 60. The average weight of boys is 52 kg and that of girls is 48 kg. What is the average weight (in kg) of the whole class?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "48.8",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "49.6",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "51.2",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "50.4",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "**Given:**\nTotal Students = 150\nNumber of Girls = 60\nNumber of Boys = $150 - 60 = 90$\nAverage Weight of Boys = 52 kg\nAverage Weight of Girls = 48 kg\n\n**Step 1: Calculate Total Weight**\nTotal Weight of Boys = $90 \\times 52 = 4680$ kg\nTotal Weight of Girls = $60 \\times 48 = 2880$ kg\n\n**Step 2: Calculate Average of Whole Class**\nTotal Weight = $4680 + 2880 = 7560$ kg\nAverage = $\\frac{7560}{150}$\n\nCalculation:\n$\\frac{7560}{150} = \\frac{756}{15} = 50.4$ kg\n\n**Answer:** Option D (50.4)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "average",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE] - Question content not extracted.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "7,536",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "7,693",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "8,164",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "7,850",
+                "image": ""
+            }
+        ],
+        "correct_option": null,
+        "solution": "Content missing from source.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "simplification",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE] - Question content not extracted.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "2018 and 2019",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "2017 and 2018",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "2018 and 2020",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "2020 and 2021",
+                "image": ""
+            }
+        ],
+        "correct_option": null,
+        "solution": "Content missing from source.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "data_interpretation",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Three people, A, B and C, invest in a business in the ratio 2 : 3 : 5. It was decided that 9% of the profits will go to charity. If the total profit was ₹2,50,000, then find the share of C in the profit (in ₹).",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "1,11,650",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "1,13,750",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "1,26,950",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "1,21,850",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "**Given:**\nInvestment Ratio A:B:C = 2:3:5\nTotal Profit = ₹2,50,000\nCharity = 9%\n\n**Step 1: Calculate Remaining Profit**\nRemaining Profit = Total Profit - (9% of Total)\n$250000 \\times (100 - 9)\\% = 250000 \\times 0.91$\n$250000 \\times 0.91 = 2,27,500$\n\n**Step 2: Calculate C's Share**\nTotal Parts = $2 + 3 + 5 = 10$\nC's Part = 5\nC's Share = $\\frac{5}{10} \\times 227500 = \\frac{1}{2} \\times 227500$\n$227500 / 2 = 1,13,750$\n\n**Answer:** Option B (1,13,750)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "partnership",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Given a linear equation in two variables: $5x + 7y - 8 = 0$, which of the following linear equations, along with the given equation, forms a system of linear equations having no solution?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "$10x + 14y - 16 = 0$",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "$5x + 7y - 16 = 0$",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "$5x - 7y - 8 = 0$",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "$7x + 5y - 8 = 0$",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "**Condition for No Solution:**\nFor two lines $a_1x + b_1y + c_1 = 0$ and $a_2x + b_2y + c_2 = 0$ to be parallel (no solution), the condition is:\n$\\frac{a_1}{a_2} = \\frac{b_1}{b_2} \\neq \\frac{c_1}{c_2}$\n\n**Given:** $5x + 7y - 8 = 0$\n$a_1 = 5, b_1 = 7, c_1 = -8$\n\n**Test Options:**\nA. $10x + 14y - 16 = 0$\n   $\\frac{5}{10} = \\frac{1}{2}, \\frac{7}{14} = \\frac{1}{2}, \\frac{-8}{-16} = \\frac{1}{2}$\n   All ratios equal $\\rightarrow$ Infinite solutions.\n\nB. $5x + 7y - 16 = 0$\n   $\\frac{5}{5} = 1, \\frac{7}{7} = 1, \\frac{-8}{-16} = \\frac{1}{2}$\n   $\\frac{a_1}{a_2} = \\frac{b_1}{b_2} \\neq \\frac{c_1}{c_2}$ (1 = 1 $\\neq$ 0.5)\n   This satisfies the condition for NO SOLUTION.\n\n**Answer:** Option B",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "algebra",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "If ₹1,875 becomes ₹2,625 in 4 years, what will ₹24,000 become at the end of 9 years at the same rate of interest, under simple interest?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "₹43,200",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "₹21,600",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "₹45,600",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "₹34,800",
+                "image": ""
+            }
+        ],
+        "correct_option": "C",
+        "solution": "**Step 1: Find Rate of Interest**\nPrincipal ($P_1$) = 1875\nAmount ($A_1$) = 2625\nTime ($T_1$) = 4 years\nSimple Interest ($SI_1$) = $2625 - 1875 = 750$\n\n$SI = \\frac{P \\times R \\times T}{100}$\n$750 = \\frac{1875 \\times R \\times 4}{100}$\n$750 = 75 \\times R$\n$R = 10\\%$\n\n**Step 2: Calculate Amount for New Principal**\n$P_2 = 24000$\nTime ($T_2$) = 9 years\nRate ($R$) = 10%\n\n$SI_2 = \\frac{24000 \\times 10 \\times 9}{100} = 2400 \\times 9 = 21,600$\n\nTotal Amount = $P_2 + SI_2$\n$Amount = 24000 + 21600 = 45,600$\n\n**Answer:** Option C (₹45,600)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "simple_interest",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE] - Question content not extracted.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "112",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "98",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "96",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "108",
+                "image": ""
+            }
+        ],
+        "correct_option": null,
+        "solution": "Content missing from source.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "miscellaneous",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Evaluate the given expression.\n\n[MISSING EXPRESSION]",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "0",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "2",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "3",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "5",
+                "image": ""
+            }
+        ],
+        "correct_option": null,
+        "solution": "Expression missing from source.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "simplification",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "If $(48^\\circ + k)$ is an acute angle and $\\sin(48^\\circ + k) = \\cos13^\\circ$, what is the value of k (in $^\\circ$)?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "23",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "17",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "37",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "29",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "**Given:**\n$\\sin(48^\\circ + k) = \\cos(13^\\circ)$\n\n**Step 1: Convert Cos to Sin**\nWe know that $\\cos \\theta = \\sin(90^\\circ - \\theta)$\n$\\cos(13^\\circ) = \\sin(90^\\circ - 13^\\circ) = \\sin(77^\\circ)$\n\n**Step 2: Equate Angles**\n$\\sin(48^\\circ + k) = \\sin(77^\\circ)$\nSince $(48^\\circ + k)$ is acute:\n$48 + k = 77$\n$k = 77 - 48$\n$k = 29$\n\n**Answer:** Option D (29)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "trigonometry",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Find the remainder when $9^{20} + 2$ is divided by 4.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "1",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "2",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "3",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "0",
+                "image": ""
+            }
+        ],
+        "correct_option": "C",
+        "solution": "**Expression:** $9^{20} + 2$ divided by 4.\n\n**Step 1: Modular Arithmetic**\n$9 \\equiv 1 \\pmod 4$ (Since $9 = 4 \\times 2 + 1$)\n\n**Step 2: Apply Power**\n$9^{20} \\equiv 1^{20} \\pmod 4$\n$1^{20} = 1$\n\n**Step 3: Add Constant**\n$(9^{20} + 2) \\equiv (1 + 2) \\pmod 4$\n$3 \\pmod 4$\n\n**Conclusion:**\nThe remainder is 3.\n\n**Answer:** Option C (3)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "number_system",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Annual income of five schools (in lakhs). In case of how many schools, the income by semester fee, is less than three times of donation?\n\n[MISSING TABLE]",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "4",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "2",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "3",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "5",
+                "image": ""
+            }
+        ],
+        "correct_option": null,
+        "solution": "Table data is missing.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "data_interpretation",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "A number whose fifth part increased by 5 is equal to its third part decreased by 7. Find half of the number.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "150",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "45",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "80",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "60",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "**Given:**\nLet the number be $x$.\nCondition: $\\frac{x}{5} + 5 = \\frac{x}{3} - 7$\n\n**Step 1: Solve for x**\n$\\frac{x}{5} - \\frac{x}{3} = -7 - 5$\n$\\frac{3x - 5x}{15} = -12$\n$\\frac{-2x}{15} = -12$\n$-2x = -180$\n$x = 90$\n\n**Step 2: Find half of the number**\nHalf = $\\frac{90}{2} = 45$\n\n**Answer:** Option B (45)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "algebra",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE] - Question content not extracted.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "7",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "16",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "17",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "6",
+                "image": ""
+            }
+        ],
+        "correct_option": null,
+        "solution": "Content missing from source.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "miscellaneous",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Two athletes are participating in a race on a circular track of 220 m. Ravi runs at the speed of 22 m/s, while Kapil runs at the speed of 11 m/s. They start from the same point, at the same time and in the same direction. After how many seconds will they meet for the first time?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "15 seconds",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "20 seconds",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "16 seconds",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "24 seconds",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "**Given:**\nTrack Length ($L$) = 220 m\nSpeed of Ravi ($S_1$) = 22 m/s\nSpeed of Kapil ($S_2$) = 11 m/s\nDirection: Same\n\n**Step 1: Calculate Relative Speed**\nRelative Speed = $S_1 - S_2 = 22 - 11 = 11$ m/s\n\n**Step 2: Calculate Time to Meet**\nTime = $\\frac{Distance}{Relative Speed}$\nTime = $\\frac{220}{11} = 20$ seconds\n\n**Answer:** Option B (20 seconds)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "time_speed_distance",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "A person first increases the price of a commodity by 8% and then he announces a discount of 18%. The actual discount (in%) on the original price is:",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "8.44",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "14.44",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "9.44",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "11.44",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "**Step 1: Assume Original Price**\nOriginal Price = 100\n\n**Step 2: Increase by 8%**\nMarked Price = $100 + 8 = 108$\n\n**Step 3: Discount of 18%**\nDiscount Amount = $18\\%$ of 108\n$108 \\times 0.18 = 19.44$\n\nBuying Price = $108 - 19.44 = 88.56$\n\n**Step 4: Calculate Actual Discount on Original**\nLoss/Overall Discount = $100 - 88.56 = 11.44$\nPercentage = 11.44%\n\n**Answer:** Option D (11.44)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "profit_and_loss",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "If books bought at prices ranging from ₹200 to ₹260 are sold at prices ranging from ₹250 to 300, what is the greatest possible profit that might be made in selling 25 books?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "₹2,500",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "₹1,800",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "₹2,300",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "₹2,700",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Condition for Greatest Profit:**\nMaximize Selling Price and Minimize Cost Price.\n\n**Step 1: Identify Prices**\nMin Cost Price (CP) = ₹200\nMax Selling Price (SP) = ₹300\n\n**Step 2: Calculate Max Profit per Book**\nProfit = $SP - CP = 300 - 200 = 100$\n\n**Step 3: Total Profit for 25 Books**\nTotal Profit = $25 \\times 100 = 2,500$\n\n**Answer:** Option A (₹2,500)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "profit_and_loss",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "From a point A, which is at a distance of 17 cm from the centre C of a circle with radius 8 cm, the pair of tangents AB and AD to the circle are drawn. The area of the quadrilateral ABCD is _____ cm$^2$.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "192",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "60",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "120",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "360",
+                "image": ""
+            }
+        ],
+        "correct_option": "C",
+        "solution": "**Given:**\nRadius ($r$) = $BC = DC = 8$ cm\nDistance ($AC$) = 17 cm\nTangent $AB$ is perpendicular to Radius $BC$.\n\n**Step 1: Calculate Length of Tangent AB**\nIn $\\triangle ABC$ (Right angled at B):\n$AC^2 = AB^2 + BC^2$\n$17^2 = AB^2 + 8^2$\n$289 = AB^2 + 64$\n$AB^2 = 225$\n$AB = 15$ cm\n\n**Step 2: Area of $\\triangle ABC$**\nArea = $\\frac{1}{2} \\times \\text{base} \\times \\text{height}$\nArea = $\\frac{1}{2} \\times 8 \\times 15 = 60$ cm$^2$\n\n**Step 3: Area of Quadrilateral ABCD**\nSince tangents from an external point are equal and symmetric, $\\triangle ADC \\cong \\triangle ABC$.\nArea of $ABCD = 2 \\times \\text{Area of } \\triangle ABC$\nArea = $2 \\times 60 = 120$ cm$^2$\n\n**Answer:** Option C (120)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "geometry",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "If the angles of a triangle are in the ratio 7 : 8 : 3, then the value of the largest angle is:",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "80°",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "120°",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "60°",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "100°",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Given:**\nRatio of angles = 7 : 8 : 3\nSum of angles = $180^\\circ$\n\n**Step 1: Find Value of One Unit**\n$7x + 8x + 3x = 180^\\circ$\n$18x = 180^\\circ$\n$x = 10^\\circ$\n\n**Step 2: Find Largest Angle**\nLargest ratio part is 8.\nLargest Angle = $8 \\times 10^\\circ = 80^\\circ$\n\n**Answer:** Option A (80°)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "geometry",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE] - Question content not extracted.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "704.00 cm2",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "714.05 cm2",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "682.60 cm2",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "764.71 cm2",
+                "image": ""
+            }
+        ],
+        "correct_option": null,
+        "solution": "Content missing from source.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "mensuration",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "One pipe can fill a tank four times as fast as another pipe. If together the two pipes can fill the tank in 48 minutes, the slower pipe alone will be able to fill the tank in:",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "240 minutes",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "144 minutes",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "192 minutes",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "288 minutes",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Given:**\nPipe A (Fast) = 4 \\times Efficiency of Pipe B (Slow)\nEfficiencies: $A : B = 4 : 1$\nTotal Efficiency = $4 + 1 = 5$ units/min\nTime taken together = 48 minutes\n\n**Step 1: Calculate Total Capacity**\nTotal Work = $Efficiency \\times Time$\nCapacity = $5 \\times 48 = 240$ units\n\n**Step 2: Calculate Time for Slower Pipe**\nEfficiency of B = 1\nTime = $\\frac{240}{1} = 240$ minutes\n\n**Answer:** Option A (240 minutes)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "time_and_work",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Study the given table and answer the question that follows. The following table shows the percentage distribution of students in four different schools during the years 2021-22. If there was a total number of 16,000 and 18,000 students during the years 2021 and 2022 respectively, then the difference in number of students in school 4 in 2022 with respect to 2021 is:\n\n[MISSING TABLE]",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "380",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "180",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "240",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "280",
+                "image": ""
+            }
+        ],
+        "correct_option": null,
+        "solution": "Table data missing.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "data_interpretation",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "In a room, there are some chairs and some people. If on each chair, only one person is seated, then there is no chair for exactly one person. If on each chair, two persons sit, then there is one vacant chair. What is the number of chairs in the room?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "6",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "7",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "4",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "3",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "**Given:**\nLet $P$ = People, $C$ = Chairs.\n\n**Case 1:** 1 person per chair, 1 person left standing.\n$P = C + 1$\n\n**Case 2:** 2 persons per chair, 1 chair remains vacant.\nNumber of occupied chairs = $C - 1$\nPeople = $2 \\times (C - 1) = 2C - 2$\n\n**Step 1: Equate P**\n$C + 1 = 2C - 2$\n$1 + 2 = 2C - C$\n$3 = C$\n\nNumber of Chairs = 3\n(Number of People = 4)\n\n**Answer:** Option D (3)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "algebra",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "[MISSING TEXT/IMAGE] - Question content not extracted.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "(a) and (b)",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "(a), (b) and (d)",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "(a) and (c)",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "(b), (c) and (d)",
+                "image": ""
+            }
+        ],
+        "correct_option": null,
+        "solution": "Content missing from source.",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "miscellaneous",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Two successive percentage decrease of 25% each is by what percentage less than two successive percentage increase of 25% each? (Round to two decimal places.)",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "50%",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "22.22%",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "43.75%",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "56.25%",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "**Step 1: Calculate Successive Decrease**\n$x = -25, y = -25$\nNet Decrease = $-25 - 25 + \\frac{(-25)(-25)}{100}$\n$= -50 + 6.25 = -43.75\\%$\nEffective Multiplier = $1 - 0.4375 = 0.5625$\n\n**Step 2: Calculate Successive Increase**\n$x = 25, y = 25$\nNet Increase = $25 + 25 + \\frac{25 \\times 25}{100}$\n$= 50 + 6.25 = 56.25\\%$\nEffective Multiplier = $1 + 0.5625 = 1.5625$\n\n**Step 3: Calculate Percentage Difference**\nQuestion: \"Decrease... is by what percentage less than Increase...\"\nWe compare the change percentages or the final values?\nThe options (22.22%) suggest comparing the two net change values relative to the Increase value.\n\nLet's assume we compare the absolute percentage change values:\n$A = 43.75, B = 56.25$\nDiff = $56.25 - 43.75 = 12.5$\nPercentage Less = $\\frac{Diff}{B} \\times 100$\n$= \\frac{12.5}{56.25} \\times 100$\n$= \\frac{1250}{56.25} = 22.22\\%$\n\n**Answer:** Option B (22.22%)",
+        "subject": "QUANTITATIVE APTITUDE",
+        "pattern": "percentage",
+        "difficulty": "HARD",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 26.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    }
+]

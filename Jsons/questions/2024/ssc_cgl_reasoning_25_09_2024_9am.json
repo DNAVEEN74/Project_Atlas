@@ -1,0 +1,1077 @@
+[
+    {
+        "text": "Select the term from among the given options that can replace the question mark (?) in the given series.\nHM71, JP68, LS65, NV62, ?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "RX59",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "QY57",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "PY59",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "QX58",
+                "image": ""
+            }
+        ],
+        "correct_option": "C",
+        "solution": "**Series Analysis:**\nterms: HM71, JP68, LS65, NV62\n\n**1. First Letter:**\nH (+2) -> J (+2) -> L (+2) -> N (+2) -> **P**\n\n**2. Second Letter:**\nM (+3) -> P (+3) -> S (+3) -> V (+3) -> **Y**\n\n**3. Number:**\n71 (-3) -> 68 (-3) -> 65 (-3) -> 62 (-3) -> **59**\n\n**Result:** PY59\n\n**Answer:** Option C (PY59)",
+        "subject": "REASONING",
+        "pattern": "letter_series",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Select the set in which the numbers are related in the same way as are the numbers of the following set.\n(24, 15, 120)\n(21, 19, 133)",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "(31, 9, 96)",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "(18, 16, 99)",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "(27, 12, 108)",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "(33, 10, 170)",
+                "image": ""
+            }
+        ],
+        "correct_option": "C",
+        "solution": "**Analyze Set 1: (24, 15, 120)**\nLogic: $(A - B) \\times B = ?$\n$(24 - 15) \\times 15 = 9 \\times 15 = 135 \\neq 120$.\nLogic: $(A + 1) \\times ...$?\nLogic: Maybe related to sum or product.\n$24 + 15 = 39$. $120 / 39$ No.\n$24 \\times 5 = 120$. How to get 5 from 15? $15/3$?\nLet's check Set 2: (21, 19, 133)\n$21 \\times (19/3)$? No.\n\nTry Logic: $A \\times (B/3)$?\nSet 1: $24 \\times (15/3) = 24 \\times 5 = 120$. (Matches)\nSet 2: $21 \\times (19/3)$? 19 is not divisible by 3.\n\nTry Logic: $(A - (B/something)) \\times ...$?\n\nLet's look at Set 2 again: $133 = 19 \\times 7$.\n$A = 21, B = 19, C = 133$.\nRelation: $B \\times (A / 3) = C$\n$19 \\times (21 / 3) = 19 \\times 7 = 133$. (Matches)\n\nCheck Set 1 with $B \\times (A / 3)$:\n$15 \\times (24 / 3) = 15 \\times 8 = 120$. (Matches)\n\n**Logic: Result = Second Number * (First Number / 3)**\n\n**Check Options:**\nA. (31, 9, 96): $9 \\times (31/3)$? 31 not divisible.\nB. (18, 16, 99): $16 \\times (18/3) = 16 \\times 6 = 96 \\neq 99$.\nC. (27, 12, 108): $12 \\times (27/3) = 12 \\times 9 = 108$. (Matches)\nD. (33, 10, 170): $10 \\times (33/3) = 10 \\times 11 = 110 \\neq 170$.\n\n**Answer:** Option C (27, 12, 108)",
+        "subject": "REASONING",
+        "pattern": "set_analogy",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "How many squares are there in the figure shown below?\n\n[MISSING IMAGE]",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "18",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "17",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "15",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "16",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "Counting figures requires the visual image which is missing.",
+        "subject": "REASONING",
+        "pattern": "figure_counting",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Select the option figure in which the given figure (X) is embedded (rotation is NOT allowed).\n\n[MISSING IMAGE]",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "Figure 1",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "Figure 2",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "Figure 3",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "Figure 4",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "Visual question, image missing.",
+        "subject": "REASONING",
+        "pattern": "embedded_figures",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Select the option that is related to the fifth letter-cluster in the same way as the second letter-cluster is related to the first letter-cluster and the fourth letter-cluster is related to the third letter-cluster.\nCRW: TIN :: DOZ: UFQ :: ALW:?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "RCN",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "RCM",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "JCN",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "JCM",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Analyze Relation 1: CRW -> TIN**\nC -> T (Opposite G=7, T=20? No. C=3, T=20)\nLet's check Reverse:\nW -> T (-3)\nR -> I (Opposite)\nC -> N (+11?)\n\nLet's try Standard Shift:\nC (3) -> T (20) (+17)\nR (18) -> I (9) (-9)\nW (23) -> N (14) (-9)\n\nLet's try Opposite Letters:\nC <-> X (24). X -> T (-4)\nR <-> I (9). I -> I (0)\nW <-> D (4). D -> N (+10)\n\nLet's check DOZ -> UFQ\nD (4) -> U (21) (+17)\nO (15) -> F (6) (-9)\nZ (26) -> Q (17) (-9)\n\nPattern Confirmed:\n**1st Letter: +17**\n**2nd Letter: -9**\n**3rd Letter: -9**\n\n**Apply to ALW:**\nA (+17) -> **R** (1+17=18)\nL (-9) -> **C** (12-9=3)\nW (-9) -> **N** (23-9=14)\n\n**Result:** RCN\n\n**Answer:** Option A (RCN)",
+        "subject": "REASONING",
+        "pattern": "letter_analogy",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Select the figure that can replace the question mark (?) in the following series.\n\n[MISSING IMAGE]",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "Figure 1",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "Figure 2",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "Figure 3",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "Figure 4",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "Visual series question, image missing.",
+        "subject": "REASONING",
+        "pattern": "figure_series",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Four letter-clusters have been given, out of which three are alike in some manner and one is different. Select the one that is different.\nNote : The odd one out is not based on the number of consonants/vowels or their position in the letter cluster.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "SQPN",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "YWVT",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "NLKI",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "WVTS",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "**Analyze Options:**\n1. SQPN: S(19) - Q(17) = -2; Q(17) - P(16) = -1; P(16) - N(14) = -2.\n   Pattern: -2, -1, -2.\n2. YWVT: Y(25) - W(23) = -2; W(23) - V(22) = -1; V(22) - T(20) = -2.\n   Pattern: -2, -1, -2.\n3. NLKI: N(14) - L(12) = -2; L(12) - K(11) = -1; K(11) - I(9) = -2.\n   Pattern: -2, -1, -2.\n4. WVTS: W(23) - V(22) = -1; V(22) - T(20) = -2; T(20) - S(19) = -1.\n   Pattern: -1, -2, -1.\n\n**Conclusion:** Option D follows a different pattern.\n\n**Answer:** Option D (WVTS)",
+        "subject": "REASONING",
+        "pattern": "classification",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "In a certain code language, 'EAGLE' is written as 'DZFKD' and 'DREAM' is written as 'CQDZL'. How will 'SINCE' be written in that language?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "THMDF",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "RHMBD",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "RJOBD",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "TJODF",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "**Decode EAGLE -> DZFKD**\nE -1 = D\nA -1 = Z\nG -1 = F\nL -1 = K\nE -1 = D\nPattern: **-1** for all letters.\n\n**Decode DREAM -> CQDZL**\nD -1 = C\nR -1 = Q\nE -1 = D\nA -1 = Z\nM -1 = L\nPattern: **-1** Confirmed.\n\n**Apply to SINCE**\nS -1 = **R**\nI -1 = **H**\nN -1 = **M**\nC -1 = **B**\nE -1 = **D**\n\nResult: RHMBD\n\n**Answer:** Option B (RHMBD)",
+        "subject": "REASONING",
+        "pattern": "coding_decoding",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Select the correct combination of mathematical signs to sequentially place from left to right in the blanks below to balance the given equation.\n75 _ 3 _ 17 _ 8 = 0",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "÷, −, −",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "×, +, −",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "−, −, ×",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "−, −, +",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Equation:** 75 _ 3 _ 17 _ 8 = 0\n\n**Test Option A:** ÷, −, −\n$75 \\div 3 - 17 - 8 = 0$\n$25 - 17 - 8 = 0$\n$8 - 8 = 0$\n$0 = 0$ (Balanced)\n\n**Answer:** Option A (÷, −, −)",
+        "subject": "REASONING",
+        "pattern": "mathematical_operations",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Six letters J, K, L, M, N and O are written on different faces of a dice. Two positions of this dice are shown in the figure below. Find the letter on the face opposite to N.\n\n[MISSING IMAGE]",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "J",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "L",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "M",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "K",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "Cube/Dice question requires the image to determine the adjacent faces and rotation logic.",
+        "subject": "REASONING",
+        "pattern": "cubes_and_dice",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "All the six members of a family, 1, 2, 3, 4, 5 and 6, live together. 2 is the daughter of 3, but 3 is not the mother of 2. 1 and 3 are a married couple. 5 is the sister of 3. 4 is the daughter of 1. 6 is the brother of 2. Who is the mother of 2?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "2",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "1",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "4",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "5",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "**Breakdown:**\n1. **2 is daughter of 3, but 3 is not mother.**\n   Implies: 3 is the **Father** of 2. 2 is Female.\n2. **1 and 3 are a married couple.**\n   Since 3 is Father, 1 must be the **Mother**.\n3. **5 is the sister of 3.**\n   5 is Aunt.\n4. **4 is the daughter of 1.**\n   4 and 2 are sisters.\n5. **6 is the brother of 2.**\n   6 is son of 1 and 3.\n\n**Question:** Who is the mother of 2?\nFrom logic step 2: 1 is the mother of 2.\n\n**Answer:** Option B (1)",
+        "subject": "REASONING",
+        "pattern": "blood_relations",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Select the correct mirror image of the given figure when the mirror is placed at MN as shown below.\n\n[MISSING IMAGE]",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "Figure 1",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "Figure 2",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "Figure 3",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "Figure 4",
+                "image": ""
+            }
+        ],
+        "correct_option": "C",
+        "solution": "Visual question requiring image.",
+        "subject": "REASONING",
+        "pattern": "mirror_image",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "The question contains pairs of words that are related to each other in a certain way. Three of the following four word pairs are alike as these have the same relationship and thus form a group. Which word pair is the one that DOES NOT belong to that group?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "Shoes – feet",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "Book – pages",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "Flowers – petals",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "Spectacles – lens",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Analyze Relationships:**\n1. **Shoes – feet**: Shoes are worn on feet. (Item - Body Part)\n2. **Book – pages**: Pages are a *part* of a book. (Whole - Part)\n3. **Flowers – petals**: Petals are a *part* of a flower. (Whole - Part)\n4. **Spectacles – lens**: Lens is a *part* of spectacles. (Whole - Part)\n\n**Conclusion:** Option A is \"Item - Usage Location\", others are \"Whole - Part\" relationship.\n\n**Answer:** Option A (Shoes – feet)",
+        "subject": "REASONING",
+        "pattern": "classification",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Select the figure from among the given option that can replace the question mark (?) in the following series.\n\n[MISSING IMAGE]",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "Figure 1",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "Figure 2",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "Figure 3",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "Figure 4",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "Visual series question, image missing.",
+        "subject": "REASONING",
+        "pattern": "figure_series",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Select the number from among the given options that can replace the question mark (?) in the following series.\n35, 46, 68, 101, 145, ?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "212",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "200",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "214",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "210",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "**Analyze Series:**\n35 -> 46 (+11)\n46 -> 68 (+22)\n68 -> 101 (+33)\n101 -> 145 (+44)\n\n**Pattern:** Differences are multiples of 11: 11, 22, 33, 44.\nNext difference should be **55**.\n\n**Next Term:**\n$145 + 55 = 200$\n\n**Answer:** Option B (200)",
+        "subject": "REASONING",
+        "pattern": "number_series",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Select the option that represents the letters that when sequentially placed from left to right in the blanks below will complete the letter series.\nZ_A_Z__ZA_Z_",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "ZZAZZA",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "AZAZAZ",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "ZZZAAA",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "AZZAZZ",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Analyze Pattern:**\nSeries: Z _ A _ Z _ _ Z A _ Z _\nLet's count positions. 12 blanks? No, 12 characters + blanks.\nPattern looks like repetition of group.\nTry grouping size 3 or 4.\n\nOption A: **Z, Z, A, Z, Z, A**\nFill: Z **Z** A / **Z** Z **A** / **Z** Z A / **Z** Z **A** ...\nSequence: ZZA ZZA ZZA ZZA\nThis creates a repeating pattern \"ZZA\".\n\nCheck Original: Z _ A _ Z _ _ Z A _ Z _\nFilled: Z **Z** A **Z** Z **A** **Z** Z A **Z** Z **A** ?\nWait, the blanks are: 1, 2, 3, 4, 5, 6.\nOriginal: Z (1) A (2) Z (3) (4) Z A (5) Z (6)\nFill A: Z **Z** A **Z** Z **A** Z **Z** Z A **A** Z ... Mistake in reading blanks?\n\nLet's trace carefully from Question text:\n\"Z_A_Z__ZA_Z_\"\nBlanks: 1, 2, 3, 4, 5, 6.\n\nFill with Option A (ZZAZZA):\n1=Z -> Z **Z** A\n2=Z -> **Z** Z\n3=A -> **A** Z A\n4=Z -> **Z** Z\n5=Z -> **Z**\n6=A -> **A**\n\nResult: ZZA ZZAZZA ZA ZA... No.\n\nLet's restart grouping.\nString with gaps: Z _ A _ Z _ _ Z A _ Z _\nTotal length = 12 chars + 6 gaps = 18?\nNo, let's look at the text line: \"Z_A_Z__ZA_Z_\"\nCount: Z(1) _(2) A(3) _(4) Z(5) _(6) _(7) Z(8) A(9) _(10) Z(11) _(12)\nWait, spaces are not always 1 char.\nLet's assume standard pattern.\nTry logical groups.\nMaybe ZAZ?\nZ **Z** A **Z** Z **A** Z **Z** Z A **Z** Z ... Matches Option A?\n\nLet's try Option A: Z, Z, A, Z, Z, A.\nSequence: Z **Z** A **Z** Z **A** **Z** Z A **Z** Z **A**\nGroups: ZZAZ / ZZAZ / ZZAZ ?\nZ Z A Z (4)\nZ A Z Z (4) - No.\n\nGroups: ZZA / ZZA / ZZA / ZZA\nZ Z A\nZ Z A\nZ Z A\nZ Z A\n\nLet's see if it fits the blanks:\n1. Z\n2. Z (Blank 1)\n3. A\n4. Z (Blank 2)\n5. Z\n6. A (Blank 3)\n7. Z (Blank 4)\n8. Z\n9. A\n10. Z (Blank 5)\n11. Z\n12. A (Blank 6)\n\nOriginal: Z _ A _ Z _ _ Z A _ Z _\nCompare: Z (Z) A (Z) Z (A) (Z? No original has Z next). \nLet's check indices.\nStr: Z [1] A [2] Z [3] [4] Z A [5] Z [6]\n\nTry Pattern ZZA ZZA ZZA ZZA.\nZ (1) -> Z Matches\n(2) -> Z Matches Blank 1\nA (3) -> A Matches\n(4) -> Z Matches Blank 2\nZ (5) -> Z Matches\n(6) -> Z Matches Blank 3? No, original has Blank 3 then Blank 4\n\nWait, \"Z_A_Z__ZA_Z_\"\nPositions:\n1: Z\n2: _ (Fill 1)\n3: A\n4: _ (Fill 2)\n5: Z\n6: _ (Fill 3)\n7: _ (Fill 4)\n8: Z\n9: A\n10: _ (Fill 5)\n11: Z\n12: _ (Fill 6)\n\nTotal 12 chars.\nTry Option A: Z Z A Z Z A\nFill 1: Z -> ZZA\nFill 2: Z -> ZZZ (Next is Z?)\n\nLet's re-read the string visual from text.\n\"Z_A_Z__ZA_Z_\"\nIf Pattern is ZZA ZZA ZZA ZZA (Length 12)\n1: Z\n2: Z (Fill)\n3: A\n4: Z (Fill)\n5: Z\n6: A (Fill)\n7: Z (Fill?)\n8: Z (In text? No, text has Z at 8?)\nText: Z _ A _ Z _ _ Z A _ Z _\nIndices: 1 2 3 4 5 6 7 8 9 10 11 12\nChars: Z, A, Z, Z, A, Z\nBlanks: 2, 4, 6, 7, 10, 12\n\nFill A: Z Z A Z Z A\n2=Z\n4=Z\n6=A\n7=Z\n10=Z\n12=A\n\nSequence:\n1: Z\n2: **Z**\n3: A\n4: **Z**\n5: Z\n6: **A**\n7: **Z**\n8: Z (From text)\n9: A (From text)\n10: **Z**\n11: Z (From text)\n12: **A**\n\nResult: Z Z A Z Z A Z Z A Z Z A\nGroups: ZZA ZZA ZZA ZZA.\nPerfect match.\n\n**Answer:** Option A (ZZAZZA)",
+        "subject": "REASONING",
+        "pattern": "letter_series",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "The position of how many letters will change if each of the letters in the word 'CORNFLAKES' is re-arranged in the English alphabetical order from left to right?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "Eight",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "Seven",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "Nine",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "Ten",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Word:** CORNFLAKES (10 letters)\nLetters: C, O, R, N, F, L, A, K, E, S\n\n**Sorted:**\nA, C, E, F, K, L, N, O, R, S\n\n**Comparison:**\n1. C vs A (Change)\n2. O vs C (Change)\n3. R vs E (Change)\n4. N vs F (Change)\n5. F vs K (Change)\n6. L vs L (**NO Change**)\n7. A vs N (Change)\n8. K vs O (Change)\n9. E vs R (Change)\n10. S vs S (**NO Change**)\n\n**Count Changes:**\nTotal 10. No Change = 2 (L, S).\nChanges = $10 - 2 = 8$.\n\n**Answer:** Option A (Eight)",
+        "subject": "REASONING",
+        "pattern": "word_arrangement",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "A paper is folded and cut as shown below. How will it appear when unfolded?\n\n[MISSING IMAGE]",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "Figure 1",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "Figure 2",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "Figure 3",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "Figure 4",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "Visual question requiring image.",
+        "subject": "REASONING",
+        "pattern": "paper_folding",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Read the given statements and conclusions carefully. Assuming that the information given in the statements is true, even if it appears to be at variance with commonly known facts, decide which of the given conclusions logically follow(s) from the statements.\n\nStatements:\nSome vegetables are fruits.\nSome fruits are flowers.\nAll flowers are garlands.\n\nConclusions:\nI. Some garlands are fruits.\nII. Some vegetables are flowers.\nIII. Some vegetables are garlands.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "Only conclusions I and III follow",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "Only conclusions II and III follow",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "Only conclusions I and II follow",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "Only conclusion I follows",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "**Analyze Statements:**\n1. Some V are Fr.\n2. Some Fr are Fl.\n3. All Fl are G.\n\n**Diagram:**\nV --(some)-- Fr --(some)-- Fl (inside G)\n\n**Analyze Conclusions:**\nI. **Some garlands are fruits.**\n   Since Some Fr are Fl, and All Fl are G, the intersection of Fr and Fl is part of G.\n   Thus, Some G are Fr. (**True**)\n\nII. **Some vegetables are flowers.**\n    V intersects Fr. Fr intersects Fl.\n    No direct link between V and Fl. Possible but not definite. (**False**)\n\nIII. **Some vegetables are garlands.**\n    V intersects Fr. G contains Fl.\n    No direct link between V and G. (**False**)\n\n**Result:** Only I follows.\n\n**Answer:** Option D (Only conclusion I follows)",
+        "subject": "REASONING",
+        "pattern": "syllogism",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "In a certain code language, 'EXCESS' is written as '726572121', 'ENERGY' is written as '716720927', how will 'ESCAPE' be written in that language?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "72153187",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "72153165",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "72151167",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "71933187",
+                "image": ""
+            }
+        ],
+        "correct_option": "A",
+        "solution": "**Analyze Code: EXCESS -> 726572121**\nE (5) -> ? 7?\nX (24) -> ? 26?\nC (3) -> ? 5?\nE (5) -> ? 7?\nS (19) -> ? 21?\nS (19) -> ? 21?\nPattern: **Value + 2**\nE(5)+2 = 7\nX(24)+2 = 26\nC(3)+2 = 5\nE(5)+2 = 7\nS(19)+2 = 21\nS(19)+2 = 21\nCode: 7 26 5 7 21 21 -> 726572121. Matches.\n\n**Apply to ESCAPE**\nE (5) + 2 = **7**\nS (19) + 2 = **21**\nC (3) + 2 = **5**\nA (1) + 2 = **3**\nP (16) + 2 = **18**\nE (5) + 2 = **7**\n\nResult: 7 21 5 3 18 7 -> 72153187\n\n**Answer:** Option A (72153187)",
+        "subject": "REASONING",
+        "pattern": "coding_decoding",
+        "difficulty": "MEDIUM",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Which letter-cluster will replace the question mark (?) to complete the given series?\nCQJG, ERMJ, ?, ITSP, KUVS",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "GSQM",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "GRPM",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "GTPM",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "GSPM",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "**Analyze Series:**\n1. CQJG\n2. ERMJ\n\n**First Letter:**\nC (3) -> E (5) (+2) -> ? -> I (9) (+2) -> K (11)\nMissing: 5 + 2 = 7 (**G**)\n\n**Second Letter:**\nQ (17) -> R (18) (+1) -> ? -> T (20) (+1) -> U (21)\nMissing: 18 + 1 = 19 (**S**)\n\n**Third Letter:**\nJ (10) -> M (13) (+3) -> ? -> S (19) (+3) -> V (22)\nMissing: 13 + 3 = 16 (**P**)\n\n**Fourth Letter:**\nG (7) -> J (10) (+3) -> ? -> P (16) (+3) -> S (19)\nMissing: 10 + 3 = 13 (**M**)\n\n**Result:** GSPM\n\n**Answer:** Option D (GSPM)",
+        "subject": "REASONING",
+        "pattern": "letter_series",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Which number will come in the place of the question mark (?) in the following equation if ‘+’ and ‘−’ are interchanged and ‘×’ and ‘÷’ are interchanged?\n27 × 3 + 4 ÷ 2 − 7 = ?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "10",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "9",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "6",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "8",
+                "image": ""
+            }
+        ],
+        "correct_option": "D",
+        "solution": "**Original:** $27 \\times 3 + 4 \\div 2 - 7$\n**Interchanges:**\n+ $\\leftrightarrow$ -\n$\\times$ $\\leftrightarrow$ $\\div$\n\n**New Equation:**\n$27 \\div 3 - 4 \\times 2 + 7$\n\n**Solve:**\n$27 \\div 3 = 9$\n$4 \\times 2 = 8$\n$9 - 8 + 7$\n$1 + 7 = 8$\n\n**Answer:** Option D (8)",
+        "subject": "REASONING",
+        "pattern": "mathematical_operations",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "11 is related to 121 following a certain logic. Following the same logic, 22 is related to 484. To which of the following is 31 related, following the same logic?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "943",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "961",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "957",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "973",
+                "image": ""
+            }
+        ],
+        "correct_option": "B",
+        "solution": "**Analyze Relation:**\n11 -> 121 ($11^2$)\n22 -> 484 ($22^2$)\n\n**Apply to 31:**\n$31^2 = 961$\n\n**Answer:** Option B (961)",
+        "subject": "REASONING",
+        "pattern": "number_analogy",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "The same operation(s) are followed in all the given number pairs except one. Find that odd number pair.",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "22 : 45",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "7 : 15",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "11 : 121",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "5 : 11",
+                "image": ""
+            }
+        ],
+        "correct_option": "C",
+        "solution": "**Analyze Options:**\n1. 22 : 45 -> $22 \\times 2 + 1 = 45$\n2. 7 : 15 -> $7 \\times 2 + 1 = 15$\n3. 11 : 121 -> $11 \\times 11 = 121$ (Or $11^2$)\n4. 5 : 11 -> $5 \\times 2 + 1 = 11$\n\n**Conclusion:** Options A, B, D follow $x \\times 2 + 1$. Option C follows $x^2$.\n\n**Answer:** Option C (11 : 121)",
+        "subject": "REASONING",
+        "pattern": "classification",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    },
+    {
+        "text": "Select the option that is related to the fifth number in the same way as the second number is related to the first number and the fourth number is related to the third number.\n4 : 68 :: 8 : 136 :: 9 : ?",
+        "image": "",
+        "options": [
+            {
+                "id": "A",
+                "text": "147",
+                "image": ""
+            },
+            {
+                "id": "B",
+                "text": "149",
+                "image": ""
+            },
+            {
+                "id": "C",
+                "text": "153",
+                "image": ""
+            },
+            {
+                "id": "D",
+                "text": "152",
+                "image": ""
+            }
+        ],
+        "correct_option": "C",
+        "solution": "**Analyze Relation:**\n4 : 68\n$4 \\times 17 = 68$.\n\n8 : 136\n$8 \\times 17 = 136$.\n\n**Apply to 9:**\n$9 \\times 17 = 153$\n\n**Answer:** Option C (153)",
+        "subject": "REASONING",
+        "pattern": "number_analogy",
+        "difficulty": "EASY",
+        "source": {
+            "exam": "SSC CGL 2024",
+            "year": 2024,
+            "shift": "Tier 1 - 25.09.2024 9:00 AM - 10:00 AM"
+        },
+        "stats": {
+            "attempt_count": 0,
+            "accuracy_rate": 0,
+            "avg_time_ms": 0
+        },
+        "is_live": false,
+        "needs_review": true
+    }
+]
