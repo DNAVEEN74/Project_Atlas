@@ -1,51 +1,201 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 import { CheckCircleOutlinedIcon, StarIcon } from '@/components/icons';
 import Link from 'next/link';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
+import { AnimatePresence, motion } from 'framer-motion';
+import confetti from 'canvas-confetti';
 
 export default function PricingPage() {
+    const { user } = useAuth();
     const [scrolled, setScrolled] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const [paymentStatus, setPaymentStatus] = useState<'idle' | 'success' | 'failed'>('idle');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [paymentDetails, setPaymentDetails] = useState<{ amount: number; paymentId: string; date: string } | null>(null);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+
+        // Load Razorpay script
+        const script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            document.body.removeChild(script);
+        };
     }, []);
+
+    // Trigger confetti on success
+    useEffect(() => {
+        if (paymentStatus === 'success') {
+            const duration = 3 * 1000;
+            const animationEnd = Date.now() + duration;
+            // zIndex set to 200 to appear above the modal
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 200 };
+
+            const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
+
+            const interval: any = setInterval(function () {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                confetti({
+                    ...defaults, particleCount,
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+                });
+                confetti({
+                    ...defaults, particleCount,
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+                });
+            }, 250);
+
+            // Auto-redirect to dashboard after 3 seconds
+            const redirectTimer = setTimeout(() => {
+                window.location.href = '/dashboard';
+            }, 3000);
+
+            return () => {
+                clearInterval(interval);
+                clearTimeout(redirectTimer);
+            };
+        }
+    }, [paymentStatus]);
+
+    const handlePayment = async (planId: string) => {
+        setLoading(true);
+        setPaymentStatus('idle');
+        setPaymentDetails(null);
+        try {
+            // 1. Create Order
+            const res = await fetch('/api/payments/create-order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ planId }),
+            });
+
+            if (!res.ok) {
+                const error = await res.json();
+                if (res.status === 401) {
+                    window.location.href = '/login?redirect=/pricing';
+                    return;
+                }
+                throw new Error(error.error || 'Failed to create order');
+            }
+
+            const data = await res.json();
+
+            // 2. Open Razorpay Checkout
+            const options = {
+                key: data.keyId,
+                amount: data.amount,
+                currency: data.currency,
+                name: 'PrepLeague',
+                description: `${planId === 'monthly' ? 'Monthly' : 'Yearly'} Premium Subscription`,
+                image: '/logo-final.png',
+                order_id: data.id,
+                handler: async function (response: any) {
+                    // 3. Verify Payment
+                    try {
+                        const verifyRes = await fetch('/api/payments/verify', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature,
+                                planId: planId,
+                            }),
+                        });
+
+                        const verifyData = await verifyRes.json();
+                        if (verifyData.success) {
+                            setPaymentDetails({
+                                amount: data.amount / 100,
+                                paymentId: response.razorpay_payment_id,
+                                date: new Date().toLocaleString('en-IN', {
+                                    day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true
+                                })
+                            });
+                            setPaymentStatus('success');
+                        } else {
+                            setErrorMessage(verifyData.message || 'Verification failed');
+                            setPaymentStatus('failed');
+                        }
+                    } catch (verifyError) {
+                        console.error('Verification error:', verifyError);
+                        setErrorMessage('Payment verification failed');
+                        setPaymentStatus('failed');
+                    }
+                },
+                prefill: {
+                    name: user?.name,
+                    email: user?.email,
+                },
+                theme: {
+                    color: '#f59e0b', // Amber-500
+                },
+            };
+
+            const rzp = new (window as any).Razorpay(options);
+            rzp.on('payment.failed', function (response: any) {
+                setErrorMessage(response.error.description || 'Payment failed');
+                setPaymentStatus('failed');
+            });
+            rzp.open();
+
+        } catch (error: any) {
+            console.error('Payment error:', error);
+            setErrorMessage(error.message || 'Something went wrong');
+            setPaymentStatus('failed');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="min-h-screen bg-[#0f0f0f] text-white selection:bg-amber-500/30 relative overflow-hidden">
             {/* --- HEADER --- */}
-            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-white/5 py-3' : 'bg-transparent py-5'
-                }`}>
-                <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-                    <Link href="/" className="flex items-center gap-3 group">
-                        <div className="relative w-8 h-8 transition-transform group-hover:scale-105">
-                            <Image src="/logo-final.png" alt="PrepLeague Logo" fill className="object-contain" />
-                        </div>
-                        <span className="font-bold text-lg tracking-tight text-white">PrepLeague</span>
-                    </Link>
-                    <nav className="hidden md:flex items-center gap-8">
-                        <Link href="/" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Home</Link>
-                        <Link href="/problems" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Problems</Link>
-                        <Link href="/sprint" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Sprint</Link>
-                        <Link href="/games" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Games</Link>
-                        <Link href="/pricing" className="text-sm font-medium text-white transition-colors">Pricing</Link>
-                    </nav>
-                    <div className="flex items-center gap-4">
-                        <Link href="/login" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden sm:block">Sign in</Link>
-                        <Link href="/register" className="px-5 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-neutral-200 transition-colors">
-                            Get Started
+            {!user && (
+                <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-white/5 py-3' : 'bg-transparent py-5'
+                    }`}>
+                    <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+                        <Link href="/" className="flex items-center gap-3 group">
+                            <div className="relative w-8 h-8 transition-transform group-hover:scale-105">
+                                <Image src="/logo-final.png" alt="PrepLeague Logo" fill className="object-contain" />
+                            </div>
+                            <span className="font-bold text-lg tracking-tight text-white">PrepLeague</span>
                         </Link>
+                        <nav className="hidden md:flex items-center gap-8">
+                            <Link href="/" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Home</Link>
+                            <Link href="/problems" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Problems</Link>
+                            <Link href="/sprint" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Sprint</Link>
+                            <Link href="/games" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Games</Link>
+                            <Link href="/pricing" className="text-sm font-medium text-white transition-colors">Pricing</Link>
+                        </nav>
+                        <div className="flex items-center gap-4">
+                            <Link href="/login" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden sm:block">Sign in</Link>
+                            <Link href="/register" className="px-5 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-neutral-200 transition-colors">
+                                Get Started
+                            </Link>
+                        </div>
                     </div>
-                </div>
-            </header>
+                </header>
+            )}
 
             {/* --- HERO SECTION (Animated Grid + Formulas) --- */}
-            {/* Animated Grid Background - Moved to Root for Full Width */}
-            {/* Animated Grid Background - Facded out before Compare Plans */}
             <div className="absolute top-0 left-0 right-0 h-[1200px] pointer-events-none -z-0">
                 {/* Perspective Grid */}
                 <div className="absolute inset-0 opacity-[0.15]"
@@ -117,8 +267,11 @@ export default function PricingPage() {
                             <FeatureItem text="Weak Spot Drills" highlight />
                         </div>
 
-                        <button className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white hover:text-black transition-all">
-                            Select Monthly
+                        <button
+                            onClick={() => handlePayment('monthly')}
+                            disabled={loading}
+                            className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white hover:text-black transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                            {loading ? 'Processing...' : 'Select Monthly'}
                         </button>
                     </div>
 
@@ -142,11 +295,14 @@ export default function PricingPage() {
                         <div className="space-y-4 mb-8 flex-1">
                             <FeatureItem text="Everything in Monthly" highlight />
                             <FeatureItem text="Same Premium Features" highlight />
-                            <FeatureItem text="Save ₹689 / Year" highlight />
+                            <FeatureItem text="Save ₹690 / Year" highlight />
                         </div>
 
-                        <button className="w-full py-4 rounded-xl bg-amber-500 text-black font-black uppercase tracking-wide hover:bg-amber-400 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20">
-                            Select Yearly
+                        <button
+                            onClick={() => handlePayment('yearly')}
+                            disabled={loading}
+                            className="w-full py-4 rounded-xl bg-amber-500 text-black font-black uppercase tracking-wide hover:bg-amber-400 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20 disabled:opacity-50 disabled:cursor-not-allowed">
+                            {loading ? 'Processing...' : 'Select Yearly'}
                         </button>
                         <p className="text-[10px] text-center text-neutral-500 mt-4">Billed as one payment of ₹499</p>
                     </div>
@@ -233,6 +389,106 @@ export default function PricingPage() {
                     </p>
                 </div>
             </main>
+
+            {/* Immersive Payment Status Modal */}
+            <AnimatePresence>
+                {paymentStatus !== 'idle' && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
+                    >
+                        {/* 
+                            Logic for different Modal Styles based on Status 
+                            Success -> Razorpay Green Style
+                            Failed -> Dark Red Style
+                        */}
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            transition={{ type: "spring", duration: 0.5 }}
+                            className={`relative rounded-3xl p-1 max-w-md w-full shadow-2xl overflow-hidden ${paymentStatus === 'success' ? 'bg-[#0cce6b]' : 'bg-[#1a1a1a] border border-neutral-800'}`}
+                        >
+                            {paymentStatus === 'success' ? (
+                                // --- SUCCESS STATE (Razorpay Style) ---
+                                <div className="relative bg-[#0cce6b] rounded-[22px] p-8 text-center min-h-[400px] flex flex-col items-center justify-center">
+
+                                    <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mb-6 animate-pulse">
+                                        <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={4}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+
+                                    <h3 className="text-3xl font-bold text-white mb-2">
+                                        Payment Successful!
+                                    </h3>
+
+                                    <p className="text-white/80 font-medium mb-8">
+                                        Redirecting you to dashboard...
+                                    </p>
+
+                                    {/* Receipt Card */}
+                                    <div className="bg-white rounded-xl w-full p-6 text-left shadow-lg transition-transform duration-300">
+                                        <div className="flex justify-between items-start mb-4 border-b border-neutral-100 pb-4">
+                                            <div>
+                                                <p className="text-xs text-neutral-400 font-bold uppercase tracking-wider">Amount Paid</p>
+                                                <p className="text-3xl font-black text-neutral-900">₹{paymentDetails?.amount || '--'}</p>
+                                            </div>
+                                            <div className="bg-emerald-100 p-2 rounded-lg">
+                                                <Image src="/logo-final.png" width={24} height={24} alt="Logo" className="object-contain" />
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-3">
+                                            <div className="flex justify-between text-sm">
+                                                <span className="text-neutral-500">Payment ID</span>
+                                                <span className="font-mono text-neutral-900">{paymentDetails?.paymentId ? `...${paymentDetails.paymentId.slice(-6)}` : '...'}</span>
+                                            </div>
+                                            <div className="flex justify-between text-sm">
+                                                <span className="text-neutral-500">Date</span>
+                                                <span className="text-neutral-900 font-medium">{paymentDetails?.date ? new Date(paymentDetails.date).toLocaleDateString() : 'Just now'}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        onClick={() => window.location.href = '/dashboard'}
+                                        className="mt-8 text-white font-bold text-sm hover:underline opacity-80 hover:opacity-100"
+                                    >
+                                        Click here if not redirected
+                                    </button>
+                                </div>
+                            ) : (
+                                // --- FAILURE STATE (Dark Style) ---
+                                <div className="relative bg-[#121212] rounded-[22px] p-8 text-center overflow-hidden">
+                                    {/* Background Glow */}
+                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-b from-rose-500/10 to-transparent blur-3xl -z-10" />
+
+                                    <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg bg-gradient-to-br from-rose-400 to-red-600 text-white shadow-rose-500/20">
+                                        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                                    </div>
+
+                                    <h3 className="text-2xl font-bold text-white mb-2">
+                                        Payment Failed
+                                    </h3>
+
+                                    <p className="text-neutral-400 mb-8 leading-relaxed">
+                                        {errorMessage}
+                                    </p>
+
+                                    <button
+                                        onClick={() => setPaymentStatus('idle')}
+                                        className="w-full py-3.5 rounded-xl font-bold text-sm tracking-wide transition-all shadow-lg bg-neutral-800 text-white hover:bg-neutral-700 hover:shadow-lg"
+                                    >
+                                        Try Again
+                                    </button>
+                                </div>
+                            )}
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <Footer />
         </div>
     );

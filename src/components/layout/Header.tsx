@@ -15,6 +15,7 @@ import {
     PersonIcon,
     SettingsIcon,
     HelpIcon,
+    StarIcon,
 } from '@/components/icons';
 
 interface HeaderProps {
@@ -196,6 +197,12 @@ export default function Header({ activePage }: HeaderProps) {
                                                 <p className="text-xs text-neutral-500">{user?.email}</p>
                                             </div>
                                             <div className="py-1">
+                                                <Link href="/pricing" className="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-amber-500 hover:bg-neutral-800 transition-colors">
+                                                    <StarIcon sx={{ fontSize: '1.1rem' }} />
+                                                    Upgrade Plan
+                                                </Link>
+                                                <div className="h-px bg-neutral-800 my-1 mx-4"></div>
+
                                                 <Link href="/dashboard" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
                                                     <DashboardIcon sx={{ fontSize: '1.1rem' }} />
                                                     Dashboard

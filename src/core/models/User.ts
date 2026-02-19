@@ -31,6 +31,20 @@ export interface IUser extends Document {
         last_used?: Date;
     }[];
     role: 'USER' | 'ADMIN';
+    razorpay_customer_id?: string;
+    subscription?: {
+        plan: 'MONTHLY' | 'YEARLY';
+        status: 'ACTIVE' | 'EXPIRED' | 'CANCELLED';
+        start_date: Date;
+        end_date: Date;
+    };
+    payment_history: {
+        order_id: string;
+        payment_id: string;
+        amount: number;
+        status: 'SUCCESS' | 'FAILED';
+        date: Date;
+    }[];
     created_at: Date;
     updated_at: Date;
 }
@@ -99,6 +113,24 @@ const UserSchema: Schema = new Schema(
             type: String,
             enum: ['USER', 'ADMIN'],
             default: 'USER',
+        },
+
+        razorpay_customer_id: { type: String },
+        subscription: {
+            plan: { type: String, enum: ['MONTHLY', 'YEARLY'] },
+            status: { type: String, enum: ['ACTIVE', 'EXPIRED', 'CANCELLED'] },
+            start_date: { type: Date },
+            end_date: { type: Date },
+        },
+        payment_history: {
+            type: [{
+                order_id: { type: String },
+                payment_id: { type: String },
+                amount: { type: Number },
+                status: { type: String, enum: ['SUCCESS', 'FAILED'] },
+                date: { type: Date, default: Date.now },
+            }],
+            default: [],
         },
     },
     { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
