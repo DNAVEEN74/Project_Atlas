@@ -101,7 +101,9 @@ export async function GET() {
                 dailyQuantGoal: (userLean as any).preferences?.daily_quant_goal || 5,
                 dailyReasoningGoal: (userLean as any).preferences?.daily_reasoning_goal || 5,
                 isPremium: (userLean as any).config?.is_premium,
+                subscription: (userLean as any).subscription,
                 targetExam: (userLean as any).target_exam,
+                targetYear: (userLean as any).target_year,
                 totalQuestions
             },
         });

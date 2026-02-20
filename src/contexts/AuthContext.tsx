@@ -18,6 +18,12 @@ interface User {
     dailyQuantGoal: number;
     dailyReasoningGoal: number;
     totalQuestions: number;
+    subscription?: {
+        plan: 'MONTHLY' | 'YEARLY';
+        status: 'ACTIVE' | 'EXPIRED' | 'CANCELLED';
+        start_date: Date;
+        end_date: Date;
+    };
 }
 
 interface AuthContextType {

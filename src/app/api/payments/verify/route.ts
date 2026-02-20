@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 import dbConnect from '@/core/db/connect';
+import Payment from '@/core/models/Payment';
 import User from '@/core/models/User';
 import { getCurrentUser } from '@/lib/auth';
 
@@ -26,14 +27,28 @@ export async function POST(req: Request) {
             await dbConnect();
 
             const startDate = new Date();
-            let endDate = new Date();
+            let endDate = new Date(startDate);
 
+            // Calculate End Date
             if (planId === 'monthly') {
                 endDate.setMonth(endDate.getMonth() + 1);
             } else if (planId === 'yearly') {
                 endDate.setFullYear(endDate.getFullYear() + 1);
             }
 
+            // Create Payment Record
+            await Payment.create({
+                user_id: user.userId,
+                razorpay_order_id,
+                razorpay_payment_id,
+                razorpay_signature,
+                amount: planId === 'monthly' ? 99 : 499,
+                currency: 'INR',
+                status: 'SUCCESS',
+                plan_id: planId
+            });
+
+            // Update User Subscription
             await User.findByIdAndUpdate(user.userId, {
                 $set: {
                     'config.is_premium': true,
@@ -42,15 +57,6 @@ export async function POST(req: Request) {
                         status: 'ACTIVE',
                         start_date: startDate,
                         end_date: endDate,
-                    }
-                },
-                $push: {
-                    payment_history: {
-                        order_id: razorpay_order_id,
-                        payment_id: razorpay_payment_id,
-                        amount: planId === 'monthly' ? 99 : 499,
-                        status: 'SUCCESS',
-                        date: new Date(),
                     }
                 }
             });

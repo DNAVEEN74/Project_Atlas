@@ -9,6 +9,7 @@ export interface IUser extends Document {
         avatar_url?: string;
     };
     target_exam: 'SSC_CGL';
+    target_year: number; // e.g., 2025
     config: { is_premium: boolean; };
     preferences: {
         daily_quant_goal: number;       // 5-100
@@ -38,13 +39,6 @@ export interface IUser extends Document {
         start_date: Date;
         end_date: Date;
     };
-    payment_history: {
-        order_id: string;
-        payment_id: string;
-        amount: number;
-        status: 'SUCCESS' | 'FAILED';
-        date: Date;
-    }[];
     created_at: Date;
     updated_at: Date;
 }
@@ -71,6 +65,11 @@ const UserSchema: Schema = new Schema(
             type: String,
             enum: ['SSC_CGL'],
             default: 'SSC_CGL',
+        },
+
+        target_year: {
+            type: Number,
+            default: 2025,
         },
 
         config: {
@@ -121,16 +120,6 @@ const UserSchema: Schema = new Schema(
             status: { type: String, enum: ['ACTIVE', 'EXPIRED', 'CANCELLED'] },
             start_date: { type: Date },
             end_date: { type: Date },
-        },
-        payment_history: {
-            type: [{
-                order_id: { type: String },
-                payment_id: { type: String },
-                amount: { type: Number },
-                status: { type: String, enum: ['SUCCESS', 'FAILED'] },
-                date: { type: Date, default: Date.now },
-            }],
-            default: [],
         },
     },
     { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }

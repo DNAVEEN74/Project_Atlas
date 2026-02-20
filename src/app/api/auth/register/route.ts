@@ -13,6 +13,7 @@ export async function POST(req: NextRequest) {
             password,
             name,
             targetExam, // Optional in UI, default SSC_CGL
+            targetYear,
             dailyQuantGoal,
             dailyReasoningGoal,
         } = body;
@@ -59,6 +60,7 @@ export async function POST(req: NextRequest) {
                 avatar_url: '' // optional
             },
             target_exam: 'SSC_CGL', // Currently only one supported
+            target_year: targetYear || 2025,
             config: {
                 is_premium: false
             },
