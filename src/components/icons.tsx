@@ -312,6 +312,7 @@ export const ForumIcon = createIcon(MessagesSquare);
 export const VisibilityIcon = createIcon(Eye);
 export const VisibilityOffIcon = createIcon(EyeOff);
 export const EyeIcon = createIcon(Eye);
+export const EyeOffIcon = createIcon(EyeOff);
 
 // ========== DIFFICULTY & LEVEL ICONS ==========
 export const DifficultyIcon = createIcon(BarChart3);

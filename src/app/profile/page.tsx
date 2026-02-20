@@ -10,11 +10,14 @@ import {
     EditIcon,
     TrackChangesOutlinedIcon,
     HistoryIcon,
-    CloseIcon
+    CloseIcon,
+    EyeIcon,
+    EyeOffIcon
 } from '@/components/icons';
 import { CustomSelect } from '@/components/ui/CustomSelect';
 import Link from 'next/link';
 import { useToast } from '@/contexts/ToastContext';
+import mongoose from 'mongoose';
 
 // Fallback icons if not present
 const XIcon = ({ className }: { className?: string }) => (
@@ -35,6 +38,14 @@ const ReceiptIcon = ({ className }: { className?: string }) => (
     </svg>
 );
 
+function CheckIcon(props: any) {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 ml-1" {...props}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+        </svg>
+    )
+}
+
 interface Payment {
     id: string;
     amount: number;
@@ -44,6 +55,13 @@ interface Payment {
     date: string;
     order_id: string;
 }
+
+const REFUND_REASONS = [
+    'Accidental purchase',
+    'Content not as expected',
+    'Technical issues',
+    'Other'
+];
 
 export default function ProfilePage() {
     const { user, refreshUser } = useAuth();
@@ -57,6 +75,24 @@ export default function ProfilePage() {
     const [showHistory, setShowHistory] = useState(false);
     const [transactions, setTransactions] = useState<Payment[]>([]);
     const [loadingHistory, setLoadingHistory] = useState(false);
+
+    // Refund Request State
+    const [showRefund, setShowRefund] = useState(false);
+    const [refundReason, setRefundReason] = useState('');
+    const [customRefundReason, setCustomRefundReason] = useState('');
+    const [isSubmittingRefund, setIsSubmittingRefund] = useState(false);
+
+    // Cancel Subscription State
+    const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+    const [isCancelling, setIsCancelling] = useState(false);
+
+    // Change Password State
+    const [showChangePassword, setShowChangePassword] = useState(false);
+    const [passwordData, setPasswordData] = useState({ currentPassword: '', newPassword: '' });
+    const [isChangingPassword, setIsChangingPassword] = useState(false);
+    const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [passwordErrors, setPasswordErrors] = useState({ current: '', new: '' });
 
     const [formData, setFormData] = useState({
         name: '',
@@ -160,8 +196,117 @@ export default function ProfilePage() {
         });
     };
 
-    const isPremium = user?.subscription?.status === 'ACTIVE';
+    const handleRefundSubmit = async () => {
+        if (!refundReason) {
+            error("Please select a reason");
+            return;
+        }
+        setIsSubmittingRefund(true);
+        try {
+            const res = await fetch('/api/payments/refund', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    reason: refundReason,
+                    custom_reason: customRefundReason
+                })
+            });
+            const data = await res.json();
+            if (res.ok) {
+                success("Refund request submitted successfully");
+                setShowRefund(false);
+                setRefundReason('');
+                setCustomRefundReason('');
+            } else {
+                error(data.error || "Failed to submit refund request");
+            }
+        } catch (err) {
+            error("Something went wrong");
+        } finally {
+            setIsSubmittingRefund(false);
+        }
+    };
+
+    const handleCancelSubscription = async () => {
+        setIsCancelling(true);
+        try {
+            const res = await fetch('/api/payments/cancel', {
+                method: 'POST',
+            });
+            const data = await res.json();
+            if (res.ok) {
+                success('Subscription cancelled successfully. Changes will reflect shortly.');
+                await refreshUser();
+                setShowCancelConfirm(false);
+            } else {
+                error(data.error || 'Failed to cancel subscription');
+            }
+        } catch (err) {
+            error('Something went wrong');
+        } finally {
+            setIsCancelling(false);
+        }
+    };
+
+    const handleChangePassword = async () => {
+        setPasswordErrors({ current: '', new: '' });
+        let hasError = false;
+
+        if (!passwordData.currentPassword) {
+            setPasswordErrors(prev => ({ ...prev, current: 'Current password is required' }));
+            hasError = true;
+        }
+
+        if (!passwordData.newPassword) {
+            setPasswordErrors(prev => ({ ...prev, new: 'New password is required' }));
+            hasError = true;
+        } else if (passwordData.newPassword.length < 6) {
+            setPasswordErrors(prev => ({ ...prev, new: 'Password must be at least 6 characters' }));
+            hasError = true;
+        }
+
+        if (hasError) return;
+
+        setIsChangingPassword(true);
+        try {
+            const res = await fetch('/api/auth/change-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(passwordData)
+            });
+            const data = await res.json();
+            if (res.ok) {
+                success("Password changed successfully");
+                setShowChangePassword(false);
+                setPasswordData({ currentPassword: '', newPassword: '' });
+            } else {
+                if (data.error === 'Incorrect current password') {
+                    setPasswordErrors(prev => ({ ...prev, current: 'Incorrect current password' }));
+                } else {
+                    error(data.error || "Failed to change password");
+                }
+            }
+        } catch (err) {
+            error("Something went wrong");
+        } finally {
+            setIsChangingPassword(false);
+        }
+    };
+
+    const isPremium = user?.subscription?.status === 'ACTIVE' || user?.subscription?.status === 'CANCELLED';
     const isMonthly = user?.subscription?.plan === 'MONTHLY';
+    const planAmount = user?.subscription?.plan === 'YEARLY' ? '₹499/year' : '₹99/month';
+    const refundAmount = user?.subscription?.plan === 'YEARLY' ? '499.00' : '99.00';
+
+    // Check if within 7 days
+    const isEligibleForRefund = isPremium && user?.subscription?.start_date && (
+        (new Date().getTime() - new Date(user.subscription.start_date).getTime()) < (7 * 24 * 60 * 60 * 1000)
+    ) && user?.subscription?.status !== 'CANCELLED';
+
+    // Check if eligible for cancellation (Premium, Active, and NOT eligible for refund - though logic allows cancel even if eligible for refund, usually refund is preferred)
+    // We display Cancel button if Premium AND Active AND Not Eligible For Refund
+    // Actually, user might want to cancel instead of refund even if eligible? 
+    // Let's stick to the logic: If Eligible for Refund -> Show Refund. Else If Active -> Show Cancel.
 
     return (
         <div className="min-h-screen bg-[#0f0f0f] text-neutral-200 font-sans selection:bg-amber-500/30">
@@ -265,6 +410,20 @@ export default function ProfilePage() {
                                             <p className="text-base text-neutral-300 font-mono bg-neutral-900/50 px-3 py-2 rounded-lg border border-neutral-800/50 inline-block">
                                                 {user?.email}
                                             </p>
+                                        </div>
+
+                                        {/* Password - Change Link */}
+                                        <div>
+                                            <label className="block text-xs font-semibold text-neutral-500 mb-1.5 uppercase tracking-wider">Password</label>
+                                            <div className="flex items-center gap-4">
+                                                <p className="text-base text-neutral-300 font-mono tracking-widest">••••••••</p>
+                                                <button
+                                                    onClick={() => setShowChangePassword(true)}
+                                                    className="text-xs font-bold text-amber-500 hover:text-amber-400 hover:underline transition-all"
+                                                >
+                                                    Change Password
+                                                </button>
+                                            </div>
                                         </div>
 
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
@@ -372,12 +531,13 @@ export default function ProfilePage() {
                                     </div>
                                 )}
                             </section>
+
                         </div>
 
                         {/* RIGHT COLUMN */}
                         <div className="space-y-6">
                             {/* Subscription Card */}
-                            <section className={`rounded-3xl p-8 relative overflow-hidden border flex flex-col h-full bg-[#1a1a1a] ${isPremium ? 'border-emerald-500/30' : 'border-neutral-800'}`}>
+                            <section className={`rounded-3xl p-8 relative overflow-hidden border flex flex-col h-fit bg-[#1a1a1a] ${isPremium ? 'border-emerald-500/30' : 'border-neutral-800'}`}>
                                 {isPremium && (
                                     <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
                                         <StarIcon sx={{ fontSize: '12rem' }} className="text-emerald-500" />
@@ -390,8 +550,8 @@ export default function ProfilePage() {
                                         Subscription
                                     </h2>
                                     {isPremium && (
-                                        <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider rounded-full border border-emerald-500/20">
-                                            Active
+                                        <span className={`px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full border ${user?.subscription?.status === 'CANCELLED' ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'}`}>
+                                            {user?.subscription?.status === 'CANCELLED' ? 'Cancelled' : 'Active'}
                                         </span>
                                     )}
                                 </div>
@@ -412,12 +572,37 @@ export default function ProfilePage() {
                                                     <span className="text-white font-medium">{formatDate(user?.subscription?.start_date)}</span>
                                                 </div>
                                                 <div className="flex justify-between text-sm">
-                                                    <span className="text-neutral-400">Renews On</span>
-                                                    <span className="text-emerald-400 font-medium">{formatDate(user?.subscription?.end_date)}</span>
+                                                    <span className="text-neutral-400">
+                                                        {user?.subscription?.status === 'CANCELLED' ? 'Access Expires On' : 'Renews On'}
+                                                    </span>
+                                                    <span className={`${user?.subscription?.status === 'CANCELLED' ? 'text-amber-500' : 'text-emerald-400'} font-medium`}>
+                                                        {formatDate(user?.subscription?.end_date)}
+                                                    </span>
                                                 </div>
+
+                                                {user?.subscription?.status === 'ACTIVE' && (
+                                                    <>
+                                                        <div className="flex justify-between text-sm">
+                                                            <span className="text-neutral-400">Amount</span>
+                                                            <span className="text-white font-medium">{planAmount}</span>
+                                                        </div>
+                                                        <div className="flex justify-between text-sm">
+                                                            <span className="text-neutral-400">Payment</span>
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="text-white font-medium">•••• 4242 (Visa)</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex justify-between text-sm">
+                                                            <span className="text-neutral-400">Next Charge</span>
+                                                            <span className="text-white font-medium">
+                                                                {user?.subscription?.plan === 'YEARLY' ? '₹499' : '₹99'} on {formatDate(user?.subscription?.end_date)}
+                                                            </span>
+                                                        </div>
+                                                    </>
+                                                )}
                                             </div>
 
-                                            {isMonthly && (
+                                            {isMonthly && user?.subscription?.status === 'ACTIVE' && (
                                                 <Link
                                                     href="/pricing"
                                                     className="block w-full py-3 bg-neutral-800 hover:bg-neutral-700 text-amber-500 text-center font-bold rounded-xl transition-all border border-amber-500/20 hover:border-amber-500/40 text-sm"
@@ -440,6 +625,24 @@ export default function ProfilePage() {
                                         </div>
                                     )}
                                 </div>
+
+                                {isEligibleForRefund ? (
+                                    <button
+                                        onClick={() => setShowRefund(true)}
+                                        className="mb-4 mt-2 w-full py-2 text-xs font-semibold text-rose-500 hover:text-rose-400 hover:bg-rose-500/10 border border-transparent hover:border-rose-500/20 rounded-xl transition-all"
+                                    >
+                                        Request Refund (Within 7 Days)
+                                    </button>
+                                ) : (
+                                    isPremium && user?.subscription?.status === 'ACTIVE' && (
+                                        <button
+                                            onClick={() => setShowCancelConfirm(true)}
+                                            className="mb-4 mt-2 w-full py-2 text-xs font-semibold text-neutral-500 hover:text-white hover:bg-neutral-800 border border-transparent hover:border-neutral-700 rounded-xl transition-all hover:bg-neutral-800"
+                                        >
+                                            Cancel Subscription
+                                        </button>
+                                    )
+                                )}
 
                                 <button
                                     onClick={openHistory}
@@ -476,7 +679,7 @@ export default function ProfilePage() {
                                         Transaction History
                                     </h3>
                                     <button onClick={() => setShowHistory(false)} className="text-neutral-400 hover:text-white transition-colors">
-                                        <CloseIcon sx={{ fontSize: '1.5rem' }} /> {/* Falling back to CloseIcon or standard X */}
+                                        <CloseIcon sx={{ fontSize: '1.5rem' }} />
                                         {!CloseIcon && <XIcon className='w-6 h-6' />}
                                     </button>
                                 </div>
@@ -493,7 +696,7 @@ export default function ProfilePage() {
                                                     <div>
                                                         <div className="flex items-center gap-3 mb-1">
                                                             <span className="font-bold text-white text-lg">
-                                                                {tx.currency} {(tx.amount / 100).toFixed(2)}
+                                                                {tx.currency} {tx.amount.toFixed(2)}
                                                             </span>
                                                             <span className={`px-2 py-0.5 text-[10px] font-bold uppercase rounded-full border ${tx.status === 'SUCCESS' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20'}`}>
                                                                 {tx.status}
@@ -532,17 +735,218 @@ export default function ProfilePage() {
                         </>
                     )}
                 </AnimatePresence>
+
+                {/* Refund Modal */}
+                <AnimatePresence>
+                    {showRefund && (
+                        <>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setShowRefund(false)}
+                                className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+                            />
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                                className="fixed inset-0 m-auto w-full max-w-md h-fit bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden"
+                            >
+                                <div className="p-6 border-b border-neutral-800 flex justify-between items-center">
+                                    <h3 className="text-xl font-bold text-white">Request Refund</h3>
+                                    <button onClick={() => setShowRefund(false)} className="text-neutral-400 hover:text-white">
+                                        <XIcon className="w-6 h-6" />
+                                    </button>
+                                </div>
+
+                                <div className="p-6 space-y-4">
+                                    <p className="text-sm text-neutral-400">
+                                        You'll receive <span className="text-white font-bold">₹{refundAmount}</span> back to your original payment method within <span className="text-white font-bold">5-7 business days</span>.
+                                    </p>
+                                    <p className="text-xs text-neutral-500 mt-2">
+                                        Please let us know why you'd like a refund.
+                                    </p>
+
+                                    <div className="space-y-2">
+                                        {REFUND_REASONS.map((reason) => (
+                                            <label key={reason} className="flex items-center gap-3 p-3 rounded-xl bg-neutral-900/50 border border-neutral-800 hover:border-neutral-700 cursor-pointer transition-all">
+                                                <input
+                                                    type="radio"
+                                                    name="refundReason"
+                                                    value={reason}
+                                                    checked={refundReason === reason}
+                                                    onChange={(e) => setRefundReason(e.target.value)}
+                                                    className="w-4 h-4 text-amber-500 bg-neutral-800 border-neutral-600 focus:ring-amber-500"
+                                                />
+                                                <span className="text-sm text-white">{reason}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+
+                                    {refundReason === 'Other' && (
+                                        <textarea
+                                            value={customRefundReason}
+                                            onChange={(e) => setCustomRefundReason(e.target.value)}
+                                            placeholder="Please tell us more..."
+                                            className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-amber-500 h-24 resize-none"
+                                        />
+                                    )}
+
+                                    <div className="pt-2">
+                                        <button
+                                            onClick={handleRefundSubmit}
+                                            disabled={isSubmittingRefund || !refundReason}
+                                            className="w-full py-3 bg-white text-black font-bold rounded-xl hover:bg-neutral-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >
+                                            {isSubmittingRefund ? 'Submitting...' : 'Submit Request'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>
+
+                {/* Cancel Confirmation Modal */}
+                <AnimatePresence>
+                    {showCancelConfirm && (
+                        <>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setShowCancelConfirm(false)}
+                                className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+                            />
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                                className="fixed inset-0 m-auto w-full max-w-sm h-fit bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl z-50 flex flex-col p-6"
+                            >
+                                <h3 className="text-xl font-bold text-white mb-2">Cancel Subscription?</h3>
+                                <p className="text-neutral-400 text-sm mb-6 leading-relaxed">
+                                    Are you sure? Your subscription will <strong>not renew</strong> on {formatDate(user?.subscription?.end_date)}.
+                                    You can still practice until then.
+                                </p>
+
+                                <div className="flex gap-3">
+                                    <button
+                                        onClick={() => setShowCancelConfirm(false)}
+                                        className="flex-1 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-white font-medium rounded-xl transition-all"
+                                    >
+                                        Go Back
+                                    </button>
+                                    <button
+                                        onClick={handleCancelSubscription}
+                                        disabled={isCancelling}
+                                        className="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl transition-all disabled:opacity-50"
+                                    >
+                                        {isCancelling ? 'Cancelling...' : 'Confirm Cancel'}
+                                    </button>
+                                </div>
+                            </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>
+
+                {/* Change Password Modal */}
+                <AnimatePresence>
+                    {showChangePassword && (
+                        <>
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setShowChangePassword(false)}
+                                className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+                            />
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                                className="fixed inset-0 m-auto w-full max-w-sm h-fit bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl z-50 flex flex-col p-6"
+                            >
+                                <div className="flex justify-between items-center mb-6">
+                                    <h3 className="text-xl font-bold text-white">Change Password</h3>
+                                    <button onClick={() => setShowChangePassword(false)} className="text-neutral-400 hover:text-white">
+                                        <XIcon className="w-5 h-5" />
+                                    </button>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <div className="relative">
+                                        <label className="block text-xs font-semibold text-neutral-500 mb-1.5 uppercase">Current Password</label>
+                                        <div className="relative">
+                                            <input
+                                                type={showCurrentPassword ? "text" : "password"}
+                                                value={passwordData.currentPassword}
+                                                onChange={(e) => {
+                                                    setPasswordData({ ...passwordData, currentPassword: e.target.value });
+                                                    if (passwordErrors.current) setPasswordErrors(prev => ({ ...prev, current: '' }));
+                                                }}
+                                                className={`w-full bg-neutral-900 border ${passwordErrors.current ? 'border-rose-500 focus:border-rose-500' : 'border-neutral-700 focus:border-amber-500'} rounded-xl px-4 py-3 text-sm text-white focus:outline-none transition-all pr-10`}
+                                                placeholder="Enter current password"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white transition-colors"
+                                            >
+                                                {showCurrentPassword ? <EyeOffIcon className="w-4 h-4" /> : <EyeIcon className="w-4 h-4" />}
+                                            </button>
+                                        </div>
+                                        {passwordErrors.current && (
+                                            <p className="text-xs text-rose-500 mt-1">{passwordErrors.current}</p>
+                                        )}
+                                        <div className="flex justify-end mt-1">
+                                            <Link href="/forgot-password" className="text-xs text-amber-500 hover:underline">
+                                                Forgot Password?
+                                            </Link>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs font-semibold text-neutral-500 mb-1.5 uppercase">New Password</label>
+                                        <div className="relative">
+                                            <input
+                                                type={showNewPassword ? "text" : "password"}
+                                                value={passwordData.newPassword}
+                                                onChange={(e) => {
+                                                    setPasswordData({ ...passwordData, newPassword: e.target.value });
+                                                    if (passwordErrors.new) setPasswordErrors(prev => ({ ...prev, new: '' }));
+                                                }}
+                                                className={`w-full bg-neutral-900 border ${passwordErrors.new ? 'border-rose-500 focus:border-rose-500' : 'border-neutral-700 focus:border-amber-500'} rounded-xl px-4 py-3 text-sm text-white focus:outline-none transition-all pr-10`}
+                                                placeholder="Min. 6 characters"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowNewPassword(!showNewPassword)}
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white transition-colors"
+                                            >
+                                                {showNewPassword ? <EyeOffIcon className="w-4 h-4" /> : <EyeIcon className="w-4 h-4" />}
+                                            </button>
+                                        </div>
+                                        {passwordErrors.new && (
+                                            <p className="text-xs text-rose-500 mt-1">{passwordErrors.new}</p>
+                                        )}
+                                    </div>
+
+                                    <button
+                                        onClick={handleChangePassword}
+                                        disabled={isChangingPassword}
+                                        className="w-full py-3 bg-amber-500 hover:bg-amber-600 text-black font-bold rounded-xl transition-all disabled:opacity-50 mt-4"
+                                    >
+                                        {isChangingPassword ? 'Updating...' : 'Update Password'}
+                                    </button>
+                                </div>
+                            </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>
+
             </main>
         </div>
     );
 }
-
-// CheckIcon wrapper if not imported - though it should be
-function CheckIcon(props: any) {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 ml-1" {...props}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-        </svg>
-    )
-}
-

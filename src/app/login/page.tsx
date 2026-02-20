@@ -108,9 +108,9 @@ export default function LoginPage() {
                         <div>
                             <div className="flex items-center justify-between mb-2">
                                 <label className="block text-sm font-medium text-neutral-400">Password</label>
-                                <button type="button" className="text-sm text-neutral-500 hover:text-amber-500 transition-colors">
+                                <Link href="/forgot-password" className="text-sm text-neutral-500 hover:text-amber-500 transition-colors">
                                     Forgot password?
-                                </button>
+                                </Link>
                             </div>
                             <div className="relative group">
                                 <LockOutlinedIcon

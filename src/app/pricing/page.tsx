@@ -2,15 +2,18 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
+import { useToast } from '@/contexts/ToastContext';
 import { CheckCircleOutlinedIcon, StarIcon } from '@/components/icons';
 import Link from 'next/link';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
 import { AnimatePresence, motion } from 'framer-motion';
-import confetti from 'canvas-confetti';
 
 export default function PricingPage() {
-    const { user } = useAuth();
+    const { user, refreshUser } = useAuth();
+    const router = useRouter();
+    const { success, error: showError } = useToast();
     const [scrolled, setScrolled] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -35,51 +38,34 @@ export default function PricingPage() {
     }, []);
 
     // Trigger confetti on success
+    // Auto-redirect to dashboard after success
     useEffect(() => {
         if (paymentStatus === 'success') {
-            const duration = 3 * 1000;
-            const animationEnd = Date.now() + duration;
-            // zIndex set to 200 to appear above the modal
-            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 200 };
-
-            const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
-
-            const interval: any = setInterval(function () {
-                const timeLeft = animationEnd - Date.now();
-
-                if (timeLeft <= 0) {
-                    return clearInterval(interval);
-                }
-
-                const particleCount = 50 * (timeLeft / duration);
-                confetti({
-                    ...defaults, particleCount,
-                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
-                });
-                confetti({
-                    ...defaults, particleCount,
-                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
-                });
-            }, 250);
-
-            // Auto-redirect to dashboard after 3 seconds
-            const redirectTimer = setTimeout(() => {
-                window.location.href = '/dashboard';
-            }, 3000);
-
-            return () => {
-                clearInterval(interval);
-                clearTimeout(redirectTimer);
+            const handleSuccess = async () => {
+                await refreshUser();
+                // Auto-redirect to dashboard after 2.5 seconds
+                const redirectTimer = setTimeout(() => {
+                    router.push('/dashboard');
+                }, 2500);
+                return () => clearTimeout(redirectTimer);
             };
+            handleSuccess();
         }
-    }, [paymentStatus]);
+    }, [paymentStatus, router, refreshUser]);
 
     const handlePayment = async (planId: string) => {
+        // 1. Auth Check
+        if (!user) {
+            showError('Please sign in or register to subscribe.');
+            router.push('/register?redirect=/pricing');
+            return;
+        }
+
         setLoading(true);
         setPaymentStatus('idle');
         setPaymentDetails(null);
         try {
-            // 1. Create Order
+            // 2. Create Order
             const res = await fetch('/api/payments/create-order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -89,7 +75,7 @@ export default function PricingPage() {
             if (!res.ok) {
                 const error = await res.json();
                 if (res.status === 401) {
-                    window.location.href = '/login?redirect=/pricing';
+                    router.push('/login?redirect=/pricing');
                     return;
                 }
                 throw new Error(error.error || 'Failed to create order');
@@ -153,6 +139,7 @@ export default function PricingPage() {
             rzp.on('payment.failed', function (response: any) {
                 setErrorMessage(response.error.description || 'Payment failed');
                 setPaymentStatus('failed');
+                showError('Payment failed: ' + response.error.description);
             });
             rzp.open();
 
@@ -160,9 +147,84 @@ export default function PricingPage() {
             console.error('Payment error:', error);
             setErrorMessage(error.message || 'Something went wrong');
             setPaymentStatus('failed');
+            showError(error.message || 'Payment processing failed');
         } finally {
             setLoading(false);
         }
+    };
+
+    // Helper to determine button state
+    const getPlanButton = (plan: 'free' | 'monthly' | 'yearly') => {
+        const currentPlan = user?.subscription?.status === 'ACTIVE' ? user.subscription.plan.toLowerCase() : 'free';
+
+        // 1. Not Logged In
+        if (!user) {
+            return (
+                <button
+                    onClick={() => handlePayment(plan)}
+                    className={`w-full py-4 rounded-xl font-bold transition-all ${plan === 'yearly' ? 'bg-amber-500 text-black hover:bg-amber-400' : 'bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black'}`}
+                >
+                    Get Started
+                </button>
+            );
+        }
+
+        // 2. Current Plan Logic
+        if (currentPlan === plan) {
+            return (
+                <button
+                    disabled
+                    className="w-full py-4 rounded-xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 font-bold cursor-default flex items-center justify-center gap-2"
+                >
+                    <CheckCircleOutlinedIcon /> Current Plan
+                </button>
+            );
+        }
+
+        // 3. Upgrade/Downgrade Logic
+
+        // If plan is Free
+        if (plan === 'free') {
+            return (
+                <button
+                    disabled
+                    className="w-full py-4 rounded-xl bg-neutral-800 text-neutral-500 font-bold cursor-default"
+                >
+                    Included
+                </button>
+            );
+        }
+
+        // If User is Yearly -> Monthly is "Included" (or redundant)
+        if (currentPlan === 'yearly' && plan === 'monthly') {
+            return (
+                <button
+                    disabled
+                    className="w-full py-4 rounded-xl bg-neutral-800 text-neutral-500 font-bold cursor-default"
+                >
+                    Included in Yearly
+                </button>
+            );
+        }
+
+        // Default Active State
+        let buttonText = plan === 'monthly' ? 'Select Monthly' : 'Select Yearly';
+        if (currentPlan === 'monthly' && plan === 'yearly') {
+            buttonText = 'Upgrade to Yearly';
+        }
+
+        return (
+            <button
+                onClick={() => handlePayment(plan)}
+                disabled={loading}
+                className={`w-full py-4 rounded-xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed ${plan === 'yearly'
+                        ? 'bg-amber-500 text-black hover:bg-amber-400 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-amber-500/20'
+                        : 'bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black'
+                    }`}
+            >
+                {loading ? 'Processing...' : buttonText}
+            </button>
+        );
     };
 
     return (
@@ -242,9 +304,7 @@ export default function PricingPage() {
                             <FeatureItem text="Access to All Topics" />
                         </div>
 
-                        <Link href="/register" className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white hover:text-black transition-all text-center block">
-                            Get Started Free
-                        </Link>
+                        {getPlanButton('free')}
                     </div>
 
                     {/* Monthly Plan */}
@@ -267,12 +327,7 @@ export default function PricingPage() {
                             <FeatureItem text="Weak Spot Drills" highlight />
                         </div>
 
-                        <button
-                            onClick={() => handlePayment('monthly')}
-                            disabled={loading}
-                            className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white hover:text-black transition-all disabled:opacity-50 disabled:cursor-not-allowed">
-                            {loading ? 'Processing...' : 'Select Monthly'}
-                        </button>
+                        {getPlanButton('monthly')}
                     </div>
 
                     {/* Yearly Plan (Best Value) */}
@@ -298,12 +353,7 @@ export default function PricingPage() {
                             <FeatureItem text="Save ₹690 / Year" highlight />
                         </div>
 
-                        <button
-                            onClick={() => handlePayment('yearly')}
-                            disabled={loading}
-                            className="w-full py-4 rounded-xl bg-amber-500 text-black font-black uppercase tracking-wide hover:bg-amber-400 hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-amber-500/20 disabled:opacity-50 disabled:cursor-not-allowed">
-                            {loading ? 'Processing...' : 'Select Yearly'}
-                        </button>
+                        {getPlanButton('yearly')}
                         <p className="text-[10px] text-center text-neutral-500 mt-4">Billed as one payment of ₹499</p>
                     </div>
 
@@ -452,7 +502,7 @@ export default function PricingPage() {
                                     </div>
 
                                     <button
-                                        onClick={() => window.location.href = '/dashboard'}
+                                        onClick={() => router.push('/dashboard')}
                                         className="mt-8 text-white font-bold text-sm hover:underline opacity-80 hover:opacity-100"
                                     >
                                         Click here if not redirected

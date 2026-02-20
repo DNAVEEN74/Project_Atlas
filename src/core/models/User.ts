@@ -39,6 +39,13 @@ export interface IUser extends Document {
         start_date: Date;
         end_date: Date;
     };
+    // Password reset
+    password_reset_token?: string;
+    password_reset_expires?: Date;
+    // Email OTP verification
+    email_otp?: string;
+    email_otp_expires?: Date;
+    is_email_verified?: boolean;
     created_at: Date;
     updated_at: Date;
 }
@@ -121,6 +128,13 @@ const UserSchema: Schema = new Schema(
             start_date: { type: Date },
             end_date: { type: Date },
         },
+        // Password reset
+        password_reset_token: { type: String },
+        password_reset_expires: { type: Date },
+        // Email OTP
+        email_otp: { type: String },
+        email_otp_expires: { type: Date },
+        is_email_verified: { type: Boolean, default: false },
     },
     { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
 );
