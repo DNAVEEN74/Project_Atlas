@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import {
     CalculateOutlinedIcon,
@@ -30,6 +30,7 @@ import { DIFFICULTY_CONFIG, Difficulty } from '../../lib/sprint-config';
 
 function SprintSetupContent() {
     const router = useRouter();
+    const searchParams = useSearchParams();
     const { user, loading, logout } = useAuth();
 
     const [subject, setSubject] = useState<Subject>('QUANT');
@@ -39,6 +40,7 @@ function SprintSetupContent() {
     const [questionCount, setQuestionCount] = useState<number>(10);
     const [isStarting, setIsStarting] = useState(false);
     const [showAllTopics, setShowAllTopics] = useState(true); // Default show all as requested
+    const [searchTerm, setSearchTerm] = useState('');
     const [error, setError] = useState<string | null>(null);
 
     // Saved Configurations
@@ -100,8 +102,9 @@ function SprintSetupContent() {
     });
 
     useEffect(() => {
-        // Reset selection when subject changes
+        // Reset selection and search when subject changes
         setSelectedTopics([]);
+        setSearchTerm('');
 
         // Fetch Recent History
         const fetchRecentHistory = async () => {
@@ -139,7 +142,38 @@ function SprintSetupContent() {
         };
         fetchSavedConfigs();
 
-        // Load saved config if exists for this subject (localStorage fallback)
+        // 1. Try to load from URL Search Params first
+        const urlSubject = searchParams?.get('subject') as Subject;
+        const urlTopics = searchParams?.get('topics');
+        const urlDifficulty = searchParams?.get('difficulty') as Difficulty;
+        const urlCount = searchParams?.get('count');
+
+        // Only override if the URL subject matches the current selected subject tab
+        // Or if this is the initial load and subject might be default 'QUANT'
+        if (urlSubject === subject) {
+            if (urlTopics) {
+                const availableTopics = subject === 'QUANT' ? quantTopics : reasoningTopics;
+                // Normalizes by removing spaces, &, and converting to lowercase
+                const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+                const topicArr = urlTopics.split(',').map(t => {
+                    const trimmed = t.trim();
+                    if (trimmed.toUpperCase() === 'ALL') return 'ALL';
+                    const normalizedIncoming = normalize(trimmed);
+                    const matched = availableTopics.find(at => normalize(at) === normalizedIncoming);
+                    return matched || trimmed;
+                });
+
+                setSelectedTopics(topicArr.includes('ALL') ? ['ALL'] : topicArr);
+            }
+            if (urlDifficulty) setDifficulty(urlDifficulty);
+            if (urlCount) setQuestionCount(parseInt(urlCount, 10) || 10);
+
+            // If URL params exist and matched subject, don't load from localStorage
+            if (urlTopics || urlDifficulty || urlCount) return;
+        }
+
+        // 2. Load saved config if exists for this subject (localStorage fallback)
         const savedConfig = localStorage.getItem(`sprintConfig_${subject}`);
         if (savedConfig) {
             try {
@@ -150,8 +184,12 @@ function SprintSetupContent() {
             } catch (e) {
                 console.error("Failed to parse saved config", e);
             }
+        } else {
+            setDifficulty('MEDIUM');
+            setQuestionCount(10);
+            setSelectedTopics([]);
         }
-    }, [subject, user]);
+    }, [subject, user, searchParams]);
 
     // Removed fetchTopics as we use static lists now
 
@@ -348,88 +386,118 @@ function SprintSetupContent() {
                         <p className="text-neutral-400 text-sm mt-1">High-intensity practice sessions to build speed and accuracy.</p>
                     </div>
 
-                    {/* Subject Selection Moved Here */}
-                    <div className="inline-flex p-1.5 bg-[#1a1a1a] rounded-[20px] border border-neutral-800 self-start md:self-center">
-                        <button
-                            onClick={() => { setSubject('QUANT'); setSelectedTopics([]); }}
-                            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${subject === 'QUANT'
-                                ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25'
-                                : 'text-neutral-400 hover:text-white'
-                                }`}
-                        >
-                            <CalculateOutlinedIcon sx={{ fontSize: '1.2rem' }} />
-                            Quantitative
-                        </button>
-                        <button
-                            onClick={() => { setSubject('REASONING'); setSelectedTopics([]); }}
-                            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${subject === 'REASONING'
-                                ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-violet-500/25'
-                                : 'text-neutral-400 hover:text-white'
-                                }`}
-                        >
-                            <PsychologyOutlinedIcon sx={{ fontSize: '1.2rem' }} />
-                            Reasoning
-                        </button>
+                    <div className="w-full md:w-auto mt-4 md:mt-0">
+                        <div className="flex p-1 bg-[#1a1a1a] rounded-[20px] border border-neutral-800">
+                            <button
+                                onClick={() => { setSubject('QUANT'); setSelectedTopics([]); setSearchTerm(''); }}
+                                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-3 rounded-xl text-sm font-bold transition-all ${subject === 'QUANT'
+                                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25'
+                                    : 'text-neutral-400 hover:text-white'
+                                    }`}
+                            >
+                                <CalculateOutlinedIcon sx={{ fontSize: '1.2rem' }} />
+                                Quantitative
+                            </button>
+                            <button
+                                onClick={() => { setSubject('REASONING'); setSelectedTopics([]); setSearchTerm(''); }}
+                                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-3 rounded-xl text-sm font-bold transition-all ${subject === 'REASONING'
+                                    ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-violet-500/25'
+                                    : 'text-neutral-400 hover:text-white'
+                                    }`}
+                            >
+                                <PsychologyOutlinedIcon sx={{ fontSize: '1.2rem' }} />
+                                Reasoning
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 xl:grid-cols-[1fr_380px] gap-8">
-                    {/* LEFT COLUMN */}
-                    <div className="space-y-8">
+                {/* Mobile Grid Order Shift: On XL screens right col is 2nd. On small screens we want right col above left col. */}
+                <div className="flex flex-col xl:grid xl:grid-cols-[1fr_380px] gap-8">
+                    {/* LEFT COLUMN (Topics & History) */}
+                    {/* On Default/Mobile: Order 2. On XL: Order 1 */}
+                    <div className="space-y-8 order-2 xl:order-1">
 
 
 
                         {/* 2. Topic Selection (Matched to Problems Page) */}
                         <div>
-                            <div className="flex items-center justify-between mb-4">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                                 <h2 className="text-sm font-medium text-neutral-400 uppercase tracking-wider">Select Topics to Practice</h2>
-                                {selectedTopics.length > 0 && (
-                                    <button
-                                        onClick={() => setSelectedTopics([])}
-                                        className="text-xs font-bold text-rose-500 hover:text-rose-400 transition-colors flex items-center gap-1"
-                                    >
-                                        ✕ Clear Selection
-                                    </button>
-                                )}
+
+                                <div className="flex items-center gap-3">
+                                    <div className="relative">
+                                        <input
+                                            type="text"
+                                            placeholder="🔍 Search topics..."
+                                            value={searchTerm}
+                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                            className="w-full md:w-48 bg-[#1a1a1a] border border-neutral-800 rounded-lg px-3 py-1.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500/50 transition-colors"
+                                        />
+                                        {searchTerm && (
+                                            <button
+                                                onClick={() => setSearchTerm('')}
+                                                className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white"
+                                            >
+                                                ✕
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {selectedTopics.length > 0 && (
+                                        <button
+                                            onClick={() => setSelectedTopics([])}
+                                            className="text-xs font-bold text-rose-500 hover:text-rose-400 transition-colors flex items-center gap-1 whitespace-nowrap"
+                                        >
+                                            ✕ Clear Selection
+                                        </button>
+                                    )}
+                                </div>
                             </div>
 
                             <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 p-6 min-h-[200px]">
                                 {topics.length > 0 ? (
                                     <>
                                         <div className="flex flex-wrap gap-2">
-                                            {visibleTopics.map(topic => {
-                                                const isSelected = topic.code === 'All'
-                                                    ? selectedTopics.includes('ALL')
-                                                    : (selectedTopics.includes('ALL') || selectedTopics.includes(topic.code));
+                                            {topics
+                                                .filter(t => t.name.toLowerCase().includes(searchTerm.toLowerCase()) || t.code === 'All') // Only filter visible pills by search
+                                                .slice(0, showAllTopics || searchTerm ? undefined : 16) // If searching or "showAll", show all the filtered
+                                                .map(topic => {
+                                                    // When filtering by search, we may not want "All" to show unless they type "All"
+                                                    if (searchTerm && topic.code === 'All' && !'all'.includes(searchTerm.toLowerCase())) return null;
 
-                                                return (
-                                                    <button
-                                                        key={topic.code}
-                                                        onClick={() => toggleTopic(topic.code)}
-                                                        className={`px-4 py-2 text-sm font-medium rounded-full border transition-all flex items-center gap-2 ${isSelected
-                                                            ? subject === 'QUANT'
-                                                                ? 'bg-amber-500/20 text-amber-400 border-amber-500/30'
-                                                                : 'bg-violet-500/20 text-violet-400 border-violet-500/30'
-                                                            : 'bg-neutral-800/50 text-neutral-400 border-transparent hover:bg-neutral-800 hover:text-neutral-200'
-                                                            }`}
-                                                    >
-                                                        {topic.code === 'All' && isSelected && selectedTopics.includes('ALL') ? `All Topics (${topics.length - 1})` : topic.name}
-                                                        {isSelected && <CheckCircleOutlinedIcon sx={{ fontSize: '1rem' }} />}
+                                                    const isSelected = topic.code === 'All'
+                                                        ? selectedTopics.includes('ALL')
+                                                        : (selectedTopics.includes('ALL') || selectedTopics.includes(topic.code));
 
-                                                        {topic.questionCount > 0 && topic.code !== 'All' && (
-                                                            <span
-                                                                title={`${topic.questionCount} questions available`}
-                                                                className={`text-sm font-bold px-2 py-0.5 rounded-full ${isSelected
-                                                                    ? 'bg-black/20 text-current'
-                                                                    : 'bg-neutral-900/50 text-neutral-500'
-                                                                    }`}>
-                                                                {topic.questionCount}
-                                                            </span>
-                                                        )}
-                                                    </button>
-                                                );
-                                            })}
-                                            {topics.length > 16 && (
+                                                    return (
+                                                        <button
+                                                            key={topic.code}
+                                                            onClick={() => toggleTopic(topic.code)}
+                                                            className={`px-4 py-2 text-sm font-medium rounded-full border transition-all flex items-center gap-2 ${isSelected
+                                                                ? subject === 'QUANT'
+                                                                    ? 'bg-amber-500/20 text-amber-400 border-amber-500/30'
+                                                                    : 'bg-violet-500/20 text-violet-400 border-violet-500/30'
+                                                                : 'bg-neutral-800/50 text-neutral-400 border-transparent hover:bg-neutral-800 hover:text-neutral-200'
+                                                                }`}
+                                                        >
+                                                            {topic.code === 'All' && isSelected && selectedTopics.includes('ALL') ? `All Topics (${topics.length - 1})` : topic.name}
+                                                            {isSelected && <CheckCircleOutlinedIcon sx={{ fontSize: '1rem' }} />}
+
+                                                            {topic.questionCount > 0 && topic.code !== 'All' && (
+                                                                <span
+                                                                    title={`${topic.questionCount} questions available`}
+                                                                    className={`text-sm font-bold px-2 py-0.5 rounded-full ${isSelected
+                                                                        ? 'bg-black/20 text-current'
+                                                                        : 'bg-neutral-900/50 text-neutral-500'
+                                                                        }`}>
+                                                                    {topic.questionCount}
+                                                                </span>
+                                                            )}
+                                                        </button>
+                                                    );
+                                                })}
+                                            {topics.length > 16 && !searchTerm && (
                                                 <button
                                                     onClick={() => setShowAllTopics(!showAllTopics)}
                                                     className={`px-3 py-1.5 text-sm font-medium flex items-center gap-1 transition-colors ${subject === 'QUANT' ? 'text-amber-500 hover:text-amber-400' : 'text-violet-500 hover:text-violet-400'}`}
@@ -517,8 +585,9 @@ function SprintSetupContent() {
                     </div>
 
                     {/* RIGHT COLUMN (Configuration) */}
-                    <div className="space-y-6">
-                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6 sticky top-24 shadow-2xl shadow-black/50">
+                    {/* On Default/Mobile: Order 1. On XL: Order 2 */}
+                    <div className="space-y-6 order-1 xl:order-2">
+                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6 xl:sticky xl:top-24 shadow-2xl shadow-black/50">
                             <div className="flex items-center gap-2 mb-4 text-white pb-3 border-b border-neutral-800">
                                 <TuneIcon sx={{ fontSize: '1.2rem' }} className="text-neutral-400" />
                                 <h3 className="text-sm font-bold uppercase tracking-wider">Configuration</h3>
@@ -598,7 +667,7 @@ function SprintSetupContent() {
                                     {savedConfigs.length > 0 && (
                                         <div>
                                             <label className="text-xs text-neutral-500 block mb-2 uppercase tracking-wide font-medium">Load Saved Preset</label>
-                                            <div className="space-y-2">
+                                            <div className="space-y-2 max-h-40 overflow-y-auto pr-2 custom-scrollbar">
                                                 {savedConfigs.map((config: any) => (
                                                     <div key={config.name} className="flex items-center gap-2 bg-neutral-800/30 p-2 rounded-lg border border-neutral-800 hover:border-neutral-700 transition-colors">
                                                         <button
@@ -689,6 +758,31 @@ function SprintSetupContent() {
                     </div>
                 </div>
             </main >
+
+            {/* Mobile Sticky Action Bar */}
+            <div className="xl:hidden fixed bottom-0 left-0 right-0 p-4 bg-[#1a1a1a]/90 backdrop-blur-md border-t border-neutral-800 z-40">
+                <AuthActionGuard>
+                    <button
+                        onClick={handleStartSprint}
+                        disabled={selectedTopics.length === 0 || isStarting}
+                        className={`w-full py-4 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${subject === 'QUANT'
+                            ? 'bg-gradient-to-r from-amber-500 to-orange-600 shadow-amber-500/25'
+                            : 'bg-gradient-to-r from-violet-500 to-purple-600 shadow-violet-500/25'
+                            }`}
+                    >
+                        {isStarting ? (
+                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        ) : (
+                            <>
+                                <PlayArrowIcon sx={{ fontSize: '1.5rem' }} />
+                                {selectedTopics.length === 0 ? 'Select Topics to Start' : 'Start Sprint'}
+                            </>
+                        )}
+                    </button>
+                </AuthActionGuard>
+            </div>
+            {/* Spacer for mobile action bar */}
+            <div className="h-24 xl:hidden"></div>
 
             {/* Save Configuration Modal */}
             {showSaveModal && (

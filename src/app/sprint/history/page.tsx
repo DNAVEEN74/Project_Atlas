@@ -1,14 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import {
     ChevronLeftIcon,
     ChevronRightIcon,
-    BoltIcon
+    BoltIcon,
+    TrendingUpIcon
 } from '@/components/icons';
-import { TrophyIcon } from 'lucide-react';
+import { TrophyIcon, InfoIcon, AlertTriangle, BookOpen, Zap } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import SummaryCards from '@/components/sprint/SummaryCards';
 import AccuracyTrendChart from '@/components/sprint/AccuracyTrendChart';
@@ -50,6 +51,7 @@ export default function SprintHistoryPage() {
 
     const [isLoading, setIsLoading] = useState(true);
     const [filter, setFilter] = useState('ALL'); // ALL, QUANT, REASONING
+    const [analytics, setAnalytics] = useState<any>(null);
 
     // Fetch Data
     useEffect(() => {
@@ -65,14 +67,24 @@ export default function SprintHistoryPage() {
                     filter: filter
                 });
 
-                const res = await fetch(`/api/sprint/history?${params.toString()}`);
-                if (res.ok) {
-                    const data = await res.json();
+                const [historyRes, analyticsRes] = await Promise.all([
+                    fetch(`/api/sprint/history?${params.toString()}`),
+                    fetch(`/api/sprint/analytics/global`) // Fetch global analytics once
+                ]);
 
+                if (historyRes.ok) {
+                    const data = await historyRes.json();
                     if (data.stats) setStats(data.stats);
                     if (data.sessions) setSessions(data.sessions);
                     if (data.chartData) setChartData(data.chartData);
                     if (data.pagination) setPagination(prev => ({ ...prev, ...data.pagination }));
+                }
+
+                if (analyticsRes.ok) {
+                    const analyticsData = await analyticsRes.json();
+                    if (analyticsData.success && analyticsData.analytics) {
+                        setAnalytics(analyticsData.analytics);
+                    }
                 }
             } catch (error) {
                 console.error("Failed to fetch history:", error);
@@ -103,6 +115,90 @@ export default function SprintHistoryPage() {
             setPagination(prev => ({ ...prev, current: newPage }));
         }
     };
+
+    const filteredAnalytics = useMemo(() => {
+        if (!analytics) return null;
+        if (filter === 'ALL') return analytics;
+
+        return {
+            efficiency_matrix: analytics.efficiency_matrix.filter((t: any) => t.subject === filter),
+            red_zone_topics: analytics.red_zone_topics.filter((t: any) => t.subject === filter),
+            exam_readiness: analytics.exam_readiness.filter((t: any) => t.subject === filter),
+            difficulty_progression: analytics.difficulty_progression.filter((t: any) => t.subject === filter)
+        };
+    }, [analytics, filter]);
+
+    const smartSprints = useMemo(() => {
+        if (!filteredAnalytics) return [];
+
+        const sprints = [];
+
+        // 1. Fix Careless Mistakes
+        const careless = filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'CARELESS');
+        if (careless.length > 0) {
+            const primarySubject = careless[0].subject; // To ensure single-subject sprint creation
+            const topicsToUse = careless.filter((t: any) => t.subject === primarySubject).slice(0, 5).map((t: any) => t.pattern.replace(/_/g, ' '));
+            if (topicsToUse.length > 0) {
+                sprints.push({
+                    title: 'Fix Careless Mistakes',
+                    description: 'Focus on accuracy over speed for these fast-but-wrong topics.',
+                    icon: <AlertTriangle className="text-amber-500 w-5 h-5" />,
+                    color: 'text-amber-400 bg-amber-500/10 border-amber-500/20 hover:border-amber-500/40',
+                    params: `?subject=${primarySubject}&topics=${encodeURIComponent(topicsToUse.join(','))}&difficulty=MEDIUM&count=10`
+                });
+            }
+        }
+
+        // 2. Speed Drills
+        const needsSpeed = filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'NEEDS_SPEED');
+        if (needsSpeed.length > 0) {
+            const primarySubject = needsSpeed[0].subject;
+            const topicsToUse = needsSpeed.filter((t: any) => t.subject === primarySubject).slice(0, 5).map((t: any) => t.pattern.replace(/_/g, ' '));
+            if (topicsToUse.length > 0) {
+                sprints.push({
+                    title: 'Speed Drills',
+                    description: 'You know these well. Now push your speed to the limit.',
+                    icon: <BoltIcon className="text-blue-500" />,
+                    color: 'text-blue-400 bg-blue-500/10 border-blue-500/20 hover:border-blue-500/40',
+                    params: `?subject=${primarySubject}&topics=${encodeURIComponent(topicsToUse.join(','))}&difficulty=EASY&count=15`
+                });
+            }
+        }
+
+        // 3. Level Up Challenge
+        const mastered = filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'MASTERED');
+        if (mastered.length > 0) {
+            const primarySubject = mastered[0].subject;
+            const topicsToUse = mastered.filter((t: any) => t.subject === primarySubject).slice(0, 5).map((t: any) => t.pattern.replace(/_/g, ' '));
+            if (topicsToUse.length > 0) {
+                sprints.push({
+                    title: 'Level Up Challenge',
+                    description: 'Test your true mastery with Hard difficulty questions.',
+                    icon: <TrophyIcon className="text-emerald-500 w-5 h-5" />,
+                    color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20 hover:border-emerald-500/40',
+                    params: `?subject=${primarySubject}&topics=${encodeURIComponent(topicsToUse.join(','))}&difficulty=HARD&count=10`
+                });
+            }
+        }
+
+        // 4. Fundamentals Review (if space permits)
+        const review = filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'NEEDS_REVIEW');
+        if (review.length > 0 && sprints.length < 3) {
+            const primarySubject = review[0].subject;
+            const topicsToUse = review.filter((t: any) => t.subject === primarySubject).slice(0, 5).map((t: any) => t.pattern.replace(/_/g, ' '));
+            if (topicsToUse.length > 0) {
+                sprints.push({
+                    title: 'Fundamentals Review',
+                    description: 'Take your time. Focus purely on getting these right.',
+                    icon: <BookOpen className="text-rose-500 w-5 h-5" />,
+                    color: 'text-rose-400 bg-rose-500/10 border-rose-500/20 hover:border-rose-500/40',
+                    params: `?subject=${primarySubject}&topics=${encodeURIComponent(topicsToUse.join(','))}&difficulty=EASY&count=10`
+                });
+            }
+        }
+
+        return sprints.slice(0, 3); // Max 3 cards
+    }, [filteredAnalytics]);
 
     if (loading) return null;
 
@@ -188,6 +284,289 @@ export default function SprintHistoryPage() {
                             avgTimePerQuestion={stats.avgTimePerQuestion}
                         />
 
+                        {/* Smart Global Analytics Dashboard */}
+                        {filteredAnalytics && (
+                            <div className="mb-8 mt-4 space-y-6">
+                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                                    {/* Exam Readiness */}
+                                    <div className="lg:col-span-8 bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6">
+                                        <div className="flex items-center justify-between mb-6">
+                                            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                                                <TrophyIcon className="w-5 h-5 text-amber-500" />
+                                                Exam Readiness
+                                            </h2>
+                                            <span className="text-xs text-neutral-500 uppercase tracking-widest font-bold">Based on Accuracy & Speed</span>
+                                        </div>
+
+                                        <div className="space-y-4">
+                                            {filteredAnalytics.exam_readiness.slice(0, 5).map((topic: any, idx: number) => {
+                                                const scoreColor = topic.score >= 80 ? 'bg-emerald-500 text-emerald-400' :
+                                                    topic.score >= 65 ? 'bg-amber-500 text-amber-400' :
+                                                        topic.score >= 40 ? 'bg-blue-500 text-blue-400' : 'bg-rose-500 text-rose-400';
+
+                                                return (
+                                                    <div key={idx} className="flex flex-col gap-1">
+                                                        <div className="flex justify-between items-end">
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="text-sm font-bold text-neutral-200">{topic.pattern}</span>
+                                                                <span className="text-[10px] uppercase px-1.5 py-0.5 rounded border border-neutral-700 text-neutral-500">{topic.subject}</span>
+                                                            </div>
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="text-xs text-neutral-400">{topic.label}</span>
+                                                                <span className="text-sm font-bold text-white">{topic.score}/100</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="h-2 w-full bg-neutral-900 rounded-full overflow-hidden">
+                                                            <div className={`h-full ${scoreColor.split(' ')[0]} transition-all duration-1000`} style={{ width: `${topic.score}%` }}></div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                            {filteredAnalytics.exam_readiness.length === 0 && (
+                                                <p className="text-sm text-neutral-500 text-center py-4">Complete more varied sprints to see readiness scores.</p>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Red Zone Alerts */}
+                                    <div className="lg:col-span-4 bg-[#1a1a1a] border border-red-900/40 rounded-2xl p-6 relative overflow-hidden group">
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 rounded-full blur-3xl -mr-10 -mt-10"></div>
+                                        <h2 className="text-lg font-bold text-rose-400 flex items-center gap-2 mb-2">
+                                            <span className="relative flex h-3 w-3">
+                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                                                <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500"></span>
+                                            </span>
+                                            Red Zone Topics
+                                        </h2>
+                                        <p className="text-sm text-neutral-400 mb-6">Topics severely pulling down your overall score.</p>
+
+                                        <div className="space-y-3 relative z-10">
+                                            {filteredAnalytics.red_zone_topics.length > 0 ? filteredAnalytics.red_zone_topics.map((topic: any, idx: number) => (
+                                                <div key={idx} className="bg-neutral-900/80 border border-red-900/30 rounded-xl p-3">
+                                                    <div className="flex justify-between items-center mb-2">
+                                                        <span className="text-sm font-bold text-neutral-200">{topic.pattern}</span>
+                                                        <span className="text-sm font-bold text-rose-500">{topic.accuracy}% acc</span>
+                                                    </div>
+                                                    <Link href={`/sprint?subject=${topic.subject}&topics=${encodeURIComponent(topic.pattern.replace(/_/g, ' '))}&difficulty=EASY&count=5`} className="block w-full text-center text-xs py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 font-bold rounded-lg transition-colors border border-rose-500/20">
+                                                        Practice Now →
+                                                    </Link>
+                                                </div>
+                                            )) : (
+                                                <div className="text-center py-8">
+                                                    <p className="text-sm text-emerald-400 font-bold mb-1">Look at you go! 🎉</p>
+                                                    <p className="text-xs text-neutral-500">You don't have any major red zone topics yet.</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                {/* Efficiency Matrix & Difficulty Progression */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6">
+                                        <h2 className="text-lg font-bold text-white mb-4">Efficiency Matrix Summary</h2>
+                                        <div className="grid grid-cols-1 gap-4">
+                                            {/* Mastered */}
+                                            <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-xl flex flex-col overflow-hidden">
+                                                <div className="p-4 border-b border-emerald-500/10 bg-emerald-500/10 flex justify-between items-start gap-4">
+                                                    <div className="flex-1">
+                                                        <div className="flex items-baseline gap-2 mb-1">
+                                                            <p className="text-sm font-bold text-emerald-400">Mastered</p>
+                                                            <p className="text-[10px] text-emerald-500/70 uppercase tracking-wider font-bold">Fast & Accurate</p>
+                                                        </div>
+                                                        <p className="text-xs text-emerald-500/80 leading-relaxed">
+                                                            You answer these quickly and correctly. Consider practicing them on a harder difficulty level to keep improving.
+                                                        </p>
+                                                    </div>
+                                                    <p className="text-2xl font-black text-emerald-400">{filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'MASTERED').length}</p>
+                                                </div>
+                                                <div className="p-4 flex-1 flex flex-wrap content-start gap-2 overflow-y-auto custom-scrollbar max-h-48 min-h-[60px]">
+                                                    {filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'MASTERED').map((t: any) => (
+                                                        <span key={t.pattern} className="text-xs font-semibold px-2.5 py-1.5 rounded-md bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 shadow-sm" title={t.message}>
+                                                            {t.pattern.replace(/_/g, ' ')}
+                                                        </span>
+                                                    ))}
+                                                    {filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'MASTERED').length === 0 && <span className="text-xs text-emerald-500/50 italic self-center">No topics in this category yet.</span>}
+                                                </div>
+                                            </div>
+
+                                            {/* Careless */}
+                                            <div className="bg-amber-500/5 border border-amber-500/20 rounded-xl flex flex-col overflow-hidden">
+                                                <div className="p-4 border-b border-amber-500/10 bg-amber-500/10 flex justify-between items-start gap-4">
+                                                    <div className="flex-1">
+                                                        <div className="flex items-baseline gap-2 mb-1">
+                                                            <p className="text-sm font-bold text-amber-400">Careless Mistakes</p>
+                                                            <p className="text-[10px] text-amber-500/70 uppercase tracking-wider font-bold">Fast & Inaccurate</p>
+                                                        </div>
+                                                        <p className="text-xs text-amber-500/80 leading-relaxed">
+                                                            You answer these quickly but get them wrong. Slow down, read twice, and double-check your steps.
+                                                        </p>
+                                                    </div>
+                                                    <p className="text-2xl font-black text-amber-400">{filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'CARELESS').length}</p>
+                                                </div>
+                                                <div className="p-4 flex-1 flex flex-wrap content-start gap-2 overflow-y-auto custom-scrollbar max-h-48 min-h-[60px]">
+                                                    {filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'CARELESS').map((t: any) => (
+                                                        <span key={t.pattern} className="text-xs font-semibold px-2.5 py-1.5 rounded-md bg-amber-500/10 text-amber-300 border border-amber-500/20 shadow-sm" title={t.message}>
+                                                            {t.pattern.replace(/_/g, ' ')}
+                                                        </span>
+                                                    ))}
+                                                    {filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'CARELESS').length === 0 && <span className="text-xs text-amber-500/50 italic self-center">No topics in this category yet.</span>}
+                                                </div>
+                                            </div>
+
+                                            {/* Needs Speed */}
+                                            <div className="bg-blue-500/5 border border-blue-500/20 rounded-xl flex flex-col overflow-hidden">
+                                                <div className="p-4 border-b border-blue-500/10 bg-blue-500/10 flex justify-between items-start gap-4">
+                                                    <div className="flex-1">
+                                                        <div className="flex items-baseline gap-2 mb-1">
+                                                            <p className="text-sm font-bold text-blue-400">Needs Speed</p>
+                                                            <p className="text-[10px] text-blue-500/70 uppercase tracking-wider font-bold">Slow & Accurate</p>
+                                                        </div>
+                                                        <p className="text-xs text-blue-500/80 leading-relaxed">
+                                                            You know the concepts well but take too long. Look up ratio shortcuts and focus on time-bound drills.
+                                                        </p>
+                                                    </div>
+                                                    <p className="text-2xl font-black text-blue-400">{filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'NEEDS_SPEED').length}</p>
+                                                </div>
+                                                <div className="p-4 flex-1 flex flex-wrap content-start gap-2 overflow-y-auto custom-scrollbar max-h-48 min-h-[60px]">
+                                                    {filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'NEEDS_SPEED').map((t: any) => (
+                                                        <span key={t.pattern} className="text-xs font-semibold px-2.5 py-1.5 rounded-md bg-blue-500/10 text-blue-300 border border-blue-500/20 shadow-sm" title={t.message}>
+                                                            {t.pattern.replace(/_/g, ' ')}
+                                                        </span>
+                                                    ))}
+                                                    {filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'NEEDS_SPEED').length === 0 && <span className="text-xs text-blue-500/50 italic self-center">No topics in this category yet.</span>}
+                                                </div>
+                                            </div>
+
+                                            {/* Review Concepts */}
+                                            <div className="bg-rose-500/5 border border-rose-500/20 rounded-xl flex flex-col overflow-hidden">
+                                                <div className="p-4 border-b border-rose-500/10 bg-rose-500/10 flex justify-between items-start gap-4">
+                                                    <div className="flex-1">
+                                                        <div className="flex items-baseline gap-2 mb-1">
+                                                            <p className="text-sm font-bold text-rose-400">Review Concepts</p>
+                                                            <p className="text-[10px] text-rose-500/70 uppercase tracking-wider font-bold">Slow & Inaccurate</p>
+                                                        </div>
+                                                        <p className="text-xs text-rose-500/80 leading-relaxed">
+                                                            You struggle with both accuracy and time. Stop practicing blindly and re-read foundational theory first.
+                                                        </p>
+                                                    </div>
+                                                    <p className="text-2xl font-black text-rose-400">{filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'NEEDS_REVIEW').length}</p>
+                                                </div>
+                                                <div className="p-4 flex-1 flex flex-wrap content-start gap-2 overflow-y-auto custom-scrollbar max-h-48 min-h-[60px]">
+                                                    {filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'NEEDS_REVIEW').map((t: any) => (
+                                                        <span key={t.pattern} className="text-xs font-semibold px-2.5 py-1.5 rounded-md bg-rose-500/10 text-rose-300 border border-rose-500/20 shadow-sm" title={t.message}>
+                                                            {t.pattern.replace(/_/g, ' ')}
+                                                        </span>
+                                                    ))}
+                                                    {filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'NEEDS_REVIEW').length === 0 && <span className="text-xs text-rose-500/50 italic self-center">No topics in this category yet.</span>}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-6">
+                                        {filteredAnalytics.difficulty_progression.length > 0 && (
+                                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6">
+                                                <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                                    <TrendingUpIcon sx={{ fontSize: '1.2rem' }} className="text-emerald-400" />
+                                                    Recommended Difficulty Moves
+                                                </h2>
+                                                <div className="space-y-3 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                                                    {filteredAnalytics.difficulty_progression.map((item: any, idx: number) => (
+                                                        <div key={idx} className="bg-neutral-900 border border-neutral-800 p-3 rounded-xl flex items-start gap-3">
+                                                            <div className={`mt-1 bg-neutral-800 rounded-full p-1 ${item.recommendation === 'LEVEL_UP' ? 'text-emerald-400' : 'text-rose-400'}`}>
+                                                                {item.recommendation === 'LEVEL_UP' ? '↑' : '↓'}
+                                                            </div>
+                                                            <div>
+                                                                <p className="text-sm font-bold text-white mb-0.5">{item.pattern.replace(/_/g, ' ')}</p>
+                                                                <p className="text-xs text-neutral-400 leading-relaxed">{item.message}</p>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/* New Topic Correlation Insight */}
+                                        {filteredAnalytics.topic_correlation && filteredAnalytics.topic_correlation.length > 0 && (
+                                            <div className="bg-[#1a1a1a] border border-indigo-500/20 rounded-2xl p-6">
+                                                <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                                    <InfoIcon className="w-5 h-5 text-indigo-400" />
+                                                    Topic Interconnections
+                                                </h2>
+                                                <p className="text-xs text-neutral-400 mb-4">Insights based on related topic performance.</p>
+                                                <div className="space-y-3 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                                                    {filteredAnalytics.topic_correlation.map((item: any, idx: number) => (
+                                                        <div key={idx} className="bg-indigo-500/5 border border-indigo-500/20 p-3 rounded-xl relative overflow-hidden group">
+                                                            <div className="absolute top-0 right-0 w-16 h-16 bg-indigo-500/10 rounded-full blur-2xl -mr-8 -mt-8"></div>
+                                                            <p className="text-sm text-neutral-300 leading-relaxed relative z-10">
+                                                                {item.message}
+                                                            </p>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {/* New Consistency Alert Widget */}
+                                        {filteredAnalytics.consistency_alerts && filteredAnalytics.consistency_alerts.length > 0 && (
+                                            <div className="bg-[#1a1a1a] border border-amber-500/20 rounded-2xl p-6">
+                                                <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                                    <AlertTriangle className="w-5 h-5 text-amber-400" />
+                                                    Consistency Warnings
+                                                </h2>
+                                                <p className="text-xs text-neutral-400 mb-4">Topics with volatile scores across practice sessions.</p>
+                                                <div className="space-y-3 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                                                    {filteredAnalytics.consistency_alerts.map((item: any, idx: number) => (
+                                                        <div key={idx} className="bg-amber-500/5 border border-amber-500/20 p-3 rounded-xl relative overflow-hidden group">
+                                                            <div className="absolute top-0 right-0 w-16 h-16 bg-amber-500/10 rounded-full blur-2xl -mr-8 -mt-8"></div>
+                                                            <p className="text-sm font-bold text-amber-400 mb-1 relative z-10">{item.topic.replace(/_/g, ' ')}</p>
+                                                            <p className="text-xs text-neutral-300 mb-3 leading-relaxed relative z-10">
+                                                                {item.message}
+                                                            </p>
+                                                            <div className="flex gap-1 items-end h-8 relative z-10">
+                                                                {item.history.map((acc: number, hIdx: number) => (
+                                                                    <div key={hIdx} className="w-1.5 h-full bg-neutral-800 rounded-sm relative overflow-hidden group/bar" title={`${acc}%`}>
+                                                                        <div className={`absolute bottom-0 left-0 right-0 transition-all ${acc >= 70 ? 'bg-emerald-500' : acc >= 40 ? 'bg-amber-500' : 'bg-rose-500'}`} style={{ height: `${Math.max(10, acc)}%` }}></div>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Dynamic Smart Sprint Setups Block */}
+                                {smartSprints.length > 0 && (
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        {smartSprints.map((sprint, idx) => (
+                                            <Link
+                                                key={idx}
+                                                href={`/sprint${sprint.params}`}
+                                                className={`flex flex-col p-5 bg-[#1a1a1a] border rounded-2xl group transition-all duration-300 ${sprint.color}`}
+                                            >
+                                                <div className="flex items-center gap-3 mb-3">
+                                                    <div className="p-2.5 rounded-xl bg-black/40 group-hover:scale-110 transition-transform duration-300">
+                                                        {sprint.icon}
+                                                    </div>
+                                                    <h3 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors">{sprint.title}</h3>
+                                                </div>
+                                                <p className="text-sm font-medium opacity-80 mb-6 flex-1">{sprint.description}</p>
+                                                <div className="flex items-center text-xs font-bold uppercase tracking-wider group-hover:gap-2 transition-all">
+                                                    Start Smart Sprint <ChevronRightIcon className="w-4 h-4" />
+                                                </div>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
                         {/* Chart - Use separate chartData */}
                         <AccuracyTrendChart submissions={chartData} />
 
@@ -217,8 +596,8 @@ export default function SprintHistoryPage() {
                                                 {sub.subject}
                                             </span>
                                         </div>
-                                        <div className="col-span-2 text-base text-neutral-400 truncate" title={sub.topics?.join(', ')}>
-                                            {sub.topics?.length ? sub.topics.join(', ') : 'All Topics'}
+                                        <div className="col-span-2 text-base text-neutral-400 truncate" title={sub.topics?.includes('ALL') ? 'All Topics' : sub.topics?.join(', ')}>
+                                            {sub.topics?.length ? (sub.topics.includes('ALL') ? 'All Topics' : sub.topics.join(', ')) : 'All Topics'}
                                         </div>
                                         <div className="col-span-1">
                                             <span className={`text-xs font-bold px-2 py-1 rounded ${sub.difficulty === 'HARD' ? 'bg-rose-500/20 text-rose-400' :

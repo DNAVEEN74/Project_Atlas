@@ -26,7 +26,11 @@ export async function GET(req: NextRequest) {
         const query: any = {
             user_id: user.userId,
             type: 'SPRINT',
-            status: { $in: ['COMPLETED', 'ABANDONED'] }
+            status: 'COMPLETED',
+            $or: [
+                { 'stats.total_time_ms': { $gte: 5000 } },
+                { total_time_ms: { $gte: 5000 } }
+            ]
         };
 
         if (filter !== 'ALL') {
@@ -154,10 +158,9 @@ export async function GET(req: NextRequest) {
         // 4. Chart Data (All Time Trend) - Lightweight
         // Fetch minimal fields for chart, respecting filter (or all time?)
         // User wants "Accuracy Over Time". 
-        // Let's return the last 50 sessions minimal data for the chart, reversed.
+        // Let's return all valid sessions data for the chart, reversed.
         const chartSessions = await Session.find(query)
             .sort({ created_at: -1 })
-            .limit(200) // Show trend of last 200
             .select('created_at stats correct_count total_time_ms config.question_count config.subject status')
             .lean();
 

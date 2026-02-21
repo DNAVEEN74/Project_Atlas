@@ -23,7 +23,7 @@ export async function GET(
 
         // 1. Fetch Session (lightweight)
         const session = await Session.findOne({ _id: sessionId, user_id: user.userId })
-            .select('question_status question_ids')
+            .select('config stats topic_performance expired status question_status question_ids')
             .lean();
 
         if (!session) {
@@ -44,9 +44,13 @@ export async function GET(
                 question_id: q._id,
                 order: statusItem.order,
                 text: q.text,
-                options: q.options || [], // Assuming options are in question
+                image: q.image,
+                options: q.options || [],
                 correct_option: q.correct_option,
-                explanation: q.solution,
+                solution: q.solution,
+                difficulty: q.difficulty,
+                pattern: q.pattern,
+                subject: q.subject,
 
                 // Status info
                 status: statusItem.status, // CORRECT, INCORRECT, SKIPPED, NOT_ATTEMPTED
@@ -88,11 +92,103 @@ export async function GET(
             reviewQuestions = reviewQuestions.filter((q: any) => q.status === filter);
         }
 
+        // --- Calculate Single-Sprint Insights ---
+
+        // 1. Negative Marking & Skip Optimization
+        const totalQs = reviewQuestions.length;
+        const correctCount = reviewQuestions.filter((q: any) => q.status === 'CORRECT').length;
+        const wrongCount = reviewQuestions.filter((q: any) => q.status === 'INCORRECT').length;
+
+        const actualMarks = (correctCount * 2) - (wrongCount * 0.5);
+        const maxMarks = totalQs * 2;
+
+        // Find slowest wrong answers
+        const wrongQuestions = reviewQuestions
+            .filter((q: any) => q.status === 'INCORRECT')
+            .sort((a: any, b: any) => (b.time_ms || 0) - (a.time_ms || 0)); // Slowest first
+
+        const skipCount = Math.ceil(wrongQuestions.length / 2); // simulate skipping half of the wrong ones
+        const savedTimeMs = wrongQuestions.slice(0, skipCount).reduce((sum: number, q: any) => sum + (q.time_ms || 0), 0);
+
+        const optimizedWrong = wrongCount - skipCount;
+        const optimizedMarks = (correctCount * 2) - (optimizedWrong * 0.5);
+        const optimizedMax = (totalQs - skipCount) * 2;
+
+        const negative_marking = {
+            actual_marks: actualMarks,
+            max_marks: maxMarks,
+            optimized_marks: optimizedMarks,
+            optimized_max: optimizedMax,
+            skip_count: skipCount,
+            saved_time_ms: savedTimeMs
+        };
+
+        // 2. Time Distribution Histogram
+        const distribution = {
+            under_20: { count: 0, correct: 0 },
+            btn_20_40: { count: 0, correct: 0 },
+            btn_40_60: { count: 0, correct: 0 },
+            over_60: { count: 0, correct: 0 }
+        };
+
+        reviewQuestions.forEach((q: any) => {
+            const time = q.time_ms || 0;
+            const isCorrect = q.status === 'CORRECT';
+
+            if (time < 20000) {
+                distribution.under_20.count++;
+                if (isCorrect) distribution.under_20.correct++;
+            } else if (time < 40000) {
+                distribution.btn_20_40.count++;
+                if (isCorrect) distribution.btn_20_40.correct++;
+            } else if (time < 60000) {
+                distribution.btn_40_60.count++;
+                if (isCorrect) distribution.btn_40_60.correct++;
+            } else {
+                distribution.over_60.count++;
+                if (isCorrect) distribution.over_60.correct++;
+            }
+        });
+
+        // 3. Fatigue Detection
+        let fatigue = null;
+        if (reviewQuestions.length >= 6) {
+            const sortedByOrder = [...reviewQuestions].sort((a: any, b: any) => a.order - b.order);
+            const midpoint = Math.floor(sortedByOrder.length / 2);
+            const firstHalf = sortedByOrder.slice(0, midpoint);
+            const secondHalf = sortedByOrder.slice(midpoint);
+
+            const firstAcc = firstHalf.length > 0 ? firstHalf.filter((q: any) => q.status === 'CORRECT').length / firstHalf.length : 0;
+            const secondAcc = secondHalf.length > 0 ? secondHalf.filter((q: any) => q.status === 'CORRECT').length / secondHalf.length : 0;
+
+            const drop = firstAcc - secondAcc;
+            fatigue = {
+                detected: drop >= 0.15, // 15% drop or more
+                first_half_accuracy: firstAcc,
+                second_half_accuracy: secondAcc,
+                drop_percent: drop
+            };
+        }
+
+        const single_sprint_insights = {
+            negative_marking,
+            time_distribution: distribution,
+            fatigue
+        };
+
         return NextResponse.json({
             success: true,
             review: {
                 session_id: sessionId,
                 total_questions: reviewQuestions.length,
+                config: session.config,
+                stats: session.stats || {
+                    total_questions: 0, attempted: 0, correct: 0, incorrect: 0, skipped: 0, not_attempted: 0, accuracy: 0, avg_time_ms: 0, total_time_ms: 0
+                },
+                topic_performance: session.topic_performance || [],
+                expired: session.expired,
+                status: session.status,
+                insights: single_sprint_insights,
                 questions: reviewQuestions
             }
         });

@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Lock, EyeOff, Eye, CheckCircle, XCircle } from 'lucide-react';
 import { useToast } from '@/contexts/ToastContext';
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const { success, error } = useToast();
@@ -144,5 +144,17 @@ export default function ResetPasswordPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function ResetPasswordPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+                <div className="animate-spin rounded-full h-10 w-10 border-2 border-amber-500 border-t-transparent"></div>
+            </div>
+        }>
+            <ResetPasswordForm />
+        </Suspense>
     );
 }

@@ -148,7 +148,7 @@ export default function SprintClient({ session, questions, initialAttempts, user
     const handleComplete = async () => {
         try {
             await fetch(`/api/sprint/${session._id}/complete`, { method: 'PUT' });
-            router.replace(`/sprint/${session._id}/summary`);
+            router.replace(`/sprint/${session._id}/review`);
         } catch (error) {
             console.error("Completion error", error);
         }
@@ -167,7 +167,7 @@ export default function SprintClient({ session, questions, initialAttempts, user
     const handleTimeout = async () => {
         try {
             await fetch(`/api/sprint/${session._id}/timeout`, { method: 'PUT' });
-            router.replace(`/sprint/${session._id}/summary`);
+            router.replace(`/sprint/${session._id}/review`);
         } catch (error) {
             console.error("Timeout error", error);
         }

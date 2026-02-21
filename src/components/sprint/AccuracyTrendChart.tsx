@@ -70,51 +70,97 @@ export default function AccuracyTrendChart({ submissions }: AccuracyTrendChartPr
                 Accuracy Over Time
             </h3>
 
-            <div className="relative">
-                {/* Target Line Description */}
-                <div className="absolute right-0 top-[30%] text-[10px] text-neutral-500 z-0 pointer-events-none select-none pr-4">
-                    Target: 70%
+            <div className="relative mt-8">
+                {/* Y-Axis Labels */}
+                <div className="absolute left-0 top-0 bottom-4 w-8 flex flex-col justify-between text-[10px] text-neutral-500 font-mono z-10 pointer-events-none select-none">
+                    <span>100%</span>
+                    <span>75%</span>
+                    <span>50%</span>
+                    <span>25%</span>
+                    <span>0%</span>
                 </div>
-                <div className="overflow-x-auto pb-4 custom-scrollbar">
+
+                <div className="pl-10 overflow-x-auto pb-8 custom-scrollbar relative">
                     <div
-                        className="flex justify-between gap-3 h-48 mb-4 relative items-stretch w-full"
-                        style={{ minWidth: `${submissions.length * 40}px` }}
+                        className="relative h-56 w-full"
+                        style={{ minWidth: `${Math.max(600, submissions.length * 60)}px` }}
                     >
+                        {/* SVG Line Chart */}
+                        <svg className="absolute inset-0 w-full h-full overflow-visible pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
+                            {/* Horizontal Grid Component */}
+                            <line x1="0" y1="0" x2="100" y2="0" stroke="currentColor" strokeDasharray="2 2" strokeWidth="1" vectorEffect="non-scaling-stroke" className="text-neutral-800" />
+                            <line x1="0" y1="25" x2="100" y2="25" stroke="currentColor" strokeDasharray="2 2" strokeWidth="1" vectorEffect="non-scaling-stroke" className="text-neutral-800" />
+                            <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" strokeDasharray="2 2" strokeWidth="1" vectorEffect="non-scaling-stroke" className="text-neutral-800" />
+                            <line x1="0" y1="75" x2="100" y2="75" stroke="currentColor" strokeDasharray="2 2" strokeWidth="1" vectorEffect="non-scaling-stroke" className="text-neutral-800" />
+                            <line x1="0" y1="100" x2="100" y2="100" stroke="currentColor" strokeWidth="1" vectorEffect="non-scaling-stroke" className="text-neutral-700" />
+
+                            {/* Target 70% */}
+                            <line x1="0" y1="30" x2="100" y2="30" stroke="currentColor" strokeDasharray="4 4" strokeWidth="1" vectorEffect="non-scaling-stroke" className="text-emerald-500/30" />
+                            <text x="100" y="28" textAnchor="end" fontSize="2" fill="currentColor" className="text-emerald-500/50">Target</text>
+
+                            {/* The Line */}
+                            <polyline
+                                points={submissions.map((s, i) => {
+                                    const x = submissions.length > 1 ? (i / (submissions.length - 1)) * 100 : 50;
+                                    const y = 100 - s.accuracy; // 100 is bottom, 0 is top
+                                    return `${x},${y}`;
+                                }).join(' ')}
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2.5"
+                                vectorEffect="non-scaling-stroke"
+                                className="text-violet-500 drop-shadow-[0_0_6px_rgba(139,92,246,0.6)]"
+                            />
+
+                            {/* Faded Area Under Line */}
+                            <polygon
+                                points={`0,100 ${submissions.map((s, i) => {
+                                    const x = submissions.length > 1 ? (i / (submissions.length - 1)) * 100 : 50;
+                                    const y = 100 - s.accuracy;
+                                    return `${x},${y}`;
+                                }).join(' ')} 100,100`}
+                                fill="currentColor"
+                                className="text-violet-500/5"
+                            />
+                        </svg>
+
+                        {/* Interactive Data Points */}
                         {submissions.map((sub, i) => {
-                            const barHeight = `${Math.max(sub.accuracy, 5)}%`;
-                            const isQuant = sub.subject === 'QUANT';
-                            const color = sub.accuracy >= 70 ? 'bg-emerald-500' : sub.accuracy >= 40 ? 'bg-amber-500' : 'bg-rose-500';
-                            const textColor = sub.accuracy >= 70 ? 'text-emerald-400' : sub.accuracy >= 40 ? 'text-amber-400' : 'text-rose-400';
+                            const x = submissions.length > 1 ? (i / (submissions.length - 1)) * 100 : 50;
+                            const y = 100 - sub.accuracy;
+                            const colorClass = sub.accuracy >= 70 ? 'bg-emerald-500' : sub.accuracy >= 40 ? 'bg-amber-500' : 'bg-rose-500';
+                            const textClass = sub.accuracy >= 70 ? 'text-emerald-400' : sub.accuracy >= 40 ? 'text-amber-400' : 'text-rose-400';
 
                             return (
                                 <div
                                     key={i}
-                                    className="flex-1 flex flex-col items-center gap-2 group relative z-10 h-full justify-end min-w-[30px]"
+                                    className="absolute transform -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer group"
+                                    style={{ left: `${x}%`, top: `${y}%` }}
                                     onMouseEnter={(e) => {
                                         const rect = e.currentTarget.getBoundingClientRect();
                                         setHoveredData({
                                             data: sub,
                                             x: rect.left + rect.width / 2,
-                                            y: rect.top
+                                            y: rect.top - 10
                                         });
                                     }}
                                     onMouseLeave={() => setHoveredData(null)}
                                 >
-                                    {/* Bar Track */}
-                                    <div className="w-full bg-neutral-800 rounded-t-lg overflow-visible flex items-end relative hover:bg-neutral-700 transition-colors flex-1 min-h-0">
-                                        {/* Target line at 70% INSIDE Bar Track */}
-                                        <div className="absolute left-0 right-0 border-t border-dashed border-neutral-700/50 pointer-events-none w-full" style={{ bottom: '70%' }}></div>
+                                    {/* Hover interaction area (larger invisible target) */}
+                                    <div className="absolute inset-[-15px] rounded-full"></div>
 
-                                        <div
-                                            className={`w-full transition-all duration-500 rounded-t-lg ${color} ${!sub.completed ? 'opacity-40' : ''}`}
-                                            style={{ height: barHeight }}
-                                        ></div>
+                                    {/* The visual dot */}
+                                    <div className={`w-3.5 h-3.5 rounded-full ${colorClass} border-[3px] border-[#1a1a1a] shadow-[0_0_8px_rgba(0,0,0,0.8)] group-hover:scale-150 transition-transform duration-200`}></div>
+
+                                    {/* Score below point on hover */}
+                                    <div className="absolute top-4 left-1/2 -translate-x-1/2 mt-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                                        <span className={`text-[11px] font-bold bg-[#1a1a1a] px-1.5 py-0.5 rounded shadow ${textClass}`}>
+                                            {sub.accuracy}%
+                                        </span>
                                     </div>
-                                    <span className={`text-[10px] font-bold ${textColor}`}>
-                                        {sub.accuracy}%
-                                    </span>
+
                                     {!sub.completed && (
-                                        <div className="absolute -bottom-5" title="Abandoned">
+                                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2" title="Abandoned">
                                             <AlertTriangleIcon size={12} className="text-rose-500" />
                                         </div>
                                     )}
