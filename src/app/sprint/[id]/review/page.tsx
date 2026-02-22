@@ -20,6 +20,7 @@ import {
 } from '@/components/icons';
 import Header from '@/components/layout/Header';
 import { CircularProgress } from '@/components/ui/CircularProgress';
+import MathText from '@/components/ui/MathText';
 
 interface ReviewQuestion {
     _id: string;
@@ -481,9 +482,9 @@ export default function SprintReviewPage({ params }: { params: Promise<{ id: str
                                             {q.difficulty}
                                         </span>
                                     </div>
-                                    <h3 className="text-sm font-medium text-neutral-300 line-clamp-2"
-                                        dangerouslySetInnerHTML={{ __html: q.title || 'Question content not available' }}
-                                    />
+                                    <h3 className="text-sm font-medium text-neutral-300 line-clamp-2">
+                                        <MathText>{q.title || 'Question content not available'}</MathText>
+                                    </h3>
                                 </div>
 
                                 {/* Footer */}

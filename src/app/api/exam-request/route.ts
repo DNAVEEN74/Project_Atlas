@@ -32,10 +32,23 @@ export async function POST(req: NextRequest) {
             );
         }
 
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
+        }
+
+        if (examName.length > 100) {
+            return NextResponse.json({ error: "examName must be 100 characters or fewer" }, { status: 400 });
+        }
+
+        if (fullName && fullName.length > 100) {
+            return NextResponse.json({ error: "fullName must be 100 characters or fewer" }, { status: 400 });
+        }
+
         await ExamRequest.create({
-            email: email.toLowerCase(),
-            exam_name: examName,
-            full_name: fullName || undefined,
+            email: email.toLowerCase().trim(),
+            exam_name: examName.trim(),
+            full_name: fullName ? fullName.trim() : undefined,
         });
 
         return NextResponse.json({ success: true });

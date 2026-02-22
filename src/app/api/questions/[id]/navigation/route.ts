@@ -60,7 +60,8 @@ export async function GET(
             baseQuery['source.year'] = parseInt(year);
         }
         if (query) {
-            baseQuery.text = { $regex: query, $options: 'i' };
+            const safeQuery = query.slice(0, 200).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            baseQuery.text = { $regex: safeQuery, $options: 'i' };
         }
 
         // Use question_number for ordering if available

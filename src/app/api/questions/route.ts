@@ -80,7 +80,8 @@ export async function GET(req: NextRequest) {
         if (year) filter["source.year"] = parseInt(year);
 
         if (query) {
-            filter.text = { $regex: query, $options: "i" };
+            const safeQuery = query.slice(0, 200).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            filter.text = { $regex: safeQuery, $options: "i" };
         }
 
         const questions = await Question.find(filter)

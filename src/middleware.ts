@@ -29,7 +29,11 @@ function checkRateLimit(ip: string, limit: number): boolean {
 export function middleware(request: NextRequest) {
     const token = request.cookies.get('atlas_auth_token');
     const { pathname } = request.nextUrl;
-    const ip = request.headers.get('x-forwarded-for') || 'unknown';
+    // x-real-ip is set by Vercel's edge layer and cannot be spoofed by clients.
+    // Fall back to the leftmost address in x-forwarded-for (the originating client IP).
+    const realIp = request.headers.get('x-real-ip');
+    const forwardedFor = request.headers.get('x-forwarded-for');
+    const ip = realIp || (forwardedFor ? forwardedFor.split(',')[0].trim() : 'unknown');
 
     // 1. Rate Limiting
     let limit = LIMITS.GLOBAL;

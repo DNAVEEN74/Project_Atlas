@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/core/db/connect';
 import User from '@/core/models/User';
-import { getCurrentUser } from '@/lib/auth';
-import bcrypt from 'bcryptjs';
+import { getCurrentUser, hashPassword, verifyPassword } from '@/lib/auth';
 
 export async function POST(req: Request) {
     try {
@@ -17,8 +16,8 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Current and new passwords are required' }, { status: 400 });
         }
 
-        if (newPassword.length < 6) {
-            return NextResponse.json({ error: 'New password must be at least 6 characters long' }, { status: 400 });
+        if (newPassword.length < 8) {
+            return NextResponse.json({ error: 'New password must be at least 8 characters long' }, { status: 400 });
         }
 
         await dbConnect();
@@ -31,14 +30,13 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
-        const isValid = await bcrypt.compare(currentPassword, userDoc.password_hash);
+        const isValid = await verifyPassword(currentPassword, userDoc.password_hash);
 
         if (!isValid) {
             return NextResponse.json({ error: 'Incorrect current password' }, { status: 400 });
         }
 
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
-        userDoc.password_hash = hashedPassword;
+        userDoc.password_hash = await hashPassword(newPassword);
         await userDoc.save();
 
         return NextResponse.json({
