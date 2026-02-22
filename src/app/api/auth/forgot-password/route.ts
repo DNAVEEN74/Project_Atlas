@@ -29,7 +29,9 @@ export async function POST(req: Request) {
             user.password_reset_expires = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
             await user.save();
 
-            const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password?token=${rawToken}`;
+            // Use a URL fragment so the token is never sent to the server in Referer headers
+            // or recorded in server access logs.
+            const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password#token=${rawToken}`;
 
             await resend.emails.send({
                 from: 'PrepLeague <onboarding@resend.dev>',

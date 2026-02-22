@@ -1,17 +1,16 @@
 'use client';
 
 import React, { useState, useEffect, Suspense } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Lock, EyeOff, Eye, CheckCircle, XCircle } from 'lucide-react';
 import { useToast } from '@/contexts/ToastContext';
 
 function ResetPasswordForm() {
-    const searchParams = useSearchParams();
     const router = useRouter();
     const { success, error } = useToast();
-    const token = searchParams.get('token');
+    const [token, setToken] = useState<string | null>(null);
 
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -22,16 +21,21 @@ function ResetPasswordForm() {
     const [errors, setErrors] = useState({ new: '', confirm: '' });
 
     useEffect(() => {
-        if (!token) router.push('/forgot-password');
-    }, [token, router]);
+        // Read token from URL fragment (never sent to server, never in Referer headers)
+        const hash = window.location.hash.slice(1);
+        const params = new URLSearchParams(hash);
+        const t = params.get('token');
+        if (!t) router.push('/forgot-password');
+        else setToken(t);
+    }, [router]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setErrors({ new: '', confirm: '' });
         let hasError = false;
 
-        if (newPassword.length < 6) {
-            setErrors(prev => ({ ...prev, new: 'Password must be at least 6 characters' }));
+        if (newPassword.length < 8) {
+            setErrors(prev => ({ ...prev, new: 'Password must be at least 8 characters' }));
             hasError = true;
         }
         if (newPassword !== confirmPassword) {
@@ -91,7 +95,7 @@ function ResetPasswordForm() {
                                             value={newPassword}
                                             onChange={(e) => { setNewPassword(e.target.value); setErrors(prev => ({ ...prev, new: '' })); }}
                                             className={`w-full bg-neutral-900 border ${errors.new ? 'border-rose-500' : 'border-neutral-700 focus:border-amber-500'} rounded-xl px-4 py-3 text-sm text-white focus:outline-none transition-all pr-10`}
-                                            placeholder="Min. 6 characters"
+                                            placeholder="Min. 8 characters"
                                         />
                                         <button type="button" onClick={() => setShowNew(!showNew)} className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white">
                                             {showNew ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}

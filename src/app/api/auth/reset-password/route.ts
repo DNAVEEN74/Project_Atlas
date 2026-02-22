@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import crypto from 'crypto';
-import bcrypt from 'bcryptjs';
 import dbConnect from '@/core/db/connect';
 import User from '@/core/models/User';
+import { hashPassword } from '@/lib/auth';
 
 export async function POST(req: Request) {
     try {
@@ -12,8 +12,8 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'Token and new password are required' }, { status: 400 });
         }
 
-        if (newPassword.length < 6) {
-            return NextResponse.json({ error: 'Password must be at least 6 characters' }, { status: 400 });
+        if (newPassword.length < 8) {
+            return NextResponse.json({ error: 'Password must be at least 8 characters' }, { status: 400 });
         }
 
         await dbConnect();
@@ -31,8 +31,7 @@ export async function POST(req: Request) {
         }
 
         // Hash new password and update
-        const salt = await bcrypt.genSalt(10);
-        user.password_hash = await bcrypt.hash(newPassword, salt);
+        user.password_hash = await hashPassword(newPassword);
 
         // Clear the reset token (single-use)
         user.password_reset_token = undefined;

@@ -1,8 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { uploadImage, generateImageKey } from '@/lib/r2';
+import { requireAdmin } from '@/lib/auth';
+
+const ALLOWED_MIME_TYPES = new Set(['image/png', 'image/jpeg', 'image/webp', 'image/gif']);
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
 
 export async function POST(request: NextRequest) {
     try {
+        const { error: authError } = await requireAdmin();
+        if (authError) return authError;
+
         const formData = await request.formData();
         const file = formData.get('file') as File;
         const questionId = formData.get('questionId') as string;
@@ -12,6 +19,20 @@ export async function POST(request: NextRequest) {
         if (!file || !questionId || !type) {
             return NextResponse.json(
                 { error: 'Missing required fields: file, questionId, type' },
+                { status: 400 }
+            );
+        }
+
+        if (!ALLOWED_MIME_TYPES.has(file.type)) {
+            return NextResponse.json(
+                { error: 'Invalid file type. Allowed: png, jpeg, webp, gif' },
+                { status: 400 }
+            );
+        }
+
+        if (file.size > MAX_FILE_SIZE) {
+            return NextResponse.json(
+                { error: 'File size must be less than 5MB' },
                 { status: 400 }
             );
         }
