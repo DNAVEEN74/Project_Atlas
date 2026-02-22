@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import dbConnect from '@/core/db/connect';
 import User from '@/core/models/User';
-import { getCurrentUser, hashPassword } from '@/lib/auth';
+import { getCurrentUser, hashPassword, verifyPassword } from '@/lib/auth';
 
 export async function POST(req: Request) {
     try {
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
-        const isValid = await bcrypt.compare(currentPassword, userDoc.password_hash);
+        const isValid = await verifyPassword(currentPassword, userDoc.password_hash);
 
         if (!isValid) {
             return NextResponse.json({ error: 'Incorrect current password' }, { status: 400 });
