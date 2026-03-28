@@ -16,6 +16,7 @@ interface TopicStat {
     correct: number;
     accuracy: number;
     avg_time_ms: number;
+    pacing_category?: string;
 }
 
 interface TopicPerformanceProps {
@@ -54,8 +55,17 @@ const TopicPerformance: React.FC<TopicPerformanceProps> = ({ stats, className, s
                     displayTopics.map((topic) => (
                         <div key={topic.pattern}>
                             <div className="flex justify-between items-center mb-1.5">
-                                <span className="text-sm font-medium text-neutral-300" title={topic.display_name}>
-                                    {topic.display_name}
+                                <span className="text-sm font-medium text-neutral-300 flex items-center gap-2" title={topic.display_name}>
+                                    <span className="truncate">{topic.display_name}</span>
+                                    {topic.pacing_category === 'NEEDS_SPEED' && (
+                                        <span className="text-[9px] font-bold tracking-wider text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/20 whitespace-nowrap" title="Good accuracy, but slow solving time (Avg > 36s)">NEEDS SPEED</span>
+                                    )}
+                                    {topic.pacing_category === 'CARELESS_ERRORS' && (
+                                        <span className="text-[9px] font-bold tracking-wider text-rose-500 bg-rose-500/10 px-1.5 py-0.5 rounded border border-rose-500/20 whitespace-nowrap" title="Fast solving time (Avg < 36s), but low accuracy">CARELESS ERRORS</span>
+                                    )}
+                                    {topic.pacing_category === 'NEEDS_REVIEW' && (
+                                        <span className="text-[9px] font-bold tracking-wider text-red-500 bg-red-500/10 px-1.5 py-0.5 rounded border border-red-500/20 whitespace-nowrap" title="Low accuracy and slow solving time">CONCEPT GAP</span>
+                                    )}
                                 </span>
                             </div>
                             <div className="flex items-center gap-3">

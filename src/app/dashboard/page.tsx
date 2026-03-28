@@ -10,6 +10,8 @@ import Heatmap from '@/components/dashboard/Heatmap';
 import TopicPerformance from '@/components/dashboard/TopicPerformance';
 import RecentActivity from '@/components/dashboard/RecentActivity';
 import DifficultyBreakdown from '@/components/dashboard/DifficultyBreakdown';
+import QuickPracticeCard from '@/components/dashboard/QuickPracticeCard';
+import PremiumTeasers from '@/components/dashboard/PremiumTeasers';
 
 interface DashboardData {
     user: any;
@@ -19,6 +21,8 @@ interface DashboardData {
     recent_attempts: any[];
     difficulty_stats: any;
     difficulty_stats_raw?: any[];
+    advanced_insights?: any;
+    overall_stats?: any;
 }
 
 export default function DashboardPage() {
@@ -212,6 +216,8 @@ export default function DashboardPage() {
         return acc;
     }, {} as Record<string, { total: number, correct: number, accuracy: number }>);
 
+    // Find "On Fire" topic
+    const onFireTopic = data.topic_stats?.find((t: any) => t.accuracy >= 0.85 && t.total >= 10);
 
     return (
         <div className="min-h-screen bg-[#0f0f0f]">
@@ -223,6 +229,10 @@ export default function DashboardPage() {
                 <DailyProgressHero
                     dailyGoal={data.daily_progress?.daily_goal || (data.user?.preferences?.daily_quant_goal || 0) + (data.user?.preferences?.daily_reasoning_goal || 0) || 20}
                     dailySolved={data.daily_progress?.questions_solved || 0}
+                    quantGoal={data.daily_progress?.quant_goal || data.user?.preferences?.daily_quant_goal || 10}
+                    quantSolved={data.daily_progress?.quant_solved || 0}
+                    reasoningGoal={data.daily_progress?.reasoning_goal || data.user?.preferences?.daily_reasoning_goal || 10}
+                    reasoningSolved={data.daily_progress?.reasoning_solved || 0}
                     streak={streak}
                     maxStreak={maxStreak}
                     weakTopicsQuant={data.topic_stats
@@ -243,20 +253,34 @@ export default function DashboardPage() {
                         }))}
                 />
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Left Column (Main Stats) */}
-                    <div className="lg:col-span-2 space-y-6">
+                {/* 1.5 "On Fire" Topic Notification */}
+                {onFireTopic && (
+                    <div className="w-full bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-transparent border border-orange-500/20 rounded-xl p-4 flex items-center justify-between animate-fade-in-up">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-xl">
+                                🔥
+                            </div>
+                            <div>
+                                <h4 className="text-orange-400 font-bold text-sm">You're on fire in {onFireTopic.display_name}!</h4>
+                                <p className="text-neutral-400 text-xs">You've reached {Math.round(onFireTopic.accuracy * 100)}% accuracy with {onFireTopic.total} questions solved.</p>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
-                        {/* 2. Key Statistics Grid - UPDATED with filtered stats */}
+                {/* Row 2: Stats + Heatmap */}
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    <div className="lg:col-span-1">
                         <Statistics
                             accuracy={filteredAccuracy}
                             avg_time_ms={filteredAvgTime}
                             total_solved={filteredTotalSolved}
                             streak={streak}
                             max_streak={maxStreak}
+                            sprint_discipline={data.advanced_insights?.sprint_discipline || 0}
                         />
-
-                        {/* 3. Heatmap - Controlled Component */}
+                    </div>
+                    <div className="lg:col-span-3">
                         <Heatmap
                             data={data.heatmap}
                             active_days={data.heatmap.length}
@@ -264,23 +288,43 @@ export default function DashboardPage() {
                             selectedSubject={selectedSubject}
                             onSubjectChange={setSelectedSubject}
                         />
-
-
-                        {/* 4. Recent Activity - Filtered */}
-                        <RecentActivity attempts={filteredRecentAttempts} />
-
                     </div>
+                </div>
 
-                    {/* Right Column (Actions & Details) */}
-                    <div className="space-y-6">
-
-                        {/* 5. Topic Performance - Filtered */}
+                {/* Row 3: Topic Performance + Quick Practice */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div className="lg:col-span-2">
                         <TopicPerformance stats={filteredTopicStats} selectedSubject={selectedSubject} />
+                    </div>
+                    <div className="lg:col-span-1">
+                        <QuickPracticeCard
+                            questions_left={Math.max(0, (data.daily_progress?.daily_goal || 20) - (data.daily_progress?.questions_solved || 0))}
+                            weak_topics={
+                                data.topic_stats
+                                    .filter((t: any) => t.accuracy < 0.6 && t.total > 0)
+                                    .sort((a: any, b: any) => a.accuracy - b.accuracy)
+                                    .slice(0, 3)
+                                    .map((t: any) => t.display_name)
+                            }
+                        />
+                    </div>
+                </div>
 
-                        {/* 6. Difficulty Breakdown */}
-                        {/* Now correctly filtered using raw data aggregation */}
+                {/* Row 4: Premium Analytics */}
+                <PremiumTeasers 
+                    isPremium={data.user?.config?.is_premium || false} 
+                    topicStats={filteredTopicStats}
+                    overallAccuracy={data.overall_stats?.accuracy || 0}
+                    proEngineData={data.advanced_insights?.pro_engine}
+                />
+
+                {/* Row 5: Difficulty Breakdown + Recent Activity */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="lg:col-span-1 border border-neutral-800 rounded-2xl p-6 bg-[#1a1a1a]">
                         <DifficultyBreakdown stats={filteredDifficultyStats} isGlobal={false} />
-
+                    </div>
+                    <div className="lg:col-span-1">
+                        <RecentActivity attempts={filteredRecentAttempts} />
                     </div>
                 </div>
 

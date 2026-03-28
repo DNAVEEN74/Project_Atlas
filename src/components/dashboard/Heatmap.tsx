@@ -107,9 +107,9 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
                 </div>
             </div>
 
-            {/* Grid Container - Compact Sizing */}
-            <div className="w-full overflow-hidden">
-                <div className="flex items-end gap-1">
+            {/* Grid Container - Compact Sizing with Mobile Scroll */}
+            <div className="w-full overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent">
+                <div className="flex items-end gap-1 min-w-max">
                     {/* Generate last 12 months */}
                     {Array.from({ length: 13 }).map((_, monthIndex) => {
                         // Logic from reference: 

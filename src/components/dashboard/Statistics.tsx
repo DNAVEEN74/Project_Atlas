@@ -9,6 +9,7 @@ interface StatisticsProps {
     total_solved: number;
     streak: number;
     max_streak: number;
+    sprint_discipline?: number;
     className?: string;
 }
 
@@ -18,6 +19,7 @@ const Statistics: React.FC<StatisticsProps> = ({
     total_solved,
     streak,
     max_streak,
+    sprint_discipline = 0,
     className
 }) => {
     // Format time: 42s or 1m 20s
@@ -70,9 +72,19 @@ const Statistics: React.FC<StatisticsProps> = ({
             color: getStreakColor(streak),
             bg: "bg-[#1a1a1a]",
             border: "border-neutral-800"
+        },
+        {
+            label: "Discipline",
+            value: `${Math.round(sprint_discipline * 100)}%`,
+            subtext: "Sprint completion rate",
+            color: sprint_discipline > 0.8 ? "text-emerald-400" : "text-amber-500",
+            bg: "bg-emerald-500/5",
+            border: "border-emerald-500/20"
         }
     ];
 
+    // Ensure we have an even number of items, pad with an empty string or adjust grid
+    // Actually we have 5 items now, grid-cols-2 might leave one hanging. We'll let it hang or change to grid-cols-2 lg:grid-cols-3
     return (
         <div className={`grid grid-cols-2 gap-4 ${className}`}>
             {stats.map((stat, idx) => (

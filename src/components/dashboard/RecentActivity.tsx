@@ -40,8 +40,21 @@ interface RecentActivityProps {
 
 const RecentActivity = ({ attempts, className }: RecentActivityProps) => {
 
-    // Limit to 6 items
-    const displayAttempts = attempts.slice(0, 6);
+    // Group re-attempts by question ID
+    const groupedAttemptsMap = new Map<string, RecentAttempt & { attempt_count: number }>();
+    attempts.forEach(attempt => {
+        const questionData = typeof attempt.question_id === 'object' ? attempt.question_id : null;
+        const qId = questionData?._id || attempt._id;
+
+        if (groupedAttemptsMap.has(qId)) {
+            groupedAttemptsMap.get(qId)!.attempt_count += 1;
+        } else {
+            groupedAttemptsMap.set(qId, { ...attempt, attempt_count: 1 });
+        }
+    });
+
+    // Limit to 6 unique questions
+    const displayAttempts = Array.from(groupedAttemptsMap.values()).slice(0, 6);
 
     if (displayAttempts.length === 0) {
         return (
@@ -124,15 +137,22 @@ const RecentActivity = ({ attempts, className }: RecentActivityProps) => {
                                                 title="Very fast - did you rush?"
                                             >
                                                 <BoltIcon className="w-3 h-3" />
-                                                {/* <span className="text-[10px] font-bold">⚡</span> */}
                                             </span>
                                         )}
                                     </span>
+                                    {(attempt as any).attempt_count > 1 && (
+                                        <>
+                                            <span>•</span>
+                                            <span className="text-[9px] font-bold bg-neutral-800 text-neutral-400 px-1.5 py-0.5 rounded">
+                                                {(attempt as any).attempt_count} tries
+                                            </span>
+                                        </>
+                                    )}
                                 </div>
                             </div>
 
                             {/* Action Arrow */}
-                            <ChevronRightIcon className="text-neutral-700 group-hover:text-neutral-500 transition-colors w-5 h-5" />
+                            <ChevronRightIcon className="text-neutral-700 group-hover:text-neutral-500 transition-colors w-5 h-5 shrink-0" />
                         </Link>
                     );
                 })}

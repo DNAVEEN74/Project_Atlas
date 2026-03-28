@@ -98,7 +98,7 @@ export default function Header({ activePage }: HeaderProps) {
                             >
                                 Sprint Mode
                             </Link>
-                            <Link
+                            {/* <Link
                                 href="/games"
                                 className={`px-5 py-2 text-sm font-medium rounded-full transition-colors ${activePage === 'games'
                                     ? 'text-amber-500 bg-amber-500/10 font-semibold'
@@ -106,7 +106,7 @@ export default function Header({ activePage }: HeaderProps) {
                                     }`}
                             >
                                 Games
-                            </Link>
+                            </Link> */}
                             <Link
                                 href="/dashboard"
                                 className={`px-5 py-2 text-sm font-medium rounded-full transition-colors ${activePage === 'dashboard'

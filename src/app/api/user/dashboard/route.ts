@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 import dbConnect from '@/core/db/connect';
@@ -7,10 +6,10 @@ import User from '@/core/models/User';
 import DailyActivity from '@/core/models/DailyActivity';
 import Attempt from '@/core/models/Attempt';
 import Pattern from '@/core/models/Pattern';
+import Session from '@/core/models/Session';
 
 export async function GET(req: NextRequest) {
     try {
-        // 1. Authentication
         const authUser = await getCurrentUser();
         if (!authUser) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -21,19 +20,21 @@ export async function GET(req: NextRequest) {
         const userId = authUser.userId;
         const section = req.nextUrl.searchParams.get('section') || 'ALL';
 
-        // 2. Date calculations
-        // Get today in YYYY-MM-DD format (local time implied by valid ISO string slicing)
-        // ideally we should handle timezones, but for now we follow existing patterns
         const today = new Date().toISOString().split('T')[0];
-
-        // Year ago for heatmap
         const yearAgoDate = new Date();
         yearAgoDate.setDate(yearAgoDate.getDate() - 365);
         const yearAgo = yearAgoDate.toISOString().split('T')[0];
 
         const userObjectId = new mongoose.Types.ObjectId(userId);
 
-        // 3. Parallel Queries
+        const attemptMatch: any = { user_id: userObjectId };
+        const sessionMatch: any = { user_id: userObjectId };
+
+        if (section === 'QUANT' || section === 'REASONING') {
+            attemptMatch.subject = section;
+            sessionMatch['config.subject'] = section;
+        }
+
         const [
             user,
             todayActivity,
@@ -41,16 +42,16 @@ export async function GET(req: NextRequest) {
             topicStats,
             recentAttempts,
             difficultyStats,
-            patterns
+            patterns,
+            sessionsCount
         ] = await Promise.all([
-
             // 1. User Profile & Stats
             User.findById(userId).select('profile stats preferences config').lean(),
 
             // 2. Today's Activity
             DailyActivity.findOne({ user_id: userId, date: today }).lean(),
 
-            // 3. Heatmap (365 days) - Fetch all necessary fields for filtering
+            // 3. Heatmap (365 days)
             DailyActivity.find(
                 { user_id: userId, date: { $gte: yearAgo } },
                 'date questions_solved quant_solved reasoning_solved'
@@ -58,13 +59,14 @@ export async function GET(req: NextRequest) {
 
             // 4. Topic Accuracy (Aggregation)
             Attempt.aggregate([
-                { $match: { user_id: userObjectId } }, // Filter by subject if needed, but we fetch all for now
+                { $match: attemptMatch },
                 {
                     $group: {
                         _id: { pattern: '$pattern', subject: '$subject' },
                         total: { $sum: 1 },
                         correct: { $sum: { $cond: ['$is_correct', 1, 0] } },
-                        avg_time: { $avg: '$time_ms' }
+                        avg_time: { $avg: '$time_ms' },
+                        last_attempted: { $max: '$created_at' }
                     }
                 },
                 {
@@ -74,22 +76,23 @@ export async function GET(req: NextRequest) {
                         total: 1,
                         correct: 1,
                         accuracy: { $divide: ['$correct', '$total'] },
-                        avg_time_ms: '$avg_time'
+                        avg_time_ms: '$avg_time',
+                        last_attempted: 1
                     }
                 },
-                { $sort: { accuracy: 1 } } // Worst topics first
+                { $sort: { accuracy: 1 } } // Worst topics first for direct UI mapping
             ]),
 
-            // 5. Recent Attempts (Last 10)
-            Attempt.find({ user_id: userId })
+            // 5. Recent Attempts (Last 15)
+            Attempt.find(attemptMatch)
                 .sort({ created_at: -1 })
-                .limit(10)
-                .populate('question_id', 'text') // Populate question text
+                .limit(15)
+                .populate('question_id', 'text')
                 .lean(),
 
             // 6. Difficulty Breakdown
             Attempt.aggregate([
-                { $match: { user_id: userObjectId } },
+                { $match: attemptMatch },
                 {
                     $group: {
                         _id: { difficulty: '$difficulty', subject: '$subject' },
@@ -100,14 +103,59 @@ export async function GET(req: NextRequest) {
             ]),
 
             // 7. Pattern Display Names
-            Pattern.find({}, 'code name subject').lean()
+            Pattern.find({}, 'code name subject').lean(),
+
+            // 8. Session / Sprint Discipline
+            Session.aggregate([
+                { $match: sessionMatch },
+                {
+                    $group: {
+                        _id: '$status', // 'COMPLETED' or 'ABANDONED' or 'IN_PROGRESS'
+                        count: { $sum: 1 }
+                    }
+                }
+            ])
         ]);
 
         if (!user) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
-        // 4. Data Processing
+        // --- PREMIUM PRO ENGINE AGGREGATIONS ---
+        let premium_insights = null;
+        if (user.config?.is_premium) {
+            const [premiumAttempts, premiumSessions] = await Promise.all([
+                // 1. Time-Drain Scatter Plot (Last 500 attempts)
+                Attempt.find(attemptMatch)
+                    .select('time_ms difficulty is_correct pattern created_at')
+                    .sort({ created_at: -1 })
+                    .limit(500)
+                    .lean(),
+                
+                // 2. Fatigue Curve (Last 10 completed Sprints)
+                Session.find({ ...sessionMatch, status: 'COMPLETED', type: 'SPRINT' })
+                    .select('question_status started_at')
+                    .sort({ started_at: -1 })
+                    .limit(10)
+                    .lean()
+            ]);
+
+            // Clean the data payload
+            const mappedAttempts = premiumAttempts.map(a => ({
+                time_ms: a.time_ms,
+                difficulty: a.difficulty,
+                is_correct: a.is_correct,
+                pattern: a.pattern,
+                created_at: a.created_at
+            }));
+
+            premium_insights = {
+                recent_raw_attempts: mappedAttempts,
+                recent_fatigue_sessions: premiumSessions
+            };
+        }
+
+        // --- DATA PROCESSING ---
 
         // Map patterns for easy lookup
         const patternMap = (patterns as any[]).reduce((acc, p) => {
@@ -115,58 +163,112 @@ export async function GET(req: NextRequest) {
             return acc;
         }, {} as Record<string, string>);
 
-        // Process Topic Stats with Display Names
-        const processedTopicStats = (topicStats as any[]).map(t => ({
-            ...t,
-            display_name: patternMap[t.pattern] || formatTopicName(t.pattern)
-        }));
+        // Process Topic Stats with Display Names & Pacing Matrix
+        // Target: 36s (36000ms), 65% Accuracy (0.65)
+        const processedTopicStats = (topicStats as any[]).map(t => {
+            const isFast = t.avg_time_ms <= 36000;
+            const isAccurate = t.accuracy > 0.65;
+            let pacing_category = 'NEEDS_REVIEW';
+            if (isFast && isAccurate) pacing_category = 'MASTERED';
+            else if (!isFast && isAccurate) pacing_category = 'NEEDS_SPEED';
+            else if (isFast && !isAccurate) pacing_category = 'CARELESS_ERRORS';
 
-        // Process Recent Attempts with Display Names & Question Details (if populated in future)
-        // We aren't populating questions here to save time, but we might need it for names if not using pattern
+            return {
+                ...t,
+                display_name: patternMap[t.pattern] || t.pattern.split('_').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+                pacing_category
+            };
+        });
+
+        // Process Recent Attempts with Display Names
         const processedRecentAttempts = (recentAttempts as any[]).map(a => ({
             ...a,
-            display_name: patternMap[a.pattern] || formatTopicName(a.pattern)
+            display_name: patternMap[a.pattern] || a.pattern.split('_').map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
         }));
 
         // Process Difficulty Stats
-        // { "EASY": { total: 10, correct: 8, accuracy: 0.8 }, ... }
         const processedDifficultyStats = (difficultyStats as any[]).reduce((acc, d) => {
-            const diff = d._id.difficulty;
+            const diff = d._id.difficulty || 'MEDIUM';
             if (!acc[diff]) {
                 acc[diff] = { total: 0, correct: 0 };
             }
             acc[diff].total += d.total;
             acc[diff].correct += d.correct;
             return acc;
-        }, {} as Record<string, { total: number, correct: number }>);
+        }, {} as Record<string, { total: number, correct: number, accuracy?: number }>);
 
-        // Add accuracy to difficulty stats
-        Object.keys(processedDifficultyStats).forEach(key => {
-            const stat = processedDifficultyStats[key];
-            (stat as any).accuracy = stat.total > 0 ? stat.correct / stat.total : 0;
+        ['EASY', 'MEDIUM', 'HARD'].forEach(lvl => {
+            if (!processedDifficultyStats[lvl]) processedDifficultyStats[lvl] = { total: 0, correct: 0, accuracy: 0 };
+            else processedDifficultyStats[lvl].accuracy = processedDifficultyStats[lvl].total > 0 ? processedDifficultyStats[lvl].correct / processedDifficultyStats[lvl].total : 0;
         });
 
+        // Calculate Sprint Discipline
+        let totalSessions = 0;
+        let completedSessions = 0;
+        (sessionsCount as any[]).forEach(s => {
+            totalSessions += s.count;
+            if (s._id === 'COMPLETED') completedSessions += s.count;
+        });
+        const sprint_discipline = totalSessions > 0 ? completedSessions / totalSessions : 0; // 0 fallback is safer for Division-by-Zero
 
-        // 5. Response Construction
+        // Overall calculations
+        const difficultyValues = Object.values(processedDifficultyStats) as { total: number, correct: number }[];
+        const totalSolved: number = difficultyValues.reduce((acc, d) => acc + d.total, 0);
+        const totalCorrect: number = difficultyValues.reduce((acc, d) => acc + d.correct, 0);
+        const overallAccuracy: number = totalSolved > 0 ? totalCorrect / totalSolved : 0;
+
+        let totalTimeMs = 0;
+        let attemptCountWithTime = 0;
+        (topicStats as any[]).forEach(t => {
+            if (t.avg_time_ms) {
+                totalTimeMs += (t.avg_time_ms * t.total);
+                attemptCountWithTime += t.total;
+            }
+        });
+        const overallAvgTimeMs = attemptCountWithTime > 0 ? totalTimeMs / attemptCountWithTime : 0;
+
+        // Overall stats object
+        const overall_stats = {
+            accuracy: overallAccuracy,
+            avg_time_ms: overallAvgTimeMs,
+            total_solved: totalSolved,
+            total_correct: totalCorrect,
+            streak: user.stats.current_streak,
+            max_streak: user.stats.max_streak
+        };
+
+        // --- RESPONSE CONSTRUCTION ---
         return NextResponse.json({
             success: true,
             dashboard: {
-                user,
+                user: {
+                    profile: user.profile,
+                    preferences: user.preferences,
+                    config: user.config,
+                },
                 daily_progress: {
                     date: today,
                     questions_solved: todayActivity?.questions_solved || 0,
-                    year_questions_solved: user.stats.total_solved, // Fallback/Total
+                    year_questions_solved: user.stats.total_solved,
                     quant_solved: todayActivity?.quant_solved || 0,
                     reasoning_solved: todayActivity?.reasoning_solved || 0,
-                    daily_goal: user.preferences.daily_quant_goal + user.preferences.daily_reasoning_goal, // Combined goal? Or separate.
-                    // The doc says "Daily Goal" implies a total. Let's sum them for now.
-                    streak: user.stats.current_streak
+                    quant_goal: user.preferences?.daily_quant_goal || 10,
+                    reasoning_goal: user.preferences?.daily_reasoning_goal || 10,
+                    daily_goal: (user.preferences?.daily_quant_goal || 10) + (user.preferences?.daily_reasoning_goal || 10),
+                    streak: user.stats.current_streak,
+                    max_streak: user.stats.max_streak
                 },
-                heatmap, // Client will filter this based on tab
+                overall_stats,
+                heatmap,
                 topic_stats: processedTopicStats,
                 recent_attempts: processedRecentAttempts,
                 difficulty_stats: processedDifficultyStats,
-                difficulty_stats_raw: difficultyStats // Pass raw array correctly
+                advanced_insights: {
+                    sprint_discipline,
+                    completed_sessions: completedSessions,
+                    total_sessions: totalSessions,
+                    pro_engine: premium_insights
+                }
             }
         });
 
@@ -174,10 +276,4 @@ export async function GET(req: NextRequest) {
         console.error('Dashboard API Error:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
-}
-
-function formatTopicName(slug: string): string {
-    return slug.split('_')
-        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(' ');
 }

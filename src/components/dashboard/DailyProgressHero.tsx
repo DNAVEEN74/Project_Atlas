@@ -9,6 +9,10 @@ import { formatDate } from '@/utils/format';
 interface DailyProgressHeroProps {
     dailyGoal?: number;
     dailySolved?: number;
+    quantGoal?: number;
+    quantSolved?: number;
+    reasoningGoal?: number;
+    reasoningSolved?: number;
     streak?: number;
     maxStreak?: number;
     weakTopicsQuant?: {
@@ -23,7 +27,18 @@ interface DailyProgressHeroProps {
     }[];
 }
 
-const DailyProgressHero = ({ dailyGoal = 20, dailySolved = 0, streak = 0, maxStreak = 0, weakTopicsQuant = [], weakTopicsReasoning = [] }: DailyProgressHeroProps) => {
+const DailyProgressHero = ({
+    dailyGoal = 20,
+    dailySolved = 0,
+    quantGoal = 10,
+    quantSolved = 0,
+    reasoningGoal = 10,
+    reasoningSolved = 0,
+    streak = 0,
+    maxStreak = 0,
+    weakTopicsQuant = [],
+    weakTopicsReasoning = []
+}: DailyProgressHeroProps) => {
     // Calculate progress
     const percentage = Math.min(100, Math.round((dailySolved / dailyGoal) * 100));
     const isGoalMet = dailySolved >= dailyGoal;
@@ -94,8 +109,8 @@ const DailyProgressHero = ({ dailyGoal = 20, dailySolved = 0, streak = 0, maxStr
                             </div>
                         </div>
                         <div className="flex gap-6 text-xs text-neutral-500 pt-1">
-                            <span>Quant: <span className="text-neutral-300 font-medium">0/{Math.ceil(dailyGoal * 0.6)}</span></span>
-                            <span>Reasoning: <span className="text-neutral-300 font-medium">0/{Math.floor(dailyGoal * 0.4)}</span></span>
+                            <span>Quant: <span className="text-neutral-300 font-medium">{quantSolved}/{quantGoal}</span></span>
+                            <span>Reasoning: <span className="text-neutral-300 font-medium">{reasoningSolved}/{reasoningGoal}</span></span>
                         </div>
                     </div>
                 </div>

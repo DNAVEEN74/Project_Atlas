@@ -96,7 +96,7 @@ export default function Home() {
             <Link href="/" className="text-sm font-medium text-white transition-colors">Home</Link>
             <Link href="/problems" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Problems</Link>
             <Link href="/sprint" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Sprint</Link>
-            <Link href="/games" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Games</Link>
+            {/* <Link href="/games" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Games</Link> */}
             <Link href="/pricing" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Pricing</Link>
           </nav>
           <div className="flex items-center gap-4">
