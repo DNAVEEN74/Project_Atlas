@@ -26,6 +26,7 @@ import {
 import { ReportModal } from '@/components/ui/ReportModal';
 import { SprintSessionLayout } from './SprintSessionLayout';
 import { QuestionContent } from '@/components/ui/QuestionContent';
+import { AskAIClarification } from './AskAIClarification';
 
 // ... (interfaces remain same) -> RESTORING MISSING CODE
 
@@ -104,12 +105,12 @@ function SolutionContent({ solution }: { solution: string }) {
     });
 
     return (
-        <div className="space-y-12 py-4">
+        <div className="space-y-8 py-4">
             {blocks.map((block, bIdx) => (
                 <div key={bIdx} className="relative pl-10 group">
                     {/* Vertical Connector Line */}
                     {bIdx !== blocks.length - 1 && (
-                        <div className="absolute left-[7px] top-8 bottom-[-48px] w-px bg-neutral-800 group-hover:bg-amber-500/30 transition-colors" />
+                        <div className="absolute left-[7px] top-8 bottom-[-32px] w-px bg-neutral-800 group-hover:bg-amber-500/30 transition-colors" />
                     )}
 
                     {/* Step Indicator Dot */}
@@ -139,7 +140,7 @@ function SolutionContent({ solution }: { solution: string }) {
 
                             if (trimmedItem.startsWith('$$') && trimmedItem.endsWith('$$')) {
                                 return (
-                                    <div key={iIdx} className="my-8 py-4 flex justify-center items-center overflow-x-auto custom-scrollbar-horizontal">
+                                    <div key={iIdx} className="my-2 flex justify-center items-center overflow-x-auto custom-scrollbar-horizontal">
                                         <MathText>{trimmedItem}</MathText>
                                     </div>
                                 );
@@ -1457,6 +1458,7 @@ export default function QuestionPage({
                                 {question.solution ? (
                                     <div>
                                         <SolutionContent solution={question.solution} />
+                                        <AskAIClarification questionId={question.id as string} />
                                     </div>
                                 ) : (
                                     <div className="text-neutral-500 text-sm italic py-2">

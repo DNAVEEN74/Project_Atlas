@@ -21,6 +21,7 @@ export interface IUser extends Document {
         current_streak: number;
         max_streak: number;
         last_active_date: string;       // "YYYY-MM-DD"
+        free_ai_questions_used?: number;
     };
     sprint_configs: {
         name: string;
@@ -94,6 +95,7 @@ const UserSchema: Schema = new Schema(
             current_streak: { type: Number, default: 0 },
             max_streak: { type: Number, default: 0 },
             last_active_date: { type: String, default: () => new Date().toISOString().split('T')[0] },
+            free_ai_questions_used: { type: Number, default: 0 },
         },
 
         sprint_configs: {
