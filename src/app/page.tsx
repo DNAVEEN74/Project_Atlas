@@ -350,23 +350,72 @@ export default function Home() {
               </div>
             </div>
             <div className="order-1 lg:order-2">
-              <div className="relative bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-10 shadow-2xl overflow-hidden group">
-                <div className="flex items-center justify-center py-10">
+              <div className="relative bg-[#1a1a1a] border border-neutral-800 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden group">
+                <div className="absolute top-0 right-0 p-6 opacity-20">
+                   <BoltIcon sx={{ fontSize: '4rem' }} className="text-amber-500" />
+                </div>
+                
+                <div className="relative flex flex-col items-center gap-10">
+                   {/* Main Diagnostic Ring */}
                    <div className="relative w-48 h-48 flex items-center justify-center">
-                      <svg className="w-full h-full transform -rotate-90">
-                        <circle cx="96" cy="96" r="88" fill="transparent" stroke="currentColor" strokeWidth="12" className="text-neutral-800" />
+                      <div className="absolute inset-0 rounded-full border-[10px] border-neutral-800" />
+                      <svg className="w-full h-full transform -rotate-90 relative z-10">
                         <motion.circle 
-                          cx="96" cy="96" r="88" fill="transparent" stroke="currentColor" strokeWidth="12" 
+                          cx="96" cy="96" r="88" fill="transparent" stroke="currentColor" strokeWidth="10" 
                           strokeDasharray={552.92}
                           initial={{ strokeDashoffset: 552.92 }}
                           whileInView={{ strokeDashoffset: 552.92 * (1 - 0.7) }}
                           transition={{ duration: 1.5, ease: "easeOut" }}
-                          className="text-amber-500" 
+                          className="text-amber-500 drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]" 
                         />
                       </svg>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center">
-                         <span className="text-4xl font-mono font-bold text-white">70%</span>
-                         <span className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Daily Goal</span>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center z-20">
+                         <span className="text-5xl font-mono font-bold text-white tracking-tighter">70<span className="text-amber-500">%</span></span>
+                         <span className="text-[9px] text-neutral-500 font-bold uppercase tracking-[0.25em] mt-1">Daily Pulse</span>
+                      </div>
+                   </div>
+
+                   {/* Subject Splits (Diagnostic Tracks) */}
+                   <div className="w-full space-y-6">
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-neutral-500">
+                          <span>Maths Potential</span>
+                          <span className="text-white">8/10</span>
+                        </div>
+                        <div className="h-1.5 w-full bg-neutral-800 rounded-full overflow-hidden">
+                           <motion.div 
+                             initial={{ width: 0 }}
+                             whileInView={{ width: '80%' }}
+                             transition={{ duration: 1, delay: 0.5 }}
+                             className="h-full bg-gradient-to-r from-amber-600 to-amber-400" 
+                           />
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-neutral-500">
+                          <span>Reasoning Reflex</span>
+                          <span className="text-white">6/10</span>
+                        </div>
+                        <div className="h-1.5 w-full bg-neutral-800 rounded-full overflow-hidden">
+                           <motion.div 
+                             initial={{ width: 0 }}
+                             whileInView={{ width: '60%' }}
+                             transition={{ duration: 1, delay: 0.7 }}
+                             className="h-full bg-neutral-600" 
+                           />
+                        </div>
+                      </div>
+                   </div>
+
+                   {/* Diagnostic Meta Tags */}
+                   <div className="grid grid-cols-2 gap-4 w-full pt-4 border-t border-neutral-800/50">
+                      <div className="px-4 py-2 rounded-xl bg-[#0f0f0f] border border-neutral-800 flex flex-col items-center">
+                         <span className="text-[8px] text-neutral-500 font-bold uppercase tracking-widest mb-1">Consistency</span>
+                         <span className="text-xs text-amber-500 font-bold">14-Day Peak</span>
+                      </div>
+                      <div className="px-4 py-2 rounded-xl bg-[#0f0f0f] border border-neutral-800 flex flex-col items-center">
+                         <span className="text-[8px] text-neutral-500 font-bold uppercase tracking-widest mb-1">Pace</span>
+                         <span className="text-xs text-white font-bold">42s / avg</span>
                       </div>
                    </div>
                 </div>

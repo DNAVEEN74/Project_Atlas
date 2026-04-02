@@ -67,8 +67,28 @@ async function importQuestions() {
         }
 
         const normalizeText = (s: string) => s.toLowerCase().replace(/\s+/g, ' ').trim();
+        const normalizeSubject = (subjectRaw: string) => {
+            const s = String(subjectRaw || '').trim().toUpperCase();
+            if (s === 'QUANT' || s === 'REASONING') return s;
+            if (s === 'QUANTITATIVE APTITUDE') return 'QUANT';
+            if (s.includes('REASONING')) return 'REASONING';
+            return s;
+        };
+        const normalizeCorrectOption = (q: any): string => {
+            const raw = q?.correct_option ?? q?.correctOption ?? q?.correct_answer ?? q?.correctAnswer;
+            if (raw === null || raw === undefined) return '';
+            const str = String(raw).trim().toUpperCase();
+            if (['A', 'B', 'C', 'D'].includes(str)) return str;
+            if (['1', '2', '3', '4'].includes(str)) return ['A', 'B', 'C', 'D'][parseInt(str, 10) - 1];
+            return '';
+        };
+        const normalizeDifficulty = (difficultyRaw: string) => {
+            const s = String(difficultyRaw || '').trim().toUpperCase();
+            if (s === 'EASY' || s === 'MEDIUM' || s === 'HARD') return s;
+            return 'MEDIUM';
+        };
         const buildKey = (q: any) => {
-            const subject = String(q?.subject || '').trim().toUpperCase();
+            const subject = normalizeSubject(String(q?.subject || ''));
             const shift = String(q?.source?.shift || '').trim();
             const text = normalizeText(String(q?.text || ''));
             return `${subject}||${shift}||${text}`;
@@ -80,6 +100,7 @@ async function importQuestions() {
             unique_in_file: number;
             duplicates_in_file: number;
             duplicates_in_db: number;
+            skipped_invalid: number;
             inserted: number;
             start_question_number: number | null;
             end_question_number: number | null;
@@ -133,7 +154,7 @@ async function importQuestions() {
                 const subjects = Array.from(
                     new Set(
                         dedupedInFile
-                            .map((q) => String(q?.subject || '').trim().toUpperCase())
+                            .map((q) => normalizeSubject(String(q?.subject || '')))
                             .filter((v) => v.length > 0)
                     )
                 );
@@ -145,7 +166,7 @@ async function importQuestions() {
 
                 const existingKeys = new Set<string>(
                     existing.map((q: any) => {
-                        const subject = String(q?.subject || '').trim().toUpperCase();
+                        const subject = normalizeSubject(String(q?.subject || ''));
                         const shift = String(q?.source?.shift || '').trim();
                         const text = normalizeText(String(q?.text || ''));
                         return `${subject}||${shift}||${text}`;
@@ -154,13 +175,60 @@ async function importQuestions() {
 
                 const toInsertRaw: any[] = [];
                 let duplicatesInDb = 0;
+                let skippedInvalid = 0;
                 for (const q of dedupedInFile) {
                     const key = buildKey(q);
                     if (existingKeys.has(key)) {
                         duplicatesInDb++;
                         continue;
                     }
-                    toInsertRaw.push(q);
+
+                    const subject = normalizeSubject(String(q?.subject || ''));
+                    const correctOption = normalizeCorrectOption(q);
+                    const text = String(q?.text || '').trim();
+                    const shift = String(q?.source?.shift || '').trim();
+                    const year = Number(q?.source?.year || 0);
+
+                    if (!text || !shift || !year || !['QUANT', 'REASONING'].includes(subject) || !correctOption) {
+                        skippedInvalid++;
+                        continue;
+                    }
+
+                    const options = Array.isArray(q?.options) ? q.options : [];
+                    if (options.length !== 4) {
+                        skippedInvalid++;
+                        continue;
+                    }
+
+                    const normalizedOptions = options.map((opt: any, idx: number) => ({
+                        id: String(opt?.id || ['A', 'B', 'C', 'D'][idx] || '').toUpperCase(),
+                        text: String(opt?.text || '').trim(),
+                        image: opt?.image ?? ''
+                    }));
+
+                    if (normalizedOptions.some((opt: any) => !opt.id || !opt.text)) {
+                        skippedInvalid++;
+                        continue;
+                    }
+
+                    toInsertRaw.push({
+                        ...q,
+                        text,
+                        subject,
+                        difficulty: normalizeDifficulty(String(q?.difficulty || '')),
+                        correct_option: correctOption,
+                        source: {
+                            exam: String(q?.source?.exam || 'SSC CGL 2024'),
+                            year,
+                            shift
+                        },
+                        options: normalizedOptions,
+                        stats: {
+                            attempt_count: q?.stats?.attempt_count ?? 0,
+                            accuracy_rate: q?.stats?.accuracy_rate ?? 0,
+                            avg_time_ms: q?.stats?.avg_time_ms ?? 0
+                        }
+                    });
                 }
 
                 const startNumber = toInsertRaw.length > 0 ? nextQuestionNumber : null;
@@ -189,6 +257,7 @@ async function importQuestions() {
                     unique_in_file: dedupedInFile.length,
                     duplicates_in_file: duplicatesInFile,
                     duplicates_in_db: duplicatesInDb,
+                    skipped_invalid: skippedInvalid,
                     inserted: insertedCount,
                     start_question_number: startNumber,
                     end_question_number: endNumber
@@ -201,6 +270,7 @@ async function importQuestions() {
                     unique_in_file: 0,
                     duplicates_in_file: 0,
                     duplicates_in_db: 0,
+                    skipped_invalid: 0,
                     inserted: 0,
                     start_question_number: null,
                     end_question_number: null
@@ -216,7 +286,7 @@ async function importQuestions() {
         for (const row of runSummary) {
             totalInserted += row.inserted;
             console.log(
-                `${row.file} | total=${row.total} unique_in_file=${row.unique_in_file} dup_file=${row.duplicates_in_file} dup_db=${row.duplicates_in_db} inserted=${row.inserted}`
+                `${row.file} | total=${row.total} unique_in_file=${row.unique_in_file} dup_file=${row.duplicates_in_file} dup_db=${row.duplicates_in_db} invalid=${row.skipped_invalid} inserted=${row.inserted}`
             );
         }
         console.log(`Total inserted: ${totalInserted}`);
