@@ -30,50 +30,197 @@ async function connectToDatabase() {
 async function importQuestions() {
     const args = process.argv.slice(2);
     if (args.length !== 1) {
-        console.error('Usage: npx tsx scripts/import_questions_auto_increment.ts <path_to_json>');
-        process.exit(1);
-    }
-
-    const relativePath = args[0];
-    const absolutePath = path.resolve(process.cwd(), relativePath);
-
-    if (!fs.existsSync(absolutePath)) {
-        console.error(`File not found: ${absolutePath}`);
+        console.error('Usage: npx tsx scripts/import_questions_auto_increment.ts <path_to_json_or_directory>');
         process.exit(1);
     }
 
     await connectToDatabase();
 
     try {
-        console.log(`Reading questions from: ${absolutePath}`);
-        const rawData = fs.readFileSync(absolutePath, 'utf-8');
-        const questionsData = JSON.parse(rawData);
+        const relativePath = args[0];
+        const absolutePath = path.resolve(process.cwd(), relativePath);
 
-        if (!Array.isArray(questionsData)) {
-            console.error('Invalid JSON format: Expected an array of questions.');
+        if (!fs.existsSync(absolutePath)) {
+            console.error(`Path not found: ${absolutePath}`);
             process.exit(1);
         }
 
-        console.log(`Found ${questionsData.length} questions to import.`);
+        const stat = fs.statSync(absolutePath);
+        const filesToImport: string[] = [];
 
-        // Find the current maximum question_number
+        if (stat.isDirectory()) {
+            const dirFiles = fs
+                .readdirSync(absolutePath)
+                .filter((f) => f.toLowerCase().endsWith('.json'))
+                .sort();
+
+            if (dirFiles.length === 0) {
+                console.log(`No JSON files found in directory: ${absolutePath}`);
+                return;
+            }
+
+            for (const f of dirFiles) {
+                filesToImport.push(path.join(absolutePath, f));
+            }
+        } else {
+            filesToImport.push(absolutePath);
+        }
+
+        const normalizeText = (s: string) => s.toLowerCase().replace(/\s+/g, ' ').trim();
+        const buildKey = (q: any) => {
+            const subject = String(q?.subject || '').trim().toUpperCase();
+            const shift = String(q?.source?.shift || '').trim();
+            const text = normalizeText(String(q?.text || ''));
+            return `${subject}||${shift}||${text}`;
+        };
+
+        const runSummary: Array<{
+            file: string;
+            total: number;
+            unique_in_file: number;
+            duplicates_in_file: number;
+            duplicates_in_db: number;
+            inserted: number;
+            start_question_number: number | null;
+            end_question_number: number | null;
+        }> = [];
+
+        // Find the current maximum question_number once, then keep incrementing.
         const lastQuestion = await Question.findOne().sort({ question_number: -1 }).select('question_number');
         let nextQuestionNumber = (lastQuestion?.question_number || 0) + 1;
 
         console.log(`Starting auto-increment from question_number: ${nextQuestionNumber}`);
+        console.log(`Processing ${filesToImport.length} file(s)...`);
 
-        const questionsToInsert = questionsData.map((q: any, index: number) => ({
-            ...q,
-            question_number: nextQuestionNumber + index,
-            // Ensure default fields if missing
-            is_live: q.is_live ?? false,
-            needs_review: q.needs_review ?? true,
-            created_at: new Date()
-        }));
+        for (const filePath of filesToImport) {
+            try {
+                console.log('\n' + '='.repeat(60));
+                console.log(`Reading: ${filePath}`);
+                const rawData = fs.readFileSync(filePath, 'utf-8').replace(/^\uFEFF/, '');
+                const questionsData = JSON.parse(rawData);
 
-        const result = await Question.insertMany(questionsToInsert);
-        console.log(`Successfully imported ${result.length} questions.`);
-        console.log(`Last assigned question_number: ${nextQuestionNumber + result.length - 1}`);
+                if (!Array.isArray(questionsData)) {
+                    console.error(`Invalid JSON format in ${filePath}: expected an array.`);
+                    continue;
+                }
+
+                const total = questionsData.length;
+                const seenInFile = new Set<string>();
+                const dedupedInFile: any[] = [];
+                let duplicatesInFile = 0;
+
+                for (const q of questionsData) {
+                    const key = buildKey(q);
+                    if (!key || key.endsWith('||')) {
+                        continue;
+                    }
+                    if (seenInFile.has(key)) {
+                        duplicatesInFile++;
+                        continue;
+                    }
+                    seenInFile.add(key);
+                    dedupedInFile.push(q);
+                }
+
+                const shifts = Array.from(
+                    new Set(
+                        dedupedInFile
+                            .map((q) => String(q?.source?.shift || '').trim())
+                            .filter((v) => v.length > 0)
+                    )
+                );
+
+                const subjects = Array.from(
+                    new Set(
+                        dedupedInFile
+                            .map((q) => String(q?.subject || '').trim().toUpperCase())
+                            .filter((v) => v.length > 0)
+                    )
+                );
+
+                const existing = await Question.find({
+                    'source.shift': { $in: shifts },
+                    subject: { $in: subjects }
+                }).select('subject source.shift text').lean();
+
+                const existingKeys = new Set<string>(
+                    existing.map((q: any) => {
+                        const subject = String(q?.subject || '').trim().toUpperCase();
+                        const shift = String(q?.source?.shift || '').trim();
+                        const text = normalizeText(String(q?.text || ''));
+                        return `${subject}||${shift}||${text}`;
+                    })
+                );
+
+                const toInsertRaw: any[] = [];
+                let duplicatesInDb = 0;
+                for (const q of dedupedInFile) {
+                    const key = buildKey(q);
+                    if (existingKeys.has(key)) {
+                        duplicatesInDb++;
+                        continue;
+                    }
+                    toInsertRaw.push(q);
+                }
+
+                const startNumber = toInsertRaw.length > 0 ? nextQuestionNumber : null;
+                const questionsToInsert = toInsertRaw.map((q: any, index: number) => ({
+                    ...q,
+                    question_number: nextQuestionNumber + index,
+                    is_live: q.is_live ?? false,
+                    needs_review: q.needs_review ?? true,
+                    created_at: new Date()
+                }));
+
+                if (questionsToInsert.length > 0) {
+                    const result = await Question.insertMany(questionsToInsert);
+                    console.log(`Inserted ${result.length} question(s).`);
+                    nextQuestionNumber += result.length;
+                } else {
+                    console.log('No new questions to insert (all duplicates in DB or file).');
+                }
+
+                const insertedCount = questionsToInsert.length;
+                const endNumber = insertedCount > 0 ? (startNumber as number) + insertedCount - 1 : null;
+
+                runSummary.push({
+                    file: path.basename(filePath),
+                    total,
+                    unique_in_file: dedupedInFile.length,
+                    duplicates_in_file: duplicatesInFile,
+                    duplicates_in_db: duplicatesInDb,
+                    inserted: insertedCount,
+                    start_question_number: startNumber,
+                    end_question_number: endNumber
+                });
+            } catch (fileError) {
+                console.error(`Failed to process ${filePath}:`, fileError);
+                runSummary.push({
+                    file: path.basename(filePath),
+                    total: 0,
+                    unique_in_file: 0,
+                    duplicates_in_file: 0,
+                    duplicates_in_db: 0,
+                    inserted: 0,
+                    start_question_number: null,
+                    end_question_number: null
+                });
+                continue;
+            }
+        }
+
+        console.log('\n' + '='.repeat(60));
+        console.log('IMPORT SUMMARY');
+        console.log('='.repeat(60));
+        let totalInserted = 0;
+        for (const row of runSummary) {
+            totalInserted += row.inserted;
+            console.log(
+                `${row.file} | total=${row.total} unique_in_file=${row.unique_in_file} dup_file=${row.duplicates_in_file} dup_db=${row.duplicates_in_db} inserted=${row.inserted}`
+            );
+        }
+        console.log(`Total inserted: ${totalInserted}`);
+        console.log(`Next question_number will start from: ${nextQuestionNumber}`);
 
     } catch (error) {
         console.error('Error importing questions:', error);

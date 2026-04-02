@@ -17,7 +17,9 @@ import {
     TrackChangesOutlinedIcon,
     EditIcon,
     SchoolIcon,
-    CalendarTodayOutlinedIcon
+    CalendarTodayOutlinedIcon,
+    VisibilityIcon,
+    VisibilityOffIcon
 } from '@/components/icons';
 
 const EXAM_OPTIONS = [
@@ -35,7 +37,7 @@ const YEAR_OPTIONS = [2025, 2026, 2027];
 export default function RegisterPage() {
     const router = useRouter();
     const { register, user, loading } = useAuth();
-    const { warning: notifyWarning, error: notifyError, success: notifySuccess } = useToast();
+    const { success: notifySuccess } = useToast();
     const otpRefs = [
         useRef<HTMLInputElement>(null),
         useRef<HTMLInputElement>(null),
@@ -52,6 +54,8 @@ export default function RegisterPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [targetExam, setTargetExam] = useState('SSC_CGL');
     const [targetYear, setTargetYear] = useState(2025);
     const [dailyQuantGoal, setDailyQuantGoal] = useState(10);
@@ -165,7 +169,7 @@ export default function RegisterPage() {
                 return;
             }
 
-            // OTP verified — create account
+            // OTP verified - create account
             const result = await register({
                 email,
                 password,
@@ -177,7 +181,7 @@ export default function RegisterPage() {
             });
 
             if (result.success) {
-                notifySuccess('Account created! Welcome to PrepLeague 🎉');
+                notifySuccess('Account created! Welcome to PrepLeague!');
                 router.push('/problems');
             } else {
                 setOtpError(result.error || 'Registration failed');
@@ -239,7 +243,7 @@ export default function RegisterPage() {
 
                                 {error && (
                                     <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm flex items-center gap-2">
-                                        <span>⚠️</span> {error}
+                                        <span>!</span> {error}
                                     </div>
                                 )}
 
@@ -300,7 +304,7 @@ export default function RegisterPage() {
                                             <TrackChangesOutlinedIcon className="text-amber-500" sx={{ fontSize: '2rem' }} />
                                             <div>
                                                 <span className="text-sm font-semibold text-white">Daily Practice Goals</span>
-                                                <p className="text-[11px] text-neutral-500">We'll remind you to practice this many questions each day.</p>
+                                                <p className="text-[11px] text-neutral-500">We&apos;ll remind you to practice this many questions each day.</p>
                                             </div>
                                         </div>
 
@@ -352,7 +356,10 @@ export default function RegisterPage() {
                                         <label className="block text-sm font-medium text-neutral-400 mb-2">Password</label>
                                         <div className="relative group">
                                             <LockOutlinedIcon sx={{ fontSize: '1.25rem' }} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 group-focus-within:text-amber-500 transition-colors" />
-                                            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full pl-12 pr-4 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white placeholder-neutral-600" placeholder="••••••••" required minLength={6} />
+                                            <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full pl-12 pr-12 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white placeholder-neutral-600" placeholder="********" required minLength={6} />
+                                            <button type="button" onClick={() => setShowPassword((prev) => !prev)} className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-amber-500 transition-colors" aria-label={showPassword ? "Hide password" : "Show password"}>
+                                                {showPassword ? <VisibilityOffIcon sx={{ fontSize: '1.1rem' }} /> : <VisibilityIcon sx={{ fontSize: '1.1rem' }} />}
+                                            </button>
                                         </div>
                                     </div>
 
@@ -361,7 +368,10 @@ export default function RegisterPage() {
                                         <label className="block text-sm font-medium text-neutral-400 mb-2">Confirm Password</label>
                                         <div className="relative group">
                                             <LockOutlinedIcon sx={{ fontSize: '1.25rem' }} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 group-focus-within:text-amber-500 transition-colors" />
-                                            <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full pl-12 pr-4 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white placeholder-neutral-600" placeholder="••••••••" required />
+                                            <input type={showConfirmPassword ? "text" : "password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full pl-12 pr-12 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white placeholder-neutral-600" placeholder="********" required />
+                                            <button type="button" onClick={() => setShowConfirmPassword((prev) => !prev)} className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-amber-500 transition-colors" aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}>
+                                                {showConfirmPassword ? <VisibilityOffIcon sx={{ fontSize: '1.1rem' }} /> : <VisibilityIcon sx={{ fontSize: '1.1rem' }} />}
+                                            </button>
                                         </div>
                                     </div>
 
@@ -369,7 +379,7 @@ export default function RegisterPage() {
                                     <div className="flex items-start gap-3">
                                         <input type="checkbox" id="terms" checked={agreedToTerms} onChange={(e) => setAgreedToTerms(e.target.checked)} className="mt-1 w-4 h-4 rounded border-gray-600 bg-neutral-800 text-amber-500 focus:ring-amber-500" />
                                         <label htmlFor="terms" className="text-sm text-neutral-400">
-                                            I agree to PrepLeague's{' '}
+                                            I agree to PrepLeague&apos;s{' '}
                                             <Link href="/terms" className="text-amber-500 hover:text-amber-400">Terms of Service</Link>
                                             {' '}and{' '}
                                             <Link href="/privacy" className="text-amber-500 hover:text-amber-400">Privacy Policy</Link>
@@ -404,7 +414,7 @@ export default function RegisterPage() {
 
                                 <div className="text-center mb-8">
                                     <div className="w-14 h-14 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <span className="text-2xl">📬</span>
+                                        <span className="text-xl font-bold">OTP</span>
                                     </div>
                                     <h2 className="text-xl font-bold text-white mb-2">Check your inbox</h2>
                                     <p className="text-neutral-400 text-sm">

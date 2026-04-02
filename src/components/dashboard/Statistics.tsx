@@ -88,7 +88,8 @@ const Statistics: React.FC<StatisticsProps> = ({
     return (
         <div className={`grid grid-cols-2 gap-4 ${className}`}>
             {stats.map((stat, idx) => (
-                <div key={idx} className={`rounded-xl p-4 border ${stat.bg} ${stat.border}`}>
+                <div key={idx} className={`rounded-xl p-4 border ${stat.bg} ${stat.border} ${idx === stats.length - 1 && stats.length % 2 !== 0 ? 'col-span-2' : ''
+                    }`}>
                     <div className="text-neutral-400 text-xs font-medium uppercase tracking-wider mb-1">
                         {stat.label}
                     </div>

@@ -535,16 +535,27 @@ function SprintSetupContent() {
                                 ) : (
                                     <div className="divide-y divide-neutral-800/50">
                                         {history.map((h, i) => (
-                                            <div key={h.id || i} className="p-5 grid grid-cols-12 gap-4 items-center hover:bg-neutral-800/30 transition-colors group">
-                                                <div className="col-span-4">
-                                                    <p className="text-sm font-medium text-neutral-200">{formatDate(h.createdAt)}</p>
-                                                    <div className="flex items-center gap-2 mt-1.5">
-                                                        <span className={`px-2 py-0.5 text-[10px] font-bold rounded border ${h.subject === 'QUANT'
-                                                            ? 'bg-amber-500/10 text-amber-500 border-amber-500/20'
-                                                            : 'bg-violet-500/10 text-violet-500 border-violet-500/20'}`}>
-                                                            {h.subject}
-                                                        </span>
-                                                        <span className="text-[10px] text-neutral-500 font-medium">#{h.id?.slice(-4).toUpperCase() || (1000 + i)}</span>
+                                            <div key={h.id || i} className="p-5 flex flex-wrap md:grid md:grid-cols-12 gap-4 items-center justify-between hover:bg-neutral-800/30 transition-colors group">
+                                                <div className="w-full md:w-auto md:col-span-4 flex justify-between items-center md:block">
+                                                    <div>
+                                                        <p className="text-sm font-medium text-neutral-200">{formatDate(h.createdAt)}</p>
+                                                        <div className="flex items-center gap-2 mt-1.5">
+                                                            <span className={`px-2 py-0.5 text-[10px] font-bold rounded border ${h.subject === 'QUANT'
+                                                                ? 'bg-amber-500/10 text-amber-500 border-amber-500/20'
+                                                                : 'bg-violet-500/10 text-violet-500 border-violet-500/20'}`}>
+                                                                {h.subject}
+                                                            </span>
+                                                            <span className="text-[10px] text-neutral-500 font-medium">#{h.id?.slice(-4).toUpperCase() || (1000 + i)}</span>
+                                                        </div>
+                                                    </div>
+                                                    {/* Mobile Review Button */}
+                                                    <div className="md:hidden">
+                                                        <Link
+                                                            href={`/sprint/${h.id}/review`}
+                                                            className="px-4 py-2 text-xs font-bold text-neutral-400 hover:text-white bg-neutral-800/50 hover:bg-neutral-700 border border-neutral-700 rounded-xl transition-all"
+                                                        >
+                                                            Review
+                                                        </Link>
                                                     </div>
                                                 </div>
 
@@ -568,7 +579,7 @@ function SprintSetupContent() {
                                                     <p className="text-sm font-mono text-neutral-300">{formatTime(h.timeTaken)}</p>
                                                 </div>
 
-                                                <div className="col-span-2 flex justify-end">
+                                                <div className="col-span-2 hidden md:flex justify-end">
                                                     <Link
                                                         href={`/sprint/${h.id}/review`}
                                                         className="px-4 py-2 text-xs font-bold text-neutral-400 hover:text-white bg-neutral-800/50 hover:bg-neutral-700 border border-neutral-700 rounded-xl transition-all"

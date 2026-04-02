@@ -4,12 +4,17 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
+import { MenuIcon, CloseIcon } from '@/components/icons';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function PrivacyPage() {
     const [activeSection, setActiveSection] = useState('info-collect');
+    const [scrolled, setScrolled] = useState(false);
+    const [showMobileMenu, setShowMobileMenu] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
+            setScrolled(window.scrollY > 10);
             const sections = [
                 'info-collect', 'how-we-use', 'sharing', 'retention',
                 'rights', 'security', 'children', 'cookies',
@@ -36,7 +41,7 @@ export default function PrivacyPage() {
         const element = document.getElementById(id);
         if (element) {
             window.scrollTo({
-                top: element.offsetTop - 100,
+                top: element.offsetTop - 110,
                 behavior: 'smooth'
             });
             setActiveSection(id);
@@ -44,290 +49,255 @@ export default function PrivacyPage() {
     };
 
     const sidebarLinks = [
-        { id: 'info-collect', label: '1. Information We Collect' },
-        { id: 'how-we-use', label: '2. How We Use It' },
-        { id: 'sharing', label: '3. Data Sharing' },
-        { id: 'retention', label: '4. Data Retention' },
-        { id: 'rights', label: '5. Your Rights' },
-        { id: 'security', label: '6. Security' },
-        { id: 'children', label: "7. Children's Privacy" },
-        { id: 'cookies', label: '8. Cookies Policy' },
-        { id: 'links', label: '9. Third-Party Links' },
-        { id: 'international', label: '10. International Transfers' },
-        { id: 'changes', label: '11. Changes to Policy' },
-        { id: 'contact', label: '12. Contact Us' },
-        { id: 'compliance', label: '13. Compliance' },
+        { id: 'info-collect', label: 'Information We Collect' },
+        { id: 'how-we-use', label: 'How We Use Data' },
+        { id: 'sharing', label: 'Data Sharing Protocols' },
+        { id: 'retention', label: 'Data Retention' },
+        { id: 'rights', label: 'Your User Rights' },
+        { id: 'security', label: 'Security Infrastructure' },
+        { id: 'children', label: "Children's Privacy" },
+        { id: 'cookies', label: 'Cookies Usage' },
+        { id: 'links', label: 'Third-Party Links' },
+        { id: 'international', label: 'International Transfers' },
+        { id: 'changes', label: 'Policy Transformations' },
+        { id: 'contact', label: 'Contact Privacy Team' },
+        { id: 'compliance', label: 'Legal Compliance' },
     ];
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] text-white selection:bg-amber-500/30 font-sans">
+        <div className="min-h-screen bg-[#0f0f0f] text-neutral-200 selection:bg-amber-500/30 selection:text-white font-sans antialiased">
+            
             {/* --- HEADER --- */}
-            <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-white/5 py-3">
-                <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-                    <Link href="/" className="flex items-center gap-3 group">
-                        <div className="relative w-8 h-8 transition-transform group-hover:scale-105">
-                            <Image src="/logo-final.png" alt="PrepLeague Logo" fill className="object-contain" />
-                        </div>
-                        <span className="font-bold text-lg tracking-tight text-white">PrepLeague</span>
-                    </Link>
-                    <nav className="hidden md:flex items-center gap-8">
-                        <Link href="/" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Home</Link>
-                        <Link href="/problems" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Problems</Link>
-                        <Link href="/sprint" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Sprint</Link>
-                        {/* <Link href="/games" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Games</Link> */}
-                        <Link href="/pricing" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Pricing</Link>
-                    </nav>
-                    <div className="flex items-center gap-4">
-                        <Link href="/login" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden sm:block">Sign in</Link>
-                        <Link href="/register" className="px-5 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-neutral-200 transition-colors">
-                            Get Started
-                        </Link>
+            <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 border-b ${
+              scrolled 
+                ? 'bg-[#1a1a1a]/90 backdrop-blur-md border-neutral-800/80 py-3' 
+                : 'bg-transparent border-transparent py-5'
+            }`}>
+              <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between">
+                <div className="flex items-center gap-12">
+                  <Link href="/" className="flex items-center gap-3 transition-transform active:scale-95 group">
+                    <div className="relative w-9 h-9">
+                      <Image src="/logo-final.png" alt="Logo" fill className="object-contain" />
                     </div>
+                    <div className="hidden sm:block">
+                      <span className="text-xl font-bold text-white tracking-tight">PrepLeague</span>
+                    </div>
+                  </Link>
+
+                  <nav className="hidden lg:flex items-center gap-2">
+                    {[
+                      { n: 'Home', h: '/' },
+                      { n: 'Problems', h: '/problems' },
+                      { n: 'Sprint Mode', h: '/sprint' },
+                      { n: 'Pricing', h: '/pricing' }
+                    ].map((item) => (
+                      <Link 
+                        key={item.n} 
+                        href={item.h}
+                        className="px-4 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800/50 rounded-full transition-all"
+                      >
+                        {item.n}
+                      </Link>
+                    ))}
+                  </nav>
                 </div>
+
+                <div className="flex items-center gap-4">
+                  <Link href="/login" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden sm:block px-4">Log in</Link>
+                  <Link href="/register" className="px-6 py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-neutral-200 transition-all shadow-lg active:scale-95">
+                    Get Started
+                  </Link>
+                  <button className="lg:hidden p-2 text-neutral-400" onClick={() => setShowMobileMenu(true)}>
+                    <MenuIcon />
+                  </button>
+                </div>
+              </div>
+
+              {/* Mobile Nav */}
+              <AnimatePresence>
+                {showMobileMenu && (
+                  <motion.div 
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    className="fixed inset-0 z-[200] lg:hidden bg-[#0f0f0f] flex flex-col"
+                  >
+                    <div className="flex items-center justify-between p-6 border-b border-neutral-800">
+                      <span className="text-xl font-bold text-white">Menu</span>
+                      <button onClick={() => setShowMobileMenu(false)} className="text-neutral-400 p-2"><CloseIcon /></button>
+                    </div>
+                    <nav className="flex flex-col p-6 gap-2">
+                      {[
+                        { n: 'Home', h: '/' },
+                        { n: 'Problems', h: '/problems' },
+                        { n: 'Sprint Mode', h: '/sprint' },
+                        { n: 'Pricing', h: '/pricing' },
+                        { n: 'Login', h: '/login' }
+                      ].map((item) => (
+                        <Link 
+                          key={item.n}
+                          href={item.h}
+                          onClick={() => setShowMobileMenu(false)}
+                          className="px-4 py-4 rounded-xl text-lg font-medium text-neutral-300 hover:bg-neutral-800 transition-all"
+                        >
+                          {item.n}
+                        </Link>
+                      ))}
+                    </nav>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </header>
 
             {/* --- MAIN LAYOUT --- */}
-            <div className="max-w-7xl mx-auto px-6 pt-32 pb-24 flex flex-col lg:flex-row gap-12">
+            <div className="max-w-[1440px] mx-auto px-6 lg:px-12 pt-48 pb-32 flex flex-col lg:flex-row gap-20">
 
                 {/* --- SIDEBAR (Sticky) --- */}
                 <aside className="hidden lg:block w-72 shrink-0">
-                    <div className="sticky top-28 space-y-2 max-h-[calc(100vh-140px)] overflow-y-auto pr-4 scrollbar-thin scrollbar-thumb-neutral-800 scrollbar-track-transparent">
-                        <h4 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider pl-3">Table of Contents</h4>
-                        <nav className="space-y-1">
-                            {sidebarLinks.map((link) => (
-                                <button
-                                    key={link.id}
-                                    onClick={() => scrollToSection(link.id)}
-                                    className={`block w-full text-left px-3 py-2 text-sm rounded-xl transition-colors ${activeSection === link.id
-                                        ? 'bg-neutral-800 text-white font-medium'
-                                        : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/50'
-                                        }`}
-                                >
-                                    {link.label}
-                                </button>
-                            ))}
-                        </nav>
+                    <div className="sticky top-32 space-y-8">
+                        <div className="space-y-4 pr-10">
+                          <h4 className="text-[10px] font-black text-neutral-600 uppercase tracking-[0.2em] px-1">Integrity Framework</h4>
+                          <nav className="flex flex-col">
+                              {sidebarLinks.map((link, i) => (
+                                  <button
+                                      key={link.id}
+                                      onClick={() => scrollToSection(link.id)}
+                                      className="group relative flex items-center gap-3 py-2 text-left transition-all"
+                                  >
+                                      <span className={`text-[10px] font-mono font-bold transition-colors ${activeSection === link.id ? 'text-white' : 'text-neutral-700'}`}>{String(i + 1).padStart(2, '0')}</span>
+                                      <span className={`text-sm font-semibold transition-colors ${activeSection === link.id ? 'text-white translate-x-1' : 'text-neutral-500 hover:text-neutral-300'}`}>
+                                          {link.label}
+                                      </span>
+                                  </button>
+                              ))}
+                          </nav>
+                        </div>
                     </div>
                 </aside>
 
                 {/* --- CONTENT --- */}
-                <main className="flex-1 min-w-0">
-                    <div className="mb-12 border-b border-neutral-800 pb-8">
-                        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">
+                <main className="flex-1 max-w-3xl">
+                    <div className="mb-16">
+                        <div className="inline-block px-3 py-1 rounded-full bg-neutral-800 border border-neutral-700 text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-10">
+                          Data Sovereignty
+                        </div>
+                        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-8 text-white">
                             Privacy Policy
                         </h1>
-                        <p className="text-neutral-400 text-lg">
-                            Last Updated: <span className="text-neutral-200">February 18, 2026</span>
-                        </p>
+                        <div className="flex items-center gap-3 text-xs font-mono font-bold text-neutral-500">
+                            <span>LAST UPDATED:</span>
+                            <span className="text-neutral-300 uppercase">FEBRUARY 18, 2026</span>
+                        </div>
                     </div>
 
-                    <div className="prose prose-invert prose-neutral max-w-none prose-headings:scroll-mt-28 prose-headings:font-semibold prose-a:text-amber-500 hover:prose-a:text-amber-400">
-                        <p className="lead text-xl text-neutral-300">
-                            PrepLeague ("we," "us," or "our") operates prepleague.com. This Privacy Policy explains how we collect, use, disclose, and protect your information when you use our SSC CGL exam preparation platform.
-                        </p>
-                        <p>
-                            By using PrepLeague, you agree to the collection and use of information in accordance with this policy.
+                    <div className="prose prose-invert prose-neutral max-w-none">
+                        <p className="text-lg text-neutral-400 leading-relaxed font-medium mb-12">
+                          PrepLeague ("we," "us," or "our") operates prepleague.com. This Privacy Policy details our operational protocols for collecting and protecting your identity while you utilize our preparation engine.
                         </p>
 
-                        <div className="h-8"></div>
+                        <section id="info-collect" className="scroll-mt-32 mb-20">
+                            <h2 className="text-xl font-bold text-white mb-6">1. Information We Collect</h2>
+                            <p className="text-neutral-500 leading-relaxed mb-10">We collect granular data to optimize your performance engine and secure your preparation history.</p>
 
-                        <section id="info-collect">
-                            <h2>1. Information We Collect</h2>
-
-                            <h3 className="text-neutral-200 mt-6 mb-3">1.1 Information You Provide</h3>
-                            <div className="grid md:grid-cols-2 gap-6 bg-neutral-900/50 p-6 rounded-2xl border border-neutral-800 my-6 shadow-sm">
+                            <div className="grid md:grid-cols-2 gap-6 bg-[#1a1a1a] p-8 rounded-3xl border border-neutral-800">
                                 <div>
-                                    <h4 className="text-white font-medium mb-2">Account Information</h4>
-                                    <ul className="text-sm text-neutral-400 space-y-1">
-                                        <li>Name & Email address</li>
-                                        <li>Password (encrypted)</li>
-                                        <li>Exam details (target date)</li>
+                                    <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">Identity Data</h4>
+                                    <ul className="text-sm text-neutral-500 space-y-2 mb-0 list-none p-0">
+                                        <li>• Verified name & Email</li>
+                                        <li>• Hashed credentials</li>
+                                        <li>• Goal benchmarks</li>
                                     </ul>
                                 </div>
                                 <div>
-                                    <h4 className="text-white font-medium mb-2">Payment Information</h4>
-                                    <ul className="text-sm text-neutral-400 space-y-1">
-                                        <li>Payment method (via Razorpay)</li>
-                                        <li>Billing address</li>
-                                        <li>Transaction history</li>
+                                    <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">Financial Data</h4>
+                                    <ul className="text-sm text-neutral-500 space-y-2 mb-0 list-none p-0">
+                                        <li>• Razorpay identifiers</li>
+                                        <li>• Billing geography</li>
+                                        <li>• Subscription status</li>
                                     </ul>
                                 </div>
-                                <div>
-                                    <h4 className="text-white font-medium mb-2">Practice Data</h4>
-                                    <ul className="text-sm text-neutral-400 space-y-1">
-                                        <li>Questions attempted</li>
-                                        <li>Time spent & Speed</li>
-                                        <li>Session history & Bookmarks</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 className="text-white font-medium mb-2">Optional</h4>
-                                    <ul className="text-sm text-neutral-400 space-y-1">
-                                        <li>Profile photo</li>
-                                        <li>Educational background</li>
-                                        <li>Target score goals</li>
+                                <div className="mt-4">
+                                    <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">Engine Metrics</h4>
+                                    <ul className="text-sm text-neutral-500 space-y-2 mb-0 list-none p-0 font-mono">
+                                        <li>• Precision stats (Accuracy)</li>
+                                        <li>• Sprint reflex timing</li>
+                                        <li>• Heatmap history</li>
                                     </ul>
                                 </div>
                             </div>
-
-                            <h3 className="text-neutral-200 mt-8 mb-3">1.2 Automatically Collected Information</h3>
-                            <ul className="list-disc pl-5 space-y-2 text-neutral-300">
-                                <li><strong>Usage Data:</strong> Pages visited, features used, device type, IP address, session duration.</li>
-                                <li><strong>Performance Data:</strong> Accuracy by topic, speed analytics, streaks, progress over time.</li>
-                                <li><strong>Cookies:</strong> Authentication (required), Preferences, and Analytics cookies.</li>
-                            </ul>
                         </section>
 
-                        <hr className="border-neutral-800 my-12" />
-
-                        <section id="how-we-use">
-                            <h2>2. How We Use Your Information</h2>
-                            <p>We use your data to power the core functionality of PrepLeague and improve your learning experience.</p>
-
-                            <div className="space-y-6 mt-6">
+                        <section id="how-we-use" className="scroll-mt-32 mb-20 text-neutral-400">
+                            <h2 className="text-xl font-bold text-white mb-6">2. Utilization Protocol</h2>
+                            <div className="space-y-8">
                                 <div>
-                                    <h4 className="text-white font-medium">Provide Core Services</h4>
-                                    <p className="text-neutral-400 text-sm mt-1">Creating accounts, delivering personalized questions, tracking progress, and calculating predicted scores.</p>
+                                    <h4 className="text-white font-bold text-sm tracking-wide">Performance Optimization</h4>
+                                    <p className="text-sm text-neutral-500 leading-relaxed mt-2">Personalizing your question repository and automating "Weakspot Drills" based on real-time accuracy metrics.</p>
                                 </div>
                                 <div>
-                                    <h4 className="text-white font-medium">Improve Your Experience</h4>
-                                    <p className="text-neutral-400 text-sm mt-1">Recommending questions based on weak areas, adjusting daily targets, and showing speed benchmarks.</p>
+                                    <h4 className="text-white font-bold text-sm tracking-wide">Analytic Scaling</h4>
+                                    <p className="text-sm text-neutral-500 leading-relaxed mt-2">Generating predictive scores and visualized heatmaps to trace your growth across 365 days.</p>
                                 </div>
                                 <div>
-                                    <h4 className="text-white font-medium">Platform Operations & Security</h4>
-                                    <p className="text-neutral-400 text-sm mt-1">Processing payments, preventing fraud, and sending important account notifications.</p>
+                                    <h4 className="text-white font-bold text-sm tracking-wide">Operational Integrity</h4>
+                                    <p className="text-sm text-neutral-500 leading-relaxed mt-2">Securing billing flows, preventing fraud, and delivering critical engine updates via transactional emails.</p>
                                 </div>
                             </div>
                         </section>
 
-                        <hr className="border-neutral-800 my-12" />
-
-                        <section id="sharing">
-                            <h2>3. How We Share Your Information</h2>
-                            <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl mb-6">
-                                <p className="text-amber-200 text-sm font-medium m-0">We DO NOT sell your personal information to third parties.</p>
+                        <section id="sharing" className="scroll-mt-32 mb-20 text-neutral-400">
+                            <h2 className="text-xl font-bold text-white mb-6">3. Data Sharing Protocols</h2>
+                            <div className="px-5 py-4 bg-amber-500/10 border border-amber-500/20 rounded-2xl mb-8">
+                                <p className="text-amber-200 text-sm font-bold m-0">Protocol Zero: We do not sell personal identification to third-party data harvesters.</p>
                             </div>
-                            <p>We may share information with trusted service providers:</p>
-                            <ul className="grid sm:grid-cols-2 gap-4 not-prose my-6">
-                                <li className="bg-neutral-900 border border-neutral-800 p-4 rounded-xl shadow-sm">
-                                    <strong className="block text-white mb-1">Razorpay</strong>
-                                    <span className="text-sm text-neutral-500">Payment processing (PCI DSS compliant)</span>
-                                </li>
-                                <li className="bg-neutral-900 border border-neutral-800 p-4 rounded-xl shadow-sm">
-                                    <strong className="block text-white mb-1">Vercel</strong>
-                                    <span className="text-sm text-neutral-500">Web hosting and infrastructure</span>
-                                </li>
-                                <li className="bg-neutral-900 border border-neutral-800 p-4 rounded-xl shadow-sm">
-                                    <strong className="block text-white mb-1">MongoDB Atlas</strong>
-                                    <span className="text-sm text-neutral-500">Database hosting (Mumbai region)</span>
-                                </li>
-                                <li className="bg-neutral-900 border border-neutral-800 p-4 rounded-xl shadow-sm">
-                                    <strong className="block text-white mb-1">Email Providers</strong>
-                                    <span className="text-sm text-neutral-500">For transactional emails only</span>
-                                </li>
-                            </ul>
-                        </section>
-
-                        <hr className="border-neutral-800 my-12" />
-
-                        <section id="retention">
-                            <h2>4. Data Retention</h2>
-                            <p>We retain your data while your account is active. Practice history is kept indefinitely to show your progress.</p>
-                            <ul>
-                                <li><strong>Deleted Accounts:</strong> Personal info removed within 30 days. Anonymized data may be kept for stats.</li>
-                                <li><strong>Legal Records:</strong> Payment records kept for 7 years as required by Indian tax law.</li>
-                            </ul>
-                        </section>
-
-                        <hr className="border-neutral-800 my-12" />
-
-                        <section id="rights">
-                            <h2>5. Your Rights and Choices</h2>
-                            <p>Under India's Digital Personal Data Protection Act (DPDPA) 2023, you have the right to:</p>
-                            <div className="grid md:grid-cols-2 gap-4 mt-4">
-                                <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-800 shadow-sm">
-                                    <h4 className="text-white m-0">Access & Portability</h4>
-                                    <p className="text-sm text-neutral-400 mt-2 m-0">Request a copy of your data or export your practice history.</p>
-                                </div>
-                                <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-800 shadow-sm">
-                                    <h4 className="text-white m-0">Correction & Deletion</h4>
-                                    <p className="text-sm text-neutral-400 mt-2 m-0">Update your profile or request full account deletion.</p>
-                                </div>
-                                <div className="p-5 bg-neutral-900 rounded-xl border border-neutral-800 shadow-sm">
-                                    <h4 className="text-white m-0">Opt-Out & Withdraw</h4>
-                                    <p className="text-sm text-neutral-400 mt-2 m-0">Unsubscribe from emails or disable optional data collection.</p>
-                                </div>
-                            </div>
-                            <p className="mt-6">
-                                To exercise these rights, contact us at: <a href="mailto:privacy@prepleague.com">privacy@prepleague.com</a>
-                            </p>
-                        </section>
-
-                        <hr className="border-neutral-800 my-12" />
-
-                        <section id="security">
-                            <h2>6. Data Security</h2>
-                            <p>We implement industry-standard security measures:</p>
-                            <ul className="list-disc pl-5 mb-4">
-                                <li>All data encrypted in transit (HTTPS/TLS)</li>
-                                <li>Passwords hashed using bcrypt</li>
-                                <li>Database access restricted and encrypted at rest</li>
-                                <li>Payment data processed via PCI DSS compliant Razorpay (we never store card details)</li>
-                            </ul>
-                        </section>
-
-                        <hr className="border-neutral-800 my-12" />
-
-                        <section id="children">
-                            <h2>7. Children's Privacy</h2>
-                            <p>PrepLeague is intended for users aged 16 and above. We do not knowingly collect information from children under 16. If we discover such data, we will delete it immediately.</p>
-                        </section>
-
-                        <hr className="border-neutral-800 my-12" />
-
-                        <section id="cookies">
-                            <h2>8. Cookies Policy</h2>
-                            <p>We use Essential cookies (for login/security), Functional cookies (preferences), and Analytics cookies. You can manage optional cookies in your browser settings.</p>
-                        </section>
-
-                        <hr className="border-neutral-800 my-12" />
-
-                        <section id="links">
-                            <h2>9. Third-Party Links</h2>
-                            <p>We are not responsible for the privacy practices of external sites (e.g., official SSC website) linked from PrepLeague.</p>
-                        </section>
-
-                        <hr className="border-neutral-800 my-12" />
-
-                        <section id="international">
-                            <h2>10. International Transfers</h2>
-                            <p>Your data is primarily stored in India (Mumbai). Any international transfers ensure appropriate safeguards and compliance with local laws.</p>
-                        </section>
-
-                        <hr className="border-neutral-800 my-12" />
-
-                        <section id="changes">
-                            <h2>11. Changes to This Policy</h2>
-                            <p>We may update this policy. Significant changes will be notified via email or a prominent platform notice.</p>
-                        </section>
-
-                        <hr className="border-neutral-800 my-12" />
-
-                        <section id="contact">
-                            <h2>12. Contact Us</h2>
-                            <div className="bg-neutral-900 p-8 rounded-2xl border border-neutral-800 shadow-sm">
-                                <p className="mt-0">For privacy questions:</p>
-                                <p className="mb-1"><strong>Email:</strong> privacy@prepleague.com</p>
-                                <p className="mb-1"><strong>Support:</strong> support@prepleague.com</p>
-                                <p className="m-0"><strong>Address:</strong> PrepLeague, Hyderabad, Telangana, India</p>
+                            <p className="mb-6">We only transmit data to verified infrastructure partners required to maintain the platform:</p>
+                            <div className="grid sm:grid-cols-2 gap-4">
+                               <div className="bg-neutral-900 border border-neutral-800 p-5 rounded-2xl">
+                                  <span className="text-[10px] font-mono font-bold text-neutral-600 block mb-1">PAYMENT ENGINE</span>
+                                  <span className="text-sm text-white font-bold">Razorpay</span>
+                               </div>
+                               <div className="bg-neutral-900 border border-neutral-800 p-5 rounded-2xl">
+                                  <span className="text-[10px] font-mono font-bold text-neutral-600 block mb-1">INFRASTRUCTURE</span>
+                                  <span className="text-sm text-white font-bold">Vercel</span>
+                               </div>
+                               <div className="bg-neutral-900 border border-neutral-800 p-5 rounded-2xl">
+                                  <span className="text-[10px] font-mono font-bold text-neutral-600 block mb-1">STAGING DATABASE</span>
+                                  <span className="text-sm text-white font-bold">MongoDB Atlas</span>
+                               </div>
                             </div>
                         </section>
 
-                        <hr className="border-neutral-800 my-12" />
+                        <section id="security" className="scroll-mt-32 mb-20">
+                            <h2 className="text-xl font-bold text-white mb-6">6. Security Infrastructure</h2>
+                            <div className="p-8 rounded-3xl bg-[#1a1a1a] border border-neutral-800 space-y-6">
+                                <div className="flex gap-4">
+                                  <div className="w-1 h-auto bg-amber-500 rounded-full" />
+                                  <div>
+                                    <h4 className="text-white font-bold text-sm uppercase tracking-widest">Encryption Protocols</h4>
+                                    <p className="text-sm text-neutral-500 leading-relaxed m-0">All data in transit is shielded via HTTPS/TLS 1.3 headers. Credentials are transformed using adaptive hashing (bcrypt).</p>
+                                  </div>
+                                </div>
+                                <div className="flex gap-4">
+                                  <div className="w-1 h-auto bg-emerald-500 rounded-full" />
+                                  <div>
+                                    <h4 className="text-white font-bold text-sm uppercase tracking-widest">Financial Safety</h4>
+                                    <p className="text-sm text-neutral-500 leading-relaxed m-0">Zero local card storage. Every transaction is handled by PCI DSS compliant environments via Razorpay.</p>
+                                  </div>
+                                </div>
+                            </div>
+                        </section>
 
-                        <section id="compliance">
-                            <h2>13. Compliance</h2>
-                            <p>PrepLeague complies with the Digital Personal Data Protection Act (DPDPA) 2023, IT Act 2000, and other relevant Indian laws. </p>
+                        <section id="compliance" className="scroll-mt-32 mb-20 text-neutral-400 leading-relaxed">
+                            <h2 className="text-xl font-bold text-white mb-6">13. Legal Compliance</h2>
+                            <p>PrepLeague operates under the regulatory frameworks of the <strong>Digital Personal Data Protection Act (DPDPA) 2023</strong> and the <strong>IT Act 2000</strong> of India.</p>
+                        </section>
+
+                        <section id="contact" className="scroll-mt-32 pt-12 border-t border-neutral-800">
+                            <h2 className="text-xl font-bold text-white mb-6">Contact Privacy Team</h2>
+                            <p className="text-neutral-500 text-sm mb-4">Direct all sovereignty and data-deletion inquiries to:</p>
+                            <div className="font-mono text-xs font-bold text-white">
+                                privacy@prepleague.com
+                            </div>
                         </section>
                     </div>
                 </main>

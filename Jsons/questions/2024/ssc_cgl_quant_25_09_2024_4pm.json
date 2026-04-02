@@ -1,0 +1,1077 @@
+[
+  {
+    "text": "Find the value of $3\\sin15^\\circ - 4\\sin^3 15^\\circ$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "sqrt(2)",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1/sqrt(2)",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "1/2",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Use identity $\\sin 3x = 3\\sin x - 4\\sin^3 x$.\nStep 2: Put $x=15^\\circ$: expression becomes $\\sin45^\\circ$.\nStep 3: $\\sin45^\\circ= \\frac{1}{\\sqrt2}$.\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "trigonometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Find the gain percentage, given that Aditi sold her scooter for 40,620 gaining $ \\frac{1}{5}$ of the selling price.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "25%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "20%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "35%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "10%",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Profit = $ \\frac{1}{5}$ of SP = $40620/5 = 8124$.\nStep 2: CP = SP - Profit = 40620 - 8124 = 32496.\nStep 3: Gain% = $(8124/32496) \\times100 = 25\\%$.\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "profit_and_loss",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A tap can fill a cistern in 10 minutes and another tap can empty it in 12 minutes. If both the taps are open, the time (in hours) taken to fill the tank will be:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "2 hours",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "2.5 hours",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1 hour",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "1.5 hours",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: Fill rate = $1/10$ tank/min, empty rate = $1/12$ tank/min.\nStep 2: Net rate = $1/10-1/12=1/60$ tank/min.\nStep 3: Time = 60 minutes = 1 hour.\nAnswer: Option C.",
+    "subject": "QUANT",
+    "pattern": "time_and_work",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The ratio of circumference and diameter of a circle is 3 : 5. If the circumference is 6 cm, then the radius of the circle is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "1.8 cm",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "10 cm",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "15 cm",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "5 cm",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: Given circumference:diameter = 3:5, so $C/D=3/5$.\nStep 2: With $C=6$, $D=6 \\times \\frac{5}{3}=10$.\nStep 3: Radius = $D/2=5$ cm.\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "mensuration_2d",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The table shows sales of bicycles B1 and B2 over three years. [IMAGE] From 2004 to 2006, find the ratio of total sales of B1 to total sales of B2.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "9 : 10",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "27 : 40",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "40 : 27",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "10 : 9",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Add B1 sales for 20042006 from table.\nStep 2: Add B2 sales for 20042006 from table.\nStep 3: Reduce the ratio B1:B2 to lowest form.\nStep 4: Ratio obtained is 27:40.\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If $a^2+b^2=148$ and $ab=54$, find the value of $\\df\\frac{a+b}{a-b}$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "$ \\frac{1}{\\sqrt{10}}$",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "$8\\sqrt{7}$",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "$5\\sqrt{3}$",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "$ \\frac{8}{\\sqrt{10}}$",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: $(a+b)^2=a^2+b^2+2ab=148+108=256\\Rightarrow a+b=16$.\nStep 2: $(a-b)^2=a^2+b^2-2ab=148-108=40\\Rightarrow a-b=2\\sqrt{10}$.\nStep 3: $ \\frac{a+b}{a-b}= \\frac{16}{2\\sqrt{10}}= \\frac{8}{\\sqrt{10}}$.\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The monthly income of Ramesh in year 2021 was ₹18,600 and his monthly expenditure was ₹12,400. In year 2022 his income increased by 15% and his expenditure increased by 8%. Find the percentage increase in his savings.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "25%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "32%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "27%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "29%",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: Savings in 2021 = 1860012400 = 6200.\nStep 2: 2022 income = 186001.15 = 21390; expenditure = 124001.08 = 13392.\nStep 3: Savings in 2022 = 2139013392 = 7998.\nStep 4: Increase% = $ \\frac{7998-6200}{6200} \\times100=29\\%$.\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "percentage",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "$x$ varies directly as the cube of $y$ and inversely as the square of $z$. If $x= \\frac{1}{36}$ when $y=2$ and $z=3$, find $800x$ when $y=3$ and $z=5$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "$ \\frac{800}{9}$",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "$ \\frac{9}{800}$",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "27",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "9",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: $x\\propto \\frac{y^3}{z^2}$, so $x=k \\frac{y^3}{z^2}$.\nStep 2: Using given condition ($x= \\frac{1}{36}$ at $y=2,z=3$), get $k= \\frac{1}{32}$.\nStep 3: For $y=3,z=5$, $x= \\frac{1}{32}\\cdot \\frac{27}{25}= \\frac{27}{800}$.\nStep 4: $800x=27$.\nAnswer: Option C.",
+    "subject": "QUANT",
+    "pattern": "variation",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The table shows 1-litre bottle production for companies A, B and C during 2016-2020. [IMAGE] Find the difference in average production of A and C during 2016-2018 (in lakhs).",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "14,000",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "13,000",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "9500",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "7800",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Average of A (20162018) = $(38000+41000+53000)/3 = 44000$.\nStep 2: Average of C (20162018) = $(51000+57000+63000)/3 = 57000$.\nStep 3: Difference = 5700044000 = 13000.\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Find $N$ in: $9 \\times N ext{ of } 4 \\div 4 - 15 \\times 4 = 12$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "0",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "9",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "8",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "12",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: Evaluate \"of\" first: $N$ of 4 = $4N$.\nStep 2: Equation: $9 \\times4N\\div4 - 15 \\times4 = 12$ becomes $9N-60=12$.\nStep 3: $9N=72\\Rightarrow N=8$.\nAnswer: Option C.",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Pranav borrows a sum of ₹335180 at the rate of 13% per annum simple interest. At the end of the first year, he repays ₹23060 towards return of principal amount borrowed. If Pranav clears all pending dues at the end of the second year, including interest payment that accrued during the first year, how much does he pay (in ₹) at the end of the second year",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "396269",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "398876",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "393949",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "388076",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Year-1 SI = $335180 \\times13\\% = 43573.4$.\nStep 2: Principal repaid at year-1 = 23060, so remaining principal = 312120.\nStep 3: Year-2 SI on remaining = $312120 \\times13\\%=40575.6$.\nStep 4: Final payment at end of year-2 (remaining principal + both year interests)\n$=312120+43573.4+40575.6=396269$.\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "simple_interest",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A well with 14 cm radius is dug 23 cm deep. Find the volume of the earth taken out of it.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "14,168 cm3",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "14,108 cm3",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "15,168 cm3",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "14,178 cm3",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Well is a cylinder: $V=\\pi r^2h$.\nStep 2: $r=14$, $h=23$, take $\\pi=22/7$.\nStep 3: $V= \\frac{22}{7} \\times14 \\times14 \\times23=14168\\,cm^3$.\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "mensuration_3d",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Find the value of $\\left(\\df\\frac{5}{\\sqrt{3}} - \\csc 60^\\circ ight)$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "$ \\frac{1}{\\sqrt{3}}$",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "$ \\frac{2}{\\sqrt{3}}$",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "$3\\sqrt{3}$",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "$\\sqrt{3}$",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: $\\csc60^\\circ= \\frac{2}{\\sqrt3}$.\nStep 2: Expression $= \\frac{5}{\\sqrt3}- \\frac{2}{\\sqrt3}= \\frac{3}{\\sqrt3}=\\sqrt3$.\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "trigonometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If $\\sec heta + an heta = x$, then find $\\sin heta$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "$ \\frac{x^2-1}{1+x^2}$",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "$ \\frac{x^2+1}{1-x^2}$",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "$ \\frac{x^2-1}{1+2x^2}$",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "$ \\frac{1-x^2}{1+x^2}$",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Given $\\sec heta+ an heta=x$.\nStep 2: Using $(\\sec heta+ an heta)(\\sec heta- an heta)=1$, we get $\\sec heta- an heta=1/x$.\nStep 3: Add/subtract to get $\\sec heta= \\frac{x+1/x}{2}$, $ an heta= \\frac{x-1/x}{2}$.\nStep 4: $\\sin heta= \\frac{ an heta}{\\sec heta}= \\frac{x^2-1}{x^2+1}$.\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "trigonometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "From the given bar graph of branch sales (2000 and 2001), find: average sales of B1,B3,B6 in 2000 is what percent of average sales of B1,B2,B3 in 2001 [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "87.5%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "80.25%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "78.5%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "65.25%",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Average(B1,B2,B3 in 2001) = $(105+65+110)/3 = 280/3$.\nStep 2: Average(B1,B3,B6 in 2000) = $(80+95+70)/3 = 245/3$.\nStep 3: Required percent = $ \\frac{245/3}{280/3} \\times100= \\frac{245}{280} \\times100=87.5\\%$.\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Seema walks around a circular field at the rate of 3 rounds per hour, while Priya runs around it at the rate of 8 rounds per hour. They start in the same direction from the same point at 11:54 p.m. They shall first cross each other at:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "12:06 a.m.",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "12:06 p.m.",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "12:00 a.m.",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "11:59 p.m.",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Relative speed = 83 = 5 rounds/hour.\nStep 2: First crossing after relative gain of 1 round: time = $1/5$ hour = 12 minutes.\nStep 3: 11:54 p.m. + 12 minutes = 12:06 a.m.\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "time_speed_distance",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In cyclic quadrilateral $PQRS$, if $\u0007ngle QOS=20x^\\circ$ and $\u0007ngle QRS=26x^\\circ$, find $x$. [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "4",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "3",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "6",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "5",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: Let minor arc QS = $20x$ (central angle $\u0007ngle QOS$).\nStep 2: Inscribed angle $\u0007ngle QRS$ subtends major arc QS, so\n$26x= \\frac{1}{2}(360-20x)$.\nStep 3: $52x=360-20x\\Rightarrow72x=360\\Rightarrow x=5$.\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which of the following numbers is divisible by 6",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "62233",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "438750",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "12581",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "128530",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: A number divisible by 6 must be divisible by both 2 and 3.\nStep 2: 438750 is even and sum of digits = 27 (divisible by 3).\nStep 3: Other options fail one of these checks.\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "divisibility",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Pages printed by printers P1 and P2 over three days are given in table. [IMAGE] Find difference between total pages printed by the two printers.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "185",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "180",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "170",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "175",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Add P1 pages for all three days.\nStep 2: Add P2 pages for all three days.\nStep 3: Take absolute difference of totals.\nStep 4: Difference is 185 pages.\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A class of 30 students appeared in a test. The average score of 12 students is 60, and that of the rest is 80. What is the average score of the class",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "71",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "72",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "70",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "73",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Total score = $12 \\times60 + 18 \\times80 = 720+1440=2160$.\nStep 2: Average = $2160/30 = 72$.\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "average",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If $x^2 + 1 = x$, then find the value of $(x^{14}+x^8+1)$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "1",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "3",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "0",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "2",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Use the given relation to reduce higher powers of $x$ repeatedly.\nStep 2: Convert $x^{14}$ and $x^8$ into lower power expressions using the same identity.\nStep 3: Simplification gives value $3$.\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "From point $T$, tangent $TP$ and secant $TQR$ are drawn to a circle with center $O$. If $\u0007ngle PTQ=27^\\circ$ and $\u0007ngle TPQ=55^\\circ$, find $\u0007ngle ROQ$. [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "94",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "86",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "98",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "82",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: By tangent-secant theorem, $\u0007ngle PTQ = \\frac{1}{2}( ext{arc }PR - ext{arc }PQ)=27^\\circ$.\nStep 2: By tangent-chord theorem, $\u0007ngle TPQ=55^\\circ \\Rightarrow ext{arc }PQ=110^\\circ$.\nStep 3: So arc $PR=164^\\circ$, hence arc $RQ = 360-110-164=86^\\circ$.\nStep 4: Central angle $\u0007ngle ROQ$ equals arc $RQ$, so $86^\\circ$.\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Cindy bought 15 apples and 12 oranges and paid a sum of ₹447 for the purchase. Which of the statements given below is inconsistent with the information given in the previous statement, leading to no possible prices of the two fruits",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Purchased 10 apples and 13 oranges and paid a sum of ₹353",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Purchased 25 apples and 20 oranges and paid a sum of ₹745",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Purchased 35 apples and 28 oranges and paid a sum of ₹1,029",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Purchased 12 apples and 8 oranges and paid a sum of ₹340",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: Let apple = $a$, orange = $o$. Given $15a+12o=447$.\nStep 2: Check each statement for consistency.\nStep 3: Statement 3 implies $35a+28o=1029$, i.e., $5a+4o=147$.\nStep 4: But original gives $5a+4o=149$, contradiction.\nAnswer: Option C.",
+    "subject": "QUANT",
+    "pattern": "linear_equations",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The single discount equivalent to the discount series of 15%, 20% and 5% is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "35.4%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "20%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "32%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "32.5%",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Successive discount factor = $(1-0.15)(1-0.20)(1-0.05)=0.85 \\times0.80 \\times0.95=0.646$.\nStep 2: Equivalent single discount = $1-0.646=0.354=35.4\\%$.\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "discount",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In ∆PQR, S and T are the midpoints of the sides PQ and PR, respectively. The length of the side QR is 12 cm. If ST is parallel to QR, then find the length (in cm) of ST.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "4",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "8",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "6",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "10",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: In triangle, line joining midpoints of two sides is parallel to third side and equals half of it.\nStep 2: So $ST= \\frac{1}{2}QR= \\frac{1}{2} \\times12=6$ cm.\nAnswer: Option C.",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

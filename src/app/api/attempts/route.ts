@@ -44,6 +44,7 @@ export async function POST(req: NextRequest) {
 
         const is_correct = (question as any).correct_option === optionSelected;
         const userObjectId = new mongoose.Types.ObjectId(authUser.userId);
+        const questionObjectId = new mongoose.Types.ObjectId(questionId);
 
         // Server-side timer validation for sprint sessions
         if (sessionId) {
@@ -108,23 +109,60 @@ export async function POST(req: NextRequest) {
             .toISOString()
             .split('T')[0]; // YYYY-MM-DD
 
-        await DailyActivity.findOneAndUpdate(
+        // Ensure daily row exists and always accumulate time spent.
+        await DailyActivity.updateOne(
             { user_id: userObjectId, date: today },
             {
                 $inc: {
-                    questions_solved: 1,
-                    questions_correct: is_correct ? 1 : 0,
                     time_spent_ms: timeMs || 0,
-                    quant_solved: (question as any).subject === 'QUANT' && is_correct ? 1 : 0,
-                    reasoning_solved: (question as any).subject === 'REASONING' && is_correct ? 1 : 0,
                 },
                 $setOnInsert: {
+                    questions_solved: 0,
+                    questions_correct: 0,
+                    quant_solved: 0,
+                    reasoning_solved: 0,
                     games_played: 0,
-                    sessions_completed: 0
+                    sessions_completed: 0,
+                    attempted_question_ids: [],
+                    correct_question_ids: [],
                 }
             },
-            { upsert: true, new: true }
+            { upsert: true }
         );
+
+        // Count only first attempt of a question per day toward daily solved.
+        await DailyActivity.updateOne(
+            {
+                user_id: userObjectId,
+                date: today,
+                attempted_question_ids: { $ne: questionObjectId }
+            },
+            {
+                $inc: {
+                    questions_solved: 1,
+                    quant_solved: (question as any).subject === 'QUANT' ? 1 : 0,
+                    reasoning_solved: (question as any).subject === 'REASONING' ? 1 : 0,
+                },
+                $addToSet: { attempted_question_ids: questionObjectId }
+            }
+        );
+
+        // Count only first correct attempt of a question per day toward daily correct/subject goals.
+        if (is_correct) {
+            await DailyActivity.updateOne(
+                {
+                    user_id: userObjectId,
+                    date: today,
+                    correct_question_ids: { $ne: questionObjectId }
+                },
+                {
+                    $inc: {
+                        questions_correct: 1,
+                    },
+                    $addToSet: { correct_question_ids: questionObjectId }
+                }
+            );
+        }
 
         // Update User stats (User.stats)
         const alreadySolved = await Attempt.exists({

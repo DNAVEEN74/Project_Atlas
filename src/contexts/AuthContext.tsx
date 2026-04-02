@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from 'react';
 
 interface User {
     id: string;
@@ -51,27 +51,62 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
 
-    const refreshUser = async () => {
+    const hydrateUser = useCallback((incoming: Partial<User> | null | undefined) => {
+        if (!incoming) return;
+
+        setUser((prev) => {
+            const base: User = prev ?? {
+                id: '',
+                email: '',
+                name: '',
+                targetExam: 'SSC_CGL',
+                targetYear: new Date().getFullYear(),
+                totalSolved: 0,
+                totalCorrect: 0,
+                streak: 0,
+                maxStreak: 0,
+                bookmarks: [],
+                heatmap: [],
+                dailyQuantGoal: 5,
+                dailyReasoningGoal: 5,
+                totalQuestions: 0,
+            };
+
+            return {
+                ...base,
+                ...incoming,
+                bookmarks: incoming.bookmarks ?? base.bookmarks,
+                heatmap: incoming.heatmap ?? base.heatmap,
+                dailyQuantGoal: incoming.dailyQuantGoal ?? base.dailyQuantGoal,
+                dailyReasoningGoal: incoming.dailyReasoningGoal ?? base.dailyReasoningGoal,
+                totalQuestions: incoming.totalQuestions ?? base.totalQuestions,
+            };
+        });
+    }, []);
+
+    const refreshUser = useCallback(async () => {
         try {
-            const res = await fetch('/api/auth/me');
+            const res = await fetch('/api/auth/me', { cache: 'no-store' });
             if (res.ok) {
                 const data = await res.json();
-                setUser(data.user);
-            } else {
+                hydrateUser(data.user);
+            } else if (res.status === 401 || res.status === 404) {
                 setUser(null);
                 // If user is not found (e.g. deleted from DB) or token invalid, ensure cookie is cleared
                 await fetch('/api/auth/logout', { method: 'POST' });
+            } else {
+                console.error(`refreshUser failed with status ${res.status}`);
             }
         } catch {
-            setUser(null);
+            // Keep current user on transient network errors.
         } finally {
             setLoading(false);
         }
-    };
+    }, [hydrateUser]);
 
     useEffect(() => {
-        refreshUser();
-    }, []);
+        void refreshUser();
+    }, [refreshUser]);
 
     const login = async (email: string, password: string) => {
         try {
@@ -84,7 +119,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             const data = await res.json();
 
             if (res.ok) {
-                await refreshUser();
+                hydrateUser(data.user);
+                setLoading(false);
+                // Keep dashboard/profile data in sync without blocking navigation.
+                void refreshUser();
                 return { success: true };
             } else {
                 return { success: false, error: data.error || 'Login failed' };
@@ -105,7 +143,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             const data = await res.json();
 
             if (res.ok) {
-                await refreshUser();
+                hydrateUser(data.user);
+                setLoading(false);
+                // Keep dashboard/profile data in sync without blocking navigation.
+                void refreshUser();
                 return { success: true };
             } else {
                 return { success: false, error: data.error || 'Registration failed' };

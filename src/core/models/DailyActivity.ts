@@ -10,6 +10,8 @@ export interface IDailyActivity extends Document {
     games_played: number;
     quant_solved: number;
     reasoning_solved: number;
+    attempted_question_ids: mongoose.Types.ObjectId[];
+    correct_question_ids: mongoose.Types.ObjectId[];
 }
 
 const DailyActivitySchema: Schema = new Schema(
@@ -23,6 +25,8 @@ const DailyActivitySchema: Schema = new Schema(
         games_played: { type: Number, default: 0 },
         quant_solved: { type: Number, default: 0 },
         reasoning_solved: { type: Number, default: 0 },
+        attempted_question_ids: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
+        correct_question_ids: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
     },
     { timestamps: true }
 );

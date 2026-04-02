@@ -142,7 +142,7 @@ const PremiumTeasers = ({ isPremium = false, topicStats = [], overallAccuracy = 
             {/* Lock overlay inside the border but floating above content */}
             {!isPremium && (
                 <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/60 backdrop-blur-[3px] p-6 text-center">
-                    <div className="w-16 h-16 bg-amber-500/20 rounded-full flex flex-center items-center justify-center mb-4 border border-amber-500/30">
+                    <div className="w-16 h-16 bg-amber-500/20 rounded-full flex flex-col items-center justify-center mb-4 border border-amber-500/30">
                         <LockIcon className="w-8 h-8 text-amber-500" />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-2">Unlock Atlas PRO</h3>
@@ -158,7 +158,7 @@ const PremiumTeasers = ({ isPremium = false, topicStats = [], overallAccuracy = 
             )}
 
             {/* CONTENT LAYER */}
-            <div className={`p-6 ${!isPremium ? 'opacity-60 pointer-events-none select-none filter blur-[4px]' : ''}`}>
+            <div className={`p-6 ${!isPremium ? 'opacity-40 pointer-events-none select-none' : ''}`}>
                 <div className="flex items-center gap-2 mb-6 text-amber-500">
                     <BoltIcon className="w-5 h-5 pointer-events-none" />
                     <h3 className="font-bold text-lg">PRO Analytics Suite</h3>

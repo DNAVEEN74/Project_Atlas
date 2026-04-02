@@ -33,18 +33,7 @@ export default function DashboardPage() {
     // State for global filter
     const [selectedSubject, setSelectedSubject] = useState<'ALL' | 'QUANT' | 'REASONING'>('ALL');
 
-    useEffect(() => {
-        if (!authLoading && !user) {
-            router.push('/');
-            return;
-        }
-
-        if (user) {
-            fetchDashboardData();
-        }
-    }, [user, authLoading, router]);
-
-    const fetchDashboardData = async () => {
+    const fetchDashboardData = React.useCallback(async () => {
         try {
             const res = await fetch('/api/user/dashboard');
             const result = await res.json();
@@ -56,7 +45,18 @@ export default function DashboardPage() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [setData, setLoading]);
+
+    useEffect(() => {
+        if (!authLoading && !user) {
+            router.push('/');
+            return;
+        }
+
+        if (user) {
+            fetchDashboardData();
+        }
+    }, [user, authLoading, router, fetchDashboardData]);
 
     if (authLoading || loading) {
         return (
@@ -68,17 +68,8 @@ export default function DashboardPage() {
 
     if (!user || !data) return null;
 
-
-
-    if (authLoading || loading) {
-        return (
-            <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-10 w-10 border-4 border-indigo-500 border-t-transparent"></div>
-            </div>
-        );
-    }
-
-    if (!user || !data) return null;
+    // Empty state for brand-new users who have no activity yet
+    const isNewUser = (data.recent_attempts?.length ?? 0) === 0 && (data.heatmap?.length ?? 0) === 0;
 
     // --- FILTERING LOGIC ---
 
@@ -137,7 +128,7 @@ export default function DashboardPage() {
 
         // Determine start date for check
         // If today active, start today. Else yesterday.
-        let checkDate = hasToday ? today : yesterday;
+        let checkDate = new Date(hasToday ? today : yesterday);
 
         while (true) {
             const dateStr = checkDate.toISOString().split('T')[0];
@@ -195,7 +186,13 @@ export default function DashboardPage() {
     // 5. Filter Difficulty Stats
     // Aggregate from raw subject-wise stats if available, otherwise fallback to global
     // Data structure: Array of { _id: { difficulty, subject }, total, correct }
-    const difficultyRaw = data.difficulty_stats_raw || [];
+    const difficultyRaw = (Array.isArray(data.difficulty_stats_raw) && data.difficulty_stats_raw.length > 0)
+        ? data.difficulty_stats_raw
+        : Object.entries(data.difficulty_stats || {}).map(([difficulty, value]: [string, any]) => ({
+            _id: { difficulty, subject: 'ALL' },
+            total: value?.total || 0,
+            correct: value?.correct || 0
+        }));
 
     const filteredDifficultyStats = ['EASY', 'MEDIUM', 'HARD'].reduce((acc, level) => {
         // Find all entries matching level and subject
@@ -223,112 +220,131 @@ export default function DashboardPage() {
         <div className="min-h-screen bg-[#0f0f0f]">
             <Header activePage="dashboard" />
 
-            <main className="max-w-7xl mx-auto px-4 md:px-6 py-8 space-y-6">
+            {/* Empty state for new users */}
+            {isNewUser ? (
+                <main className="max-w-3xl mx-auto px-4 md:px-6 py-24 text-center">
+                    <div className="text-6xl mb-6">🚀</div>
+                    <h1 className="text-3xl font-black text-white mb-4">Welcome to your Dashboard!</h1>
+                    <p className="text-neutral-400 mb-10 text-lg leading-relaxed">
+                        Your stats, streaks, and analytics will appear here once you start solving questions.<br />
+                        Go solve your first problem to get started!
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="/problems" className="px-8 py-4 bg-amber-500 text-black font-bold rounded-xl hover:bg-amber-400 transition-colors shadow-lg shadow-amber-500/20">
+                            Browse Problems
+                        </a>
+                        <a href="/sprint" className="px-8 py-4 bg-neutral-800 text-white font-bold rounded-xl hover:bg-neutral-700 transition-colors border border-neutral-700">
+                            Try Sprint Mode
+                        </a>
+                    </div>
+                </main>
+            ) : (
 
-                {/* 1. Hero Section */}
-                <DailyProgressHero
-                    dailyGoal={data.daily_progress?.daily_goal || (data.user?.preferences?.daily_quant_goal || 0) + (data.user?.preferences?.daily_reasoning_goal || 0) || 20}
-                    dailySolved={data.daily_progress?.questions_solved || 0}
-                    quantGoal={data.daily_progress?.quant_goal || data.user?.preferences?.daily_quant_goal || 10}
-                    quantSolved={data.daily_progress?.quant_solved || 0}
-                    reasoningGoal={data.daily_progress?.reasoning_goal || data.user?.preferences?.daily_reasoning_goal || 10}
-                    reasoningSolved={data.daily_progress?.reasoning_solved || 0}
-                    streak={streak}
-                    maxStreak={maxStreak}
-                    weakTopicsQuant={data.topic_stats
-                        .filter((t: any) => t.accuracy < 0.6 && t.total > 0 && normalizeSubject(t.subject) === 'QUANT')
-                        .slice(0, 3)
-                        .map((t: any) => ({
-                            topic: t.display_name,
-                            accuracy: t.accuracy,
-                            questionCount: t.total
-                        }))}
-                    weakTopicsReasoning={data.topic_stats
-                        .filter((t: any) => t.accuracy < 0.6 && t.total > 0 && normalizeSubject(t.subject) === 'REASONING')
-                        .slice(0, 3)
-                        .map((t: any) => ({
-                            topic: t.display_name,
-                            accuracy: t.accuracy,
-                            questionCount: t.total
-                        }))}
-                />
+                <main className="max-w-7xl mx-auto px-4 md:px-6 py-8 space-y-6">
 
-                {/* 1.5 "On Fire" Topic Notification */}
-                {onFireTopic && (
-                    <div className="w-full bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-transparent border border-orange-500/20 rounded-xl p-4 flex items-center justify-between animate-fade-in-up">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-xl">
-                                🔥
-                            </div>
-                            <div>
-                                <h4 className="text-orange-400 font-bold text-sm">You're on fire in {onFireTopic.display_name}!</h4>
-                                <p className="text-neutral-400 text-xs">You've reached {Math.round(onFireTopic.accuracy * 100)}% accuracy with {onFireTopic.total} questions solved.</p>
+                    {/* 1. Hero Section */}
+                    <DailyProgressHero
+                        dailyGoal={data.daily_progress?.daily_goal || (data.user?.preferences?.daily_quant_goal || 0) + (data.user?.preferences?.daily_reasoning_goal || 0) || 20}
+                        dailySolved={data.daily_progress?.questions_solved || 0}
+                        quantGoal={data.daily_progress?.quant_goal || data.user?.preferences?.daily_quant_goal || 10}
+                        quantSolved={data.daily_progress?.quant_solved || 0}
+                        reasoningGoal={data.daily_progress?.reasoning_goal || data.user?.preferences?.daily_reasoning_goal || 10}
+                        reasoningSolved={data.daily_progress?.reasoning_solved || 0}
+                        streak={streak}
+                        maxStreak={maxStreak}
+                        weakTopicsQuant={data.topic_stats
+                            .filter((t: any) => t.accuracy < 0.6 && t.total > 0 && normalizeSubject(t.subject) === 'QUANT')
+                            .slice(0, 3)
+                            .map((t: any) => ({
+                                topic: t.display_name,
+                                accuracy: t.accuracy,
+                                questionCount: t.total
+                            }))}
+                        weakTopicsReasoning={data.topic_stats
+                            .filter((t: any) => t.accuracy < 0.6 && t.total > 0 && normalizeSubject(t.subject) === 'REASONING')
+                            .slice(0, 3)
+                            .map((t: any) => ({
+                                topic: t.display_name,
+                                accuracy: t.accuracy,
+                                questionCount: t.total
+                            }))}
+                    />
+
+                    {/* 1.5 "On Fire" Topic Notification */}
+                    {onFireTopic && (
+                        <div className="w-full bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-transparent border border-orange-500/20 rounded-xl p-4 flex items-center justify-between animate-fade-in-up">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-xl">
+                                    🔥
+                                </div>
+                                <div>
+                                    <h4 className="text-orange-400 font-bold text-sm">You're on fire in {onFireTopic.display_name}!</h4>
+                                    <p className="text-neutral-400 text-xs">You've reached {Math.round(onFireTopic.accuracy * 100)}% accuracy with {onFireTopic.total} questions solved.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
-                {/* Row 2: Stats + Heatmap */}
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                    <div className="lg:col-span-1">
-                        <Statistics
-                            accuracy={filteredAccuracy}
-                            avg_time_ms={filteredAvgTime}
-                            total_solved={filteredTotalSolved}
-                            streak={streak}
-                            max_streak={maxStreak}
-                            sprint_discipline={data.advanced_insights?.sprint_discipline || 0}
-                        />
+                    {/* Row 2: Stats + Heatmap */}
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        <div className="lg:col-span-1">
+                            <Statistics
+                                accuracy={filteredAccuracy}
+                                avg_time_ms={filteredAvgTime}
+                                total_solved={filteredTotalSolved}
+                                streak={streak}
+                                max_streak={maxStreak}
+                                sprint_discipline={data.advanced_insights?.sprint_discipline || 0}
+                            />
+                        </div>
+                        <div className="lg:col-span-3">
+                            <Heatmap
+                                data={data.heatmap}
+                                active_days={data.heatmap.length}
+                                max_streak={maxStreak}
+                                selectedSubject={selectedSubject}
+                                onSubjectChange={setSelectedSubject}
+                            />
+                        </div>
                     </div>
-                    <div className="lg:col-span-3">
-                        <Heatmap
-                            data={data.heatmap}
-                            active_days={data.heatmap.length}
-                            max_streak={maxStreak}
-                            selectedSubject={selectedSubject}
-                            onSubjectChange={setSelectedSubject}
-                        />
-                    </div>
-                </div>
 
-                {/* Row 3: Topic Performance + Quick Practice */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div className="lg:col-span-2">
-                        <TopicPerformance stats={filteredTopicStats} selectedSubject={selectedSubject} />
+                    {/* Row 3: Topic Performance + Quick Practice */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div className="lg:col-span-2">
+                            <TopicPerformance stats={filteredTopicStats} selectedSubject={selectedSubject} />
+                        </div>
+                        <div className="lg:col-span-1">
+                            <QuickPracticeCard
+                                questions_left={Math.max(0, (data.daily_progress?.daily_goal || 20) - (data.daily_progress?.questions_solved || 0))}
+                                weak_topics={
+                                    data.topic_stats
+                                        .filter((t: any) => t.accuracy < 0.6 && t.total > 0)
+                                        .sort((a: any, b: any) => a.accuracy - b.accuracy)
+                                        .slice(0, 3)
+                                        .map((t: any) => t.display_name)
+                                }
+                            />
+                        </div>
                     </div>
-                    <div className="lg:col-span-1">
-                        <QuickPracticeCard
-                            questions_left={Math.max(0, (data.daily_progress?.daily_goal || 20) - (data.daily_progress?.questions_solved || 0))}
-                            weak_topics={
-                                data.topic_stats
-                                    .filter((t: any) => t.accuracy < 0.6 && t.total > 0)
-                                    .sort((a: any, b: any) => a.accuracy - b.accuracy)
-                                    .slice(0, 3)
-                                    .map((t: any) => t.display_name)
-                            }
-                        />
-                    </div>
-                </div>
 
-                {/* Row 4: Premium Analytics */}
-                <PremiumTeasers 
-                    isPremium={data.user?.config?.is_premium || false} 
-                    topicStats={filteredTopicStats}
-                    overallAccuracy={data.overall_stats?.accuracy || 0}
-                    proEngineData={data.advanced_insights?.pro_engine}
-                />
+                    {/* Row 4: Premium Analytics */}
+                    <PremiumTeasers
+                        isPremium={data.user?.config?.is_premium || false}
+                        topicStats={filteredTopicStats}
+                        overallAccuracy={data.overall_stats?.accuracy || 0}
+                        proEngineData={data.advanced_insights?.pro_engine}
+                    />
 
-                {/* Row 5: Difficulty Breakdown + Recent Activity */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="lg:col-span-1 border border-neutral-800 rounded-2xl p-6 bg-[#1a1a1a]">
+                    {/* Row 5: Difficulty Breakdown + Recent Activity */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <DifficultyBreakdown stats={filteredDifficultyStats} isGlobal={false} />
+                        <div className="lg:col-span-1">
+                            <RecentActivity attempts={filteredRecentAttempts} />
+                        </div>
                     </div>
-                    <div className="lg:col-span-1">
-                        <RecentActivity attempts={filteredRecentAttempts} />
-                    </div>
-                </div>
 
-            </main>
+                </main>
+            )}
         </div>
     );
 }

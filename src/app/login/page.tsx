@@ -8,7 +8,9 @@ import { useAuth } from '@/contexts/AuthContext';
 import {
     LockOutlinedIcon,
     EmailOutlinedIcon,
-    ArrowBackIcon
+    ArrowBackIcon,
+    VisibilityIcon,
+    VisibilityOffIcon
 } from '@/components/icons';
 
 export default function LoginPage() {
@@ -16,25 +18,29 @@ export default function LoginPage() {
     const { login, user, loading } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     // Redirect if already logged in
     React.useEffect(() => {
         if (!loading && user) {
-            router.push('/dashboard');
+            router.replace('/problems');
         }
     }, [user, loading, router]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (isLoading || loading) return;
         setError('');
         setIsLoading(true);
 
         const result = await login(email, password);
 
         if (result.success) {
-            router.push('/problems');
+            router.replace('/problems');
+            router.refresh();
+            return;
         } else {
             setError(result.error || 'Login failed');
         }
@@ -80,7 +86,7 @@ export default function LoginPage() {
 
                     {error && (
                         <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm flex items-center gap-2">
-                            <span>⚠️</span> {error}
+                            <span>!</span> {error}
                         </div>
                     )}
 
@@ -118,13 +124,25 @@ export default function LoginPage() {
                                     className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 group-focus-within:text-amber-500 transition-colors"
                                 />
                                 <input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white placeholder-neutral-600"
-                                    placeholder="••••••••"
+                                    className="w-full pl-12 pr-12 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white placeholder-neutral-600"
+                                    placeholder="********"
                                     required
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword((prev) => !prev)}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-amber-500 transition-colors"
+                                    aria-label={showPassword ? "Hide password" : "Show password"}
+                                >
+                                    {showPassword ? (
+                                        <VisibilityOffIcon sx={{ fontSize: '1.1rem' }} />
+                                    ) : (
+                                        <VisibilityIcon sx={{ fontSize: '1.1rem' }} />
+                                    )}
+                                </button>
                             </div>
                         </div>
 
@@ -141,7 +159,7 @@ export default function LoginPage() {
                     {/* Register Link */}
                     <div className="mt-8 pt-6 border-t border-neutral-800 text-center">
                         <p className="text-neutral-400 text-sm">
-                            Don't have an account?{' '}
+                            Don&apos;t have an account?{' '}
                             <Link href="/register" className="text-amber-500 font-semibold hover:text-amber-400 transition-colors">
                                 Create one for free
                             </Link>

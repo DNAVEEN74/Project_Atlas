@@ -101,7 +101,10 @@ export function AskAIClarification({ questionId }: { questionId: string }) {
 
                     setMessages(prev => {
                         const updated = [...prev];
-                        updated[updated.length - 1].content = modelOutput;
+                        updated[updated.length - 1] = {
+                            ...updated[updated.length - 1],
+                            content: modelOutput
+                        };
                         return updated;
                     });
                 }

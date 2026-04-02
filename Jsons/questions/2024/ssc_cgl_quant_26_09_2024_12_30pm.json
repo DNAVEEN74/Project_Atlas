@@ -1,0 +1,1077 @@
+[
+  {
+    "text": "If $8\\cot\\theta = 7$, then find the value of $\\frac{1+\\sin\\theta}{\\cos\\theta}$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\frac{1+\\sqrt{113}}{8}$",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "$\\frac{7+\\sqrt{113}}{8}$",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "$\\frac{1+\\sqrt{113}}{7}$",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "$\\frac{8+\\sqrt{113}}{7}$",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: From $8\\cot\\theta=7$, we get $\\cot\\theta=\\frac{7}{8}$, so $\\tan\\theta=\\frac{8}{7}$.\n\nStep 2: Take opposite $=8$, adjacent $=7$, then hypotenuse $=\\sqrt{8^2+7^2}=\\sqrt{113}$.\n\nStep 3: So $\\sin\\theta=\\frac{8}{\\sqrt{113}}$ and $\\cos\\theta=\\frac{7}{\\sqrt{113}}$.\n\nStep 4: \\n$\\frac{1+\\sin\\theta}{\\cos\\theta}=\\frac{1+\\frac{8}{\\sqrt{113}}}{\\frac{7}{\\sqrt{113}}}=\\frac{\\sqrt{113}+8}{7}$.\n\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "trigonometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The table below shows company-wise employee data in 2022. [IMAGE]\nFind the total number of male employees working in company D.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "6000",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "6750",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "6500",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "6250",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: From the table (company D), read: number of zones $=25$, average employees per zone $=450$, and male:female ratio $=5:4$.\n\nStep 2: Total employees in D $=25\\times 450=11250$.\n\nStep 3: Male share in ratio $5:4$ is $\\frac{5}{9}$.\n\nStep 4: Male employees $=\\frac{5}{9}\\times11250=6250$.\n\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The side $BC$ of $\\triangle ABC$ is produced to point $D$. If $AC=BC$ and $\\angle BAC=70^\\circ$, find $2.5\\angle ACD-1.5\\angle ABC$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "$235^\\circ$",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "$245^\\circ$",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "$225^\\circ$",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "$230^\\circ$",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Since $AC=BC$, base angles are equal, so $\\angle A=\\angle B=70^\\circ$. Hence $\\angle ABC=70^\\circ$.\n\nStep 2: Interior angle $\\angle ACB=180^\\circ-70^\\circ-70^\\circ=40^\\circ$.\n\nStep 3: Exterior angle at $C$: $\\angle ACD=180^\\circ-40^\\circ=140^\\circ$.\n\nStep 4: Compute:\n$2.5(140)-1.5(70)=350-105=245^\\circ$.\n\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Marked price of a watch is ?15,620 and discount is 27%. Find selling price (nearest tens).",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "11,400",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "9,880",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "12,500",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "10,800",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Selling price $= 15620\\times(1-0.27)=15620\\times0.73$.\n\nStep 2: $15620\\times0.73=11402.6$.\n\nStep 3: Rounded to nearest tens $=11,400$.\n\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "percentage",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The five-digit number $45yz0$ is divisible by 40. Find maximum possible value of $(y+z)$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "16",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "18",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "17",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "15",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Divisible by 40 means divisible by 5 and 8. Last digit is already 0, so check divisibility by 8 using last three digits $yz0$.\n\nStep 2: Need $yz0$ divisible by 8.\n\nStep 3: Try maximizing $y+z$ with digits 0 to 9. Largest valid choice is $y=8, z=8$ giving $880$, and $880$ is divisible by 8.\n\nStep 4: So maximum $y+z=8+8=16$.\n\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "number_system",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If $x=\\sqrt{6}+2$ and $y=\\sqrt{6}-2$, find $\\left(\\frac{x}{y}+\\frac{y}{x}\\right)^2-3$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "22",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "35",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "42",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "97",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: Compute $xy=(\\sqrt6+2)(\\sqrt6-2)=6-4=2$.\n\nStep 2: Compute $x+y=2\\sqrt6$. Then\n$x^2+y^2=(x+y)^2-2xy=24-4=20$.\n\nStep 3: \\n$\\frac{x}{y}+\\frac{y}{x}=\\frac{x^2+y^2}{xy}=\\frac{20}{2}=10$.\n\nStep 4: \\n$\\left(\\frac{x}{y}+\\frac{y}{x}\\right)^2-3=10^2-3=97$.\n\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Study the bar graph and answer: average number of deaths during April across all cities (rounded up). [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "953",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "965",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "928",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "934",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: Read April values for all four cities from the bar graph.\n\nStep 2: Add those four April values.\n\nStep 3: Divide by 4 to get the average.\n\nStep 4: Round up to the next integer. The result is 934.\n\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If $a:b=c:d=e:f=5:7$, then find $(3a+5c+11e):(3b+5d+11f)$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "11:7",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "3:7",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "7:11",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "5:7",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: Since all are in ratio $5:7$, let $a=5k_1,b=7k_1$, $c=5k_2,d=7k_2$, $e=5k_3,f=7k_3$.\n\nStep 2: Numerator $=3(5k_1)+5(5k_2)+11(5k_3)=5(3k_1+5k_2+11k_3)$.\n\nStep 3: Denominator $=3(7k_1)+5(7k_2)+11(7k_3)=7(3k_1+5k_2+11k_3)$.\n\nStep 4: Ratio becomes $5:7$.\n\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Varun and Raju together finish a job in 40 hours. Varun alone finishes in 50 hours. How many hours for Raju alone?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "170",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "150",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "200",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "190",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: Combined work rate $=1/40$.\n\nStep 2: Varun's rate $=1/50$.\n\nStep 3: Raju's rate $=1/40-1/50=(5-4)/200=1/200$.\n\nStep 4: Time taken by Raju alone $=200$ hours.\n\nAnswer: Option C.",
+    "subject": "QUANT",
+    "pattern": "time_and_work",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "What principal amounts to ?21,420 in 2 years at 9.5% p.a. simple interest?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "?16,000",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "?12,000",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "?11,273",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "?18,000",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: For simple interest, $A=P(1+rt)$. Here $r=9.5\\%=0.095$, $t=2$.\n\nStep 2: So $A=P(1+0.095\\times2)=1.19P$.\n\nStep 3: $P=21420/1.19=18000$.\n\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "simple_interest",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Raman marks goods 16% above cost price and then sells at 12% less than marked price. Find profit %.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "0.08%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "2.08%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1.07%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "3.01%",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Let cost price $=100$. Marked price $=116$.\n\nStep 2: Selling price after 12% discount on MP:\n$SP=116\\times0.88=102.08$.\n\nStep 3: Profit $=102.08-100=2.08$.\n\nStep 4: Profit% $=2.08\\%$.\n\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "profit_and_loss",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If $2a-b=3$ and $8a^3-b^3=999$, find value of $4a^2-b^2$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "61",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "65",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "67",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "63",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: Put $u=2a$ and $v=b$. Then $u-v=3$ and $u^3-v^3=999$.\n\nStep 2: Use identity: $u^3-v^3=(u-v)(u^2+uv+v^2)$.\nSo $3(u^2+uv+v^2)=999\\Rightarrow u^2+uv+v^2=333$.\n\nStep 3: From $(u-v)^2=u^2-2uv+v^2=9$.\nSubtract from 333: $3uv=324\\Rightarrow uv=108$.\n\nStep 4: $(u+v)^2=(u-v)^2+4uv=9+432=441\\Rightarrow u+v=21$.\n\nStep 5: Required $4a^2-b^2=u^2-v^2=(u-v)(u+v)=3\\times21=63$.\n\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If radius and height of a right circular cylinder are 21 cm and 5 cm, find total surface area (use $\\pi=22/7$).",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "3432 cm?",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "5212 cm?",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "3816 cm?",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "4312 cm?",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: TSA of cylinder $=2\\pi r(h+r)$.\n\nStep 2: Substitute $r=21, h=5, \\pi=22/7$.\n$TSA=2\\times\\frac{22}{7}\\times21\\times(5+21)$.\n\nStep 3: $=2\\times22\\times3\\times26=3432\\text{ cm}^2$.\n\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "mensuration_3d",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If $p=\\dfrac{\\sin A}{1+\\cos A}$, then $\\dfrac{\\sin A}{1-\\cos A}$ equals:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "$p-1$",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "$\\dfrac{1}{p}$",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "$\\dfrac{1}{1-p}$",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "$\\dfrac{1}{p+1}$",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Use half-angle identity: $\\dfrac{\\sin A}{1+\\cos A}=\\tan\\frac{A}{2}$. So $p=\\tan\\frac{A}{2}$.\n\nStep 2: Also, $\\dfrac{\\sin A}{1-\\cos A}=\\cot\\frac{A}{2}$.\n\nStep 3: Since $\\cot\\frac{A}{2}=1/\\tan\\frac{A}{2}=1/p$, value is $1/p$.\n\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "trigonometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A thief starts when police is 250 m behind. Police catches him after thief runs 1.5 km. Police speed is 70 km/h. Find thief speed.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "65",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "50",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "55",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "60",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: Police travels thief distance plus initial gap:\n$1.5\\text{ km}+0.25\\text{ km}=1.75\\text{ km}$.\n\nStep 2: Time taken by police:\n$t=\\frac{1.75}{70}=0.025$ hours.\n\nStep 3: Thief speed $=\\frac{1.5}{0.025}=60$ km/h.\n\nAnswer: Option D.",
+    "subject": "QUANT",
+    "pattern": "time_speed_distance",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Share distribution table is given. [IMAGE]\nTotal shares = 10 lakh. If Jeevan sells 20,000 shares to Meera, how many shares will Meera have?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "4,60,000",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "4,80,000",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "4,70,000",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "5,10,000",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: From table, Meera has 45% shares initially.\n\nStep 2: Initial Meera shares $=45\\%$ of $10,00,000 = 4,50,000$.\n\nStep 3: Jeevan transfers 20,000 shares to Meera.\n\nStep 4: New Meera shares $=4,50,000+20,000=4,70,000$.\n\nAnswer: Option C.",
+    "subject": "QUANT",
+    "pattern": "percentage",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Sum of two consecutive even numbers is 174. Find the smaller number.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "86",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "84",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "88",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "90",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Let numbers be $x$ and $x+2$.\n\nStep 2: $x+(x+2)=174\\Rightarrow 2x+2=174$.\n\nStep 3: $2x=172\\Rightarrow x=86$.\n\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "linear_equation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A sector has central angle $80^\\circ$ and arc length $96\\pi$. Find circle radius.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "196 units",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "216 units",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "204 units",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "116 units",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Arc length formula: $L=\\frac{\\theta}{360}\\times2\\pi r$.\n\nStep 2: $96\\pi=\\frac{80}{360}\\times2\\pi r=\\frac{4}{9}\\pi r$.\n\nStep 3: Cancel $\\pi$: $96=\\frac{4}{9}r\\Rightarrow r=96\\times\\frac{9}{4}=216$.\n\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "mensuration_2d",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Simplify: $(60 + 64 \\div 4 \\text{ of } 4) \\times \\{1000 \\div ((10 \\text{ of } (3+2)) \\times 2 \\text{ of } 5)\\} - 28 + (100 \\times 3 \\text{ of } 3)$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "1000",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "100",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "500",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "600",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Evaluate \"of\" first.\n$4\\text{ of }4=16$, so $64\\div16=4$. Thus first bracket $=60+4=64$.\n\nStep 2: Inside braces: $(3+2)=5$, so $10\\text{ of }5=50$ and $2\\text{ of }5=10$.\nThen $50\\times10=500$, so $1000\\div500=2$.\n\nStep 3: So first big product $=64\\times2=128$.\n\nStep 4: Last term: $100\\times(3\\text{ of }3)=100\\times9=900$.\n\nStep 5: Total $=128-28+900=1000$.\n\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In $\\triangle ABC$, $DE \\parallel BC$ and $5AE=3EC$. If $AB=6.4$ units, find $DB$. [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "3.2",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "5",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "4",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "2.4",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: From $5AE=3EC$, we get $AE:EC=3:5$.\n\nStep 2: Since $DE \\parallel BC$, by basic proportionality theorem, $AD:DB=AE:EC=3:5$.\n\nStep 3: Let $AD=3k$, $DB=5k$. Then $AB=8k=6.4$, so $k=0.8$.\n\nStep 4: $DB=5k=5\\times0.8=4$.\n\nAnswer: Option C.",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a circle with center $O$, an arc $ABC$ subtends the given central angle [IMAGE]. Chord $AB$ is produced to point $P$. Find $\\angle CBP$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "$42^\\circ$",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "$111^\\circ$",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "$69^\\circ$",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "$108^\\circ$",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Let the central angle subtending arc $ABC$ be $\\theta$ (given in the figure).\n\nStep 2: The inscribed angle at $B$ formed by $BA$ and $BC$ is\n$\\angle CBA=\\frac{1}{2}(360^\\circ-\\theta)$.\n\nStep 3: Since $AB$ is extended to $P$, exterior angle\n$\\angle CBP = 180^\\circ-\\angle CBA = \\frac{\\theta}{2}$.\n\nStep 4: Substituting the figure's central angle gives $\\angle CBP=111^\\circ$.\n\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The bar graph shows turnover of five companies in different years. [IMAGE]\nFind the difference between average turnover of all companies in 2018-19 and 2019-20.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "?2 crore",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "?5 crore",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "?6.5 crore",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "?3.5 crore",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Read 2018-19 turnovers of all 5 companies from the graph and add them.\n\nStep 2: Read 2019-20 turnovers of all 5 companies and add them.\n\nStep 3: Compute average for each year by dividing each total by 5.\n\nStep 4: Take absolute difference of the two averages. This gives ?5 crore.\n\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Suresh's expenditure:savings = $3:1$. Income increases by $25\\%$. Savings increase by $20\\%$. By what percent does expenditure increase?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "$26\\dfrac{2}{3}\\%$",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "$27\\dfrac{2}{3}\\%$",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "$25\\dfrac{2}{3}\\%$",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "$28\\dfrac{2}{3}\\%$",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Let initial expenditure $=3x$, savings $=x$. So income $=4x$.\n\nStep 2: New income after 25% increase $=5x$.\n\nStep 3: New savings after 20% increase $=1.2x$.\n\nStep 4: New expenditure $=5x-1.2x=3.8x$.\n\nStep 5: Increase in expenditure $=3.8x-3x=0.8x$.\nPercentage increase $=\\frac{0.8x}{3x}\\times100=26.666...\\%=26\\dfrac{2}{3}\\%$.\n\nAnswer: Option A.",
+    "subject": "QUANT",
+    "pattern": "percentage",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Half litre of a solution contains 15% alcohol. To make concentration 50%, how much pure alcohol should be mixed?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "400 ml",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "350 ml",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "175 ml",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "250 ml",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Initial solution $=500$ ml, alcohol $=15\\%$ of 500 = 75 ml.\n\nStep 2: Let $x$ ml pure alcohol be added.\nThen new alcohol $=75+x$ and new total volume $=500+x$.\n\nStep 3: Final concentration 50%:\n$\\frac{75+x}{500+x}=\\frac{1}{2}$.\n\nStep 4: Solve:\n$150+2x=500+x \\Rightarrow x=350$.\n\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "mixture_alligation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In right triangle $ABC$ (right-angled at $B$), if $\\tan C=\\sqrt3$, find $\\dfrac{\\sin^2 C+\\cos^2 C}{\\cosec^2 C}$.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "$\\dfrac{16}{3}$",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "$\\dfrac{3}{4}$",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "$\\dfrac{3}{16}$",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "$\\dfrac{4}{15}$",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: $\\tan C=\\sqrt3 \\Rightarrow C=60^\\circ$ (acute angle in right triangle).\n\nStep 2: $\\sin^2C+\\cos^2C=1$.\n\nStep 3: $\\cosec^2C=\\frac{1}{\\sin^2C}=\\frac{1}{(\\sqrt3/2)^2}=\\frac{4}{3}$.\n\nStep 4: Required value $=\\frac{1}{4/3}=\\frac{3}{4}$.\n\nAnswer: Option B.",
+    "subject": "QUANT",
+    "pattern": "trigonometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 26.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

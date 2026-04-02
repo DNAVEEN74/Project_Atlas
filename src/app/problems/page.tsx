@@ -794,7 +794,7 @@ function ProblemsPageContent() {
                                                             </div>
                                                         )}
                                                         {/* Tooltip for full text - Improved Readability & Dynamic Positioning */}
-                                                        <div className={`absolute left-0 ${index < 3 ? 'top-full mt-2' : 'bottom-full mb-2'} hidden md:group-hover/title:block w-[500px] lg:w-[700px] p-5 bg-neutral-900/95 backdrop-blur-sm text-base font-medium text-neutral-200 rounded-xl shadow-[0_0_40px_rgba(0,0,0,0.6)] ring-1 ring-white/10 border border-neutral-700/50 z-50 pointer-events-none whitespace-normal leading-relaxed`}>
+                                                        <div className={`absolute left-0 ${index < 3 ? 'top-full mt-2' : 'bottom-full mb-2'} hidden md:group-hover/title:block w-max max-w-[400px] lg:max-w-[600px] p-4 bg-neutral-900/95 backdrop-blur-sm text-sm font-medium text-neutral-200 rounded-xl shadow-[0_0_40px_rgba(0,0,0,0.6)] ring-1 ring-white/10 border border-neutral-700/50 z-[100] pointer-events-none whitespace-normal leading-relaxed`}>
                                                             <MathText>{q.title}</MathText>
                                                         </div>
                                                     </div>
@@ -840,6 +840,7 @@ function ProblemsPageContent() {
                                         <button
                                             onClick={() => updatePage(pagination.page - 1)}
                                             disabled={pagination.page === 1}
+                                            aria-label="Previous page"
                                             className="p-2 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                                         >
                                             <ChevronLeftIcon sx={{ fontSize: '1.2rem' }} />
@@ -869,6 +870,7 @@ function ProblemsPageContent() {
                                         <button
                                             onClick={() => updatePage(pagination.page + 1)}
                                             disabled={pagination.page === pagination.totalPages}
+                                            aria-label="Next page"
                                             className="p-2 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                                         >
                                             <ChevronRightIcon sx={{ fontSize: '1.2rem' }} />

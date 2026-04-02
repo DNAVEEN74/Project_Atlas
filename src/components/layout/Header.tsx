@@ -16,6 +16,8 @@ import {
     SettingsIcon,
     HelpIcon,
     StarIcon,
+    MenuIcon,
+    CloseIcon,
 } from '@/components/icons';
 
 interface HeaderProps {
@@ -26,6 +28,7 @@ export default function Header({ activePage }: HeaderProps) {
     const { user, logout } = useAuth();
     const router = useRouter();
     const [showUserMenu, setShowUserMenu] = useState(false);
+    const [showMobileMenu, setShowMobileMenu] = useState(false);
     const userMenuRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -120,7 +123,16 @@ export default function Header({ activePage }: HeaderProps) {
                     </div>
 
                     {/* Stats & User */}
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-4 sm:gap-6">
+                        {/* Mobile Menu Toggle */}
+                        <button 
+                            className="lg:hidden p-1.5 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded-xl transition-colors"
+                            onClick={() => setShowMobileMenu(true)}
+                            aria-label="Open mobile menu"
+                        >
+                            <MenuIcon sx={{ fontSize: '1.5rem' }} />
+                        </button>
+
                         {user ? (
                             <>
                                 <div className="hidden md:flex items-center gap-3">
@@ -263,6 +275,26 @@ export default function Header({ activePage }: HeaderProps) {
                     </div>
                 </div>
             </div>
+
+            {/* Mobile Navigation Drawer */}
+            {showMobileMenu && (
+                <div className="fixed inset-0 z-[100] lg:hidden">
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowMobileMenu(false)} />
+                    <div className="absolute right-0 top-0 bottom-0 w-64 bg-[#1a1a1a] shadow-2xl flex flex-col border-l border-neutral-800 transition-transform">
+                        <div className="flex items-center justify-between p-6 border-b border-neutral-800">
+                            <span className="text-lg font-bold text-white">Menu</span>
+                            <button onClick={() => setShowMobileMenu(false)} className="text-neutral-400 hover:text-white p-1" aria-label="Close menu">
+                                <CloseIcon />
+                            </button>
+                        </div>
+                        <nav className="flex flex-col p-4 gap-2">
+                            <Link href="/problems" onClick={() => setShowMobileMenu(false)} className={`px-4 py-3 text-sm font-medium rounded-xl transition-colors ${activePage === 'problems' ? 'text-amber-500 bg-amber-500/10' : 'text-neutral-300 hover:bg-neutral-800'}`}>Problems</Link>
+                            <Link href="/sprint" onClick={() => setShowMobileMenu(false)} className={`px-4 py-3 text-sm font-medium rounded-xl transition-colors ${activePage === 'sprint' ? 'text-amber-500 bg-amber-500/10' : 'text-neutral-300 hover:bg-neutral-800'}`}>Sprint Mode</Link>
+                            <Link href="/dashboard" onClick={() => setShowMobileMenu(false)} className={`px-4 py-3 text-sm font-medium rounded-xl transition-colors ${activePage === 'dashboard' ? 'text-amber-500 bg-amber-500/10' : 'text-neutral-300 hover:bg-neutral-800'}`}>Dashboard</Link>
+                        </nav>
+                    </div>
+                </div>
+            )}
         </header >
     );
 }

@@ -8,6 +8,8 @@ import {
 } from '@/components/icons';
 import { MathText } from '@/components/ui/MathText';
 import { QuestionContent } from '@/components/ui/QuestionContent';
+import { SolutionContent } from '@/components/ui/SolutionContent';
+import { AskAIClarification } from '@/app/problems/[id]/AskAIClarification';
 
 interface QuestionOption {
     id: string;
@@ -125,7 +127,8 @@ export function SprintReviewSessionLayout({
                         <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-widest mb-6">Solution</h3>
                         {question.solution ? (
                             <div className="text-lg leading-relaxed text-neutral-200">
-                                <MathText>{question.solution}</MathText>
+                                <SolutionContent solution={question.solution} />
+                                <AskAIClarification questionId={question.id} />
                             </div>
                         ) : (
                             <div className="p-8 border border-neutral-800 border-dashed rounded-xl text-center text-neutral-500 bg-neutral-900/50">

@@ -55,13 +55,6 @@ export default function TopicPerformancePage() {
     }
 
     // Process and group topics
-    const allTopics: TopicStat[] = stats?.topics || []; // Ensure API returns 'topics' array
-    // Note: The API returns `bestTopic` and `worstTopic` but we need ALL topics.
-    // I need to update the API to return the full list of topics as well.
-    // Wait, the API returns `bestTopic` and `worstTopic` calculated from `topics` array but currently DOES NOT return `topics` array in the response `data`.
-    // I must update the API to return `topics` array.
-
-    // Placeholder for now until API is updated in next step
     const filteredTopics = (stats?.allTopics || []).filter((t: TopicStat) => {
         if (subjectFilter === 'all') return true;
         return t.subject === subjectFilter;

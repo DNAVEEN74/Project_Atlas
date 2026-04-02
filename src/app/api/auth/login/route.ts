@@ -37,16 +37,15 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // Update last active and validate streak
-        // Normalize today to YYYY-MM-DD
-        const today = new Date().toISOString().split('T')[0];
-
+        // Validate streak on login, but do not mark activity here.
+        // Activity dates are updated from /api/attempts when a question is attempted.
+        let userModified = false;
         if (user.stats) {
-            user.stats.last_active_date = today;
-            // Validate streak
-            validateUserStreak(user);
+            const streakUpdated = validateUserStreak(user);
+            if (streakUpdated) userModified = true;
         } else {
             // Fallback init if stats missing
+            const today = new Date().toISOString().split('T')[0];
             user.stats = {
                 total_solved: 0,
                 total_correct: 0,
@@ -54,17 +53,21 @@ export async function POST(req: NextRequest) {
                 max_streak: 0,
                 last_active_date: today
             };
+            userModified = true;
         }
 
         // Backfill username if missing (Lazy Migration)
         if (!user.profile?.username) {
             const baseUsername = user.email.split('@')[0];
             const uniqueSuffix = Math.floor(Math.random() * 10000);
-            if (!user.profile) user.profile = { name: 'User' } as any;
+            if (!user.profile) user.profile = { name: 'User', username: '' };
             user.profile.username = `${baseUsername}${uniqueSuffix}`;
+            userModified = true;
         }
 
-        await user.save();
+        if (userModified) {
+            await user.save();
+        }
 
         // Generate JWT token
         const token = generateToken({

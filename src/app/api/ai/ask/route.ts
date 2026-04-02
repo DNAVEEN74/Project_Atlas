@@ -67,14 +67,7 @@ GUARDRAILS (CRITICAL):
 3. Be concise, clear, and encouraging.
 4. If they ask to solve it differently, explain alternative methods clearly.`;
 
-        // 3. Mark usage if free tier before starting stream
-        if (!isPremium) {
-            await User.findByIdAndUpdate(user._id, {
-                $inc: { 'stats.free_ai_questions_used': 1 }
-            });
-        }
-
-        // We use gemini-3-flash-preview as requested User
+        // 3. We use gemini-3-flash-preview as requested User
         // Note: the new GoogleGenAI SDK format uses model names like 'gemini-3-flash-preview'
         const stream = await ai.models.generateContentStream({
             model: 'gemini-3-flash-preview',
@@ -87,6 +80,13 @@ GUARDRAILS (CRITICAL):
                 temperature: 0.3,
             }
         });
+
+        // 4. Mark usage if free tier only after successful API initialization
+        if (!isPremium) {
+            await User.findByIdAndUpdate(user._id, {
+                $inc: { 'stats.free_ai_questions_used': 1 }
+            });
+        }
 
         const readableStream = new ReadableStream({
             async start(controller) {

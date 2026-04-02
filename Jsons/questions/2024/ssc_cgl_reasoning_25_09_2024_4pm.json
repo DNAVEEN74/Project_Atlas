@@ -1,0 +1,1077 @@
+[
+  {
+    "text": "‘LISP’ is related to ‘ORHK’ in a certain way based on the English alphabetical order. In the same way, ‘WAND’ is related to ‘DZMW’. To which of the following is ‘BOTE’ related, following the same logic",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "YLGV",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "YKFU",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "YMHV",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "YKFW",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Observe both examples use opposite-alphabet coding (A<->Z, B<->Y, ...).\nStep 2: For BOTE: B<->Y, O<->L, T<->G, E<->V.\nStep 3: Code becomes YLGV.\nAnswer: Option A.",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The position of how many letters will remain unchanged if each of the letters in the word ‘DOWNSIZE’ is re-arranged in the English alphabetical order from left to right",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "One",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Two",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Three",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Four",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Arrange DOWNSIZE alphabetically: D, E, I, N, O, S, W, Z.\nStep 2: Compare with original D O W N S I Z E.\nStep 3: Unchanged positions are 1 (D) and 4 (N).\nAnswer: Option B (Two).",
+    "subject": "REASONING",
+    "pattern": "alphabetical_arrangement",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "19 is related to 76 following a certain logic. Following the same logic, 27 is related to 108. To which of the following is 49 related, following the same logic (NOTE: Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc. to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "196",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "190",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "202",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "198",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: 1976 and 27108 both follow multiplication by 4.\nStep 2: Apply same to 49: 494=196.\nAnswer: Option A.",
+    "subject": "REASONING",
+    "pattern": "number_analogy",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Two different positions of the same dice with faces 9, 2, 5, 3, 8 and 6 are shown below. [IMAGE] Select the number on the face opposite to 2.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "6",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "5",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "3",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "9",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: From the two dice positions, identify faces adjacent to 2.\nStep 2: The adjacent faces to 2 are 9, 5, 8, and 6.\nStep 3: The only remaining face is 3, so it is opposite to 2.\nAnswer: Option C.",
+    "subject": "REASONING",
+    "pattern": "dice",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Four letter-clusters have been given, out of which three are alike in some manner and one is different. Select the letter-cluster that is different. Note: The odd one out is not based on the number of consonants/vowels or their position in the letter cluster.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "IAK",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "UOW",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "LFN",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "PJR",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Check letter gaps in each cluster.\nStep 2: UOW, LFN and PJR follow a consistent internal gap pattern; IAK does not.\nStep 3: Therefore IAK is odd.\nAnswer: Option A.",
+    "subject": "REASONING",
+    "pattern": "odd_one_out",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "14 is related to 42 following a certain logic. Following the same logic, 26 is related to 78. To which of the following is 47 related, following the same logic (NOTE: Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc. to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "143",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "135",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "137",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "141",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: 1442 and 2678 show multiplication by 3.\nStep 2: 473=141.\nAnswer: Option D.",
+    "subject": "REASONING",
+    "pattern": "number_analogy",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the correct mirror image of Figure-1 when mirror is placed at MN. [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE Option 1]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE Option 2]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE Option 3]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE Option 4]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Reflect the given figure left-right about line MN.\nStep 2: Match orientation of each symbol after reflection.\nStep 3: Only option 2 matches exactly.\nAnswer: Option B.",
+    "subject": "REASONING",
+    "pattern": "mirror_image",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "How many triangles are there in the given figure [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "14",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "17",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "18",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "15",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Count all smallest triangles in the figure.\nStep 2: Count medium triangles formed by combining smaller ones.\nStep 3: Count the largest composite triangles and total all counts.\nStep 4: Total is 17.\nAnswer: Option B.",
+    "subject": "REASONING",
+    "pattern": "counting_figures",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "What will come in place of the question mark () in the following equation if ‘÷’ and ‘−’ are interchanged and ‘×’ and ‘+’ are interchanged 2 × 16 ÷ 36 + 42 − 6 =",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "−280",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "−246",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "−234",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "−216",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: Interchange operators as asked: ~ and degrees+.\nStep 2: Evaluate new expression using BODMAS.\nStep 3: Computation gives 234.\nAnswer: Option C.",
+    "subject": "REASONING",
+    "pattern": "mathematical_operations",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the correct mirror image of Figure-2 when mirror is placed at MN. [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE Option 1]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE Option 2]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE Option 3]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE Option 4]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: Reflect the alphanumeric figure across MN.\nStep 2: Check reversed order and mirrored shape of each character.\nStep 3: Option 3 is the exact mirror image.\nAnswer: Option C.",
+    "subject": "REASONING",
+    "pattern": "mirror_image",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the number that will come in the place of the question mark(), if ‘+’ and ‘ – ‘ are interchanged and ‘×’ and ‘÷’ are interchanged 61 – 42 × 6 ÷ 9 + 27 =",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "97",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "101",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "89",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "84",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Interchange + and , and and + in the expression.\nStep 2: Evaluate resulting expression by BODMAS.\nStep 3: Final value is 97.\nAnswer: Option A.",
+    "subject": "REASONING",
+    "pattern": "mathematical_operations",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, 'CASE' is written as 'FTBD' and 'CAKE' is written as 'FLBD'. How will 'CALF’ be written in that language",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "GBDM",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "GBMD",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "GMBD",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "GMDB",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: Reverse CASE ESAC, then shift each letter +1 FTBD.\nStep 2: Reverse CAKE EKAC, +1 FLBD (checks rule).\nStep 3: Reverse CALF FLAC, +1 GMBD.\nAnswer: Option C.",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the option that is related to the fifth number in the same way as the second number is related to the first number and the fourth number is related to the third number. 45 : 56 :: 62 : 73 :: 19 : (NOTE : Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc., to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "31",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "30",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "28",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "27",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: In both examples, second number = first number +11.\nStep 2: 4556 and 6273 satisfy this.\nStep 3: So 1930.\nAnswer: Option B.",
+    "subject": "REASONING",
+    "pattern": "number_analogy",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the figure that can replace the question mark in Series-1. [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE Option 1]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE Option 2]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE Option 3]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE Option 4]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: Observe the outer polygon and inner dot count change pattern in the series.\nStep 2: Continue the same transformation to next figure.\nStep 3: Matching figure is option 4.\nAnswer: Option D.",
+    "subject": "REASONING",
+    "pattern": "non_verbal_series",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which of the following numbers will replace the question marks () in the given series 88, 78, 70, 64, 60, ,",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "56, 56",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "56, 54",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "58, 58",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "58, 56",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: Differences are 10, 8, 6, 4.\nStep 2: Next differences are 2 and 0.\nStep 3: So next terms: 602=58 and 580=58.\nAnswer: Option C.",
+    "subject": "REASONING",
+    "pattern": "number_series",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A paper is folded and cut as shown. How will it appear when unfolded [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE Option 1]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE Option 2]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE Option 3]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE Option 4]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: Track fold order along shown lines.\nStep 2: Reflect each cut/hole through all folds while unfolding.\nStep 3: Symmetric placement matches option 1.\nAnswer: Option A.",
+    "subject": "REASONING",
+    "pattern": "paper_folding",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which of the following terms will replace the question mark () in the given series AEYT, CGWR, EIUP, , IMQL",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "GKTN",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "GKSN",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "GLTN",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "GLSN",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: First letters: A,C,E,,I (+2) gives G.\nStep 2: Second letters: E,G,I,,M (+2) gives K.\nStep 3: Third letters: Y,W,U,,Q (2) gives S. Fourth: T,R,P,,L (2) gives N.\nAnswer: Option B (GKSN).",
+    "subject": "REASONING",
+    "pattern": "letter_series",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the option that represents the letters that when placed from left to right in the blanks below will complete the given letter series. CARET_RCA_ETCRCAR_TCR_ARET_RCA",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "CRCEC",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "CERCC",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "CRECC",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "CRCCE",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: Write sequence blocks and check recurring CARET/RCA structure.\nStep 2: Fill blanks to preserve repeating order.\nStep 3: Required letters are C, R, E, C, C.\nAnswer: Option C.",
+    "subject": "REASONING",
+    "pattern": "letter_series",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the figure that can replace the question mark in Series-2. [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE Option 1]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE Option 2]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE Option 3]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE Option 4]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Track movement/count of curve marks between top-right and bottom-left positions.\nStep 2: Apply same increment/decrement in next frame.\nStep 3: Option 2 continues the pattern.\nAnswer: Option B.",
+    "subject": "REASONING",
+    "pattern": "non_verbal_series",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Study the Venn diagram and answer: difference between students who like all three subjects and biology only. [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "16",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "3",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "17",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "19",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: From diagram, students liking all three subjects = 5.\nStep 2: Students liking Biology only = 8.\nStep 3: Difference = 85=3.\nAnswer: Option B.",
+    "subject": "REASONING",
+    "pattern": "venn_diagram",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "‘Tame’ is related to ‘Wild’ in the same way as ‘Adjacent’ is related to ‘________’. (The words must be considered as meaningful English words and must not be related to each other based on the number of letters/number of consonants/vowels in the word.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Neighbouring",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Accommodating",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Close",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Distant",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: Tame and Wild are antonyms.\nStep 2: We need antonym of Adjacent.\nStep 3: Antonym is Distant.\nAnswer: Option D.",
+    "subject": "REASONING",
+    "pattern": "analogy",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, A + B means ‘A is the husband of B’, A − B means ‘B is the mother of A’, A × B means ‘B is the sister of A’ and A ÷ B means ‘A is the daughter of B’. Based on the above, how is Q related to T if ‘P + Q × R − S ÷ T’",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Sister",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Daughter’s daughter",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Mother’s mother",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Daughter’s husband",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "Step 1: Decode the family relation chain exactly as per symbols.\nStep 2: Build relations one by one from expression PQRS+T (as given in paper notation).\nStep 3: Final relation of Q with T is Daughter's daughter.\nAnswer: Option B.",
+    "subject": "REASONING",
+    "pattern": "blood_relations_coding",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, ‘BREAK’ is coded as ‘57123’ and ‘BROKE’ is coded as ‘91753’. What is the code for ‘A’ in that language",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "2",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "9",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "3",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "5",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "Step 1: BREAK57123 and BROKE91753.\nStep 2: Common letters B,R,E,K map to 5,7,3,1 respectively.\nStep 3: Remaining letter A maps to 2.\nAnswer: Option A.",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The same operation(s) are followed in all the given number pairs except one. Find that odd number pair. (NOTE : Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc., to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "11 : 143",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "13 : 169",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "12 : 152",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "15 : 195",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "Step 1: In valid pairs, second number = first13.\nStep 2: 11143, 13169 and 15195 follow 13.\nStep 3: 1213=156, not 152.\nAnswer: Option C.",
+    "subject": "REASONING",
+    "pattern": "odd_pair",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Study the Venn diagram and answer: How many people travel by bus and car both, but NOT by train [IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "19",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "27",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "17",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "9",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "Step 1: Locate region common to Bus and Car only in Venn diagram.\nStep 2: Exclude the part overlapping Train.\nStep 3: Required count is 9.\nAnswer: Option D.",
+    "subject": "REASONING",
+    "pattern": "venn_diagram",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 25.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

@@ -4,25 +4,30 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/contexts/ToastContext';
-import { CheckCircleOutlinedIcon, StarIcon } from '@/components/icons';
+import { 
+  CheckCircleOutlinedIcon, 
+  MenuIcon, 
+  CloseIcon 
+} from '@/components/icons';
 import Link from 'next/link';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export default function PricingPage() {
-    const { user, refreshUser } = useAuth();
+    const { user, refreshUser, loading: authLoading } = useAuth();
     const router = useRouter();
-    const { success, error: showError } = useToast();
+    const { error: showError } = useToast();
     const [scrolled, setScrolled] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [showMobileMenu, setShowMobileMenu] = useState(false);
 
     const [paymentStatus, setPaymentStatus] = useState<'idle' | 'success' | 'failed'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
     const [paymentDetails, setPaymentDetails] = useState<{ amount: number; paymentId: string; date: string } | null>(null);
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 20);
+        const handleScroll = () => setScrolled(window.scrollY > 10);
         window.addEventListener('scroll', handleScroll);
 
         // Load Razorpay script
@@ -33,17 +38,16 @@ export default function PricingPage() {
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            document.body.removeChild(script);
+            if (document.body.contains(script)) {
+              document.body.removeChild(script);
+            }
         };
     }, []);
 
-    // Trigger confetti on success
-    // Auto-redirect to dashboard after success
     useEffect(() => {
         if (paymentStatus === 'success') {
             const handleSuccess = async () => {
                 await refreshUser();
-                // Auto-redirect to dashboard after 2.5 seconds
                 const redirectTimer = setTimeout(() => {
                     router.push('/dashboard');
                 }, 2500);
@@ -54,10 +58,9 @@ export default function PricingPage() {
     }, [paymentStatus, router, refreshUser]);
 
     const handlePayment = async (planId: string) => {
-        // 1. Auth Check
         if (!user) {
             showError('Please sign in or register to subscribe.');
-            router.push('/register?redirect=/pricing');
+            router.push(`/register?redirect=/pricing`);
             return;
         }
 
@@ -65,7 +68,6 @@ export default function PricingPage() {
         setPaymentStatus('idle');
         setPaymentDetails(null);
         try {
-            // 2. Create Order
             const res = await fetch('/api/payments/create-order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -83,7 +85,6 @@ export default function PricingPage() {
 
             const data = await res.json();
 
-            // 2. Open Razorpay Checkout
             const options = {
                 key: data.keyId,
                 amount: data.amount,
@@ -93,7 +94,6 @@ export default function PricingPage() {
                 image: '/logo-final.png',
                 order_id: data.id,
                 handler: async function (response: any) {
-                    // 3. Verify Payment
                     try {
                         const verifyRes = await fetch('/api/payments/verify', {
                             method: 'POST',
@@ -131,7 +131,7 @@ export default function PricingPage() {
                     email: user?.email,
                 },
                 theme: {
-                    color: '#f59e0b', // Amber-500
+                    color: '#f59e0b',
                 },
             };
 
@@ -153,289 +153,345 @@ export default function PricingPage() {
         }
     };
 
-    // Helper to determine button state
     const getPlanButton = (plan: 'free' | 'monthly' | 'yearly') => {
         const currentPlan = user?.subscription?.status === 'ACTIVE' ? user.subscription.plan.toLowerCase() : 'free';
 
-        // 1. Not Logged In
         if (!user) {
             return (
                 <button
                     onClick={() => handlePayment(plan)}
-                    className={`w-full py-4 rounded-xl font-bold transition-all ${plan === 'yearly' ? 'bg-amber-500 text-black hover:bg-amber-400' : 'bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black'}`}
+                    className={`w-full py-4 rounded-xl font-bold transition-all active:scale-[0.98] ${plan === 'yearly' ? 'bg-white text-black hover:bg-neutral-200' : 'bg-neutral-800 text-neutral-400 hover:bg-neutral-700'}`}
                 >
-                    Get Started
+                    {plan === 'free' ? 'Join Free' : 'Secure Pro Engine'}
                 </button>
             );
         }
 
-        // 2. Current Plan Logic
         if (currentPlan === plan) {
             return (
                 <button
                     disabled
-                    className="w-full py-4 rounded-xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 font-bold cursor-default flex items-center justify-center gap-2"
+                    className="w-full py-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 font-bold cursor-default flex items-center justify-center gap-2"
                 >
-                    <CheckCircleOutlinedIcon /> Current Plan
+                    <CheckCircleOutlinedIcon sx={{ fontSize: '1.2rem' }} /> Active Tier
                 </button>
             );
         }
 
-        // 3. Upgrade/Downgrade Logic
-
-        // If plan is Free
         if (plan === 'free') {
             return (
-                <button
-                    disabled
-                    className="w-full py-4 rounded-xl bg-neutral-800 text-neutral-500 font-bold cursor-default"
-                >
-                    Included
+                <button disabled className="w-full py-4 rounded-xl bg-neutral-900 border border-neutral-800 text-neutral-600 font-bold cursor-default">
+                    Current Limit
                 </button>
             );
         }
 
-        // If User is Yearly -> Monthly is "Included" (or redundant)
         if (currentPlan === 'yearly' && plan === 'monthly') {
             return (
-                <button
-                    disabled
-                    className="w-full py-4 rounded-xl bg-neutral-800 text-neutral-500 font-bold cursor-default"
-                >
+                <button disabled className="w-full py-4 rounded-xl bg-neutral-900 border border-neutral-800 text-neutral-600 font-bold cursor-default">
                     Included in Yearly
                 </button>
             );
         }
 
-        // Default Active State
-        let buttonText = plan === 'monthly' ? 'Select Monthly' : 'Select Yearly';
-        if (currentPlan === 'monthly' && plan === 'yearly') {
-            buttonText = 'Upgrade to Yearly';
+        let buttonText = plan === 'monthly' ? 'Upgrade to Monthly' : 'Upgrade to Yearly';
+        if (currentPlan === 'free') {
+            buttonText = plan === 'monthly' ? 'Unlock Monthly' : 'Unlock Yearly';
         }
 
         return (
             <button
                 onClick={() => handlePayment(plan)}
                 disabled={loading}
-                className={`w-full py-4 rounded-xl font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed ${plan === 'yearly'
-                        ? 'bg-amber-500 text-black hover:bg-amber-400 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-amber-500/20'
-                        : 'bg-white/5 border border-white/10 text-white hover:bg-white hover:text-black'
+                className={`w-full py-4 rounded-xl font-bold transition-all disabled:opacity-50 active:scale-[0.98] ${plan === 'yearly'
+                        ? 'bg-white text-black hover:bg-neutral-200 shadow-xl'
+                        : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700 border border-neutral-700'
                     }`}
             >
-                {loading ? 'Processing...' : buttonText}
+                {loading ? 'Initiating...' : buttonText}
             </button>
         );
     };
 
+    if (authLoading) return null;
+
     return (
-        <div className="min-h-screen bg-[#0f0f0f] text-white selection:bg-amber-500/30 relative overflow-hidden">
+        <div className="min-h-screen bg-[#0f0f0f] text-neutral-200 selection:bg-amber-500/30 selection:text-white font-sans antialiased overflow-x-hidden">
+            
             {/* --- HEADER --- */}
-            {!user && (
-                <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-white/5 py-3' : 'bg-transparent py-5'
-                    }`}>
-                    <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-                        <Link href="/" className="flex items-center gap-3 group">
-                            <div className="relative w-8 h-8 transition-transform group-hover:scale-105">
-                                <Image src="/logo-final.png" alt="PrepLeague Logo" fill className="object-contain" />
-                            </div>
-                            <span className="font-bold text-lg tracking-tight text-white">PrepLeague</span>
-                        </Link>
-                        <nav className="hidden md:flex items-center gap-8">
-                            <Link href="/" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Home</Link>
-                            <Link href="/problems" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Problems</Link>
-                            <Link href="/sprint" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Sprint</Link>
-                            {/* <Link href="/games" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors">Games</Link> */}
-                            <Link href="/pricing" className="text-sm font-medium text-white transition-colors">Pricing</Link>
-                        </nav>
-                        <div className="flex items-center gap-4">
-                            <Link href="/login" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden sm:block">Sign in</Link>
-                            <Link href="/register" className="px-5 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-neutral-200 transition-colors">
-                                Get Started
-                            </Link>
-                        </div>
+            <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 border-b ${
+              scrolled 
+                ? 'bg-[#1a1a1a]/90 backdrop-blur-md border-neutral-800/80 py-3' 
+                : 'bg-transparent border-transparent py-5'
+            }`}>
+              <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between">
+                <div className="flex items-center gap-12">
+                  <Link href="/" className="flex items-center gap-3 transition-transform active:scale-95 group">
+                    <div className="relative w-9 h-9">
+                      <Image src="/logo-final.png" alt="Logo" fill className="object-contain" />
                     </div>
-                </header>
-            )}
+                    <div className="hidden sm:block">
+                      <span className="text-xl font-bold text-white tracking-tight">PrepLeague</span>
+                    </div>
+                  </Link>
 
-            {/* --- HERO SECTION (Animated Grid + Formulas) --- */}
-            <div className="absolute top-0 left-0 right-0 h-[1200px] pointer-events-none -z-0">
-                {/* Perspective Grid */}
-                <div className="absolute inset-0 opacity-[0.15]"
-                    style={{
-                        backgroundImage: `linear-gradient(to right, #444 1px, transparent 1px),
-                               linear-gradient(to bottom, #444 1px, transparent 1px)`,
-                        backgroundSize: '24px 24px',
-                        maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
-                    }}
-                />
-            </div>
-
-            {/* --- HERO CONTENT --- */}
-            <main className="relative w-full px-6 lg:px-12 pt-32 pb-12 max-w-7xl mx-auto z-10">
-
-                {/* Hero Section */}
-                <div className="text-center mb-16 max-w-3xl mx-auto relative z-10">
-                    <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-6 bg-gradient-to-b from-white to-neutral-500 bg-clip-text text-transparent">
-                        Choose your plan to <br className="hidden md:block" /> continue mastering.
-                    </h1>
-                    <p className="text-lg text-neutral-400 max-w-xl mx-auto mb-8">
-                        Start for free. Upgrade anytime to unlock unlimited practice and deep analytics.
-                    </p>
+                  <nav className="hidden lg:flex items-center gap-2">
+                    {[
+                      { n: 'Home', h: '/' },
+                      { n: 'Problems', h: '/problems' },
+                      { n: 'Sprint Mode', h: '/sprint' },
+                      { n: 'Pricing', h: '/pricing' }
+                    ].map((item) => (
+                      <Link 
+                        key={item.n} 
+                        href={item.h}
+                        className={`px-4 py-2 text-sm font-medium rounded-full transition-all ${item.n === 'Pricing' ? 'text-white bg-neutral-800/80' : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'}`}
+                      >
+                        {item.n}
+                      </Link>
+                    ))}
+                  </nav>
                 </div>
 
-                {/* Pricing Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto items-start">
+                <div className="flex items-center gap-4">
+                  {!user ? (
+                    <>
+                      <Link href="/login" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden sm:block px-4">Log in</Link>
+                      <Link href="/register" className="px-6 py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-neutral-200 transition-all shadow-lg active:scale-95">
+                        Get Started
+                      </Link>
+                    </>
+                  ) : (
+                    <Link href="/dashboard" className="px-6 py-2.5 bg-neutral-800 text-white text-sm font-bold rounded-xl hover:bg-neutral-700 transition-all shadow-lg active:scale-95">
+                      Dashboard
+                    </Link>
+                  )}
+                  <button className="lg:hidden p-2 text-neutral-400" onClick={() => setShowMobileMenu(true)}>
+                    <MenuIcon />
+                  </button>
+                </div>
+              </div>
 
-                    {/* FREE Plan */}
-                    <div className="bg-[#1a1a1a] border border-neutral-800 rounded-3xl p-8 hover:border-neutral-700 transition-all duration-300 group relative flex flex-col h-full">
-                        <div className="mb-8">
-                            <h3 className="text-lg font-bold text-white mb-2">Free</h3>
+              {/* Mobile Nav */}
+              <AnimatePresence>
+                {showMobileMenu && (
+                  <motion.div 
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    className="fixed inset-0 z-[200] lg:hidden bg-[#0f0f0f] flex flex-col"
+                  >
+                    <div className="flex items-center justify-between p-6 border-b border-neutral-800">
+                      <span className="text-xl font-bold text-white">Menu</span>
+                      <button onClick={() => setShowMobileMenu(false)} className="text-neutral-400 p-2"><CloseIcon /></button>
+                    </div>
+                    <nav className="flex flex-col p-6 gap-2">
+                      {[
+                        { n: 'Home', h: '/' },
+                        { n: 'Problems', h: '/problems' },
+                        { n: 'Sprint Mode', h: '/sprint' },
+                        { n: 'Pricing', h: '/pricing' },
+                        { n: 'Login', h: '/login' }
+                      ].map((item) => (
+                        <Link 
+                          key={item.n}
+                          href={item.h}
+                          onClick={() => setShowMobileMenu(false)}
+                          className="px-4 py-4 rounded-xl text-lg font-medium text-neutral-300 hover:bg-neutral-800 transition-all"
+                        >
+                          {item.n}
+                        </Link>
+                      ))}
+                    </nav>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </header>
+
+            {/* --- HERO SECTION --- */}
+            <section className="relative pt-48 pb-24 px-6 text-center">
+              <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/5 rounded-full blur-[120px] pointer-events-none" />
+              <div className="max-w-4xl mx-auto relative z-10">
+                <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+                  <div className="inline-block px-3 py-1 rounded-full bg-neutral-800/50 border border-neutral-800 text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-10">
+                    Transparent Preparation Paths
+                  </div>
+                  <p className="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed mt-4">
+                    Choose the plan that fits your ambition. From essential practice to high-intensity elite performance.
+                  </p>
+                </motion.div>
+              </div>
+            </section>
+
+            {/* --- PRICING CARDS --- */}
+            <main className="max-w-[1440px] mx-auto px-6 lg:px-12 pb-32">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+
+                    {/* FREE TIER */}
+                    <div className="p-8 md:p-12 rounded-3xl bg-[#1a1a1a] border border-neutral-800 relative group overflow-hidden flex flex-col h-full transition-all hover:border-neutral-700">
+                        <div className="mb-10">
+                            <h3 className="text-xl font-bold text-white mb-2">Core Experience</h3>
                             <div className="flex items-baseline gap-1">
                                 <span className="text-4xl font-black text-white">₹0</span>
                             </div>
-                            <p className="text-xs text-neutral-500 mt-2">Forever free</p>
+                            <p className="text-xs text-neutral-500 mt-2 font-medium tracking-wide font-mono">FOREVER FREE</p>
                         </div>
 
-                        <div className="space-y-4 mb-8 flex-1">
-                            <FeatureItem text="20 Questions / Day" />
-                            <FeatureItem text="1 Sprint / Day" />
-                            <FeatureItem text="Unlimited Speed Math Games" highlight />
-                            <FeatureItem text="Basic Accuracy Stats" />
-                            <FeatureItem text="Access to All Topics" />
+                        <div className="space-y-4 mb-12 flex-1">
+                            {[
+                              { t: '3,000+ Maths & Reasoning PYQs', d: 'Standard filter access.' },
+                              { t: 'Daily Practice Sampling', d: '1 Sprint and 2 AI clarifications.' },
+                              { t: '365-Day Practice Heatmap', d: 'Basic history and accuracy stats.' },
+                              { t: 'Topic-wise Accuracy', d: 'High-level performance metrics.' },
+                              { t: 'Supported by ads', d: 'Occasional minimal advertisements.' }
+                            ].map((f, i) => (
+                                <div key={i} className="flex items-start gap-4">
+                                    <div className="mt-1 w-5 h-5 rounded-full bg-neutral-800 flex items-center justify-center text-neutral-400">
+                                        <CheckCircleOutlinedIcon sx={{ fontSize: '1rem' }} />
+                                    </div>
+                                    <div>
+                                        <div className={`text-sm ${i === 4 ? 'text-amber-500/70 font-bold' : 'text-neutral-300 font-bold'}`}>{f.t}</div>
+                                        <div className="text-[11px] text-neutral-500 mt-0.5 leading-relaxed font-medium">{f.d}</div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
 
-                        {getPlanButton('free')}
+                        <div className="mt-auto">
+                           {getPlanButton('free')}
+                        </div>
                     </div>
 
-                    {/* Monthly Plan */}
-                    <div className="bg-[#1a1a1a] border border-neutral-800 rounded-3xl p-8 hover:border-neutral-700 transition-all duration-300 group relative flex flex-col h-full">
-                        <div className="mb-8">
-                            <h3 className="text-lg font-bold text-white mb-2">Monthly</h3>
+                    {/* MONTHLY TIER */}
+                    <div className="p-8 md:p-12 rounded-3xl bg-[#1a1a1a] border border-neutral-800 relative group overflow-hidden flex flex-col h-full transition-all hover:border-neutral-700">
+                        <div className="mb-10">
+                            <h3 className="text-xl font-bold text-white mb-2">Pro Engine</h3>
                             <div className="flex items-baseline gap-1">
                                 <span className="text-4xl font-black text-white">₹99</span>
-                                <span className="text-neutral-500 text-sm">/mo</span>
+                                <span className="text-neutral-500 text-sm font-bold">/mo</span>
                             </div>
-                            <p className="text-xs text-neutral-500 mt-2">No commitment, cancel anytime</p>
+                            <p className="text-xs text-neutral-500 mt-2 font-medium tracking-wide font-mono">Billed Monthly</p>
                         </div>
 
-                        <div className="space-y-4 mb-8 flex-1">
-                            <FeatureItem text="Unlimited Questions & Sprints" highlight />
-                            <FeatureItem text="Full Length Mock Tests" highlight />
-                            <FeatureItem text="Unlimited Speed Math Games" highlight />
-                            <FeatureItem text="Advanced Analytics & Trends" highlight />
-                            <FeatureItem text="Predicted Exam Score" highlight />
-                            <FeatureItem text="Weak Spot Drills" highlight />
+                        <div className="space-y-4 mb-12 flex-1">
+                            {[
+                                { t: 'Unlimited AI Tutor', d: 'Ask as many follow-ups as needed.' },
+                                { t: 'Full Performance Engine', d: 'Advanced analytics & heatmaps.' },
+                                { t: 'Unlimited Sprints', d: 'Infinite drills to build speed reflexes.' },
+                                { t: 'Weak Topic Isolation', d: 'Automated "Weakspot Drills".' },
+                                { t: 'Ad-free Experience', d: 'Zero distractions while solving.' }
+                            ].map((f, i) => (
+                                <div key={i} className="flex items-start gap-4">
+                                    <CheckCircleOutlinedIcon className="text-amber-500 mt-0.5" sx={{ fontSize: '1.2rem' }} />
+                                    <div>
+                                        <div className="text-sm text-white font-bold">{f.t}</div>
+                                        <div className="text-[11px] text-neutral-500 mt-0.5 leading-relaxed font-medium">{f.d}</div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
 
-                        {getPlanButton('monthly')}
+                        <div className="mt-auto">
+                           {getPlanButton('monthly')}
+                        </div>
                     </div>
 
-                    {/* Yearly Plan (Best Value) */}
-                    <div className="bg-[#1a1a1a] border-2 border-amber-500 rounded-3xl p-8 shadow-2xl shadow-amber-500/10 relative transform md:-translate-y-4 flex flex-col h-full">
-                        <div className="absolute top-0 right-0 left-0 -mt-4 flex justify-center">
-                            <div className="bg-amber-500 text-black text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg">
+                    {/* YEARLY TIER (Best Value) */}
+                    <div className="p-8 md:p-12 rounded-3xl bg-[#1a1a1a] border border-amber-500/40 relative shadow-2xl shadow-amber-500/5 group overflow-hidden flex flex-col h-full transition-all hover:border-amber-500/60">
+                        <div className="absolute top-0 right-0 p-8">
+                            <div className="px-2.5 py-1 bg-amber-500 text-black text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                                 Best Value
                             </div>
                         </div>
 
-                        <div className="mb-8 mt-2">
-                            <h3 className="text-lg font-bold text-white mb-2">Yearly</h3>
+                        <div className="mb-10">
+                            <h3 className="text-xl font-bold text-white mb-2">The Pro Engine Elite</h3>
                             <div className="flex items-baseline gap-1">
                                 <span className="text-4xl font-black text-white">₹499</span>
-                                <span className="text-neutral-500 text-sm">/yr</span>
+                                <span className="text-neutral-500 text-sm font-bold">/yr</span>
                             </div>
-                            <p className="text-xs text-amber-500 mt-2 font-medium">Just ₹42/mo • Save 58%</p>
+                            <p className="text-xs text-amber-500 mt-2 font-bold tracking-wide font-mono uppercase">Just ₹42/month</p>
                         </div>
 
-                        <div className="space-y-4 mb-8 flex-1">
-                            <FeatureItem text="Everything in Monthly" highlight />
-                            <FeatureItem text="Same Premium Features" highlight />
-                            <FeatureItem text="Save ₹690 / Year" highlight />
+                        <div className="space-y-4 mb-12 flex-1">
+                            {[
+                                { t: 'Everything in Monthly', d: 'All pro engine analytical tools.' },
+                                { t: 'Priority Support', d: 'Skip the line for technical assistance.' },
+                                { t: 'Beta Feature Access', d: 'Try new drill types before anyone else.' },
+                                { t: 'Elite Performance Label', d: 'Showcase your commitment to mastery.' }
+                            ].map((f, i) => (
+                                <div key={i} className="flex items-start gap-4">
+                                    <CheckCircleOutlinedIcon className="text-amber-500 mt-0.5" sx={{ fontSize: '1.2rem' }} />
+                                    <div>
+                                        <div className="text-sm text-white font-bold">{f.t}</div>
+                                        <div className="text-[11px] text-neutral-500 mt-0.5 leading-relaxed font-medium">{f.d}</div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
 
-                        {getPlanButton('yearly')}
-                        <p className="text-[10px] text-center text-neutral-500 mt-4">Billed as one payment of ₹499</p>
+                        <div className="mt-auto">
+                           {getPlanButton('yearly')}
+                           <p className="text-[10px] text-center text-neutral-600 mt-4 font-medium uppercase tracking-tighter">Billed as one payment of ₹499</p>
+                        </div>
                     </div>
-
                 </div>
 
                 {/* Feature Comparison Table */}
-                <div className="mt-24 max-w-4xl mx-auto">
-                    <h2 className="text-2xl font-bold text-center mb-12">Compare Plans</h2>
+                <div className="mt-40">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl font-bold text-white mb-4">Granular Comparison</h2>
+                        <p className="text-neutral-500 text-sm">Every detail of your choice, laid out simply.</p>
+                    </div>
                     <div className="overflow-x-auto">
-                        <table className="w-full text-left text-sm">
+                        <table className="w-full text-left text-sm border-collapse">
                             <thead>
                                 <tr className="border-b border-neutral-800">
-                                    <th className="py-4 px-4 font-normal text-neutral-500 w-1/3">Features</th>
-                                    <th className="py-4 px-4 font-bold text-white text-center w-1/6">Free</th>
-                                    <th className="py-4 px-4 font-bold text-white text-center w-1/6">Monthly</th>
-                                    <th className="py-4 px-4 font-bold text-amber-500 text-center w-1/6">Yearly</th>
+                                    <th className="py-6 px-6 font-bold text-neutral-600 uppercase tracking-[0.2em] text-[10px] w-1/3">Features</th>
+                                    <th className="py-6 px-6 font-bold text-white text-center w-1/6 uppercase tracking-widest text-[10px]">Free</th>
+                                    <th className="py-6 px-6 font-bold text-white text-center w-1/6 uppercase tracking-widest text-[10px]">Monthly</th>
+                                    <th className="py-6 px-6 font-bold text-amber-500 text-center w-1/6 uppercase tracking-widest text-[10px]">Yearly</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-neutral-800">
-                                <tr>
-                                    <td className="py-4 px-4 text-neutral-300">Questions / Day</td>
-                                    <td className="py-4 px-4 text-center text-neutral-400">20</td>
-                                    <td className="py-4 px-4 text-center text-white">Unlimited</td>
-                                    <td className="py-4 px-4 text-center text-amber-500 font-bold">Unlimited</td>
-                                </tr>
-                                <tr>
-                                    <td className="py-4 px-4 text-neutral-300">Sprints / Day</td>
-                                    <td className="py-4 px-4 text-center text-neutral-400">1</td>
-                                    <td className="py-4 px-4 text-center text-white">Unlimited</td>
-                                    <td className="py-4 px-4 text-center text-amber-500 font-bold">Unlimited</td>
-                                </tr>
-                                <tr>
-                                    <td className="py-4 px-4 text-neutral-300">Full Length Mock Tests</td>
-                                    <td className="py-4 px-4 text-center text-neutral-600">✗</td>
-                                    <td className="py-4 px-4 text-center text-emerald-500">✓</td>
-                                    <td className="py-4 px-4 text-center text-emerald-500">✓</td>
-                                </tr>
-                                <tr>
-                                    <td className="py-4 px-4 text-neutral-300">Speed Math Games</td>
-                                    <td className="py-4 px-4 text-center text-white">Unlimited</td>
-                                    <td className="py-4 px-4 text-center text-white">Unlimited</td>
-                                    <td className="py-4 px-4 text-center text-amber-500 font-bold">Unlimited</td>
-                                </tr>
-                                <tr>
-                                    <td className="py-4 px-4 text-neutral-300">Speed Analytics</td>
-                                    <td className="py-4 px-4 text-center text-neutral-600">✗</td>
-                                    <td className="py-4 px-4 text-center text-emerald-500">✓</td>
-                                    <td className="py-4 px-4 text-center text-emerald-500">✓</td>
-                                </tr>
-                                <tr>
-                                    <td className="py-4 px-4 text-neutral-300">Weak Spot Drills</td>
-                                    <td className="py-4 px-4 text-center text-neutral-600">✗</td>
-                                    <td className="py-4 px-4 text-center text-emerald-500">✓</td>
-                                    <td className="py-4 px-4 text-center text-emerald-500">✓</td>
-                                </tr>
-                                <tr>
-                                    <td className="py-4 px-4 text-neutral-300">Predicted Score</td>
-                                    <td className="py-4 px-4 text-center text-neutral-600">✗</td>
-                                    <td className="py-4 px-4 text-center text-emerald-500">✓</td>
-                                    <td className="py-4 px-4 text-center text-emerald-500">✓</td>
-                                </tr>
-                                <tr>
-                                    <td className="py-4 px-4 text-neutral-300">Download Sessions (PDF)</td>
-                                    <td className="py-4 px-4 text-center text-neutral-600">✗</td>
-                                    <td className="py-4 px-4 text-center text-emerald-500">✓</td>
-                                    <td className="py-4 px-4 text-center text-emerald-500">✓</td>
-                                </tr>
+                                {[
+                                  { f: 'Question Access', v: ['3k+ Maths & Reasoning', 'Unlimited', 'Unlimited'] },
+                                  { f: 'Daily Sprint Drills', v: ['1 per day', 'Unlimited', 'Unlimited'] },
+                                  { f: 'AI Tutor Clarifications', v: ['2 per day', 'Unlimited', 'Unlimited'] },
+                                  { f: 'Practice Heatmap', v: ['Basic', 'Premium', 'Premium'] },
+                                  { f: 'Topic Performance Stats', v: ['Standard', 'Grains-eye', 'Grains-eye'] },
+                                  { f: 'Weakspot Drills', v: ['✗', '✓', '✓'] },
+                                  { f: 'Ad-free Experience', v: ['✗', '✓', '✓'] },
+                                  { f: 'Priority Support', v: ['✗', '✗', '✓'] }
+                                ].map((row, i) => (
+                                  <tr key={i} className="hover:bg-neutral-800/30 transition-colors group">
+                                    <td className="py-5 px-6 text-neutral-400 group-hover:text-white transition-colors font-medium">{row.f}</td>
+                                    {row.v.map((val, j) => (
+                                      <td key={j} className={`py-5 px-6 text-center font-mono font-bold ${
+                                        val === '✗' ? 'text-neutral-800' : 
+                                        val === '✓' ? 'text-emerald-500' :
+                                        j === 3 || (j === 2 && row.v[2] === 'Unlimited') ? 'text-amber-500' : 'text-neutral-400'
+                                      }`}>
+                                        {val}
+                                      </td>
+                                    ))}
+                                  </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
                 </div>
 
                 {/* FAQ / Trust */}
-                <div className="mt-20 text-center border-t border-neutral-800 pt-12">
-                    <div className="flex justify-center gap-4 mb-6 opacity-50 grayscale hover:grayscale-0 transition-all">
-                        {/* Placeholder for payment icons - using text for now as per instructions */}
-                        <span className="text-xs font-bold text-neutral-500 border border-neutral-700 px-2 py-1 rounded">UPI</span>
-                        <span className="text-xs font-bold text-neutral-500 border border-neutral-700 px-2 py-1 rounded">Cards</span>
-                        <span className="text-xs font-bold text-neutral-500 border border-neutral-700 px-2 py-1 rounded">NetBanking</span>
+                <div className="mt-32 pt-20 border-t border-neutral-800/50 flex flex-col items-center gap-10">
+                    <div className="flex items-center gap-8 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                      {['RAZORPAY', 'UPI ENABLED', '100% SECURE'].map(t => (
+                        <span key={t} className="text-[10px] font-black tracking-[0.25em] text-neutral-400">{t}</span>
+                      ))}
                     </div>
-                    <p className="text-neutral-500 text-sm mb-4">
-                        100% Secure Payment via Razorpay. 7-Day Money Back Guarantee for new subscribers.
+                    <p className="text-neutral-500 text-xs font-medium max-w-sm text-center leading-relaxed">
+                        Secure infrastructure powered by Razorpay. <br />
+                        No hidden charges. No complex cancellation flows.
                     </p>
                 </div>
             </main>
@@ -443,112 +499,52 @@ export default function PricingPage() {
             {/* Immersive Payment Status Modal */}
             <AnimatePresence>
                 {paymentStatus !== 'idle' && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
-                    >
-                        {/* 
-                            Logic for different Modal Styles based on Status 
-                            Success -> Razorpay Green Style
-                            Failed -> Dark Red Style
-                        */}
-                        <motion.div
-                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
-                            animate={{ scale: 1, opacity: 1, y: 0 }}
-                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
-                            transition={{ type: "spring", duration: 0.5 }}
-                            className={`relative rounded-3xl p-1 max-w-md w-full shadow-2xl overflow-hidden ${paymentStatus === 'success' ? 'bg-[#0cce6b]' : 'bg-[#1a1a1a] border border-neutral-800'}`}
-                        >
-                            {paymentStatus === 'success' ? (
-                                // --- SUCCESS STATE (Razorpay Style) ---
-                                <div className="relative bg-[#0cce6b] rounded-[22px] p-8 text-center min-h-[400px] flex flex-col items-center justify-center">
-
-                                    <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mb-6 animate-pulse">
-                                        <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={4}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                                    </div>
-
-                                    <h3 className="text-3xl font-bold text-white mb-2">
-                                        Payment Successful!
-                                    </h3>
-
-                                    <p className="text-white/80 font-medium mb-8">
-                                        Redirecting you to dashboard...
-                                    </p>
-
-                                    {/* Receipt Card */}
-                                    <div className="bg-white rounded-xl w-full p-6 text-left shadow-lg transition-transform duration-300">
-                                        <div className="flex justify-between items-start mb-4 border-b border-neutral-100 pb-4">
-                                            <div>
-                                                <p className="text-xs text-neutral-400 font-bold uppercase tracking-wider">Amount Paid</p>
-                                                <p className="text-3xl font-black text-neutral-900">₹{paymentDetails?.amount || '--'}</p>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl">
+                        <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className={`max-w-md w-full rounded-[2rem] p-1 ${paymentStatus === 'success' ? 'bg-gradient-to-br from-emerald-400 to-emerald-600' : 'bg-neutral-800 border border-neutral-700'}`}>
+                            <div className="bg-[#0f0f0f] rounded-[1.95rem] p-8 text-center overflow-hidden relative">
+                                {paymentStatus === 'success' ? (
+                                    <div className="relative z-10">
+                                        <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-8">
+                                          <CheckCircleOutlinedIcon sx={{ fontSize: '3rem', color: '#10b981' }} />
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-white mb-2">Payment Executed</h3>
+                                        <p className="text-neutral-400 text-sm mb-10">Synchronizing your Pro Engine features...</p>
+                                        
+                                        <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 text-left space-y-4">
+                                            <div className="flex justify-between items-center text-xs">
+                                              <span className="text-neutral-500 font-bold uppercase tracking-widest">Amount</span>
+                                              <span className="text-white font-mono font-bold">₹{paymentDetails?.amount}</span>
                                             </div>
-                                            <div className="bg-emerald-100 p-2 rounded-lg">
-                                                <Image src="/logo-final.png" width={24} height={24} alt="Logo" className="object-contain" />
+                                            <div className="flex justify-between items-center text-xs">
+                                              <span className="text-neutral-500 font-bold uppercase tracking-widest">Transaction</span>
+                                              <span className="text-white font-mono">{paymentDetails?.paymentId?.slice(-10)}</span>
                                             </div>
                                         </div>
 
-                                        <div className="space-y-3">
-                                            <div className="flex justify-between text-sm">
-                                                <span className="text-neutral-500">Payment ID</span>
-                                                <span className="font-mono text-neutral-900">{paymentDetails?.paymentId ? `...${paymentDetails.paymentId.slice(-6)}` : '...'}</span>
-                                            </div>
-                                            <div className="flex justify-between text-sm">
-                                                <span className="text-neutral-500">Date</span>
-                                                <span className="text-neutral-900 font-medium">{paymentDetails?.date ? new Date(paymentDetails.date).toLocaleDateString() : 'Just now'}</span>
-                                            </div>
+                                        <button onClick={() => router.push('/dashboard')} className="mt-10 w-full py-4 bg-white text-black font-bold rounded-xl text-sm transition-all hover:bg-neutral-200">
+                                            Go to Dashboard
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className="relative z-10">
+                                        <div className="w-20 h-20 bg-rose-500/10 rounded-full flex items-center justify-center mx-auto mb-8">
+                                          <CloseIcon sx={{ fontSize: '2.5rem', color: '#f43f5e' }} />
                                         </div>
+                                        <h3 className="text-2xl font-bold text-white mb-2">Payment Interrupted</h3>
+                                        <p className="text-neutral-400 text-sm mb-10 leading-relaxed px-4">{errorMessage}</p>
+                                        
+                                        <button onClick={() => setPaymentStatus('idle')} className="w-full py-4 bg-neutral-800 text-white font-bold rounded-xl text-sm transition-all hover:bg-neutral-700">
+                                            Try Again
+                                        </button>
                                     </div>
-
-                                    <button
-                                        onClick={() => router.push('/dashboard')}
-                                        className="mt-8 text-white font-bold text-sm hover:underline opacity-80 hover:opacity-100"
-                                    >
-                                        Click here if not redirected
-                                    </button>
-                                </div>
-                            ) : (
-                                // --- FAILURE STATE (Dark Style) ---
-                                <div className="relative bg-[#121212] rounded-[22px] p-8 text-center overflow-hidden">
-                                    {/* Background Glow */}
-                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-32 bg-gradient-to-b from-rose-500/10 to-transparent blur-3xl -z-10" />
-
-                                    <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg bg-gradient-to-br from-rose-400 to-red-600 text-white shadow-rose-500/20">
-                                        <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-                                    </div>
-
-                                    <h3 className="text-2xl font-bold text-white mb-2">
-                                        Payment Failed
-                                    </h3>
-
-                                    <p className="text-neutral-400 mb-8 leading-relaxed">
-                                        {errorMessage}
-                                    </p>
-
-                                    <button
-                                        onClick={() => setPaymentStatus('idle')}
-                                        className="w-full py-3.5 rounded-xl font-bold text-sm tracking-wide transition-all shadow-lg bg-neutral-800 text-white hover:bg-neutral-700 hover:shadow-lg"
-                                    >
-                                        Try Again
-                                    </button>
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
             <Footer />
-        </div>
-    );
-}
-
-function FeatureItem({ text, highlight = false }: { text: string; highlight?: boolean }) {
-    return (
-        <div className="flex items-start gap-3">
-            <CheckCircleOutlinedIcon className={`text-xl ${highlight ? 'text-amber-500' : 'text-neutral-600'}`} />
-            <span className={`text-sm ${highlight ? 'text-white font-medium' : 'text-neutral-400'}`}>{text}</span>
         </div>
     );
 }

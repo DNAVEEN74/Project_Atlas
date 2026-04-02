@@ -36,8 +36,15 @@ const QuickPracticeCard: React.FC<QuickPracticeProps> = ({
             if (!res.ok) throw new Error('Failed to create session');
 
             const data = await res.json();
-            if (data.session && data.session._id) {
-                router.push(`/session/${data.session._id}`);
+            if (data.session && data.session.question_ids && data.session.question_ids.length > 0) {
+                const qIds = data.session.question_ids.map((q: any) => q._id || q);
+                sessionStorage.setItem('practiceSession', JSON.stringify({
+                    questionIds: qIds,
+                    currentIndex: 0,
+                    section: data.session.config?.subject || 'QUANT',
+                    topic: 'Mixed'
+                }));
+                router.push(`/problems/${qIds[0]}?practice=true&section=${data.session.config?.subject || 'QUANT'}`);
             }
         } catch (error) {
             console.error("Quick Practice Error:", error);

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 interface HeatmapData {
     date: string;
@@ -41,6 +41,8 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
         return acc + getCountForDate(curr);
     }, 0);
 
+    const dataMap = useMemo(() => new Map(data.map(d => [d.date, d])), [data]);
+
     const getIntensity = (count: number) => {
         if (count === 0) return 0;
         if (count <= 2) return 1;
@@ -66,7 +68,7 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
     };
 
     return (
-        <div className={`bg-[#1a1a1a] rounded-xl border border-neutral-800 p-6 ${className}`}>
+        <div className={`bg-[#1a1a1a] h-full rounded-xl border border-neutral-800 p-6 flex flex-col ${className}`}>
 
             {/* Header Section - Reorganized */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">
@@ -79,7 +81,7 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
-                                className={`px-3 py-1 text-[11px] font-medium rounded-full border transition-all ${activeTab === tab
+                                className={`px-3 py-1 text-sm font-medium rounded-full border transition-all ${activeTab === tab
                                     ? 'bg-neutral-800 text-white border-neutral-700'
                                     : 'bg-transparent text-neutral-500 border-transparent hover:text-neutral-300'
                                     }`}
@@ -91,7 +93,7 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
                 </div>
 
                 {/* Right: Stats */}
-                <div className="flex items-center gap-6 text-xs text-neutral-500">
+                <div className="flex items-center gap-6 text-sm text-neutral-500">
                     <div className="flex items-baseline gap-2">
                         <span className="text-white font-bold">{totalSubmissions}</span>
                         <span>submissions</span>
@@ -108,8 +110,8 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
             </div>
 
             {/* Grid Container - Compact Sizing with Mobile Scroll */}
-            <div className="w-full overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent">
-                <div className="flex items-end gap-1 min-w-max">
+            <div className="w-full flex-1 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent flex flex-col justify-center min-h-[160px]">
+                <div className="flex items-end gap-1 min-w-[700px] w-full">
                     {/* Generate last 12 months */}
                     {Array.from({ length: 13 }).map((_, monthIndex) => {
                         // Logic from reference: 
@@ -134,11 +136,11 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
                         const columns = Math.ceil(totalSlots / 7);
 
                         return (
-                            <div key={monthIndex} className="flex flex-col gap-1 relative group">
+                            <div key={monthIndex} className="flex flex-col gap-1 relative group" style={{ flex: columns }}>
                                 {/* Grid for this month */}
-                                <div className="flex gap-[2px]">
+                                <div className="flex gap-[2px] w-full">
                                     {Array.from({ length: columns }).map((_, colIndex) => (
-                                        <div key={colIndex} className="flex flex-col gap-[2px]">
+                                        <div key={colIndex} className="flex flex-col gap-[2px] flex-1">
                                             {Array.from({ length: 7 }).map((_, rowIndex) => {
                                                 // Calculate actual day number
                                                 const slotIndex = (colIndex * 7) + rowIndex;
@@ -147,18 +149,18 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
                                                 const isValidDay = dayNumber > 0 && dayNumber <= daysInMonth;
 
                                                 if (!isValidDay) {
-                                                    return <div key={rowIndex} className="w-[10px] h-[10px]" />; // Empty placeholder
+                                                    return <div key={rowIndex} className="w-full aspect-square" />; // Empty placeholder
                                                 }
 
                                                 const dateStr = `${targetYear}-${String(targetMonth + 1).padStart(2, '0')}-${String(dayNumber).padStart(2, '0')}`;
                                                 const isFuture = isFutureDate(dateStr);
 
                                                 if (isFuture) {
-                                                    return <div key={rowIndex} className="w-[10px] h-[10px] bg-neutral-900/30 rounded-[2px]" />;
+                                                    return <div key={rowIndex} className="w-full aspect-square bg-neutral-900/30 rounded-[2px]" />;
                                                 }
 
                                                 // Get data for this day
-                                                const entry = data.find(heading => heading.date === dateStr);
+                                                const entry = dataMap.get(dateStr);
                                                 const count = getCountForDate(entry);
                                                 const intensity = getIntensity(count);
 
@@ -166,9 +168,9 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
                                                 const isTopRow = rowIndex < 2;
 
                                                 return (
-                                                    <div key={rowIndex} className="relative group/item hover:z-50">
+                                                    <div key={rowIndex} className="relative group/item hover:z-50 w-full">
                                                         <div
-                                                            className={`w-[10px] h-[10px] rounded-[2px] transition-all duration-300 group-hover/item:scale-125 ${getIntensityColor(intensity)} cursor-default`}
+                                                            className={`w-full aspect-square rounded-[2px] transition-all duration-300 group-hover/item:scale-125 ${getIntensityColor(intensity)} cursor-default`}
                                                         />
                                                         {/* Custom Tooltip */}
                                                         <div className={`absolute left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 transition-all duration-200 pointer-events-none transform z-50 flex flex-col items-center

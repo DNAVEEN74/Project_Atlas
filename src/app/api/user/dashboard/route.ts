@@ -5,6 +5,7 @@ import { getCurrentUser } from '@/lib/auth';
 import User from '@/core/models/User';
 import DailyActivity from '@/core/models/DailyActivity';
 import Attempt from '@/core/models/Attempt';
+import Question from '@/core/models/Question';
 import Pattern from '@/core/models/Pattern';
 import Session from '@/core/models/Session';
 
@@ -237,6 +238,86 @@ export async function GET(req: NextRequest) {
             max_streak: user.stats.max_streak
         };
 
+        // Keep today's section split consistent with today's solved count.
+        // This also auto-recovers older rows where section counters were not incremented properly.
+        const todayQuestionsSolved = todayActivity?.questions_solved || 0;
+        let todayQuantSolved = todayActivity?.quant_solved || 0;
+        let todayReasoningSolved = todayActivity?.reasoning_solved || 0;
+
+        if (
+            todayActivity &&
+            todayQuestionsSolved > 0 &&
+            (todayQuantSolved + todayReasoningSolved) < todayQuestionsSolved
+        ) {
+            let attemptedIds = (
+                Array.isArray((todayActivity as any).attempted_question_ids)
+                    ? (todayActivity as any).attempted_question_ids
+                    : []
+            ) as mongoose.Types.ObjectId[];
+
+            // If old row has no tracked attempted ids, rebuild from today's unique attempts.
+            if (attemptedIds.length === 0) {
+                const startOfTodayUtc = new Date(`${today}T00:00:00.000Z`);
+                const endOfTodayUtc = new Date(`${today}T23:59:59.999Z`);
+
+                const uniqueTodayAttempts = await Attempt.aggregate([
+                    {
+                        $match: {
+                            user_id: userObjectId,
+                            created_at: { $gte: startOfTodayUtc, $lte: endOfTodayUtc }
+                        }
+                    },
+                    {
+                        $group: {
+                            _id: '$question_id',
+                            subject: { $first: '$subject' }
+                        }
+                    }
+                ]);
+
+                attemptedIds = uniqueTodayAttempts.map((a: any) => a._id);
+
+                const quantCount = uniqueTodayAttempts.filter((a: any) => a.subject === 'QUANT').length;
+                const reasoningCount = uniqueTodayAttempts.filter((a: any) => a.subject === 'REASONING').length;
+
+                if (attemptedIds.length > 0) {
+                    todayQuantSolved = quantCount;
+                    todayReasoningSolved = reasoningCount;
+
+                    await DailyActivity.updateOne(
+                        { user_id: userId, date: today },
+                        {
+                            $set: {
+                                quant_solved: todayQuantSolved,
+                                reasoning_solved: todayReasoningSolved,
+                                attempted_question_ids: attemptedIds
+                            }
+                        }
+                    );
+                }
+            } else {
+                const subjectCounts = await Question.aggregate([
+                    { $match: { _id: { $in: attemptedIds } } },
+                    { $group: { _id: '$subject', count: { $sum: 1 } } }
+                ]);
+
+                const quantRow = subjectCounts.find((row: any) => row._id === 'QUANT');
+                const reasoningRow = subjectCounts.find((row: any) => row._id === 'REASONING');
+                todayQuantSolved = quantRow?.count || 0;
+                todayReasoningSolved = reasoningRow?.count || 0;
+
+                await DailyActivity.updateOne(
+                    { user_id: userId, date: today },
+                    {
+                        $set: {
+                            quant_solved: todayQuantSolved,
+                            reasoning_solved: todayReasoningSolved
+                        }
+                    }
+                );
+            }
+        }
+
         // --- RESPONSE CONSTRUCTION ---
         return NextResponse.json({
             success: true,
@@ -248,10 +329,10 @@ export async function GET(req: NextRequest) {
                 },
                 daily_progress: {
                     date: today,
-                    questions_solved: todayActivity?.questions_solved || 0,
+                    questions_solved: todayQuestionsSolved,
                     year_questions_solved: user.stats.total_solved,
-                    quant_solved: todayActivity?.quant_solved || 0,
-                    reasoning_solved: todayActivity?.reasoning_solved || 0,
+                    quant_solved: todayQuantSolved,
+                    reasoning_solved: todayReasoningSolved,
                     quant_goal: user.preferences?.daily_quant_goal || 10,
                     reasoning_goal: user.preferences?.daily_reasoning_goal || 10,
                     daily_goal: (user.preferences?.daily_quant_goal || 10) + (user.preferences?.daily_reasoning_goal || 10),
@@ -263,6 +344,7 @@ export async function GET(req: NextRequest) {
                 topic_stats: processedTopicStats,
                 recent_attempts: processedRecentAttempts,
                 difficulty_stats: processedDifficultyStats,
+                difficulty_stats_raw: difficultyStats,
                 advanced_insights: {
                     sprint_discipline,
                     completed_sessions: completedSessions,
