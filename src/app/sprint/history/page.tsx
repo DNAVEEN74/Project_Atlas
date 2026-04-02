@@ -341,7 +341,7 @@ export default function SprintHistoryPage() {
                             <section className="space-y-6">
                                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                                     <div className="lg:col-span-8 space-y-6">
-                                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6">
+                                        {/* <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6">
                                             <div className="flex items-center justify-between gap-3 mb-6">
                                                 <h2 className="text-lg font-bold text-white flex items-center gap-2">
                                                     <TrophyIcon className="w-5 h-5 text-amber-500" />
@@ -383,7 +383,7 @@ export default function SprintHistoryPage() {
                                                     </p>
                                                 )}
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                         <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6">
                                             <div className="flex items-center justify-between mb-4">
@@ -548,9 +548,9 @@ export default function SprintHistoryPage() {
                             </section>
                         )}
                         {/* Chart - Use separate chartData */}
-                        <div className="[&>div]:mb-0">
+                        {/* <div className="[&>div]:mb-0">
                             <AccuracyTrendChart submissions={chartData} />
-                        </div>
+                        </div> */}
 
                         {/* Pagination Table */}
                         {sessions.length > 0 && (

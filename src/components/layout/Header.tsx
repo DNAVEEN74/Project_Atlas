@@ -240,10 +240,10 @@ export default function Header({ activePage }: HeaderProps) {
                                                     <PersonIcon sx={{ fontSize: '1.1rem' }} />
                                                     My Profile
                                                 </Link>
-                                                <Link href="/support" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
+                                                {/* <Link href="/support" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
                                                     <HelpIcon sx={{ fontSize: '1.1rem' }} />
                                                     Help & Support
-                                                </Link>
+                                                </Link> */}
                                             </div>
 
                                             <div className="border-t border-neutral-800 py-1">

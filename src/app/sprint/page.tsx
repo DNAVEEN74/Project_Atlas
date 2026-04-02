@@ -14,6 +14,8 @@ import {
     TuneIcon,
     ExpandLessIcon,
     ExpandMoreIcon,
+    SearchIcon,
+    SaveIcon,
 } from '@/components/icons';
 import Header from '@/components/layout/Header';
 import { AuthActionGuard } from '@/components/auth/AuthActionGuard';
@@ -427,12 +429,15 @@ function SprintSetupContent() {
 
                                 <div className="flex items-center gap-3">
                                     <div className="relative">
+                                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none">
+                                            <SearchIcon sx={{ fontSize: '1rem' }} />
+                                        </div>
                                         <input
                                             type="text"
-                                            placeholder="🔍 Search topics..."
+                                            placeholder="Search topics..."
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="w-full md:w-48 bg-[#1a1a1a] border border-neutral-800 rounded-lg px-3 py-1.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500/50 transition-colors"
+                                            className="w-full md:w-48 bg-[#1a1a1a] border border-neutral-800 rounded-lg pl-9 pr-8 py-1.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500/50 transition-colors"
                                         />
                                         {searchTerm && (
                                             <button
@@ -714,13 +719,14 @@ function SprintSetupContent() {
                                             setSaveError(null);
                                         }}
                                         disabled={savedConfigs.length >= 5}
-                                        className={`w-full text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all border ${savedConfigs.length >= 5
+                                        className={`w-full text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all border flex items-center justify-center gap-2 ${savedConfigs.length >= 5
                                             ? 'bg-neutral-800/30 text-neutral-600 border-neutral-800 cursor-not-allowed'
                                             : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white border-neutral-700'
                                             }`}
                                         title={savedConfigs.length >= 5 ? 'Maximum 5 configurations allowed' : 'Save current settings as a preset'}
                                     >
-                                        {savedConfigs.length >= 5 ? 'Max Presets Reached (5/5)' : `💾 Save as Preset (${savedConfigs.length}/5)`}
+                                        <SaveIcon sx={{ fontSize: '1.1rem' }} />
+                                        {savedConfigs.length >= 5 ? 'Max Presets Reached (5/5)' : `Save as Preset (${savedConfigs.length}/5)`}
                                     </button>
                                 </div>
                             )}

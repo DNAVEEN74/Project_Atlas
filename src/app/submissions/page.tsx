@@ -13,6 +13,8 @@ import {
     ChevronRightIcon,
     CheckCircleOutlinedIcon,
     CancelIcon,
+    BarChartOutlinedIcon,
+    BoltIcon,
 } from '@/components/icons';
 
 interface Question {
@@ -166,7 +168,7 @@ export default function SubmissionsPage() {
                             <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
                             <h2 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                                <span>📊</span> Your Submission Stats
+                                <BarChartOutlinedIcon className="w-5 h-5 text-indigo-400" /> Your Submission Stats
                             </h2>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -212,7 +214,7 @@ export default function SubmissionsPage() {
                                     <div className="pt-4 border-t border-neutral-800">
                                         <div className="flex items-center justify-between text-sm mb-1">
                                             <span className="text-neutral-400 flex items-center gap-2">
-                                                <span>⚡</span> Avg Time per Question
+                                                <BoltIcon className="w-4 h-4 text-amber-500" /> Avg Time per Question
                                             </span>
                                             <span className="text-white font-mono text-lg">{stats.avgTimeSec}s</span>
                                         </div>
@@ -275,7 +277,7 @@ export default function SubmissionsPage() {
                                                     href={`/problems?pattern=${stats.worstTopic.name}`}
                                                     className="text-xs font-medium text-white bg-[#EF4444] hover:bg-rose-600 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1"
                                                 >
-                                                    Practice {formatTopicName(stats.worstTopic.name)} <span>→</span>
+                                                    Practice {formatTopicName(stats.worstTopic.name)} <ChevronRightIcon className="w-4 h-4 ml-1" />
                                                 </Link>
                                             </div>
                                         )}

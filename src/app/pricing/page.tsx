@@ -340,7 +340,7 @@ export default function PricingPage() {
                         <div className="space-y-4 mb-12 flex-1">
                             {[
                               { t: '3,000+ Maths & Reasoning PYQs', d: 'Standard filter access.' },
-                              { t: 'Daily Practice Sampling', d: '1 Sprint and 2 AI clarifications.' },
+                              { t: 'Daily Practice Sampling', d: '1 Sprint and 2 Daily AI Clarifications.' },
                               { t: '365-Day Practice Heatmap', d: 'Basic history and accuracy stats.' },
                               { t: 'Topic-wise Accuracy', d: 'High-level performance metrics.' },
                               { t: 'Supported by ads', d: 'Occasional minimal advertisements.' }
@@ -376,9 +376,8 @@ export default function PricingPage() {
                         <div className="space-y-4 mb-12 flex-1">
                             {[
                                 { t: 'Unlimited AI Tutor', d: 'Ask as many follow-ups as needed.' },
-                                { t: 'Full Performance Engine', d: 'Advanced analytics & heatmaps.' },
+                                { t: 'Full-Scale Analytics', d: 'Advanced analytics & heatmaps.' },
                                 { t: 'Unlimited Sprints', d: 'Infinite drills to build speed reflexes.' },
-                                { t: 'Weak Topic Isolation', d: 'Automated "Weakspot Drills".' },
                                 { t: 'Ad-free Experience', d: 'Zero distractions while solving.' }
                             ].map((f, i) => (
                                 <div key={i} className="flex items-start gap-4">
@@ -460,7 +459,6 @@ export default function PricingPage() {
                                   { f: 'AI Tutor Clarifications', v: ['2 per day', 'Unlimited', 'Unlimited'] },
                                   { f: 'Practice Heatmap', v: ['Basic', 'Premium', 'Premium'] },
                                   { f: 'Topic Performance Stats', v: ['Standard', 'Grains-eye', 'Grains-eye'] },
-                                  { f: 'Weakspot Drills', v: ['✗', '✓', '✓'] },
                                   { f: 'Ad-free Experience', v: ['✗', '✓', '✓'] },
                                   { f: 'Priority Support', v: ['✗', '✗', '✓'] }
                                 ].map((row, i) => (
