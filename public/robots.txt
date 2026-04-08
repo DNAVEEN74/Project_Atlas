@@ -9,4 +9,4 @@ Disallow: /bookmarks/
 Disallow: /submissions/
 
 # Sitemap location
-Sitemap: https://project-atlas-jek8.vercel.app/sitemap.xml
+Sitemap: https://prepleague.in/sitemap.xml

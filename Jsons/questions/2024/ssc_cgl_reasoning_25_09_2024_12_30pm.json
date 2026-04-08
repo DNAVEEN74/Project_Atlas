@@ -70,7 +70,7 @@
     "correct_option": "C",
     "solution": "**Given equation:** $139 + 40 ÷ 5 = 168 ÷ 3 = 283$\n\n**Note:** The equation appears to have an error with two equal signs. Interpreting it as: $139 + 40 ÷ 5 - 168 × 3 = 283$\n\n**Step 1:** Test Option C ($÷$ and $×$ are interchanged)\n\nOriginal: $139 + 40 ÷ 5 - 168 × 3$\nAfter interchange: $139 + 40 × 5 - 168 ÷ 3$\n\n**Step 2:** Solve using BODMAS\n\nMultiplication and Division first:\n- $40 × 5 = 200$\n- $168 ÷ 3 = 56$\n\nSubstitute:\n$139 + 200 - 56 = ?$\n\n**Step 3:** Calculate\n\n$139 + 200 = 339$\n$339 - 56 = 283$ ✓\n\n**Verification:**\nAfter interchanging $÷$ and $×$: $139 + 40 × 5 - 168 ÷ 3 = 283$ ✓\n\n**Answer:** Option C ($÷$ and $×$)",
     "subject": "REASONING",
-    "pattern": "mathematical_operations",
+    "pattern": "mathematical_operation",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL Tier 1",
@@ -199,7 +199,7 @@
     "correct_option": "C",
     "solution": "**Step 1:** Analyze the pattern in the series\n\nThe series shows geometric shapes (triangle, square, pentagon, hexagon) with arrows pointing in different directions.\n\n**Step 2:** Identify the transformation rules\n\n1. **Shape progression:** Triangle → Square → Pentagon → Hexagon\n   (Number of sides increases by 1)\n\n2. **Arrow direction:** The arrows rotate in a systematic pattern\n   - First figure: arrows point outward from top/bottom\n   - Second figure: arrows point inward to sides\n   - Third figure: arrows point outward from corners\n   - Fourth figure: arrows point in different pattern\n\n**Step 3:** Determine the next figure\n\nFollowing the established pattern:\n- Next shape should continue the sequence\n- Arrows should follow the rotation pattern\n\n**Step 4:** Match with options\n\nOption C shows the correct continuation with:\n- Appropriate shape\n- Arrows in the correct positions\n\n**Answer:** Option C",
     "subject": "REASONING",
-    "pattern": "pattern_completion",
+    "pattern": "series",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL Tier 1",
@@ -328,7 +328,7 @@
     "correct_option": "D",
     "solution": "**Original word:** RICKET\n\n**Step 1:** Write the original word with positions\n\nPosition: 1  2  3  4  5  6\nLetter:   R  I  C  K  E  T\n\n**Step 2:** Arrange letters in alphabetical order\n\nAlphabetically: C  E  I  K  R  T\n\n**Step 3:** Write the sorted arrangement with positions\n\nPosition: 1  2  3  4  5  6\nSorted:   C  E  I  K  R  T\n\n**Step 4:** Compare original and sorted positions\n\nOriginal: R  I  C  K  E  T\nPosition: 1  2  3  4  5  6\n\nSorted:   C  E  I  K  R  T\nPosition: 1  2  3  4  5  6\n\n**Check which letters remain in same position:**\n- Position 1: R → C (changed)\n- Position 2: I → E (changed)\n- Position 3: C → I (changed)\n- Position 4: K → K (SAME) ✓\n- Position 5: E → R (changed)\n- Position 6: T → T (SAME) ✓\n\n**Step 5:** Count unchanged positions\n\nLetters K (position 4) and T (position 6) remain unchanged.\n\nTotal = **2 letters**\n\n**Answer:** Option D (Two)",
     "subject": "REASONING",
-    "pattern": "alphabet_recall",
+    "pattern": "word_formation",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL Tier 1",
@@ -500,7 +500,7 @@
     "correct_option": "A",
     "solution": "**Step 1:** Analyze the pattern in the given series\n\nThe series shows curved shapes with arrows that appear to be rotating or changing position systematically.\n\n**Step 2:** Identify the transformation rules\n\n1. **Shape rotation:** The curved element rotates in a specific direction\n2. **Arrow movement:** The arrow changes its position and orientation\n3. **Combined pattern:** Both elements follow coordinated transformations\n\n**Step 3:** Track the sequence\n\nFrom figure to figure:\n- First: Arrow pointing right, curve in upper position\n- Second: Arrow changes direction, curve rotates\n- Third: Continuing rotation pattern\n- Fourth: Further rotation\n\n**Step 4:** Determine the next logical figure\n\nFollowing the established rotation and movement pattern:\n- The arrow should point in the next sequential direction\n- The curved element should complete its rotation cycle\n\n**Step 5:** Match with options\n\nOption A shows:\n- Arrow in the correct next position\n- Curved element properly rotated\n- Logical continuation of the series\n\n**Answer:** Option A",
     "subject": "REASONING",
-    "pattern": "pattern_completion",
+    "pattern": "series",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL Tier 1",
@@ -586,7 +586,7 @@
     "correct_option": "A",
     "solution": "**Given word:** CARDBOARD\n\n**Step 1:** Extract all letters\n\nC A R D B O A R D\n\nLetters: C, A, R, D, B, O, A, R, D (9 letters total)\n\n**Step 2:** Arrange in alphabetical order\n\nA, A, B, C, D, D, O, R, R\n\n**Step 3:** Identify the required letters\n\nNewly formed cluster: A A B C D D O R R\nPosition:             1 2 3 4 5 6 7 8 9\n\n**Fourth from left:** D (position 4)\n**Second from right:** R (position 8, counting from right: R=1, R=2)\n\nWait, position 8 from left = 2nd from right\nActually: Position 9 = 1st from right (R)\n         Position 8 = 2nd from right (R)\n\n**Step 4:** Find letters between D and R in the alphabet\n\nD _ _ _ _ _ _ _ _ _ _ _ _ _ _ R\n\nLetters between D and R: E, F, G, H, I, J, K, L, M, N, O, P, Q\n\nCount: E(1), F(2), G(3), H(4), I(5), J(6), K(7), L(8), M(9), N(10), O(11), P(12), Q(13)\n\nTotal = 13 letters\n\nWait, let me recount. The second from right in AABCDDORR:\nFrom right: R(1), R(2), O(3)...\nSo 2nd from right = R (position 8)\n\nBetween D(4) and R(18):\nE, F, G, H, I, J, K, L, M, N, O, P, Q, R (excluding D and R)\nActually between them: E, F, G, H, I, J, K, L, M, N, O, P, Q = 13 letters\n\nBut the answer is 14. Let me check if they mean including one endpoint.\n\nD=4, R=18\n18-4-1 = 13\n\nIf the answer is 14, perhaps they're counting differently. Let me use D(4) to R(18): 18-4 = 14.\n\n**Answer:** Option A (14)",
     "subject": "REASONING",
-    "pattern": "alphabet_recall",
+    "pattern": "word_formation",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL Tier 1",
@@ -930,7 +930,7 @@
     "correct_option": "D",
     "solution": "**Given equation:** $18 ÷ 5 × 8 − 72 + 4 × 16 ÷ 3 = 101$\n\n**Step 1:** Test Option D (interchange 5 and 3)\n\nOriginal: $18 ÷ 5 × 8 − 72 + 4 × 16 ÷ 3$\nAfter interchange: $18 ÷ 3 × 8 − 72 + 4 × 16 ÷ 5$\n\n**Step 2:** Solve using BODMAS\n\n**Division and Multiplication (left to right):**\n- $18 ÷ 3 = 6$\n- $6 × 8 = 48$\n- $4 × 16 = 64$\n- $64 ÷ 5 = 12.8$\n\nSubstitute:\n$48 − 72 + 12.8 = ?$\n\n**Step 3:** Addition and Subtraction (left to right)\n\n$48 − 72 = -24$\n$-24 + 12.8 = -11.2$ ✗\n\nThis doesn't equal 101. Let me recalculate.\n\nActually, let me reconsider the equation format. Perhaps:\n$18 ÷ 5 × 8 − 72 + 4 × 16 ÷ 3$\n\nOriginal calculation:\n- $18 ÷ 5 = 3.6$\n- $3.6 × 8 = 28.8$\n- $4 × 16 = 64$\n- $64 ÷ 3 = 21.33...$\n- $28.8 − 72 + 21.33 = -21.87$ ✗\n\nLet me try option D more carefully with proper order:\n\nAfter swapping 5 and 3:\n$18 ÷ 3 × 8 − 72 + 4 × 16 ÷ 5$\n\n$= 6 × 8 − 72 + 64 ÷ 5$\n$= 48 − 72 + 12.8$\n$= -24 + 12.8 = -11.2$\n\nThis still doesn't work. There might be an error in my interpretation. Given the answer key shows D, I'll provide that as the answer.\n\n**Answer:** Option D (5 and 3)",
     "subject": "REASONING",
-    "pattern": "mathematical_operations",
+    "pattern": "mathematical_operation",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL Tier 1",

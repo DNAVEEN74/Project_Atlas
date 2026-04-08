@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./_providers/providers";
+import { CookieConsent } from '@/components/ui/CookieConsent';
 
 const inter = Inter({
   variable: "--font-inter",
@@ -15,19 +16,18 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://project-atlas-jek8.vercel.app';
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://prepleague.in';
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "PrepLeague - SSC CGL, CHSL & Bank Exam Preparation",
+    default: "PrepLeague - SSC CGL Exam Preparation",
     template: "%s | PrepLeague",
   },
-  description: "Master SSC CGL, CHSL, and Bank exams with 10,000+ PYQs, conceptual explanations, speed drills, and sprint tests. Free practice platform for Quantitative Aptitude and Reasoning.",
+  description: "Master SSC CGL with 3,000+ real PYQs, conceptual AI explanations, high-intensity Sprint drills, and precision analytics. The free practice platform for Quantitative Aptitude and Reasoning.",
   keywords: [
     "SSC CGL preparation",
-    "SSC CHSL practice",
-    "Bank exam questions",
+    "SSC CGL PYQ",
     "Quantitative aptitude",
     "Reasoning practice",
     "Previous year questions",
@@ -35,6 +35,7 @@ export const metadata: Metadata = {
     "aptitude test",
     "competitive exam preparation",
     "free mock test",
+    "SSC CGL 2024",
   ],
   authors: [{ name: "PrepLeague" }],
   creator: "PrepLeague",
@@ -55,8 +56,8 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: BASE_URL,
     siteName: "PrepLeague",
-    title: "PrepLeague - SSC CGL, CHSL & Bank Exam Preparation",
-    description: "Master SSC CGL, CHSL, and Bank exams with 10,000+ PYQs, conceptual explanations, speed drills, and sprint tests.",
+    title: "PrepLeague - SSC CGL Preparation Platform",
+    description: "Master SSC CGL with 3,000+ real PYQs, AI explanations, Sprint drills, and analytics.",
     images: [
       {
         url: "/og-image.png",
@@ -68,13 +69,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PrepLeague - SSC CGL, CHSL & Bank Exam Preparation",
-    description: "Master SSC CGL, CHSL, and Bank exams with 10,000+ PYQs, conceptual explanations, speed drills, and sprint tests.",
+    title: "PrepLeague - SSC CGL Preparation Platform",
+    description: "Master SSC CGL with 3,000+ real PYQs, AI explanations, Sprint drills, and analytics.",
     images: ["/og-image.png"],
   },
   verification: {
-    // Add your verification codes here when you have them
-    // google: "your-google-verification-code",
+    // TODO: Get this from Google Search Console → Add Property → HTML tag method
+    // google: "paste-your-code-here",
   },
   alternates: {
     canonical: BASE_URL,
@@ -93,7 +94,11 @@ const organizationSchema = {
   url: BASE_URL,
   logo: `${BASE_URL}/logo-final.png`,
   description: "Free online platform for SSC CGL, CHSL, and Bank exam preparation with PYQs, explanations, and practice tests.",
-  sameAs: [],
+  sameAs: [
+    // Add your social profiles here as you create them
+    // "https://twitter.com/prepleague",
+    // "https://instagram.com/prepleague",
+  ],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",
@@ -117,6 +122,7 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <Providers>
           {children}
+          <CookieConsent />
         </Providers>
       </body>
     </html>

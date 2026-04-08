@@ -1,0 +1,1077 @@
+[
+  {
+    "text": "Select the correct mirror image of the given figure when the mirror is placed at MN.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** This question is image-dependent, so read the complete figure/table from the PDF.\n**Step 2:** Apply the required rule (pattern/geometry/data) directly on that visual.\n**Step 3:** The matching keyed option for this paper is C.\n**Answer:** Option C.",
+    "subject": "REASONING",
+    "pattern": "mirror_water_image",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "7 is related to 40 by certain logic. Following the same logic, 5 is related to 16. To which of the following is 9 related, following the same logic? (NOTE : Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc., to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "48",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "72",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "54",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "70",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option B (72).",
+    "subject": "REASONING",
+    "pattern": "analogy",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "64 is related to 4 following a certain logic. Following the same logic, 216 is related to 6. To which of the following is 729 related, following the same logic? (NOTE: Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc. to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "11",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "7",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "9",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "13",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option C (9).",
+    "subject": "REASONING",
+    "pattern": "analogy",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the combination of letters that when sequentially placed in the blanks of the given series will complete the series. B_DE_GDGBK_IB_DK",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "CBDP",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "OCBD",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "CODB",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "CBDO",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option D (CBDO).",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, ‘ZCJV’ is coded as ‘YBIU’ and ‘GKMD’ is coded as ‘FJLC’. How will ‘EYOR’ be coded in that language?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "DWMP",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "DXNQ",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "CXNQ",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "QWMP",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Observe mapping from given examples.\n**Step 2:** Apply the same mapping rule to the asked term.\n**Step 3:** Compare final code with the options.\n**Answer:** Option B (DXNQ).",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Q is the mother of T. R is the husband of P. S is the father of Q. T is the brother of P. How is P related to S?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Daughter’s daughter",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Mother’s father",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Brother’s wife",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Mother’s mother",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Decode each symbol relation in order and form the family chain.\n**Step 2:** Move from the reference person to the target person in that chain.\n**Step 3:** Identify the exact relation asked in the question.\n**Answer:** Option B (Mother’s father).",
+    "subject": "REASONING",
+    "pattern": "blood_relations",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Based on the English alphabetical order, three of the following four letter-clusters are alike in a certain way and thus form a group. Which is the one that DOES NOT belong to that group? (Note: The odd man out is not based on the number of consonants/vowels or their position in the letter-cluster.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "HKI",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "MPN",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "RUS",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "QUR",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option D (QUR).",
+    "subject": "REASONING",
+    "pattern": "word_formation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "How many squares are there in the figure shown below?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "14",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "12",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "13",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "11",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option B (12).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Two different positions of the same dice are given below. Which is the number on the face opposite the face containing 5?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "3",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "2",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "6",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Use both dice positions to identify adjacent faces.\n**Step 2:** Eliminate adjacent faces to determine opposite/required face.\n**Step 3:** Choose the matching option.\n**Answer:** Option C (1).",
+    "subject": "REASONING",
+    "pattern": "dice_cube",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In this question, three statements are given, followed by two conclusions numbered I and II. Assuming the statements to be true, even if they seem to be at variance with commonly known facts, decide which of the conclusion(s) logically follows/follow from the statements. Statements: All grains are cereals. Some cereals are fruits. No fruit is a vegetable. Conclusions: I. All cereals can be vegetables. II. All grains are fruits.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Only Conclusion I follows.",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Neither Conclusion I nor II follow.",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Only Conclusion II follows.",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Both Conclusions I and II follow.",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Convert statements into Venn/set relations.\n**Step 2:** Test each conclusion independently.\n**Step 3:** Keep only conclusions that must be true.\n**Answer:** Option B (Neither Conclusion I nor II follow.).",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In the following number-pairs, the second number is obtained by applying certain mathematical operations to the first number. Select the set in which the numbers are related in the same way as are the numbers of the following sets. (NOTE : Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc., to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed.) (26, 114) (47, 198)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "(22, 88)",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "(15, 70)",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "(18, 74)",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "(25, 105)",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option B ((15, 70)).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the word pair that best represents a similar relationship to the one expressed in the pair of words given below. (The words must be considered as meaningful English words and must not be related to each other based on the number of letters/number of consonants/vowels in the word) Love : Harmony",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Calm : Sad",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Peace : Bliss",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Rage : Cool",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Anger : Excitement",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option B (Peace : Bliss).",
+    "subject": "REASONING",
+    "pattern": "analogy",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The position of how many letters will remain unchanged if each of the letters in the word ‘SIGNATURE’ is re-arranged in the English alphabetical order from left to right?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "One",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Two",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Four",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Three",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option A (One).",
+    "subject": "REASONING",
+    "pattern": "word_formation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which of the following numbers will replace the question marks (?) in the given series? 61, ?, ?, 73, 79, 83, 89",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "67, 69",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "63, 65",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "63, 67",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "67, 71",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option D (67, 71).",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, ‘BLEACHERS’ is coded as ‘63’ and ‘ABACAS’ is coded as ‘42’. How will ‘FIZZY’ be coded in the same language?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "52",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "45",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "44",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "35",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Observe mapping from given examples.\n**Step 2:** Apply the same mapping rule to the asked term.\n**Step 3:** Compare final code with the options.\n**Answer:** Option D (35).",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A paper is folded and cut as shown below. How will it appear when unfolded?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** This question is image-dependent, so read the complete figure/table from the PDF.\n**Step 2:** Apply the required rule (pattern/geometry/data) directly on that visual.\n**Step 3:** The matching keyed option for this paper is C.\n**Answer:** Option C.",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which number will come in the place of the question mark (?) in the following equation if ‘+’ and ‘−’ are interchanged and ‘×’ and ‘÷’ are interchanged? 7 ÷ 5 − 30 × 6 + 4 = ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "32",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "36",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "30",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "34",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Interchange operators exactly as instructed.\n**Step 2:** Evaluate the new expression using BODMAS.\n**Step 3:** Select the option satisfying the corrected equation.\n**Answer:** Option B (36).",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Identify the figure from among the given options which when put in place of the question mark (?) will logically complete the series.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** This question is image-dependent, so read the complete figure/table from the PDF.\n**Step 2:** Apply the required rule (pattern/geometry/data) directly on that visual.\n**Step 3:** The matching keyed option for this paper is D.\n**Answer:** Option D.",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the figure from among the given options that can replace the question mark (?) in the following series.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** This question is image-dependent, so read the complete figure/table from the PDF.\n**Step 2:** Apply the required rule (pattern/geometry/data) directly on that visual.\n**Step 3:** The matching keyed option for this paper is D.\n**Answer:** Option D.",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Study the given diagram carefully and answer the question that follows. The numbers in different sections indicate the number of persons who can drive different vehicles. What is the difference between the number of persons who can drive all the three vehicles and that of persons who can drive any two of these vehicles?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "15",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "12",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "27",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "21",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option D (21).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "What will come in place of the question mark (?) in the following equation, if ‘+’ and ‘–’ are interchanged and ‘×’ and ‘÷’ are interchanged? 1604 × 4 + 87 – 16 ÷ 16 = ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "770",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "870",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "570",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "670",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Interchange operators exactly as instructed.\n**Step 2:** Evaluate the new expression using BODMAS.\n**Step 3:** Select the option satisfying the corrected equation.\n**Answer:** Option C (570).",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the option that is related to the third word in the same way as the second word is related to the first word. (The words must be considered as meaningful English words and must not be related to each other based on the number of letters/number of consonants/vowels in the word) Botany : Plants : : Conchology : ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Fossils",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Names",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Shells",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Soil",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option C (Shells).",
+    "subject": "REASONING",
+    "pattern": "analogy",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which of the following letter-clusters will replace the question mark (?) in the given series to make it logically complete? JAL, MDO, PGR, SJU, ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "WNX",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "WMX",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "VMY",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "VMX",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option D (VMX).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Three of the following numbers are alike in a certain way and one is different. Pick the odd one out. (NOTE : Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc. to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "829",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "237",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "643",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "821",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core logical pattern from the given terms.\n**Step 2:** Apply the same rule to the asked case.\n**Step 3:** Match with the option that follows the rule exactly.\n**Answer:** Option A (829).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the correct mirror image of the given figure when the mirror is placed at MN.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** This question is image-dependent, so read the complete figure/table from the PDF.\n**Step 2:** Apply the required rule (pattern/geometry/data) directly on that visual.\n**Step 3:** The matching keyed option for this paper is D.\n**Answer:** Option D.",
+    "subject": "REASONING",
+    "pattern": "mirror_water_image",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

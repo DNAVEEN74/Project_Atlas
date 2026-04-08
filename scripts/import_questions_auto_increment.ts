@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import Question from '../src/core/models/Question';
+import { normalizePatternCode } from '../src/lib/patternUtils';
 
 // Load environment variables
 dotenv.config({ path: path.resolve(__dirname, '../.env.local') });
@@ -188,8 +189,9 @@ async function importQuestions() {
                     const text = String(q?.text || '').trim();
                     const shift = String(q?.source?.shift || '').trim();
                     const year = Number(q?.source?.year || 0);
+                    const pattern = normalizePatternCode(String(q?.pattern || ''), subject);
 
-                    if (!text || !shift || !year || !['QUANT', 'REASONING'].includes(subject) || !correctOption) {
+                    if (!text || !shift || !year || !['QUANT', 'REASONING'].includes(subject) || !correctOption || !pattern) {
                         skippedInvalid++;
                         continue;
                     }
@@ -215,6 +217,7 @@ async function importQuestions() {
                         ...q,
                         text,
                         subject,
+                        pattern,
                         difficulty: normalizeDifficulty(String(q?.difficulty || '')),
                         correct_option: correctOption,
                         source: {

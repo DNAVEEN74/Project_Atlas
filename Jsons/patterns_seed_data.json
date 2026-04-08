@@ -256,5 +256,17 @@
     "name": "Statement & Conclusion",
     "subject": "REASONING",
     "question_count": 0
+  },
+  {
+    "code": "mathematical_operation",
+    "name": "Mathematical Operation",
+    "subject": "REASONING",
+    "question_count": 0
+  },
+  {
+    "code": "word_formation",
+    "name": "Word Formation",
+    "subject": "REASONING",
+    "question_count": 0
   }
 ]

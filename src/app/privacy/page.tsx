@@ -56,7 +56,7 @@ export default function PrivacyPage() {
         { id: 'rights', label: 'Your User Rights' },
         { id: 'security', label: 'Security Infrastructure' },
         { id: 'children', label: "Children's Privacy" },
-        { id: 'cookies', label: 'Cookies Usage' },
+        { id: 'cookies', label: 'Cookies & Advertising' },
         { id: 'links', label: 'Third-Party Links' },
         { id: 'international', label: 'International Transfers' },
         { id: 'changes', label: 'Policy Transformations' },
@@ -264,6 +264,39 @@ export default function PrivacyPage() {
                                   <span className="text-[10px] font-mono font-bold text-neutral-600 block mb-1">STAGING DATABASE</span>
                                   <span className="text-sm text-white font-bold">MongoDB Atlas</span>
                                </div>
+                            </div>
+                        </section>
+
+                        <section id="cookies" className="scroll-mt-32 mb-20">
+                            <h2 className="text-xl font-bold text-white mb-6">8. Cookies &amp; Advertising</h2>
+                            <p className="text-neutral-500 leading-relaxed mb-8">We use cookies and similar tracking technologies to enhance your experience and serve relevant advertising.</p>
+
+                            <div className="space-y-6">
+                                <div className="p-6 rounded-2xl bg-[#1a1a1a] border border-neutral-800">
+                                    <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-3">Essential Cookies</h4>
+                                    <p className="text-sm text-neutral-500 leading-relaxed">Required for core platform functions — authentication sessions, preferences, and security tokens. These cannot be disabled.</p>
+                                </div>
+
+                                <div className="p-6 rounded-2xl bg-[#1a1a1a] border border-amber-500/10">
+                                    <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-3">Advertising Cookies (Google AdSense)</h4>
+                                    <p className="text-sm text-neutral-500 leading-relaxed mb-4">
+                                        PrepLeague uses <strong className="text-neutral-300">Google AdSense</strong> to display advertisements on the free tier. Google and its partners use cookies (including the <strong className="text-neutral-300">DoubleClick cookie</strong>) to serve ads based on your prior visits to this and other websites.
+                                    </p>
+                                    <ul className="text-sm text-neutral-500 space-y-2 list-none">
+                                        <li>• Google's use of advertising cookies enables it and its partners to serve ads based on your visit to PrepLeague and other sites.</li>
+                                        <li>• You may <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400 underline underline-offset-2">opt out of personalised advertising</a> by visiting Google Ads Settings.</li>
+                                        <li>• You can also opt out via <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400 underline underline-offset-2">aboutads.info</a>.</li>
+                                    </ul>
+                                </div>
+
+                                <div className="p-6 rounded-2xl bg-[#1a1a1a] border border-neutral-800">
+                                    <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-3">Analytics Cookies</h4>
+                                    <p className="text-sm text-neutral-500 leading-relaxed">Used to understand how visitors interact with the platform — page views, session lengths, and navigation paths. Data is aggregated and anonymised.</p>
+                                </div>
+
+                                <div className="px-5 py-4 bg-neutral-900 border border-neutral-800 rounded-2xl">
+                                    <p className="text-neutral-400 text-sm">You can manage or disable cookies via your browser settings. Note that disabling certain cookies may affect platform functionality.</p>
+                                </div>
                             </div>
                         </section>
 

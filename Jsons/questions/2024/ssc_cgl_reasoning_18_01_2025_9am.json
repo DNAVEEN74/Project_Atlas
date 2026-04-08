@@ -1,0 +1,1292 @@
+[
+  {
+    "text": "In this question, two statements are followed by four conclusions given as  options. Decide which conclusion is definitely true, based on the given  statements.  Statements:  A<B≥C>D  C>E≥F=G",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "A < E",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "D < F",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "G > C",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "B > G",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option D (B > G).",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A question is given, followed by two statements labelled I and II. Identify  which of the statements is/are sufficient/necessary to answer the question.  Question:  In a certain code language, ‘fire in mountain’ is coded as ‘si ph bo’. What is  code for ‘fire’?  Statements:  (I) ‘mountain’ is coded as ‘bo’.  (II) ‘ice and fire’ is coded as ‘si yu ca’.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Data in Statements I and II together is sufficient to answer the question",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Data in Statements I and II together is not sufficient to answer the question",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Data in Statement I alone is sufficient to answer the question while data in Statement  II is not",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Data in Statement II alone is sufficient to answer the question while data in  Statement I is not",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option D (Data in Statement II alone is sufficient to answer the question while data in  Statement I is not).",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the option figure in which the given figure is embedded as its part  (rotation is NOT allowed).",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C ([IMAGE]).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Given below is a statement (Cause) followed by possible effects numbered  I, II and III. Read the ‘Cause’ carefully and decide which of the three can be  possible effect/s.  Cause – Many people in City X have reported receiving two electricity bills  this month, instead of one.  Effect I – The Electricity Board has published the details of areas where  power shutdowns are expected tomorrow in City X.  Effect II – The municipal commissioner of City X has clarified that the  technical glitch which led to multiple electricity bills being generated would  be resolved within 48 hours.  Effect III – Long queues were seen outside the electricity board offices in  many localities.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Only II is a possible effect.",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Both I and II are possible effects .",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Only I is a possible effect.",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Both II and III are possible effects.",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option D (Both II and III are possible effects.).",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, ‘POSE’ is coded as ‘3517’ and ‘SILK’ is coded  as ‘4638’. What is the code for ‘S’ in the given code language?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "4",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "8",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "3",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option D (3).",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the correct mirror image of the given combination when the mirror is  placed at line MN as shown.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A ([IMAGE]).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Figure A is related to B in a certain pattern. Following the same pattern,  figure C is related to D. Study the pattern and select the figure which  should be in place of D.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B ([IMAGE]).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the option figure that will replace the question mark (?) in the figure  given below to complete the pattern.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B ([IMAGE]).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the set in which the numbers are related in the same way as are the  numbers of the following sets.  (NOTE : Operations should be performed on the whole numbers, without  breaking down the numbers into its constituent digits. E.g. 13 – Operations  on 13 such as adding / subtracting / multiplying etc. to 13 can be  performed. Breaking down 13 into 1 and 3 and then performing  mathematical operations on 1 and 3 is not allowed.)  (215, 185, 135)  (276, 246, 196)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "(255, 235, 205)",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "(294, 264, 224)",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "(269, 229, 199)",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "(238, 208, 158)",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option D ((238, 208, 158)).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "How many meaningful English words can be formed using first, third, sixth  and seventh letters of the word RECOGNIZE (when counted from left to  right) using all the letters but each letter only once in each word?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "One",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Two",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Three",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "None",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option D (None).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The following contains two pairs of words which are related to each other  in a certain way. Three of the following four word-pairs are alike as these  have the same relationship and thus form a group. Which word-pair does  NOT belong to that group?  (The words must be considered as meaningful English words and must not  be grouped based on the number of letters/number of consonants/vowels  in the word)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Park - Swim",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Restaurant - Dinner",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Temple - Pray",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Theatre - Movies",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (Park - Swim).",
+    "subject": "REASONING",
+    "pattern": "blood_relations",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Read the following information and answer the question which follows.  “Similar to expert puzzle solvers, Solver S employs systematic problem-  solving approaches, ensuring efficient and accurate resolutions to  complex challenges.\"  Which of the following can be inferred from the given statement? (An  inference is something which is not directly stated but can be derived from  the given facts/information in the statement)  1. The efficiency and accuracy of Solver S in resolving complex challenges  may be attributed to their systematic problem-solving methods.  2. Solver S utilizes systematic problem-solving approaches, similar to  expert puzzle solvers.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Both (I) and (II) can be inferred.",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Only (I) can be inferred.",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Neither (I) nor (II) can be inferred.",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Only (II) can be inferred.",
+        "image": ""
+      }
+    ],
+    "correct_option": "",
+    "solution": "**Step 1:** Source entry has no selected option in the PDF (`Chosen Option: --`).\n**Step 2:** Validate this question against the official answer key before import.\n**Step 3:** Keep this row in review state until the correct option is confirmed.\n**Answer:** Option [TO_VERIFY].",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "U is the father of N. N is the sister of T. T is the wife of I. I is son of L.  How is U related to L?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Son's wife's father",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Son's wife",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Son's wife's sister",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Son's wife's mother",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (Son's wife's father).",
+    "subject": "REASONING",
+    "pattern": "blood_relations",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the correct option that indicates the arrangement of the following  words in a logical and meaningful order.  1. Design 2. Test 3. Conceptualize 4. Develop 5. Implement",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "3, 5, 2, 4, 1",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1, 4, 5, 3, 2",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "3, 1, 4, 2, 5",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "3, 1, 5, 4, 2",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (3, 5, 2, 4, 1).",
+    "subject": "REASONING",
+    "pattern": "sitting_arrangement",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the correct option that indicates the arrangement of the following  words in a logical and meaningful order.  1. Delivery  2. Finished Paper  3. Dry  4. Pulp  5. Press",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "4, 5, 3, 2, 1",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "4, 1, 2, 5, 3",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2, 5, 4, 3, 1",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "5, 4, 2, 3, 1",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (4, 5, 3, 2, 1).",
+    "subject": "REASONING",
+    "pattern": "sitting_arrangement",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the number from among the given options that can replace the  question mark (?) in the following series.  9, 5, 6, 10.5, 23, ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "90",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "80",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "60",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "50",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C (60).",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Each of P, Q, R, S, T, U and V has an exam on a different day of a week,  starting from Monday and ending on Sunday of the same week.  Q has the exam on Saturday. Only two people have exams between S and  Q. R has the exam before S, but after P. U has the exam immediately after T.  On which of the following days does V have the exam?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Saturday",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Thursday",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Sunday",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Friday",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C (Sunday).",
+    "subject": "REASONING",
+    "pattern": "clock_calendar",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language,  A + B means ‘A is the mother of B’,  A – B means ‘A is the brother of B’,  A x B means ‘A is the wife of B’ and  A ÷ B means ‘A is the father of B’.  Based on the above, how is U related to Z if ‘U + V ÷ W – Y x Z’?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Wife's Mother's Sister",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Wife's Father's Mother",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Wife's Mother's Mother",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Wife's Father's Sister",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B (Wife's Father's Mother).",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Four of the following five figures are alike in a certain way and thus form a  group. Which is the one that does NOT belong to that group?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "C",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "D",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "B",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "A",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C (B).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Identify the figure given in the options which when put in place of the  question mark (?) will logically complete the series.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A ([IMAGE]).",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In the following number-pairs, the second number is obtained by applying  certain mathematical operations to the first number. In three of the four  pairs, the same pattern is applied and hence they form a group. Select the  number-pair that does NOT belong to this group.  (NOTE : Operations should be performed on the whole numbers, without  breaking down the numbers into its constituent digits. E.g. 13 – Operations  on 13 such as adding /subtracting /multiplying etc. to 13 can be performed.  Breaking down 13 into 1 and 3 and then performing mathematical  operations on 1 and 3 is not allowed.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "13 - 144",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "31 - 341",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "18 - 198",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "22 - 242",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (13 - 144).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A question is given, followed by two statements labelled I and II. Identify  which of the statements is/are sufficient/necessary to answer the question.  Question:  Arvind has blue, green and white marbles. What is the percentage of white  marbles out of all the marbles he has?  Statements:  (I) The sum of blue and green marbles he has is 7.  (II) He has 3 white marbles out of 10 marbles.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Data in Statement II alone is sufficient to answer the question while data in  Statement I is not",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Data in Statement I alone is sufficient to answer the question while data in Statement  II is not",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Data in Statements I and II together is sufficient to answer the question",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Data in Statements I and II together is not sufficient to answer the question",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (Data in Statement II alone is sufficient to answer the question while data in  Statement I is not).",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Six letters P, Q, S, T, U and V are written on different faces of a dice. Two  positions of this dice are shown in thefigure. Find the letter on the face  opposite to T.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "S",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "U",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "V",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "P",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option D (P).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If ‘A’ stands for ‘÷’, ‘B’ stands for ‘×’, ‘C’ stands for ‘+’ and ‘D’ stands for ‘−’,  what will be come in place of the question mark (?) in the following  equation?  55 B 5 D 13 B 2 C 14 A 7 D 15 B 5 C 102 A 2 C 15 = ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "203",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "242",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "291",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "177",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B (242).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Each of the digits in the number 5238641 is arranged in  ascending order from left to right. The position(s) of how many  digits will remain unchanged as compared to that/those in the  original number ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "None",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Two",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Three",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "One",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B (Two).",
+    "subject": "REASONING",
+    "pattern": "sitting_arrangement",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A statement is followed by two arguments I and II. Read the statement and  the arguments carefully and select the appropriate answer from the given  options.  Statement:  Hydroelectricity is a cleaner and greener energy than other forms of power  generation.  Arguments:  (I) Hydroelectric plants almost have nil CO 2 emissions.  (II) Hydroelectric power projects submerge huge amounts under water  thereby affecting local flora and fauna.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Both I and II weaken the statement.",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "II weakens while I strengthens the statement.",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Both I and II strengthen the statement.",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "I weakens while II strengthens the statement.",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B (II weakens while I strengthens the statement.).",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which of the following letter-clusters should replace # and % so that the  pattern and relationship followed between the letter-cluster pair on the left  side of :: is the same as that on the right side of ::?  # : XAF :: SVA : %",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "# = BEJ % = QRW",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "# = BEJ % = ORW",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "# = BEJ % = ORP",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "# = BBJ % = ORW",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B (# = BEJ % = ORW).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "O, P, Q, R, S and T are sitting around a circular table facing the centre(but  not necessarily in the same order). P sits second to the left of T. S sits third  to the right of Q. Q is not an immediate neighbour of P. O sits second to the  right of S. Which of the following represents the position of O with respect  of R?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Third to the left",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Second to the left",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Immediate right",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Third to the right",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B (Second to the left).",
+    "subject": "REASONING",
+    "pattern": "sitting_arrangement",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Read the given statements and conclusions carefully. Assuming that the  information given in the statement(s) is true, even if it appears to be at  variance with commonly known facts, decide which of the given  conclusions logically follow(s) from the statement(s).  Statements:  All sheeps are cows.  Some cows are horses.  All horses are jackals.  Conclusion:  (I) Some jackals are cows.  (II) Some horses are sheeps.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Only Conclusion (II) follows.",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Both Conclusions (I) and (II) follow.",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Neither Conclusion (I) nor (II) follows.",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Only Conclusion (I) follows.",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option D (Only Conclusion (I) follows.).",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, ‘she gardens daily’ is coded as ‘ak jb mp’ and  ‘where is she’ is coded as ‘mp pt kt’. How is ‘she’ coded in the given  language?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "mp",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "pt",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "ak",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "kt",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (mp).",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

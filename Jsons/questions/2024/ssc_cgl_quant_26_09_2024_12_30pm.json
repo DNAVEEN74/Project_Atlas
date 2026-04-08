@@ -371,7 +371,7 @@
     "correct_option": "C",
     "solution": "Step 1: Combined work rate $=1/40$.\n\nStep 2: Varun's rate $=1/50$.\n\nStep 3: Raju's rate $=1/40-1/50=(5-4)/200=1/200$.\n\nStep 4: Time taken by Raju alone $=200$ hours.\n\nAnswer: Option C.",
     "subject": "QUANT",
-    "pattern": "time_and_work",
+    "pattern": "time_work",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -457,7 +457,7 @@
     "correct_option": "B",
     "solution": "Step 1: Let cost price $=100$. Marked price $=116$.\n\nStep 2: Selling price after 12% discount on MP:\n$SP=116\\times0.88=102.08$.\n\nStep 3: Profit $=102.08-100=2.08$.\n\nStep 4: Profit% $=2.08\\%$.\n\nAnswer: Option B.",
     "subject": "QUANT",
-    "pattern": "profit_and_loss",
+    "pattern": "profit_loss",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -629,7 +629,7 @@
     "correct_option": "D",
     "solution": "Step 1: Police travels thief distance plus initial gap:\n$1.5\\text{ km}+0.25\\text{ km}=1.75\\text{ km}$.\n\nStep 2: Time taken by police:\n$t=\\frac{1.75}{70}=0.025$ hours.\n\nStep 3: Thief speed $=\\frac{1.5}{0.025}=60$ km/h.\n\nAnswer: Option D.",
     "subject": "QUANT",
-    "pattern": "time_speed_distance",
+    "pattern": "speed_distance_time",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -715,7 +715,7 @@
     "correct_option": "A",
     "solution": "Step 1: Let numbers be $x$ and $x+2$.\n\nStep 2: $x+(x+2)=174\\Rightarrow 2x+2=174$.\n\nStep 3: $2x=172\\Rightarrow x=86$.\n\nAnswer: Option A.",
     "subject": "QUANT",
-    "pattern": "linear_equation",
+    "pattern": "algebra",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",

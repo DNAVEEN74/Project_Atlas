@@ -75,7 +75,7 @@ export default function LoginPage() {
                                 className="object-contain drop-shadow-lg"
                             />
                         </div>
-                        <h1 className="text-3xl font-bold text-white mb-1">PrepLeague</h1>
+                        <h1 className="text-3xl font-bold text-white mb-1">Sign In to PrepLeague</h1>
                     </Link>
                     <p className="text-neutral-400">Welcome back! Ready to practice?</p>
                 </div>

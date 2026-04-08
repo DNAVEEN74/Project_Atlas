@@ -224,7 +224,7 @@ export default function RegisterPage() {
                         <div className="relative w-20 h-20 mx-auto mb-4 group-hover:scale-105 transition-transform">
                             <Image src="/logo-final.png" alt="PrepLeague Logo" fill className="object-contain drop-shadow-lg" />
                         </div>
-                        <h1 className="text-3xl font-bold text-white mb-1">PrepLeague</h1>
+                        <h1 className="text-3xl font-bold text-white mb-1">Join PrepLeague Free</h1>
                     </Link>
                     <p className="text-neutral-400">Start your preparation journey</p>
                 </div>

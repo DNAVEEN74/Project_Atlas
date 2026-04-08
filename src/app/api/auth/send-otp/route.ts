@@ -39,7 +39,7 @@ export async function POST(req: Request) {
         );
 
         await resend.emails.send({
-            from: 'PrepLeague <onboarding@resend.dev>',
+            from: 'PrepLeague <noreply@mail.prepleague.in>',
             to: email,
             subject: 'Your PrepLeague verification code',
             html: `

@@ -70,7 +70,7 @@
     "correct_option": "B",
     "solution": "Step 1: Arrange DOWNSIZE alphabetically: D, E, I, N, O, S, W, Z.\nStep 2: Compare with original D O W N S I Z E.\nStep 3: Unchanged positions are 1 (D) and 4 (N).\nAnswer: Option B (Two).",
     "subject": "REASONING",
-    "pattern": "alphabetical_arrangement",
+    "pattern": "word_formation",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -113,7 +113,7 @@
     "correct_option": "A",
     "solution": "Step 1: 1976 and 27108 both follow multiplication by 4.\nStep 2: Apply same to 49: 494=196.\nAnswer: Option A.",
     "subject": "REASONING",
-    "pattern": "number_analogy",
+    "pattern": "analogy",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -156,7 +156,7 @@
     "correct_option": "C",
     "solution": "Step 1: From the two dice positions, identify faces adjacent to 2.\nStep 2: The adjacent faces to 2 are 9, 5, 8, and 6.\nStep 3: The only remaining face is 3, so it is opposite to 2.\nAnswer: Option C.",
     "subject": "REASONING",
-    "pattern": "dice",
+    "pattern": "dice_cube",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",
@@ -199,7 +199,7 @@
     "correct_option": "A",
     "solution": "Step 1: Check letter gaps in each cluster.\nStep 2: UOW, LFN and PJR follow a consistent internal gap pattern; IAK does not.\nStep 3: Therefore IAK is odd.\nAnswer: Option A.",
     "subject": "REASONING",
-    "pattern": "odd_one_out",
+    "pattern": "classification",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",
@@ -242,7 +242,7 @@
     "correct_option": "D",
     "solution": "Step 1: 1442 and 2678 show multiplication by 3.\nStep 2: 473=141.\nAnswer: Option D.",
     "subject": "REASONING",
-    "pattern": "number_analogy",
+    "pattern": "analogy",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -285,7 +285,7 @@
     "correct_option": "B",
     "solution": "Step 1: Reflect the given figure left-right about line MN.\nStep 2: Match orientation of each symbol after reflection.\nStep 3: Only option 2 matches exactly.\nAnswer: Option B.",
     "subject": "REASONING",
-    "pattern": "mirror_image",
+    "pattern": "mirror_water_image",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL 2024",
@@ -371,7 +371,7 @@
     "correct_option": "C",
     "solution": "Step 1: Interchange operators as asked: ~ and degrees+.\nStep 2: Evaluate new expression using BODMAS.\nStep 3: Computation gives 234.\nAnswer: Option C.",
     "subject": "REASONING",
-    "pattern": "mathematical_operations",
+    "pattern": "mathematical_operation",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -414,7 +414,7 @@
     "correct_option": "C",
     "solution": "Step 1: Reflect the alphanumeric figure across MN.\nStep 2: Check reversed order and mirrored shape of each character.\nStep 3: Option 3 is the exact mirror image.\nAnswer: Option C.",
     "subject": "REASONING",
-    "pattern": "mirror_image",
+    "pattern": "mirror_water_image",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",
@@ -457,7 +457,7 @@
     "correct_option": "A",
     "solution": "Step 1: Interchange + and , and and + in the expression.\nStep 2: Evaluate resulting expression by BODMAS.\nStep 3: Final value is 97.\nAnswer: Option A.",
     "subject": "REASONING",
-    "pattern": "mathematical_operations",
+    "pattern": "mathematical_operation",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -543,7 +543,7 @@
     "correct_option": "B",
     "solution": "Step 1: In both examples, second number = first number +11.\nStep 2: 4556 and 6273 satisfy this.\nStep 3: So 1930.\nAnswer: Option B.",
     "subject": "REASONING",
-    "pattern": "number_analogy",
+    "pattern": "analogy",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",
@@ -586,7 +586,7 @@
     "correct_option": "D",
     "solution": "Step 1: Observe the outer polygon and inner dot count change pattern in the series.\nStep 2: Continue the same transformation to next figure.\nStep 3: Matching figure is option 4.\nAnswer: Option D.",
     "subject": "REASONING",
-    "pattern": "non_verbal_series",
+    "pattern": "series",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL 2024",
@@ -629,7 +629,7 @@
     "correct_option": "C",
     "solution": "Step 1: Differences are 10, 8, 6, 4.\nStep 2: Next differences are 2 and 0.\nStep 3: So next terms: 602=58 and 580=58.\nAnswer: Option C.",
     "subject": "REASONING",
-    "pattern": "number_series",
+    "pattern": "series",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -672,7 +672,7 @@
     "correct_option": "A",
     "solution": "Step 1: Track fold order along shown lines.\nStep 2: Reflect each cut/hole through all folds while unfolding.\nStep 3: Symmetric placement matches option 1.\nAnswer: Option A.",
     "subject": "REASONING",
-    "pattern": "paper_folding",
+    "pattern": "paper_cutting",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL 2024",
@@ -715,7 +715,7 @@
     "correct_option": "B",
     "solution": "Step 1: First letters: A,C,E,,I (+2) gives G.\nStep 2: Second letters: E,G,I,,M (+2) gives K.\nStep 3: Third letters: Y,W,U,,Q (2) gives S. Fourth: T,R,P,,L (2) gives N.\nAnswer: Option B (GKSN).",
     "subject": "REASONING",
-    "pattern": "letter_series",
+    "pattern": "series",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",
@@ -758,7 +758,7 @@
     "correct_option": "C",
     "solution": "Step 1: Write sequence blocks and check recurring CARET/RCA structure.\nStep 2: Fill blanks to preserve repeating order.\nStep 3: Required letters are C, R, E, C, C.\nAnswer: Option C.",
     "subject": "REASONING",
-    "pattern": "letter_series",
+    "pattern": "series",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",
@@ -801,7 +801,7 @@
     "correct_option": "B",
     "solution": "Step 1: Track movement/count of curve marks between top-right and bottom-left positions.\nStep 2: Apply same increment/decrement in next frame.\nStep 3: Option 2 continues the pattern.\nAnswer: Option B.",
     "subject": "REASONING",
-    "pattern": "non_verbal_series",
+    "pattern": "series",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL 2024",
@@ -930,7 +930,7 @@
     "correct_option": "B",
     "solution": "Step 1: Decode the family relation chain exactly as per symbols.\nStep 2: Build relations one by one from expression PQRS+T (as given in paper notation).\nStep 3: Final relation of Q with T is Daughter's daughter.\nAnswer: Option B.",
     "subject": "REASONING",
-    "pattern": "blood_relations_coding",
+    "pattern": "blood_relations",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL 2024",
@@ -1016,7 +1016,7 @@
     "correct_option": "C",
     "solution": "Step 1: In valid pairs, second number = first13.\nStep 2: 11143, 13169 and 15195 follow 13.\nStep 3: 1213=156, not 152.\nAnswer: Option C.",
     "subject": "REASONING",
-    "pattern": "odd_pair",
+    "pattern": "classification",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",

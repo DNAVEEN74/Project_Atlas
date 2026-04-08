@@ -1,0 +1,1292 @@
+[
+  {
+    "text": "∆ABC is inscribed in a circle with Centre O. If AB = 21 cm, BC = 20 cm and  AC = 29 cm, then what is the length of the circumradius of the triangle?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "13.5 cm",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "21.5 cm",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "32.5 cm",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "14.5 cm",
+        "image": ""
+      }
+    ],
+    "correct_option": "",
+    "solution": "**Step 1:** Source entry has no selected option in the PDF (`Chosen Option: --`).\n**Step 2:** Validate this question against the official answer key before import.\n**Step 3:** Keep this row in review state until the correct option is confirmed.\n**Answer:** Option [TO_VERIFY].",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "On a 2200 m long circular track, Sarita and Kavita drove their cycles from  the same point but in opposite direction with the speeds 20 km/hr and 16  km/hr, respectively. After how much time will they meet again for the first  time?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "3 minutes 40 seconds",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "3 minutes 20 seconds",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2 minutes 50 seconds",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "2 minutes 20 seconds",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (3 minutes 40 seconds).",
+    "subject": "QUANT",
+    "pattern": "speed_distance_time",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a triangle HJK, HJ = HK. G is a point on HJ such that HG = GK = JK. What  is the degree measure of two-third of (∠HGK + ∠GKJ)?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "84°",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "136°",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "90°",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "96°",
+        "image": ""
+      }
+    ],
+    "correct_option": "",
+    "solution": "**Step 1:** Source entry has no selected option in the PDF (`Chosen Option: --`).\n**Step 2:** Validate this question against the official answer key before import.\n**Step 3:** Keep this row in review state until the correct option is confirmed.\n**Answer:** Option [TO_VERIFY].",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Find the simple interest (in ₹) on ₹2000 at 6.5% per annum rate of interest  for the period from 14 February 2023 to 28 April 2023",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "27",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "25",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "26",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "24",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C (26).",
+    "subject": "QUANT",
+    "pattern": "simple_interest",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The population of a place increased to 50,000 from 2016 to 2018 at the rate  of 6% per annum, and continued the same trend for the next 3 years. If A is  the population in 2016 and B is the population in 2020, both are  approximated to the next possible integers, then the value of B − A is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "11680",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "13220",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "16270",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "12850",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (11680).",
+    "subject": "QUANT",
+    "pattern": "simple_interest",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "15 : 13",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "11 : 15",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "9 : 11",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "11 : 13",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B (11 : 15).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Find the value of Y, if X− 2Y + 2Z = 16, X − Y + Z = 9 and 2X − 3Y − Z = 9.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "4",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "2",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "−4",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "−3",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option D (−3).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Rani and Adya, working separately, can finish a task in 12 days and 16  hours, respectively. They work in stretches of one day alternately. If Rani  starts working first, then the task will be completed in",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "",
+    "solution": "**Step 1:** Source entry has no selected option in the PDF (`Chosen Option: --`).\n**Step 2:** Validate this question against the official answer key before import.\n**Step 3:** Keep this row in review state until the correct option is confirmed.\n**Answer:** Option [TO_VERIFY].",
+    "subject": "QUANT",
+    "pattern": "simple_interest",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Let A and B be two players who are playing the game to hit the  target. The probabilities of hitting the target by A and B is and  , respectively. What is the probability that exactly one of them  hit the target?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option D ([IMAGE]).",
+    "subject": "QUANT",
+    "pattern": "number_system",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "On the occasion of Republic Day, a retail store offers a scheme where  customers can avail a discount of 26% on their total purchase. If Manish  buys items worth ₹2,050, how much money (in ₹) will he save through the  scheme discount?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "522",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "511",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "533",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "544",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C (533).",
+    "subject": "QUANT",
+    "pattern": "profit_loss",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Vessel A contains milk and water in the ratio 4 : 5. Vessel B contains milk  and water in the ratio 2 : 1. If x litres mixture of A is mixed with y litres  mixture of B, then the ratio of milk to water in the mixture becomes 8 : 5.  Find the ratio x : y.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "5 : 6",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "3 : 10",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2 : 5",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "3 : 4",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B (3 : 10).",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The average of first 91 even numbers is",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "91",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "90",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "92",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "93",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C (92).",
+    "subject": "QUANT",
+    "pattern": "average",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Find the volume (in cm3, rounded off to 2 decimal places) of a right circular  cone of diameter 12 cm and height 5 cm. [Use π = ]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "197.25",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "156.39",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "188.57",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "147.23",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C (188.57).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "7",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "-3",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "16",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "17",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (7).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "138",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "143",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "140",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "124",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (138).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A sum of money is to be distributed among 3 friends P, Q and R in the  proportion of 5 : 3 : 4 . If P gets₹1,500 more than R, what is Q's share?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "₹4,500",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "₹4,950",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "₹5,100",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "₹4,680",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (₹4,500).",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B ([IMAGE]).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Using empirical formula, calculate the mode for the following data.  17, 20, 21, 18, 25, 28, 24, 22, 16, 24, 25, 24",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "25.8",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "30.6",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "25",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "32",
+        "image": ""
+      }
+    ],
+    "correct_option": "",
+    "solution": "**Step 1:** Source entry has no selected option in the PDF (`Chosen Option: --`).\n**Step 2:** Validate this question against the official answer key before import.\n**Step 3:** Keep this row in review state until the correct option is confirmed.\n**Answer:** Option [TO_VERIFY].",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option D ([IMAGE]).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C ([IMAGE]).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "37",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "34",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "40",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "38",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C (40).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "24 years",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "20 years",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "22 years",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "26 years",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (24 years).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A toy is in the form of a cone mounted on a hemisphere. The radius of the  hemisphere and that of the cone is 36 cm and height of the cone is 105 cm.  The total surface area (in cm2) of the toy is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "6025 π",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "6588 π",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "5799 π",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "5240 π",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B (6588 π).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Anil and Beena are friends, and the difference between their ages is 5  years. Anil’s father Dinesh is three times as old as Anil, and Beena is twice  as old as her sister Charu. The ages of Dinesh and Charu differ by 45  years. If Beena is older than Anil, then find the sum of the present ages of  both Dinesh and Charu.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "100 years",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "91 years",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "69 years",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "78 years",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C (69 years).",
+    "subject": "QUANT",
+    "pattern": "speed_distance_time",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The height of a right circular cone is 63 cm and the area of its curved  surface is five times the area of its base. What is the volume (in cm3) of the  cone? (Use π = 22/7)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "12589.10",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "11234.65",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "10914.75",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "13540.25",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C (10914.75).",
+    "subject": "QUANT",
+    "pattern": "speed_distance_time",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A man buys 10 identical articles for a total of ₹15. If he sells each of them  for ₹1.7, then his profit percentage will be ______%'(rounded off to two  decimal place).",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "14.33",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "13.33",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "12.76",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "11.76",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option B (13.33).",
+    "subject": "QUANT",
+    "pattern": "profit_loss",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Find the median of the following data. (Rounded off to 2 decimal places.)  Class interval 0-5 5-10 10-15 15-20 20-25 25-30 30-35  Frequency 3 5 4 2 7 6 5",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "18.64",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "20.53",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "21.43",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "23.40",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A (18.64).",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option C ([IMAGE]).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the key concept from the question and simplify the given information.\n**Step 2:** Evaluate options using elimination/standard formula logic for this topic.\n**Step 3:** Match the derived result with the keyed choice from the source.\n**Answer:** Option A ([IMAGE]).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "218",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "224",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "219",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "229",
+        "image": ""
+      }
+    ],
+    "correct_option": "",
+    "solution": "**Step 1:** Source entry has no selected option in the PDF (`Chosen Option: --`).\n**Step 2:** Validate this question against the official answer key before import.\n**Step 3:** Keep this row in review state until the correct option is confirmed.\n**Answer:** Option [TO_VERIFY].",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 18.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

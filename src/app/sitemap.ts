@@ -3,23 +3,22 @@ import dbConnect from '@/core/db/connect';
 import Question from '@/core/models/Question';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://prepleague.com';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://prepleague.in';
 
     // Static routes
     const routes = [
-        '',
-        '/problems',
-        '/sprint',
-        // '/games',
-        '/dashboard',
-        '/pricing',
-        '/login',
-        '/register',
-    ].map((route) => ({
-        url: `${baseUrl}${route}`,
+        { path: '', priority: 1.0 },
+        { path: '/problems', priority: 0.9 },
+        { path: '/sprint', priority: 0.9 },
+        { path: '/pricing', priority: 0.8 },
+        { path: '/privacy', priority: 0.4 },
+        { path: '/terms', priority: 0.4 },
+        // '/login', '/register', '/dashboard' are intentionally excluded (noindex pages)
+    ].map(({ path, priority }) => ({
+        url: `${baseUrl}${path}`,
         lastModified: new Date(),
-        changeFrequency: 'daily' as const,
-        priority: route === '' ? 1 : 0.8,
+        changeFrequency: 'weekly' as const,
+        priority,
     }));
 
     let questionRoutes: MetadataRoute.Sitemap = [];

@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Practice SSC CGL & CHSL Previous Year Questions",
-    description: "Solve 10,000+ SSC CGL, CHSL, and Bank exam previous year questions (PYQs). Filter by topic, year, and difficulty. Practice Quantitative Aptitude and Reasoning with instant solutions.",
-    keywords: ["SSC CGL PYQ", "SSC CHSL questions", "Bank exam practice", "Quantitative Aptitude questions", "Reasoning questions", "previous year questions"],
+    title: "Practice SSC CGL Previous Year Questions",
+    description: "Solve 3,000+ SSC CGL previous year questions (PYQs). Filter by topic, year, and difficulty. Practice Quantitative Aptitude and Reasoning with step-by-step solutions.",
+    keywords: ["SSC CGL PYQ", "SSC CGL questions", "Quantitative Aptitude questions", "Reasoning questions", "previous year questions", "SSC CGL 2024"],
     openGraph: {
         title: "Practice SSC CGL Questions - PrepLeague",
-        description: "10,000+ SSC Previous Year Questions with solutions. Practice Quant and Reasoning.",
+        description: "3,000+ SSC CGL Previous Year Questions with solutions. Practice Quant and Reasoning.",
         type: "website",
     },
 };

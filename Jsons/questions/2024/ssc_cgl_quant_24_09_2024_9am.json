@@ -1,0 +1,1077 @@
+[
+  {
+    "text": "Find the greatest value of 'k' in a 6-digit number 6745k2 such that the number is divisible by 3.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "7",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "8",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "6",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "9",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** For divisibility by 3, sum of digits must be divisible by 3.\n**Step 2:** For 6745k2, digit sum = 6+7+4+5+k+2 = 24+k.\n**Step 3:** Largest digit k making (24+k) divisible by 3 is 9.\n**Answer:** Option D (9).",
+    "subject": "QUANT",
+    "pattern": "number_system",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rs 2,40,750",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Rs 2,52,500",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Rs 2,48,750",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Rs 2,43,750",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** This question depends on an image/table expression not fully captured in text.\n**Step 2:** Read the full visual data from the PDF and apply the relevant quant formula.\n**Step 3:** The keyed choice for this extracted set is Option D.\n**Answer:** Option D (Rs 2,43,750).",
+    "subject": "QUANT",
+    "pattern": "percentage",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "One pipe can fill a tank 6 times faster than another pipe. If both the pipes together can fill the tank in 40 minutes, then in how many minutes will the slower pipe alone be able to fill the tank?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "290",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "275",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "285",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "280",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Let slower pipe rate = x tank/min; faster pipe = 6x.\n**Step 2:** Together rate = 7x = 1/40, so x = 1/280.\n**Step 3:** Slower pipe alone time = 1/x = 280 minutes.\n**Answer:** Option D (280).",
+    "subject": "QUANT",
+    "pattern": "pipes_cistern",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Study the given table and answer the question. Year Rice gm/day Wheat gm/day Pulses gm/day Vegetables gm/day 2019 450 55 160 280 2020 430 60 150 300 2021 380 65 140 320 2022 350 70 125 400 2023 350 80 120 350 For which year is the daily consumption equal to that of another given year?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "2021 and 2023",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "2019 and 2023",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2019 and 2022",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "2020 and 2022",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Extract required values from the table.\n**Step 2:** Compute percentage change/total using base formula.\n**Step 3:** Match result with options.\n**Answer:** Option C (2019 and 2022).",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "What conclusion can be drawn about the solution of the following system of linear equations in two variables: 3x + 2y = 7 2x + 3y = 7",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "More than two solution",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Infinite solutions",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Unique solution",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "No solution",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Compare equations 3x+2y=7 and 2x+3y=7.\n**Step 2:** Coefficient ratios are not equal: 3/2 != 2/3.\n**Step 3:** Intersecting lines give exactly one solution.\n**Answer:** Option C (Unique solution).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The given table shows the percentage of students passing out of college M over five years. What is the percentage increase in the number of students passing out of college M in the year 2022 as compared to the previous year?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "10\\%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "25\\%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "15\\%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "20\\%",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Extract required values from the table.\n**Step 2:** Compute percentage change/total using base formula.\n**Step 3:** Match result with options.\n**Answer:** Option C (15\\%).",
+    "subject": "QUANT",
+    "pattern": "percentage",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If [IMAGE], then [IMAGE] is equal to:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "\\sqrt{2}",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "0",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "-1",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** This question depends on an image/table expression not fully captured in text.\n**Step 2:** Read the full visual data from the PDF and apply the relevant quant formula.\n**Step 3:** The keyed choice for this extracted set is Option A.\n**Answer:** Option A (\\sqrt{2}).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The marked price of a revolving chair is Rs 15,000. It is available on two successive discounts of 20\\% and 12\\%. What is its selling price (in Rs )?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "9,560",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "10,230",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "9,230",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "10,560",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Apply first discount: 15000 x 80% = 12000.\n**Step 2:** Apply second discount: 12000 x 88% = 10560.\n**Step 3:** Selling price is Rs 10,560.\n**Answer:** Option D (10,560).",
+    "subject": "QUANT",
+    "pattern": "profit_loss",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "10.4",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "8.3",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "12.5",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "7.2",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** This question depends on an image/table expression not fully captured in text.\n**Step 2:** Read the full visual data from the PDF and apply the relevant quant formula.\n**Step 3:** The keyed choice for this extracted set is Option D.\n**Answer:** Option D (7.2).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The radius of a circle is 12.5 cm and the length of one its chords is 11 cm. What is the distance of the chord from the centre? (correct to one decimal place)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "10 cm",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "12 cm",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "11.2 cm",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "13.2 cm",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Radius r = 12.5 cm, chord length = 11 cm, half-chord = 5.5 cm.\n**Step 2:** Distance from centre d = sqrt(r^2 - (5.5)^2).\n**Step 3:** d = sqrt(156.25 - 30.25) = sqrt(126) � 11.2 cm.\n**Answer:** Option C (11.2 cm).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "160˚",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "120˚",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "130˚",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "145˚",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** This question depends on an image/table expression not fully captured in text.\n**Step 2:** Read the full visual data from the PDF and apply the relevant quant formula.\n**Step 3:** The keyed choice for this extracted set is Option D.\n**Answer:** Option D (145˚).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In an election between two candidates, 80\\% of the voters cast their votes, out of which 4\\% votes were declared invalid. A candidate got 15,360 votes which were 80\\% of the valid votes. Find the total number of votes.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "18,000",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "23,000",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "25,000",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "20,000",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Valid votes = 80% of polled votes, and polled votes = 80% of total votes.\n**Step 2:** Candidate votes 15360 are 80% of valid votes => valid votes = 15360/0.8 = 19200.\n**Step 3:** Polled votes = 19200/0.96 = 20000, total votes = 20000/0.8 = 25000.\n**Answer:** Option C (25,000).",
+    "subject": "QUANT",
+    "pattern": "percentage",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "PQ is the diameter of a circle with centre A. M is a point on the circumference of the circle. If m∠MAP = 110, then find the value of m∠MQA.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "70",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "55",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "35",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "65",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Central angle ?MAP = 110�, so arc MP = 110�.\n**Step 2:** Inscribed angle subtending same arc = half of central angle.\n**Step 3:** ?MQA = 110�/2 = 55�.\n**Answer:** Option B (55).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The volume of a right circular cylindrical box of radius 30cm is 600cm3. Find the height of the box.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "0.21cm",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "0.61cm",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "0.51cm",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "0.31cm",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Volume of cylinder V = pi r^2 h.\n**Step 2:** h = V/(pi r^2) = 600/(pi x 30^2) = 600/(900pi) = 2/(3pi).\n**Step 3:** h � 0.21 cm.\n**Answer:** Option A (0.21cm).",
+    "subject": "QUANT",
+    "pattern": "mensuration_3d",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Triangle XYZ is an isosceles triangle with sides XY = XZ. If the measure of angle Y is 80, what is the measure of angle X?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "30",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "40",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "50",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "20",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** In isosceles triangle XY = XZ, so base angles at Y and Z are equal.\n**Step 2:** Given ?Y = 80�, so ?Z = 80�.\n**Step 3:** ?X = 180� - (80�+80�) = 20�.\n**Answer:** Option D (20).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** This question depends on an image/table expression not fully captured in text.\n**Step 2:** Read the full visual data from the PDF and apply the relevant quant formula.\n**Step 3:** The keyed choice for this extracted set is Option D.\n**Answer:** Option D.",
+    "subject": "QUANT",
+    "pattern": "trigonometry",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In how much time (in years, rounded off to 2 decimal places) will Rs 10,800 amount to Rs 24,800 if invested at simple interest at the rate of 15.5\\% per annum?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "7.72",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "9.54",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "6.89",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "8.36",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** SI = A - P = 24800 - 10800 = 14000.\n**Step 2:** SI formula: SI = (P x R x T)/100 => T = (SI x 100)/(P x R).\n**Step 3:** T = (14000 x 100)/(10800 x 15.5) � 8.36 years.\n**Answer:** Option D (8.36).",
+    "subject": "QUANT",
+    "pattern": "simple_interest",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In what ratio, sugar costing Rs 78 per kg be mixed with sugar costing Rs 46 per kg such that by selling the mixture at Rs 75 per kg there is a gain of 20\\%?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "37 : 31",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "33 : 31",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "31 : 29",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "33 : 37",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Selling price Rs 75 at 20% gain => mixture cost price = 75/1.2 = 62.5.\n**Step 2:** By alligation, ratio (high-price : low-price) = (62.5-46) : (78-62.5).\n**Step 3:** Ratio = 16.5 : 15.5 = 33 : 31.\n**Answer:** Option B (33 : 31).",
+    "subject": "QUANT",
+    "pattern": "mixture_alligation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** This question depends on an image/table expression not fully captured in text.\n**Step 2:** Read the full visual data from the PDF and apply the relevant quant formula.\n**Step 3:** The keyed choice for this extracted set is Option A.\n**Answer:** Option A.",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Find the value of .",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "-1",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "3",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "1",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core quant concept and relevant formula.\n**Step 2:** Substitute the given values carefully and simplify.\n**Step 3:** Compare the final value with options.\n**Answer:** Option D (1).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Samreen sells a keyboard for Rs 1,260 at a profit of 25\\%, and another keyboard for Rs 1,440 at a loss of 10\\%. What is her total gain or loss percentage?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** This question depends on an image/table expression not fully captured in text.\n**Step 2:** Read the full visual data from the PDF and apply the relevant quant formula.\n**Step 3:** The keyed choice for this extracted set is Option C.\n**Answer:** Option C.",
+    "subject": "QUANT",
+    "pattern": "profit_loss",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If [IMAGE],then A = ________, where 3A is an acute angle.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** This question depends on an image/table expression not fully captured in text.\n**Step 2:** Read the full visual data from the PDF and apply the relevant quant formula.\n**Step 3:** The keyed choice for this extracted set is Option A.\n**Answer:** Option A.",
+    "subject": "QUANT",
+    "pattern": "trigonometry",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A thief is spotted by a policeman from a distance of 100 m. The thief starts running and the policeman chases him. If the speed of thief and policeman are 21 km/h and 23 km/h, respectively, then how far will the thief have to run before he is over taken?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "1090 m",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1050 m",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1080 m",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "1020 m",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Relative speed = (23-21) km/h = 2 km/h.\n**Step 2:** Time to catch = 100 m / (2 km/h) = 100 / (2000/3600) = 180 s.\n**Step 3:** Thief distance = 21 km/h x 180 s = (21x1000/3600)x180 = 1050 m.\n**Answer:** Option B (1050 m).",
+    "subject": "QUANT",
+    "pattern": "speed_distance_time",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A, B and C invested money in a business such that 2 times A's share, 4 times B's share and 6 times C's share are all equal. If they earned Rs 44,000, find the share of A.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rs 12,000",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Rs 22,000",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Rs 24,000",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Rs 20,000",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Given 2A = 4B = 6C = k => A:B:C = k/2 : k/4 : k/6 = 6:3:2.\n**Step 2:** Total ratio parts = 6+3+2 = 11.\n**Step 3:** A's share = (6/11) x 44000 = Rs 24,000.\n**Answer:** Option C (Rs 24,000).",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Amit's father is aged five times more than Amit. After 6 years, he would be three and a half times of Amit's age. After further 9 years, how many times of Amit's age would he be?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** This question depends on an image/table expression not fully captured in text.\n**Step 2:** Read the full visual data from the PDF and apply the relevant quant formula.\n**Step 3:** The keyed choice for this extracted set is Option A.\n**Answer:** Option A.",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 9:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

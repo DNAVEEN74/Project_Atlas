@@ -70,7 +70,7 @@
     "correct_option": "A",
     "solution": "Step 1: Profit = $ \\frac{1}{5}$ of SP = $40620/5 = 8124$.\nStep 2: CP = SP - Profit = 40620 - 8124 = 32496.\nStep 3: Gain% = $(8124/32496) \\times100 = 25\\%$.\nAnswer: Option A.",
     "subject": "QUANT",
-    "pattern": "profit_and_loss",
+    "pattern": "profit_loss",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -113,7 +113,7 @@
     "correct_option": "C",
     "solution": "Step 1: Fill rate = $1/10$ tank/min, empty rate = $1/12$ tank/min.\nStep 2: Net rate = $1/10-1/12=1/60$ tank/min.\nStep 3: Time = 60 minutes = 1 hour.\nAnswer: Option C.",
     "subject": "QUANT",
-    "pattern": "time_and_work",
+    "pattern": "time_work",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -328,7 +328,7 @@
     "correct_option": "C",
     "solution": "Step 1: $x\\propto \\frac{y^3}{z^2}$, so $x=k \\frac{y^3}{z^2}$.\nStep 2: Using given condition ($x= \\frac{1}{36}$ at $y=2,z=3$), get $k= \\frac{1}{32}$.\nStep 3: For $y=3,z=5$, $x= \\frac{1}{32}\\cdot \\frac{27}{25}= \\frac{27}{800}$.\nStep 4: $800x=27$.\nAnswer: Option C.",
     "subject": "QUANT",
-    "pattern": "variation",
+    "pattern": "ratio_proportion",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL 2024",
@@ -672,7 +672,7 @@
     "correct_option": "A",
     "solution": "Step 1: Relative speed = 83 = 5 rounds/hour.\nStep 2: First crossing after relative gain of 1 round: time = $1/5$ hour = 12 minutes.\nStep 3: 11:54 p.m. + 12 minutes = 12:06 a.m.\nAnswer: Option A.",
     "subject": "QUANT",
-    "pattern": "time_speed_distance",
+    "pattern": "speed_distance_time",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -758,7 +758,7 @@
     "correct_option": "B",
     "solution": "Step 1: A number divisible by 6 must be divisible by both 2 and 3.\nStep 2: 438750 is even and sum of digits = 27 (divisible by 3).\nStep 3: Other options fail one of these checks.\nAnswer: Option B.",
     "subject": "QUANT",
-    "pattern": "divisibility",
+    "pattern": "number_system",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -973,7 +973,7 @@
     "correct_option": "C",
     "solution": "Step 1: Let apple = $a$, orange = $o$. Given $15a+12o=447$.\nStep 2: Check each statement for consistency.\nStep 3: Statement 3 implies $35a+28o=1029$, i.e., $5a+4o=147$.\nStep 4: But original gives $5a+4o=149$, contradiction.\nAnswer: Option C.",
     "subject": "QUANT",
-    "pattern": "linear_equations",
+    "pattern": "algebra",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",
@@ -1016,7 +1016,7 @@
     "correct_option": "A",
     "solution": "Step 1: Successive discount factor = $(1-0.15)(1-0.20)(1-0.05)=0.85 \\times0.80 \\times0.95=0.646$.\nStep 2: Equivalent single discount = $1-0.646=0.354=35.4\\%$.\nAnswer: Option A.",
     "subject": "QUANT",
-    "pattern": "discount",
+    "pattern": "profit_loss",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",

@@ -1,0 +1,991 @@
+[
+  {
+    "text": "Which composite number can divide the sum of the first 12 natural numbers?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "12",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "8",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "6",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "4",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the governing arithmetic/algebraic relation.\n**Step 2:** Substitute known values and simplify step by step.\n**Step 3:** Match the final result with options.\n**Answer:** Option A (12).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Let ABC be a triangle. If the mid-points of AB, BC and AC are D, E and F, respectively, then ∆DEF is NOT congruent to _____.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "∆BDE",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "∆ADF",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "∆ECF",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "∆ABC",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the required geometric formula.\n**Step 2:** Substitute given dimensions and simplify.\n**Step 3:** Match the computed value with options.\n**Answer:** Option A (∆BDE).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The angles of a triangle are in the ratio 1 : 2 : 3. The difference in the largest and smallest angle is (in degrees):",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "15",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "30",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "45",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "60",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the governing arithmetic/algebraic relation.\n**Step 2:** Substitute known values and simplify step by step.\n**Step 3:** Match the final result with options.\n**Answer:** Option A (15).",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The income of a person is Rs 16,500, and his expenditure is Rs 12,000. Next year, his income increases by 24\\% but his expenditure decreases by 10\\%. The percentage increase (rounded off to the nearest integer) in his savings is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "115\\%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "120\\%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "95\\%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "90\\%",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the governing arithmetic/algebraic relation.\n**Step 2:** Substitute known values and simplify step by step.\n**Step 3:** Match the final result with options.\n**Answer:** Option A (115\\%).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If two straight lines are coinciding with each other, then the number of points of intersection is/are:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "infinitely many points of intersection",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "unique point of intersection",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "finite number of point of intersection",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "no points of intersection",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the governing arithmetic/algebraic relation.\n**Step 2:** Substitute known values and simplify step by step.\n**Step 3:** Match the final result with options.\n**Answer:** Option A (infinitely many points of intersection).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "One year ago, the age of B was twice that of A. After 9 years, if the ratio of the ages of B and A would be 4 ∶ 3, then the sum of their present ages is _____ years.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "17",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "15",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "21",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "30",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the governing arithmetic/algebraic relation.\n**Step 2:** Substitute known values and simplify step by step.\n**Step 3:** Match the final result with options.\n**Answer:** Option A (17).",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Pipe A can fill a cistern in 4 hours and Pipe B can fill the same cistern in 5 hours. Pipe C can empty a full cistern in 3 hours. If all three pipes are opened together, then the time (in minutes) taken to fill the tank is: (round to the nearest minute)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "625",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "445",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "514",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "800",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Convert each pipe into rate (work per unit time).\n**Step 2:** Add/subtract rates as per condition.\n**Step 3:** Invert net rate to get time.\n**Answer:** Option C (514).",
+    "subject": "QUANT",
+    "pattern": "pipes_cistern",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "0",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "3",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "2",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** This question is image-dependent, so read the complete figure/table from the PDF.\n**Step 2:** Apply the required rule (pattern/geometry/data) directly on that visual.\n**Step 3:** The matching keyed option for this paper is A.\n**Answer:** Option A (0).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Study the given pie chart carefully and answer the question that follows. The given pie chart depicts the expenditure incurred towards different hobby classes of an institute. If the total expenditure is Rs 10,70,000, then find the central angle of the sector representing ‘drawing’.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "70°",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "68.4°",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "19°",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "90°",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Read exact numbers from the table/chart.\n**Step 2:** Apply the asked arithmetic/percentage operation.\n**Step 3:** Compute and compare with options.\n**Answer:** Option A (70°).",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A policeman is chasing a thief at a speed of 82 km/h. The thief is 1300 m away and is running at a speed of 64 km/h. In how much time will the policeman catch the thief if both are riding on bikes?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "300 sec",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "350 sec",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "260 sec",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "250 sec",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Use Distance = Speed x Time or relative speed.\n**Step 2:** Convert units consistently.\n**Step 3:** Solve and match option.\n**Answer:** Option A (300 sec).",
+    "subject": "QUANT",
+    "pattern": "speed_distance_time",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** This question is image-dependent, so read the complete figure/table from the PDF.\n**Step 2:** Apply the required rule (pattern/geometry/data) directly on that visual.\n**Step 3:** The matching keyed option for this paper is A.\n**Answer:** Option A.",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Ramu lent Rs 3,000 to Raju and a certain sum to Ravi at the same time and at the same rate of simple interest of 8\\% per annum. After 5 years, he received a sum of Rs 1,600 from Raju and Ravi together as interest. Find the sum lent to Ravi.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rs 1,000",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Rs 1,250",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Rs 1,200",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Rs 1,500",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Write the correct interest formula.\n**Step 2:** Substitute given values and solve the equation.\n**Step 3:** Verify units and match with options.\n**Answer:** Option A (Rs 1,000).",
+    "subject": "QUANT",
+    "pattern": "simple_interest",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The ratio of two numbers is 2 : 5 and their difference is 210. The smaller number is ____________.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "60",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "150",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "350",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "140",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the governing arithmetic/algebraic relation.\n**Step 2:** Substitute known values and simplify step by step.\n**Step 3:** Match the final result with options.\n**Answer:** Option D (140).",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "5.75",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "5.25",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "6.75",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "6.25",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** This question is image-dependent, so read the complete figure/table from the PDF.\n**Step 2:** Apply the required rule (pattern/geometry/data) directly on that visual.\n**Step 3:** The matching keyed option for this paper is C.\n**Answer:** Option C (6.75).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A line cuts two concentric circles. The length of chords formed by this line on the circles is 6 cm and 18 cm. Find the difference in the squares of the radii of two circles.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "72",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "90",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "120",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "60",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the required geometric formula.\n**Step 2:** Substitute given dimensions and simplify.\n**Step 3:** Match the computed value with options.\n**Answer:** Option A (72).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The ratio of the length, the breadth, and the height of a solid cuboid is given as 3 : 2 : 1, and the breadth of this cuboid is given as 12 cm. Find the volume (in cm3) of the cuboid.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "1500",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1250",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1200",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "1296",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the governing arithmetic/algebraic relation.\n**Step 2:** Substitute known values and simplify step by step.\n**Step 3:** Match the final result with options.\n**Answer:** Option A (1500).",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A class of 30 students appeared in a test. The average score of 12 students is 62, and that of the rest is 78. What is the average score of the class?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "69.6",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "71.6",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "70.6",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "72.6",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the governing arithmetic/algebraic relation.\n**Step 2:** Substitute known values and simplify step by step.\n**Step 3:** Match the final result with options.\n**Answer:** Option B (71.6).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If the market price of a bag is 25\\% above the cost price, and a discount of 18\\% is declared on it, then find the gain percentage.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "1.5\\%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "3.0\\%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2.5\\%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "2.0\\%",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Convert percentages to multipliers and set CP/SP equations.\n**Step 2:** Compute required intermediate values carefully.\n**Step 3:** Match the final value/ratio with options.\n**Answer:** Option A (1.5\\%).",
+    "subject": "QUANT",
+    "pattern": "profit_loss",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The given pie-chart shows the data on A, B, O, and AB blood groups of 240 donors. Study the chart and answer the question that follows. What is the ratio of the average donors of blood groups ‘A’, ‘O’, and ‘AB’ to the donors of blood group ‘B’?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "4 : 3",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "3 : 4",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1 : 3",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "2 : 3",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the governing arithmetic/algebraic relation.\n**Step 2:** Substitute known values and simplify step by step.\n**Step 3:** Match the final result with options.\n**Answer:** Option A (4 : 3).",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** This question is image-dependent, so read the complete figure/table from the PDF.\n**Step 2:** Apply the required rule (pattern/geometry/data) directly on that visual.\n**Step 3:** The matching keyed option for this paper is A.\n**Answer:** Option A.",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "14.63\\%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "15.78\\%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "15.63\\%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "14.34\\%",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** This question is image-dependent, so read the complete figure/table from the PDF.\n**Step 2:** Apply the required rule (pattern/geometry/data) directly on that visual.\n**Step 3:** The matching keyed option for this paper is A.\n**Answer:** Option A (14.63\\%).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If 436P5 is divisible by 3, then the largest value of P is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "8",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "12",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "9",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "6",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Apply the divisibility rule to the given number expression.\n**Step 2:** Solve for unknown value(s).\n**Step 3:** Select valid option.\n**Answer:** Option A (8).",
+    "subject": "QUANT",
+    "pattern": "number_system",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** This question is image-dependent, so read the complete figure/table from the PDF.\n**Step 2:** Apply the required rule (pattern/geometry/data) directly on that visual.\n**Step 3:** The matching keyed option for this paper is A.\n**Answer:** Option A.",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 24.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

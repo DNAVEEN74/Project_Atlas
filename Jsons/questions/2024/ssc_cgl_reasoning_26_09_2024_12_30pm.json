@@ -199,7 +199,7 @@
     "correct_option": "C",
     "solution": "**Given word:** DARKEN\n\n**Step 1:** Arrange letters in alphabetical order\nD, A, R, K, E, N → A, D, E, K, N, R\n\n**New arrangement:** ADENR\n\nWait, let me recount the letters:\nD-A-R-K-E-N (6 letters)\n\nArranged alphabetically: A-D-E-K-N-R\n\n**Step 2:** Identify the required letters\n\n**Second from left:** D (position 2)\n**Third from right:** K (counting from right: R=1st, N=2nd, K=3rd)\n\n**Step 3:** Find letters between D and K in English alphabet\n\nD _ _ _ _ _ _ K\n\nLetters between D and K: E, F, G, H, I, J\n\nCount: **6 letters**\n\n**Answer:** Option C (Six)",
     "subject": "REASONING",
-    "pattern": "alphabet_recall",
+    "pattern": "word_formation",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -242,7 +242,7 @@
     "correct_option": "B",
     "solution": "**Step 1:** Understand paper folding logic\nWhen a paper is folded and punched, the holes appear symmetrically when unfolded.\n\n**Step 2:** Track the folding sequence\n- The paper is shown being folded in specific directions\n- A punch is made after the final fold\n- Each fold creates a mirror image when unfolded\n\n**Step 3:** Work backwards from the punch\nWhen you unfold once, the punch appears on both sides of the fold line.\nWhen you unfold again, each of those punches creates another mirror image.\n\n**Step 4:** Identify the correct pattern\nBased on the number of folds and their directions:\n- The punches should appear in symmetric positions\n- Option B shows the correct symmetrical pattern with triangles and circles positioned as they would appear after unfolding\n\n**Answer:** Option B\n\n**Note:** This requires spatial visualization skills to mentally unfold the paper step by step.",
     "subject": "REASONING",
-    "pattern": "paper_folding",
+    "pattern": "paper_cutting",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL 2024",
@@ -285,7 +285,7 @@
     "correct_option": "B",
     "solution": "**Method:** Count triangles systematically by size\n\n**Step 1:** Count smallest triangles\nIdentify all the basic unit triangles in the figure.\nLet's assume from the figure there are several small triangles formed by the basic lines.\n\n**Step 2:** Count medium-sized triangles\nThese are formed by combining 2 or more small triangles.\n\n**Step 3:** Count large triangles\nThese are formed by combining multiple smaller triangles.\n\n**Step 4:** Count the largest triangles\nThe overall large triangle(s) that encompass most of the figure.\n\n**Systematic counting approach:**\n- Small triangles: Count each distinct small triangle\n- Medium triangles: Look for triangles formed by 2-3 small units\n- Large triangles: Look for triangles formed by 4+ small units\n- Largest: The complete figure triangle\n\n**Total count:** After systematic counting = **10 triangles**\n\n**Answer:** Option B (10)\n\n**Note:** The exact breakdown requires seeing the actual figure, but the total comes to 10 triangles through systematic counting.",
     "subject": "REASONING",
-    "pattern": "figure_counting",
+    "pattern": "counting_figures",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",
@@ -328,7 +328,7 @@
     "correct_option": "A",
     "solution": "**Given:** Six numbers on dice faces: 5, 3, 6, 7, 9, 2\nTwo positions of the dice are shown.\n\n**Dice rule:** Opposite faces of a die cannot be seen together in any single view.\n\n**Step 1:** Analyze Position 1\nFrom the first position, we can see three faces. Let's say:\n- Face 1: 5\n- Face 2: 3  \n- Face 3: 6\n\n**Step 2:** Analyze Position 2\nFrom the second position:\n- We can see: 2, 3, 7\n\n**Step 3:** Identify adjacent faces\n- In both positions, 3 is visible\n- In position 1: 5, 3, 6 are adjacent to each other\n- In position 2: 2, 3, 7 are adjacent to each other\n\n**Step 4:** Find opposite to 5\n- Faces adjacent to 5: 3, 6 (from position 1)\n- From position 2, faces with 3 are: 2, 7\n- Since 3 and 6 are adjacent to 5, they cannot be opposite to 5\n- We have: 3, 6, 7, 9 as faces that are NOT opposite to 5\n- Remaining faces: 2 and 9\n- Since 7 is adjacent to 3, and 5 is also adjacent to 3, we need to find which of 2 or 9 is opposite to 5\n\n**Step 5:** Using elimination\nFrom the two positions:\n- 5 is with 3, 6 (position 1)\n- 2 is with 3, 7 (position 2)\n- The number opposite to 5 must be one that never appears with 5\n- That number is **2**\n\n**Answer:** Option A (2)",
     "subject": "REASONING",
-    "pattern": "dice_cubes",
+    "pattern": "dice_cube",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL 2024",
@@ -414,7 +414,7 @@
     "correct_option": "B",
     "solution": "**Given:** Interchange operators\n- '+' ↔ '−'\n- '×' ↔ '÷'\n\n**Original equation:** 11 ÷ 8 − 78 × 6 + 37 = ?\n\n**Step 1:** Apply the interchanges\n- 11 ÷ 8 becomes 11 **×** 8\n- − becomes **+**\n- 78 × 6 becomes 78 **÷** 6\n- + becomes **−**\n\n**Step 2:** Write the new equation\n11 × 8 + 78 ÷ 6 − 37 = ?\n\n**Step 3:** Solve using BODMAS (Division and Multiplication first, then Addition and Subtraction)\n\n**Division first:**\n78 ÷ 6 = 13\n\n**Multiplication:**\n11 × 8 = 88\n\n**Step 4:** Substitute and solve\n88 + 13 − 37 = ?\n\n**Step 5:** Calculate left to right\n88 + 13 = 101\n101 − 37 = 64\n\n**Answer:** Option B (64)",
     "subject": "REASONING",
-    "pattern": "mathematical_operations",
+    "pattern": "mathematical_operation",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",
@@ -457,7 +457,7 @@
     "correct_option": "C",
     "solution": "**Given sets:**\n- Set 1: 3 — 20 — 5\n- Set 2: 4 — 17 — 3\n\n**Step 1:** Find the pattern\n\nLet's try: (1st number)² + (3rd number)\n\n**For Set 1:** 3 — 20 — 5\n- 3² + 5 = 9 + 5 = 14 ✗ (not 20)\n\nLet's try: (1st number) × (3rd number) + something\n\n**For Set 1:** 3 — 20 — 5\n- 3 × 5 = 15\n- 15 + 5 = 20 ✓\n\nPattern: **(1st × 3rd) + 3rd = 2nd**\n\n**Step 2:** Verify with Set 2: 4 — 17 — 3\n- 4 × 3 = 12\n- 12 + 5 = 17... wait, that doesn't work.\n\nLet me try another pattern: **(1st × 3rd) + (1st + 3rd) = 2nd**\n\n**For Set 1:** 3 — 20 — 5\n- (3 × 5) + (3 + 5) = 15 + 8 = 23 ✗\n\nLet's try: **(1st number)² + (1st × 3rd) + some constant**\n\nActually, let me try: **(1st × 3rd) + (1st + 2) = 2nd**\n\n**For Set 1:** 3 — 20 — 5\n- (3 × 5) + (3 + 2) = 15 + 5 = 20 ✓\n\n**For Set 2:** 4 — 17 — 3\n- (4 × 3) + (4 + 1) = 12 + 5 = 17 ✓\n\nWait, that's inconsistent. Let me reconsider.\n\n**Trying: (1st)² + (3rd)² = 2nd**\n\n**For Set 1:** 3 — 20 — 5\n- 3² + (something) = 9 + 11 = 20\n- Not quite...\n\n**Correct pattern: 1st × (3rd + 2) + 2nd_derived = middle**\n\nActually: **1st × 3rd + 1st² + 3rd = 2nd**\n\n**For Set 1:** 3 — 20 — 5\n- (3 × 5) + 3 + 2 = 15 + 5 = 20 ✓ (where +2 is adjustment)\n\n**Let me verify Option C: 9 — 77 — 8**\n- (9 × 8) + 5 = 72 + 5 = 77 ✓\n\nActually the pattern is: **(1st × 3rd) + (1st + 2) = 2nd**\n\n**Verify with all:**\n- 3 — 20 — 5: (3×5) + 5 = 20 ✓\n- 4 — 17 — 3: (4×3) + 5 = 17 ✓  \n- 9 — 77 — 8: (9×8) + 5 = 77 ✓\n\n**Pattern: (1st × 3rd) + 5 = 2nd**\n\n**Answer:** Option C (9 — 77 — 8)",
     "subject": "REASONING",
-    "pattern": "logical_sequence",
+    "pattern": "series",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL 2024",
@@ -500,7 +500,7 @@
     "correct_option": "D",
     "solution": "**Given sets:**\n- Set 1: (16, 7, 112)\n- Set 2: (8, 12, 96)\n\n**Step 1:** Find the pattern\n\nLet's try: 1st × 2nd = 3rd\n\n**For Set 1:** (16, 7, 112)\n- 16 × 7 = 112 ✓\n\n**For Set 2:** (8, 12, 96)\n- 8 × 12 = 96 ✓\n\n**Pattern found:** 1st number × 2nd number = 3rd number\n\n**Step 2:** Check each option\n\n**Option A: (13, 7, 96)**\n- 13 × 7 = 91 ✗ (not 96)\n\n**Option B: (14, 9, 128)**\n- 14 × 9 = 126 ✗ (not 128)\n\n**Option C: (12, 5, 65)**\n- 12 × 5 = 60 ✗ (not 65)\n\n**Option D: (15, 8, 120)**\n- 15 × 8 = 120 ✓\n\n**Answer:** Option D (15, 8, 120)",
     "subject": "REASONING",
-    "pattern": "logical_sequence",
+    "pattern": "series",
     "difficulty": "EASY",
     "source": {
       "exam": "SSC CGL 2024",
@@ -543,7 +543,7 @@
     "correct_option": "A",
     "solution": "**Step 1:** Observe the pattern in the given series\nThe series shows a sequence of figures with letters arranged in a 3×3 grid pattern.\n\n**Step 2:** Identify the transformation rule\n- Look for patterns in letter positions\n- Check for rotation, reflection, or sequential movement\n- Observe if letters are changing or positions are shifting\n\n**Step 3:** Track the changes\nFrom the visible pattern in the series, letters appear to be:\n- Moving in a specific direction (clockwise or counterclockwise)\n- Or following a sequential alphabetical pattern\n- Or rotating positions systematically\n\n**Step 4:** Apply the rule to find the next figure\nBased on the established pattern, the next figure should continue the same transformation.\n\n**Step 5:** Match with options\nOption A shows the correct continuation of the pattern based on the transformation rule observed.\n\n**Answer:** Option A\n\n**Note:** This requires visual analysis of the actual figure series to determine the exact pattern.",
     "subject": "REASONING",
-    "pattern": "pattern_completion",
+    "pattern": "series",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",
@@ -586,7 +586,7 @@
     "correct_option": "B",
     "solution": "**Given code:**\n- A + B = A is the mother of B\n- A − B = A is the brother of B\n- A × B = A is the wife of B\n- A ÷ B = A is the father of B\n\n**Given expression:** B + R × I − T ÷ H\n\n**Step 1:** Decode each relationship\n\n**B + R:** B is the mother of R\n\n**R × I:** R is the wife of I\n(This means R is female and I is male, and they are married)\n\n**I − T:** I is the brother of T\n(Both I and T are males and siblings)\n\n**T ÷ H:** T is the father of H\n\n**Step 2:** Build the family tree\n```\n        B (mother)\n         |\n         R (female, married to I)\n         |\n    I — R (married couple)\n    |\n    T (I's brother)\n    |\n    H (T's child)\n```\n\n**Step 3:** Find relationship between I and H\n\n- I is the brother of T\n- T is the father of H\n- Therefore, I is the **father's brother** (uncle/chacha) of H\n\n**Answer:** Option B (Father's brother)",
     "subject": "REASONING",
-    "pattern": "blood_relation",
+    "pattern": "blood_relations",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",
@@ -629,7 +629,7 @@
     "correct_option": "A",
     "solution": "**Step 1:** Analyze the given figure series\nObserve the pattern of shapes, their positions, orientations, and any elements that change across the series.\n\n**Step 2:** Identify the pattern elements\n- Triangle, star, square, and circle shapes\n- Arrow directions (up, right, down)\n- Position of shapes in each box\n\n**Step 3:** Track the transformations\nFrom the visible series:\n- Shapes appear to rotate or move systematically\n- Arrows change direction in a sequence\n- Elements may be added or removed following a rule\n\n**Step 4:** Determine the next logical step\nBased on the established pattern:\n- The next figure should continue the rotation/movement\n- Arrow should point in the next logical direction\n- Shape positions should follow the sequence\n\n**Step 5:** Match with options\nOption A shows the triangle at the top with star pointing down and arrow pointing downward, which completes the logical sequence.\n\n**Answer:** Option A\n\n**Note:** This requires visual analysis of the complete figure series.",
     "subject": "REASONING",
-    "pattern": "pattern_completion",
+    "pattern": "series",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL 2024",
@@ -672,7 +672,7 @@
     "correct_option": "B",
     "solution": "**Step 1:** Analyze each letter cluster for patterns\n\n**Option A: PRUZ**\n- P (16), R (18), U (21), Z (26)\n- Gaps: R-P = 2, U-R = 3, Z-U = 5\n\n**Option B: ORTU**\n- O (15), R (18), T (20), U (21)\n- Gaps: R-O = 3, T-R = 2, U-T = 1\n\n**Option C: MORW**\n- M (13), O (15), R (18), W (23)\n- Gaps: O-M = 2, R-O = 3, W-R = 5\n\n**Option D: XZCH**\n- X (24), Z (26), C (3), H (8)\n- Gaps: Z-X = 2, C-Z = 3 (wrapping), H-C = 5\n\n**Step 2:** Identify the pattern\n\nOptions A, C, and D follow the gap pattern: **2, 3, 5** (which is like a Fibonacci-style sequence)\n\nOption B has gaps: **3, 2, 1** (decreasing sequence) - **DIFFERENT**\n\n**Answer:** Option B (ORTU)",
     "subject": "REASONING",
-    "pattern": "odd_one_out",
+    "pattern": "classification",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL 2024",
@@ -715,7 +715,7 @@
     "correct_option": "C",
     "solution": "**Step 1:** Find the pattern by checking each pair\n\n**Option A: 34 : 44**\n- 34 + 10 = 44 ✓\n\n**Option B: 23 : 25**\n- 23 + 2 = 25\n- Or: 23 + 2 = 25\n\nWait, let me look for another pattern.\n\n**Trying: First number + (some value) = Second number**\n\nLet me check for square root or prime related patterns:\n\n**Option D: 13 : 16**\n- 13 + 3 = 16\n\nLet me try: **Add (last digit - first digit) × constant**\n\nActually, let me try: **Add (sum of digits of first number)**\n\n**Option A: 34 : 44**\n- 34: digits are 3, 4 → sum = 7\n- 34 + 10 = 44 (not 7)\n\nLet me try: **First + something based on its value**\n\n**Pattern check: First + 10 = Second?**\n- 34 + 10 = 44 ✓\n- 23 + 2 = 25 ✗\n- 35 + 1 = 36 ✗\n- 13 + 3 = 16 ✗\n\nLet me try: **First + (difference of digits)**\n- 34: 4-3 = 1, but 34+10=44\n\nActually looking more carefully:\n- 34 → 44: difference = 10\n- 23 → 25: difference = 2  \n- 35 → 36: difference = 1\n- 13 → 16: difference = 3\n\n**New approach - checking if second = first + (first digit)**\n- 34: first digit = 3, 34+3 = 37 ✗\n\n**Trying: second = first + (some digit manipulation)**\n\nLet me reconsider: **second - first**\n- 44 - 34 = 10\n- 25 - 23 = 2\n- 36 - 35 = 1\n- 16 - 13 = 3\n\n**Pattern insight:** 10, 2, 1, 3\n\nLooking at the first numbers: 34, 23, 35, 13\nLooking at differences: Maybe related to digits?\n\n- 34: 3+4 = 7, but difference is 10\n- 23: 2+3 = 5, but difference is 2\n- 35: 3+5 = 8, but difference is 1 ← **ODD ONE**\n- 13: 1+3 = 4, but difference is 3\n\n35:36 seems to be the odd one because the gap is only 1, while others have larger gaps.\n\n**Answer:** Option C (35 : 36)",
     "subject": "REASONING",
-    "pattern": "odd_one_out",
+    "pattern": "classification",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",
@@ -758,7 +758,7 @@
     "correct_option": "B",
     "solution": "**Given:** Dice with faces Z, G, M, F, H, S\nTwo positions shown.\n\n**Dice rule:** Opposite faces cannot appear together in any single view.\n\n**Step 1:** Analyze Position 1\nLet's say position 1 shows: Z, G, M\n\nThese three are adjacent to each other.\n\n**Step 2:** Analyze Position 2  \nLet's say position 2 shows: Z, F, H\n\nThese three are adjacent to each other.\n\n**Step 3:** Find faces that never appear with G\n\nFrom both positions:\n- Position 1 has: Z, G, M\n- Position 2 has: Z, F, H\n\n**Common face:** Z appears in both (so Z is not opposite to G, it's adjacent)\n\n**Faces seen with G:** Z, M (from position 1)\n\n**Faces NOT seen with G:** F, H, S\n\n**Step 4:** Determine which of F, H, or S is opposite to G\n\nFrom position 2: F and H appear together.\nIf both F and H are not opposite to G, then one of them must be adjacent.\n\nSince we have 6 faces and G is adjacent to Z and M, G has 4 adjacent faces total.\n\nRemaining faces: F, H, S\n\nG's adjacencies: Z, M, and 2 more from {F, H, S}\n\nThe one opposite to G will be the one that NEVER appears with G in any position.\n\nLooking at the options and typical dice patterns, **F** is opposite to **G**.\n\n**Answer:** Option B (F)",
     "subject": "REASONING",
-    "pattern": "dice_cubes",
+    "pattern": "dice_cube",
     "difficulty": "HARD",
     "source": {
       "exam": "SSC CGL 2024",
@@ -930,7 +930,7 @@
     "correct_option": "C",
     "solution": "**Given:** Interchange operators\n- '÷' ↔ '–'\n- '×' ↔ '+'\n\n**Original equation:** 7 + 4 ÷ 18 – 3 × 2 = ?\n\n**Step 1:** Apply the interchanges\n- 7 **+** 4 becomes 7 **×** 4\n- 4 **÷** 18 becomes 4 **–** 18\n- 18 **–** 3 becomes 18 **÷** 3\n- 3 **×** 2 becomes 3 **+** 2\n\n**Step 2:** Write the new equation\n7 × 4 – 18 ÷ 3 + 2 = ?\n\n**Step 3:** Solve using BODMAS (Division and Multiplication first)\n\n**Division:**\n18 ÷ 3 = 6\n\n**Multiplication:**\n7 × 4 = 28\n\n**Step 4:** Substitute and solve (left to right)\n28 – 6 + 2 = ?\n\n22 + 2 = 24\n\n**Answer:** Option C (24)",
     "subject": "REASONING",
-    "pattern": "mathematical_operations",
+    "pattern": "mathematical_operation",
     "difficulty": "MEDIUM",
     "source": {
       "exam": "SSC CGL 2024",

@@ -32,7 +32,7 @@ export async function POST(req: Request) {
             const resetUrl = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password?token=${rawToken}`;
 
             await resend.emails.send({
-                from: 'PrepLeague <onboarding@resend.dev>',
+                from: 'PrepLeague <noreply@mail.prepleague.in>',
                 to: email,
                 subject: 'Reset your PrepLeague password',
                 html: `
