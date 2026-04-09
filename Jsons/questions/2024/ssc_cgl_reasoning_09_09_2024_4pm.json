@@ -1,0 +1,1077 @@
+[
+  {
+    "text": "Select the option that is related to the fifth letter-cluster in the same way as the second letter-cluster is related to the first letter-cluster and the fourth letter-cluster is related to the third letter-cluster. CWE:ZFX ::PYT:MDI :: KIL:?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "PRO",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "RTQ",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "PQO",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "STQ",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option B (RTQ).",
+    "subject": "REASONING",
+    "pattern": "analogy",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which of the following terms will replace the question mark (?) in the given series? MFT, NIS, PLQ, SON, WRJ, ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "BUP",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "BVD",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "BUE",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "RUE",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Check positional/alphabet/number progression between terms.\n**Step 2:** Derive the next required transformation.\n**Step 3:** Pick the option that follows the same pattern.\n**Answer:** Option C (BUE).",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Six letters P, Q, R, S, T and U are written on different faces of a dice. Two positions of this dice are shown in the figure below. Find the letter on the face opposite to R.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "U",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Q",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "S",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "T",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option C (S).",
+    "subject": "REASONING",
+    "pattern": "dice_cube",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Three of the following numbers are alike in a certain way and one is different. Pick the odd one out. (NOTE : Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc., to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "36 – 84",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "33 – 72",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "66 – 154",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "72 – 168",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option B (33 – 72).",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Six letters A, M, R, S, Y and Q are written on different faces of a dice. Two positions of this dice are shown in the figures below. Find the letter on the face opposite to S.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Y",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "M",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Q",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "A",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option D (A).",
+    "subject": "REASONING",
+    "pattern": "dice_cube",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the option figure in which the given figure (X) is embedded (rotation is NOT allowed).",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** This is image/table dependent, so read the full visual from the PDF.\n**Step 2:** Apply the relevant logical rule on that visual.\n**Step 3:** Match the derived result with the keyed option.\n**Answer:** Option C.",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which two numbers (not digits) should be interchanged to make the given equation correct? 24 ÷ 3 – 4 × 2 + 6 × 5 +12 = 50",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "4 and 3",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "5 and 4",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "3 and 2",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "24 and 12",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option D (24 and 12).",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "How many triangles are there in the given figure?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "6",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "8",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "4",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "5",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option B (8).",
+    "subject": "REASONING",
+    "pattern": "counting_figures",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Study the given diagram carefully and answer the question that follows. The numbers in different sections indicate the number of persons who have applied for different posts. What is the total number of persons who have applied for more than one post?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "21",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "15",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "113",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "18",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option A (21).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the option that will replace the question mark (?) in the figure given below to complete the pattern.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** This is image/table dependent, so read the full visual from the PDF.\n**Step 2:** Apply the relevant logical rule on that visual.\n**Step 3:** Match the derived result with the keyed option.\n**Answer:** Option A.",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "47",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "34",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "23",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "24",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** This is image/table dependent, so read the full visual from the PDF.\n**Step 2:** Apply the relevant logical rule on that visual.\n**Step 3:** Match the derived result with the keyed option.\n**Answer:** Option C (23).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The position of how many letters will remain unchanged if each of the letter in the word ‘JANITOR’ is arranged in English alphabetical order?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Zero",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Three",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "One",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Two",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option A (Zero).",
+    "subject": "REASONING",
+    "pattern": "word_formation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Four letter-clusters have been given, out of which three are alike in some manner and one is different. Select the letter-cluster that is different. Note: The odd one out is not based on the number of consonants/vowels or their position in the letter cluster.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "PSUV",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "BEHI",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "FIKL",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "TWYZ",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option B (BEHI).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the combination of letters that when sequentially placed in the blanks of the given series will complete the series. P _ A A _ _ Z A _V _ _ A _ _",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "ZVPAPZAV",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "ZPVVAPVZ",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "VZAAPVPZ",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "VPZZPVAP",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Check positional/alphabet/number progression between terms.\n**Step 2:** Derive the next required transformation.\n**Step 3:** Pick the option that follows the same pattern.\n**Answer:** Option A (ZVPAPZAV).",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which of the four options will replace the question mark (?) in the following series? XF 11 , YI 15, ZL 19 , AO 23, ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "BR 27",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "CQ 25",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "CR 25",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "BP 26",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Check positional/alphabet/number progression between terms.\n**Step 2:** Derive the next required transformation.\n**Step 3:** Pick the option that follows the same pattern.\n**Answer:** Option A (BR 27).",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, ‘SILK’ is written as ‘TIML’ and ‘INSECT’ is written as ‘IOTEDU’. How will ‘CHANGE’ be written in that language?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "DEIHAO",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "DOIHAE",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "DIAOHE",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "DEIOHA",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the transformation rule from the given coded examples.\n**Step 2:** Apply the same rule to the asked word/term.\n**Step 3:** Choose the option matching the transformed code.\n**Answer:** Option C (DIAOHE).",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "What will come in place of the question mark (?) in the following equation, if ‘+’ and ‘–’ are interchanged and ‘×’ and ‘÷’ are interchanged? 321 – 371 ÷ 22 + 216 × 6 = ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "7848",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "7884",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "8747",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "8447",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option D (8447).",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In the following number-pairs, the second number is obtained by applying certain mathematical operations to the first number. Select the set in which the numbers are related in the same way as are the numbers of the following sets. (NOTE : Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc., to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed.) (12, 145) (9, 82)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "(22, 483)",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "(16, 256)",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "(14, 197)",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "(8, 69)",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option C ((14, 197)).",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, A + B means ‘A is the son of B’, A − B means ‘A is the sister of B’, A × B means ‘A is the brother of B’ and A ÷ B means ‘A is the mother of B’. Based on the above, how is T related to P if ‘P ÷ Q × R − M + T’?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Brother",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Husband",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Father",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Son",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Decode each relation statement in order and build the family chain.\n**Step 2:** Track from the reference person to the asked person.\n**Step 3:** Select the option that gives that exact relation.\n**Answer:** Option B (Husband).",
+    "subject": "REASONING",
+    "pattern": "blood_relations",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the number from the given options to complete the series. 35, 38, 43, 50, 59, ___",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "68",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "70",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "62",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "78",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Check positional/alphabet/number progression between terms.\n**Step 2:** Derive the next required transformation.\n**Step 3:** Pick the option that follows the same pattern.\n**Answer:** Option B (70).",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the set in which the numbers are related in the same way as are the numbers of the following sets. (NOTE: Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc. to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed.) (19, 456, 6) (16, 320, 5)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "(18, 648, 9)",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "(14, 210, 5)",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "(21, 504, 8)",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "(18, 378, 7)",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option A ((18, 648, 9)).",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which figure should replace the question mark (?) if the following series were to be continued?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** This is image/table dependent, so read the full visual from the PDF.\n**Step 2:** Apply the relevant logical rule on that visual.\n**Step 3:** Match the derived result with the keyed option.\n**Answer:** Option C.",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the set in which the numbers are related in the same way as are the numbers of the following sets. (34, 47, 62) (119, 142, 167) (NOTE: Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc. to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "(64, 78, 99)",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "(48, 65, 82)",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "(27, 38, 51)",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "(79, 98, 119)",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core reasoning relation in the given data.\n**Step 2:** Eliminate options violating that relation.\n**Step 3:** Choose the only logically consistent option.\n**Answer:** Option C ((27, 38, 51)).",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Identify the figure given in the options which when put in place of the question mark (?) will logically complete the series?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** This is image/table dependent, so read the full visual from the PDF.\n**Step 2:** Apply the relevant logical rule on that visual.\n**Step 3:** Match the derived result with the keyed option.\n**Answer:** Option A.",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, ‘SET’ is coded as ‘37’ and ‘MIX’ is coded as ‘35’. How will ‘WAR’ be coded in that language?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "29",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "39",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "21",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "32",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the transformation rule from the given coded examples.\n**Step 2:** Apply the same rule to the asked word/term.\n**Step 3:** Choose the option matching the transformed code.\n**Answer:** Option B (39).",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

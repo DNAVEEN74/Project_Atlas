@@ -1,0 +1,1292 @@
+[
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "1320",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1310",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1330",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "1300",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (1330).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A tank when full can be emptied by an outlet pipe A in 5.6 hours, while an  inlet pipe B can fill the same empty tank in 7 hours. If pipes A and B are  turned on alternatively for 1 hour each starting with pipe A when the tank is  full, how long will it take to empty the tank?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "56 hours",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "55 hours",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "48 hours",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "47 hours",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option A (56 hours).",
+    "subject": "QUANT",
+    "pattern": "pipes_cistern",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "15 : 21",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "20 : 21",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "21 : 10",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "10 : 21",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (21 : 10).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "16 cm",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "20 cm",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "18 cm",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "14 cm",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option A (16 cm).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "51",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "42",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "44",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "43",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (44).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B ([IMAGE]).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The average of first 92 even numbers is",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "94",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "92",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "93",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "91",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (93).",
+    "subject": "QUANT",
+    "pattern": "average",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D ([IMAGE]).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Let PQR be a right angled triangle, right-angled at R. Let PQ = 29 cm, QR =  21 cm and ∠Q = θ. Find the value of cos 2 θ – sin 2 θ.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option A ([IMAGE]).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B ([IMAGE]).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which number among 38211, 38121, 32118, and 31128 is divisible by 24? Ans 1",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "32118",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "38121",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "38211",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "31128",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D (31128).",
+    "subject": "QUANT",
+    "pattern": "number_system",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "P and Q take part in 400 m race. P runs at 12 km/hr. P gives Q a start of 20  m and still beats him by 13 seconds. The speed of Q is:  (Round up to two decimal places.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "10.87 km/hr",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "10.29 km/hr",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "11.38 km/hr",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "11.61 km/hr",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B (10.29 km/hr).",
+    "subject": "QUANT",
+    "pattern": "speed_distance_time",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The ratio of the ages of two friends is 4 : 3 which will become 6 : 5 after 4  years. What will be the sum of their ages (in years) after 22 years from  now?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "50",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "52",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "56",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "58",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D (58).",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D ([IMAGE]).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A man sells a mobile phone for Rs 680 and loses something. If he had sold it  for Rs 1070, his gain would have been double the former loss. The cost price  (in Rs ) of the mobile phone is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "820",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "830",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "810",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "800",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (810).",
+    "subject": "QUANT",
+    "pattern": "profit_loss",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If the diameter of the base of a cone is 56 cm and its curved surface area is  3080 cm2, then what will be its volume (in cm3)? (Use π = 22/7)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "12250",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "14670",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "17248",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "15391",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (17248).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Independent",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Not Mutually Exclusive",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Dependent",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Mutually Exclusive",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B (Not Mutually Exclusive).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Find the median of the following data.  Class interval 0 – 20 20 – 40 40 – 60 60 – 80 80 - 100  Frequency 9 16 24 15 4",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "55",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "50",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "58",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "47.5",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D (47.5).",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Two years ago, the population of a town was 9487500. Due to migration to  big cities, it decreases every year at the rate of 8%. The present population  of the town is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "8070120",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "8030220",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "9060110",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "7060320",
+        "image": ""
+      }
+    ],
+    "correct_option": "",
+    "solution": "**Step 1:** Source entry has no selected option in the PDF (`Chosen Option: --`).\n**Step 2:** Validate this question against the official answer key before import.\n**Step 3:** Keep this row in review state until the correct option is confirmed.\n**Answer:** Option [TO_VERIFY].",
+    "subject": "QUANT",
+    "pattern": "simple_interest",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Adi and Dia together have Rs 1,440. If of Adi's amount is equal to of  Dia's amount, how much amount does Dia have? Ans 1. Rs 464",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rs 464",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Rs 540",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Rs 512",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Rs 480",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D (Rs 480).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option A ([IMAGE]).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "8 kg of maize costing Rs 51 per kg, is mixed with 9 kg of maize costing Rs 68  per kg. The average per kg price of mixed maize is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rs 60",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Rs 61",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Rs 59",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Rs 58",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option A (Rs 60).",
+    "subject": "QUANT",
+    "pattern": "average",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Find the simple interest (in Rs ) on Rs 2000 at 6.5% per annum rate of interest  for the period from 13 February 2023 to 27 April 2023",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "24",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "25",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "26",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "27",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (26).",
+    "subject": "QUANT",
+    "pattern": "simple_interest",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The age of some students is given in years as 12, 13, 16, 18,14, 19, 13, 17,  15 and 11. The median age (in years) of the students is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "14",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "14.5",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "13.5",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "15",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B (14.5).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Murlidhar, the owner of a grocery store, offers a discount scheme 'buy 5  water bottles get 1 for free' to his customers. What is the effective  percentage discount offered by Murlidhar? (correct up to two decimal  places)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "13.33%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "16.67%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "13.67%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "20.00%",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B (16.67%).",
+    "subject": "QUANT",
+    "pattern": "profit_loss",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "8 years",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "12 years",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "20 years",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "16 years",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B (12 years).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Amit gets 6% increase in his sale amount in the first year and 20% in the  second year, with that his present sale is Rs 254400, what was his sale (in Rs )  two years ago?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "240000",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "180000",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "200000",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "212000",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (200000).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "20.65",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "17.70",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "18.25",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "24.12",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option A (20.65).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a circle with centre O, an arc ABC subtends an angle of 134° at the  centre of the circle. The chord AB is produced to a point P. ∠CBP is equal  to:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "45°",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "67°",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "89°",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "113°",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B (67°).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The ratio between the length and the breadth of a rectangular park is 3 : 2,  and the perimeter of the park is 120 m. Find the area (in m 2) of the park.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "968",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "454",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "144",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "864",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D (864).",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

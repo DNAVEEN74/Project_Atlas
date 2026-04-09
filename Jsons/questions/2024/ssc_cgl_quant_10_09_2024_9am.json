@@ -1,0 +1,1034 @@
+[
+  {
+    "text": "Kiran lent Rs 4,000 to two persons such that one part of it at the rate of 8\\% per annum and the remaining part at the rate of 10\\% per annum. He got an annual simple interest of Rs 352. Then the sum lent at 10\\% is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rs 2,400",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Rs 1,800",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Rs 1,600",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Rs 2,200",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "simple_interest",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "By applying which of the following criteria can two triangles NOT be proved congruent?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "side-side-side",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "angle-angle-angle",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "side-angle-side",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "angle-side-angle",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "X, Y, and Z are three points on a plane with XY = 11 cm, YZ = 13 cm, and XZ = 24 cm. The number of circles that travel through points X, Y, and Z is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "0",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "2",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "3",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which of the following is the largest 5-digit number divisible by 47?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "99999",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "10000",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "99969",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "98888",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "number_system",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If, on a marked price, the difference between selling prices with a discount of 65\\% and with two successive discounts of 30\\% and 40\\% is Rs 105, then the marked price (in Rs ) is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "1,500",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1,050",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1,650",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "1,320",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "profit_loss",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "45",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "56",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "42",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "48",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Two circles of radii 18 cm and 12 cm touch each other externally. Find the length (in cm) of their direct common tangent.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Three pipes P, Q and R can fill a cistern in 40 minutes, 80 minutes and 120 minutes, respectively. Initially, all the pipes are opened. After how much time (in minutes) should the pipes Q and R be turned off so that the cistern will be completely filled in just half an hour?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "12",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "16",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "14",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "10",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "pipes_cistern",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The ages of two friends, Ram and Ravi, differ by 7 years. Ram’s mother Mayadevi is three times as old as Ram, and Ravi is four times as old as his brother Soham. The ages of Mayadevi and Soham differ by 65 years. Find the age of Mayadevi (in years).",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "45",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "69",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "36",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "85",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The bar graph given below shows the sales of books from six schools during two consecutive years, 2013 and 2014. What percentage of the average sales of the schools A, B, and C in 2014 is the average sales of schools A, C, and F in 2013?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "81.08\\%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "81\\%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "80\\%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "80.08\\%",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A money bag contains one rupee, 5 rupee and 10 rupee coins in the ratio of 3 : 5 : 7 respectively. If the total amount in the bag is Rs 980,then find the number of coins of Rs 10.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "71",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "68",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "69",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "70",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Ramesh purchased some items from a dealer on 19 November 2019. The bill generated was for Rs 5,480. He had also purchased some items on 10 November 2019 having the bill value of Rs 9,800. He cleared both the bills this time and paid the total amount in cash. If the dealer gives a scheme of 2\\% discount on the payments done within 10 days and 5\\% for the payments made in cash at the time of purchase, then find the amount paid by Ramesh on 19 November 2019.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A pole 10 m long rests slantly against a vertical wall AB making an angle 30° with the horizontal (ground). Find how far the foot of the pole is from the wall (in metres).",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "9 : 14",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "14 : 9",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "6 : 7",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "7 : 6",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A bus travels of the distance initially at a speed of 40 km/h, the next of the distance 50 km/h, and the final of the distance at 60 km/h. Find the average speed of the bus for the entire journey. (Rounded off to two decimal places)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "48.65 km/h",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "54.13 km/h",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "51.43 km/h",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "46.85 km/h",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "speed_distance_time",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "146",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "140",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "142",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "144",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Let 0° < t < 90°. Then which of the followings is true?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "271.25",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "284.55",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "238.5",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "314.75",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "704 cm2",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "904 cm2",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "608 cm2",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "806 cm2",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If the sum of three numbers is 18 and the sum of their squares is 36, then find the difference between the sum of their cubes and three times of their product.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "1449",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "−1494",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "4149",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "−1944",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "mensuration_3d",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The side of an equilateral triangle is 28 cm. Taking each vertex as the centre, a circle is described with a radius equal to half the length of the side of the triangle. Find the area of that part of the triangle which is not included in the circles (use = and ).",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "30.89 cm2",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "31.08 cm2",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "39.08 cm2",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "38.08 cm2",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a circular race of 750 m, X and Y start from the same point and at the same time with speeds of 9 km/h and 13.5 km/h, respectively. If they are running in the same direction then, when will they meet again for the first time on the track?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "500 seconds",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "600 seconds",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "900 seconds",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "750 seconds",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "speed_distance_time",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

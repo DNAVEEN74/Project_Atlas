@@ -10,6 +10,22 @@ This file tracks extracted JSONs from `docs/PYQs/SSC/CGL/2024` and duplicate cle
 | ssc_cgl_reasoning_18_01_2025_9am.json | REASONING | 18.01.2025 | 9am | 30 | Completed |
 | ssc_cgl_quant_19_01_2025_9am.json | QUANT | 19.01.2025 | 9am | 0 | Completed |
 | ssc_cgl_reasoning_19_01_2025_9am.json | REASONING | 19.01.2025 | 9am | 0 | Completed |
+| ssc_cgl_quant_20_01_2025_9am.json | QUANT | 20.01.2025 | 9am | 30 | Completed |
+| ssc_cgl_reasoning_20_01_2025_9am.json | REASONING | 20.01.2025 | 9am | 30 | Completed |
+| ssc_cgl_quant_09_09_2024_9am.json | QUANT | 09.09.2024 | 9am | 25 | Completed |
+| ssc_cgl_reasoning_09_09_2024_9am.json | REASONING | 09.09.2024 | 9am | 25 | Completed |
+| ssc_cgl_quant_09_09_2024_12_30pm.json | QUANT | 09.09.2024 | 12_30pm | 25 | Completed |
+| ssc_cgl_reasoning_09_09_2024_12_30pm.json | REASONING | 09.09.2024 | 12_30pm | 25 | Completed |
+| ssc_cgl_quant_09_09_2024_4pm.json | QUANT | 09.09.2024 | 4pm | 25 | Completed |
+| ssc_cgl_reasoning_09_09_2024_4pm.json | REASONING | 09.09.2024 | 4pm | 25 | Completed |
+| ssc_cgl_quant_10_09_2024_9am.json | QUANT | 10.09.2024 | 9am | 24 | Completed |
+| ssc_cgl_reasoning_10_09_2024_9am.json | REASONING | 10.09.2024 | 9am | 25 | Completed |
+| ssc_cgl_quant_10_09_2024_12_30pm.json | QUANT | 10.09.2024 | 12_30pm | 24 | Completed |
+| ssc_cgl_reasoning_10_09_2024_12_30pm.json | REASONING | 10.09.2024 | 12_30pm | 25 | Completed |
+| ssc_cgl_quant_10_09_2024_4pm.json | QUANT | 10.09.2024 | 4pm | 24 | Completed |
+| ssc_cgl_reasoning_10_09_2024_4pm.json | REASONING | 10.09.2024 | 4pm | 25 | Completed |
+| ssc_cgl_quant_11_09_2024_4pm.json | QUANT | 11.09.2024 | 4pm | 24 | Completed |
+| ssc_cgl_reasoning_11_09_2024_4pm.json | REASONING | 11.09.2024 | 4pm | 25 | Completed |
 | ssc_cgl_quant_19_09_2024_9am.json | QUANT | 19.09.2024 | 9am | 24 | Completed |
 | ssc_cgl_reasoning_19_09_2024_9am.json | REASONING | 19.09.2024 | 9am | 25 | Completed |
 | ssc_cgl_quant_19_09_2024_12_30pm.json | QUANT | 19.09.2024 | 12_30pm | 25 | Completed |
@@ -53,18 +69,26 @@ This file tracks extracted JSONs from `docs/PYQs/SSC/CGL/2024` and duplicate cle
 
 ## Database Import Status (MongoDB)
 
-Last sync: `2026-04-08` (19.01.2025 and 19.09.2024 files synced including 4pm shift; second run confirmed idempotency)
+Last sync: `2026-04-09` (10.09.2024 and 11.09.2024 4pm shifts synced; these 4-paper batch JSONs keep `solution` as empty string by request; second run confirmed idempotency)
 
 - Import script used: `scripts/import_questions_auto_increment.ts`
 - Duplicate-safe behavior: skips questions already present in DB by `(subject, source.shift, normalized text)`.
 - Current DB totals after sync:
-  - `questions` collection total: `704`
-  - 2024 questions total: `704`
+  - `questions` collection total: `1048`
+  - 2024 questions total: `1048`
 
 | JSON File | Subject | File Questions | Valid For Import | In DB | DB Status | Notes |
 |---|---|---:|---:|---:|---|---|
 | ssc_cgl_quant_18_01_2025_9am.json | QUANT | 30 | 16 | 16 | IN_DB | Imported on 2026-04-08; 10 duplicate rows in file and 4 invalid rows (`Chosen Option: --`) skipped |
 | ssc_cgl_quant_19_01_2025_9am.json | QUANT | 0 | 0 | 0 | IN_DB | Imported on 2026-04-08; statistics-only paper, no QUANT section found |
+| ssc_cgl_quant_20_01_2025_9am.json | QUANT | 30 | 18 | 18 | IN_DB | Imported on 2026-04-09; 11 duplicate rows in file and 1 invalid row (`Chosen Option: --`) skipped |
+| ssc_cgl_quant_09_09_2024_9am.json | QUANT | 25 | 17 | 17 | IN_DB | Imported on 2026-04-09; 8 duplicate rows in file skipped |
+| ssc_cgl_quant_09_09_2024_12_30pm.json | QUANT | 25 | 21 | 21 | IN_DB | Imported on 2026-04-09; 4 duplicate rows in file skipped |
+| ssc_cgl_quant_09_09_2024_4pm.json | QUANT | 25 | 18 | 18 | IN_DB | Imported on 2026-04-09; 7 duplicate rows in file skipped |
+| ssc_cgl_quant_10_09_2024_9am.json | QUANT | 24 | 18 | 18 | IN_DB | Imported on 2026-04-09; 6 duplicate rows in file skipped; solution kept empty by request |
+| ssc_cgl_quant_10_09_2024_12_30pm.json | QUANT | 24 | 20 | 20 | IN_DB | Imported on 2026-04-09; 4 duplicate rows in file skipped; solution kept empty by request |
+| ssc_cgl_quant_10_09_2024_4pm.json | QUANT | 24 | 18 | 18 | IN_DB | Imported on 2026-04-09; 6 duplicate rows in file skipped; solution kept empty by request |
+| ssc_cgl_quant_11_09_2024_4pm.json | QUANT | 24 | 16 | 16 | IN_DB | Imported on 2026-04-09; 8 duplicate rows in file skipped; solution kept empty by request |
 | ssc_cgl_quant_19_09_2024_9am.json | QUANT | 24 | 17 | 17 | IN_DB | Imported on 2026-04-08; 7 duplicate rows in file skipped |
 | ssc_cgl_quant_19_09_2024_12_30pm.json | QUANT | 25 | 19 | 19 | IN_DB | Imported on 2026-04-08; 6 duplicate rows in file skipped |
 | ssc_cgl_quant_19_09_2024_4pm.json | QUANT | 24 | 16 | 16 | IN_DB | Imported on 2026-04-08; 8 duplicate rows in file skipped |
@@ -85,6 +109,14 @@ Last sync: `2026-04-08` (19.01.2025 and 19.09.2024 files synced including 4pm sh
 | ssc_cgl_reasoning_25_09_2024_9am.json | REASONING | 25 | 25 | 25 | IN_DB | Fully synced |
 | ssc_cgl_reasoning_18_01_2025_9am.json | REASONING | 30 | 29 | 29 | IN_DB | Imported on 2026-04-08; 1 invalid row (`Chosen Option: --`) skipped |
 | ssc_cgl_reasoning_19_01_2025_9am.json | REASONING | 0 | 0 | 0 | IN_DB | Imported on 2026-04-08; statistics-only paper, no REASONING section found |
+| ssc_cgl_reasoning_20_01_2025_9am.json | REASONING | 30 | 26 | 26 | IN_DB | Imported on 2026-04-09; 2 duplicate rows in file and 2 invalid rows (`Chosen Option: --`) skipped |
+| ssc_cgl_reasoning_09_09_2024_9am.json | REASONING | 25 | 25 | 25 | IN_DB | Imported on 2026-04-09 |
+| ssc_cgl_reasoning_09_09_2024_12_30pm.json | REASONING | 25 | 25 | 25 | IN_DB | Imported on 2026-04-09 |
+| ssc_cgl_reasoning_09_09_2024_4pm.json | REASONING | 25 | 25 | 25 | IN_DB | Imported on 2026-04-09 |
+| ssc_cgl_reasoning_10_09_2024_9am.json | REASONING | 25 | 24 | 24 | IN_DB | Imported on 2026-04-09; 1 duplicate row in file skipped; solution kept empty by request |
+| ssc_cgl_reasoning_10_09_2024_12_30pm.json | REASONING | 25 | 24 | 24 | IN_DB | Imported on 2026-04-09; 1 duplicate row in file skipped; solution kept empty by request |
+| ssc_cgl_reasoning_10_09_2024_4pm.json | REASONING | 25 | 24 | 24 | IN_DB | Imported on 2026-04-09; 1 duplicate row in file skipped; solution kept empty by request |
+| ssc_cgl_reasoning_11_09_2024_4pm.json | REASONING | 25 | 25 | 25 | IN_DB | Imported on 2026-04-09; solution kept empty by request |
 | ssc_cgl_reasoning_19_09_2024_9am.json | REASONING | 25 | 25 | 25 | IN_DB | Imported on 2026-04-08 |
 | ssc_cgl_reasoning_19_09_2024_12_30pm.json | REASONING | 25 | 25 | 25 | IN_DB | Imported on 2026-04-08 |
 | ssc_cgl_reasoning_19_09_2024_4pm.json | REASONING | 25 | 25 | 25 | IN_DB | Imported on 2026-04-08 |

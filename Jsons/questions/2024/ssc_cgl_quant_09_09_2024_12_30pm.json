@@ -1,0 +1,1077 @@
+[
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** This is image/table dependent, so read the full visual from the PDF.\n**Step 2:** Apply the relevant mathematical rule on that visual.\n**Step 3:** Match the derived result with the keyed option.\n**Answer:** Option C.",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** This is image/table dependent, so read the full visual from the PDF.\n**Step 2:** Apply the relevant mathematical rule on that visual.\n**Step 3:** Match the derived result with the keyed option.\n**Answer:** Option B.",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "30.2",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "25.5",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "28.7",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "23.6",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** This is image/table dependent, so read the full visual from the PDF.\n**Step 2:** Apply the relevant mathematical rule on that visual.\n**Step 3:** Match the derived result with the keyed option.\n**Answer:** Option D (23.6).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The pie chart given below shows the expenditure (in percentage) of Aditya. The monthly income of Aditya isRs 54,000. How much does he spend (inRs ) on Food?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "12,420",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "13,420",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "12,240",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "11,240",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Read the exact numbers from the chart/table.\n**Step 2:** Perform the asked arithmetic/ratio/percentage operation.\n**Step 3:** Compare computed value with options.\n**Answer:** Option A (12,420).",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Madhav purchased an item for Rs 42,000 and sold it at a loss of 20\\%. With that amount, he purchased another item and sold it at a gain of 30\\%. What is the overall gain (in Rs )?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "6720",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "4200",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2520",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "1680",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Set up CP/SP equations using given percentages.\n**Step 2:** Compute the required value with consistent percentage conversion.\n**Step 3:** Match with the correct option.\n**Answer:** Option D (1680).",
+    "subject": "QUANT",
+    "pattern": "profit_loss",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Seven years ago, Prachi was four times as old as her daughter was at that time. Four years from now, Prachi will be two-and-a-half times as old as her daughter would then be. Find the sum of the present ages (in years) of Prachi and her daughter.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "77",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "49",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "72",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "69",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the governing formula/relation for this topic.\n**Step 2:** Substitute values and simplify carefully.\n**Step 3:** Select the option matching the final result.\n**Answer:** Option D (69).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If a sum of Rs 5,000 is taken at a simple rate of interest of 15\\% per annum for 3 years and another sum of Rs 8,000 is taken at a simple interest of 12\\% per annum for 4 years, the positive difference of the interests paid is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rs 1,286",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Rs 1,378",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Rs 1,643",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Rs 1,590",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Write the correct interest formula.\n**Step 2:** Substitute the given principal/rate/time values.\n**Step 3:** Compute and match the result with options.\n**Answer:** Option D (Rs 1,590).",
+    "subject": "QUANT",
+    "pattern": "simple_interest",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Let C be a circle with centre O and P be an external point to C. Let PA and PB be two tangents to C with A and B being the points of tangency, respectively. If PA and PB are inclined to each other at an angle of 60°, then find∠POA.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "80°",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "30°",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "40°",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "60°",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the governing formula/relation for this topic.\n**Step 2:** Substitute values and simplify carefully.\n**Step 3:** Select the option matching the final result.\n**Answer:** Option D (60°).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The average temperature of a city for the first sixteen days of January is 22°C, and the average temperature for the last sixteen days of the same month is 26°C. If the average temperature for the entire month is 24°C, what is the temperature on the sixteenth day?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "23°C",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "24°C",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "25°C",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "22°C",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the governing formula/relation for this topic.\n**Step 2:** Substitute values and simplify carefully.\n**Step 3:** Select the option matching the final result.\n**Answer:** Option B (24°C).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The monthly wages (in Rs ) of three mess workers, Rahul, Sunil and Vipin, of a boy’s hostel for three months are given in the following table. Study the table carefully and answer the question given below. In November, the wages of Sunil is what percentage of the wages of Rahul? (Correct up to two decimal places.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "91.30\\%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "90.23\\%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "89.30\\%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "88.23\\%",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Read the exact numbers from the chart/table.\n**Step 2:** Perform the asked arithmetic/ratio/percentage operation.\n**Step 3:** Compare computed value with options.\n**Answer:** Option A (91.30\\%).",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "At present, A is thrice as old as B. C is 5 years elder than B. The sum of the ages of A, B, C is 75 years. The ratio of the age of B five years ago to the age of A three years from now is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "1 : 4",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "2 : 3",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1 : 5",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "4 : 7",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the governing formula/relation for this topic.\n**Step 2:** Substitute values and simplify carefully.\n**Step 3:** Select the option matching the final result.\n**Answer:** Option C (1 : 5).",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "3 cosA - 1",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1 – 3 sinA",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "sinA + cosA",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "1 + sinA cosA",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** This is image/table dependent, so read the full visual from the PDF.\n**Step 2:** Apply the relevant mathematical rule on that visual.\n**Step 3:** Match the derived result with the keyed option.\n**Answer:** Option D (1 + sinA cosA).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A right-angled isosceles triangle has an area of 50 square units. Its hypotenuse is (in units):",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** This is image/table dependent, so read the full visual from the PDF.\n**Step 2:** Apply the relevant mathematical rule on that visual.\n**Step 3:** Match the derived result with the keyed option.\n**Answer:** Option D.",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "2816",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "2686",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2784",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "2456",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** This is image/table dependent, so read the full visual from the PDF.\n**Step 2:** Apply the relevant mathematical rule on that visual.\n**Step 3:** Match the derived result with the keyed option.\n**Answer:** Option A (2816).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A person earns Rs 16,000 per month and spends 80\\% of his income and saves the remaining amount. If his income increases by 20\\% and expenditure by 10\\%, find the percentage of increase in his savings.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "90\\%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "120\\%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "140\\%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "60\\%",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the governing formula/relation for this topic.\n**Step 2:** Substitute values and simplify carefully.\n**Step 3:** Select the option matching the final result.\n**Answer:** Option D (60\\%).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The marked price of an article is 26\\% more than its cost price. If a discount of 32\\% is given, what will be the loss percentage?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "12.26\\%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "15.25\\%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "18.64\\%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "14.32\\%",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Set up CP/SP equations using given percentages.\n**Step 2:** Compute the required value with consistent percentage conversion.\n**Step 3:** Match with the correct option.\n**Answer:** Option D (14.32\\%).",
+    "subject": "QUANT",
+    "pattern": "profit_loss",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Varun and Sandeep started for a car race from the same point, in the same direction and at the same time on a circular track of length 1635 m with the speeds of 90 km/h and 108 km/h, respectively. After how much time (in s) will they meet again for the first time?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "327",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "325",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "324",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "326",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Use Distance = Speed x Time (or relative speed where needed).\n**Step 2:** Convert all units to a common format.\n**Step 3:** Solve and select the matching option.\n**Answer:** Option A (327).",
+    "subject": "QUANT",
+    "pattern": "speed_distance_time",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The angles of triangle are such that one is average of other two, then the angles are:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "3",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "4",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "2",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the governing formula/relation for this topic.\n**Step 2:** Substitute values and simplify carefully.\n**Step 3:** Select the option matching the final result.\n**Answer:** Option B (1).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "From a circle with the radius of 15.75 cm, a sector with the arc length of 11 cm is cut off. Find the area (in cm2) of this sector.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "86.625",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "86.875",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "86.525",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "86.125",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the governing formula/relation for this topic.\n**Step 2:** Substitute values and simplify carefully.\n**Step 3:** Select the option matching the final result.\n**Answer:** Option A (86.625).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The given bar graph shows the number of students enrolled in Institutes A and B during 5 years (2018 to 2022). What is the ratio of the total students enrolled in Institute B in 2019, 2020 and 2022 to that of the total students enrolled in Institute A in 2018, 2020 and 2021?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "11 : 28",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "28 : 37",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "37 : 28",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "28 : 11",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Read the exact numbers from the chart/table.\n**Step 2:** Perform the asked arithmetic/ratio/percentage operation.\n**Step 3:** Compare computed value with options.\n**Answer:** Option C (37 : 28).",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The given chart shows the production of different types of cars in the year 2021. Study the given chart and answer the question that follows. If the total production in the year 2021 was 2,00,00,000, then what will be the central angle of the sector representing the production of type D cars in 2021?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "50°",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "42°",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "36°",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "72°",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the governing formula/relation for this topic.\n**Step 2:** Substitute values and simplify carefully.\n**Step 3:** Select the option matching the final result.\n**Answer:** Option D (72°).",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If x varies inversely as y and x = 2 when y = 6, then the value of y when x = 3 is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "3",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "4",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "6",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the governing formula/relation for this topic.\n**Step 2:** Substitute values and simplify carefully.\n**Step 3:** Select the option matching the final result.\n**Answer:** Option B (4).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Without doing the actual division, find the remainder when 28735429 is divided by 9.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "4",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "8",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "9",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the governing formula/relation for this topic.\n**Step 2:** Substitute values and simplify carefully.\n**Step 3:** Select the option matching the final result.\n**Answer:** Option A (4).",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Simplify the following: 21− 4.9 ÷ 7 + 3.9 × 0.4 + 0.9",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "26.32",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "18.23",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "22.76",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "24.12",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the governing formula/relation for this topic.\n**Step 2:** Substitute values and simplify carefully.\n**Step 3:** Select the option matching the final result.\n**Answer:** Option C (22.76).",
+    "subject": "QUANT",
+    "pattern": "simplification",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Pipes M, N and S can fill a tank in 25, 50 and 100 minutes, respectively. Initially, pipes N and S are kept open for 10 minutes, and then pipe N is shut while pipe M is opened. Pipe S is closed 15 minutes before the tank overflows. How much time (in minutes) will it take to fill the tank if the three pipes work in this pattern?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "27",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "42",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "30",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "33",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the governing formula/relation for this topic.\n**Step 2:** Substitute values and simplify carefully.\n**Step 3:** Select the option matching the final result.\n**Answer:** Option A (27).",
+    "subject": "QUANT",
+    "pattern": "time_work",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 09.09.2024 12:30 PM - 01:30 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

@@ -1,0 +1,1034 @@
+[
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "102.42\\%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "402.42\\%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "202.42\\%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "302.42\\%",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "2016",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "2015",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2018",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "2019",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A bronze article having a marked price of Rs 1,000 is sold during a festive season sale after three successive discounts of 20\\% and 30\\% and 10\\%. What will be the amount (in Rs ) to be paid by a customer if she buys the article during the festival season?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "496",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "504",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "564",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "508",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "profit_loss",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A rectangular piece of paper is 50 cm long and 22 cm wide. If a cylinder is formed by rolling the paper along its breadth, then the volume of the cylinder is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If ∆PQR≅∆MON such that ∠PQR = 82°,∠QRP = 47°,∠RPQ = 51°,∠MON = (5y - 8)°,QR = 24 and ON = 3x + y,then find (x + y).",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "20",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "14",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "18",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "16",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If 45 ÷ 3 + 4 × A – 48 ÷ 24 + 4 = 1, then the value of A is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "2",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "4",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "−4",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "−2",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Simple interest on a certain sum is one-fifth of the sum and the interest rate per cent per annum is 5 times the number of years. If the rate of interest increases by 3\\%, then how much will the simple interest (in Rs ) be on Rs 5,600 for 6 years?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "4268",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "4668",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "4168",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "4368",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "simple_interest",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The average of the squares of the first 45 natural numbers is",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "699.67",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "697.67",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "696.67",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "698.67",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The pie chart given below shows the number of hours spent by a student for different activities on a working day. The percentage of hours spent at school in a day is _____.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "30\\%",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "35\\%",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "40\\%",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "25\\%",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "data_interpretation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In an election between Sunita and Mamata, 85\\% of voters cast their votes but 2\\% of votes were invalid. If Sunita got 64,974 votes which is 78\\% of valid votes, then the total number of voters enrolled in the election was:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "1,65,000",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1,00,000",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1,25,000",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "1,80,000",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If one man adds 6 litres of water to 10 litres of milk and another man adds 4 litres of water to 8 litres of milk. Find the ratio of milk in the two mixtures.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "15 : 16",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "16 : 15",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "12 : 11",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "16 : 17",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "ratio_proportion",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The speed of a boat in still water is 18 km/h and the speed of the stream is 3 km/h. How much time (in hours) will it take to cover a distance of 105 km in downstream and in coming back?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "12",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "10",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "9",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "15",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "speed_distance_time",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "2",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "0",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "3",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Pipes P and Q can completely fill a water tank in 10 hours and 15 hours, respectively. A pipe R can empty a tank filled completely with water in 12 hours. Initially, the tank is empty and only pipes P and Q are opened at 6 a.m. and pipe R is also opened at 9 a.m. By what time will the tank be completely filled?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "3 p.m.",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "11 a.m.",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "1 p.m.",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "2 p.m.",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "11 : 12",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "13 : 12",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "12 : 11",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "13 : 11",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which digits should come in the place of * and #, respectively, if the 7-digit number 62684*# is divisible by both 8 and 5?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "0 and 5",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "4 and 0",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "5 and 0",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "2 and 0",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "number_system",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "What is the central angle of a sector of a circle whose area and perimeter are, respectively, equal to 209 cm2 and 63 cm if it is given that its radius is a non-negative integer (roundup to one decimal place)?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "49.5°",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "55.5°",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "53.5°",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "51.5°",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "For what value of k will the lines 2x + 7ky – 8 = 0 and x + y – 9 = 0 have no solution?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The radii of two circle are 5 cm and 10 cm and the distance between their centres is 17 cm. Find the length of the transverse common tangent.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A shopkeeper allows a discount of 20\\% on the marked price of an item and thus gains 10\\%. What is the ratio of the cost price to the marked price of the item?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "algebra",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "If the length of a common external tangent to two circles is 9 and that of a common internal tangent is 5, then the product of the radii of the two circles is:",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "12",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "14",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "10",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "8",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "QUANT",
+    "pattern": "geometry",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 04:00 PM - 05:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

@@ -1,0 +1,1077 @@
+[
+  {
+    "text": "Read the given statements and conclusions carefully. Assuming that the information given in the statements is true, even if it appears to be at variance with commonly known facts, decide which of the given conclusions logically follow(s) from the statements. Statements: Some boxes are cartons. All cartons are papers. Some cartons are utensils. Conclusion (I): No box is a utensil. Conclusion (II): Some papers are utensils.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Only conclusion (II) follows",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Only conclusion (I) follows",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Both conclusions (I) and (II) follow",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Neither conclusion (I) nor (II) follows",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "statement_conclusion",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the correct mirror image of the given figure when the mirror is placed at MN as shown below.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which figure should replace the question mark (?) if the following series were to be continued?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, 'BELL' is written as 'MKFA' and 'BOND' is written as 'EMPA'. How will 'BLEW’ be written in that language?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "XDMA",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "XMDA",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "XMAD",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "XDAM",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Four letter-clusters have been given, out of which three are alike in some manner and one is different. Select the one that is different. The odd one out is not based on the number of consonants/vowels or their position in the letter cluster",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "AFK",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "LQV",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "PTX",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "DIN",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "10 is related to 15 following certain logic. Following the same logic, 42 is related to 63. To which of the following numbers is 22 related, following the same logic? (NOTE : Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc., to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "31",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "33",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "28",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "30",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "'\u0000खलना' (Blossom),'मुरझाना' (Wither) से उसी \u0000कार संबंिधत है, िजस \u0000कार '\u0000\u0000थर होना' (Stagnate) '________' से संबंिधत है। (श\u0000ो ंको साथ\u0000क िहंदी श\u0000 माना जाना चािहए और श\u0000द ो ंको अ\u0000रो ंकी सं\u0000ा/\u0000ंजनो/ं\u0000रो ंकी सं\u0000ा के आधार पर एक दूसरे से संबंिधत नही ंिकया जाना चािहए।",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "खड़े रहना (Stand)",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "िवराम (Rest)",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "बहना (Flow)",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "मंद पड़ना (Languish)",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, ‘sit on chair’ is coded as 'sk mi cn' and ‘the chair broke’ is coded as ‘gm fr mi’. How is ‘chair’ coded in the given language?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "gm",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "sk",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "mi",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "cn",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the set in which the numbers are related in the same way as are the numbers of the following set. (79, 58, 62) (54, 33, 37) (NOTE: Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding/deleting/multiplying etc. to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "(59, 33, 43)",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "(66, 45, 49)",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "(47, 36, 41)",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "(43, 25, 30)",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Three of the following four options are alike in a certain way and thus form a group. Which is the option that does NOT belong to that group? (NOTE : Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding /deleting /multiplying etc., to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed).",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "2 – 2 – 4",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "1 – 3 – 3",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "2 – 4 – 8",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "3 – 2 – 5",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "उस िवक\u0000 का चयन कर\u0000 जो तीसरे श\u0000 से उसी \u0000कार संबंिधत है जैसे दूसरा श\u0000 पहले श\u0000 से संबंिधत है। (श\u0000ो ंको अथ\u0000पूण\u0000 अं\u0000ेजी श\u0000ो ंके \u0000प म\u0000 माना जाना चािहए और श\u0000 आपस म\u0000 अ\u0000रों की सं\u0000ा/\u0000ंजन/\u0000रो ंकी सं\u0000ा के आधार पर एक दूसरे से संबंिधत नही ंहोना चािहए) उतावलापन : शम\u0000ला :: मनमुटाव : ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "नाराज़गी",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "अपराध",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "गु\u0000ा",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "आनंद",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Six letters S, T, M, P, R and C are written on different faces of a dice. Two positions of this dice are shown in the figures below. Find the letter on the face opposite to M.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "C",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "R",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "S",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "P",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "dice_cube",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the option that can replace the question mark (?) in the following series. FM61, EK58, DI55, CG52, ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "BE49",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "CD44",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "BF48",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "CE46",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "How many squares are there in the given figure?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "12",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "13",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "15",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "14",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the set in which the numbers are related in the same way as are the numbers of the following set. (7, 9, 48) (6, 8, 42) (NOTE: Operations should be performed on the whole numbers, without breaking down the numbers into its constituent digits. E.g. 13 – Operations on 13 such as adding/deleting/multiplying etc. to 13 can be performed. Breaking down 13 into 1 and 3 and then performing mathematical operations on 1 and 3 is not allowed.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "(10, 12, 54)",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "(9, 11, 56)",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "(11, 13, 72)",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "(8, 10, 47)",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which two signs should be interchanged to make the following equation correct? 18 − 23 × 455 ÷ 7 + 28 = 377",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "÷ and −",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "− and +",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "+ and ×",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "− and ×",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the option that represents the letters that when placed from left to right in the blanks below will complete the given letter series. L M B A _ H O L M B A C _ O L M _ A C H O L _ B A C H O L _",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "CHMBM",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "CMHBM",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "CHBMM",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "CHMMB",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "The position of how many letters will remain unchanged if each of the letters in the word ‘PRANKED’ is arranged in the English alphabetical order?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "One",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "None",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Three",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Two",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "word_formation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, A # B means A is the sister of B. A @ B means A is the son of B. A & B means A is the wife of B. A \\% B means A is the father of B. How is Q related to R if P & Q \\% L # R & K?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Sister",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Mother",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Father",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Wife",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "blood_relations",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "What will come in place of the question mark (?) in the following equation if ‘+’ and ‘÷’ are interchanged and ‘×’ and ‘–’ are interchanged? 4 − 12 + 3 ÷ 12 × 6 = ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "11",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "46",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "13",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "22",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the correct mirror image of the given figure when the mirror is placed at MN as shown below.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which letter-cluster will replace the question mark (?) to complete the given series? ZVRN, VSPM, RPNL, ?, JJJJ",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "RNLL",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "NMLK",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "RMLN",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "RNLK",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A paper is folded and cut as shown below. How will it appear when unfolded?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the number from among the given options that can replace the question mark (?) in the following series. 23, 27, 43, 79, 143, ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "240",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "243",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "200",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "250",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Identify the figure given in the options which when put in place of the question mark (?) will logically complete the series?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 1 - 10.09.2024 09:00 AM - 10:00 AM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]

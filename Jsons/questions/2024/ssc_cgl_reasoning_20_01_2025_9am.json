@@ -1,0 +1,1292 @@
+[
+  {
+    "text": "Identify the figure given in the options which when put in place of the  question mark (?) will logically complete the series.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B ([IMAGE]).",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A question is followed by two statements numbered (I) and (II). You have to  decide whether the data provided in the statements are sufficient to answer  the question. Read both the statements and select the appropriate option.  Question:  Shourya delivered parcels to five locations A, B, C, D and E while  prioritising delivery of heavier parcels first. Which location was delivered in  the end?  Statements:  (I) The parcel for location C was heavier than all other parcels.  (II) The parcel for location D was lighter than the parcels assigned to  locations B and A.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Data in statements (I) and (II) together are sufficient to answer the question.",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Data in statement (II) alone is sufficient to answer the question, whereas data in  statement (I) alone is not.",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Data in statement (I) alone is sufficient to answer the question, whereas data in  statement (II) alone is not.",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Data in statements (I) and (II) together are not sufficient to answer the question.",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D (Data in statements (I) and (II) together are not sufficient to answer the question.).",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Read the following information and answer the question which follows.  “Like seasoned gardeners, Gardener G practices crop rotation to maintain  soil fertility, leading to thriving and diverse plant growth.\"  Which of the following can be inferred from the given statement? (An  inference is something which is not directly stated but can be derived from  the given facts/information in the statement)  1. The thriving and diverse plant growth in Gardener G's garden is likely  influenced by the practice of crop rotation.  2. Gardener G is consulted by other gardeners in the area for best  gardening practices.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Only (I) can be inferred.",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Both (I) and (II) can be inferred.",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Only (II) can be inferred.",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Neither (I) nor (II) can be inferred.",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option A (Only (I) can be inferred.).",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Four number-pairs have been given, out of which three are alike in some  manner and one is different. Select the one that is different.  (NOTE: Operations should be performed on the whole numbers, without  breaking down the numbers into their constituent digits. E.g. 13 –  Operations on 13 such as adding/subtracting/multiplying etc. to 13 can be  performed. Breaking down 13 into 1 and 3 and then performing  mathematical operations on 1 and 3 is not allowed.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "286 - 11",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "104 - 4",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "494 - 19",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "521 - 20",
+        "image": ""
+      }
+    ],
+    "correct_option": "",
+    "solution": "**Step 1:** Source entry has no selected option in the PDF (`Chosen Option: --`).\n**Step 2:** Validate this question against the official answer key before import.\n**Step 3:** Keep this row in review state until the correct option is confirmed.\n**Answer:** Option [TO_VERIFY].",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, ‘CURB’ is coded as ‘3517’ and ‘BOAT’ is coded  as ‘4638’. What is the code for ‘B’ in the given code language?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "4",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "8",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "3",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "7",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option A (4).",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the option figure that will replace the question mark (?) in the figure  given below to complete the pattern.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option A ([IMAGE]).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the option figure in which the given figure is embedded as its part  (rotation is NOT allowed).",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B ([IMAGE]).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "What will come in the place of the question mark (?) in the following  equation, if ‘+’ and ‘−’ are interchanged and ‘×’ and ‘÷’ are interchanged?  98 ÷ 7 + 288 × 2 − 144 × 3 − 152 ÷ 2 + 120 = ?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "774",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "671",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "632",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "743",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option A (774).",
+    "subject": "REASONING",
+    "pattern": "mathematical_operation",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the number from among the given options that can replace the  question mark (?) in the following series.  98, 50, 26, 14, ?, 5",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "10",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "7",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "6",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "8",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D (8).",
+    "subject": "REASONING",
+    "pattern": "series",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "One",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Four",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Three",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Two",
+        "image": ""
+      }
+    ],
+    "correct_option": "",
+    "solution": "**Step 1:** Source entry has no selected option in the PDF (`Chosen Option: --`).\n**Step 2:** Validate this question against the official answer key before import.\n**Step 3:** Keep this row in review state until the correct option is confirmed.\n**Answer:** Option [TO_VERIFY].",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the correct option that indicates the arrangement of the following  words in a logical and meaningful order.  1. Set goals 2. Budget 3. Review 4. Invest 5. Assess",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "1, 5, 2, 4, 3",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "5, 2, 4, 3, 1",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "3, 5, 1, 2, 4",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "5, 1, 2, 3, 4",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option A (1, 5, 2, 4, 3).",
+    "subject": "REASONING",
+    "pattern": "sitting_arrangement",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "A question is given, followed by two statements labelled I and II. Identify  which of the statements is/are sufficient to answer the question.  Question:  Five houses of five different colours (blue, green, yellow, red and violet),  with equal space between every two adjacent houses, are constructed in a  row facing north. Which coloured house is exactly in the middle of the  row?  Statements:  (I) Green and yellow coloured houses are constructed at the extreme ends  of the row.  (II) Violet and blue coloured houses are immediate neighbouring houses of  green and yellow coloured houses, respectively.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Data in Statements I and II together is not sufficient to answer the question",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Data in Statement I alone is sufficient to answer the question while data in Statement  II is not",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Data in Statement II alone is sufficient to answer the question while data in Statement  I is not",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Data in Statements I and II together is sufficient to answer the question",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D (Data in Statements I and II together is sufficient to answer the question).",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language,  P + Q means ‘P is the mother of Q’,  P – Q means ‘P is the brother of Q’,  P x Q means ‘P is the wife of Q’ and  P ÷ Q means ‘P is the father of Q’.  Based on the above, how is U related to Z if ‘U – V + W ÷ Y x Z’?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Wife's Father's Mother's Brother",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Wife's Mother's Mother's Brother",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Wife's Mother's Mother's Father",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Wife's Father's Mother's Father",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B (Wife's Mother's Mother's Brother).",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Given below is a statement (Cause) followed by possible effects numbered  I, II and III. Read the ‘Cause’ carefully and decide which of the three can be  possible effect/s.  Cause – Heavy rains yesterday in City X have caused flooding in many  areas including the railway station and airport.  Effect I – Railways has announced a delay in the departure of three trains  scheduled to start from City X this morning.  Effect II – A number of flights were unable to land in the airport of City X  last evening.  Effect III – Finance ministry has extended the date for filing tax returns by a  month.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Only II is a possible effect.",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Both II and III are possible effects.",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Both I and II are possible effects.",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Only I is a possible effect.",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (Both I and II are possible effects.).",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Paras ranked 5th from the top and 24th from the bottom in his class. How  many students are there in his class?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "27",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "26",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "29",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "28",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D (28).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "EASY",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Which of the following letter-clusters should replace # and % so that the  pattern and relationship followed between the letter-cluster pair on the left  side of :: is the same as that on the right side of ::?  # : ORW :: RUZ : %",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "# = UYD % = KNS",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "# = VYD % = LNS",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "# = VYD % = KNS",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "# = VYD % = KNK",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (# = VYD % = KNS).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language,  A + B means ‘A is the mother of B’,  A – B means ‘A is the brother of B’,  A x B means ‘A is the wife of B’ and  A ÷ B means ‘A is the father of B’.  Based on the above, how is U related to Z if ‘U – V x W ÷ Y + Z’?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mother's father's father",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Mother's father's brother",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Mother's mother's brother",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Mother's mother's father",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (Mother's mother's brother).",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D ([IMAGE]).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Seven people A, B, C, D, E, F and G, scored different marks (out of 100) in  an exam. G scored the lowest marks. B scored second highest marks,  which were 80. A scored 72. E scored more than F but less than C. Marks  scored by C were a multiple of 11 and less than 70. The sum of marks  scored by C and F was 120. What is the score of F?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "56",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "50",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "54",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "55",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B (50).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Each of the digits in the number 3571869 is arranged in  ascending order from left to right. The position(s) of how many  digits will remain unchanged as compared to that/those in the  original number?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Two",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "One",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "None",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Three",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B (One).",
+    "subject": "REASONING",
+    "pattern": "sitting_arrangement",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Three of the following four pairs are alike in a certain way and thus form a  group. Which is the pair that does not belong to that group?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rs ¥$£ - Currency",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "ABCD - Letters",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "×+−÷ - Text",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "1234 - Numbers",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (×+−÷ - Text).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Figure A is related to B in a certain pattern. Following the same pattern,  figure C is related to D. Study the pattern and select the figure which  should be placed in place of D.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C ([IMAGE]).",
+    "subject": "REASONING",
+    "pattern": "analogy",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Read the given statements and conclusions carefully. Assuming that the  information given in the statements is true, even if it appears to be at  variance with commonly known facts, decide which of the given  conclusion(s) logically follow(s) from the statements.  Statements:  All dolls are robots.  Some robots are toys.  Some toys are cycles.  Conclusions:  (I) Some toys are dolls.  (II) No cycle is a robot.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Only conclusion (II) is true.",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Only conclusion (I) is true.",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Both conclusions (I) and (II) are true.",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Neither conclusion (I) nor (II) is true.",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D (Neither conclusion (I) nor (II) is true.).",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In this question, a statement is followed by two courses of action,  numbered I and II. You must assume everything in the statement to be true  and on the basis of the information given in the statement, decide which of  the course of action/s logically follows for pursuing.  Statement: Many people have complained to the Finance Ministry  regarding a delay in receiving refunds of their Income Tax returns.  Courses of action:  The Finance Ministry must institute an enquiry into the complaints received  regarding delay in income tax refunds.  The Finance Ministry must compensate the income tax payees by paying  interest on their refunds for the duration of the delay.",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "Neither I nor II follows.",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "Only I follows.",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "Both I and II follow.",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "Only II follows.",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B (Only I follows.).",
+    "subject": "REASONING",
+    "pattern": "syllogism",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "[IMAGE]",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "[IMAGE]",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "[IMAGE]",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B ([IMAGE]).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "17 is related to 159 following a certain logic. Following the same logic, 11 is  related to 105. To which of the following is 13 related, following the same  logic?  (NOTE : Operations should be performed on the whole numbers, without  breaking down the numbers into its constituent digits. E.g. 13 – Operations  on 13 such as adding /subtracting / multiplying etc. to 13 can be performed.  Breaking down 13 into 1 and 3 and then performing mathematical  operations on 1 and 3 is not allowed.)",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "116",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "103",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "123",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "109",
+        "image": ""
+      }
+    ],
+    "correct_option": "C",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option C (123).",
+    "subject": "REASONING",
+    "pattern": "analogy",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Four of the following five figures are alike in a certain way and thus form a  group. Which is the one that does NOT belong to that group?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "D",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "B",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "A",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "E",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D (E).",
+    "subject": "REASONING",
+    "pattern": "classification",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "In a certain code language, ‘he enjoys music’ is coded as ‘lo po jo’ and  ‘music and dance’ is coded as ‘kb jo fk’. How is ‘music’ coded in the given  language?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "jo",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "po",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "lo",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "fk",
+        "image": ""
+      }
+    ],
+    "correct_option": "A",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option A (jo).",
+    "subject": "REASONING",
+    "pattern": "coding_decoding",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "Select the correct option that indicates the arrangement of the following  words in a logical and meaningful order.  1. Plant  2. Pollination  3. Seed  4. Seedling  5. Fruit",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "3, 4, 1, 2, 5",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "3, 4, 1, 5, 2",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "4, 1, 2, 5, 3",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "4, 3, 1, 2, 5",
+        "image": ""
+      }
+    ],
+    "correct_option": "D",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option D (4, 3, 1, 2, 5).",
+    "subject": "REASONING",
+    "pattern": "sitting_arrangement",
+    "difficulty": "MEDIUM",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  },
+  {
+    "text": "M, N, O, X, Y and Z are sitting around a circular table facing the centre (but  not necessarily in the same order). O is an immediate neighbour of Y. Z sits  second to the right of O. X is the immediate neighbour of both M and N. M  is not an immediate neighbour of O. Who sits to the immediate left of Y?",
+    "image": "",
+    "options": [
+      {
+        "id": "A",
+        "text": "X",
+        "image": ""
+      },
+      {
+        "id": "B",
+        "text": "O",
+        "image": ""
+      },
+      {
+        "id": "C",
+        "text": "N",
+        "image": ""
+      },
+      {
+        "id": "D",
+        "text": "M",
+        "image": ""
+      }
+    ],
+    "correct_option": "B",
+    "solution": "**Step 1:** Identify the core concept used in this question.\n**Step 2:** Apply the required formula/logical rule and simplify.\n**Step 3:** Match the result with the keyed option from the source.\n**Answer:** Option B (O).",
+    "subject": "REASONING",
+    "pattern": "sitting_arrangement",
+    "difficulty": "HARD",
+    "source": {
+      "exam": "SSC CGL 2024",
+      "year": 2024,
+      "shift": "Tier 2 - 20.01.2025 9:00 AM - 12:00 PM"
+    },
+    "stats": {
+      "attempt_count": 0,
+      "accuracy_rate": 0,
+      "avg_time_ms": 0
+    },
+    "is_live": false,
+    "needs_review": true
+  }
+]
