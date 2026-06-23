@@ -10,7 +10,7 @@ export interface IUser extends Document {
     };
     target_exam: 'SSC_CGL';
     target_year: number; // e.g., 2025
-    config: { is_premium: boolean; };
+    config: Record<string, never>;
     preferences: {
         daily_quant_goal: number;       // 5-100
         daily_reasoning_goal: number;   // 5-100
@@ -21,7 +21,8 @@ export interface IUser extends Document {
         current_streak: number;
         max_streak: number;
         last_active_date: string;       // "YYYY-MM-DD"
-        free_ai_questions_used?: number;
+        ai_questions_today?: number;
+        ai_questions_date?: string;       // "YYYY-MM-DD"
     };
     sprint_configs: {
         name: string;
@@ -33,13 +34,6 @@ export interface IUser extends Document {
         last_used?: Date;
     }[];
     role: 'USER' | 'ADMIN';
-    razorpay_customer_id?: string;
-    subscription?: {
-        plan: 'MONTHLY' | 'YEARLY';
-        status: 'ACTIVE' | 'EXPIRED' | 'CANCELLED';
-        start_date: Date;
-        end_date: Date;
-    };
     // Password reset
     password_reset_token?: string;
     password_reset_expires?: Date;
@@ -81,7 +75,6 @@ const UserSchema: Schema = new Schema(
         },
 
         config: {
-            is_premium: { type: Boolean, default: false },
         },
 
         preferences: {
@@ -95,7 +88,8 @@ const UserSchema: Schema = new Schema(
             current_streak: { type: Number, default: 0 },
             max_streak: { type: Number, default: 0 },
             last_active_date: { type: String, default: () => new Date().toISOString().split('T')[0] },
-            free_ai_questions_used: { type: Number, default: 0 },
+            ai_questions_today: { type: Number, default: 0 },
+            ai_questions_date: { type: String, default: '' },
         },
 
         sprint_configs: {
@@ -123,13 +117,6 @@ const UserSchema: Schema = new Schema(
             default: 'USER',
         },
 
-        razorpay_customer_id: { type: String },
-        subscription: {
-            plan: { type: String, enum: ['MONTHLY', 'YEARLY'] },
-            status: { type: String, enum: ['ACTIVE', 'EXPIRED', 'CANCELLED'] },
-            start_date: { type: Date },
-            end_date: { type: Date },
-        },
         // Password reset
         password_reset_token: { type: String },
         password_reset_expires: { type: Date },

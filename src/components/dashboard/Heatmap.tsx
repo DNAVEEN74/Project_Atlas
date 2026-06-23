@@ -110,7 +110,7 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
             </div>
 
             {/* Grid Container - Compact Sizing with Mobile Scroll */}
-            <div className="w-full flex-1 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-neutral-700 scrollbar-track-transparent flex flex-col justify-center min-h-[160px]">
+            <div className="w-full flex-1 overflow-x-auto pb-4 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:bg-neutral-800 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent flex flex-col justify-center min-h-[160px]">
                 <div className="flex items-end gap-1 min-w-[700px] w-full">
                     {/* Generate last 12 months */}
                     {Array.from({ length: 13 }).map((_, monthIndex) => {

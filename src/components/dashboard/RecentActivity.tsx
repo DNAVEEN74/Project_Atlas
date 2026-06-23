@@ -76,18 +76,18 @@ const RecentActivity = ({ attempts, className }: RecentActivityProps) => {
     }
 
     return (
-        <div className={`bg-[#1a1a1a] rounded-xl border border-neutral-800 overflow-hidden ${className}`}>
-            <div className="flex justify-between items-center p-4 border-b border-neutral-800">
-                <div className="flex items-center gap-2 text-white font-semibold">
+        <div className={`bg-[#1a1a1a] rounded-xl border border-neutral-800 overflow-hidden flex flex-col h-full ${className}`}>
+            <div className="flex justify-between items-center p-4 border-b border-neutral-800 shrink-0">
+                <div className="flex items-center gap-2">
                     <HistoryIcon className="text-indigo-500 w-5 h-5" />
-                    <h3>Recent Submissions</h3>
+                    <h3 className="font-bold text-white text-lg">Recent Submissions</h3>
                 </div>
                 <Link href="/submissions" className="text-xs font-medium text-indigo-400 hover:text-indigo-300">
                     View All →
                 </Link>
             </div>
 
-            <div className="divide-y divide-neutral-800/50">
+            <div className="divide-y divide-neutral-800/50 flex-1 flex flex-col justify-center">
                 {displayAttempts.map((attempt) => {
                     // Safe access to question data
                     const questionData = typeof attempt.question_id === 'object' ? attempt.question_id : null;

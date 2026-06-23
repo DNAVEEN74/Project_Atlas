@@ -12,14 +12,9 @@ import {
     RemoveCircleIcon,
     TimerIcon,
     ArrowForwardIcon,
-    BoltIcon,
-    EmojiEventsIcon,
-    TargetIcon,
-    SpeedIcon,
     TrendingUpIcon,
 } from '@/components/icons';
 import Header from '@/components/layout/Header';
-import { CircularProgress } from '@/components/ui/CircularProgress';
 
 interface ReviewQuestion {
     _id: string;
@@ -186,92 +181,71 @@ export default function SprintReviewPage({ params }: { params: Promise<{ id: str
                 </Link>
 
                 {/* Dashboard / Summary Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12">
-                    {/* LEFT COLUMN - Score Circle (4 cols) */}
-                    <div className="lg:col-span-4 flex flex-col">
-                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-8 flex flex-col items-center justify-center relative overflow-hidden h-full">
-                            <div className="absolute inset-0 opacity-5">
-                                <EmojiEventsIcon sx={{ fontSize: '8rem' }} className="text-white" />
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-8">
+                    {/* LEFT COLUMN - Quick Stats (4 cols) */}
+                    <div className="lg:col-span-4 flex flex-col gap-4">
+                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-xl p-6 flex flex-col justify-center">
+                            <h2 className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-3">Sprint Score</h2>
+                            <div className="flex items-end gap-3 mb-4">
+                                <span className={`text-5xl font-black ${primaryColor} leading-none tracking-tighter`}>{data.stats.correctCount}</span>
+                                <span className="text-2xl font-bold text-neutral-600 leading-none pb-1">/ {data.stats.totalQuestions}</span>
                             </div>
-
-                            <div className="mb-6 relative z-10">
-                                <CircularProgress
-                                    value={data.stats.accuracy}
-                                    size={160}
-                                    strokeWidth={12}
-                                    color={isQuant ? 'text-amber-500' : 'text-violet-500'}
-                                    trackColor="text-neutral-800"
-                                >
-                                    <div className="flex flex-col items-center">
-                                        <span className="text-5xl font-bold text-white tracking-tighter">{data.stats.correctCount}</span>
-                                        <span className="text-sm text-neutral-500 font-medium uppercase tracking-widest mt-1">/ {data.stats.totalQuestions}</span>
-                                    </div>
-                                </CircularProgress>
-                            </div>
-
-                            <div className="text-center relative z-10">
-                                <div className={`inline-block px-3 py-1 rounded-lg bg-neutral-900/80 border border-neutral-800 text-sm font-bold ${performance.color} mb-2`}>
-                                    {performance.label}
-                                </div>
-                                <p className="text-sm text-neutral-500">{data.stats.accuracy}% Accuracy</p>
+                            
+                            <div className="flex items-center gap-3">
+                                <span className={`text-xs font-bold ${performance.color} bg-neutral-900 border border-neutral-800 px-2.5 py-1 rounded-md`}>
+                                    {data.stats.accuracy}% Accuracy - {performance.label}
+                                </span>
                             </div>
                         </div>
 
-                        {/* Quick Stats Grid */}
-                        <div className="grid grid-cols-2 gap-3 mt-3">
-                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-xl p-4">
-                                <p className="text-xs text-neutral-500 uppercase tracking-wide mb-1">Avg Time</p>
-                                <div className="flex items-baseline gap-1">
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-xl p-5">
+                                <p className="text-[10px] text-neutral-500 uppercase tracking-widest mb-1.5">Avg Time</p>
+                                <div className="flex items-baseline gap-1.5">
                                     <span className="text-xl font-bold text-white font-mono">{getAvgTimePerQuestion()}</span>
-                                    <span className="text-xs text-neutral-600">/q</span>
+                                    <span className="text-[10px] text-neutral-600 uppercase">Target 30s</span>
                                 </div>
                             </div>
-                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-xl p-4">
-                                <p className="text-xs text-neutral-500 uppercase tracking-wide mb-1">Target</p>
-                                <div className="flex items-baseline gap-1">
-                                    <span className="text-xl font-bold text-neutral-400 font-mono">30s</span>
-                                    <span className="text-xs text-neutral-600">/q</span>
-                                </div>
-                            </div>
-                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-xl p-4 col-span-2 flex items-center justify-between">
-                                <div>
-                                    <p className="text-xs text-neutral-500 uppercase tracking-wide">Difficulty</p>
-                                    <p className="text-base font-bold text-white capitalize">{data.difficulty.toLowerCase()}</p>
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-xs text-neutral-500 uppercase tracking-wide">Subject</p>
-                                    <p className={`text-base font-bold ${primaryColor}`}>{data.subject}</p>
+                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-xl p-5">
+                                <p className="text-[10px] text-neutral-500 uppercase tracking-widest mb-1.5">Config</p>
+                                <div className="flex items-center gap-1.5">
+                                    <span className={`text-sm font-bold ${primaryColor}`}>{data.subject}</span>
+                                    <span className="text-neutral-600 text-xs">•</span>
+                                    <span className="text-xs font-bold text-neutral-300 capitalize">{data.difficulty.toLowerCase()}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* MIDDLE COLUMN - Topic Breakdown (8 cols) */}
+                    {/* RIGHT COLUMN - Topic Breakdown (8 cols) */}
                     <div className="lg:col-span-8 flex flex-col">
-                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6 h-full">
-                            <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                                <TrendingUpIcon sx={{ fontSize: '1.25rem' }} className="text-neutral-400" />
-                                Topic-Wise Breakdown
+                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-xl p-6 h-full">
+                            <h3 className="text-sm font-bold text-white mb-6 flex items-center gap-2">
+                                <TrendingUpIcon sx={{ fontSize: '1rem' }} className="text-neutral-400" />
+                                Topic Performance
                             </h3>
 
                             {data.topicPerformance && data.topicPerformance.length > 0 ? (
-                                <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 items-start">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                                     {data.topicPerformance.map((tp, idx) => {
                                         let color = 'bg-rose-500';
                                         let textColor = 'text-rose-400';
                                         if (tp.accuracy >= 80) { color = 'bg-emerald-500'; textColor = 'text-emerald-400'; }
                                         else if (tp.accuracy >= 50) { color = 'bg-amber-500'; textColor = 'text-amber-400'; }
 
+                                        // Format topic name nicely: "speed_distance_time" -> "Speed Distance Time"
+                                        const formattedTopic = tp.topic.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
                                         return (
-                                            <div key={idx} className="w-full mt-0">
-                                                <div className="flex justify-between items-end mb-2">
-                                                    <span className="text-sm font-medium text-neutral-300">{tp.topic}</span>
-                                                    <div className="text-right">
-                                                        <span className={`text-sm font-bold ${textColor}`}>{tp.correct}/{tp.total}</span>
-                                                        <span className="text-xs text-neutral-600 ml-1">({tp.accuracy}%)</span>
+                                            <div key={idx} className="w-full">
+                                                <div className="flex justify-between items-center mb-1.5">
+                                                    <span className="text-xs font-bold text-neutral-300 truncate pr-2">{formattedTopic}</span>
+                                                    <div className="text-right shrink-0">
+                                                        <span className={`text-xs font-bold ${textColor}`}>{tp.correct}/{tp.total}</span>
+                                                        <span className="text-[10px] text-neutral-600 ml-1 font-mono">({tp.accuracy}%)</span>
                                                     </div>
                                                 </div>
-                                                <div className="h-2 w-full bg-neutral-800 rounded-full overflow-hidden">
+                                                <div className="h-1 w-full bg-neutral-900 rounded-full overflow-hidden">
                                                     <div
                                                         className={`h-full ${color} transition-all duration-500`}
                                                         style={{ width: `${Math.max(tp.accuracy, 5)}%` }} // Min 5% so bar is visible
@@ -282,133 +256,13 @@ export default function SprintReviewPage({ params }: { params: Promise<{ id: str
                                     })}
                                 </div>
                             ) : (
-                                <div className="h-32 flex items-center justify-center text-neutral-500 text-sm">
+                                <div className="h-32 flex items-center justify-center text-neutral-600 text-xs">
                                     No topic data available
                                 </div>
                             )}
                         </div>
                     </div>
                 </div>
-
-                {/* Single-Sprint Smart Insights */}
-                {data.insights && (
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-                        {/* Negative Marking & Skip Strategy */}
-                        <div className="bg-[#1a1a1a] border border-neutral-800 hover:border-violet-500/50 transition-colors rounded-2xl p-6 flex flex-col">
-                            <h3 className="text-sm font-bold text-neutral-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                                <TargetIcon sx={{ fontSize: '1rem' }} /> Marking Simulation
-                            </h3>
-                            <div className="flex-1">
-                                <div className="flex items-center justify-between mb-2">
-                                    <span className="text-neutral-400 text-sm">Raw Score (No Negative)</span>
-                                    <span className="text-white font-bold">{data.stats.correctCount}/{data.stats.totalQuestions}</span>
-                                </div>
-                                <div className="flex items-center justify-between mb-4 pb-4 border-b border-neutral-800">
-                                    <span className="text-neutral-400 text-sm">SSC CGL System (+2, -0.5)</span>
-                                    <span className="text-amber-500 font-bold">{data.insights.negative_marking.actual_marks}/{data.insights.negative_marking.max_marks} marks</span>
-                                </div>
-                                {data.insights.negative_marking.skip_count > 0 ? (
-                                    <div className="bg-neutral-900/50 p-3 rounded-lg border border-neutral-800/80 mt-auto">
-                                        <p className="text-xs text-neutral-300 leading-relaxed">
-                                            If you had <span className="text-emerald-400 font-bold">skipped the {data.insights.negative_marking.skip_count} slowest wrong answers</span>,
-                                            your score would be <span className="text-emerald-400 font-bold">{data.insights.negative_marking.optimized_marks}/{data.insights.negative_marking.optimized_max}</span>.
-                                            You'd also save <span className="text-amber-400 font-bold">{Math.round(data.insights.negative_marking.saved_time_ms / 1000)}s</span>!
-                                        </p>
-                                    </div>
-                                ) : (
-                                    <div className="bg-neutral-900/50 p-3 rounded-lg border border-neutral-800/80 mt-auto">
-                                        <p className="text-xs text-neutral-300 leading-relaxed">
-                                            Great job! You didn't lose any unnecessary marks to negative marking because you didn't guess incorrectly.
-                                        </p>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Time Distribution Histogram */}
-                        <div className="bg-[#1a1a1a] border border-neutral-800 hover:border-amber-500/50 transition-colors rounded-2xl p-6 flex flex-col">
-                            <h3 className="text-sm font-bold text-neutral-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                                <TimerIcon sx={{ fontSize: '1rem' }} /> Time Spent
-                            </h3>
-                            <div className="flex-1 flex flex-col justify-end gap-3 mt-4">
-                                {(() => {
-                                    const dist = data.insights!.time_distribution;
-                                    const maxCount = Math.max(1, dist.under_20.count, dist.btn_20_40.count, dist.btn_40_60.count, dist.over_60.count);
-                                    const rows = [
-                                        { label: '< 20s', data: dist.under_20, color: 'bg-emerald-500' },
-                                        { label: '20-40s', data: dist.btn_20_40, color: 'bg-emerald-400' },
-                                        { label: '40-60s', data: dist.btn_40_60, color: 'bg-amber-500' },
-                                        { label: '> 60s', data: dist.over_60, color: 'bg-rose-500' }
-                                    ];
-
-                                    return rows.map(r => (
-                                        <div key={r.label} className="flex items-center gap-3">
-                                            <div className="w-12 text-xs text-neutral-500 text-right shrink-0">{r.label}</div>
-                                            <div className="flex-1 h-3 bg-neutral-900 rounded-full overflow-hidden flex">
-                                                <div
-                                                    className={`h-full ${r.color}`}
-                                                    style={{ width: `${(r.data.count / maxCount) * 100}%` }}
-                                                />
-                                            </div>
-                                            <div className="w-5 text-xs font-bold text-white shrink-0 text-right">
-                                                {r.data.count > 0 ? r.data.count : ''}
-                                            </div>
-                                        </div>
-                                    ));
-                                })()}
-                            </div>
-                            <div className="mt-4 text-[11px] text-neutral-400 border-t border-neutral-800 pt-3">
-                                {data.insights.time_distribution.over_60.count > 0
-                                    ? <><span className="text-rose-400 font-bold">⚠️ Warning:</span> You spent over 60s on {data.insights.time_distribution.over_60.count} questions. Consider skipping these next time.</>
-                                    : <><span className="text-emerald-400 font-bold">✓ Great pace!</span> No questions took longer than 60 seconds.</>
-                                }
-                            </div>
-                        </div>
-
-                        {/* Fatigue Detection */}
-                        <div className="bg-[#1a1a1a] border border-neutral-800 hover:border-emerald-500/50 transition-colors rounded-2xl p-6 flex flex-col">
-                            <h3 className="text-sm font-bold text-neutral-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                                <SpeedIcon sx={{ fontSize: '1rem' }} /> Stamina Check
-                            </h3>
-                            <div className="flex-1 flex flex-col justify-center">
-                                {!data.insights.fatigue ? (
-                                    <div className="text-center text-neutral-500 text-sm">Not enough questions to analyze stamina.</div>
-                                ) : (
-                                    <>
-                                        <div className="flex justify-between items-end mb-4 px-2">
-                                            <div className="text-center">
-                                                <div className="text-2xl font-bold text-white mb-1">{Math.round(data.insights.fatigue.first_half_accuracy * 100)}%</div>
-                                                <div className="text-[10px] text-neutral-500 uppercase tracking-wider">First Half Acc.</div>
-                                            </div>
-                                            <div className="h-10 border-r border-neutral-800 mx-4"></div>
-                                            <div className="text-center">
-                                                <div className={`text-2xl font-bold mb-1 ${data.insights.fatigue.detected ? 'text-rose-500' : 'text-emerald-500'}`}>
-                                                    {Math.round(data.insights.fatigue.second_half_accuracy * 100)}%
-                                                </div>
-                                                <div className="text-[10px] text-neutral-500 uppercase tracking-wider">Second Half Acc.</div>
-                                            </div>
-                                        </div>
-
-                                        <div className="bg-neutral-900/50 p-3 rounded-lg border border-neutral-800/80 mt-auto">
-                                            {data.insights.fatigue.detected ? (
-                                                <p className="text-xs text-neutral-300 leading-relaxed">
-                                                    Your accuracy drops by <span className="text-rose-400 font-bold">{Math.round(data.insights.fatigue.drop_percent * 100)}%</span> in the second half.
-                                                    Your focus is fading. Try building stamina by increasing sprint lengths gradually.
-                                                </p>
-                                            ) : (
-                                                <p className="text-xs text-neutral-300 leading-relaxed">
-                                                    Your focus remained steady throughout the sprint! No significant drop in accuracy detected in the second half.
-                                                </p>
-                                            )}
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                <hr className="border-neutral-800 mb-8" />
 
                 {/* Filters */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">

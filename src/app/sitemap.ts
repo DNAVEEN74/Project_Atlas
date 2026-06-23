@@ -10,7 +10,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { path: '', priority: 1.0 },
         { path: '/problems', priority: 0.9 },
         { path: '/sprint', priority: 0.9 },
-        { path: '/pricing', priority: 0.8 },
         { path: '/privacy', priority: 0.4 },
         { path: '/terms', priority: 0.4 },
         // '/login', '/register', '/dashboard' are intentionally excluded (noindex pages)

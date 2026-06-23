@@ -61,9 +61,7 @@ export async function POST(req: NextRequest) {
             },
             target_exam: 'SSC_CGL', // Currently only one supported
             target_year: targetYear || 2025,
-            config: {
-                is_premium: false
-            },
+            config: {},
             preferences: {
                 daily_quant_goal: Math.min(Math.max(dailyQuantGoal || 5, 5), 100),
                 daily_reasoning_goal: Math.min(Math.max(dailyReasoningGoal || 5, 5), 100),

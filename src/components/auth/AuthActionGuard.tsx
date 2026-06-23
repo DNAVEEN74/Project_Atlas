@@ -74,7 +74,7 @@ export function AuthActionGuard({ children, onAction }: AuthActionGuardProps) {
                                 Unlock Full Access
                             </h2>
                             <p className="text-neutral-400 text-sm mb-8 leading-relaxed">
-                                Create your free account to track your progress.
+                                Create your account to track your progress.
                             </p>
 
                             {/* Features */}
@@ -97,7 +97,7 @@ export function AuthActionGuard({ children, onAction }: AuthActionGuardProps) {
                                     href="/register"
                                     className="block w-full py-3.5 bg-white text-black font-bold rounded-xl hover:bg-neutral-200 transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                                 >
-                                    Create Free Account
+                                    Create Account
                                 </Link>
                                 <Link
                                     href="/login"

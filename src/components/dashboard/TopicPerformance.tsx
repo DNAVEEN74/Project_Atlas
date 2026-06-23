@@ -37,16 +37,21 @@ const TopicPerformance: React.FC<TopicPerformanceProps> = ({ stats, className, s
             selectedSubject === 'REASONING' ? 'Reasoning' : selectedSubject;
 
     return (
-        <div className={`bg-[#1a1a1a] rounded-2xl border border-neutral-800 p-6 ${className}`}>
-            <div className="flex justify-between items-center mb-6">
+        <div className={`bg-[#1a1a1a] rounded-xl border border-neutral-800 overflow-hidden flex flex-col h-full ${className}`}>
+            <div className="flex justify-between items-center p-4 border-b border-neutral-800 shrink-0">
                 <div className="flex items-center gap-2">
                     <TargetIcon className="text-indigo-500 w-5 h-5" />
                     <h3 className="font-bold text-white text-lg">Topic Performance</h3>
                 </div>
-                <span className="text-xs font-medium text-neutral-500 uppercase tracking-wider">{subjectLabel}</span>
+                <div className="flex items-center gap-4">
+                    <span className="text-xs font-medium text-neutral-500 uppercase tracking-wider hidden sm:block">{subjectLabel}</span>
+                    <Link href="/dashboard/topics" className="text-xs font-medium text-indigo-400 hover:text-indigo-300">
+                        View All →
+                    </Link>
+                </div>
             </div>
 
-            <div className="space-y-5">
+            <div className="p-4 space-y-6 flex-1 flex flex-col justify-center">
                 {displayTopics.length === 0 ? (
                     <div className="text-center py-8 text-neutral-500 text-sm">
                         No topic data yet. Start practicing!
@@ -92,12 +97,6 @@ const TopicPerformance: React.FC<TopicPerformanceProps> = ({ stats, className, s
                 )}
             </div>
 
-            <Link
-                href="/dashboard/topics"
-                className="block w-full mt-6 py-2 text-sm text-center text-indigo-400 font-medium hover:bg-neutral-800 rounded-lg transition-colors"
-            >
-                View All Topics →
-            </Link>
         </div>
     );
 };

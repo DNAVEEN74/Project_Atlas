@@ -2,8 +2,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { PsychologyOutlinedIcon, CloseIcon, CopyIcon, CheckIcon, DeleteIcon } from '@/components/icons';
-import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next/navigation';
 import { MathText } from '@/components/ui/MathText';
 
 interface Message {
@@ -12,8 +10,6 @@ interface Message {
 }
 
 export function AskAIClarification({ questionId }: { questionId: string }) {
-    const { user } = useAuth();
-    const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
@@ -128,16 +124,10 @@ export function AskAIClarification({ questionId }: { questionId: string }) {
         return (
             <div className="mt-4 p-6 bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/30 rounded-xl text-center">
                 <PsychologyOutlinedIcon sx={{ fontSize: '2.5rem' }} className="text-amber-500 mb-3" />
-                <h3 className="text-lg font-bold text-amber-400 mb-2">Limit Reached</h3>
-                <p className="text-neutral-300 text-sm mb-4">
-                    You've reached your 2 free AI clarifications. Get Premium to ask unlimited follow-up questions for every problem!
+                <h3 className="text-lg font-bold text-amber-400 mb-2">Daily Limit Reached</h3>
+                <p className="text-neutral-300 text-sm">
+                    You&apos;ve used all your AI clarifications for today. Come back tomorrow for more!
                 </p>
-                <button
-                    onClick={() => router.push('/pricing')}
-                    className="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-xl hover:from-amber-400 hover:to-orange-400 transition-all shadow-lg shadow-amber-500/20"
-                >
-                    Upgrade to Premium
-                </button>
             </div>
         );
     }
@@ -163,11 +153,7 @@ export function AskAIClarification({ questionId }: { questionId: string }) {
                 <div className="flex items-center gap-2">
                     <PsychologyOutlinedIcon className="text-violet-400" />
                     <span className="font-bold text-violet-400 text-sm">AI Tutor</span>
-                    {!((user as any)?.config?.is_premium || (user as any)?.subscription?.status === 'ACTIVE') && (
-                        <span className="text-[10px] font-bold bg-neutral-800 text-neutral-400 px-2 py-0.5 rounded-full border border-neutral-700 uppercase tracking-wider">
-                            Free Trial
-                        </span>
-                    )}
+
                 </div>
                 <div className="flex items-center gap-1">
                     {messages.length > 0 && (

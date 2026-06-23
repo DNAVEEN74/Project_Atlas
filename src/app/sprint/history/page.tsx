@@ -1,18 +1,16 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import {
     ChevronLeftIcon,
     ChevronRightIcon,
-    BoltIcon,
-    TrendingUpIcon
+    BoltIcon
 } from '@/components/icons';
-import { TrophyIcon, InfoIcon, AlertTriangle, BookOpen, Zap } from 'lucide-react';
+import { TrophyIcon } from 'lucide-react';
 import Header from '@/components/layout/Header';
 import SummaryCards from '@/components/sprint/SummaryCards';
-import AccuracyTrendChart from '@/components/sprint/AccuracyTrendChart';
 
 interface SprintSubmission {
     id: string;
@@ -41,7 +39,6 @@ export default function SprintHistoryPage() {
         completedCount: 0,
         avgTimePerQuestion: 0
     });
-    const [chartData, setChartData] = useState<any[]>([]);
     const [pagination, setPagination] = useState({
         current: 1,
         total: 0,
@@ -51,7 +48,6 @@ export default function SprintHistoryPage() {
 
     const [isLoading, setIsLoading] = useState(true);
     const [filter, setFilter] = useState('ALL'); // ALL, QUANT, REASONING
-    const [analytics, setAnalytics] = useState<any>(null);
 
     // Fetch Data
     useEffect(() => {
@@ -67,24 +63,13 @@ export default function SprintHistoryPage() {
                     filter: filter
                 });
 
-                const [historyRes, analyticsRes] = await Promise.all([
-                    fetch(`/api/sprint/history?${params.toString()}`),
-                    fetch(`/api/sprint/analytics/global`) // Fetch global analytics once
-                ]);
+                const historyRes = await fetch(`/api/sprint/history?${params.toString()}`);
 
                 if (historyRes.ok) {
                     const data = await historyRes.json();
                     if (data.stats) setStats(data.stats);
                     if (data.sessions) setSessions(data.sessions);
-                    if (data.chartData) setChartData(data.chartData);
                     if (data.pagination) setPagination(prev => ({ ...prev, ...data.pagination }));
-                }
-
-                if (analyticsRes.ok) {
-                    const analyticsData = await analyticsRes.json();
-                    if (analyticsData.success && analyticsData.analytics) {
-                        setAnalytics(analyticsData.analytics);
-                    }
                 }
             } catch (error) {
                 console.error("Failed to fetch history:", error);
@@ -115,142 +100,6 @@ export default function SprintHistoryPage() {
             setPagination(prev => ({ ...prev, current: newPage }));
         }
     };
-
-    const filteredAnalytics = useMemo(() => {
-        if (!analytics) return null;
-        if (filter === 'ALL') return analytics;
-
-        return {
-            efficiency_matrix: analytics.efficiency_matrix.filter((t: any) => t.subject === filter),
-            red_zone_topics: analytics.red_zone_topics.filter((t: any) => t.subject === filter),
-            exam_readiness: analytics.exam_readiness.filter((t: any) => t.subject === filter),
-            difficulty_progression: analytics.difficulty_progression.filter((t: any) => t.subject === filter)
-        };
-    }, [analytics, filter]);
-
-    const smartSprints = useMemo(() => {
-        if (!filteredAnalytics) return [];
-
-        const sprints = [];
-
-        // 1. Fix Careless Mistakes
-        const careless = filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'CARELESS');
-        if (careless.length > 0) {
-            const primarySubject = careless[0].subject; // To ensure single-subject sprint creation
-            const topicsToUse = careless.filter((t: any) => t.subject === primarySubject).slice(0, 5).map((t: any) => t.pattern.replace(/_/g, ' '));
-            if (topicsToUse.length > 0) {
-                sprints.push({
-                    title: 'Fix Careless Mistakes',
-                    description: 'Focus on accuracy over speed for these fast-but-wrong topics.',
-                    icon: <AlertTriangle className="text-amber-500 w-5 h-5" />,
-                    color: 'text-amber-400 bg-amber-500/10 border-amber-500/20 hover:border-amber-500/40',
-                    params: `?subject=${primarySubject}&topics=${encodeURIComponent(topicsToUse.join(','))}&difficulty=MEDIUM&count=10`
-                });
-            }
-        }
-
-        // 2. Speed Drills
-        const needsSpeed = filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'NEEDS_SPEED');
-        if (needsSpeed.length > 0) {
-            const primarySubject = needsSpeed[0].subject;
-            const topicsToUse = needsSpeed.filter((t: any) => t.subject === primarySubject).slice(0, 5).map((t: any) => t.pattern.replace(/_/g, ' '));
-            if (topicsToUse.length > 0) {
-                sprints.push({
-                    title: 'Speed Drills',
-                    description: 'You know these well. Now push your speed to the limit.',
-                    icon: <BoltIcon className="text-blue-500" />,
-                    color: 'text-blue-400 bg-blue-500/10 border-blue-500/20 hover:border-blue-500/40',
-                    params: `?subject=${primarySubject}&topics=${encodeURIComponent(topicsToUse.join(','))}&difficulty=EASY&count=15`
-                });
-            }
-        }
-
-        // 3. Level Up Challenge
-        const mastered = filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'MASTERED');
-        if (mastered.length > 0) {
-            const primarySubject = mastered[0].subject;
-            const topicsToUse = mastered.filter((t: any) => t.subject === primarySubject).slice(0, 5).map((t: any) => t.pattern.replace(/_/g, ' '));
-            if (topicsToUse.length > 0) {
-                sprints.push({
-                    title: 'Level Up Challenge',
-                    description: 'Test your true mastery with Hard difficulty questions.',
-                    icon: <TrophyIcon className="text-emerald-500 w-5 h-5" />,
-                    color: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20 hover:border-emerald-500/40',
-                    params: `?subject=${primarySubject}&topics=${encodeURIComponent(topicsToUse.join(','))}&difficulty=HARD&count=10`
-                });
-            }
-        }
-
-        // 4. Fundamentals Review (if space permits)
-        const review = filteredAnalytics.efficiency_matrix.filter((t: any) => t.category === 'NEEDS_REVIEW');
-        if (review.length > 0 && sprints.length < 3) {
-            const primarySubject = review[0].subject;
-            const topicsToUse = review.filter((t: any) => t.subject === primarySubject).slice(0, 5).map((t: any) => t.pattern.replace(/_/g, ' '));
-            if (topicsToUse.length > 0) {
-                sprints.push({
-                    title: 'Fundamentals Review',
-                    description: 'Take your time. Focus purely on getting these right.',
-                    icon: <BookOpen className="text-rose-500 w-5 h-5" />,
-                    color: 'text-rose-400 bg-rose-500/10 border-rose-500/20 hover:border-rose-500/40',
-                    params: `?subject=${primarySubject}&topics=${encodeURIComponent(topicsToUse.join(','))}&difficulty=EASY&count=10`
-                });
-            }
-        }
-
-        return sprints.slice(0, 3); // Max 3 cards
-    }, [filteredAnalytics]);
-
-    const efficiencyGroups = useMemo(() => {
-        if (!filteredAnalytics?.efficiency_matrix) return [];
-
-        const groupConfig = [
-            {
-                key: 'MASTERED',
-                title: 'Mastered',
-                tone: 'Fast & accurate',
-                hint: 'Try a harder level to keep improving.',
-                containerClass: 'bg-emerald-500/5 border-emerald-500/20',
-                titleClass: 'text-emerald-400',
-                chipClass: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20',
-                emptyClass: 'text-emerald-500/60'
-            },
-            {
-                key: 'CARELESS',
-                title: 'Careless Mistakes',
-                tone: 'Fast & inaccurate',
-                hint: 'Slow down and re-check before submitting.',
-                containerClass: 'bg-amber-500/5 border-amber-500/20',
-                titleClass: 'text-amber-400',
-                chipClass: 'bg-amber-500/10 text-amber-300 border-amber-500/20',
-                emptyClass: 'text-amber-500/60'
-            },
-            {
-                key: 'NEEDS_SPEED',
-                title: 'Needs Speed',
-                tone: 'Slow & accurate',
-                hint: 'Use timed drills to build pace.',
-                containerClass: 'bg-blue-500/5 border-blue-500/20',
-                titleClass: 'text-blue-400',
-                chipClass: 'bg-blue-500/10 text-blue-300 border-blue-500/20',
-                emptyClass: 'text-blue-500/60'
-            },
-            {
-                key: 'NEEDS_REVIEW',
-                title: 'Review Concepts',
-                tone: 'Slow & inaccurate',
-                hint: 'Revisit foundations before more sprints.',
-                containerClass: 'bg-rose-500/5 border-rose-500/20',
-                titleClass: 'text-rose-400',
-                chipClass: 'bg-rose-500/10 text-rose-300 border-rose-500/20',
-                emptyClass: 'text-rose-500/60'
-            }
-        ];
-
-        return groupConfig.map((group) => ({
-            ...group,
-            topics: filteredAnalytics.efficiency_matrix.filter((topic: any) => topic.category === group.key)
-        }));
-    }, [filteredAnalytics]);
 
     if (loading) return null;
 
@@ -335,222 +184,6 @@ export default function SprintHistoryPage() {
                             completedCount={stats.completedCount}
                             avgTimePerQuestion={stats.avgTimePerQuestion}
                         />
-
-                        {/* Smart Global Analytics Dashboard */}
-                        {filteredAnalytics && (
-                            <section className="space-y-6">
-                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                                    <div className="lg:col-span-8 space-y-6">
-                                        {/* <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6">
-                                            <div className="flex items-center justify-between gap-3 mb-6">
-                                                <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                                                    <TrophyIcon className="w-5 h-5 text-amber-500" />
-                                                    Exam Readiness
-                                                </h2>
-                                                <span className="text-[11px] text-neutral-500 uppercase tracking-widest font-bold">
-                                                    Accuracy and Speed
-                                                </span>
-                                            </div>
-
-                                            <div className="space-y-4">
-                                                {filteredAnalytics.exam_readiness.slice(0, 5).map((topic: any, idx: number) => {
-                                                    const scoreColor = topic.score >= 80 ? 'bg-emerald-500' :
-                                                        topic.score >= 65 ? 'bg-amber-500' :
-                                                            topic.score >= 40 ? 'bg-blue-500' : 'bg-rose-500';
-
-                                                    return (
-                                                        <div key={idx} className="space-y-1.5">
-                                                            <div className="flex items-center justify-between gap-3">
-                                                                <div className="flex items-center gap-2 min-w-0">
-                                                                    <span className="text-sm font-semibold text-neutral-200 truncate">{topic.pattern.replace(/_/g, ' ')}</span>
-                                                                    <span className="text-[10px] uppercase px-1.5 py-0.5 rounded border border-neutral-700 text-neutral-500 shrink-0">{topic.subject}</span>
-                                                                </div>
-                                                                <div className="flex items-center gap-2 shrink-0">
-                                                                    <span className="text-xs text-neutral-400">{topic.label}</span>
-                                                                    <span className="text-sm font-bold text-white">{topic.score}/100</span>
-                                                                </div>
-                                                            </div>
-                                                            <div className="h-2 w-full bg-neutral-900 rounded-full overflow-hidden">
-                                                                <div className={`h-full ${scoreColor} transition-all duration-700`} style={{ width: `${topic.score}%` }}></div>
-                                                            </div>
-                                                        </div>
-                                                    );
-                                                })}
-
-                                                {filteredAnalytics.exam_readiness.length === 0 && (
-                                                    <p className="text-sm text-neutral-500 text-center py-4">
-                                                        Complete more varied sprints to see readiness scores.
-                                                    </p>
-                                                )}
-                                            </div>
-                                        </div> */}
-
-                                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6">
-                                            <div className="flex items-center justify-between mb-4">
-                                                <h2 className="text-lg font-bold text-white">Efficiency Matrix Summary</h2>
-                                                <span className="text-xs text-neutral-500">{filteredAnalytics.efficiency_matrix.length} tagged topics</span>
-                                            </div>
-
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                {efficiencyGroups.map((group) => (
-                                                    <div key={group.key} className={`rounded-xl border p-4 ${group.containerClass}`}>
-                                                        <div className="flex items-start justify-between gap-3">
-                                                            <div>
-                                                                <p className={`text-sm font-bold ${group.titleClass}`}>{group.title}</p>
-                                                                <p className="text-[11px] uppercase tracking-wide text-neutral-500 mt-0.5">{group.tone}</p>
-                                                                <p className="text-xs text-neutral-400 mt-2">{group.hint}</p>
-                                                            </div>
-                                                            <span className={`text-2xl font-black ${group.titleClass}`}>{group.topics.length}</span>
-                                                        </div>
-
-                                                        <div className="mt-3 flex flex-wrap gap-2 max-h-24 overflow-y-auto pr-1 custom-scrollbar">
-                                                            {group.topics.map((topic: any) => (
-                                                                <span
-                                                                    key={topic.pattern}
-                                                                    className={`text-xs font-semibold px-2 py-1 rounded-md border ${group.chipClass}`}
-                                                                    title={topic.message}
-                                                                >
-                                                                    {topic.pattern.replace(/_/g, ' ')}
-                                                                </span>
-                                                            ))}
-                                                            {group.topics.length === 0 && (
-                                                                <span className={`text-xs italic ${group.emptyClass}`}>No topics in this category yet.</span>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="lg:col-span-4 space-y-6">
-                                        <div className="bg-[#1a1a1a] border border-rose-900/40 rounded-2xl p-6 relative overflow-hidden">
-                                            <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/5 rounded-full blur-3xl -mr-10 -mt-10"></div>
-                                            <h2 className="text-lg font-bold text-rose-400 flex items-center gap-2 mb-2 relative z-10">
-                                                <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.7)]"></span>
-                                                Red Zone Topics
-                                            </h2>
-                                            <p className="text-sm text-neutral-400 mb-4 relative z-10">Topics pulling down your current performance.</p>
-
-                                            <div className="space-y-3 relative z-10">
-                                                {filteredAnalytics.red_zone_topics.length > 0 ? filteredAnalytics.red_zone_topics.map((topic: any, idx: number) => (
-                                                    <div key={idx} className="bg-neutral-900/80 border border-rose-900/30 rounded-xl p-3">
-                                                        <div className="flex justify-between items-center mb-2">
-                                                            <span className="text-sm font-bold text-neutral-200">{topic.pattern.replace(/_/g, ' ')}</span>
-                                                            <span className="text-sm font-bold text-rose-500">{topic.accuracy}% acc</span>
-                                                        </div>
-                                                        <Link
-                                                            href={`/sprint?subject=${topic.subject}&topics=${encodeURIComponent(topic.pattern.replace(/_/g, ' '))}&difficulty=EASY&count=5`}
-                                                            className="block w-full text-center text-xs py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 font-bold rounded-lg transition-colors border border-rose-500/20"
-                                                        >
-                                                            Practice Now
-                                                        </Link>
-                                                    </div>
-                                                )) : (
-                                                    <div className="text-center py-6">
-                                                        <p className="text-sm text-emerald-400 font-semibold mb-1">No red-zone topics right now.</p>
-                                                        <p className="text-xs text-neutral-500">Keep practicing to maintain this trend.</p>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        </div>
-
-                                        {filteredAnalytics.difficulty_progression.length > 0 && (
-                                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6">
-                                                <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                                    <TrendingUpIcon sx={{ fontSize: '1.2rem' }} className="text-emerald-400" />
-                                                    Recommended Difficulty Moves
-                                                </h2>
-                                                <div className="space-y-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
-                                                    {filteredAnalytics.difficulty_progression.map((item: any, idx: number) => (
-                                                        <div key={idx} className="bg-neutral-900 border border-neutral-800 p-3 rounded-xl flex items-start gap-3">
-                                                            <div className={`mt-1 bg-neutral-800 rounded-full px-2 py-1 text-[10px] font-bold ${item.recommendation === 'LEVEL_UP' ? 'text-emerald-400' : 'text-rose-400'}`}>
-                                                                {item.recommendation === 'LEVEL_UP' ? 'UP' : 'DOWN'}
-                                                            </div>
-                                                            <div>
-                                                                <p className="text-sm font-bold text-white mb-0.5">{item.pattern.replace(/_/g, ' ')}</p>
-                                                                <p className="text-xs text-neutral-400 leading-relaxed">{item.message}</p>
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-
-                                        {filteredAnalytics.topic_correlation && filteredAnalytics.topic_correlation.length > 0 && (
-                                            <div className="bg-[#1a1a1a] border border-indigo-500/20 rounded-2xl p-6">
-                                                <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                                    <InfoIcon className="w-5 h-5 text-indigo-400" />
-                                                    Topic Interconnections
-                                                </h2>
-                                                <p className="text-xs text-neutral-400 mb-4">Insights based on related topic performance.</p>
-                                                <div className="space-y-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
-                                                    {filteredAnalytics.topic_correlation.map((item: any, idx: number) => (
-                                                        <div key={idx} className="bg-indigo-500/5 border border-indigo-500/20 p-3 rounded-xl relative overflow-hidden">
-                                                            <div className="absolute top-0 right-0 w-16 h-16 bg-indigo-500/10 rounded-full blur-2xl -mr-8 -mt-8"></div>
-                                                            <p className="text-sm text-neutral-300 leading-relaxed relative z-10">{item.message}</p>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-
-                                        {filteredAnalytics.consistency_alerts && filteredAnalytics.consistency_alerts.length > 0 && (
-                                            <div className="bg-[#1a1a1a] border border-amber-500/20 rounded-2xl p-6">
-                                                <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                                    <AlertTriangle className="w-5 h-5 text-amber-400" />
-                                                    Consistency Warnings
-                                                </h2>
-                                                <p className="text-xs text-neutral-400 mb-4">Topics with volatile scores across recent sessions.</p>
-                                                <div className="space-y-3 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
-                                                    {filteredAnalytics.consistency_alerts.map((item: any, idx: number) => (
-                                                        <div key={idx} className="bg-amber-500/5 border border-amber-500/20 p-3 rounded-xl relative overflow-hidden">
-                                                            <div className="absolute top-0 right-0 w-16 h-16 bg-amber-500/10 rounded-full blur-2xl -mr-8 -mt-8"></div>
-                                                            <p className="text-sm font-bold text-amber-400 mb-1 relative z-10">{item.topic.replace(/_/g, ' ')}</p>
-                                                            <p className="text-xs text-neutral-300 mb-3 leading-relaxed relative z-10">{item.message}</p>
-                                                            <div className="flex gap-1 items-end h-8 relative z-10">
-                                                                {item.history.map((acc: number, hIdx: number) => (
-                                                                    <div key={hIdx} className="w-1.5 h-full bg-neutral-800 rounded-sm relative overflow-hidden" title={`${acc}%`}>
-                                                                        <div className={`absolute bottom-0 left-0 right-0 transition-all ${acc >= 70 ? 'bg-emerald-500' : acc >= 40 ? 'bg-amber-500' : 'bg-rose-500'}`} style={{ height: `${Math.max(10, acc)}%` }}></div>
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-
-                                {smartSprints.length > 0 && (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                                        {smartSprints.map((sprint, idx) => (
-                                            <Link
-                                                key={idx}
-                                                href={`/sprint${sprint.params}`}
-                                                className={`flex flex-col p-5 bg-[#1a1a1a] border rounded-2xl group transition-all duration-300 ${sprint.color}`}
-                                            >
-                                                <div className="flex items-center gap-3 mb-3">
-                                                    <div className="p-2.5 rounded-xl bg-black/40 group-hover:scale-110 transition-transform duration-300">
-                                                        {sprint.icon}
-                                                    </div>
-                                                    <h3 className="text-base font-bold text-white group-hover:text-amber-400 transition-colors">{sprint.title}</h3>
-                                                </div>
-                                                <p className="text-sm font-medium opacity-80 mb-6 flex-1">{sprint.description}</p>
-                                                <div className="flex items-center text-xs font-bold uppercase tracking-wider gap-1">
-                                                    Start Smart Sprint <ChevronRightIcon className="w-4 h-4" />
-                                                </div>
-                                            </Link>
-                                        ))}
-                                    </div>
-                                )}
-                            </section>
-                        )}
-                        {/* Chart - Use separate chartData */}
-                        {/* <div className="[&>div]:mb-0">
-                            <AccuracyTrendChart submissions={chartData} />
-                        </div> */}
 
                         {/* Pagination Table */}
                         {sessions.length > 0 && (

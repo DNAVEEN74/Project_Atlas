@@ -15,7 +15,7 @@ export default function Footer() {
                       </div>
                   </Link>
                   <p className="text-[11px] text-neutral-600 font-medium max-w-[200px] leading-relaxed">
-                    Built for aspirants who prioritize elite performance. The systematic choice for CGL mastery.
+                    Built for aspirants who prioritize elite performance. The definitive choice for CGL mastery.
                   </p>
                 </div>
 
@@ -24,14 +24,14 @@ export default function Footer() {
                         <span className="text-[10px] font-black text-neutral-700 uppercase tracking-widest mb-1">Platform</span>
                         <Link href="/problems" className="hover:text-white transition-colors">Problem Repository</Link>
                         <Link href="/sprint" className="hover:text-white transition-colors">Sprint Training</Link>
-                        <Link href="/pricing" className="hover:text-white transition-colors">Pricing Engine</Link>
+
                     </div>
 
                     <div className="flex flex-col gap-3">
                         <span className="text-[10px] font-black text-neutral-700 uppercase tracking-widest mb-1">Legal</span>
                         <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
                         <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                        <Link href="/refund" className="hover:text-white transition-colors">Refund Policy</Link>
+
                     </div>
 
                     <div className="flex flex-col gap-3">

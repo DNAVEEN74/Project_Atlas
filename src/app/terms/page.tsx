@@ -16,7 +16,7 @@ export default function TermsPage() {
         const handleScroll = () => {
             setScrolled(window.scrollY > 10);
             const sections = [
-                'agreement', 'account', 'subscription', 'usage',
+                'agreement', 'account', 'usage',
                 'intellectual', 'disclaimers', 'liability', 'indemnification',
                 'governing', 'general', 'contact', 'acknowledgment'
             ];
@@ -51,7 +51,7 @@ export default function TermsPage() {
     const sidebarLinks = [
         { id: 'agreement', label: 'Acceptance of Terms' },
         { id: 'account', label: 'Account & Security' },
-        { id: 'subscription', label: 'Subscription & Billing' },
+        { id: 'platform-access', label: 'Platform Access' },
         { id: 'usage', label: 'Platform Usage' },
         { id: 'intellectual', label: 'Intellectual Property' },
         { id: 'disclaimers', label: 'Disclaimers' },
@@ -87,8 +87,7 @@ export default function TermsPage() {
                     {[
                       { n: 'Home', h: '/' },
                       { n: 'Problems', h: '/problems' },
-                      { n: 'Sprint Mode', h: '/sprint' },
-                      { n: 'Pricing', h: '/pricing' }
+                      { n: 'Sprint Mode', h: '/sprint' }
                     ].map((item) => (
                       <Link 
                         key={item.n} 
@@ -130,7 +129,6 @@ export default function TermsPage() {
                         { n: 'Home', h: '/' },
                         { n: 'Problems', h: '/problems' },
                         { n: 'Sprint Mode', h: '/sprint' },
-                        { n: 'Pricing', h: '/pricing' },
                         { n: 'Login', h: '/login' }
                       ].map((item) => (
                         <Link 
@@ -227,38 +225,9 @@ export default function TermsPage() {
                             </div>
                         </section>
 
-                        <section id="subscription" className="scroll-mt-32 mb-20 text-neutral-400">
-                            <h2 className="text-xl font-bold text-white mb-6">3. Subscription Plans and Billing</h2>
-                            <p className="mb-8">PrepLeague operates on a tiered access model designed for long-term consistency.</p>
-
-                            <div className="overflow-hidden rounded-2xl border border-neutral-800 mb-8 bg-[#1a1a1a]">
-                                <table className="w-full text-left border-collapse">
-                                    <thead>
-                                        <tr className="bg-neutral-900/50">
-                                            <th className="p-4 text-[10px] font-black text-neutral-500 uppercase tracking-widest border-b border-neutral-800">Tier</th>
-                                            <th className="p-4 text-[10px] font-black text-neutral-500 uppercase tracking-widest border-b border-neutral-800">Protocol</th>
-                                            <th className="p-4 text-[10px] font-black text-neutral-500 uppercase tracking-widest border-b border-neutral-800">Features</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-neutral-800 text-sm">
-                                        <tr>
-                                            <td className="p-4 font-bold text-white">Free</td>
-                                            <td className="p-4 font-mono">₹0</td>
-                                            <td className="p-4 text-neutral-500">1 Sprint/day, 2 AI clarifies</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="p-4 font-bold text-white">Monthly</td>
-                                            <td className="p-4 font-mono">₹99</td>
-                                            <td className="p-4 text-neutral-500">Unlimited access & analytics</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="p-4 font-bold text-amber-500">Yearly</td>
-                                            <td className="p-4 font-mono">₹499</td>
-                                            <td className="p-4 text-neutral-300">Best Value (Ad-free)</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <section id="platform-access" className="scroll-mt-32 mb-20 text-neutral-400">
+                            <h2 className="text-xl font-bold text-white mb-6">3. Platform Access</h2>
+                            <p className="mb-8">PrepLeague is an elite platform with daily usage limits to ensure fair access for all users. Features and limits may change as the platform evolves.</p>
                         </section>
 
                         <section id="usage" className="scroll-mt-32 mb-20 text-neutral-400 leading-relaxed">

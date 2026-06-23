@@ -25,6 +25,7 @@ interface DailyProgressHeroProps {
         accuracy?: number;
         questionCount?: number;
     }[];
+    heatmap?: any[];
 }
 
 const DailyProgressHero = ({
@@ -49,10 +50,10 @@ const DailyProgressHero = ({
 
     if (isGoalMet) {
         buttonText = "Goal Complete! Any More?";
-        buttonIcon = <CheckCircleIcon className="text-emerald-500 w-5 h-5" />;
+        buttonIcon = <CheckCircleIcon className="text-black/80 w-5 h-5" />;
     } else if (dailySolved > 0) {
         buttonText = "Continue Practice";
-        buttonIcon = <PlayArrowIcon className="text-emerald-500 w-5 h-5" />;
+        buttonIcon = <PlayArrowIcon className="text-black/80 w-5 h-5" />;
     }
 
     return (
@@ -65,8 +66,6 @@ const DailyProgressHero = ({
 
                 {/* Left: Progress & Status */}
                 <div className="flex-1 space-y-5">
-
-
 
                     {/* Header Row */}
                     <div className="flex items-center justify-between">
@@ -82,7 +81,7 @@ const DailyProgressHero = ({
                                 </>
                             ) : (
                                 <>
-                                    <span className="text-lg">💤</span>
+                                    <span className="text-sm">😴</span>
                                     <span className="text-sm font-medium text-neutral-400">No active streak</span>
                                 </>
                             )}
@@ -133,7 +132,7 @@ const DailyProgressHero = ({
                             {/* Quant Topics */}
                             {weakTopicsQuant.length > 0 && (
                                 <div className="flex flex-wrap gap-2">
-                                    <span className="text-[10px] font-bold text-blue-400 bg-blue-500/10 px-1.5 py-1 rounded-full self-center border border-blue-500/20">QUANT</span>
+                                    <span className="inline-flex items-center justify-center text-[10px] font-bold text-blue-400 bg-blue-500/10 px-2 h-5 rounded-full border border-blue-500/20">QUANT</span>
                                     {weakTopicsQuant.slice(0, 3).map((topic, idx) => (
                                         <div key={idx} className="flex items-center gap-1 bg-neutral-800/40 border border-neutral-800 rounded-lg px-2 py-1 text-[11px] text-neutral-300 transition-colors hover:border-blue-500/30 hover:bg-blue-500/5">
                                             {/* Removed warning icon as requested */}
@@ -146,7 +145,7 @@ const DailyProgressHero = ({
                             {/* Reasoning Topics */}
                             {weakTopicsReasoning.length > 0 && (
                                 <div className="flex flex-wrap gap-2">
-                                    <span className="text-[10px] font-bold text-purple-400 bg-purple-500/10 px-1.5 py-1 rounded-full self-center border border-purple-500/20">REASON</span>
+                                    <span className="inline-flex items-center justify-center text-[10px] font-bold text-purple-400 bg-purple-500/10 px-2 h-5 rounded-full border border-purple-500/20">REASON</span>
                                     {weakTopicsReasoning.slice(0, 3).map((topic, idx) => (
                                         <div key={idx} className="flex items-center gap-1 bg-neutral-800/40 border border-neutral-800 rounded-lg px-2 py-1 text-[11px] text-neutral-300 transition-colors hover:border-purple-500/30 hover:bg-purple-500/5">
                                             {/* Removed warning icon as requested */}
@@ -167,7 +166,7 @@ const DailyProgressHero = ({
                     {/* Action Buttons */}
                     <div className="flex gap-3 mt-auto">
                         <Link href="/problems" className="flex-1">
-                            <button className="w-full h-12 bg-white text-black font-bold rounded-xl hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-white/5 active:scale-[0.98] duration-200">
+                            <button className="w-full h-12 bg-amber-500 text-black font-bold rounded-xl hover:bg-amber-400 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 active:scale-[0.98] duration-200">
                                 {buttonIcon}
                                 {buttonText}
                             </button>
@@ -179,8 +178,8 @@ const DailyProgressHero = ({
                             </button>
                         </Link>
                     </div>
-
                 </div>
+
             </div>
 
             {/* Animation Styles */}

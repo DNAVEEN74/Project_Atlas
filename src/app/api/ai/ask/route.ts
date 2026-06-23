@@ -26,21 +26,22 @@ export async function POST(req: Request) {
 
         await dbConnect();
 
-        // 1. Validate User limits
+        // 1. Validate User limits (daily cap controlled by env)
         const user = await User.findById(userPayload.userId);
         if (!user) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
-        const isPremium = user.config?.is_premium;
-        if (!isPremium) {
-            const used = user.stats?.free_ai_questions_used || 0;
-            if (used >= 2) {
-                return NextResponse.json({
-                    error: 'LIMIT_REACHED',
-                    message: 'You have reached your 2 free AI clarification questions. Please upgrade to Premium for unlimited access.'
-                }, { status: 403 });
-            }
+        const DAILY_LIMIT = parseInt(process.env.DAILY_AI_QUESTION_LIMIT || '3', 10);
+        const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+        const lastDate = user.stats?.ai_questions_date || '';
+        const usedToday = lastDate === today ? (user.stats?.ai_questions_today || 0) : 0;
+
+        if (usedToday >= DAILY_LIMIT) {
+            return NextResponse.json({
+                error: 'LIMIT_REACHED',
+                message: `You've used all ${DAILY_LIMIT} AI clarifications for today. Come back tomorrow!`
+            }, { status: 429 });
         }
 
         // 2. Fetch Question Context
@@ -81,12 +82,17 @@ GUARDRAILS (CRITICAL):
             }
         });
 
-        // 4. Mark usage if free tier only after successful API initialization
-        if (!isPremium) {
-            await User.findByIdAndUpdate(user._id, {
-                $inc: { 'stats.free_ai_questions_used': 1 }
-            });
+        // 4. Increment daily usage counter
+        const updateFields: Record<string, any> = {
+            $set: { 'stats.ai_questions_date': today },
+        };
+        if (lastDate !== today) {
+            // New day — reset counter to 1
+            updateFields.$set['stats.ai_questions_today'] = 1;
+        } else {
+            updateFields.$inc = { 'stats.ai_questions_today': 1 };
         }
+        await User.findByIdAndUpdate(user._id, updateFields);
 
         const readableStream = new ReadableStream({
             async start(controller) {

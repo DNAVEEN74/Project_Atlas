@@ -122,39 +122,7 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
-        // --- PREMIUM PRO ENGINE AGGREGATIONS ---
-        let premium_insights = null;
-        if (user.config?.is_premium) {
-            const [premiumAttempts, premiumSessions] = await Promise.all([
-                // 1. Time-Drain Scatter Plot (Last 500 attempts)
-                Attempt.find(attemptMatch)
-                    .select('time_ms difficulty is_correct pattern created_at')
-                    .sort({ created_at: -1 })
-                    .limit(500)
-                    .lean(),
-                
-                // 2. Fatigue Curve (Last 10 completed Sprints)
-                Session.find({ ...sessionMatch, status: 'COMPLETED', type: 'SPRINT' })
-                    .select('question_status started_at')
-                    .sort({ started_at: -1 })
-                    .limit(10)
-                    .lean()
-            ]);
 
-            // Clean the data payload
-            const mappedAttempts = premiumAttempts.map(a => ({
-                time_ms: a.time_ms,
-                difficulty: a.difficulty,
-                is_correct: a.is_correct,
-                pattern: a.pattern,
-                created_at: a.created_at
-            }));
-
-            premium_insights = {
-                recent_raw_attempts: mappedAttempts,
-                recent_fatigue_sessions: premiumSessions
-            };
-        }
 
         // --- DATA PROCESSING ---
 
@@ -348,8 +316,7 @@ export async function GET(req: NextRequest) {
                 advanced_insights: {
                     sprint_discipline,
                     completed_sessions: completedSessions,
-                    total_sessions: totalSessions,
-                    pro_engine: premium_insights
+                    total_sessions: totalSessions
                 }
             }
         });

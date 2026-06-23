@@ -1,5 +1,7 @@
 'use client';
 
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
@@ -9,9 +11,7 @@ import Statistics from '@/components/dashboard/Statistics';
 import Heatmap from '@/components/dashboard/Heatmap';
 import TopicPerformance from '@/components/dashboard/TopicPerformance';
 import RecentActivity from '@/components/dashboard/RecentActivity';
-import DifficultyBreakdown from '@/components/dashboard/DifficultyBreakdown';
-import QuickPracticeCard from '@/components/dashboard/QuickPracticeCard';
-import PremiumTeasers from '@/components/dashboard/PremiumTeasers';
+
 
 interface DashboardData {
     user: any;
@@ -52,7 +52,6 @@ export default function DashboardPage() {
             router.push('/');
             return;
         }
-
         if (user) {
             fetchDashboardData();
         }
@@ -60,8 +59,11 @@ export default function DashboardPage() {
 
     if (authLoading || loading) {
         return (
-            <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-10 w-10 border-4 border-indigo-500 border-t-transparent"></div>
+            <div className="min-h-screen bg-[#0f0f0f]">
+                <Header activePage="dashboard" />
+                <main className="flex items-center justify-center min-h-[60vh]">
+                    <div className="animate-spin rounded-full h-10 w-10 border-4 border-amber-500 border-t-transparent"></div>
+                </main>
             </div>
         );
     }
@@ -159,12 +161,9 @@ export default function DashboardPage() {
     });
 
     // 3. Stats Calculation (remains same logic, just using robust filtered list)
-    const filteredTotalSolved = filteredTopicStats.reduce((acc, t) => acc + t.correct, 0);
-    const filteredTotalQuestions = filteredTopicStats.reduce((acc, t) => acc + t.total, 0);
+    const filteredTotalSolved = filteredTopicStats.reduce((acc: any, t: any) => acc + t.correct, 0);
+    const filteredTotalQuestions = filteredTopicStats.reduce((acc: any, t: any) => acc + t.total, 0);
     const filteredAccuracy = filteredTotalQuestions > 0 ? filteredTotalSolved / filteredTotalQuestions : 0;
-
-    const filteredTimeWeight = filteredTopicStats.reduce((acc, t: any) => acc + ((t.avg_time_ms || 0) * t.total), 0);
-    const filteredAvgTime = filteredTotalQuestions > 0 ? filteredTimeWeight / filteredTotalQuestions : 0;
 
 
     // 4. Filter Recent Activity
@@ -181,40 +180,6 @@ export default function DashboardPage() {
 
         return normalizedSection === selectedSubject || normalizedSubject === selectedSubject;
     });
-
-
-    // 5. Filter Difficulty Stats
-    // Aggregate from raw subject-wise stats if available, otherwise fallback to global
-    // Data structure: Array of { _id: { difficulty, subject }, total, correct }
-    const difficultyRaw = (Array.isArray(data.difficulty_stats_raw) && data.difficulty_stats_raw.length > 0)
-        ? data.difficulty_stats_raw
-        : Object.entries(data.difficulty_stats || {}).map(([difficulty, value]: [string, any]) => ({
-            _id: { difficulty, subject: 'ALL' },
-            total: value?.total || 0,
-            correct: value?.correct || 0
-        }));
-
-    const filteredDifficultyStats = ['EASY', 'MEDIUM', 'HARD'].reduce((acc, level) => {
-        // Find all entries matching level and subject
-        const matches = difficultyRaw.filter((d: any) => {
-            const isLevel = d._id.difficulty === level;
-            if (!isLevel) return false;
-
-            if (selectedSubject === 'ALL') return true;
-            return normalizeSubject(d._id.subject) === selectedSubject;
-        });
-
-        const total = matches.reduce((sum: number, d: any) => sum + d.total, 0);
-        const correct = matches.reduce((sum: number, d: any) => sum + d.correct, 0);
-        // Avoid NaN
-        const accuracy = total > 0 ? correct / total : 0;
-
-        acc[level] = { total, correct, accuracy };
-        return acc;
-    }, {} as Record<string, { total: number, correct: number, accuracy: number }>);
-
-    // Find "On Fire" topic
-    const onFireTopic = data.topic_stats?.find((t: any) => t.accuracy >= 0.85 && t.total >= 10);
 
     return (
         <div className="min-h-screen bg-[#0f0f0f]">
@@ -270,27 +235,12 @@ export default function DashboardPage() {
                             }))}
                     />
 
-                    {/* 1.5 "On Fire" Topic Notification */}
-                    {onFireTopic && (
-                        <div className="w-full bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-transparent border border-orange-500/20 rounded-xl p-4 flex items-center justify-between animate-fade-in-up">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-xl">
-                                    🔥
-                                </div>
-                                <div>
-                                    <h4 className="text-orange-400 font-bold text-sm">You're on fire in {onFireTopic.display_name}!</h4>
-                                    <p className="text-neutral-400 text-xs">You've reached {Math.round(onFireTopic.accuracy * 100)}% accuracy with {onFireTopic.total} questions solved.</p>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
                     {/* Row 2: Stats + Heatmap */}
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                         <div className="lg:col-span-1">
                             <Statistics
+                                className="h-full"
                                 accuracy={filteredAccuracy}
-                                avg_time_ms={filteredAvgTime}
                                 total_solved={filteredTotalSolved}
                                 streak={streak}
                                 max_streak={maxStreak}
@@ -308,38 +258,13 @@ export default function DashboardPage() {
                         </div>
                     </div>
 
-                    {/* Row 3: Topic Performance + Quick Practice */}
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <div className="lg:col-span-2">
-                            <TopicPerformance stats={filteredTopicStats} selectedSubject={selectedSubject} />
-                        </div>
-                        <div className="lg:col-span-1">
-                            <QuickPracticeCard
-                                questions_left={Math.max(0, (data.daily_progress?.daily_goal || 20) - (data.daily_progress?.questions_solved || 0))}
-                                weak_topics={
-                                    data.topic_stats
-                                        .filter((t: any) => t.accuracy < 0.6 && t.total > 0)
-                                        .sort((a: any, b: any) => a.accuracy - b.accuracy)
-                                        .slice(0, 3)
-                                        .map((t: any) => t.display_name)
-                                }
-                            />
-                        </div>
-                    </div>
-
-                    {/* Row 4: Premium Analytics */}
-                    <PremiumTeasers
-                        isPremium={data.user?.config?.is_premium || false}
-                        topicStats={filteredTopicStats}
-                        overallAccuracy={data.overall_stats?.accuracy || 0}
-                        proEngineData={data.advanced_insights?.pro_engine}
-                    />
-
-                    {/* Row 5: Difficulty Breakdown + Recent Activity */}
+                    {/* Row 3: Topic Performance + Recent Activity */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <DifficultyBreakdown stats={filteredDifficultyStats} isGlobal={false} />
                         <div className="lg:col-span-1">
-                            <RecentActivity attempts={filteredRecentAttempts} />
+                            <TopicPerformance stats={filteredTopicStats} selectedSubject={selectedSubject} className="h-full" />
+                        </div>
+                        <div className="lg:col-span-1">
+                            <RecentActivity attempts={filteredRecentAttempts} className="h-full" />
                         </div>
                     </div>
 

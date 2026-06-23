@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
     title: 'Terms of Service — PrepLeague',
-    description: 'Review the Terms of Service for PrepLeague. Understand your rights, account policies, subscription billing, and usage guidelines for our SSC CGL exam preparation platform.',
+    description: 'Review the Terms of Service for PrepLeague. Understand your rights, account policies, and usage guidelines for our SSC CGL exam preparation platform.',
     openGraph: {
         title: 'Terms of Service — PrepLeague',
         description: 'Terms and conditions governing your use of PrepLeague.',

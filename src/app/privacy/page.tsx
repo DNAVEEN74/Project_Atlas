@@ -88,8 +88,7 @@ export default function PrivacyPage() {
                     {[
                       { n: 'Home', h: '/' },
                       { n: 'Problems', h: '/problems' },
-                      { n: 'Sprint Mode', h: '/sprint' },
-                      { n: 'Pricing', h: '/pricing' }
+                      { n: 'Sprint Mode', h: '/sprint' }
                     ].map((item) => (
                       <Link 
                         key={item.n} 
@@ -131,7 +130,6 @@ export default function PrivacyPage() {
                         { n: 'Home', h: '/' },
                         { n: 'Problems', h: '/problems' },
                         { n: 'Sprint Mode', h: '/sprint' },
-                        { n: 'Pricing', h: '/pricing' },
                         { n: 'Login', h: '/login' }
                       ].map((item) => (
                         <Link 
@@ -209,11 +207,10 @@ export default function PrivacyPage() {
                                     </ul>
                                 </div>
                                 <div>
-                                    <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">Financial Data</h4>
+                                    <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">Account Data</h4>
                                     <ul className="text-sm text-neutral-500 space-y-2 mb-0 list-none p-0">
-                                        <li>• Razorpay identifiers</li>
-                                        <li>• Billing geography</li>
-                                        <li>• Subscription status</li>
+                                        <li>• Account preferences</li>
+                                        <li>• Usage limits tracking</li>
                                     </ul>
                                 </div>
                                 <div className="mt-4">
@@ -253,8 +250,8 @@ export default function PrivacyPage() {
                             <p className="mb-6">We only transmit data to verified infrastructure partners required to maintain the platform:</p>
                             <div className="grid sm:grid-cols-2 gap-4">
                                <div className="bg-neutral-900 border border-neutral-800 p-5 rounded-2xl">
-                                  <span className="text-[10px] font-mono font-bold text-neutral-600 block mb-1">PAYMENT ENGINE</span>
-                                  <span className="text-sm text-white font-bold">Razorpay</span>
+                                  <span className="text-[10px] font-mono font-bold text-neutral-600 block mb-1">AI ENGINE</span>
+                                  <span className="text-sm text-white font-bold">Google Gemini</span>
                                </div>
                                <div className="bg-neutral-900 border border-neutral-800 p-5 rounded-2xl">
                                   <span className="text-[10px] font-mono font-bold text-neutral-600 block mb-1">INFRASTRUCTURE</span>
@@ -280,7 +277,7 @@ export default function PrivacyPage() {
                                 <div className="p-6 rounded-2xl bg-[#1a1a1a] border border-amber-500/10">
                                     <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-3">Advertising Cookies (Google AdSense)</h4>
                                     <p className="text-sm text-neutral-500 leading-relaxed mb-4">
-                                        PrepLeague uses <strong className="text-neutral-300">Google AdSense</strong> to display advertisements on the free tier. Google and its partners use cookies (including the <strong className="text-neutral-300">DoubleClick cookie</strong>) to serve ads based on your prior visits to this and other websites.
+                                        PrepLeague uses <strong className="text-neutral-300">Google AdSense</strong> to display advertisements on the platform. Google and its partners use cookies (including the <strong className="text-neutral-300">DoubleClick cookie</strong>) to serve ads based on your prior visits to this and other websites.
                                     </p>
                                     <ul className="text-sm text-neutral-500 space-y-2 list-none">
                                         <li>• Google's use of advertising cookies enables it and its partners to serve ads based on your visit to PrepLeague and other sites.</li>
@@ -313,8 +310,8 @@ export default function PrivacyPage() {
                                 <div className="flex gap-4">
                                   <div className="w-1 h-auto bg-emerald-500 rounded-full" />
                                   <div>
-                                    <h4 className="text-white font-bold text-sm uppercase tracking-widest">Financial Safety</h4>
-                                    <p className="text-sm text-neutral-500 leading-relaxed m-0">Zero local card storage. Every transaction is handled by PCI DSS compliant environments via Razorpay.</p>
+                                    <h4 className="text-white font-bold text-sm uppercase tracking-widest">Data Minimization</h4>
+                                    <p className="text-sm text-neutral-500 leading-relaxed m-0">We only collect and retain data necessary for platform functionality. No payment or financial data is stored locally.</p>
                                   </div>
                                 </div>
                             </div>

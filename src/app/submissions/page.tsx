@@ -81,6 +81,8 @@ export default function SubmissionsPage() {
 
     const ITEMS_PER_PAGE = 20;
 
+    const accentColor = subjectFilter === 'REASONING' ? 'violet' : 'amber';
+
     useEffect(() => {
         if (!loading && !user) {
             router.push('/login');
@@ -137,6 +139,20 @@ export default function SubmissionsPage() {
         setPagination((prev: any) => ({ ...prev, page }));
     };
 
+    const getPageNumbers = () => {
+        const totalPages = pagination.totalPages;
+        const current = pagination.page;
+        const pages: (number | string)[] = [];
+        if (totalPages <= 7) {
+            for (let i = 1; i <= totalPages; i++) pages.push(i);
+        } else {
+            if (current <= 3) pages.push(1, 2, 3, 4, '...', totalPages);
+            else if (current >= totalPages - 2) pages.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+            else pages.push(1, '...', current - 1, current, current + 1, '...', totalPages);
+        }
+        return pages;
+    };
+
     if (loading || !user) {
         return (
             <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
@@ -162,130 +178,7 @@ export default function SubmissionsPage() {
                         <h1 className="text-2xl font-bold text-white">All Submissions</h1>
                     </div>
 
-                    {/* Stats Card */}
-                    {stats && (
-                        <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 p-6 mb-8 relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-                            <h2 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                                <BarChartOutlinedIcon className="w-5 h-5 text-indigo-400" /> Your Submission Stats
-                            </h2>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {/* Left Column: General Stats */}
-                                <div className="space-y-6">
-                                    <div className="flex items-center justify-between text-sm">
-                                        <span className="text-neutral-400">Total Submissions</span>
-                                        <span className="text-white font-mono font-medium text-lg">{stats.total}</span>
-                                    </div>
-
-                                    <div className="space-y-4">
-                                        {/* Correct Bar */}
-                                        <div className="space-y-2">
-                                            <div className="flex items-center justify-between text-sm">
-                                                <span className="flex items-center gap-2 text-[#22C55E] font-medium">
-                                                    <CheckCircleOutlinedIcon sx={{ fontSize: '1rem' }} /> Correct
-                                                </span>
-                                                <span className="text-neutral-200 font-mono">
-                                                    {stats.correct} <span className="text-neutral-500">({stats.correctPct}%)</span>
-                                                </span>
-                                            </div>
-                                            <div className="w-full h-2.5 bg-neutral-800 rounded-full overflow-hidden">
-                                                <div className="h-full bg-[#22C55E] rounded-full" style={{ width: `${stats.correctPct}%` }}></div>
-                                            </div>
-                                        </div>
-
-                                        {/* Wrong Bar */}
-                                        <div className="space-y-2">
-                                            <div className="flex items-center justify-between text-sm">
-                                                <span className="flex items-center gap-2 text-[#EF4444] font-medium">
-                                                    <CancelIcon sx={{ fontSize: '1rem' }} /> Wrong
-                                                </span>
-                                                <span className="text-neutral-200 font-mono">
-                                                    {stats.wrong} <span className="text-neutral-500">({stats.wrongPct}%)</span>
-                                                </span>
-                                            </div>
-                                            <div className="w-full h-2.5 bg-neutral-800 rounded-full overflow-hidden">
-                                                <div className="h-full bg-[#EF4444] rounded-full" style={{ width: `${stats.wrongPct}%` }}></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="pt-4 border-t border-neutral-800">
-                                        <div className="flex items-center justify-between text-sm mb-1">
-                                            <span className="text-neutral-400 flex items-center gap-2">
-                                                <BoltIcon className="w-4 h-4 text-amber-500" /> Avg Time per Question
-                                            </span>
-                                            <span className="text-white font-mono text-lg">{stats.avgTimeSec}s</span>
-                                        </div>
-                                        <div className="text-xs text-neutral-500 flex items-center justify-end gap-2">
-                                            <span>Target: 36s</span>
-                                            {stats.avgTimeSec < 36 ? (
-                                                <span className="text-emerald-500">• Good Pace</span>
-                                            ) : (
-                                                <span className="text-amber-500">• Too Slow</span>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Right Column: Best/Worst Topic */}
-                                <div className="space-y-6 border-t md:border-t-0 md:border-l border-neutral-800 pt-6 md:pt-0 md:pl-8 flex flex-col justify-center">
-                                    {/* Best Topic */}
-                                    <div className="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10 group hover:border-emerald-500/20 transition-colors">
-                                        <div className="flex items-start justify-between mb-2">
-                                            <div className="space-y-1">
-                                                <div className="text-xs font-bold text-[#22C55E] uppercase tracking-wider">Best Topic</div>
-                                                <div className="text-white font-medium text-lg">
-                                                    {stats.bestTopic ? formatTopicName(stats.bestTopic.name) : '-'}
-                                                </div>
-                                            </div>
-                                            {stats.bestTopic && (
-                                                <div className="text-2xl font-bold text-[#22C55E]">
-                                                    {stats.bestTopic.accuracy}%
-                                                </div>
-                                            )}
-                                        </div>
-                                        {stats.bestTopic && (
-                                            <div className="text-xs text-neutral-400 font-mono">
-                                                {stats.bestTopic.correct}/{stats.bestTopic.total} Correct
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Worst Topic */}
-                                    <div className="p-4 rounded-xl bg-rose-500/5 border border-rose-500/10 group hover:border-rose-500/20 transition-colors">
-                                        <div className="flex items-start justify-between mb-2">
-                                            <div className="space-y-1">
-                                                <div className="text-xs font-bold text-[#EF4444] uppercase tracking-wider">Worst Topic</div>
-                                                <div className="text-white font-medium text-lg">
-                                                    {stats.worstTopic ? formatTopicName(stats.worstTopic.name) : '-'}
-                                                </div>
-                                            </div>
-                                            {stats.worstTopic && (
-                                                <div className="text-2xl font-bold text-[#EF4444]">
-                                                    {stats.worstTopic.accuracy}%
-                                                </div>
-                                            )}
-                                        </div>
-                                        {stats.worstTopic && (
-                                            <div className="flex items-center justify-between mt-3">
-                                                <div className="text-xs text-neutral-400 font-mono">
-                                                    {stats.worstTopic.total} Attempted
-                                                </div>
-                                                <Link
-                                                    href={`/problems?pattern=${stats.worstTopic.name}`}
-                                                    className="text-xs font-medium text-white bg-[#EF4444] hover:bg-rose-600 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1"
-                                                >
-                                                    Practice {formatTopicName(stats.worstTopic.name)} <ChevronRightIcon className="w-4 h-4 ml-1" />
-                                                </Link>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
 
                     {/* Filters */}
                     <div className="mb-6 flex flex-wrap gap-4">
@@ -383,27 +276,49 @@ export default function SubmissionsPage() {
                             )}
                         </div>
 
-                        {/* Pagination */}
-                        {pagination.total > 0 && (
-                            <div className="flex items-center justify-between px-6 py-4 bg-neutral-900/50 border-t border-neutral-800">
-                                <p className="text-sm text-neutral-500">
-                                    <span className="text-neutral-300 font-medium">{(pagination.page - 1) * ITEMS_PER_PAGE + 1}-{Math.min(pagination.page * ITEMS_PER_PAGE, pagination.total)}</span> of <span className="text-neutral-300 font-medium">{pagination.total}</span>
+                        {/* Pagination with Context */}
+                        {attempts.length > 0 && pagination.totalPages > 1 && (
+                            <div className="p-4 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                                <p className="text-xs text-neutral-500 font-medium">
+                                    Showing <span className="text-neutral-300 font-bold">{(pagination.page - 1) * ITEMS_PER_PAGE + 1}</span> to <span className="text-neutral-300 font-bold">{Math.min(pagination.page * ITEMS_PER_PAGE, pagination.total)}</span> of <span className="text-neutral-300 font-bold">{pagination.total}</span> submissions
                                 </p>
-                                <div className="flex gap-2">
+
+                                <div className="flex items-center gap-2">
                                     <button
                                         onClick={() => updatePage(pagination.page - 1)}
-                                        disabled={pagination.page <= 1}
-                                        className="p-2 text-neutral-500 hover:text-indigo-400 hover:bg-neutral-800 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition-colors border border-transparent hover:border-neutral-700"
+                                        disabled={pagination.page === 1}
+                                        aria-label="Previous page"
+                                        className="p-2 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                                     >
                                         <ChevronLeftIcon sx={{ fontSize: '1.2rem' }} />
                                     </button>
-                                    <span className="px-4 py-2 text-sm text-neutral-400 font-medium">
-                                        Page {pagination.page} of {pagination.totalPages}
-                                    </span>
+
+                                    <div className="flex items-center gap-1">
+                                        {getPageNumbers().map((p, i) => (
+                                            p === '...' ? (
+                                                <span key={i} className="px-2 text-neutral-600 text-sm">...</span>
+                                            ) : (
+                                                <button
+                                                    key={i}
+                                                    onClick={() => updatePage(p as number)}
+                                                    className={`w-9 h-9 flex items-center justify-center rounded-xl text-sm font-bold transition-all ${pagination.page === p
+                                                        ? accentColor === 'amber'
+                                                            ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
+                                                            : 'bg-violet-500 text-white shadow-lg shadow-violet-500/20'
+                                                        : 'text-neutral-400 hover:bg-neutral-800 hover:text-neutral-200 border border-transparent hover:border-neutral-800'
+                                                        }`}
+                                                >
+                                                    {p}
+                                                </button>
+                                            )
+                                        ))}
+                                    </div>
+
                                     <button
                                         onClick={() => updatePage(pagination.page + 1)}
-                                        disabled={pagination.page >= pagination.totalPages}
-                                        className="p-2 text-neutral-500 hover:text-indigo-400 hover:bg-neutral-800 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition-colors border border-transparent hover:border-neutral-700"
+                                        disabled={pagination.page === pagination.totalPages}
+                                        aria-label="Next page"
+                                        className="p-2 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                                     >
                                         <ChevronRightIcon sx={{ fontSize: '1.2rem' }} />
                                     </button>

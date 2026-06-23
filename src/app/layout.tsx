@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     default: "PrepLeague - SSC CGL Exam Preparation",
     template: "%s | PrepLeague",
   },
-  description: "Master SSC CGL with 3,000+ real PYQs, conceptual AI explanations, high-intensity Sprint drills, and precision analytics. The free practice platform for Quantitative Aptitude and Reasoning.",
+  description: "Master SSC CGL with 3,000+ real PYQs, conceptual AI explanations, high-intensity Sprint drills, and precision analytics. The elite practice platform for Quantitative Aptitude and Reasoning.",
   keywords: [
     "SSC CGL preparation",
     "SSC CGL PYQ",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "PYQ practice",
     "aptitude test",
     "competitive exam preparation",
-    "free mock test",
+    "mock test",
     "SSC CGL 2024",
   ],
   authors: [{ name: "PrepLeague" }],
@@ -93,7 +93,7 @@ const organizationSchema = {
   name: "PrepLeague",
   url: BASE_URL,
   logo: `${BASE_URL}/logo-final.png`,
-  description: "Free online platform for SSC CGL, CHSL, and Bank exam preparation with PYQs, explanations, and practice tests.",
+  description: "Elite online platform for SSC CGL, CHSL, and Bank exam preparation with PYQs, explanations, and practice tests.",
   sameAs: [
     // Add your social profiles here as you create them
     // "https://twitter.com/prepleague",
