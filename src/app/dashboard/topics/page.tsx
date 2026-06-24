@@ -181,7 +181,7 @@ export default function TopicPerformancePage() {
                                 <CheckCircleIcon className="w-6 h-6" /> Mastered
                             </h2>
                             <motion.div variants={containerVariants} initial="hidden" animate="show" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                                {mastered.map(topic => (
+                                {mastered.map((topic: TopicStat) => (
                                     <motion.div key={topic.name} variants={itemVariants} className="h-full">
                                         <TopicCard topic={topic} />
                                     </motion.div>
@@ -197,7 +197,7 @@ export default function TopicPerformancePage() {
                                 <TrendingUpIcon className="w-6 h-6" /> Improving
                             </h2>
                             <motion.div variants={containerVariants} initial="hidden" animate="show" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                                {improving.map(topic => (
+                                {improving.map((topic: TopicStat) => (
                                     <motion.div key={topic.name} variants={itemVariants} className="h-full">
                                         <TopicCard topic={topic} />
                                     </motion.div>
@@ -213,7 +213,7 @@ export default function TopicPerformancePage() {
                                 <WarningIcon className="w-6 h-6" /> Needs Work
                             </h2>
                             <motion.div variants={containerVariants} initial="hidden" animate="show" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                                {needsWork.map(topic => (
+                                {needsWork.map((topic: TopicStat) => (
                                     <motion.div key={topic.name} variants={itemVariants} className="h-full">
                                         <TopicCard topic={topic} />
                                     </motion.div>
@@ -229,7 +229,7 @@ export default function TopicPerformancePage() {
                                 <BookIcon className="w-6 h-6" /> Not Started
                             </h2>
                             <motion.div variants={containerVariants} initial="hidden" animate="show" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                                {notStarted.map(topic => (
+                                {notStarted.map((topic: TopicStat) => (
                                     <motion.div key={topic.name} variants={itemVariants} className="h-full">
                                         <TopicCard topic={topic} />
                                     </motion.div>
