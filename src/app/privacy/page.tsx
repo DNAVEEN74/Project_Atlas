@@ -8,7 +8,7 @@ import { MenuIcon, CloseIcon } from '@/components/icons';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function PrivacyPage() {
-    const [activeSection, setActiveSection] = useState('info-collect');
+    const [activeSection, setActiveSection] = useState('data-collection');
     const [scrolled, setScrolled] = useState(false);
     const [showMobileMenu, setShowMobileMenu] = useState(false);
 
@@ -16,9 +16,8 @@ export default function PrivacyPage() {
         const handleScroll = () => {
             setScrolled(window.scrollY > 10);
             const sections = [
-                'info-collect', 'how-we-use', 'sharing', 'retention',
-                'rights', 'security', 'children', 'cookies',
-                'links', 'international', 'changes', 'contact', 'compliance'
+                'data-collection', 'data-usage', 'data-sharing',
+                'cookies', 'security', 'compliance', 'contact'
             ];
 
             for (const section of sections) {
@@ -49,28 +48,22 @@ export default function PrivacyPage() {
     };
 
     const sidebarLinks = [
-        { id: 'info-collect', label: 'Information We Collect' },
-        { id: 'how-we-use', label: 'How We Use Data' },
-        { id: 'sharing', label: 'Data Sharing Protocols' },
-        { id: 'retention', label: 'Data Retention' },
-        { id: 'rights', label: 'Your User Rights' },
-        { id: 'security', label: 'Security Infrastructure' },
-        { id: 'children', label: "Children's Privacy" },
+        { id: 'data-collection', label: 'Data Collection' },
+        { id: 'data-usage', label: 'Data Usage' },
+        { id: 'data-sharing', label: 'Data Sharing' },
         { id: 'cookies', label: 'Cookies & Advertising' },
-        { id: 'links', label: 'Third-Party Links' },
-        { id: 'international', label: 'International Transfers' },
-        { id: 'changes', label: 'Policy Transformations' },
-        { id: 'contact', label: 'Contact Privacy Team' },
+        { id: 'security', label: 'Security Infrastructure' },
         { id: 'compliance', label: 'Legal Compliance' },
+        { id: 'contact', label: 'Contact Privacy Team' },
     ];
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] text-neutral-200 selection:bg-amber-500/30 selection:text-white font-sans antialiased">
+        <div className="min-h-screen bg-[#0a0a0a] text-neutral-200 selection:bg-amber-500/30 selection:text-white font-sans antialiased">
             
             {/* --- HEADER --- */}
             <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 border-b ${
               scrolled 
-                ? 'bg-[#1a1a1a]/90 backdrop-blur-md border-neutral-800/80 py-3' 
+                ? 'bg-[#0a0a0a]/80 backdrop-blur-xl border-[#1f1f1f] py-3' 
                 : 'bg-transparent border-transparent py-5'
             }`}>
               <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between">
@@ -93,7 +86,7 @@ export default function PrivacyPage() {
                       <Link 
                         key={item.n} 
                         href={item.h}
-                        className="px-4 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-neutral-800/50 rounded-full transition-all"
+                        className="px-4 py-2 text-sm font-medium text-neutral-400 hover:text-white hover:bg-[#1a1a1a] rounded-full transition-all"
                       >
                         {item.n}
                       </Link>
@@ -103,7 +96,7 @@ export default function PrivacyPage() {
 
                 <div className="flex items-center gap-4">
                   <Link href="/login" className="text-sm font-medium text-neutral-400 hover:text-white transition-colors hidden sm:block px-4">Log in</Link>
-                  <Link href="/register" className="px-6 py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-neutral-200 transition-all shadow-lg active:scale-95">
+                  <Link href="/register" className="px-6 py-2.5 bg-amber-500 text-black text-sm font-bold rounded-[20px] hover:bg-amber-400 transition-all shadow-lg active:scale-95">
                     Get Started
                   </Link>
                   <button className="lg:hidden p-2 text-neutral-400" onClick={() => setShowMobileMenu(true)}>
@@ -119,9 +112,9 @@ export default function PrivacyPage() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
-                    className="fixed inset-0 z-[200] lg:hidden bg-[#0f0f0f] flex flex-col"
+                    className="fixed inset-0 z-[200] lg:hidden bg-[#0a0a0a] flex flex-col"
                   >
-                    <div className="flex items-center justify-between p-6 border-b border-neutral-800">
+                    <div className="flex items-center justify-between p-6 border-b border-[#1f1f1f]">
                       <span className="text-xl font-bold text-white">Menu</span>
                       <button onClick={() => setShowMobileMenu(false)} className="text-neutral-400 p-2"><CloseIcon /></button>
                     </div>
@@ -136,7 +129,7 @@ export default function PrivacyPage() {
                           key={item.n}
                           href={item.h}
                           onClick={() => setShowMobileMenu(false)}
-                          className="px-4 py-4 rounded-xl text-lg font-medium text-neutral-300 hover:bg-neutral-800 transition-all"
+                          className="px-4 py-4 rounded-xl text-lg font-medium text-neutral-300 hover:bg-[#1a1a1a] transition-all"
                         >
                           {item.n}
                         </Link>
@@ -152,181 +145,194 @@ export default function PrivacyPage() {
 
                 {/* --- SIDEBAR (Sticky) --- */}
                 <aside className="hidden lg:block w-72 shrink-0">
-                    <div className="sticky top-32 space-y-8">
-                        <div className="space-y-4 pr-10">
-                          <h4 className="text-[10px] font-black text-neutral-600 uppercase tracking-[0.2em] px-1">Integrity Framework</h4>
-                          <nav className="flex flex-col">
+                    <div className="sticky top-32 bg-[#111111] border border-[#1f1f1f] rounded-[24px] p-4 space-y-4">
+                        <div className="px-4 pt-2 pb-1">
+                          <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-widest">Table of Contents</h4>
+                        </div>
+                        <nav className="flex flex-col list-none m-0 p-0 gap-1">
                               {sidebarLinks.map((link, i) => (
-                                  <button
-                                      key={link.id}
-                                      onClick={() => scrollToSection(link.id)}
-                                      className="group relative flex items-center gap-3 py-2 text-left transition-all"
-                                  >
-                                      <span className={`text-[10px] font-mono font-bold transition-colors ${activeSection === link.id ? 'text-white' : 'text-neutral-700'}`}>{String(i + 1).padStart(2, '0')}</span>
-                                      <span className={`text-sm font-semibold transition-colors ${activeSection === link.id ? 'text-white translate-x-1' : 'text-neutral-500 hover:text-neutral-300'}`}>
-                                          {link.label}
-                                      </span>
-                                  </button>
+                                  <li key={link.id} className="m-0 p-0">
+                                      <button
+                                          onClick={() => scrollToSection(link.id)}
+                                          className={`w-full flex items-center min-h-[56px] px-4 gap-4 rounded-[16px] text-left transition-colors ${
+                                              activeSection === link.id 
+                                                ? 'bg-amber-500/10 text-amber-500' 
+                                                : 'text-neutral-400 hover:bg-[#1a1a1a] hover:text-neutral-200'
+                                          }`}
+                                      >
+                                          <div className={`flex-shrink-0 text-xs font-mono font-bold transition-colors ${activeSection === link.id ? 'text-amber-500' : 'text-neutral-500'}`}>0{i + 1}</div>
+                                          <div className="flex-1 text-sm font-medium">
+                                              {link.label}
+                                          </div>
+                                      </button>
+                                  </li>
                               ))}
                           </nav>
-                        </div>
                     </div>
                 </aside>
 
                 {/* --- CONTENT --- */}
                 <main className="flex-1 max-w-3xl">
                     <div className="mb-16">
-                        <div className="inline-block px-3 py-1 rounded-full bg-neutral-800 border border-neutral-700 text-[10px] font-bold text-neutral-500 uppercase tracking-widest mb-10">
-                          Data Sovereignty
+                        {/* M3 Chip */}
+                        <div className="inline-flex items-center min-h-[32px] px-4 rounded-full bg-[#141414] border border-[#1f1f1f] mb-8">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2" />
+                          <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest">Data Protection</span>
                         </div>
                         <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-8 text-white">
                             Privacy Policy
                         </h1>
-                        <div className="flex items-center gap-3 text-xs font-mono font-bold text-neutral-500">
-                            <span>LAST UPDATED:</span>
-                            <span className="text-neutral-300 uppercase">FEBRUARY 18, 2026</span>
+                        <div className="flex items-center min-h-[48px] px-4 rounded-[16px] bg-[#111111] border border-[#1f1f1f] w-fit">
+                            <span className="text-xs font-mono font-bold text-neutral-500 mr-3">LAST UPDATED:</span>
+                            <span className="text-xs font-mono font-bold text-emerald-500 uppercase">FEBRUARY 18, 2026</span>
                         </div>
                     </div>
 
-                    <div className="prose prose-invert prose-neutral max-w-none">
-                        <p className="text-lg text-neutral-400 leading-relaxed font-medium mb-12">
-                          PrepLeague ("we," "us," or "our") operates prepleague.com. This Privacy Policy details our operational protocols for collecting and protecting your identity while you utilize our preparation engine.
+                    <div className="space-y-16">
+                        <p className="text-base text-neutral-400 leading-relaxed font-medium">
+                            At PrepLeague, we treat your preparation data with absolute sovereignty. This Privacy Policy details the strict protocols governing how we collect, store, and utilize your information to optimize your exam performance.
                         </p>
 
-                        <section id="info-collect" className="scroll-mt-32 mb-20">
-                            <h2 className="text-xl font-bold text-white mb-6">1. Information We Collect</h2>
-                            <p className="text-neutral-500 leading-relaxed mb-10">We collect granular data to optimize your performance engine and secure your preparation history.</p>
-
-                            <div className="grid md:grid-cols-2 gap-6 bg-[#1a1a1a] p-8 rounded-3xl border border-neutral-800">
-                                <div>
-                                    <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">Identity Data</h4>
-                                    <ul className="text-sm text-neutral-500 space-y-2 mb-0 list-none p-0">
-                                        <li>• Verified name & Email</li>
-                                        <li>• Hashed credentials</li>
-                                        <li>• Goal benchmarks</li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">Account Data</h4>
-                                    <ul className="text-sm text-neutral-500 space-y-2 mb-0 list-none p-0">
-                                        <li>• Account preferences</li>
-                                        <li>• Usage limits tracking</li>
-                                    </ul>
-                                </div>
-                                <div className="mt-4">
-                                    <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">Engine Metrics</h4>
-                                    <ul className="text-sm text-neutral-500 space-y-2 mb-0 list-none p-0 font-mono">
-                                        <li>• Precision stats (Accuracy)</li>
-                                        <li>• Sprint reflex timing</li>
-                                        <li>• Heatmap history</li>
-                                    </ul>
-                                </div>
+                        <section id="data-collection" className="scroll-mt-32">
+                            <h2 className="text-2xl font-bold text-white mb-6 tracking-tight">1. Data Collection</h2>
+                            <div className="p-2 bg-[#111111] border border-[#1f1f1f] rounded-[24px]">
+                                <ul className="flex flex-col m-0 p-0 list-none gap-2">
+                                    <li className="flex flex-col min-h-[72px] p-4 gap-1 hover:bg-[#1a1a1a] transition-colors rounded-[16px]">
+                                        <div className="text-sm font-bold text-white uppercase tracking-widest">Identity Vectors</div>
+                                        <div className="text-sm text-neutral-400 leading-relaxed">Name, email, and authentication tokens provided during registration.</div>
+                                    </li>
+                                    <li className="flex flex-col min-h-[72px] p-4 gap-1 hover:bg-[#1a1a1a] transition-colors rounded-[16px]">
+                                        <div className="text-sm font-bold text-white uppercase tracking-widest">Performance Telemetry</div>
+                                        <div className="text-sm text-neutral-400 leading-relaxed">Response times, accuracy metrics, concept mastery levels, and behavioral patterns within the platform.</div>
+                                    </li>
+                                    <li className="flex flex-col min-h-[72px] p-4 gap-1 hover:bg-[#1a1a1a] transition-colors rounded-[16px]">
+                                        <div className="text-sm font-bold text-white uppercase tracking-widest">Technical Telemetry</div>
+                                        <div className="text-sm text-neutral-400 leading-relaxed">IP address, browser signatures, and device metrics required for security verification and session continuity.</div>
+                                    </li>
+                                </ul>
                             </div>
                         </section>
 
-                        <section id="how-we-use" className="scroll-mt-32 mb-20 text-neutral-400">
-                            <h2 className="text-xl font-bold text-white mb-6">2. Utilization Protocol</h2>
-                            <div className="space-y-8">
-                                <div>
-                                    <h4 className="text-white font-bold text-sm tracking-wide">Performance Optimization</h4>
-                                    <p className="text-sm text-neutral-500 leading-relaxed mt-2">Personalizing your question repository and automating "Weakspot Drills" based on real-time accuracy metrics.</p>
-                                </div>
-                                <div>
-                                    <h4 className="text-white font-bold text-sm tracking-wide">Analytic Scaling</h4>
-                                    <p className="text-sm text-neutral-500 leading-relaxed mt-2">Generating predictive scores and visualized heatmaps to trace your growth across 365 days.</p>
-                                </div>
-                                <div>
-                                    <h4 className="text-white font-bold text-sm tracking-wide">Operational Integrity</h4>
-                                    <p className="text-sm text-neutral-500 leading-relaxed mt-2">Securing billing flows, preventing fraud, and delivering critical engine updates via transactional emails.</p>
-                                </div>
-                            </div>
+                        <section id="data-usage" className="scroll-mt-32">
+                            <h2 className="text-2xl font-bold text-white mb-6 tracking-tight">2. Data Usage</h2>
+                            <p className="text-neutral-400 leading-relaxed text-base mb-6">Your telemetry is strictly used to calibrate the PrepLeague Engine. We analyze your performance to:</p>
+                            
+                            <ul className="flex flex-col m-0 p-0 list-none gap-2">
+                                <li className="flex items-center min-h-[56px] px-4 gap-4 bg-[#111111] border border-[#1f1f1f] rounded-[16px]">
+                                    <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                    </div>
+                                    <div className="flex-1 text-sm font-medium text-neutral-300">Deploy adaptive question serving (adjusting difficulty dynamically)</div>
+                                </li>
+                                <li className="flex items-center min-h-[56px] px-4 gap-4 bg-[#111111] border border-[#1f1f1f] rounded-[16px]">
+                                    <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                    </div>
+                                    <div className="flex-1 text-sm font-medium text-neutral-300">Generate personalized sprint mode trajectories</div>
+                                </li>
+                                <li className="flex items-center min-h-[56px] px-4 gap-4 bg-[#111111] border border-[#1f1f1f] rounded-[16px]">
+                                    <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                    </div>
+                                    <div className="flex-1 text-sm font-medium text-neutral-300">Calculate global ranking percentiles against other candidates</div>
+                                </li>
+                            </ul>
                         </section>
 
-                        <section id="sharing" className="scroll-mt-32 mb-20 text-neutral-400">
-                            <h2 className="text-xl font-bold text-white mb-6">3. Data Sharing Protocols</h2>
-                            <div className="px-5 py-4 bg-amber-500/10 border border-amber-500/20 rounded-2xl mb-8">
-                                <p className="text-amber-200 text-sm font-bold m-0">Protocol Zero: We do not sell personal identification to third-party data harvesters.</p>
+                        <section id="data-sharing" className="scroll-mt-32">
+                            <h2 className="text-2xl font-bold text-white mb-6 tracking-tight">3. Data Sharing</h2>
+                            <div className="flex items-start min-h-[72px] p-4 gap-4 bg-amber-500/[0.05] border border-amber-500/10 rounded-[24px] mb-8">
+                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center mt-1">
+                                    <span className="w-2 h-2 rounded-full bg-amber-500" />
+                                </div>
+                                <div className="flex flex-col justify-center">
+                                    <div className="text-sm font-bold text-amber-500 uppercase tracking-widest mb-1">Protocol Zero</div>
+                                    <div className="text-sm text-amber-200/80 leading-relaxed">We do not sell personal identification to third-party data harvesters.</div>
+                                </div>
                             </div>
-                            <p className="mb-6">We only transmit data to verified infrastructure partners required to maintain the platform:</p>
-                            <div className="grid sm:grid-cols-2 gap-4">
-                               <div className="bg-neutral-900 border border-neutral-800 p-5 rounded-2xl">
-                                  <span className="text-[10px] font-mono font-bold text-neutral-600 block mb-1">AI ENGINE</span>
+                            
+                            <p className="text-neutral-400 mb-6 text-base">We only transmit data to verified infrastructure partners required to maintain the platform:</p>
+                            
+                            <div className="grid sm:grid-cols-3 gap-4">
+                               <div className="bg-[#111111] border border-[#1f1f1f] p-5 rounded-[24px] hover:bg-[#141414] transition-colors">
+                                  <span className="text-[10px] font-mono font-bold text-neutral-500 block mb-2 tracking-widest">AI ENGINE</span>
                                   <span className="text-sm text-white font-bold">Google Gemini</span>
                                </div>
-                               <div className="bg-neutral-900 border border-neutral-800 p-5 rounded-2xl">
-                                  <span className="text-[10px] font-mono font-bold text-neutral-600 block mb-1">INFRASTRUCTURE</span>
+                               <div className="bg-[#111111] border border-[#1f1f1f] p-5 rounded-[24px] hover:bg-[#141414] transition-colors">
+                                  <span className="text-[10px] font-mono font-bold text-neutral-500 block mb-2 tracking-widest">INFRASTRUCTURE</span>
                                   <span className="text-sm text-white font-bold">Vercel</span>
                                </div>
-                               <div className="bg-neutral-900 border border-neutral-800 p-5 rounded-2xl">
-                                  <span className="text-[10px] font-mono font-bold text-neutral-600 block mb-1">STAGING DATABASE</span>
+                               <div className="bg-[#111111] border border-[#1f1f1f] p-5 rounded-[24px] hover:bg-[#141414] transition-colors">
+                                  <span className="text-[10px] font-mono font-bold text-neutral-500 block mb-2 tracking-widest">STAGING DATABASE</span>
                                   <span className="text-sm text-white font-bold">MongoDB Atlas</span>
                                </div>
                             </div>
                         </section>
 
-                        <section id="cookies" className="scroll-mt-32 mb-20">
-                            <h2 className="text-xl font-bold text-white mb-6">8. Cookies &amp; Advertising</h2>
-                            <p className="text-neutral-500 leading-relaxed mb-8">We use cookies and similar tracking technologies to enhance your experience and serve relevant advertising.</p>
+                        <section id="cookies" className="scroll-mt-32">
+                            <h2 className="text-2xl font-bold text-white mb-6 tracking-tight">4. Cookies & Advertising</h2>
+                            <p className="text-neutral-400 leading-relaxed text-base mb-8">We use cookies and similar tracking technologies to enhance your experience and serve relevant advertising.</p>
 
-                            <div className="space-y-6">
-                                <div className="p-6 rounded-2xl bg-[#1a1a1a] border border-neutral-800">
-                                    <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-3">Essential Cookies</h4>
-                                    <p className="text-sm text-neutral-500 leading-relaxed">Required for core platform functions — authentication sessions, preferences, and security tokens. These cannot be disabled.</p>
+                            <ul className="flex flex-col m-0 p-2 list-none gap-2 bg-[#111111] border border-[#1f1f1f] rounded-[24px]">
+                                <li className="flex flex-col min-h-[72px] p-4 gap-2 hover:bg-[#1a1a1a] transition-colors rounded-[16px]">
+                                    <div className="text-sm font-bold text-white uppercase tracking-widest">Essential Cookies</div>
+                                    <div className="text-sm text-neutral-400 leading-relaxed">Required for core platform functions — authentication sessions, preferences, and security tokens. These cannot be disabled.</div>
+                                </li>
+                                <li className="flex flex-col min-h-[72px] p-4 gap-4 bg-amber-500/[0.02] border border-amber-500/10 transition-colors rounded-[16px]">
+                                    <div>
+                                      <div className="text-sm font-bold text-amber-500 uppercase tracking-widest mb-1">Advertising Cookies (Google AdSense)</div>
+                                      <div className="text-sm text-neutral-400 leading-relaxed">PrepLeague uses Google AdSense to display advertisements. Google uses cookies (including the DoubleClick cookie) to serve ads based on your prior visits.</div>
+                                    </div>
+                                    <div className="bg-[#0a0a0a] rounded-[16px] border border-[#1f1f1f] p-4">
+                                      <ul className="flex flex-col list-none m-0 p-0 gap-2">
+                                        <li className="flex items-start gap-3">
+                                          <span className="text-amber-500 font-black text-sm mt-0.5">·</span>
+                                          <span className="text-sm text-neutral-400">Google's use of advertising cookies enables it to serve ads based on your visit to PrepLeague.</span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                          <span className="text-amber-500 font-black text-sm mt-0.5">·</span>
+                                          <span className="text-sm text-neutral-400">You may <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400 underline underline-offset-2">opt out of personalised advertising</a> by visiting Google Ads Settings.</span>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                </li>
+                                <li className="flex flex-col min-h-[72px] p-4 gap-2 hover:bg-[#1a1a1a] transition-colors rounded-[16px]">
+                                    <div className="text-sm font-bold text-white uppercase tracking-widest">Analytics Cookies</div>
+                                    <div className="text-sm text-neutral-400 leading-relaxed">Used to understand how visitors interact with the platform — page views, session lengths, and navigation paths. Data is aggregated and anonymised.</div>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section id="security" className="scroll-mt-32">
+                            <h2 className="text-2xl font-bold text-white mb-6 tracking-tight">5. Security Infrastructure</h2>
+                            <div className="grid md:grid-cols-2 gap-4">
+                                <div className="flex flex-col min-h-[100px] p-6 gap-3 bg-[#111111] border border-[#1f1f1f] rounded-[24px]">
+                                    <div className="flex items-center gap-3">
+                                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                      <div className="text-sm font-bold text-white uppercase tracking-widest">Encryption Protocols</div>
+                                    </div>
+                                    <div className="text-sm text-neutral-400 leading-relaxed">All data in transit is shielded via HTTPS/TLS 1.3 headers. Credentials are transformed using adaptive hashing (bcrypt).</div>
                                 </div>
-
-                                <div className="p-6 rounded-2xl bg-[#1a1a1a] border border-amber-500/10">
-                                    <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-3">Advertising Cookies (Google AdSense)</h4>
-                                    <p className="text-sm text-neutral-500 leading-relaxed mb-4">
-                                        PrepLeague uses <strong className="text-neutral-300">Google AdSense</strong> to display advertisements on the platform. Google and its partners use cookies (including the <strong className="text-neutral-300">DoubleClick cookie</strong>) to serve ads based on your prior visits to this and other websites.
-                                    </p>
-                                    <ul className="text-sm text-neutral-500 space-y-2 list-none">
-                                        <li>• Google's use of advertising cookies enables it and its partners to serve ads based on your visit to PrepLeague and other sites.</li>
-                                        <li>• You may <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400 underline underline-offset-2">opt out of personalised advertising</a> by visiting Google Ads Settings.</li>
-                                        <li>• You can also opt out via <a href="http://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400 underline underline-offset-2">aboutads.info</a>.</li>
-                                    </ul>
-                                </div>
-
-                                <div className="p-6 rounded-2xl bg-[#1a1a1a] border border-neutral-800">
-                                    <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-3">Analytics Cookies</h4>
-                                    <p className="text-sm text-neutral-500 leading-relaxed">Used to understand how visitors interact with the platform — page views, session lengths, and navigation paths. Data is aggregated and anonymised.</p>
-                                </div>
-
-                                <div className="px-5 py-4 bg-neutral-900 border border-neutral-800 rounded-2xl">
-                                    <p className="text-neutral-400 text-sm">You can manage or disable cookies via your browser settings. Note that disabling certain cookies may affect platform functionality.</p>
+                                <div className="flex flex-col min-h-[100px] p-6 gap-3 bg-[#111111] border border-[#1f1f1f] rounded-[24px]">
+                                    <div className="flex items-center gap-3">
+                                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                                      <div className="text-sm font-bold text-white uppercase tracking-widest">Data Minimization</div>
+                                    </div>
+                                    <div className="text-sm text-neutral-400 leading-relaxed">We only collect and retain data necessary for platform functionality. No payment or financial data is stored locally.</div>
                                 </div>
                             </div>
                         </section>
 
-                        <section id="security" className="scroll-mt-32 mb-20">
-                            <h2 className="text-xl font-bold text-white mb-6">6. Security Infrastructure</h2>
-                            <div className="p-8 rounded-3xl bg-[#1a1a1a] border border-neutral-800 space-y-6">
-                                <div className="flex gap-4">
-                                  <div className="w-1 h-auto bg-amber-500 rounded-full" />
-                                  <div>
-                                    <h4 className="text-white font-bold text-sm uppercase tracking-widest">Encryption Protocols</h4>
-                                    <p className="text-sm text-neutral-500 leading-relaxed m-0">All data in transit is shielded via HTTPS/TLS 1.3 headers. Credentials are transformed using adaptive hashing (bcrypt).</p>
-                                  </div>
-                                </div>
-                                <div className="flex gap-4">
-                                  <div className="w-1 h-auto bg-emerald-500 rounded-full" />
-                                  <div>
-                                    <h4 className="text-white font-bold text-sm uppercase tracking-widest">Data Minimization</h4>
-                                    <p className="text-sm text-neutral-500 leading-relaxed m-0">We only collect and retain data necessary for platform functionality. No payment or financial data is stored locally.</p>
-                                  </div>
-                                </div>
-                            </div>
+                        <section id="compliance" className="scroll-mt-32">
+                            <h2 className="text-2xl font-bold text-white mb-6 tracking-tight">6. Legal Compliance</h2>
+                            <p className="text-neutral-400 leading-relaxed text-base">PrepLeague operates under the regulatory frameworks of the <strong>Digital Personal Data Protection Act (DPDPA) 2023</strong> and the <strong>IT Act 2000</strong> of India.</p>
                         </section>
 
-                        <section id="compliance" className="scroll-mt-32 mb-20 text-neutral-400 leading-relaxed">
-                            <h2 className="text-xl font-bold text-white mb-6">13. Legal Compliance</h2>
-                            <p>PrepLeague operates under the regulatory frameworks of the <strong>Digital Personal Data Protection Act (DPDPA) 2023</strong> and the <strong>IT Act 2000</strong> of India.</p>
-                        </section>
-
-                        <section id="contact" className="scroll-mt-32 pt-12 border-t border-neutral-800">
-                            <h2 className="text-xl font-bold text-white mb-6">Contact Privacy Team</h2>
-                            <p className="text-neutral-500 text-sm mb-4">Direct all sovereignty and data-deletion inquiries to:</p>
-                            <div className="font-mono text-xs font-bold text-white">
-                                privacy@prepleague.com
+                        <section id="contact" className="scroll-mt-32 pt-12 border-t border-[#1f1f1f]">
+                            <h2 className="text-2xl font-bold text-white mb-6 tracking-tight">Contact Privacy Team</h2>
+                            <p className="text-neutral-400 text-base mb-6">Direct all sovereignty and data-deletion inquiries to:</p>
+                            <div className="inline-flex items-center min-h-[48px] px-6 rounded-full bg-[#111111] border border-[#1f1f1f]">
+                                <span className="font-mono text-sm font-bold text-white tracking-widest">privacy@prepleague.com</span>
                             </div>
                         </section>
                     </div>

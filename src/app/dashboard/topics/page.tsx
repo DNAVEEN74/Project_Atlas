@@ -49,7 +49,7 @@ export default function TopicPerformancePage() {
 
     if (loading || pageLoading) {
         return (
-            <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
+            <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
                 <div className="animate-spin rounded-full h-10 w-10 border-4 border-indigo-500 border-t-transparent"></div>
             </div>
         );
@@ -90,19 +90,19 @@ export default function TopicPerformancePage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f]">
+        <div className="min-h-screen bg-[#0a0a0a]">
             <Header activePage="dashboard" />
 
             <main className="w-full px-6 lg:px-12 py-8">
                 <div className="max-w-6xl mx-auto">
-                    {/* Header */}
-                    <div className="flex items-center gap-4 mb-8">
-                        <Link href="/dashboard" className="flex items-center gap-1 text-neutral-500 hover:text-neutral-300 transition-colors">
+                    {/* Top App Bar & Navigation */}
+                    <div className="mb-10">
+                        <Link href="/dashboard" className="inline-flex items-center gap-2 text-[#CAC4D0] hover:text-[#E6E1E5] transition-colors mb-4 rounded-full px-3 py-1.5 hover:bg-[#1f1f1f] -ml-3">
                             <ChevronLeftIcon sx={{ fontSize: '1.25rem' }} />
-                            <span className="font-medium text-sm">Dashboard</span>
+                            <span className="font-medium text-sm tracking-wide">Back to Dashboard</span>
                         </Link>
-                        <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 flex items-center gap-3 tracking-tight">
-                            <BarChartIcon className="text-indigo-400 w-8 h-8" />
+                        <h1 className="text-4xl md:text-5xl font-medium tracking-tight text-[#E6E1E5] flex items-center gap-4">
+                            <BarChartIcon className="text-indigo-400 w-10 h-10" />
                             Topic Performance
                         </h1>
                     </div>
@@ -110,7 +110,7 @@ export default function TopicPerformancePage() {
                     {/* Top Level: Radar Chart + Controls */}
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
                         {/* The Skill Web */}
-                        <div className="lg:col-span-2 bg-[#1a1a1a] rounded-3xl border border-neutral-800 p-6 flex flex-col relative overflow-hidden">
+                        <div className="lg:col-span-2 bg-[#141414] rounded-[24px] border border-[#1f1f1f] p-6 flex flex-col relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 blur-[100px] rounded-full pointer-events-none"></div>
                             <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
                                 <TargetIcon className="text-indigo-400 w-5 h-5" />
@@ -140,7 +140,7 @@ export default function TopicPerformancePage() {
                         </div>
 
                         {/* Controls & Quick Stats */}
-                        <div className="bg-[#1a1a1a] rounded-3xl border border-neutral-800 p-6 flex flex-col justify-between">
+                        <div className="bg-[#141414] rounded-[24px] border border-[#1f1f1f] p-6 flex flex-col justify-between">
                             <div>
                                 <h3 className="text-lg font-bold text-white mb-6">Filter Options</h3>
                                 <div className="space-y-4">
@@ -159,13 +159,13 @@ export default function TopicPerformancePage() {
                                 </div>
                             </div>
                             
-                            <div className="mt-8 pt-6 border-t border-neutral-800/50">
+                            <div className="mt-8 pt-6 border-t border-[#1f1f1f]">
                                 <div className="grid grid-cols-2 gap-4">
-                                    <div className="bg-neutral-900 p-4 rounded-2xl border border-neutral-800/50">
+                                    <div className="bg-[#0a0a0a] p-4 rounded-[16px] border border-[#1f1f1f]">
                                         <div className="text-2xl font-black text-white">{mastered.length}</div>
                                         <div className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest mt-1">Mastered</div>
                                     </div>
-                                    <div className="bg-neutral-900 p-4 rounded-2xl border border-neutral-800/50">
+                                    <div className="bg-[#0a0a0a] p-4 rounded-[16px] border border-[#1f1f1f]">
                                         <div className="text-2xl font-black text-white">{needsWork.length}</div>
                                         <div className="text-[10px] font-bold text-rose-500 uppercase tracking-widest mt-1">Critical</div>
                                     </div>
@@ -269,13 +269,13 @@ function TopicCard({ topic }: { topic: TopicStat }) {
     }
 
     return (
-        <div className="bg-[#121212] hover:bg-[#181818] border border-neutral-800/60 hover:border-neutral-700 rounded-xl p-5 transition-colors flex flex-col h-full group">
+        <div className="bg-[#141414] hover:bg-[#1f1f1f] border border-[#1f1f1f] hover:border-[#1f1f1f] rounded-[24px] p-6 transition-all duration-200 flex flex-col h-full group">
             <div className="flex justify-between items-start gap-4 mb-6">
                 <div className="flex-1">
                     <span className="text-[10px] font-semibold text-neutral-500 uppercase tracking-widest mb-1.5 block">
                         {topic.subject}
                     </span>
-                    <h4 className="font-semibold text-neutral-200 text-base leading-snug line-clamp-2" title={formatTopicName(topic.name)}>
+                    <h4 className="font-medium text-[#E6E1E5] text-[18px] leading-relaxed line-clamp-2" title={formatTopicName(topic.name)}>
                         {formatTopicName(topic.name)}
                     </h4>
                 </div>
@@ -304,7 +304,7 @@ function TopicCard({ topic }: { topic: TopicStat }) {
                 <div className="mt-5">
                     <Link
                         href={`/problems?pattern=${topic.name}`}
-                        className="w-full flex items-center justify-center py-2.5 rounded-lg text-sm font-medium text-neutral-400 bg-neutral-900 hover:bg-neutral-800 hover:text-white transition-colors border border-neutral-800 hover:border-neutral-700"
+                        className="w-full flex items-center justify-center py-2.5 rounded-full text-sm font-medium text-[#CAC4D0] bg-[#1f1f1f] hover:bg-[#2b2b2b] hover:text-[#E6E1E5] transition-colors border border-transparent"
                     >
                         Practice Topic
                     </Link>

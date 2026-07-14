@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { MathText } from '@/components/ui/MathText';
-import { CustomSelect } from '@/components/ui/CustomSelect';
 import {
     ChevronLeftIcon,
     ChevronRightIcon,
@@ -113,134 +112,174 @@ export default function BookmarksPage() {
 
     if (loading || !user) {
         return (
-            <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-10 w-10 border-4 border-amber-500 border-t-transparent"></div>
+            <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+                <div className="animate-spin rounded-full h-10 w-10 border-4 border-[#FFB951] border-t-transparent"></div>
             </div>
         );
     }
 
+    const filters = [
+        { id: 'all', label: 'All' },
+        { id: 'EASY', label: 'Easy' },
+        { id: 'MEDIUM', label: 'Medium' },
+        { id: 'HARD', label: 'Hard' }
+    ];
+
     return (
-        <div className="min-h-screen bg-[#0f0f0f]">
+        <div className="min-h-screen bg-[#0a0a0a]">
             <Header activePage="bookmarks" />
 
             {/* Main Content */}
-            <main className="w-full px-6 lg:px-12 py-8">
-                <div className="max-w-6xl mx-auto">
-                    {/* Page Title */}
-                    <div className="flex items-center gap-4 mb-8">
-                        <Link href="/dashboard" className="flex items-center gap-1 text-neutral-500 hover:text-neutral-300 transition-colors">
+            <main className="w-full px-6 lg:px-12 py-10">
+                <div className="max-w-5xl mx-auto">
+                    {/* Top App Bar & Navigation */}
+                    <div className="mb-10">
+                        <Link href="/dashboard" className="inline-flex items-center gap-2 text-[#CAC4D0] hover:text-[#E6E1E5] transition-colors mb-4 rounded-full px-3 py-1.5 hover:bg-[#1f1f1f] -ml-3">
                             <ChevronLeftIcon sx={{ fontSize: '1.25rem' }} />
-                            <span className="font-medium text-sm">Dashboard</span>
+                            <span className="font-medium text-sm tracking-wide">Back to Dashboard</span>
                         </Link>
-                        <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-                            <BookmarkIcon className="text-amber-500 w-8 h-8" />
+                        <h1 className="text-4xl md:text-5xl font-medium tracking-tight text-[#E6E1E5] flex items-center gap-4">
+                            <BookmarkIcon className="text-[#FFB951] w-10 h-10" />
                             Saved Bookmarks
                         </h1>
                     </div>
-                    {/* Filters */}
-                    <div className="mb-8 bg-[#1a1a1a] p-4 rounded-xl border border-neutral-800 flex items-center justify-between">
-                        <div className="flex items-center gap-4">
-                            <CustomSelect
-                                value={difficultyFilter}
-                                onChange={(val) => { setDifficultyFilter(val); updatePage(1); }}
-                                options={[
-                                    { value: 'all', label: 'All Difficulties' },
-                                    { value: 'EASY', label: 'Easy' },
-                                    { value: 'MEDIUM', label: 'Medium' },
-                                    { value: 'HARD', label: 'Hard' },
-                                ]}
-                            />
+
+                    {/* Filter Chips - Material Design 3 */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
+                        <div className="flex flex-wrap items-center gap-3">
+                            {filters.map((filter) => {
+                                const isSelected = difficultyFilter === filter.id;
+                                return (
+                                    <button
+                                        key={filter.id}
+                                        onClick={() => { setDifficultyFilter(filter.id); updatePage(1); }}
+                                        className={`h-8 px-4 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2
+                                            ${isSelected 
+                                                ? 'bg-[#4A4458] text-[#E8DEF8] border border-transparent' // M3 Secondary Container style for dark mode
+                                                : 'bg-transparent border border-[#938F99] text-[#CAC4D0] hover:bg-[#1f1f1f] hover:border-[#CAC4D0]'
+                                            }`}
+                                    >
+                                        {isSelected && (
+                                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                        )}
+                                        {filter.label}
+                                    </button>
+                                );
+                            })}
                         </div>
-                        <div className="text-sm text-neutral-500">
-                            {pagination.total} bookmarks saved
+                        <div className="text-sm font-medium text-[#CAC4D0] bg-[#141414] px-4 py-2 rounded-full">
+                            {pagination.total} total
                         </div>
                     </div>
 
-                    {/* List */}
-                    <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 overflow-hidden">
-                        <div className="divide-y divide-neutral-800/50">
-                            {pageLoading ? (
-                                <div className="p-12 text-center">
-                                    <div className="animate-spin rounded-full h-8 w-8 border-4 border-amber-500 border-t-transparent mx-auto"></div>
-                                </div>
-                            ) : filteredBookmarks.length === 0 ? (
-                                <div className="p-12 text-center text-neutral-500">
-                                    {bookmarks.length === 0 ? "You haven't bookmarked any questions yet." : "No bookmarks match the current filter."}
-                                </div>
-                            ) : (
-                                filteredBookmarks.map((question: Question) => (
-                                    <div key={question._id} className="relative group">
-                                        <Link
-                                            href={`/problems/${question._id}?section=${question.subject}`}
-                                            className="block px-6 py-6 hover:bg-neutral-800/50 transition-colors"
-                                        >
-                                            <div className="flex items-start justify-between gap-6">
-                                                <div className="flex-1 min-w-0">
-                                                    <div className="flex items-center gap-3 mb-3">
-                                                        <span className={`px-2 py-1 text-[10px] font-bold tracking-wider rounded-md border ${question.difficulty === 'EASY' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
-                                                            question.difficulty === 'MEDIUM' ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' :
-                                                                'bg-rose-500/10 text-rose-500 border-rose-500/20'
-                                                            }`}>
-                                                            {question.difficulty}
-                                                        </span>
-                                                        <span className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">{question.subject}</span>
-                                                    </div>
-                                                    <p className="text-neutral-200 group-hover:text-amber-500 transition-colors line-clamp-2 font-medium text-lg leading-relaxed">
-                                                        <MathText>{question.text}</MathText>
-                                                    </p>
-                                                    <div className="mt-4 flex items-center gap-4 text-xs text-neutral-500">
-                                                        <span>{formatTopicName(question.pattern) || 'General'}</span>
-                                                        <span>•</span>
-                                                        <span>{question.source.exam} {question.source.year}</span>
-                                                    </div>
-                                                </div>
-                                                <button
-                                                    onClick={(e: any) => handleRemoveBookmark(e, question._id)}
-                                                    disabled={removingId === question._id}
-                                                    className="p-2 text-neutral-500 hover:text-rose-500 hover:bg-rose-500/10 rounded-lg transition-colors relative z-10"
-                                                    title="Remove bookmark"
-                                                >
-                                                    {removingId === question._id ? (
-                                                        <div className="h-5 w-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
-                                                    ) : (
-                                                        <DeleteIcon sx={{ fontSize: '1.25rem' }} />
-                                                    )}
-                                                </button>
-                                            </div>
-                                        </Link>
-                                    </div>
-                                ))
-                            )}
-                        </div>
-
-                        {/* Pagination */}
-                        {pagination.total > 0 && (
-                            <div className="flex items-center justify-between px-6 py-4 bg-neutral-900/50 border-t border-neutral-800">
-                                <p className="text-sm text-neutral-500">
-                                    <span className="text-neutral-300 font-medium">{(pagination.page - 1) * ITEMS_PER_PAGE + 1}-{Math.min(pagination.page * ITEMS_PER_PAGE, pagination.total)}</span> of <span className="text-neutral-300 font-medium">{pagination.total}</span>
-                                </p>
-                                <div className="flex gap-2">
-                                    <button
-                                        onClick={() => updatePage(pagination.page - 1)}
-                                        disabled={pagination.page <= 1}
-                                        className="p-2 text-neutral-500 hover:text-amber-500 hover:bg-neutral-800 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition-colors border border-transparent hover:border-neutral-700"
-                                    >
-                                        <ChevronLeftIcon sx={{ fontSize: '1.2rem' }} />
-                                    </button>
-                                    <span className="px-4 py-2 text-sm text-neutral-400 font-medium">
-                                        Page {pagination.page} of {pagination.totalPages}
-                                    </span>
-                                    <button
-                                        onClick={() => updatePage(pagination.page + 1)}
-                                        disabled={pagination.page >= pagination.totalPages}
-                                        className="p-2 text-neutral-500 hover:text-amber-500 hover:bg-neutral-800 rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition-colors border border-transparent hover:border-neutral-700"
-                                    >
-                                        <ChevronRightIcon sx={{ fontSize: '1.2rem' }} />
-                                    </button>
-                                </div>
+                    {/* MD3 Elevated Cards List */}
+                    <div className="space-y-4">
+                        {pageLoading ? (
+                            <div className="p-16 text-center">
+                                <div className="animate-spin rounded-full h-10 w-10 border-4 border-[#FFB951] border-t-transparent mx-auto"></div>
                             </div>
+                        ) : filteredBookmarks.length === 0 ? (
+                            <div className="py-20 px-8 text-center bg-[#141414] rounded-[24px]">
+                                <BookmarkIcon className="text-[#938F99] w-16 h-16 mx-auto mb-4 opacity-50" />
+                                <h3 className="text-xl font-medium text-[#E6E1E5] mb-2">
+                                    {bookmarks.length === 0 ? "No saved bookmarks" : "No matches found"}
+                                </h3>
+                                <p className="text-[#CAC4D0]">
+                                    {bookmarks.length === 0 ? "Questions you bookmark will appear here." : "Try selecting a different difficulty filter."}
+                                </p>
+                            </div>
+                        ) : (
+                            filteredBookmarks.map((question: Question) => (
+                                <Link
+                                    key={question._id}
+                                    href={`/problems/${question._id}?section=${question.subject}`}
+                                    className="block group"
+                                >
+                                    <div className="bg-[#141414] hover:bg-[#1f1f1f] rounded-[24px] p-6 transition-all duration-200">
+                                        <div className="flex items-start justify-between gap-6">
+                                            <div className="flex-1 min-w-0">
+                                                {/* Meta Row */}
+                                                <div className="flex items-center gap-2 mb-4">
+                                                    <span className={`px-3 py-1.5 text-xs font-medium rounded-full border 
+                                                        ${question.difficulty === 'EASY' ? 'bg-[#143224] text-[#6DD58C] border-transparent' :
+                                                          question.difficulty === 'MEDIUM' ? 'bg-[#594100] text-[#FFB951] border-transparent' :
+                                                          'bg-[#4B191D] text-[#FFB4AB] border-transparent'
+                                                        }`}>
+                                                        {question.difficulty.charAt(0) + question.difficulty.slice(1).toLowerCase()}
+                                                    </span>
+                                                    <span className="px-3 py-1.5 text-xs font-medium bg-[#2b2b2b] text-[#CAC4D0] rounded-full">
+                                                        {question.subject.charAt(0) + question.subject.slice(1).toLowerCase()}
+                                                    </span>
+                                                </div>
+                                                
+                                                {/* Title */}
+                                                <p className="text-[#E6E1E5] group-hover:text-[#FFB951] transition-colors line-clamp-2 font-medium text-[18px] leading-relaxed mb-4">
+                                                    <MathText>{question.text}</MathText>
+                                                </p>
+                                                
+                                                {/* Bottom Metadata */}
+                                                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[#938F99] font-medium">
+                                                    <span className="bg-[#0a0a0a] border border-[#2b2b2b] px-3 py-1 rounded-full">
+                                                        {formatTopicName(question.pattern) || 'General'}
+                                                    </span>
+                                                    <span className="bg-[#0a0a0a] border border-[#2b2b2b] px-3 py-1 rounded-full">
+                                                        {question.source.exam} {question.source.year}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            
+                                            {/* MD3 Icon Button */}
+                                            <button
+                                                onClick={(e: any) => handleRemoveBookmark(e, question._id)}
+                                                disabled={removingId === question._id}
+                                                className="p-3 text-[#CAC4D0] hover:text-[#FFB4AB] hover:bg-[#36343B] rounded-full transition-colors relative z-10 -mt-2 -mr-2"
+                                                title="Remove bookmark"
+                                                aria-label="Remove bookmark"
+                                            >
+                                                {removingId === question._id ? (
+                                                    <div className="h-6 w-6 border-2 border-[#FFB951] border-t-transparent rounded-full animate-spin"></div>
+                                                ) : (
+                                                    <DeleteIcon sx={{ fontSize: '1.5rem' }} />
+                                                )}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))
                         )}
                     </div>
+
+                    {/* MD3 Pagination */}
+                    {pagination.total > 0 && (
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 px-2">
+                            <p className="text-sm font-medium text-[#CAC4D0]">
+                                Showing <span className="text-[#E6E1E5]">{(pagination.page - 1) * ITEMS_PER_PAGE + 1}</span> to <span className="text-[#E6E1E5]">{Math.min(pagination.page * ITEMS_PER_PAGE, pagination.total)}</span> of <span className="text-[#E6E1E5]">{pagination.total}</span>
+                            </p>
+                            <div className="flex items-center gap-2 bg-[#141414] p-1 rounded-full">
+                                <button
+                                    onClick={() => updatePage(pagination.page - 1)}
+                                    disabled={pagination.page <= 1}
+                                    className="p-2 text-[#CAC4D0] hover:text-[#FFB951] hover:bg-[#1f1f1f] rounded-full disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
+                                    aria-label="Previous page"
+                                >
+                                    <ChevronLeftIcon sx={{ fontSize: '1.5rem' }} />
+                                </button>
+                                <span className="px-4 text-sm font-medium text-[#E6E1E5]">
+                                    Page {pagination.page} of {pagination.totalPages}
+                                </span>
+                                <button
+                                    onClick={() => updatePage(pagination.page + 1)}
+                                    disabled={pagination.page >= pagination.totalPages}
+                                    className="p-2 text-[#CAC4D0] hover:text-[#FFB951] hover:bg-[#1f1f1f] rounded-full disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
+                                    aria-label="Next page"
+                                >
+                                    <ChevronRightIcon sx={{ fontSize: '1.5rem' }} />
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </main>
         </div>

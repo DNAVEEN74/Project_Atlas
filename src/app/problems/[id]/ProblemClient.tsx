@@ -309,8 +309,9 @@ export default function QuestionPage({
                 }
 
                 if (bookmarksData.data) {
-                    const bookmarkedIds = bookmarksData.data.map((b: any) => b.question?._id?.toString() || b.question?.toString());
-                    setIsBookmarked(bookmarkedIds.includes(questionId));
+                    const bookmarkedIds = bookmarksData.data.map((b: any) => b.question?._id?.toString() || b.question?.toString() || b.question);
+                    const actualQuestionId = questionData.data?.id || questionId;
+                    setIsBookmarked(bookmarkedIds.includes(actualQuestionId));
                 }
 
                 // Pre-populate previous attempt if exists (but NOT in sprint mode - each sprint is independent)
@@ -794,7 +795,7 @@ export default function QuestionPage({
             const res = await fetch('/api/bookmarks', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ questionId }),
+                body: JSON.stringify({ questionId: question?.id || questionId }),
             });
             const data = await res.json();
             setIsBookmarked(data.bookmarked);

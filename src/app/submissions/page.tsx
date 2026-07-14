@@ -15,6 +15,7 @@ import {
     CancelIcon,
     BarChartOutlinedIcon,
     BoltIcon,
+    DocumentIcon,
 } from '@/components/icons';
 
 interface Question {
@@ -155,27 +156,30 @@ export default function SubmissionsPage() {
 
     if (loading || !user) {
         return (
-            <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
+            <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
                 <div className="animate-spin rounded-full h-10 w-10 border-4 border-indigo-500 border-t-transparent"></div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f]">
+        <div className="min-h-screen bg-[#0a0a0a]">
             <Header activePage="submissions" />
 
             {/* Main Content */}
             <main className="w-full px-6 lg:px-12 py-8">
                 <div className="max-w-6xl mx-auto">
 
-                    {/* Page Title */}
-                    <div className="flex items-center gap-4 mb-6">
-                        <Link href="/dashboard" className="flex items-center gap-1 text-neutral-500 hover:text-neutral-300 transition-colors">
+                    {/* Top App Bar & Navigation */}
+                    <div className="mb-10">
+                        <Link href="/dashboard" className="inline-flex items-center gap-2 text-[#CAC4D0] hover:text-[#E6E1E5] transition-colors mb-4 rounded-full px-3 py-1.5 hover:bg-[#1f1f1f] -ml-3">
                             <ChevronLeftIcon sx={{ fontSize: '1.25rem' }} />
-                            <span className="font-medium text-sm">Dashboard</span>
+                            <span className="font-medium text-sm tracking-wide">Back to Dashboard</span>
                         </Link>
-                        <h1 className="text-2xl font-bold text-white">All Submissions</h1>
+                        <h1 className="text-4xl md:text-5xl font-medium tracking-tight text-[#E6E1E5] flex items-center gap-4">
+                            <DocumentIcon className="text-indigo-400 w-10 h-10" />
+                            All Submissions
+                        </h1>
                     </div>
 
 
@@ -223,74 +227,89 @@ export default function SubmissionsPage() {
                         />
                     </div>
 
-                    {/* Table */}
-                    <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 overflow-hidden">
-                        <div className="divide-y divide-neutral-800/50">
-                            {pageLoading ? (
-                                <div className="p-12 text-center">
-                                    <div className="animate-spin rounded-full h-8 w-8 border-4 border-indigo-500 border-t-transparent mx-auto"></div>
-                                </div>
-                            ) : attempts.length === 0 ? (
-                                <div className="p-12 text-center text-neutral-500">
+                    {/* Elevated Cards List */}
+                    <div className="space-y-4">
+                        {pageLoading ? (
+                            <div className="p-16 text-center">
+                                <div className="animate-spin rounded-full h-10 w-10 border-4 border-indigo-500 border-t-transparent mx-auto"></div>
+                            </div>
+                        ) : attempts.length === 0 ? (
+                            <div className="py-20 px-8 text-center bg-[#141414] rounded-[24px]">
+                                <DocumentIcon className="text-[#938F99] w-16 h-16 mx-auto mb-4 opacity-50" />
+                                <h3 className="text-xl font-medium text-[#E6E1E5] mb-2">
                                     No submissions found
-                                </div>
-                            ) : (
-                                attempts.map((attempt: Attempt) => (
-                                    <Link
-                                        key={attempt._id}
-                                        href={`/problems/${attempt.q_id._id}?section=${attempt.q_id.subject}`}
-                                        className="block px-6 py-4 hover:bg-neutral-800/50 transition-colors group"
-                                    >
-                                        <div className="flex items-start justify-between gap-4">
+                                </h3>
+                                <p className="text-[#CAC4D0]">
+                                    Questions you solve will appear here.
+                                </p>
+                            </div>
+                        ) : (
+                            attempts.map((attempt: Attempt) => (
+                                <Link
+                                    key={attempt._id}
+                                    href={`/problems/${attempt.q_id._id}?section=${attempt.q_id.subject}`}
+                                    className="block group"
+                                >
+                                    <div className="bg-[#141414] hover:bg-[#1f1f1f] rounded-[24px] p-6 transition-all duration-200">
+                                        <div className="flex items-start justify-between gap-6">
                                             <div className="flex-1 min-w-0">
-                                                <div className="flex items-center gap-3 mb-2">
-                                                    {attempt.is_correct ? (
-                                                        <CheckCircleOutlinedIcon className="text-emerald-500" sx={{ fontSize: '1.2rem' }} />
-                                                    ) : (
-                                                        <CancelIcon className="text-rose-500" sx={{ fontSize: '1.2rem' }} />
-                                                    )}
-                                                    <span className={`text-sm font-medium ${attempt.is_correct ? 'text-emerald-400' : 'text-rose-400'}`}>
+                                                {/* Meta Row */}
+                                                <div className="flex items-center gap-2 mb-4">
+                                                    <span className={`px-3 py-1.5 text-xs font-medium rounded-full flex items-center gap-1 border-transparent ${attempt.is_correct ? 'bg-[#143224] text-[#6DD58C]' : 'bg-[#4B191D] text-[#FFB4AB]'}`}>
+                                                        {attempt.is_correct ? <CheckCircleOutlinedIcon sx={{ fontSize: '1rem' }} /> : <CancelIcon sx={{ fontSize: '1rem' }} />}
                                                         {attempt.is_correct ? 'Correct' : 'Incorrect'}
                                                     </span>
-                                                    <span className={`px-2 py-1 text-xs rounded-full font-medium ${attempt.q_id.difficulty === 'EASY' ? 'bg-emerald-400/10 text-emerald-400 border border-emerald-400/20' :
-                                                        attempt.q_id.difficulty === 'MEDIUM' ? 'bg-amber-400/10 text-amber-400 border border-amber-400/20' :
-                                                            'bg-rose-400/10 text-rose-400 border border-rose-400/20'
+                                                    <span className={`px-3 py-1.5 text-xs font-medium rounded-full border-transparent ${attempt.q_id.difficulty === 'EASY' ? 'bg-[#143224] text-[#6DD58C]' :
+                                                        attempt.q_id.difficulty === 'MEDIUM' ? 'bg-[#594100] text-[#FFB951]' :
+                                                            'bg-[#4B191D] text-[#FFB4AB]'
                                                         }`}>
-                                                        {attempt.q_id.difficulty}
+                                                        {attempt.q_id.difficulty.charAt(0) + attempt.q_id.difficulty.slice(1).toLowerCase()}
+                                                    </span>
+                                                    <span className="px-3 py-1.5 text-xs font-medium bg-[#2b2b2b] text-[#CAC4D0] rounded-full border-transparent">
+                                                        {attempt.q_id.subject.charAt(0) + attempt.q_id.subject.slice(1).toLowerCase()}
                                                     </span>
                                                 </div>
-                                                <p className="text-neutral-200 group-hover:text-indigo-400 transition-colors line-clamp-2 font-medium">
+
+                                                {/* Title */}
+                                                <p className="text-[#E6E1E5] group-hover:text-indigo-400 transition-colors line-clamp-2 font-medium text-[18px] leading-relaxed mb-4">
                                                     <MathText>{attempt.q_id.text}</MathText>
                                                 </p>
-                                                <div className="mt-2 flex items-center gap-4 text-xs text-neutral-500">
-                                                    <span>{formatTopicName(attempt.q_id.pattern) || 'General'}</span>
-                                                    <span>•</span>
-                                                    <span>{formatDate(attempt.createdAt)}</span>
-                                                    <span>•</span>
-                                                    <span className="font-mono">{formatTime(attempt.time_ms)}</span>
+                                                
+                                                {/* Bottom Metadata */}
+                                                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[#938F99] font-medium">
+                                                    <span className="bg-[#0a0a0a] border border-[#2b2b2b] px-3 py-1 rounded-full">
+                                                        {formatTopicName(attempt.q_id.pattern) || 'General'}
+                                                    </span>
+                                                    <span className="bg-[#0a0a0a] border border-[#2b2b2b] px-3 py-1 rounded-full">
+                                                        {formatDate(attempt.createdAt)}
+                                                    </span>
+                                                    <span className="bg-[#0a0a0a] border border-[#2b2b2b] px-3 py-1 rounded-full font-mono">
+                                                        {formatTime(attempt.time_ms)}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
-                                    </Link>
+                                    </div>
+                                </Link>
                                 ))
                             )}
                         </div>
 
-                        {/* Pagination with Context */}
+                        {/* MD3 Pagination */}
                         {attempts.length > 0 && pagination.totalPages > 1 && (
-                            <div className="p-4 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                                <p className="text-xs text-neutral-500 font-medium">
-                                    Showing <span className="text-neutral-300 font-bold">{(pagination.page - 1) * ITEMS_PER_PAGE + 1}</span> to <span className="text-neutral-300 font-bold">{Math.min(pagination.page * ITEMS_PER_PAGE, pagination.total)}</span> of <span className="text-neutral-300 font-bold">{pagination.total}</span> submissions
+                            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 px-2">
+                                <p className="text-sm font-medium text-[#CAC4D0]">
+                                    Showing <span className="text-[#E6E1E5]">{(pagination.page - 1) * ITEMS_PER_PAGE + 1}</span> to <span className="text-[#E6E1E5]">{Math.min(pagination.page * ITEMS_PER_PAGE, pagination.total)}</span> of <span className="text-[#E6E1E5]">{pagination.total}</span> submissions
                                 </p>
 
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 bg-[#141414] p-1 rounded-full">
                                     <button
                                         onClick={() => updatePage(pagination.page - 1)}
                                         disabled={pagination.page === 1}
                                         aria-label="Previous page"
-                                        className="p-2 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                        className="p-2 text-[#CAC4D0] hover:text-indigo-400 hover:bg-[#1f1f1f] rounded-full disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
                                     >
-                                        <ChevronLeftIcon sx={{ fontSize: '1.2rem' }} />
+                                        <ChevronLeftIcon sx={{ fontSize: '1.5rem' }} />
                                     </button>
 
                                     <div className="flex items-center gap-1">
@@ -301,11 +320,11 @@ export default function SubmissionsPage() {
                                                 <button
                                                     key={i}
                                                     onClick={() => updatePage(p as number)}
-                                                    className={`w-9 h-9 flex items-center justify-center rounded-xl text-sm font-bold transition-all ${pagination.page === p
+                                                    className={`w-9 h-9 flex items-center justify-center rounded-full text-sm font-bold transition-all ${pagination.page === p
                                                         ? accentColor === 'amber'
                                                             ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
-                                                            : 'bg-violet-500 text-white shadow-lg shadow-violet-500/20'
-                                                        : 'text-neutral-400 hover:bg-neutral-800 hover:text-neutral-200 border border-transparent hover:border-neutral-800'
+                                                            : 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/20'
+                                                        : 'text-neutral-400 hover:bg-[#1f1f1f] hover:text-neutral-200 border border-transparent'
                                                         }`}
                                                 >
                                                     {p}
@@ -318,14 +337,13 @@ export default function SubmissionsPage() {
                                         onClick={() => updatePage(pagination.page + 1)}
                                         disabled={pagination.page === pagination.totalPages}
                                         aria-label="Next page"
-                                        className="p-2 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                        className="p-2 text-[#CAC4D0] hover:text-indigo-400 hover:bg-[#1f1f1f] rounded-full disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
                                     >
-                                        <ChevronRightIcon sx={{ fontSize: '1.2rem' }} />
+                                        <ChevronRightIcon sx={{ fontSize: '1.5rem' }} />
                                     </button>
                                 </div>
                             </div>
                         )}
-                    </div>
                 </div>
             </main>
         </div>

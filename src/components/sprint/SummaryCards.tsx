@@ -69,7 +69,7 @@ export default function SummaryCards({
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             {/* Total Sprints */}
-            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-5">
+            <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-5">
                 <p className="text-xs text-neutral-500 uppercase tracking-wide mb-2">Total Sprints</p>
                 <p className="text-3xl font-bold text-white mb-1">{totalSprints}</p>
                 <div className="flex items-center gap-1.5 text-xs text-neutral-400">
@@ -79,7 +79,7 @@ export default function SummaryCards({
             </div>
 
             {/* Avg Accuracy */}
-            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-5">
+            <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-5">
                 <p className="text-xs text-neutral-500 uppercase tracking-wide mb-2">Avg Accuracy</p>
                 <p className={`text-3xl font-bold ${getAccuracyColor(avgAccuracy)} mb-1`}>{avgAccuracy}%</p>
                 <div className="flex items-center gap-1.5 text-xs text-neutral-400">
@@ -89,7 +89,7 @@ export default function SummaryCards({
             </div>
 
             {/* Completion Rate */}
-            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-5">
+            <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-5">
                 <p className="text-xs text-neutral-500 uppercase tracking-wide mb-2">Completed</p>
                 <p className={`text-3xl font-bold ${getCompletionColor(completionRate)} mb-1`}>
                     {completedCount}/{totalSprints}
@@ -101,7 +101,7 @@ export default function SummaryCards({
             </div>
 
             {/* Avg Time/Q */}
-            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-5">
+            <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-5">
                 <p className="text-xs text-neutral-500 uppercase tracking-wide mb-2">Avg Time/Q</p>
                 <p className={`text-3xl font-bold ${getTimeColor(avgTimePerQuestion)} mb-1`}>
                     {Math.round(avgTimePerQuestion)}s

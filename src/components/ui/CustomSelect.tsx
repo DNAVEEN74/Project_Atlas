@@ -40,7 +40,7 @@ export function CustomSelect({ value, onChange, options, placeholder, className,
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full h-[48px] flex items-center justify-between px-4 bg-[#1a1a1a] border border-neutral-800 rounded-xl text-neutral-200 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-all text-sm group"
+                className="w-full h-[48px] flex items-center justify-between px-4 bg-[#141414] border border-[#1f1f1f] rounded-full text-neutral-200 outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-colors text-sm group hover:border-[#2b2b2b]"
             >
                 <span className={`flex items-center gap-2 ${!options.find(opt => opt.value === value) && placeholder ? 'text-neutral-400' : ''}`}>
                     {icon && <span className="text-neutral-500">{icon}</span>}
@@ -53,8 +53,8 @@ export function CustomSelect({ value, onChange, options, placeholder, className,
             </button>
 
             {isOpen && (
-                <div className="absolute top-[calc(100%+8px)] left-0 w-full bg-[#1a1a1a] border border-neutral-800 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.7)] overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200">
-                    <div className="py-1 max-h-60 overflow-y-auto custom-scrollbar">
+                <div className="absolute top-[calc(100%+8px)] left-0 w-full bg-[#141414] border border-[#1f1f1f] rounded-[24px] shadow-[0_10px_40px_rgba(0,0,0,0.7)] overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200">
+                    <div className="py-2 max-h-60 overflow-y-auto custom-scrollbar">
                         {options.map((option) => (
                             <button
                                 key={option.value}
@@ -66,7 +66,7 @@ export function CustomSelect({ value, onChange, options, placeholder, className,
                                 className={`w-full text-left px-4 py-2.5 text-sm transition-colors flex items-center justify-between
                                     ${option.value === value
                                         ? 'bg-amber-500/10 text-amber-500 font-medium'
-                                        : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800'
+                                        : 'text-neutral-400 hover:text-neutral-200 hover:bg-[#1f1f1f]'
                                     }`}
                             >
                                 {option.label}

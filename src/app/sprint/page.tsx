@@ -360,7 +360,7 @@ function SprintSetupContent() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
+            <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
                 <div className="animate-spin rounded-full h-10 w-10 border-2 border-amber-500 border-t-transparent"></div>
             </div>
         );
@@ -374,27 +374,28 @@ function SprintSetupContent() {
     const isQuant = subject === 'QUANT';
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] text-neutral-200 font-sans selection:bg-amber-500/30">
+        <div className="min-h-screen bg-[#0a0a0a] text-neutral-200 font-sans selection:bg-amber-500/30">
             {/* Header */}
             <Header activePage="sprint" />
 
             <main className="w-full px-6 lg:px-12 py-8">
                 {/* Section Header */}
-                <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
-                        <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400">
+                        <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400 flex items-center gap-3">
+                            <BoltIcon className="text-amber-500 w-7 h-7" />
                             Sprint Mode
                         </h1>
-                        <p className="text-neutral-400 text-sm mt-1">High-intensity practice sessions to build speed and accuracy.</p>
+                        <p className="text-[#938F99] text-sm mt-1 max-w-lg">High-intensity practice sessions to build speed and accuracy.</p>
                     </div>
 
                     <div className="w-full md:w-auto mt-4 md:mt-0">
-                        <div className="flex p-1 bg-[#1a1a1a] rounded-[20px] border border-neutral-800">
+                        <div className="flex p-1 bg-[#141414] rounded-full border border-[#1f1f1f]">
                             <button
                                 onClick={() => { setSubject('QUANT'); setSelectedTopics([]); setSearchTerm(''); }}
-                                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-3 rounded-xl text-sm font-bold transition-all ${subject === 'QUANT'
-                                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25'
-                                    : 'text-neutral-400 hover:text-white'
+                                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-3 rounded-full text-sm font-medium transition-all ${subject === 'QUANT'
+                                    ? 'bg-[#594100] text-[#FFB951] shadow-sm'
+                                    : 'text-[#CAC4D0] hover:text-[#E6E1E5] hover:bg-[#1f1f1f]'
                                     }`}
                             >
                                 <CalculateOutlinedIcon sx={{ fontSize: '1.2rem' }} />
@@ -402,9 +403,9 @@ function SprintSetupContent() {
                             </button>
                             <button
                                 onClick={() => { setSubject('REASONING'); setSelectedTopics([]); setSearchTerm(''); }}
-                                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-3 rounded-xl text-sm font-bold transition-all ${subject === 'REASONING'
-                                    ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-violet-500/25'
-                                    : 'text-neutral-400 hover:text-white'
+                                className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-3 rounded-full text-sm font-medium transition-all ${subject === 'REASONING'
+                                    ? 'bg-[#332D41] text-[#D0BCFF] shadow-sm'
+                                    : 'text-[#CAC4D0] hover:text-[#E6E1E5] hover:bg-[#1f1f1f]'
                                     }`}
                             >
                                 <PsychologyOutlinedIcon sx={{ fontSize: '1.2rem' }} />
@@ -424,12 +425,12 @@ function SprintSetupContent() {
 
                         {/* 2. Topic Selection (Matched to Problems Page) */}
                         <div>
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-                                <h2 className="text-sm font-medium text-neutral-400 uppercase tracking-wider">Select Topics to Practice</h2>
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+                                <h2 className="text-sm font-medium text-[#CAC4D0] uppercase tracking-wider">Select Topics to Practice</h2>
 
                                 <div className="flex items-center gap-3">
                                     <div className="relative">
-                                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none">
+                                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[#CAC4D0] pointer-events-none">
                                             <SearchIcon sx={{ fontSize: '1rem' }} />
                                         </div>
                                         <input
@@ -437,12 +438,12 @@ function SprintSetupContent() {
                                             placeholder="Search topics..."
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="w-full md:w-48 bg-[#1a1a1a] border border-neutral-800 rounded-lg pl-9 pr-8 py-1.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500/50 transition-colors"
+                                            className="w-full md:w-48 bg-[#0a0a0a] border border-[#1f1f1f] rounded-full pl-10 pr-8 py-2 text-sm text-[#E6E1E5] placeholder-[#938F99] outline-none hover:border-[#CAC4D0] focus:border-[#E8DEF8] transition-colors"
                                         />
                                         {searchTerm && (
                                             <button
                                                 onClick={() => setSearchTerm('')}
-                                                className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white"
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#CAC4D0] hover:text-[#E6E1E5]"
                                             >
                                                 ✕
                                             </button>
@@ -460,7 +461,7 @@ function SprintSetupContent() {
                                 </div>
                             </div>
 
-                            <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 p-6 min-h-[200px]">
+                            <div className="bg-[#141414] rounded-[24px] border border-[#1f1f1f] p-6 min-h-[200px]">
                                 {topics.length > 0 ? (
                                     <>
                                         <div className="flex flex-wrap gap-2">
@@ -481,9 +482,9 @@ function SprintSetupContent() {
                                                             onClick={() => toggleTopic(topic.code)}
                                                             className={`px-4 py-2 text-sm font-medium rounded-full border transition-all flex items-center gap-2 ${isSelected
                                                                 ? subject === 'QUANT'
-                                                                    ? 'bg-amber-500/20 text-amber-400 border-amber-500/30'
-                                                                    : 'bg-violet-500/20 text-violet-400 border-violet-500/30'
-                                                                : 'bg-neutral-800/50 text-neutral-400 border-transparent hover:bg-neutral-800 hover:text-neutral-200'
+                                                                    ? 'bg-[#594100] text-[#FFB951] border-[#594100]'
+                                                                    : 'bg-[#332D41] text-[#D0BCFF] border-[#332D41]'
+                                                                : 'bg-[#0a0a0a] text-[#CAC4D0] border-[#1f1f1f] hover:border-[#CAC4D0] hover:bg-[#1f1f1f]'
                                                                 }`}
                                                         >
                                                             {topic.code === 'All' && isSelected && selectedTopics.includes('ALL') ? `All Topics (${topics.length - 1})` : topic.name}
@@ -492,9 +493,9 @@ function SprintSetupContent() {
                                                             {topic.questionCount > 0 && topic.code !== 'All' && (
                                                                 <span
                                                                     title={`${topic.questionCount} questions available`}
-                                                                    className={`text-sm font-bold px-2 py-0.5 rounded-full ${isSelected
+                                                                    className={`text-xs font-medium px-2 py-0.5 rounded-full ${isSelected
                                                                         ? 'bg-black/20 text-current'
-                                                                        : 'bg-neutral-900/50 text-neutral-500'
+                                                                        : 'bg-[#1f1f1f] text-[#938F99]'
                                                                         }`}>
                                                                     {topic.questionCount}
                                                                 </span>
@@ -521,43 +522,43 @@ function SprintSetupContent() {
                         </div>
 
                         {/* 3. Sprint History (New Section) */}
-                        <div className="pt-4 border-t border-neutral-800">
-                            <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-sm font-medium text-neutral-400 uppercase tracking-wider">Recent Sprint History</h2>
+                        <div className="pt-6 mt-6 border-t border-[#1f1f1f]">
+                            <div className="flex items-center justify-between mb-5">
+                                <h2 className="text-sm font-medium text-[#CAC4D0] uppercase tracking-wider">Recent Sprint History</h2>
                                 <Link
                                     href="/sprint/history"
-                                    className="text-xs font-medium text-neutral-500 hover:text-white transition-colors"
+                                    className="text-xs font-medium text-[#E6E1E5] hover:text-white transition-colors hover:underline"
                                 >
                                     View All Submissions
                                 </Link>
                             </div>
 
-                            <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 overflow-hidden">
+                            <div className="bg-[#141414] rounded-[24px] border border-[#1f1f1f] overflow-hidden">
                                 {history.length === 0 ? (
-                                    <div className="p-8 text-center text-neutral-500">
+                                    <div className="p-8 text-center text-[#938F99]">
                                         <p className="text-sm">No recent sprints found. Start your first sprint!</p>
                                     </div>
                                 ) : (
-                                    <div className="divide-y divide-neutral-800/50">
+                                    <div className="divide-y divide-[#1f1f1f]">
                                         {history.map((h, i) => (
-                                            <div key={h.id || i} className="p-5 flex flex-wrap md:grid md:grid-cols-12 gap-4 items-center justify-between hover:bg-neutral-800/30 transition-colors group">
+                                            <div key={h.id || i} className="p-5 flex flex-wrap md:grid md:grid-cols-12 gap-4 items-center justify-between hover:bg-[#1f1f1f]/50 transition-colors group">
                                                 <div className="w-full md:w-auto md:col-span-4 flex justify-between items-center md:block">
                                                     <div>
-                                                        <p className="text-sm font-medium text-neutral-200">{formatDate(h.createdAt)}</p>
+                                                        <p className="text-sm font-medium text-[#E6E1E5]">{formatDate(h.createdAt)}</p>
                                                         <div className="flex items-center gap-2 mt-1.5">
-                                                            <span className={`px-2 py-0.5 text-[10px] font-bold rounded border ${h.subject === 'QUANT'
-                                                                ? 'bg-amber-500/10 text-amber-500 border-amber-500/20'
-                                                                : 'bg-violet-500/10 text-violet-500 border-violet-500/20'}`}>
-                                                                {h.subject}
+                                                            <span className={`px-2.5 py-1 text-[10px] font-medium rounded-full ${h.subject === 'QUANT'
+                                                                ? 'bg-[#594100] text-[#FFB951]'
+                                                                : 'bg-[#332D41] text-[#D0BCFF]'}`}>
+                                                                {h.subject.charAt(0) + h.subject.slice(1).toLowerCase()}
                                                             </span>
-                                                            <span className="text-[10px] text-neutral-500 font-medium">#{h.id?.slice(-4).toUpperCase() || (1000 + i)}</span>
+                                                            <span className="text-[10px] text-[#938F99] font-medium">#{h.id?.slice(-4).toUpperCase() || (1000 + i)}</span>
                                                         </div>
                                                     </div>
                                                     {/* Mobile Review Button */}
                                                     <div className="md:hidden">
                                                         <Link
                                                             href={`/sprint/${h.id}/review`}
-                                                            className="px-4 py-2 text-xs font-bold text-neutral-400 hover:text-white bg-neutral-800/50 hover:bg-neutral-700 border border-neutral-700 rounded-xl transition-all"
+                                                            className="px-4 py-2 text-xs font-medium text-[#E6E1E5] bg-[#36343B] hover:bg-[#4A4458] rounded-full transition-all"
                                                         >
                                                             Review
                                                         </Link>
@@ -565,29 +566,29 @@ function SprintSetupContent() {
                                                 </div>
 
                                                 <div className="col-span-2 hidden sm:block">
-                                                    <p className="text-[10px] text-neutral-500 mb-0.5 uppercase tracking-wide">Score</p>
+                                                    <p className="text-[10px] text-[#938F99] mb-0.5 uppercase tracking-wide">Score</p>
                                                     <div className="flex items-baseline gap-0.5">
-                                                        <span className="text-sm font-bold text-white">{h.score}</span>
-                                                        <span className="text-[10px] text-neutral-600">/{h.totalQuestions}</span>
+                                                        <span className="text-sm font-bold text-[#E6E1E5]">{h.score}</span>
+                                                        <span className="text-[10px] text-[#CAC4D0]">/{h.totalQuestions}</span>
                                                     </div>
                                                 </div>
 
                                                 <div className="col-span-2 hidden sm:block">
-                                                    <p className="text-[10px] text-neutral-500 mb-0.5 uppercase tracking-wide">Accuracy</p>
-                                                    <p className={`text-sm font-bold ${h.accuracy >= 70 ? 'text-emerald-400' : h.accuracy >= 40 ? 'text-amber-400' : 'text-rose-400'}`}>
+                                                    <p className="text-[10px] text-[#938F99] mb-0.5 uppercase tracking-wide">Accuracy</p>
+                                                    <p className={`text-sm font-bold ${h.accuracy >= 70 ? 'text-[#6DD58C]' : h.accuracy >= 40 ? 'text-[#FFB951]' : 'text-[#FFB4AB]'}`}>
                                                         {h.accuracy}%
                                                     </p>
                                                 </div>
 
                                                 <div className="col-span-2 hidden md:block">
-                                                    <p className="text-[10px] text-neutral-500 mb-0.5 uppercase tracking-wide">Time</p>
-                                                    <p className="text-sm font-mono text-neutral-300">{formatTime(h.timeTaken)}</p>
+                                                    <p className="text-[10px] text-[#938F99] mb-0.5 uppercase tracking-wide">Time</p>
+                                                    <p className="text-sm font-mono text-[#CAC4D0]">{formatTime(h.timeTaken)}</p>
                                                 </div>
 
                                                 <div className="col-span-2 hidden md:flex justify-end">
                                                     <Link
                                                         href={`/sprint/${h.id}/review`}
-                                                        className="px-4 py-2 text-xs font-bold text-neutral-400 hover:text-white bg-neutral-800/50 hover:bg-neutral-700 border border-neutral-700 rounded-xl transition-all"
+                                                        className="px-4 py-2 text-xs font-medium text-[#E6E1E5] bg-[#36343B] hover:bg-[#4A4458] rounded-full transition-all"
                                                     >
                                                         Review
                                                     </Link>
@@ -603,25 +604,25 @@ function SprintSetupContent() {
                     {/* RIGHT COLUMN (Configuration) */}
                     {/* On Default/Mobile: Order 1. On XL: Order 2 */}
                     <div className="space-y-6 order-1 xl:order-2">
-                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6 xl:sticky xl:top-24 shadow-2xl shadow-black/50">
-                            <div className="flex items-center gap-2 mb-4 text-white pb-3 border-b border-neutral-800">
-                                <TuneIcon sx={{ fontSize: '1.2rem' }} className="text-neutral-400" />
-                                <h3 className="text-sm font-bold uppercase tracking-wider">Configuration</h3>
+                        <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-6 xl:sticky xl:top-24">
+                            <div className="flex items-center gap-2 mb-5 text-[#E6E1E5]">
+                                <TuneIcon sx={{ fontSize: '1.2rem' }} className="text-[#CAC4D0]" />
+                                <h3 className="text-sm font-medium uppercase tracking-wider">Configuration</h3>
                             </div>
 
                             {/* Questions Count */}
                             <div className="mb-6">
-                                <label className="text-xs text-neutral-500 block mb-2 uppercase tracking-wide font-medium">Number of Questions</label>
+                                <label className="text-xs text-[#CAC4D0] block mb-3 uppercase tracking-wide font-medium">Number of Questions</label>
                                 <div className="grid grid-cols-4 gap-2">
                                     {[5, 10, 15, 20].map(count => (
                                         <button
                                             key={count}
                                             onClick={() => setQuestionCount(count)}
-                                            className={`py-2.5 rounded-xl text-sm font-bold transition-all border ${questionCount === count
+                                            className={`py-2 rounded-full text-sm font-medium transition-all border ${questionCount === count
                                                 ? subject === 'QUANT'
-                                                    ? 'bg-amber-500/10 text-amber-500 border-amber-500/50'
-                                                    : 'bg-violet-500/10 text-violet-500 border-violet-500/50'
-                                                : 'bg-neutral-800/50 text-neutral-500 border-transparent hover:bg-neutral-800'
+                                                    ? 'bg-[#594100] text-[#FFB951] border-[#594100]'
+                                                    : 'bg-[#332D41] text-[#D0BCFF] border-[#332D41]'
+                                                : 'bg-[#0a0a0a] text-[#CAC4D0] border-[#1f1f1f] hover:border-[#CAC4D0]'
                                                 }`}
                                         >
                                             {count}
@@ -632,25 +633,25 @@ function SprintSetupContent() {
 
                             {/* Difficulty - Compact Horizontal Grid */}
                             <div className="mb-6">
-                                <label className="text-xs text-neutral-500 block mb-2 uppercase tracking-wide font-medium">Difficulty Level</label>
+                                <label className="text-xs text-[#CAC4D0] block mb-3 uppercase tracking-wide font-medium">Difficulty Level</label>
                                 <div className="grid grid-cols-4 gap-2">
                                     {(Object.keys(DIFFICULTY_CONFIG) as Difficulty[]).map(diff => (
                                         <button
                                             key={diff}
                                             onClick={() => setDifficulty(diff)}
-                                            className={`py-2 rounded-xl flex flex-col items-center justify-center border transition-all ${difficulty === diff
+                                            className={`py-2 rounded-full flex flex-col items-center justify-center border transition-all ${difficulty === diff
                                                 ? subject === 'QUANT'
-                                                    ? 'bg-amber-500/10 border-amber-500/50'
-                                                    : 'bg-violet-500/10 border-violet-500/50'
-                                                : 'bg-neutral-800/50 border-transparent hover:bg-neutral-800'
+                                                    ? 'bg-[#594100] border-[#594100]'
+                                                    : 'bg-[#332D41] border-[#332D41]'
+                                                : 'bg-[#0a0a0a] border-[#1f1f1f] hover:border-[#CAC4D0]'
                                                 }`}
                                         >
-                                            <span className={`text-xs font-bold ${difficulty === diff ? 'text-white' : 'text-neutral-400'}`}>
+                                            <span className={`text-xs font-medium ${difficulty === diff ? (subject === 'QUANT' ? 'text-[#FFB951]' : 'text-[#D0BCFF]') : 'text-[#CAC4D0]'}`}>
                                                 {DIFFICULTY_CONFIG[diff].label}
                                             </span>
                                             <span className={`text-[10px] ${difficulty === diff
-                                                ? subject === 'QUANT' ? 'text-amber-400' : 'text-violet-400'
-                                                : 'text-neutral-600'
+                                                ? subject === 'QUANT' ? 'text-[#FFB951]/70' : 'text-[#D0BCFF]/70'
+                                                : 'text-[#938F99]'
                                                 }`}>
                                                 {DIFFICULTY_CONFIG[diff].timePerQ}s
                                             </span>
@@ -660,17 +661,17 @@ function SprintSetupContent() {
                             </div>
 
                             {/* Estimated Time */}
-                            <div className="bg-black/40 rounded-xl p-4 mb-6">
+                            <div className="bg-[#0a0a0a] rounded-[16px] border border-[#1f1f1f] p-4 mb-6">
                                 <div className="flex items-center justify-between mb-1">
-                                    <span className="text-neutral-400 text-sm">Est. Duration</span>
-                                    <span className="text-white font-mono font-bold">
+                                    <span className="text-[#CAC4D0] text-sm">Est. Duration</span>
+                                    <span className="text-[#E6E1E5] font-mono font-medium">
                                         {Math.floor((questionCount * DIFFICULTY_CONFIG[difficulty].timePerQ) / 60)}m {(questionCount * DIFFICULTY_CONFIG[difficulty].timePerQ) % 60}s
                                     </span>
                                 </div>
-                                <div className="text-xs text-neutral-500 text-right">
+                                <div className="text-xs text-[#938F99] text-right">
                                     ({questionCount} questions × {DIFFICULTY_CONFIG[difficulty].timePerQ}s)
                                 </div>
-                                <div className="mt-3 pt-3 border-t border-white/5 text-[11px] text-neutral-500 italic">
+                                <div className="mt-3 pt-3 border-t border-[#1f1f1f] text-[11px] text-[#CAC4D0] italic">
                                     💡 Tip: Accuracy matters more than speed!
                                 </div>
                             </div>
@@ -685,7 +686,7 @@ function SprintSetupContent() {
                                             <label className="text-xs text-neutral-500 block mb-2 uppercase tracking-wide font-medium">Load Saved Preset</label>
                                             <div className="space-y-2 max-h-40 overflow-y-auto pr-2 custom-scrollbar">
                                                 {savedConfigs.map((config: any) => (
-                                                    <div key={config.name} className="flex items-center gap-2 bg-neutral-800/30 p-2 rounded-lg border border-neutral-800 hover:border-neutral-700 transition-colors">
+                                                    <div key={config.name} className="flex items-center gap-2 bg-[#0a0a0a] p-2 rounded-2xl border border-[#1f1f1f] hover:border-[#2b2b2b] transition-colors">
                                                         <button
                                                             onClick={() => handleLoadConfig(config)}
                                                             className="flex-1 text-left text-xs text-neutral-300 hover:text-white transition-colors"
@@ -719,7 +720,7 @@ function SprintSetupContent() {
                                             setSaveError(null);
                                         }}
                                         disabled={savedConfigs.length >= 5}
-                                        className={`w-full text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all border flex items-center justify-center gap-2 ${savedConfigs.length >= 5
+                                        className={`w-full text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-full transition-all border flex items-center justify-center gap-2 ${savedConfigs.length >= 5
                                             ? 'bg-neutral-800/30 text-neutral-600 border-neutral-800 cursor-not-allowed'
                                             : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white border-neutral-700'
                                             }`}
@@ -743,13 +744,13 @@ function SprintSetupContent() {
                                 <button
                                     onClick={handleStartSprint}
                                     disabled={selectedTopics.length === 0 || isStarting}
-                                    className={`w-full py-4 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${subject === 'QUANT'
-                                        ? 'bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 shadow-amber-500/25'
-                                        : 'bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-400 hover:to-purple-500 shadow-violet-500/25'
+                                    className={`w-full py-4 rounded-[20px] font-bold text-lg transition-all shadow-sm ${selectedTopics.length === 0 || isStarting
+                                        ? 'bg-[#141414] text-[#938F99] border border-[#1f1f1f] cursor-not-allowed'
+                                        : 'bg-[#FFB951] hover:bg-[#FFB951]/90 text-[#452B00]'
                                         }`}
                                 >
                                     {isStarting ? (
-                                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                        <div className="w-5 h-5 border-2 border-[#1D192B]/30 border-t-[#1D192B] rounded-full animate-spin"></div>
                                     ) : (
                                         <>
                                             <PlayArrowIcon sx={{ fontSize: '1.5rem' }} />
@@ -777,18 +778,18 @@ function SprintSetupContent() {
             </main >
 
             {/* Mobile Sticky Action Bar */}
-            <div className="xl:hidden fixed bottom-0 left-0 right-0 p-4 bg-[#1a1a1a]/90 backdrop-blur-md border-t border-neutral-800 z-40">
+            <div className="xl:hidden fixed bottom-0 left-0 right-0 p-4 bg-[#0a0a0a]/90 backdrop-blur-md border-t border-[#1f1f1f] z-40">
                 <AuthActionGuard>
                     <button
                         onClick={handleStartSprint}
                         disabled={selectedTopics.length === 0 || isStarting}
-                        className={`w-full py-4 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${subject === 'QUANT'
-                            ? 'bg-gradient-to-r from-amber-500 to-orange-600 shadow-amber-500/25'
-                            : 'bg-gradient-to-r from-violet-500 to-purple-600 shadow-violet-500/25'
+                        className={`w-full py-4 text-[#1D192B] font-medium rounded-full shadow-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${subject === 'QUANT'
+                            ? 'bg-[#FFB951] hover:bg-[#FFB951]/90'
+                            : 'bg-[#D0BCFF] hover:bg-[#D0BCFF]/90'
                             }`}
                     >
                         {isStarting ? (
-                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                            <div className="w-5 h-5 border-2 border-[#1D192B]/30 border-t-[#1D192B] rounded-full animate-spin"></div>
                         ) : (
                             <>
                                 <PlayArrowIcon sx={{ fontSize: '1.5rem' }} />
@@ -804,17 +805,17 @@ function SprintSetupContent() {
             {/* Save Configuration Modal */}
             {showSaveModal && (
                 <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                    <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl p-6 max-w-md w-full shadow-2xl">
-                        <h3 className="text-lg font-bold text-white mb-4">Save Sprint Configuration</h3>
+                    <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-6 max-w-md w-full shadow-2xl">
+                        <h3 className="text-lg font-medium tracking-tight text-[#E6E1E5] mb-5">Save Sprint Configuration</h3>
 
-                        <div className="mb-4">
-                            <label className="text-xs text-neutral-400 block mb-2">Configuration Name</label>
+                        <div className="mb-5">
+                            <label className="text-xs text-[#CAC4D0] block mb-2 font-medium">Configuration Name</label>
                             <input
                                 type="text"
                                 value={configName}
                                 onChange={(e) => setConfigName(e.target.value)}
                                 placeholder="e.g., My Daily Practice"
-                                className="w-full bg-neutral-900 border border-neutral-800 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-amber-500/50 transition-colors"
+                                className="w-full bg-[#0a0a0a] border border-[#1f1f1f] rounded-full px-5 py-3 text-sm text-[#E6E1E5] placeholder-[#938F99] focus:outline-none focus:border-[#E8DEF8] transition-colors"
                                 autoFocus
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') handleSaveConfig();
@@ -827,17 +828,17 @@ function SprintSetupContent() {
                             />
                         </div>
 
-                        <div className="mb-4 p-3 bg-neutral-900 rounded-lg border border-neutral-800">
-                            <div className="text-xs text-neutral-500 space-y-1">
-                                <div><span className="text-neutral-400 font-medium">Subject:</span> {subject}</div>
-                                <div><span className="text-neutral-400 font-medium">Difficulty:</span> {difficulty}</div>
-                                <div><span className="text-neutral-400 font-medium">Questions:</span> {questionCount}</div>
-                                <div><span className="text-neutral-400 font-medium">Topics:</span> {selectedTopics.includes('ALL') ? 'All' : selectedTopics.length}</div>
+                        <div className="mb-5 p-4 bg-[#0a0a0a] rounded-[16px] border border-[#1f1f1f]">
+                            <div className="text-xs text-[#CAC4D0] space-y-2">
+                                <div className="flex justify-between"><span className="text-[#938F99]">Subject</span> <span className="font-medium text-[#E6E1E5]">{subject}</span></div>
+                                <div className="flex justify-between"><span className="text-[#938F99]">Difficulty</span> <span className="font-medium text-[#E6E1E5]">{difficulty}</span></div>
+                                <div className="flex justify-between"><span className="text-[#938F99]">Questions</span> <span className="font-medium text-[#E6E1E5]">{questionCount}</span></div>
+                                <div className="flex justify-between"><span className="text-[#938F99]">Topics</span> <span className="font-medium text-[#E6E1E5]">{selectedTopics.includes('ALL') ? 'All' : selectedTopics.length}</span></div>
                             </div>
                         </div>
 
                         {saveError && (
-                            <div className="mb-4 p-3 bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs rounded-lg">
+                            <div className="mb-5 p-3 bg-rose-900/30 border border-rose-500/30 text-[#FFB4AB] text-xs rounded-[16px] text-center">
                                 {saveError}
                             </div>
                         )}
@@ -849,16 +850,16 @@ function SprintSetupContent() {
                                     setConfigName('');
                                     setSaveError(null);
                                 }}
-                                className="flex-1 px-4 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-white rounded-lg text-sm font-medium transition-colors"
+                                className="flex-1 px-4 py-3 bg-[#0a0a0a] hover:bg-[#1f1f1f] border border-[#1f1f1f] text-[#CAC4D0] hover:text-[#E6E1E5] rounded-full text-sm font-medium transition-colors"
                             >
                                 Cancel
                             </button>
                             <button
                                 onClick={handleSaveConfig}
                                 disabled={!configName.trim()}
-                                className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all ${configName.trim()
-                                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white shadow-lg shadow-amber-500/25'
-                                    : 'bg-neutral-800 text-neutral-600 cursor-not-allowed'
+                                className={`flex-1 px-4 py-3 rounded-full text-sm font-medium transition-all ${configName.trim()
+                                    ? (subject === 'QUANT' ? 'bg-[#FFB951] text-[#1D192B] hover:bg-[#FFB951]/90' : 'bg-[#D0BCFF] text-[#1D192B] hover:bg-[#D0BCFF]/90')
+                                    : 'bg-[#1f1f1f] text-[#938F99] cursor-not-allowed border border-[#2b2b2b]'
                                     }`}
                             >
                                 Save Configuration
@@ -874,7 +875,7 @@ function SprintSetupContent() {
 export default function SprintSetupPage() {
     return (
         <Suspense fallback={
-            <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
+            <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
                 <div className="text-neutral-500">Loading PrepLeague...</div>
             </div>
         }>

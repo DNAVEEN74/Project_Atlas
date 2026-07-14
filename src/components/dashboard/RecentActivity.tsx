@@ -58,17 +58,17 @@ const RecentActivity = ({ attempts, className }: RecentActivityProps) => {
 
     if (displayAttempts.length === 0) {
         return (
-            <div className={`bg-[#1a1a1a] rounded-xl border border-neutral-800 p-6 ${className}`}>
+            <div className={`bg-[#141414] rounded-[24px] border border-[#1f1f1f] p-6 ${className}`}>
                 <div className="flex justify-between items-center mb-6">
                     <div className="flex items-center gap-2">
-                        <HistoryIcon className="text-indigo-500 w-5 h-5" />
-                        <h3 className="font-bold text-white text-lg">Recent Submissions</h3>
+                        <HistoryIcon className="text-[#FFB951] w-5 h-5" />
+                        <h3 className="font-bold text-[#E6E1E5] text-lg">Recent Submissions</h3>
                     </div>
-                    <Link href="/submissions" className="text-xs font-medium text-indigo-400 hover:text-indigo-300">
+                    <Link href="/submissions" className="text-xs font-medium text-[#FFB951] hover:text-[#FFDE9C] transition-colors">
                         View All →
                     </Link>
                 </div>
-                <div className="text-center py-8 text-neutral-500 text-sm">
+                <div className="text-center py-8 text-[#938F99] text-sm font-medium">
                     No recent activity.
                 </div>
             </div>
@@ -76,18 +76,18 @@ const RecentActivity = ({ attempts, className }: RecentActivityProps) => {
     }
 
     return (
-        <div className={`bg-[#1a1a1a] rounded-xl border border-neutral-800 overflow-hidden flex flex-col h-full ${className}`}>
-            <div className="flex justify-between items-center p-4 border-b border-neutral-800 shrink-0">
+        <div className={`bg-[#141414] rounded-[24px] border border-[#1f1f1f] overflow-hidden flex flex-col h-full ${className}`}>
+            <div className="flex justify-between items-center p-4 border-b border-[#1f1f1f] shrink-0">
                 <div className="flex items-center gap-2">
-                    <HistoryIcon className="text-indigo-500 w-5 h-5" />
-                    <h3 className="font-bold text-white text-lg">Recent Submissions</h3>
+                    <HistoryIcon className="text-[#FFB951] w-5 h-5" />
+                    <h3 className="font-bold text-[#E6E1E5] text-lg">Recent Submissions</h3>
                 </div>
-                <Link href="/submissions" className="text-xs font-medium text-indigo-400 hover:text-indigo-300">
-                    View All →
+                <Link href="/history" className="text-[#FFB951] text-sm hover:text-[#FFDE9C] transition-colors font-medium">
+                    View full history
                 </Link>
             </div>
 
-            <div className="divide-y divide-neutral-800/50 flex-1 flex flex-col justify-center">
+            <div className="divide-y divide-[#1f1f1f] flex-1 flex flex-col justify-center">
                 {displayAttempts.map((attempt) => {
                     // Safe access to question data
                     const questionData = typeof attempt.question_id === 'object' ? attempt.question_id : null;
@@ -106,24 +106,24 @@ const RecentActivity = ({ attempts, className }: RecentActivityProps) => {
                         <Link
                             key={attempt._id}
                             href={`/problems/${questionId}?section=${section}`}
-                            className="flex items-center gap-4 p-4 hover:bg-neutral-800/40 transition-colors group"
+                            className="flex items-center gap-4 p-4 hover:bg-[#1f1f1f]/50 transition-colors group"
                         >
                             {/* Status Icon */}
                             <div className="shrink-0">
                                 {attempt.is_correct ? (
-                                    <CheckCircleIcon className="text-emerald-500 w-5 h-5" />
+                                    <CheckCircleIcon className="text-[#6DD58C] w-5 h-5" />
                                 ) : (
-                                    <CancelIcon className="text-rose-500 w-5 h-5" />
+                                    <CancelIcon className="text-[#FFB4AB] w-5 h-5" />
                                 )}
                             </div>
 
                             {/* Content */}
                             <div className="flex-1 min-w-0">
-                                <div className="text-sm text-neutral-300 font-medium truncate group-hover:text-white transition-colors">
+                                <div className="text-sm text-[#CAC4D0] font-medium truncate group-hover:text-[#E6E1E5] transition-colors">
                                     <MathText>{questionText?.slice(0, 100) || 'Question'}</MathText>
                                 </div>
-                                <div className="flex items-center gap-3 mt-1 text-xs text-neutral-500">
-                                    <span className="uppercase tracking-wide text-[10px] font-semibold text-neutral-600">
+                                <div className="flex items-center gap-3 mt-1 text-xs text-[#938F99]">
+                                    <span className="uppercase tracking-wide text-[10px] font-semibold text-[#CAC4D0]">
                                         {section}
                                     </span>
                                     <span>•</span>
@@ -133,7 +133,7 @@ const RecentActivity = ({ attempts, className }: RecentActivityProps) => {
                                         {timeSeconds}s
                                         {isFastWrong && (
                                             <span
-                                                className="text-amber-500 flex items-center gap-0.5 cursor-help"
+                                                className="text-[#FFB951] flex items-center gap-0.5 cursor-help"
                                                 title="Very fast - did you rush?"
                                             >
                                                 <BoltIcon className="w-3 h-3" />
@@ -143,7 +143,7 @@ const RecentActivity = ({ attempts, className }: RecentActivityProps) => {
                                     {(attempt as any).attempt_count > 1 && (
                                         <>
                                             <span>•</span>
-                                            <span className="text-[9px] font-bold bg-neutral-800 text-neutral-400 px-1.5 py-0.5 rounded">
+                                            <span className="text-[9px] font-bold bg-[#1f1f1f] text-[#CAC4D0] px-1.5 py-0.5 rounded">
                                                 {(attempt as any).attempt_count} tries
                                             </span>
                                         </>
@@ -152,7 +152,7 @@ const RecentActivity = ({ attempts, className }: RecentActivityProps) => {
                             </div>
 
                             {/* Action Arrow */}
-                            <ChevronRightIcon className="text-neutral-700 group-hover:text-neutral-500 transition-colors w-5 h-5 shrink-0" />
+                            <ChevronRightIcon className="text-[#49454F] group-hover:text-[#938F99] transition-colors w-5 h-5 shrink-0" />
                         </Link>
                     );
                 })}

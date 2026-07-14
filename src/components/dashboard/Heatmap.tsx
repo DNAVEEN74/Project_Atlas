@@ -53,11 +53,11 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
 
     const getIntensityColor = (intensity: number) => {
         const colors = [
-            'bg-[#1E2A1E]/40', // Empty (lightened for better contrast)
-            'bg-emerald-900',  // 1
-            'bg-emerald-700',  // 2
-            'bg-emerald-500',  // 3
-            'bg-emerald-400',  // 4
+            'bg-[#1f1f1f]', // Empty 
+            'bg-[#005325]',  // 1
+            'bg-[#008942]',  // 2
+            'bg-[#6DD58C]',  // 3
+            'bg-[#96F2B1]',  // 4
         ];
         return colors[intensity];
     };
@@ -68,7 +68,7 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
     };
 
     return (
-        <div className={`bg-[#1a1a1a] h-full rounded-xl border border-neutral-800 p-6 flex flex-col ${className}`}>
+        <div className={`bg-[#141414] h-full rounded-[24px] border border-[#1f1f1f] p-6 flex flex-col ${className}`}>
 
             {/* Header Section - Reorganized */}
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">
@@ -76,14 +76,14 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
                 {/* Left: Tabs & Title */}
                 <div className="space-y-4">
                     {/* Tabs */}
-                    <div className="flex gap-1">
+                    <div className="flex gap-2">
                         {(['ALL', 'QUANT', 'REASONING'] as TabType[]).map(tab => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
-                                className={`px-3 py-1 text-sm font-medium rounded-full border transition-all ${activeTab === tab
-                                    ? 'bg-neutral-800 text-white border-neutral-700'
-                                    : 'bg-transparent text-neutral-500 border-transparent hover:text-neutral-300'
+                                className={`px-4 py-1.5 text-sm font-medium rounded-full border transition-all ${activeTab === tab
+                                    ? 'bg-[#E8DEF8] text-[#1D192B] border-transparent'
+                                    : 'bg-transparent text-[#CAC4D0] border-[#49454F] hover:bg-[#1D192B] hover:text-[#E6E1E5]'
                                     }`}
                             >
                                 {tab === 'ALL' ? 'All' : tab === 'QUANT' ? 'Quant' : 'Reasoning'}
@@ -93,25 +93,25 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
                 </div>
 
                 {/* Right: Stats */}
-                <div className="flex items-center gap-6 text-sm text-neutral-500">
+                <div className="flex items-center gap-6 text-sm text-[#938F99]">
                     <div className="flex items-baseline gap-2">
-                        <span className="text-white font-bold">{totalSubmissions}</span>
+                        <span className="text-[#E6E1E5] font-medium tracking-tight text-lg">{totalSubmissions}</span>
                         <span>submissions</span>
                     </div>
-                    <span>•</span>
+                    <span className="text-[#49454F]">•</span>
                     <div>
-                        <span className="text-white font-bold">{active_days}</span> active days
+                        <span className="text-[#E6E1E5] font-medium tracking-tight text-lg">{active_days}</span> active days
                     </div>
-                    <span>•</span>
+                    <span className="text-[#49454F]">•</span>
                     <div>
-                        Max streak <span className="text-white font-bold">{max_streak}</span>
+                        Max streak <span className="text-[#E6E1E5] font-medium tracking-tight text-lg">{max_streak}</span>
                     </div>
                 </div>
             </div>
 
             {/* Grid Container - Compact Sizing with Mobile Scroll */}
-            <div className="w-full flex-1 overflow-x-auto pb-4 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:bg-neutral-800 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent flex flex-col justify-center min-h-[160px]">
-                <div className="flex items-end gap-1 min-w-[700px] w-full">
+            <div className="w-full flex-1 overflow-x-auto [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-thumb]:bg-neutral-800 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-transparent flex flex-col justify-center min-h-[160px]">
+                <div className="flex items-end gap-1 min-w-[700px] w-full py-6">
                     {/* Generate last 12 months */}
                     {Array.from({ length: 13 }).map((_, monthIndex) => {
                         // Logic from reference: 
@@ -156,7 +156,7 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
                                                 const isFuture = isFutureDate(dateStr);
 
                                                 if (isFuture) {
-                                                    return <div key={rowIndex} className="w-full aspect-square bg-neutral-900/30 rounded-[2px]" />;
+                                                    return <div key={rowIndex} className="w-full aspect-square bg-[#0a0a0a] rounded-[2px]" />;
                                                 }
 
                                                 // Get data for this day
@@ -165,7 +165,20 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
                                                 const intensity = getIntensity(count);
 
                                                 // Tooltip positioning logic
-                                                const isTopRow = rowIndex < 2;
+                                                const isTopRow = rowIndex < 4;
+                                                const isFirstFew = monthIndex === 0 && colIndex < 2;
+                                                const isLastFew = monthIndex === 12 && colIndex > columns - 3;
+
+                                                let tooltipPosition = 'left-1/2 -translate-x-1/2';
+                                                let arrowPosition = 'left-1/2 -translate-x-1/2';
+                                                
+                                                if (isFirstFew) {
+                                                    tooltipPosition = 'left-0 translate-x-0';
+                                                    arrowPosition = 'left-2 translate-x-0';
+                                                } else if (isLastFew) {
+                                                    tooltipPosition = 'right-0 left-auto translate-x-0';
+                                                    arrowPosition = 'right-2 left-auto translate-x-0';
+                                                }
 
                                                 return (
                                                     <div key={rowIndex} className="relative group/item hover:z-50 w-full">
@@ -173,25 +186,25 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
                                                             className={`w-full aspect-square rounded-[2px] transition-all duration-300 group-hover/item:scale-125 ${getIntensityColor(intensity)} cursor-default`}
                                                         />
                                                         {/* Custom Tooltip */}
-                                                        <div className={`absolute left-1/2 -translate-x-1/2 opacity-0 group-hover/item:opacity-100 transition-all duration-200 pointer-events-none transform z-50 flex flex-col items-center
+                                                        <div className={`absolute ${tooltipPosition} opacity-0 group-hover/item:opacity-100 transition-all duration-200 pointer-events-none transform z-50 flex flex-col items-center
                                                             ${isTopRow
                                                                 ? 'top-full mt-2 translate-y-[-8px] group-hover/item:translate-y-0'
                                                                 : 'bottom-full mb-2 translate-y-2 group-hover/item:translate-y-0'
                                                             }`}>
 
-                                                            <div className={`bg-[#1a1a1a] border border-neutral-700 text-white text-xs px-3 py-2 rounded-xl shadow-2xl whitespace-nowrap min-w-max flex flex-col items-center gap-0.5 relative z-50 ${isTopRow ? 'order-2' : ''}`}>
+                                                            <div className={`bg-[#36343B] text-[#E6E1E5] text-xs px-3 py-2 rounded-[16px] shadow-lg whitespace-nowrap min-w-max flex flex-col items-center gap-0.5 relative z-50 ${isTopRow ? 'order-2' : ''}`}>
 
                                                                 {/* Arrow */}
                                                                 {isTopRow ? (
-                                                                    <div className="w-2.5 h-2.5 bg-[#1a1a1a] border-l border-t border-neutral-700 rotate-45 absolute -top-1.5 left-1/2 -translate-x-1/2 -z-10"></div>
+                                                                    <div className={`w-2.5 h-2.5 bg-[#36343B] rotate-45 absolute -top-1.5 -z-10 ${arrowPosition}`}></div>
                                                                 ) : (
-                                                                    <div className="w-2.5 h-2.5 bg-[#1a1a1a] border-r border-b border-neutral-700 rotate-45 absolute -bottom-1.5 left-1/2 -translate-x-1/2 -z-10"></div>
+                                                                    <div className={`w-2.5 h-2.5 bg-[#36343B] rotate-45 absolute -bottom-1.5 -z-10 ${arrowPosition}`}></div>
                                                                 )}
 
-                                                                <div className="font-bold text-neutral-100">
+                                                                <div className="font-medium text-[#E6E1E5]">
                                                                     {count} {count === 1 ? 'submission' : 'submissions'}
                                                                 </div>
-                                                                <div className="text-[10px] text-neutral-400 font-medium bg-neutral-800/50 px-1.5 py-0.5 rounded-md mt-0.5">
+                                                                <div className="text-[10px] text-[#CAC4D0] font-medium bg-[#1D192B] px-2 py-1 rounded-lg mt-0.5">
                                                                     {targetDate.toLocaleString('default', { month: 'short' })} {dayNumber}, {targetYear}
                                                                 </div>
                                                             </div>
@@ -203,7 +216,7 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
                                     ))}
                                 </div>
                                 {/* Month Label */}
-                                <span className="text-[10px] text-neutral-500 text-center block w-full truncate mt-1">
+                                <span className="text-[10px] text-[#938F99] text-center block w-full truncate mt-1 font-medium tracking-wider uppercase">
                                     {targetDate.toLocaleString('default', { month: 'short' })}
                                 </span>
                             </div>
@@ -214,13 +227,13 @@ const Heatmap: React.FC<HeatmapProps> = ({ data, active_days, max_streak, classN
 
             {/* Legend */}
             <div className="flex items-center justify-end gap-2 mt-4">
-                <span className="text-[10px] text-neutral-500">Less</span>
+                <span className="text-[10px] font-medium text-[#938F99]">Less</span>
                 <div className="flex gap-[2px]">
                     {[0, 1, 2, 3, 4].map(i => (
                         <div key={i} className={`w-[10px] h-[10px] rounded-[2px] ${getIntensityColor(i)}`}></div>
                     ))}
                 </div>
-                <span className="text-[10px] text-neutral-500">More</span>
+                <span className="text-[10px] font-medium text-[#938F99]">More</span>
             </div>
         </div>
     );

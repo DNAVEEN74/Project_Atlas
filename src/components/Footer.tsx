@@ -3,8 +3,8 @@ import Image from 'next/image';
 
 export default function Footer() {
     return (
-        <footer className="py-20 px-6 bg-[#0f0f0f] border-t border-neutral-800/50 text-neutral-500 text-sm selection:bg-amber-500/30">
-            <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+        <footer className="py-20 px-6 bg-[#080808] border-t border-[#1f1f1f]/50 text-neutral-500 text-sm selection:bg-amber-500/30">
+            <div className="max-w-[1280px] mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
                 <div className="flex flex-col gap-4">
                   <Link href="/" className="flex items-center gap-3 group transition-transform active:scale-95">
                       <div className="relative w-8 h-8 opacity-80 group-hover:opacity-100 transition-opacity">
@@ -42,7 +42,7 @@ export default function Footer() {
                 </div>
             </div>
             
-            <div className="max-w-[1440px] mx-auto px-6 lg:px-12 mt-20 pt-8 border-t border-neutral-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] font-medium text-neutral-700">
+            <div className="max-w-[1280px] mx-auto px-6 lg:px-12 mt-20 pt-8 border-t border-[#1f1f1f]/50 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] font-medium text-neutral-700">
               <div className="flex items-center gap-2">
                 <span>© 2018-{new Date().getFullYear()} PREPLEAGUE TECHNOLOGIES. ALL RIGHTS RESERVED.</span>
               </div>

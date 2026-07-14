@@ -203,30 +203,25 @@ export default function RegisterPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-500"></div>
+            <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FFB951]"></div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center p-4 relative overflow-hidden">
-            {/* Ambient Background */}
-            <div className="absolute top-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[100px]" />
-                <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-orange-600/5 rounded-full blur-[100px]" />
-            </div>
+        <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-4 relative overflow-hidden">
 
             <div className="w-full max-w-lg relative z-10">
-                {/* Logo */}
+                {/* Logo & Title */}
                 <div className="text-center mb-8">
                     <Link href="/" className="inline-block group">
-                        <div className="relative w-20 h-20 mx-auto mb-4 group-hover:scale-105 transition-transform">
-                            <Image src="/logo-final.png" alt="PrepLeague Logo" fill className="object-contain drop-shadow-lg" />
+                        <div className="relative w-16 h-16 mx-auto mb-5 group-hover:scale-105 transition-transform">
+                            <Image src="/logo-final.png" alt="PrepLeague Logo" fill className="object-contain" />
                         </div>
-                        <h1 className="text-3xl font-bold text-white mb-1">Join PrepLeague</h1>
+                        <h1 className="text-2xl font-bold text-[#E6E1E5] mb-1.5">Join PrepLeague</h1>
                     </Link>
-                    <p className="text-neutral-400">Start your preparation journey</p>
+                    <p className="text-[#938F99] text-sm">Start your preparation journey</p>
                 </div>
 
                 <AnimatePresence mode="wait">
@@ -237,39 +232,40 @@ export default function RegisterPage() {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 20 }}
                         >
-                            {/* Register Card */}
-                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl p-8 backdrop-blur-sm">
-                                <h2 className="text-xl font-bold text-white text-center mb-6">Create New Account</h2>
+                            {/* Register Card — M3 Surface Container */}
+                            <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-8">
+                                <h2 className="text-lg font-bold text-[#E6E1E5] text-center mb-6">Create New Account</h2>
 
                                 {error && (
-                                    <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm flex items-center gap-2">
-                                        <span>!</span> {error}
+                                    <div className="mb-6 p-4 bg-[#93000A]/30 border border-[#FFB4AB]/20 rounded-2xl text-[#FFB4AB] text-sm flex items-center gap-2.5">
+                                        <span className="w-5 h-5 rounded-full bg-[#FFB4AB]/15 flex items-center justify-center text-xs font-bold shrink-0">!</span>
+                                        {error}
                                     </div>
                                 )}
 
                                 <form onSubmit={handleFormSubmit} className="space-y-5">
                                     {/* Name */}
                                     <div>
-                                        <label className="block text-sm font-medium text-neutral-400 mb-2">Full Name</label>
+                                        <label className="block text-sm font-medium text-[#CAC4D0] mb-2">Full Name</label>
                                         <div className="relative group">
-                                            <PersonOutlinedIcon sx={{ fontSize: '1.25rem' }} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 group-focus-within:text-amber-500 transition-colors" />
-                                            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full pl-12 pr-4 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white placeholder-neutral-600" placeholder="Your Name" required />
+                                            <PersonOutlinedIcon sx={{ fontSize: '1.25rem' }} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#938F99] group-focus-within:text-[#FFB951] transition-colors" />
+                                            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="w-full pl-12 pr-4 py-3.5 bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl focus:border-[#FFB951] focus:outline-none focus:ring-1 focus:ring-[#FFB951]/30 transition-all text-[#E6E1E5] placeholder-[#938F99]" placeholder="Your Name" required />
                                         </div>
                                     </div>
 
                                     {/* Email */}
                                     <div>
-                                        <label className="block text-sm font-medium text-neutral-400 mb-2">Email Address</label>
+                                        <label className="block text-sm font-medium text-[#CAC4D0] mb-2">Email Address</label>
                                         <div className="relative group">
-                                            <EmailOutlinedIcon sx={{ fontSize: '1.25rem' }} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 group-focus-within:text-amber-500 transition-colors" />
-                                            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full pl-12 pr-4 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white placeholder-neutral-600" placeholder="your@email.com" required />
+                                            <EmailOutlinedIcon sx={{ fontSize: '1.25rem' }} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#938F99] group-focus-within:text-[#FFB951] transition-colors" />
+                                            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full pl-12 pr-4 py-3.5 bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl focus:border-[#FFB951] focus:outline-none focus:ring-1 focus:ring-[#FFB951]/30 transition-all text-[#E6E1E5] placeholder-[#938F99]" placeholder="your@email.com" required />
                                         </div>
                                     </div>
 
                                     {/* Target Exam & Year */}
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
-                                            <label className="block text-sm font-medium text-neutral-400 mb-2">Target Exam</label>
+                                            <label className="block text-sm font-medium text-[#CAC4D0] mb-2">Target Exam</label>
                                             <CustomSelect
                                                 value={targetExam}
                                                 onChange={(value) => {
@@ -287,7 +283,7 @@ export default function RegisterPage() {
                                             />
                                         </div>
                                         <div>
-                                            <label className="block text-sm font-medium text-neutral-400 mb-2">Target Year</label>
+                                            <label className="block text-sm font-medium text-[#CAC4D0] mb-2">Target Year</label>
                                             <CustomSelect
                                                 value={targetYear.toString()}
                                                 onChange={(value) => setTargetYear(parseInt(value))}
@@ -298,54 +294,54 @@ export default function RegisterPage() {
                                         </div>
                                     </div>
 
-                                    {/* Daily Practice Goals */}
-                                    <div className="space-y-5 p-5 bg-gradient-to-br from-neutral-900/80 to-neutral-900/40 rounded-2xl border border-neutral-800/80 backdrop-blur-sm">
+                                    {/* Daily Practice Goals — M3 Surface Container High */}
+                                    <div className="space-y-5 p-5 bg-[#1D192B] rounded-2xl border border-transparent">
                                         <div className="flex items-center gap-3">
-                                            <TrackChangesOutlinedIcon className="text-amber-500" sx={{ fontSize: '2rem' }} />
+                                            <TrackChangesOutlinedIcon className="text-[#FFB951]" sx={{ fontSize: '2rem' }} />
                                             <div>
-                                                <span className="text-sm font-semibold text-white">Daily Practice Goals</span>
-                                                <p className="text-[11px] text-neutral-500">We&apos;ll remind you to practice this many questions each day.</p>
+                                                <span className="text-sm font-semibold text-[#E6E1E5]">Daily Practice Goals</span>
+                                                <p className="text-[11px] text-[#938F99]">We&apos;ll remind you to practice this many questions each day.</p>
                                             </div>
                                         </div>
 
                                         {/* Quant Goal */}
                                         <div className="space-y-3">
                                             <div className="flex items-center gap-2">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
-                                                <label className="text-xs font-semibold text-neutral-400 uppercase tracking-wide">Quantitative Aptitude</label>
+                                                <div className="w-1.5 h-1.5 rounded-full bg-[#FFB951]"></div>
+                                                <label className="text-xs font-semibold text-[#CAC4D0] uppercase tracking-wide">Quantitative Aptitude</label>
                                             </div>
                                             <div className="flex flex-wrap gap-2">
                                                 {[5, 10, 15, 20, 25].map(num => (
-                                                    <button key={num} type="button" onClick={() => { setDailyQuantGoal(num); setShowCustomQuant(false); }} className={`min-w-[44px] px-3 py-2 text-sm font-bold rounded-xl transition-all duration-200 ${!showCustomQuant && dailyQuantGoal === num ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/25 scale-105' : 'bg-neutral-800/80 text-neutral-400 border border-neutral-700/50 hover:bg-neutral-700 hover:text-white'}`}>{num}</button>
+                                                    <button key={num} type="button" onClick={() => { setDailyQuantGoal(num); setShowCustomQuant(false); }} className={`min-w-[44px] px-3 py-2 text-sm font-bold rounded-[14px] transition-all duration-200 ${!showCustomQuant && dailyQuantGoal === num ? 'bg-[#FFB951] text-[#452B00] shadow-sm scale-105' : 'bg-[#0a0a0a] text-[#938F99] border border-[#1f1f1f] hover:bg-[#141414] hover:text-[#E6E1E5]'}`}>{num}</button>
                                                 ))}
-                                                <button type="button" onClick={() => setShowCustomQuant(!showCustomQuant)} className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-200 flex items-center gap-1.5 ${showCustomQuant ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white' : 'bg-neutral-800/80 text-neutral-400 border border-neutral-700/50 hover:bg-neutral-700 hover:text-white'}`}><EditIcon sx={{ fontSize: '1rem' }} /> Custom</button>
+                                                <button type="button" onClick={() => setShowCustomQuant(!showCustomQuant)} className={`px-4 py-2 text-sm font-semibold rounded-[14px] transition-all duration-200 flex items-center gap-1.5 ${showCustomQuant ? 'bg-[#FFB951] text-[#452B00]' : 'bg-[#0a0a0a] text-[#938F99] border border-[#1f1f1f] hover:bg-[#141414] hover:text-[#E6E1E5]'}`}><EditIcon sx={{ fontSize: '1rem' }} /> Custom</button>
                                             </div>
                                             {showCustomQuant && (
                                                 <div className="flex items-center gap-3 mt-1">
-                                                    <input type="number" min="1" max="50" value={customQuantGoal} onChange={(e) => setCustomQuantGoal(e.target.value)} placeholder="Enter value" className="w-28 px-4 py-2.5 bg-neutral-800 border border-amber-500/30 rounded-xl text-white text-sm focus:border-amber-500 focus:outline-none placeholder-neutral-600" />
-                                                    <span className="text-xs text-neutral-500">Max 50</span>
+                                                    <input type="number" min="1" max="50" value={customQuantGoal} onChange={(e) => setCustomQuantGoal(e.target.value)} placeholder="Enter value" className="w-28 px-4 py-2.5 bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl text-[#E6E1E5] text-sm focus:border-[#FFB951] focus:outline-none placeholder-[#938F99]" />
+                                                    <span className="text-xs text-[#938F99]">Max 50</span>
                                                 </div>
                                             )}
                                         </div>
 
-                                        <div className="border-t border-neutral-800/50"></div>
+                                        <div className="border-t border-[#1f1f1f]"></div>
 
                                         {/* Reasoning Goal */}
                                         <div className="space-y-3">
                                             <div className="flex items-center gap-2">
-                                                <div className="w-1.5 h-1.5 rounded-full bg-violet-500"></div>
-                                                <label className="text-xs font-semibold text-neutral-400 uppercase tracking-wide">Reasoning</label>
+                                                <div className="w-1.5 h-1.5 rounded-full bg-[#D0BCFF]"></div>
+                                                <label className="text-xs font-semibold text-[#CAC4D0] uppercase tracking-wide">Reasoning</label>
                                             </div>
                                             <div className="flex flex-wrap gap-2">
                                                 {[5, 10, 15, 20, 25].map(num => (
-                                                    <button key={num} type="button" onClick={() => { setDailyReasoningGoal(num); setShowCustomReasoning(false); }} className={`min-w-[44px] px-3 py-2 text-sm font-bold rounded-xl transition-all duration-200 ${!showCustomReasoning && dailyReasoningGoal === num ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white shadow-lg shadow-violet-500/25 scale-105' : 'bg-neutral-800/80 text-neutral-400 border border-neutral-700/50 hover:bg-neutral-700 hover:text-white'}`}>{num}</button>
+                                                    <button key={num} type="button" onClick={() => { setDailyReasoningGoal(num); setShowCustomReasoning(false); }} className={`min-w-[44px] px-3 py-2 text-sm font-bold rounded-[14px] transition-all duration-200 ${!showCustomReasoning && dailyReasoningGoal === num ? 'bg-[#D0BCFF] text-[#381E72] shadow-sm scale-105' : 'bg-[#0a0a0a] text-[#938F99] border border-[#1f1f1f] hover:bg-[#141414] hover:text-[#E6E1E5]'}`}>{num}</button>
                                                 ))}
-                                                <button type="button" onClick={() => setShowCustomReasoning(!showCustomReasoning)} className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-200 flex items-center gap-1.5 ${showCustomReasoning ? 'bg-gradient-to-r from-violet-500 to-purple-500 text-white' : 'bg-neutral-800/80 text-neutral-400 border border-neutral-700/50 hover:bg-neutral-700 hover:text-white'}`}><EditIcon sx={{ fontSize: '1rem' }} /> Custom</button>
+                                                <button type="button" onClick={() => setShowCustomReasoning(!showCustomReasoning)} className={`px-4 py-2 text-sm font-semibold rounded-[14px] transition-all duration-200 flex items-center gap-1.5 ${showCustomReasoning ? 'bg-[#D0BCFF] text-[#381E72]' : 'bg-[#0a0a0a] text-[#938F99] border border-[#1f1f1f] hover:bg-[#141414] hover:text-[#E6E1E5]'}`}><EditIcon sx={{ fontSize: '1rem' }} /> Custom</button>
                                             </div>
                                             {showCustomReasoning && (
                                                 <div className="flex items-center gap-3 mt-1">
-                                                    <input type="number" min="1" max="50" value={customReasoningGoal} onChange={(e) => setCustomReasoningGoal(e.target.value)} placeholder="Enter value" className="w-28 px-4 py-2.5 bg-neutral-800 border border-violet-500/30 rounded-xl text-white text-sm focus:border-violet-500 focus:outline-none placeholder-neutral-600" />
-                                                    <span className="text-xs text-neutral-500">Max 50</span>
+                                                    <input type="number" min="1" max="50" value={customReasoningGoal} onChange={(e) => setCustomReasoningGoal(e.target.value)} placeholder="Enter value" className="w-28 px-4 py-2.5 bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl text-[#E6E1E5] text-sm focus:border-[#D0BCFF] focus:outline-none placeholder-[#938F99]" />
+                                                    <span className="text-xs text-[#938F99]">Max 50</span>
                                                 </div>
                                             )}
                                         </div>
@@ -353,11 +349,11 @@ export default function RegisterPage() {
 
                                     {/* Password */}
                                     <div>
-                                        <label className="block text-sm font-medium text-neutral-400 mb-2">Password</label>
+                                        <label className="block text-sm font-medium text-[#CAC4D0] mb-2">Password</label>
                                         <div className="relative group">
-                                            <LockOutlinedIcon sx={{ fontSize: '1.25rem' }} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 group-focus-within:text-amber-500 transition-colors" />
-                                            <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full pl-12 pr-12 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white placeholder-neutral-600" placeholder="********" required minLength={6} />
-                                            <button type="button" onClick={() => setShowPassword((prev) => !prev)} className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-amber-500 transition-colors" aria-label={showPassword ? "Hide password" : "Show password"}>
+                                            <LockOutlinedIcon sx={{ fontSize: '1.25rem' }} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#938F99] group-focus-within:text-[#FFB951] transition-colors" />
+                                            <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} className="w-full pl-12 pr-12 py-3.5 bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl focus:border-[#FFB951] focus:outline-none focus:ring-1 focus:ring-[#FFB951]/30 transition-all text-[#E6E1E5] placeholder-[#938F99]" placeholder="********" required minLength={6} />
+                                            <button type="button" onClick={() => setShowPassword((prev) => !prev)} className="absolute right-4 top-1/2 -translate-y-1/2 text-[#938F99] hover:text-[#FFB951] transition-colors" aria-label={showPassword ? "Hide password" : "Show password"}>
                                                 {showPassword ? <VisibilityOffIcon sx={{ fontSize: '1.1rem' }} /> : <VisibilityIcon sx={{ fontSize: '1.1rem' }} />}
                                             </button>
                                         </div>
@@ -365,11 +361,11 @@ export default function RegisterPage() {
 
                                     {/* Confirm Password */}
                                     <div>
-                                        <label className="block text-sm font-medium text-neutral-400 mb-2">Confirm Password</label>
+                                        <label className="block text-sm font-medium text-[#CAC4D0] mb-2">Confirm Password</label>
                                         <div className="relative group">
-                                            <LockOutlinedIcon sx={{ fontSize: '1.25rem' }} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 group-focus-within:text-amber-500 transition-colors" />
-                                            <input type={showConfirmPassword ? "text" : "password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full pl-12 pr-12 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white placeholder-neutral-600" placeholder="********" required />
-                                            <button type="button" onClick={() => setShowConfirmPassword((prev) => !prev)} className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-amber-500 transition-colors" aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}>
+                                            <LockOutlinedIcon sx={{ fontSize: '1.25rem' }} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#938F99] group-focus-within:text-[#FFB951] transition-colors" />
+                                            <input type={showConfirmPassword ? "text" : "password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="w-full pl-12 pr-12 py-3.5 bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl focus:border-[#FFB951] focus:outline-none focus:ring-1 focus:ring-[#FFB951]/30 transition-all text-[#E6E1E5] placeholder-[#938F99]" placeholder="********" required />
+                                            <button type="button" onClick={() => setShowConfirmPassword((prev) => !prev)} className="absolute right-4 top-1/2 -translate-y-1/2 text-[#938F99] hover:text-[#FFB951] transition-colors" aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}>
                                                 {showConfirmPassword ? <VisibilityOffIcon sx={{ fontSize: '1.1rem' }} /> : <VisibilityIcon sx={{ fontSize: '1.1rem' }} />}
                                             </button>
                                         </div>
@@ -377,24 +373,25 @@ export default function RegisterPage() {
 
                                     {/* Terms */}
                                     <div className="flex items-start gap-3">
-                                        <input type="checkbox" id="terms" checked={agreedToTerms} onChange={(e) => setAgreedToTerms(e.target.checked)} className="mt-1 w-4 h-4 rounded border-gray-600 bg-neutral-800 text-amber-500 focus:ring-amber-500" />
-                                        <label htmlFor="terms" className="text-sm text-neutral-400">
+                                        <input type="checkbox" id="terms" checked={agreedToTerms} onChange={(e) => setAgreedToTerms(e.target.checked)} className="mt-1 w-4 h-4 rounded border-[#1f1f1f] bg-[#0a0a0a] text-[#FFB951] focus:ring-[#FFB951]" />
+                                        <label htmlFor="terms" className="text-sm text-[#CAC4D0]">
                                             I agree to PrepLeague&apos;s{' '}
-                                            <Link href="/terms" className="text-amber-500 hover:text-amber-400">Terms of Service</Link>
+                                            <Link href="/terms" className="text-[#FFB951] hover:text-[#FFDE9C]">Terms of Service</Link>
                                             {' '}and{' '}
-                                            <Link href="/privacy" className="text-amber-500 hover:text-amber-400">Privacy Policy</Link>
+                                            <Link href="/privacy" className="text-[#FFB951] hover:text-[#FFDE9C]">Privacy Policy</Link>
                                         </label>
                                     </div>
 
-                                    <button type="submit" disabled={isLoading || isSendingOtp} className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold text-lg rounded-xl hover:shadow-lg hover:shadow-amber-500/20 hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                                    {/* M3 Filled Button */}
+                                    <button type="submit" disabled={isLoading || isSendingOtp} className="w-full py-3.5 bg-[#FFB951] text-[#452B00] font-medium text-base rounded-[20px] hover:bg-[#FFB951]/90 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-sm">
                                         {isLoading || isSendingOtp ? 'Sending Verification Code...' : 'Continue'}
                                     </button>
                                 </form>
 
-                                <div className="mt-8 pt-6 border-t border-neutral-800 text-center">
-                                    <p className="text-neutral-400 text-sm">
+                                <div className="mt-8 pt-6 border-t border-[#1f1f1f] text-center">
+                                    <p className="text-[#938F99] text-sm">
                                         Already have an account?{' '}
-                                        <Link href="/login" className="text-amber-500 font-semibold hover:text-amber-400 transition-colors">Login here</Link>
+                                        <Link href="/login" className="text-[#FFB951] font-medium hover:text-[#FFDE9C] transition-colors">Login here</Link>
                                     </p>
                                 </div>
                             </div>
@@ -406,20 +403,20 @@ export default function RegisterPage() {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
                         >
-                            {/* OTP Card */}
-                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl p-8 backdrop-blur-sm">
-                                <button onClick={() => setStep('form')} className="flex items-center gap-2 text-neutral-400 hover:text-white mb-6 text-sm transition-colors">
+                            {/* OTP Card — M3 Surface Container */}
+                            <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-8">
+                                <button onClick={() => setStep('form')} className="flex items-center gap-2 text-[#938F99] hover:text-[#E6E1E5] mb-6 text-sm transition-colors font-medium">
                                     <ArrowBackIcon sx={{ fontSize: '1rem' }} /> Back
                                 </button>
 
                                 <div className="text-center mb-8">
-                                    <div className="w-14 h-14 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <span className="text-xl font-bold">OTP</span>
+                                    <div className="w-14 h-14 bg-[#FFB951]/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-[#FFB951]/10">
+                                        <span className="text-xl font-bold text-[#FFB951]">OTP</span>
                                     </div>
-                                    <h2 className="text-xl font-bold text-white mb-2">Check your inbox</h2>
-                                    <p className="text-neutral-400 text-sm">
+                                    <h2 className="text-lg font-bold text-[#E6E1E5] mb-2">Check your inbox</h2>
+                                    <p className="text-[#938F99] text-sm">
                                         We sent a 6-digit code to<br />
-                                        <span className="text-white font-semibold">{email}</span>
+                                        <span className="text-[#E6E1E5] font-semibold">{email}</span>
                                     </p>
                                 </div>
 
@@ -443,28 +440,29 @@ export default function RegisterPage() {
                                                 }
                                                 e.preventDefault();
                                             }}
-                                            className={`w-12 h-14 text-center text-2xl font-bold bg-neutral-900 border-2 ${otpError ? 'border-rose-500' : digit ? 'border-amber-500' : 'border-neutral-700'} rounded-xl text-white focus:outline-none focus:border-amber-500 transition-all`}
+                                            className={`w-12 h-14 text-center text-2xl font-bold bg-[#0a0a0a] border-2 ${otpError ? 'border-[#FFB4AB]' : digit ? 'border-[#FFB951]' : 'border-[#1f1f1f]'} rounded-2xl text-[#E6E1E5] focus:outline-none focus:border-[#FFB951] transition-all`}
                                         />
                                     ))}
                                 </div>
 
                                 {otpError && (
-                                    <p className="text-center text-rose-400 text-sm mb-4">{otpError}</p>
+                                    <p className="text-center text-[#FFB4AB] text-sm mb-4">{otpError}</p>
                                 )}
 
+                                {/* M3 Filled Button */}
                                 <button
                                     onClick={handleOtpVerify}
                                     disabled={isVerifyingOtp || otpDigits.join('').length < 6}
-                                    className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold text-lg rounded-xl hover:shadow-lg hover:shadow-amber-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed mb-4"
+                                    className="w-full py-3.5 bg-[#FFB951] text-[#452B00] font-medium text-base rounded-[20px] hover:bg-[#FFB951]/90 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-sm mb-4"
                                 >
                                     {isVerifyingOtp ? 'Verifying...' : 'Verify & Create Account'}
                                 </button>
 
                                 <div className="text-center">
                                     {otpResendCountdown > 0 ? (
-                                        <p className="text-neutral-500 text-sm">Resend in <span className="text-amber-500 font-semibold">{otpResendCountdown}s</span></p>
+                                        <p className="text-[#938F99] text-sm">Resend in <span className="text-[#FFB951] font-semibold">{otpResendCountdown}s</span></p>
                                     ) : (
-                                        <button onClick={handleResendOtp} disabled={isSendingOtp} className="text-sm text-neutral-400 hover:text-amber-500 transition-colors disabled:opacity-50">
+                                        <button onClick={handleResendOtp} disabled={isSendingOtp} className="text-sm text-[#938F99] hover:text-[#FFB951] transition-colors disabled:opacity-50">
                                             {isSendingOtp ? 'Resending...' : "Didn't receive it? Resend code"}
                                         </button>
                                     )}
@@ -476,7 +474,7 @@ export default function RegisterPage() {
 
                 {/* Back to Home */}
                 <div className="text-center mt-8">
-                    <Link href="/" className="inline-flex items-center gap-2 text-neutral-500 hover:text-white transition-colors text-sm">
+                    <Link href="/" className="inline-flex items-center gap-2 text-[#938F99] hover:text-[#E6E1E5] transition-colors text-sm font-medium">
                         <ArrowBackIcon sx={{ fontSize: '1rem' }} /> Back to Home
                     </Link>
                 </div>

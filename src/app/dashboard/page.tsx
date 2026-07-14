@@ -59,7 +59,7 @@ export default function DashboardPage() {
 
     if (authLoading || loading) {
         return (
-            <div className="min-h-screen bg-[#0f0f0f]">
+            <div className="min-h-screen bg-[#0a0a0a]">
                 <Header activePage="dashboard" />
                 <main className="flex items-center justify-center min-h-[60vh]">
                     <div className="animate-spin rounded-full h-10 w-10 border-4 border-amber-500 border-t-transparent"></div>
@@ -182,23 +182,23 @@ export default function DashboardPage() {
     });
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f]">
+        <div className="min-h-screen bg-[#0a0a0a]">
             <Header activePage="dashboard" />
 
             {/* Empty state for new users */}
             {isNewUser ? (
                 <main className="max-w-3xl mx-auto px-4 md:px-6 py-24 text-center">
                     <div className="text-6xl mb-6">🚀</div>
-                    <h1 className="text-3xl font-black text-white mb-4">Welcome to your Dashboard!</h1>
-                    <p className="text-neutral-400 mb-10 text-lg leading-relaxed">
+                    <h1 className="text-3xl font-medium tracking-tight text-[#E6E1E5] mb-4">Welcome to your Dashboard!</h1>
+                    <p className="text-[#938F99] mb-10 text-lg leading-relaxed">
                         Your stats, streaks, and analytics will appear here once you start solving questions.<br />
                         Go solve your first problem to get started!
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="/problems" className="px-8 py-4 bg-amber-500 text-black font-bold rounded-xl hover:bg-amber-400 transition-colors shadow-lg shadow-amber-500/20">
+                        <a href="/problems" className="px-8 py-4 bg-[#FFB951] text-[#452B00] font-medium rounded-full hover:bg-[#FFB951]/90 transition-colors shadow-sm">
                             Browse Problems
                         </a>
-                        <a href="/sprint" className="px-8 py-4 bg-neutral-800 text-white font-bold rounded-xl hover:bg-neutral-700 transition-colors border border-neutral-700">
+                        <a href="/sprint" className="px-8 py-4 bg-[#36343B] text-[#E6E1E5] font-medium rounded-full hover:bg-[#4A4458] transition-colors border border-transparent">
                             Try Sprint Mode
                         </a>
                     </div>

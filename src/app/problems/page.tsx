@@ -310,7 +310,7 @@ function ProblemsPageContent() {
     })).filter(group => group.topics.length > 0);
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f]">
+        <div className="min-h-screen bg-[#0a0a0a]">
             {/* HEADER */}
             <Header activePage="problems" />
 
@@ -319,12 +319,12 @@ function ProblemsPageContent() {
 
                 {/* Section Switcher & Status */}
                 <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4 mb-8">
-                    <div className="inline-flex p-1.5 bg-[#1a1a1a] rounded-[22px] border border-neutral-800 self-start relative">
+                    <div className="inline-flex p-1.5 bg-[#141414] rounded-full border border-[#1f1f1f] self-start relative">
                         {['QUANT', 'REASONING'].map((section) => (
                             <button
                                 key={section}
                                 onClick={() => { setActiveSection(section as 'QUANT' | 'REASONING'); setActiveTopic('All'); updatePage(1); }}
-                                className={`relative flex items-center gap-3 px-6 py-3 rounded-[16px] text-base font-medium transition-colors z-10 ${activeSection === section ? 'text-white' : 'text-neutral-400 hover:text-neutral-200'
+                                className={`relative flex items-center gap-3 px-6 py-3 rounded-full text-base font-medium transition-colors z-10 ${activeSection === section ? 'text-white' : 'text-neutral-400 hover:text-neutral-200'
                                     }`}
                             >
                                 {section === 'QUANT' ? (
@@ -342,7 +342,7 @@ function ProblemsPageContent() {
                                 {activeSection === section && (
                                     <motion.div
                                         layoutId="activeTabPill"
-                                        className={`absolute inset-0 rounded-[16px] -z-10 ${section === 'QUANT'
+                                        className={`absolute inset-0 rounded-full -z-10 ${section === 'QUANT'
                                             ? 'bg-gradient-to-r from-amber-500 to-orange-500 shadow-lg shadow-amber-500/25'
                                             : 'bg-gradient-to-r from-violet-500 to-purple-500 shadow-lg shadow-violet-500/25'
                                             }`}
@@ -355,15 +355,15 @@ function ProblemsPageContent() {
 
                     {/* Stats Display - Only show if user has activity */}
                     {!authLoading && user && userStats.totalAttempted > 0 && (
-                        <div className="flex items-center gap-3 sm:gap-6 bg-[#1a1a1a] p-2 pr-6 rounded-[20px] border border-neutral-800 self-start xl:self-auto">
-                            <div className="hidden sm:flex items-center gap-3 pl-4 border-r border-neutral-800 pr-6">
+                        <div className="flex items-center gap-3 sm:gap-6 bg-[#141414] p-2 pr-6 rounded-[24px] border border-[#1f1f1f] self-start xl:self-auto">
+                            <div className="hidden sm:flex items-center gap-3 pl-4 border-r border-[#1f1f1f] pr-6">
                                 <div className="text-right">
                                     <p className="text-xs text-neutral-500 font-medium">Accuracy</p>
                                     <p className={`text-sm font-bold ${userStats.accuracy >= 80 ? 'text-emerald-400' : userStats.accuracy >= 50 ? 'text-amber-400' : 'text-neutral-300'}`}>
                                         {userStats.accuracy}%
                                     </p>
                                 </div>
-                                <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center relative ${userStats.accuracy >= 80 ? 'border-emerald-500/20' : userStats.accuracy >= 50 ? 'border-amber-500/20' : 'border-neutral-800'}`}>
+                                <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center relative ${userStats.accuracy >= 80 ? 'border-emerald-500/20' : userStats.accuracy >= 50 ? 'border-amber-500/20' : 'border-[#1f1f1f]'}`}>
                                     <TrackChangesOutlinedIcon sx={{ fontSize: '1rem' }} className={userStats.accuracy >= 80 ? 'text-emerald-400' : userStats.accuracy >= 50 ? 'text-amber-400' : 'text-neutral-500'} />
                                 </div>
                             </div>
@@ -398,14 +398,14 @@ function ProblemsPageContent() {
                         {/* Unified Filter Bar Grid */}
                         <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
                             {/* 1. Topic Dropdown (2 cols) */}
-                            <div className="xl:col-span-2 relative z-50" ref={topicDropdownRef}>
+                            <div className="xl:col-span-2 relative z-40" ref={topicDropdownRef}>
                                 <button
                                     onClick={() => setTopicDropdownOpen(!topicDropdownOpen)}
-                                    className={`flex items-center justify-between w-full h-[48px] px-3 bg-[#1a1a1a] border rounded-xl transition-all text-sm font-medium ${topicDropdownOpen
+                                    className={`flex items-center justify-between w-full h-[48px] px-4 bg-[#141414] border rounded-full outline-none transition-colors text-sm font-medium ${topicDropdownOpen
                                         ? accentColor === 'amber'
                                             ? 'border-amber-500/50 ring-1 ring-amber-500/20'
                                             : 'border-violet-500/50 ring-1 ring-violet-500/20'
-                                        : 'border-neutral-800 hover:border-neutral-700'
+                                        : 'border-[#1f1f1f] hover:border-[#2b2b2b]'
                                         }`}
                                 >
                                     <div className="flex items-center gap-2 truncate">
@@ -427,16 +427,16 @@ function ProblemsPageContent() {
 
                                 {/* Dropdown Panel */}
                                 {topicDropdownOpen && (
-                                    <div className="absolute z-50 top-full left-0 min-w-[320px] sm:min-w-[500px] mt-2 bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.7)] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-                                        <div className="p-3 border-b border-neutral-800/50">
+                                    <div className="absolute z-50 top-full left-0 min-w-[320px] sm:min-w-[500px] mt-2 bg-[#141414] border border-[#1f1f1f] rounded-[24px] shadow-[0_10px_40px_rgba(0,0,0,0.7)] overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                                        <div className="p-3 border-b border-[#1f1f1f]/50">
                                             <div className="relative">
-                                                <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500 w-4 h-4" />
+                                                <SearchIcon className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 w-4 h-4" />
                                                 <input
                                                     type="text"
                                                     placeholder="Search topics..."
                                                     value={topicSearchQuery}
                                                     onChange={(e) => setTopicSearchQuery(e.target.value)}
-                                                    className="w-full bg-neutral-900 border border-neutral-800 rounded-lg pl-9 pr-3 py-2 text-sm text-neutral-200 focus:outline-none focus:border-neutral-600 transition-colors"
+                                                    className="w-full bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl pl-10 pr-3 py-2.5 text-sm text-neutral-200 placeholder-neutral-600 outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-colors"
                                                     autoFocus
                                                 />
                                             </div>
@@ -524,7 +524,7 @@ function ProblemsPageContent() {
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     placeholder="Search..."
-                                    className="w-full h-[48px] pl-10 pr-10 bg-[#1a1a1a] border border-neutral-800 rounded-xl text-neutral-200 placeholder-neutral-600 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-all text-sm"
+                                    className="w-full h-[48px] pl-10 pr-10 bg-[#141414] border border-[#1f1f1f] rounded-full text-neutral-200 placeholder-neutral-600 outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-colors text-sm"
                                 />
                                 {searchQuery && (
                                     <button
@@ -591,8 +591,8 @@ function ProblemsPageContent() {
                         </div>
 
                         {/* Table */}
-                        <div className="bg-[#1a1a1a] rounded-2xl border border-neutral-800 overflow-hidden mt-6">
-                            <div className="hidden md:grid md:grid-cols-[50px_50px_1fr_160px_110px_70px] gap-4 px-6 py-4 text-xs font-semibold text-neutral-400 uppercase tracking-wider bg-neutral-900/50 border-b border-neutral-800">
+                        <div className="bg-[#141414] rounded-[24px] border border-[#1f1f1f] overflow-hidden mt-6">
+                            <div className="hidden md:grid md:grid-cols-[50px_50px_1fr_160px_110px_70px] gap-4 px-6 py-4 text-xs font-semibold text-neutral-400 uppercase tracking-wider bg-[#1f1f1f]/50 border-b border-[#1f1f1f]">
                                 <div className="text-center">#</div>
                                 <div className="text-center flex items-center justify-center gap-1 group/status">
                                     Status
@@ -600,8 +600,8 @@ function ProblemsPageContent() {
                                         <div className="w-3.5 h-3.5 rounded-full border border-neutral-500 text-neutral-500 flex items-center justify-center text-[8px] font-bold opacity-60 hover:opacity-100 transition-opacity">?</div>
 
                                         {/* Status Guide Tooltip */}
-                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 p-4 bg-neutral-900 border border-neutral-800 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.7)] text-xs lowercase tracking-normal space-y-3 opacity-0 group-hover/status:opacity-100 transition-opacity pointer-events-none z-50">
-                                            <p className="text-neutral-400 uppercase font-bold tracking-widest text-[10px] border-b border-neutral-800 pb-2 mb-2">Status Guide</p>
+                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 p-4 bg-[#1f1f1f] border border-[#2b2b2b] rounded-[24px] shadow-[0_10px_40px_rgba(0,0,0,0.7)] text-xs lowercase tracking-normal space-y-3 opacity-0 group-hover/status:opacity-100 transition-opacity pointer-events-none z-50">
+                                            <p className="text-neutral-400 uppercase font-bold tracking-widest text-[10px] border-b border-[#2b2b2b] pb-2 mb-2">Status Guide</p>
                                             <div className="flex items-center gap-3 text-neutral-300">
                                                 <div className="w-6 h-6 flex items-center justify-center">
                                                     <div className="w-2 h-2 rounded-full border border-neutral-600 bg-neutral-600/20"></div>
@@ -635,7 +635,7 @@ function ProblemsPageContent() {
                                 <div className="text-center">Year</div>
                             </div>
 
-                            <div className="divide-y divide-neutral-800/50">
+                            <div className="divide-y divide-[#1f1f1f]/50">
                                 {loading ? (
                                     Array.from({ length: 8 }).map((_, i) => (
                                         <div key={i} className="grid grid-cols-1 md:grid-cols-[50px_50px_1fr_160px_110px_70px] gap-3 px-5 py-4 animate-pulse">
@@ -649,12 +649,12 @@ function ProblemsPageContent() {
                                     ))
                                 ) : questions.length === 0 ? (
                                     <div className="px-8 py-20 text-center">
-                                        <div className="w-16 h-16 mx-auto mb-6 bg-neutral-800/50 rounded-2xl flex items-center justify-center border border-neutral-700/50">
+                                        <div className="w-16 h-16 mx-auto mb-6 bg-[#1f1f1f]/50 rounded-[24px] flex items-center justify-center border border-[#2b2b2b]/50">
                                             <DocumentIcon sx={{ fontSize: '2rem' }} className="text-neutral-600" />
                                         </div>
                                         <h3 className="text-xl font-bold text-neutral-200 mb-2">No Questions Found</h3>
 
-                                        <div className="max-w-md mx-auto mt-6 bg-neutral-900/50 rounded-xl border border-neutral-800 p-6 text-left">
+                                        <div className="max-w-md mx-auto mt-6 bg-[#1f1f1f] rounded-[24px] border border-[#2b2b2b] p-6 text-left">
                                             <p className="text-neutral-400 text-sm mb-4 font-medium">Current Filters:</p>
                                             <ul className="space-y-2 mb-6">
                                                 <li className="flex items-center justify-between text-sm">
@@ -716,7 +716,7 @@ function ProblemsPageContent() {
                                             <Link
                                                 href={`/problems/${q.questionNumber || q.id}?section=${activeSection}${activeTopic !== 'All' ? `&pattern=${getPatternCode(activeTopic)}` : ''}${difficulty !== 'All' ? `&difficulty=${difficulty}` : ''}${yearFilter !== 'All' ? `&year=${yearFilter}` : ''}${statusFilter !== 'all' ? `&status=${statusFilter}` : ''}${searchQuery ? `&query=${encodeURIComponent(searchQuery)}` : ''}`}
                                                 key={q.id}
-                                                className="block hover:bg-neutral-800/30 transition-colors group border-b border-neutral-800/50 md:border-none"
+                                                className="block hover:bg-neutral-800/30 transition-colors group border-b border-[#1f1f1f]/50 md:border-none"
                                             >
                                                 <div className="grid grid-cols-1 md:grid-cols-[50px_50px_1fr_160px_110px_70px] gap-3 md:gap-4 px-5 py-4 items-center">
                                                     {/* Index - Desktop */}
@@ -787,12 +787,6 @@ function ProblemsPageContent() {
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                        {/* Desktop Bookmark Indicator */}
-                                                        {isBookmarked && (
-                                                            <div className="absolute -left-8 top-1/2 -translate-y-1/2 text-amber-500 md:block hidden">
-                                                                <BookmarkIcon sx={{ fontSize: '0.9rem' }} />
-                                                            </div>
-                                                        )}
                                                         {/* Tooltip for full text - Improved Readability & Dynamic Positioning */}
                                                         <div className={`absolute left-0 ${index < 3 ? 'top-full mt-2' : 'bottom-full mb-2'} hidden md:group-hover/title:block w-max max-w-[400px] lg:max-w-[600px] p-4 bg-neutral-900/95 backdrop-blur-sm text-sm font-medium text-neutral-200 rounded-xl shadow-[0_0_40px_rgba(0,0,0,0.6)] ring-1 ring-white/10 border border-neutral-700/50 z-[100] pointer-events-none whitespace-normal leading-relaxed`}>
                                                             <MathText>{q.title}</MathText>
@@ -831,7 +825,7 @@ function ProblemsPageContent() {
 
                             {/* Pagination with Context */}
                             {questions.length > 0 && pagination.totalPages > 1 && (
-                                <div className="p-4 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                                <div className="p-4 border-t border-[#1f1f1f] flex flex-col sm:flex-row items-center justify-between gap-4">
                                     <p className="text-xs text-neutral-500 font-medium">
                                         Showing <span className="text-neutral-300 font-bold">{startItem}</span> to <span className="text-neutral-300 font-bold">{endItem}</span> of <span className="text-neutral-300 font-bold">{pagination.total}</span> questions
                                     </p>
@@ -841,7 +835,7 @@ function ProblemsPageContent() {
                                             onClick={() => updatePage(pagination.page - 1)}
                                             disabled={pagination.page === 1}
                                             aria-label="Previous page"
-                                            className="p-2 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                            className="p-2 rounded-xl border border-[#1f1f1f] text-neutral-400 hover:text-white hover:bg-[#1f1f1f] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                                         >
                                             <ChevronLeftIcon sx={{ fontSize: '1.2rem' }} />
                                         </button>
@@ -871,7 +865,7 @@ function ProblemsPageContent() {
                                             onClick={() => updatePage(pagination.page + 1)}
                                             disabled={pagination.page === pagination.totalPages}
                                             aria-label="Next page"
-                                            className="p-2 rounded-xl border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                            className="p-2 rounded-xl border border-[#1f1f1f] text-neutral-400 hover:text-white hover:bg-[#1f1f1f] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                                         >
                                             <ChevronRightIcon sx={{ fontSize: '1.2rem' }} />
                                         </button>

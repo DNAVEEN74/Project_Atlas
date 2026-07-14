@@ -136,7 +136,7 @@ export default function SprintReviewPage({ params }: { params: Promise<{ id: str
 
     if (loading || isLoading) {
         return (
-            <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
+            <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
                 <div className="animate-spin rounded-full h-10 w-10 border-2 border-amber-500 border-t-transparent"></div>
             </div>
         );
@@ -168,23 +168,29 @@ export default function SprintReviewPage({ params }: { params: Promise<{ id: str
     };
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] text-neutral-200 font-sans selection:bg-amber-500/30">
+        <div className="min-h-screen bg-[#0a0a0a] text-[#E6E1E5] font-sans selection:bg-amber-500/30">
             <Header activePage="sprint" />
 
             <main className="w-full px-6 lg:px-12 py-8 max-w-[1600px] mx-auto">
-                <Link
-                    href={'/sprint'}
-                    className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-white mb-6 transition-colors"
-                >
-                    <ArrowBackIcon sx={{ fontSize: '1rem' }} />
-                    Back to Sprint Setup
-                </Link>
+                <div className="mb-8">
+                    <Link
+                        href={'/sprint'}
+                        className="inline-flex items-center gap-2 text-[#CAC4D0] hover:text-[#E6E1E5] transition-colors mb-6 rounded-full px-3 py-1.5 hover:bg-[#1f1f1f] -ml-3"
+                    >
+                        <ArrowBackIcon sx={{ fontSize: '1rem' }} />
+                        <span className="font-medium text-sm tracking-wide">Back to Sprint Setup</span>
+                    </Link>
+                    <h1 className="text-3xl md:text-4xl font-medium tracking-tight flex items-center gap-4">
+                        <TrendingUpIcon className="text-amber-500 w-8 h-8" />
+                        Sprint Review
+                    </h1>
+                </div>
 
                 {/* Dashboard / Summary Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 mb-8">
                     {/* LEFT COLUMN - Quick Stats (4 cols) */}
                     <div className="lg:col-span-4 flex flex-col gap-4">
-                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-xl p-6 flex flex-col justify-center">
+                        <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-6 flex flex-col justify-center">
                             <h2 className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-3">Sprint Score</h2>
                             <div className="flex items-end gap-3 mb-4">
                                 <span className={`text-5xl font-black ${primaryColor} leading-none tracking-tighter`}>{data.stats.correctCount}</span>
@@ -192,26 +198,26 @@ export default function SprintReviewPage({ params }: { params: Promise<{ id: str
                             </div>
                             
                             <div className="flex items-center gap-3">
-                                <span className={`text-xs font-bold ${performance.color} bg-neutral-900 border border-neutral-800 px-2.5 py-1 rounded-md`}>
+                                <span className={`text-xs font-bold ${performance.color} bg-[#0a0a0a] border border-[#1f1f1f] px-3 py-1.5 rounded-full`}>
                                     {data.stats.accuracy}% Accuracy - {performance.label}
                                 </span>
                             </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-xl p-5">
+                            <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-5">
                                 <p className="text-[10px] text-neutral-500 uppercase tracking-widest mb-1.5">Avg Time</p>
                                 <div className="flex items-baseline gap-1.5">
-                                    <span className="text-xl font-bold text-white font-mono">{getAvgTimePerQuestion()}</span>
+                                    <span className="text-xl font-bold text-[#E6E1E5] font-mono">{getAvgTimePerQuestion()}</span>
                                     <span className="text-[10px] text-neutral-600 uppercase">Target 30s</span>
                                 </div>
                             </div>
-                            <div className="bg-[#1a1a1a] border border-neutral-800 rounded-xl p-5">
+                            <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-5">
                                 <p className="text-[10px] text-neutral-500 uppercase tracking-widest mb-1.5">Config</p>
                                 <div className="flex items-center gap-1.5">
                                     <span className={`text-sm font-bold ${primaryColor}`}>{data.subject}</span>
                                     <span className="text-neutral-600 text-xs">•</span>
-                                    <span className="text-xs font-bold text-neutral-300 capitalize">{data.difficulty.toLowerCase()}</span>
+                                    <span className="text-xs font-bold text-[#CAC4D0] capitalize">{data.difficulty.toLowerCase()}</span>
                                 </div>
                             </div>
                         </div>
@@ -219,19 +225,19 @@ export default function SprintReviewPage({ params }: { params: Promise<{ id: str
 
                     {/* RIGHT COLUMN - Topic Breakdown (8 cols) */}
                     <div className="lg:col-span-8 flex flex-col">
-                        <div className="bg-[#1a1a1a] border border-neutral-800 rounded-xl p-6 h-full">
-                            <h3 className="text-sm font-bold text-white mb-6 flex items-center gap-2">
-                                <TrendingUpIcon sx={{ fontSize: '1rem' }} className="text-neutral-400" />
+                        <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-6 h-full">
+                            <h3 className="text-sm font-bold text-[#E6E1E5] mb-6 flex items-center gap-2">
+                                <TrendingUpIcon sx={{ fontSize: '1rem' }} className="text-[#CAC4D0]" />
                                 Topic Performance
                             </h3>
 
                             {data.topicPerformance && data.topicPerformance.length > 0 ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                                     {data.topicPerformance.map((tp, idx) => {
-                                        let color = 'bg-rose-500';
-                                        let textColor = 'text-rose-400';
-                                        if (tp.accuracy >= 80) { color = 'bg-emerald-500'; textColor = 'text-emerald-400'; }
-                                        else if (tp.accuracy >= 50) { color = 'bg-amber-500'; textColor = 'text-amber-400'; }
+                                        let color = 'bg-[#4B191D]';
+                                        let textColor = 'text-[#FFB4AB]';
+                                        if (tp.accuracy >= 80) { color = 'bg-[#143224]'; textColor = 'text-[#6DD58C]'; }
+                                        else if (tp.accuracy >= 50) { color = 'bg-[#594100]'; textColor = 'text-[#FFB951]'; }
 
                                         // Format topic name nicely: "speed_distance_time" -> "Speed Distance Time"
                                         const formattedTopic = tp.topic.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
@@ -239,13 +245,13 @@ export default function SprintReviewPage({ params }: { params: Promise<{ id: str
                                         return (
                                             <div key={idx} className="w-full">
                                                 <div className="flex justify-between items-center mb-1.5">
-                                                    <span className="text-xs font-bold text-neutral-300 truncate pr-2">{formattedTopic}</span>
+                                                    <span className="text-xs font-bold text-[#CAC4D0] truncate pr-2">{formattedTopic}</span>
                                                     <div className="text-right shrink-0">
                                                         <span className={`text-xs font-bold ${textColor}`}>{tp.correct}/{tp.total}</span>
                                                         <span className="text-[10px] text-neutral-600 ml-1 font-mono">({tp.accuracy}%)</span>
                                                     </div>
                                                 </div>
-                                                <div className="h-1 w-full bg-neutral-900 rounded-full overflow-hidden">
+                                                <div className="h-1 w-full bg-[#1f1f1f] rounded-full overflow-hidden">
                                                     <div
                                                         className={`h-full ${color} transition-all duration-500`}
                                                         style={{ width: `${Math.max(tp.accuracy, 5)}%` }} // Min 5% so bar is visible
@@ -267,20 +273,20 @@ export default function SprintReviewPage({ params }: { params: Promise<{ id: str
                 {/* Filters */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
                     <div>
-                        <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                        <h2 className="text-xl font-medium tracking-tight text-[#E6E1E5] flex items-center gap-2">
                             Detailed Question Review
                         </h2>
                     </div>
 
                     {/* Filters */}
-                    <div className="flex bg-[#1a1a1a] p-1 rounded-xl border border-neutral-800 self-start md:self-center">
+                    <div className="flex bg-[#141414] p-1.5 rounded-full border border-[#1f1f1f] self-start md:self-center">
                         {(['ALL', 'CORRECT', 'INCORRECT', 'SKIPPED'] as const).map(f => (
                             <button
                                 key={f}
                                 onClick={() => setFilter(f)}
-                                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${filter === f
-                                    ? 'bg-neutral-800 text-white shadow-sm'
-                                    : 'text-neutral-500 hover:text-neutral-300'
+                                className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${filter === f
+                                    ? 'bg-[#36343B] text-[#E6E1E5] shadow-sm'
+                                    : 'text-[#CAC4D0] hover:text-[#E6E1E5] hover:bg-[#1f1f1f]'
                                     }`}
                             >
                                 {f.charAt(0) + f.slice(1).toLowerCase()}
@@ -311,14 +317,14 @@ export default function SprintReviewPage({ params }: { params: Promise<{ id: str
                         }
 
                         return (
-                            <div key={q._id} className={`bg-[#1a1a1a] border ${borderColor} rounded-xl p-5 flex flex-col h-full hover:border-neutral-700 transition-colors group`}>
+                            <div key={q._id} className={`bg-[#141414] border ${borderColor} rounded-[24px] p-6 flex flex-col h-full hover:border-[#CAC4D0] transition-colors group`}>
                                 {/* Header */}
-                                <div className="flex items-start justify-between mb-3">
-                                    <span className="bg-neutral-900 text-neutral-400 text-[10px] font-bold px-2 py-1 rounded">
+                                <div className="flex items-start justify-between mb-4">
+                                    <span className="bg-[#0a0a0a] text-[#CAC4D0] text-[10px] font-bold px-3 py-1.5 rounded-full border border-[#1f1f1f]">
                                         Q{idx + 1}
                                     </span>
                                     <div className="flex items-center gap-2">
-                                        <span className={`text-[10px] font-bold px-2 py-1 rounded bg-black/40 ${statusColor} flex items-center gap-1`}>
+                                        <span className={`text-[10px] font-bold px-3 py-1.5 rounded-full bg-[#0a0a0a] ${statusColor} flex items-center gap-1.5 border border-[#1f1f1f]`}>
                                             <StatusIcon sx={{ fontSize: '0.8rem' }} />
                                             {isSkipped ? 'Skipped' : (isCorrect ? 'Correct' : 'Incorrect')}
                                         </span>
@@ -326,36 +332,36 @@ export default function SprintReviewPage({ params }: { params: Promise<{ id: str
                                 </div>
 
                                 {/* Content */}
-                                <div className="flex-1 mb-4">
-                                    <div className="flex flex-wrap gap-2 mb-2">
-                                        <span className="text-[10px] text-neutral-500 border border-neutral-800 px-1.5 py-0.5 rounded uppercase tracking-wider">
+                                <div className="flex-1 mb-5">
+                                    <div className="flex flex-wrap gap-2 mb-3">
+                                        <span className="text-[10px] text-[#938F99] border border-[#1f1f1f] bg-[#0a0a0a] px-2 py-1 rounded-full uppercase tracking-wider">
                                             {q.pattern}
                                         </span>
-                                        <span className="text-[10px] text-neutral-500 border border-neutral-800 px-1.5 py-0.5 rounded uppercase tracking-wider">
+                                        <span className="text-[10px] text-[#938F99] border border-[#1f1f1f] bg-[#0a0a0a] px-2 py-1 rounded-full uppercase tracking-wider">
                                             {q.difficulty}
                                         </span>
                                     </div>
-                                    <h3 className="text-sm font-medium text-neutral-300 line-clamp-2"
+                                    <h3 className="text-[15px] font-medium text-[#E6E1E5] leading-relaxed line-clamp-2"
                                         dangerouslySetInnerHTML={{ __html: q.title || 'Question content not available' }}
                                     />
                                 </div>
 
                                 {/* Footer */}
-                                <div className="pt-4 border-t border-neutral-800 flex items-center justify-between mt-auto">
+                                <div className="pt-4 border-t border-[#1f1f1f] flex items-center justify-between mt-auto">
                                     <div className="flex items-center gap-3">
                                         {!isSkipped && (
-                                            <div className="flex items-center gap-1.5 text-xs text-neutral-400">
+                                            <div className="flex items-center gap-1.5 text-xs text-[#CAC4D0]">
                                                 <TimerIcon sx={{ fontSize: '0.9rem' }} />
                                                 <span className="font-mono">{formatTime(q.userAttempt?.timeMs || 0)}</span>
                                             </div>
                                         )}
                                         {!isSkipped && !isCorrect && (
                                             <div className="text-xs">
-                                                <span className="text-rose-500 font-bold strike-through mr-1">
+                                                <span className="text-[#FFB4AB] font-bold strike-through mr-1">
                                                     {q.userAttempt?.selectedOption}
                                                 </span>
-                                                <span className="text-neutral-600">→</span>
-                                                <span className="text-emerald-500 font-bold ml-1">
+                                                <span className="text-[#938F99]">→</span>
+                                                <span className="text-[#6DD58C] font-bold ml-1">
                                                     {q.correctOption}
                                                 </span>
                                             </div>
@@ -364,7 +370,7 @@ export default function SprintReviewPage({ params }: { params: Promise<{ id: str
 
                                     <Link
                                         href={`/sprint/${sprintId}/review/${q._id}`}
-                                        className="text-white hover:bg-neutral-800 p-2 rounded-lg transition-colors"
+                                        className="text-[#CAC4D0] hover:text-[#E6E1E5] hover:bg-[#1f1f1f] p-2 rounded-full transition-colors"
                                         title="View Detailed Question & Solution"
                                     >
                                         <ArrowForwardIcon sx={{ fontSize: '1.2rem' }} />

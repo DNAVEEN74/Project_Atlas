@@ -182,7 +182,7 @@ export default function ProfilePage() {
 
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] text-neutral-200 font-sans selection:bg-amber-500/30">
+        <div className="min-h-screen bg-[#0a0a0a] text-neutral-200 font-sans selection:bg-amber-500/30">
             <Header activePage="dashboard" />
 
             <main className="max-w-5xl mx-auto px-6 py-8">
@@ -199,7 +199,7 @@ export default function ProfilePage() {
                         {!isEditing ? (
                             <button
                                 onClick={() => setIsEditing(true)}
-                                className="px-4 py-2 bg-[#1a1a1a] hover:bg-neutral-800 text-white text-sm font-bold rounded-xl transition-all border border-neutral-800 hover:border-neutral-700"
+                                className="px-5 py-2.5 bg-[#141414] hover:bg-[#1f1f1f] text-white text-sm font-bold rounded-full transition-all border border-[#1f1f1f] hover:border-neutral-700"
                             >
                                 Edit Profile
                             </button>
@@ -207,14 +207,14 @@ export default function ProfilePage() {
                             <div className="flex items-center gap-3">
                                 <button
                                     onClick={() => setIsEditing(false)}
-                                    className="px-4 py-2 text-neutral-400 hover:text-white text-sm font-bold transition-all"
+                                    className="px-4 py-2 text-neutral-400 hover:text-white text-sm font-bold transition-all rounded-full hover:bg-[#141414]"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     onClick={handleSave}
                                     disabled={isLoading}
-                                    className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-black text-sm font-bold rounded-xl transition-all disabled:opacity-50 flex items-center gap-2"
+                                    className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-black text-sm font-bold rounded-full transition-all disabled:opacity-50 flex items-center gap-2"
                                 >
                                     {isLoading && <span className="w-3 h-3 border-2 border-black/30 border-t-black rounded-full animate-spin"></span>}
                                     Save Changes
@@ -227,14 +227,14 @@ export default function ProfilePage() {
                         {/* LEFT COLUMN */}
                         <div className="lg:col-span-5 flex flex-col">
                             {/* Account Information Card */}
-                            <section className="bg-[#141414] border border-neutral-800 rounded-2xl p-6 flex flex-col">
+                            <section className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-6 flex flex-col">
                                 <h2 className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-6">Account Information</h2>
                                 
                                 <div className="flex flex-col gap-4">
                                     {/* Avatar */}
                                     <div className="flex justify-center mb-2">
                                         <div className="relative group w-28 h-28">
-                                            <div className="w-full h-full rounded-2xl bg-neutral-900 flex items-center justify-center text-4xl font-bold text-white overflow-hidden border border-neutral-800">
+                                            <div className="w-full h-full rounded-[24px] bg-[#1f1f1f] flex items-center justify-center text-4xl font-bold text-white overflow-hidden border border-[#2b2b2b]">
                                                 {formData.avatar_url ? (
                                                     <img src={formData.avatar_url} alt="Avatar" className="w-full h-full object-cover" />
                                                 ) : (
@@ -245,7 +245,7 @@ export default function ProfilePage() {
                                                 <button
                                                     onClick={() => fileInputRef.current?.click()}
                                                     disabled={isUploading}
-                                                    className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center rounded-2xl cursor-pointer backdrop-blur-sm"
+                                                    className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center rounded-[24px] cursor-pointer backdrop-blur-sm"
                                                 >
                                                     {isUploading ? (
                                                         <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -267,27 +267,27 @@ export default function ProfilePage() {
                                                     type="text"
                                                     value={formData.name}
                                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                    className="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors"
+                                                    className="w-full bg-[#1f1f1f] border border-[#2b2b2b] rounded-2xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors"
                                                 />
                                             ) : (
-                                                <div className="px-4 py-2.5 bg-neutral-900/50 border border-transparent rounded-xl text-sm text-white font-medium">
+                                                <div className="px-4 py-2.5 bg-[#0a0a0a] border border-transparent rounded-2xl text-sm text-white font-medium">
                                                     {user?.name}
                                                 </div>
                                             )}
                                         </div>
                                         <div>
                                             <label className="block text-xs font-bold text-neutral-400 mb-1.5">Email Address</label>
-                                            <div className="px-4 py-2.5 bg-neutral-900/50 border border-transparent rounded-xl text-sm text-neutral-400 font-mono truncate">
+                                            <div className="px-4 py-2.5 bg-[#0a0a0a] border border-transparent rounded-2xl text-sm text-neutral-400 font-mono truncate">
                                                 {user?.email}
                                             </div>
                                         </div>
                                         <div>
                                             <label className="block text-xs font-bold text-neutral-400 mb-1.5">Password</label>
-                                            <div className="flex items-center justify-between px-4 py-2.5 bg-neutral-900/50 border border-neutral-800 rounded-xl">
+                                            <div className="flex items-center justify-between px-4 py-2.5 bg-[#0a0a0a] border border-transparent rounded-2xl">
                                                 <span className="text-neutral-400 font-mono tracking-widest text-sm">••••••••</span>
                                                 <button
                                                     onClick={() => setShowChangePassword(true)}
-                                                    className="text-xs font-bold text-neutral-300 hover:text-white transition-colors bg-neutral-800 hover:bg-neutral-700 px-3 py-1.5 rounded-lg shrink-0"
+                                                    className="text-xs font-bold text-neutral-300 hover:text-white transition-colors bg-[#1f1f1f] hover:bg-[#2b2b2b] px-3 py-1.5 rounded-full shrink-0"
                                                 >
                                                     Change Password
                                                 </button>
@@ -301,13 +301,14 @@ export default function ProfilePage() {
                         {/* RIGHT COLUMN */}
                         <div className="lg:col-span-7 flex flex-col gap-6">
                             {/* Academic Target Card */}
-                            <section className="bg-[#141414] border border-neutral-800 rounded-2xl p-6">
+                            <section className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-6">
                                 <h2 className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-6">Exam Configuration</h2>
                                 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                     <div>
                                         <label className="block text-xs font-bold text-neutral-400 mb-1.5">Target Exam</label>
                                         {isEditing ? (
+                                            <div className="relative">
                                             <CustomSelect
                                                 value={formData.targetExam}
                                                 onChange={(val) => setFormData({ ...formData, targetExam: val })}
@@ -318,8 +319,9 @@ export default function ProfilePage() {
                                                 ]}
                                                 className="w-full"
                                             />
+                                            </div>
                                         ) : (
-                                            <div className="px-4 py-2.5 bg-neutral-900/50 border border-neutral-800 rounded-xl text-sm text-white font-medium">
+                                            <div className="px-4 py-2.5 bg-[#0a0a0a] border border-transparent rounded-2xl text-sm text-white font-medium">
                                                 {user?.targetExam?.replace('_', ' ') || 'SSC CGL'}
                                             </div>
                                         )}
@@ -327,14 +329,16 @@ export default function ProfilePage() {
                                     <div>
                                         <label className="block text-xs font-bold text-neutral-400 mb-1.5">Target Year</label>
                                         {isEditing ? (
+                                            <div className="relative">
                                             <CustomSelect
                                                 value={formData.targetYear.toString()}
                                                 onChange={(val) => setFormData({ ...formData, targetYear: parseInt(val) })}
                                                 options={[2025, 2026, 2027].map(y => ({ value: y.toString(), label: y.toString() }))}
                                                 className="w-full"
                                             />
+                                            </div>
                                         ) : (
-                                            <div className="px-4 py-2.5 bg-neutral-900/50 border border-neutral-800 rounded-xl text-sm text-white font-medium">
+                                            <div className="px-4 py-2.5 bg-[#0a0a0a] border border-transparent rounded-2xl text-sm text-white font-medium">
                                                 {user?.targetYear || 2025}
                                             </div>
                                         )}
@@ -343,11 +347,11 @@ export default function ProfilePage() {
                             </section>
 
                             {/* Daily Goals Card */}
-                            <section className="bg-[#141414] border border-neutral-800 rounded-2xl p-6">
+                            <section className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-6">
                                 <h2 className="text-xs font-bold text-neutral-500 uppercase tracking-widest mb-6">Daily Practice Goals</h2>
                                 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                    <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-5">
+                                    <div className="bg-[#1f1f1f] rounded-[20px] p-5">
                                         <label className="block text-xs font-bold text-amber-500 uppercase tracking-widest mb-4">Quant Target</label>
                                         <div className="flex items-center gap-3">
                                             {isEditing ? (
@@ -357,17 +361,17 @@ export default function ProfilePage() {
                                                     max="100"
                                                     value={formData.dailyQuantGoal}
                                                     onChange={(e) => setFormData({ ...formData, dailyQuantGoal: parseInt(e.target.value) })}
-                                                    className="w-20 bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-center text-white focus:border-amber-500 focus:outline-none font-bold"
+                                                    className="w-20 bg-[#0a0a0a] border border-[#2b2b2b] rounded-xl px-3 py-2 text-center text-white focus:border-amber-500 focus:outline-none font-bold"
                                                 />
                                             ) : (
                                                 <span className="text-3xl font-black text-white">{user?.dailyQuantGoal || 5}</span>
                                             )}
-                                            <span className="text-xs text-neutral-500 font-medium leading-tight">Questions <br/>Per Day</span>
+                                            <span className="text-xs text-neutral-400 font-medium leading-tight">Questions <br/>Per Day</span>
                                         </div>
                                     </div>
 
-                                    <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-5">
-                                        <label className="block text-xs font-bold text-violet-500 uppercase tracking-widest mb-4">Reasoning Target</label>
+                                    <div className="bg-[#1f1f1f] rounded-[20px] p-5">
+                                        <label className="block text-xs font-bold text-violet-400 uppercase tracking-widest mb-4">Reasoning Target</label>
                                         <div className="flex items-center gap-3">
                                             {isEditing ? (
                                                 <input
@@ -376,12 +380,12 @@ export default function ProfilePage() {
                                                     max="100"
                                                     value={formData.dailyReasoningGoal}
                                                     onChange={(e) => setFormData({ ...formData, dailyReasoningGoal: parseInt(e.target.value) })}
-                                                    className="w-20 bg-neutral-800 border border-neutral-700 rounded-lg px-3 py-2 text-center text-white focus:border-violet-500 focus:outline-none font-bold"
+                                                    className="w-20 bg-[#0a0a0a] border border-[#2b2b2b] rounded-xl px-3 py-2 text-center text-white focus:border-violet-500 focus:outline-none font-bold"
                                                 />
                                             ) : (
                                                 <span className="text-3xl font-black text-white">{user?.dailyReasoningGoal || 5}</span>
                                             )}
-                                            <span className="text-xs text-neutral-500 font-medium leading-tight">Questions <br/>Per Day</span>
+                                            <span className="text-xs text-neutral-400 font-medium leading-tight">Questions <br/>Per Day</span>
                                         </div>
                                     </div>
                                 </div>
@@ -405,11 +409,11 @@ export default function ProfilePage() {
                                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                                className="fixed inset-0 m-auto w-full max-w-sm h-fit bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl z-50 flex flex-col p-6"
+                                className="fixed inset-0 m-auto w-full max-w-sm h-fit bg-[#141414] border border-[#1f1f1f] rounded-[24px] shadow-2xl z-50 flex flex-col p-6"
                             >
                                 <div className="flex justify-between items-center mb-6">
                                     <h3 className="text-xl font-bold text-white">Change Password</h3>
-                                    <button onClick={() => setShowChangePassword(false)} className="text-neutral-400 hover:text-white">
+                                    <button onClick={() => setShowChangePassword(false)} className="text-neutral-400 hover:text-white transition-colors bg-[#1f1f1f] hover:bg-[#2b2b2b] p-2 rounded-full">
                                         <XIcon className="w-5 h-5" />
                                     </button>
                                 </div>
@@ -425,13 +429,13 @@ export default function ProfilePage() {
                                                     setPasswordData({ ...passwordData, currentPassword: e.target.value });
                                                     if (passwordErrors.current) setPasswordErrors(prev => ({ ...prev, current: '' }));
                                                 }}
-                                                className={`w-full bg-neutral-900 border ${passwordErrors.current ? 'border-rose-500 focus:border-rose-500' : 'border-neutral-700 focus:border-amber-500'} rounded-xl px-4 py-3 text-sm text-white focus:outline-none transition-all pr-10`}
+                                                className={`w-full bg-[#0a0a0a] border ${passwordErrors.current ? 'border-rose-500 focus:border-rose-500' : 'border-[#1f1f1f] focus:border-amber-500'} rounded-2xl px-4 py-3 text-sm text-white focus:outline-none transition-all pr-10`}
                                                 placeholder="Enter current password"
                                             />
                                             <button
                                                 type="button"
                                                 onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white transition-colors"
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white transition-colors p-1"
                                             >
                                                 {showCurrentPassword ? <EyeOffIcon className="w-4 h-4" /> : <EyeIcon className="w-4 h-4" />}
                                             </button>
@@ -456,13 +460,13 @@ export default function ProfilePage() {
                                                     setPasswordData({ ...passwordData, newPassword: e.target.value });
                                                     if (passwordErrors.new) setPasswordErrors(prev => ({ ...prev, new: '' }));
                                                 }}
-                                                className={`w-full bg-neutral-900 border ${passwordErrors.new ? 'border-rose-500 focus:border-rose-500' : 'border-neutral-700 focus:border-amber-500'} rounded-xl px-4 py-3 text-sm text-white focus:outline-none transition-all pr-10`}
+                                                className={`w-full bg-[#0a0a0a] border ${passwordErrors.new ? 'border-rose-500 focus:border-rose-500' : 'border-[#1f1f1f] focus:border-amber-500'} rounded-2xl px-4 py-3 text-sm text-white focus:outline-none transition-all pr-10`}
                                                 placeholder="Min. 6 characters"
                                             />
                                             <button
                                                 type="button"
                                                 onClick={() => setShowNewPassword(!showNewPassword)}
-                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white transition-colors"
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white transition-colors p-1"
                                             >
                                                 {showNewPassword ? <EyeOffIcon className="w-4 h-4" /> : <EyeIcon className="w-4 h-4" />}
                                             </button>
@@ -475,7 +479,7 @@ export default function ProfilePage() {
                                     <button
                                         onClick={handleChangePassword}
                                         disabled={isChangingPassword}
-                                        className="w-full py-3 bg-amber-500 hover:bg-amber-600 text-black font-bold rounded-xl transition-all disabled:opacity-50 mt-4"
+                                        className="w-full py-3 bg-amber-500 hover:bg-amber-600 text-black font-bold rounded-full transition-all disabled:opacity-50 mt-4"
                                     >
                                         {isChangingPassword ? 'Updating...' : 'Update Password'}
                                     </button>

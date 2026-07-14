@@ -49,61 +49,56 @@ export default function LoginPage() {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-500"></div>
+            <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FFB951]"></div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] flex items-center justify-center p-4 relative overflow-hidden">
-            {/* Ambient Background */}
-            <div className="absolute top-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[100px]" />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-orange-600/5 rounded-full blur-[100px]" />
-            </div>
+        <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-4 relative overflow-hidden">
 
             <div className="w-full max-w-md relative z-10">
-                {/* Logo */}
+                {/* Logo & Title */}
                 <div className="text-center mb-8">
                     <Link href="/" className="inline-block group">
-                        <div className="relative w-20 h-20 mx-auto mb-4 group-hover:scale-105 transition-transform">
+                        <div className="relative w-16 h-16 mx-auto mb-5 group-hover:scale-105 transition-transform">
                             <Image
                                 src="/logo-final.png"
                                 alt="PrepLeague Logo"
                                 fill
-                                className="object-contain drop-shadow-lg"
+                                className="object-contain"
                             />
                         </div>
-                        <h1 className="text-3xl font-bold text-white mb-1">Sign In to PrepLeague</h1>
+                        <h1 className="text-2xl font-bold text-[#E6E1E5] mb-1.5">Sign in to PrepLeague</h1>
                     </Link>
-                    <p className="text-neutral-400">Welcome back! Ready to practice?</p>
+                    <p className="text-[#938F99] text-sm">Welcome back! Ready to practice?</p>
                 </div>
 
-                {/* Login Card */}
-                <div className="bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-2xl p-8 backdrop-blur-sm">
-                    <h2 className="text-xl font-bold text-white text-center mb-6">Welcome back!</h2>
+                {/* Login Card — M3 Surface Container */}
+                <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-8">
 
                     {error && (
-                        <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm flex items-center gap-2">
-                            <span>!</span> {error}
+                        <div className="mb-6 p-4 bg-[#93000A]/30 border border-[#FFB4AB]/20 rounded-2xl text-[#FFB4AB] text-sm flex items-center gap-2.5">
+                            <span className="w-5 h-5 rounded-full bg-[#FFB4AB]/15 flex items-center justify-center text-xs font-bold shrink-0">!</span>
+                            {error}
                         </div>
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         {/* Email */}
                         <div>
-                            <label className="block text-sm font-medium text-neutral-400 mb-2">Email Address</label>
+                            <label className="block text-sm font-medium text-[#CAC4D0] mb-2">Email Address</label>
                             <div className="relative group">
                                 <EmailOutlinedIcon
                                     sx={{ fontSize: '1.25rem' }}
-                                    className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 group-focus-within:text-amber-500 transition-colors"
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 text-[#938F99] group-focus-within:text-[#FFB951] transition-colors"
                                 />
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white placeholder-neutral-600"
+                                    className="w-full pl-12 pr-4 py-3.5 bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl focus:border-[#FFB951] focus:outline-none focus:ring-1 focus:ring-[#FFB951]/30 transition-all text-[#E6E1E5] placeholder-[#938F99]"
                                     placeholder="your@email.com"
                                     required
                                 />
@@ -113,28 +108,28 @@ export default function LoginPage() {
                         {/* Password */}
                         <div>
                             <div className="flex items-center justify-between mb-2">
-                                <label className="block text-sm font-medium text-neutral-400">Password</label>
-                                <Link href="/forgot-password" className="text-sm text-neutral-500 hover:text-amber-500 transition-colors">
+                                <label className="block text-sm font-medium text-[#CAC4D0]">Password</label>
+                                <Link href="/forgot-password" className="text-sm text-[#938F99] hover:text-[#FFB951] transition-colors">
                                     Forgot password?
                                 </Link>
                             </div>
                             <div className="relative group">
                                 <LockOutlinedIcon
                                     sx={{ fontSize: '1.25rem' }}
-                                    className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 group-focus-within:text-amber-500 transition-colors"
+                                    className="absolute left-4 top-1/2 -translate-y-1/2 text-[#938F99] group-focus-within:text-[#FFB951] transition-colors"
                                 />
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full pl-12 pr-12 py-3.5 bg-neutral-900 border border-neutral-700 rounded-xl focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-white placeholder-neutral-600"
+                                    className="w-full pl-12 pr-12 py-3.5 bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl focus:border-[#FFB951] focus:outline-none focus:ring-1 focus:ring-[#FFB951]/30 transition-all text-[#E6E1E5] placeholder-[#938F99]"
                                     placeholder="********"
                                     required
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword((prev) => !prev)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-amber-500 transition-colors"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#938F99] hover:text-[#FFB951] transition-colors"
                                     aria-label={showPassword ? "Hide password" : "Show password"}
                                 >
                                     {showPassword ? (
@@ -146,21 +141,21 @@ export default function LoginPage() {
                             </div>
                         </div>
 
-                        {/* Submit Button */}
+                        {/* M3 Filled Button */}
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold text-lg rounded-xl hover:shadow-lg hover:shadow-amber-500/20 hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                            className="w-full py-3.5 bg-[#FFB951] text-[#452B00] font-medium text-base rounded-[20px] hover:bg-[#FFB951]/90 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
                         >
                             {isLoading ? 'Logging in...' : 'Login'}
                         </button>
                     </form>
 
                     {/* Register Link */}
-                    <div className="mt-8 pt-6 border-t border-neutral-800 text-center">
-                        <p className="text-neutral-400 text-sm">
+                    <div className="mt-8 pt-6 border-t border-[#1f1f1f] text-center">
+                        <p className="text-[#938F99] text-sm">
                             Don&apos;t have an account?{' '}
-                            <Link href="/register" className="text-amber-500 font-semibold hover:text-amber-400 transition-colors">
+                            <Link href="/register" className="text-[#FFB951] font-medium hover:text-[#FFDE9C] transition-colors">
                                 Create an account
                             </Link>
                         </p>
@@ -169,7 +164,7 @@ export default function LoginPage() {
 
                 {/* Back to Home */}
                 <div className="text-center mt-8">
-                    <Link href="/" className="inline-flex items-center gap-2 text-neutral-500 hover:text-white transition-colors text-sm">
+                    <Link href="/" className="inline-flex items-center gap-2 text-[#938F99] hover:text-[#E6E1E5] transition-colors text-sm font-medium">
                         <ArrowBackIcon sx={{ fontSize: '1rem' }} /> Back to Home
                     </Link>
                 </div>

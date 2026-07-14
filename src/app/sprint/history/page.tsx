@@ -104,23 +104,25 @@ export default function SprintHistoryPage() {
     if (loading) return null;
 
     return (
-        <div className="min-h-screen bg-[#0f0f0f] text-white selection:bg-violet-500/30">
+        <div className="min-h-screen bg-[#0a0a0a] text-white selection:bg-violet-500/30">
             <Header activePage="sprint" />
 
             <main className="container mx-auto max-w-7xl px-4 py-8 space-y-6">
-                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between">
                     <div>
-                        <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400">
+                        <Link href="/dashboard" className="inline-flex items-center gap-2 text-[#CAC4D0] hover:text-[#E6E1E5] transition-colors mb-4 rounded-full px-3 py-1.5 hover:bg-[#1f1f1f] -ml-3">
+                            <ChevronLeftIcon sx={{ fontSize: '1.25rem' }} />
+                            <span className="font-medium text-sm tracking-wide">Back to Dashboard</span>
+                        </Link>
+                        <h1 className="text-4xl md:text-5xl font-medium tracking-tight text-[#E6E1E5] flex items-center gap-4">
+                            <BoltIcon className="text-amber-500 w-10 h-10" />
                             Sprint History
                         </h1>
-                        <p className="text-neutral-400 text-sm mt-1">
-                            Track your performance and improvements over time
-                        </p>
                     </div>
 
                     <Link
                         href="/sprint"
-                        className="w-fit bg-white text-black px-4 py-2 rounded-xl font-semibold text-sm hover:bg-neutral-200 transition-colors flex items-center gap-2"
+                        className="w-fit bg-[#E8DEF8] text-[#1D192B] px-6 py-3 rounded-full font-medium text-sm hover:bg-[#E8DEF8]/90 transition-colors flex items-center gap-2 shadow-sm mt-4 md:mt-0"
                     >
                         <BoltIcon sx={{ fontSize: '1.1rem' }} />
                         New Sprint
@@ -128,22 +130,23 @@ export default function SprintHistoryPage() {
                 </div>
 
                 {/* Filters */}
-                <div className="rounded-2xl border border-neutral-800 bg-[#141414] p-3">
-                    <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                {/* Filters */}
+                <div className="rounded-full border border-[#1f1f1f] bg-[#141414] p-2 flex items-center w-fit">
+                    <div className="flex items-center overflow-x-auto">
                         <button
                             onClick={() => { setFilter('ALL'); setPagination(p => ({ ...p, current: 1 })); }}
-                            className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors whitespace-nowrap ${filter === 'ALL'
-                                ? 'bg-neutral-800 text-white border border-neutral-700'
-                                : 'text-neutral-400 hover:text-white hover:bg-neutral-900 border border-transparent'
+                            className={`px-5 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${filter === 'ALL'
+                                ? 'bg-[#36343B] text-[#E6E1E5]'
+                                : 'text-[#CAC4D0] hover:text-[#E6E1E5] hover:bg-[#1f1f1f]'
                                 }`}
                         >
                             All Sprints
                         </button>
                         <button
                             onClick={() => { setFilter('QUANT'); setPagination(p => ({ ...p, current: 1 })); }}
-                            className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors whitespace-nowrap flex items-center gap-2 ${filter === 'QUANT'
-                                ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20'
-                                : 'text-neutral-400 hover:text-white hover:bg-neutral-900 border border-transparent'
+                            className={`px-5 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap flex items-center gap-2 ${filter === 'QUANT'
+                                ? 'bg-[#594100] text-[#FFB951]'
+                                : 'text-[#CAC4D0] hover:text-[#E6E1E5] hover:bg-[#1f1f1f]'
                                 }`}
                         >
                             <span className="w-2 h-2 rounded-full bg-amber-500"></span>
@@ -151,9 +154,9 @@ export default function SprintHistoryPage() {
                         </button>
                         <button
                             onClick={() => { setFilter('REASONING'); setPagination(p => ({ ...p, current: 1 })); }}
-                            className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors whitespace-nowrap flex items-center gap-2 ${filter === 'REASONING'
-                                ? 'bg-violet-500/10 text-violet-500 border border-violet-500/20'
-                                : 'text-neutral-400 hover:text-white hover:bg-neutral-900 border border-transparent'
+                            className={`px-5 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap flex items-center gap-2 ${filter === 'REASONING'
+                                ? 'bg-[#332D41] text-[#D0BCFF]'
+                                : 'text-[#CAC4D0] hover:text-[#E6E1E5] hover:bg-[#1f1f1f]'
                                 }`}
                         >
                             <span className="w-2 h-2 rounded-full bg-violet-500"></span>
@@ -163,12 +166,12 @@ export default function SprintHistoryPage() {
                 </div>
 
                 {isLoading && sessions.length === 0 ? (
-                    <div className="rounded-2xl border border-neutral-800 bg-[#1a1a1a] flex flex-col items-center justify-center py-20 text-neutral-500 animate-pulse">
+                    <div className="rounded-[24px] border border-[#1f1f1f] bg-[#141414] flex flex-col items-center justify-center py-20 text-neutral-500 animate-pulse">
                         <div className="w-8 h-8 rounded-full border-2 border-neutral-600 border-t-white animate-spin mb-4"></div>
                         <p>Loading history...</p>
                     </div>
                 ) : stats.totalSprints === 0 && filter === 'ALL' ? (
-                    <div className="rounded-2xl border border-neutral-800 bg-[#1a1a1a] p-16 text-center">
+                    <div className="rounded-[24px] border border-[#1f1f1f] bg-[#141414] p-16 text-center">
                         <TrophyIcon size={48} className="text-neutral-800 mb-2 mx-auto" />
                         <p className="text-neutral-500">No sprint history found.</p>
                         <Link href="/sprint" className="text-amber-500 hover:text-amber-400 text-sm font-medium mt-2 inline-block">
@@ -187,15 +190,15 @@ export default function SprintHistoryPage() {
 
                         {/* Pagination Table */}
                         {sessions.length > 0 && (
-                            <section className="overflow-hidden rounded-2xl border border-neutral-800 bg-[#1a1a1a]">
-                                <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-800">
-                                    <h2 className="text-base font-semibold text-white">Sprint Sessions</h2>
-                                    <span className="text-xs text-neutral-500">{pagination.total} total records</span>
+                            <section className="overflow-hidden rounded-[24px] border border-[#1f1f1f] bg-[#141414]">
+                                <div className="flex items-center justify-between px-6 py-5 border-b border-[#1f1f1f]">
+                                    <h2 className="text-lg font-medium text-[#E6E1E5]">Sprint Sessions</h2>
+                                    <span className="text-sm font-medium text-[#CAC4D0]">{pagination.total} total</span>
                                 </div>
 
                                 <div className="overflow-x-auto">
                                     <div className="min-w-[900px]">
-                                        <div className="grid grid-cols-12 gap-4 px-6 py-3 text-sm font-bold text-neutral-500 uppercase tracking-wider border-b border-neutral-800">
+                                        <div className="grid grid-cols-12 gap-4 px-6 py-4 text-xs font-semibold text-[#938F99] uppercase tracking-wider border-b border-[#1f1f1f]">
                                             <div className="col-span-3">Date</div>
                                             <div className="col-span-2">Subject</div>
                                             <div className="col-span-2">Topics</div>
@@ -207,44 +210,44 @@ export default function SprintHistoryPage() {
                                         </div>
 
                                         {sessions.map((sub) => (
-                                            <div key={sub.id} className="grid grid-cols-12 gap-4 px-6 py-5 items-center hover:bg-neutral-800/30 transition-colors border-b border-neutral-800/50 last:border-0">
+                                            <div key={sub.id} className="grid grid-cols-12 gap-4 px-6 py-5 items-center hover:bg-[#1f1f1f]/50 transition-colors border-b border-[#1f1f1f] last:border-0">
                                                 <div className="col-span-3">
-                                                    <p className="text-sm md:text-base font-medium text-neutral-200">{formatDate(sub.createdAt)}</p>
+                                                    <p className="text-sm md:text-base font-medium text-[#E6E1E5]">{formatDate(sub.createdAt)}</p>
                                                 </div>
                                                 <div className="col-span-2">
-                                                    <span className={`px-2.5 py-1 text-xs font-bold rounded border ${sub.subject === 'QUANT'
-                                                        ? 'bg-amber-500/10 text-amber-500 border-amber-500/20'
-                                                        : 'bg-violet-500/10 text-violet-500 border-violet-500/20'}`}>
-                                                        {sub.subject}
+                                                    <span className={`px-3 py-1.5 text-xs font-medium rounded-full ${sub.subject === 'QUANT'
+                                                        ? 'bg-[#594100] text-[#FFB951]'
+                                                        : 'bg-[#332D41] text-[#D0BCFF]'}`}>
+                                                        {sub.subject.charAt(0) + sub.subject.slice(1).toLowerCase()}
                                                     </span>
                                                 </div>
-                                                <div className="col-span-2 text-sm text-neutral-400 truncate" title={sub.topics?.includes('ALL') ? 'All Topics' : sub.topics?.join(', ')}>
+                                                <div className="col-span-2 text-sm text-[#CAC4D0] truncate" title={sub.topics?.includes('ALL') ? 'All Topics' : sub.topics?.join(', ')}>
                                                     {sub.topics?.length ? (sub.topics.includes('ALL') ? 'All Topics' : sub.topics.join(', ')) : 'All Topics'}
                                                 </div>
                                                 <div className="col-span-1">
-                                                    <span className={`text-xs font-bold px-2 py-1 rounded ${sub.difficulty === 'HARD' ? 'bg-rose-500/20 text-rose-400' :
-                                                        sub.difficulty === 'MEDIUM' ? 'bg-amber-500/20 text-amber-400' :
-                                                            'bg-emerald-500/20 text-emerald-400'
+                                                    <span className={`text-xs font-medium px-3 py-1.5 rounded-full ${sub.difficulty === 'HARD' ? 'bg-[#4B191D] text-[#FFB4AB]' :
+                                                        sub.difficulty === 'MEDIUM' ? 'bg-[#594100] text-[#FFB951]' :
+                                                            'bg-[#143224] text-[#6DD58C]'
                                                         }`}>
-                                                        {sub.difficulty || 'MEDIUM'}
+                                                        {sub.difficulty ? sub.difficulty.charAt(0) + sub.difficulty.slice(1).toLowerCase() : 'Medium'}
                                                     </span>
                                                 </div>
                                                 <div className="col-span-1 text-center">
-                                                    <span className="text-base font-bold text-white">{sub.score}</span>
-                                                    <span className="text-sm text-neutral-500">/{sub.totalQuestions}</span>
+                                                    <span className="text-base font-bold text-[#E6E1E5]">{sub.score}</span>
+                                                    <span className="text-sm font-medium text-[#CAC4D0]">/{sub.totalQuestions}</span>
                                                 </div>
                                                 <div className="col-span-1 text-center">
-                                                    <span className={`text-base font-bold ${sub.accuracy >= 80 ? 'text-emerald-400' : sub.accuracy >= 50 ? 'text-amber-400' : 'text-rose-400'}`}>
+                                                    <span className={`text-base font-bold ${sub.accuracy >= 80 ? 'text-[#6DD58C]' : sub.accuracy >= 50 ? 'text-[#FFB951]' : 'text-[#FFB4AB]'}`}>
                                                         {sub.accuracy}%
                                                     </span>
                                                 </div>
-                                                <div className="col-span-1 text-center text-sm text-neutral-400 font-mono">
+                                                <div className="col-span-1 text-center text-sm font-medium text-[#CAC4D0] font-mono">
                                                     {formatTime(sub.timeTaken)}
                                                 </div>
                                                 <div className="col-span-1 flex justify-end">
                                                     <Link
                                                         href={`/sprint/${sub.id}/review`}
-                                                        className="px-4 py-2 text-xs font-bold text-neutral-300 hover:text-white bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 rounded-xl transition-all"
+                                                        className="px-4 py-2 text-xs font-bold text-[#E6E1E5] hover:text-white bg-[#36343B] hover:bg-[#4A4458] rounded-full transition-all"
                                                     >
                                                         Review
                                                     </Link>
@@ -255,27 +258,27 @@ export default function SprintHistoryPage() {
                                 </div>
 
                                 {pagination.pages > 1 && (
-                                    <div className="px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-t border-neutral-800 bg-neutral-900/30">
-                                        <p className="text-xs text-neutral-500">
-                                            Showing <span className="font-medium text-white">{(pagination.current - 1) * 10 + 1}</span> to <span className="font-medium text-white">{Math.min(pagination.current * 10, pagination.total)}</span> of <span className="font-medium text-white">{pagination.total}</span> results
+                                    <div className="px-6 py-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-t border-[#1f1f1f]">
+                                        <p className="text-sm font-medium text-[#CAC4D0]">
+                                            Showing <span className="font-medium text-[#E6E1E5]">{(pagination.current - 1) * 10 + 1}</span> to <span className="font-medium text-[#E6E1E5]">{Math.min(pagination.current * 10, pagination.total)}</span> of <span className="font-medium text-[#E6E1E5]">{pagination.total}</span> results
                                         </p>
-                                        <div className="flex gap-2">
+                                        <div className="flex gap-2 bg-[#0a0a0a] p-1 rounded-full border border-[#1f1f1f]">
                                             <button
                                                 onClick={() => handlePageChange(pagination.current - 1)}
                                                 disabled={pagination.current === 1}
-                                                className="p-2 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+                                                className="p-2 rounded-full text-[#CAC4D0] hover:text-[#E6E1E5] hover:bg-[#1f1f1f] disabled:opacity-30 disabled:hover:bg-transparent transition-all"
                                             >
-                                                <ChevronLeftIcon sx={{ fontSize: '1.1rem' }} />
+                                                <ChevronLeftIcon sx={{ fontSize: '1.25rem' }} />
                                             </button>
-                                            <div className="flex items-center gap-1 px-2">
-                                                <span className="text-sm text-neutral-400">Page {pagination.current} of {pagination.pages}</span>
+                                            <div className="flex items-center gap-1 px-3">
+                                                <span className="text-sm font-medium text-[#E6E1E5]">Page {pagination.current} of {pagination.pages}</span>
                                             </div>
                                             <button
                                                 onClick={() => handlePageChange(pagination.current + 1)}
                                                 disabled={pagination.current === pagination.pages}
-                                                className="p-2 rounded-lg border border-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-800 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+                                                className="p-2 rounded-full text-[#CAC4D0] hover:text-[#E6E1E5] hover:bg-[#1f1f1f] disabled:opacity-30 disabled:hover:bg-transparent transition-all"
                                             >
-                                                <ChevronRightIcon sx={{ fontSize: '1.1rem' }} />
+                                                <ChevronRightIcon sx={{ fontSize: '1.25rem' }} />
                                             </button>
                                         </div>
                                     </div>

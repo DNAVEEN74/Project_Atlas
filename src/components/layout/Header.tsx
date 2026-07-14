@@ -62,7 +62,7 @@ export default function Header({ activePage }: HeaderProps) {
     };
 
     return (
-        <header className="bg-[#1a1a1a]/90 backdrop-blur-md border-b border-neutral-800/50 sticky top-0 z-50">
+        <header className="bg-[#0a0a0a]/90 backdrop-blur-md border-b border-[#1f1f1f]/50 sticky top-0 z-[100]">
             <div className="w-full px-6 lg:px-12">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo & Nav */}
@@ -152,7 +152,7 @@ export default function Header({ activePage }: HeaderProps) {
                                             )}
                                         </span>
                                         {/* Tooltip */}
-                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-4 py-2 bg-neutral-900 border border-neutral-800 text-neutral-200 text-xs font-medium rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.4)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-4 py-2 bg-[#1f1f1f] border border-[#2b2b2b] text-neutral-200 text-xs font-medium rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.4)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
                                             {user.totalSolved === 0
                                                 ? "You haven't solved any questions yet. Start your journey today!"
                                                 : `You've solved ${user.totalSolved} questions. Keep going!`}
@@ -175,7 +175,7 @@ export default function Header({ activePage }: HeaderProps) {
                                             )}
                                         </span>
                                         {/* Tooltip */}
-                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-4 py-2 bg-neutral-900 border border-neutral-800 text-neutral-200 text-xs font-medium rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.4)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                                        <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-4 py-2 bg-[#1f1f1f] border border-[#2b2b2b] text-neutral-200 text-xs font-medium rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.4)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
                                             {user.streak === 0
                                                 ? "Solve at least 1 question today to start your streak!"
                                                 : `${user.streak}-day streak! Solve 1 question today to maintain it`}
@@ -203,8 +203,8 @@ export default function Header({ activePage }: HeaderProps) {
                                     </button>
 
                                     {showUserMenu && (
-                                        <div className="absolute right-0 top-full mt-2 w-60 bg-[#1a1a1a] border border-neutral-800 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.7)] z-50 overflow-hidden">
-                                            <div className="px-4 py-3 bg-neutral-800/50 border-b border-neutral-800">
+                                        <div className="absolute right-0 top-full mt-2 w-60 bg-[#141414] border border-[#1f1f1f] rounded-[24px] shadow-[0_10px_40px_rgba(0,0,0,0.7)] z-50 overflow-hidden">
+                                            <div className="px-4 py-3 bg-[#1f1f1f]/50 border-b border-[#1f1f1f]">
                                                 <p className="text-sm font-medium text-white">{user?.name}</p>
                                                 <p className="text-xs text-neutral-500">{user?.email}</p>
                                             </div>
@@ -227,7 +227,7 @@ export default function Header({ activePage }: HeaderProps) {
                                                     Sprint History
                                                 </Link>
 
-                                                <div className="h-px bg-neutral-800 my-1 mx-4"></div>
+                                                <div className="h-px bg-[#1f1f1f] my-1 mx-4"></div>
 
                                                 <Link href="/profile" className="flex items-center gap-3 px-4 py-2.5 text-sm text-neutral-400 hover:bg-neutral-800 hover:text-white transition-colors">
                                                     <PersonIcon sx={{ fontSize: '1.1rem' }} />
@@ -239,7 +239,7 @@ export default function Header({ activePage }: HeaderProps) {
                                                 </Link> */}
                                             </div>
 
-                                            <div className="border-t border-neutral-800 py-1">
+                                            <div className="border-t border-[#1f1f1f] py-1">
                                                 <button onClick={handleLogout} className="flex items-center gap-3 px-4 py-2.5 text-sm text-rose-400 hover:bg-neutral-800 transition-colors w-full">
                                                     <LogoutIcon sx={{ fontSize: '1.1rem' }} />
                                                     Sign Out
