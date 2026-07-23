@@ -428,7 +428,7 @@ export default function RegisterPage() {
                         >
                             {/* OTP Card — M3 Surface Container */}
                             <div className="bg-[#141414] border border-[#1f1f1f] rounded-[24px] p-8">
-                                <button onClick={() => setStep('form')} className="flex items-center gap-2 text-[#938F99] hover:text-[#E6E1E5] mb-6 text-sm transition-colors font-medium">
+                                <button onClick={() => setStep('preferences')} className="flex items-center gap-2 text-[#938F99] hover:text-[#E6E1E5] mb-6 text-sm transition-colors font-medium">
                                     <ArrowBackIcon sx={{ fontSize: '1rem' }} /> Back
                                 </button>
 
