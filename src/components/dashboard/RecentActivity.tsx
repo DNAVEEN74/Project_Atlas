@@ -82,8 +82,8 @@ const RecentActivity = ({ attempts, className }: RecentActivityProps) => {
                     <HistoryIcon className="text-[#FFB951] w-5 h-5" />
                     <h3 className="font-bold text-[#E6E1E5] text-lg">Recent Submissions</h3>
                 </div>
-                <Link href="/history" className="text-[#FFB951] text-sm hover:text-[#FFDE9C] transition-colors font-medium">
-                    View full history
+                <Link href="/submissions" className="text-xs font-medium text-[#FFB951] hover:text-[#FFDE9C] transition-colors">
+                    View All →
                 </Link>
             </div>
 

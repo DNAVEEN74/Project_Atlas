@@ -50,10 +50,10 @@ const DailyProgressHero = ({
 
     if (isGoalMet) {
         buttonText = "Goal Complete! Any More?";
-        buttonIcon = <CheckCircleIcon className="text-black/80 w-5 h-5" />;
+        buttonIcon = <CheckCircleIcon className="text-white w-5 h-5" />;
     } else if (dailySolved > 0) {
         buttonText = "Continue Practice";
-        buttonIcon = <PlayArrowIcon className="text-black/80 w-5 h-5" />;
+        buttonIcon = <PlayArrowIcon className="text-white w-5 h-5" />;
     }
 
     return (
@@ -164,7 +164,7 @@ const DailyProgressHero = ({
                     {/* Action Buttons */}
                     <div className="flex gap-3 mt-auto">
                         <Link href="/problems" className="flex-1">
-                            <button className="w-full h-12 bg-[#FFB951] hover:bg-[#FFB951]/90 text-[#452B00] font-medium rounded-full transition-colors flex items-center justify-center gap-2 active:scale-[0.98] duration-200">
+                            <button className="w-full h-12 bg-gradient-to-r from-amber-500 to-orange-600 hover:opacity-90 text-white font-semibold rounded-full transition-all flex items-center justify-center gap-2 active:scale-[0.98] duration-200 shadow-lg shadow-orange-500/20 border border-orange-500/20">
                                 {buttonIcon}
                                 {buttonText}
                             </button>
