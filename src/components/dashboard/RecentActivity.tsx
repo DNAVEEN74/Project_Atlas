@@ -132,11 +132,12 @@ const RecentActivity = ({ attempts, className }: RecentActivityProps) => {
                                     <span className="flex items-center gap-1">
                                         {timeSeconds}s
                                         {isFastWrong && (
-                                            <span
-                                                className="text-[#FFB951] flex items-center gap-0.5 cursor-help"
-                                                title="Very fast - did you rush?"
-                                            >
+                                            <span className="text-[#FFB951] flex items-center gap-0.5 cursor-help group/bolt relative">
                                                 <BoltIcon className="w-3 h-3" />
+                                                {/* Tooltip */}
+                                                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#1f1f1f] border border-[#2b2b2b] text-neutral-200 text-[10px] font-medium rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.4)] opacity-0 group-hover/bolt:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50">
+                                                    Very fast - did you rush?
+                                                </div>
                                             </span>
                                         )}
                                     </span>

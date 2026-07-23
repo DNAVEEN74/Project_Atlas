@@ -61,8 +61,21 @@ export default function DashboardPage() {
         return (
             <div className="min-h-screen bg-[#0a0a0a]">
                 <Header activePage="dashboard" />
-                <main className="flex items-center justify-center min-h-[60vh]">
-                    <div className="animate-spin rounded-full h-10 w-10 border-4 border-amber-500 border-t-transparent"></div>
+                <main className="max-w-7xl mx-auto px-4 md:px-6 py-8 space-y-6">
+                    {/* Hero Skeleton */}
+                    <div className="h-[220px] bg-[#141414] border border-[#1f1f1f] rounded-[32px] animate-pulse"></div>
+                    
+                    {/* Stats & Heatmap Skeleton */}
+                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        <div className="lg:col-span-1 h-[300px] bg-[#141414] border border-[#1f1f1f] rounded-[24px] animate-pulse"></div>
+                        <div className="lg:col-span-3 h-[300px] bg-[#141414] border border-[#1f1f1f] rounded-[24px] animate-pulse"></div>
+                    </div>
+
+                    {/* Topic & Activity Skeleton */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div className="lg:col-span-1 h-[400px] bg-[#141414] border border-[#1f1f1f] rounded-[24px] animate-pulse"></div>
+                        <div className="lg:col-span-1 h-[400px] bg-[#141414] border border-[#1f1f1f] rounded-[24px] animate-pulse"></div>
+                    </div>
                 </main>
             </div>
         );

@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import {
@@ -202,9 +203,16 @@ export default function Header({ activePage }: HeaderProps) {
                                         <ExpandMoreIcon sx={{ fontSize: '1.1rem' }} className="text-neutral-500 hidden sm:block" />
                                     </button>
 
-                                    {showUserMenu && (
-                                        <div className="absolute right-0 top-full mt-2 w-60 bg-[#141414] border border-[#1f1f1f] rounded-[24px] shadow-[0_10px_40px_rgba(0,0,0,0.7)] z-50 overflow-hidden">
-                                            <div className="px-4 py-3 bg-[#1f1f1f]/50 border-b border-[#1f1f1f]">
+                                    <AnimatePresence>
+                                        {showUserMenu && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                                                transition={{ duration: 0.2 }}
+                                                className="absolute right-0 top-full mt-2 w-60 bg-[#141414] border border-[#1f1f1f] rounded-[24px] shadow-[0_10px_40px_rgba(0,0,0,0.7)] z-50 overflow-hidden"
+                                            >
+                                                <div className="px-4 py-3 bg-[#1f1f1f]/50 border-b border-[#1f1f1f]">
                                                 <p className="text-sm font-medium text-white">{user?.name}</p>
                                                 <p className="text-xs text-neutral-500">{user?.email}</p>
                                             </div>
@@ -245,8 +253,9 @@ export default function Header({ activePage }: HeaderProps) {
                                                     Sign Out
                                                 </button>
                                             </div>
-                                        </div>
-                                    )}
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                 </div>
                             </>
                         ) : (
@@ -270,11 +279,23 @@ export default function Header({ activePage }: HeaderProps) {
             </div>
 
             {/* Mobile Navigation Drawer */}
-            {showMobileMenu && (
-                <div className="fixed inset-0 z-[100] lg:hidden">
-                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowMobileMenu(false)} />
-                    <div className="absolute right-0 top-0 bottom-0 w-64 bg-[#1a1a1a] shadow-2xl flex flex-col border-l border-neutral-800 transition-transform">
-                        <div className="flex items-center justify-between p-6 border-b border-neutral-800">
+            <AnimatePresence>
+                {showMobileMenu && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] lg:hidden"
+                    >
+                        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowMobileMenu(false)} />
+                        <motion.div
+                            initial={{ x: '100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: '100%' }}
+                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                            className="absolute right-0 top-0 bottom-0 w-64 bg-[#1a1a1a] shadow-2xl flex flex-col border-l border-neutral-800"
+                        >
+                            <div className="flex items-center justify-between p-6 border-b border-neutral-800">
                             <span className="text-lg font-bold text-white">Menu</span>
                             <button onClick={() => setShowMobileMenu(false)} className="text-neutral-400 hover:text-white p-1" aria-label="Close menu">
                                 <CloseIcon />
@@ -285,9 +306,10 @@ export default function Header({ activePage }: HeaderProps) {
                             <Link href="/sprint" onClick={() => setShowMobileMenu(false)} className={`px-4 py-3 text-sm font-medium rounded-xl transition-colors ${activePage === 'sprint' ? 'text-amber-500 bg-amber-500/10' : 'text-neutral-300 hover:bg-neutral-800'}`}>Sprint Mode</Link>
                             <Link href="/dashboard" onClick={() => setShowMobileMenu(false)} className={`px-4 py-3 text-sm font-medium rounded-xl transition-colors ${activePage === 'dashboard' ? 'text-amber-500 bg-amber-500/10' : 'text-neutral-300 hover:bg-neutral-800'}`}>Dashboard</Link>
                         </nav>
-                    </div>
-                </div>
-            )}
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </header >
     );
 }

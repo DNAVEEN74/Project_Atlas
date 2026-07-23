@@ -168,36 +168,39 @@ export default function Home() {
       {/* ━━━ M3 HERO SECTION ━━━ */}
       <section className="relative min-h-[85vh] flex flex-col items-center justify-center px-6 pt-16">
         {/* Subtle tonal gradient */}
-        <div className="absolute top-1/4 right-[10%] w-[300px] h-[300px] bg-amber-500/[0.03] rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-1/4 left-[10%] w-[300px] h-[300px] bg-indigo-500/[0.03] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-1/4 right-[10%] w-[300px] h-[300px] bg-amber-500/[0.03] rounded-full blur-[100px] pointer-events-none animate-pulse-slow" />
+        <div className="absolute bottom-1/4 left-[10%] w-[300px] h-[300px] bg-indigo-500/[0.03] rounded-full blur-[100px] pointer-events-none animate-float" />
 
         <div className="max-w-[800px] mx-auto text-center relative z-10 pt-12">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: m3Easing }}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+            }}
           >
             {/* M3 Chip */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#141414] border border-[#1f1f1f] text-xs font-medium text-neutral-500 mb-10">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+            <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: m3Easing } } }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#141414] border border-[#1f1f1f] text-xs font-medium text-neutral-500 mb-10 shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
               The Elite Practice Platform
-            </div>
+            </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-[3.75rem] font-bold tracking-tight mb-6 leading-[1.1] text-white">
+            <motion.h1 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: m3Easing } } }} className="text-4xl sm:text-5xl md:text-[3.75rem] font-bold tracking-tight mb-6 leading-[1.1] text-white">
               Unlock your Full <br className="hidden md:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-500 to-amber-200">Quant & Reasoning Potential.</span>
-            </h1>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">Quant & Reasoning Potential.</span>
+            </motion.h1>
 
-            <p className="text-base md:text-lg text-neutral-400 max-w-[640px] mx-auto mb-10 leading-relaxed">
+            <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: m3Easing } } }} className="text-base md:text-lg text-neutral-400 max-w-[640px] mx-auto mb-10 leading-relaxed">
               3,000+ real Quantitative & Reasoning PYQs. High-intensity Sprint drills. Precise analytics.
               <span className="block mt-2">Built for aspirants who prioritize <span className="text-white font-semibold">elite performance.</span></span>
-            </p>
+            </motion.p>
 
             {/* M3 Button Pair: Filled + Tonal */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: m3Easing } } }} className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
                 href="/register"
-                className="w-full sm:w-auto px-10 py-4 bg-amber-500 text-black font-bold text-sm rounded-[20px] hover:bg-amber-400 transition-all duration-200 active:scale-[0.97] shadow-lg shadow-amber-500/10"
+                className="w-full sm:w-auto px-10 py-4 bg-amber-500 text-black font-bold text-sm rounded-[20px] hover:bg-amber-400 hover:shadow-amber-500/25 hover:-translate-y-0.5 transition-all duration-200 active:scale-[0.97] shadow-lg shadow-amber-500/10"
               >
                 Join PrepLeague
               </Link>
@@ -207,7 +210,7 @@ export default function Home() {
               >
                 Explore Problems
               </Link>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -217,7 +220,7 @@ export default function Home() {
         <div className="max-w-[1100px] mx-auto space-y-32">
 
           {/* ── Feature: Problems Repository ── */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.6, ease: m3Easing }} className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Mock UI Card */}
             <div className="bg-[#111111] border border-[#1f1f1f] rounded-[24px] p-7">
               <div className="flex items-center justify-between mb-5 pb-4 border-b border-[#1f1f1f]">
@@ -236,8 +239,8 @@ export default function Home() {
                 ].map((q, i) => (
                   <div key={i} className={`flex items-center justify-between p-4 rounded-2xl transition-colors ${q.active
                     ? 'bg-blue-500/10 border border-blue-500/20'
-                    : 'bg-[#141414] border border-[#1f1f1f] hover:bg-[#1a1a1a]'
-                    }`}>
+                    : 'bg-[#141414] border border-[#1f1f1f] hover:bg-[#1a1a1a] hover:scale-[1.02] hover:shadow-lg hover:shadow-black/20'
+                    } cursor-pointer`}>
                     <div className="flex items-center gap-3">
                       <div className={`w-2 h-2 rounded-full ${q.active ? 'bg-blue-500' : 'bg-neutral-700'}`} />
                       <span className={`text-sm font-medium ${q.active ? 'text-white' : 'text-neutral-400'}`}>{q.t}</span>
@@ -271,10 +274,10 @@ export default function Home() {
                 Browse Problems <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
-          </div>
+          </motion.div>
 
           {/* ── Feature: Sprint ── */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.6, ease: m3Easing }} className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="order-2 lg:order-1">
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500 border border-amber-500/10">
@@ -309,8 +312,8 @@ export default function Home() {
                   {[1, 2, 3, 4].map(i => (
                     <div key={i} className={`h-14 rounded-2xl flex items-center justify-between px-5 text-sm font-medium border transition-all duration-200 ${i === 2
                       ? 'bg-amber-500/10 border-amber-500/25 text-amber-400'
-                      : 'bg-[#141414] border-[#1f1f1f] text-neutral-500 hover:bg-[#1a1a1a]'
-                      }`}>
+                      : 'bg-[#141414] border-[#1f1f1f] text-neutral-500 hover:bg-[#1a1a1a] hover:scale-[1.02] hover:shadow-lg hover:shadow-black/20'
+                      } cursor-pointer`}>
                       <span>Option {String.fromCharCode(64 + i)}</span>
                       {i === 2 && <span className="text-[11px] bg-amber-500 text-black px-2.5 py-0.5 rounded-full font-bold">Selected</span>}
                     </div>
@@ -318,10 +321,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* ── Feature: AI Tutor ── */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.6, ease: m3Easing }} className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Mock Chat UI */}
             <div className="group">
               <div className="bg-[#111111] border border-violet-500/15 rounded-[24px] p-7 transition-transform duration-300 group-hover:translate-y-[-4px]">
@@ -373,10 +376,10 @@ export default function Home() {
                 <CheckCircleOutlinedIcon className="w-4 h-4" /> Conceptual clarity at your command.
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* ── Feature: Daily Targets ── */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.6, ease: m3Easing }} className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="order-2 lg:order-1">
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500 border border-amber-500/10">
@@ -450,10 +453,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* ── Feature: Analytics ── */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.6, ease: m3Easing }} className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Heatmap Card */}
             <div className="group">
               <div className="bg-[#111111] border border-[#1f1f1f] rounded-[24px] p-8 transition-transform duration-300 group-hover:translate-y-[-4px]">
@@ -496,7 +499,7 @@ export default function Home() {
                 Open Data Dashboard <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </section>
@@ -524,7 +527,7 @@ export default function Home() {
           {/* M3 Card Grid */}
           <div className="grid md:grid-cols-3 gap-5 text-left">
             {/* Left card */}
-            <div className="rounded-[24px] bg-[#111111] border border-[#1f1f1f] p-7 hover:bg-[#141414] transition-all duration-200 group relative overflow-hidden">
+            <div className="rounded-[24px] bg-[#111111] border border-[#1f1f1f] p-7 hover:bg-[#141414] hover:-translate-y-1 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 group relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/[0.04] rounded-full blur-3xl group-hover:bg-amber-500/[0.07] transition-all" />
               <div className="w-11 h-11 bg-[#1f1f1f] rounded-xl flex items-center justify-center text-amber-400 mb-5 group-hover:scale-105 transition-transform">
                 <PsychologyOutlinedIcon />
@@ -540,7 +543,7 @@ export default function Home() {
 
             {/* Middle stacked cards */}
             <div className="space-y-5 flex flex-col">
-              <div className="flex-1 rounded-[24px] bg-[#111111] border border-[#1f1f1f] p-7 hover:bg-[#141414] transition-all duration-200 group">
+              <div className="flex-1 rounded-[24px] bg-[#111111] border border-[#1f1f1f] p-7 hover:bg-[#141414] hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300 group">
                 <div className="w-10 h-10 bg-[#1f1f1f] rounded-xl flex items-center justify-center text-emerald-400 mb-4">
                   <TrackChangesOutlinedIcon fontSize="small" />
                 </div>
@@ -549,7 +552,7 @@ export default function Home() {
                   Visualize your 365-day practice consistency and identify weak topics instantly.
                 </p>
               </div>
-              <div className="flex-1 rounded-[24px] bg-[#111111] border border-[#1f1f1f] p-7 hover:bg-[#141414] transition-all duration-200 group">
+              <div className="flex-1 rounded-[24px] bg-[#111111] border border-[#1f1f1f] p-7 hover:bg-[#141414] hover:-translate-y-1 hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-300 group">
                 <div className="w-10 h-10 bg-[#1f1f1f] rounded-xl flex items-center justify-center text-violet-400 mb-4">
                   <BoltIcon fontSize="small" />
                 </div>
@@ -561,7 +564,7 @@ export default function Home() {
             </div>
 
             {/* Right card */}
-            <div className="rounded-[24px] bg-[#111111] border border-[#1f1f1f] p-7 hover:bg-[#141414] transition-all duration-200 group flex flex-col relative overflow-hidden">
+            <div className="rounded-[24px] bg-[#111111] border border-[#1f1f1f] p-7 hover:bg-[#141414] hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 group flex flex-col relative overflow-hidden">
               <div className="absolute top-0 left-0 w-32 h-32 bg-blue-500/[0.04] rounded-full blur-3xl group-hover:bg-blue-500/[0.07] transition-all" />
               <div className="w-11 h-11 bg-[#1f1f1f] rounded-xl flex items-center justify-center text-blue-400 mb-5 group-hover:scale-105 transition-transform">
                 <MenuBookOutlinedIcon />
@@ -583,11 +586,11 @@ export default function Home() {
       {/* ━━━ M3 FINAL CTA ━━━ */}
       <section className="relative py-36 px-6 text-center overflow-hidden">
         {/* Very subtle glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] bg-amber-500/[0.03] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] bg-amber-500/[0.05] rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
 
-        <div className="max-w-[700px] mx-auto relative z-10">
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, ease: m3Easing }} className="max-w-[700px] mx-auto relative z-10">
           <h2 className="text-4xl md:text-[3.5rem] font-bold text-white mb-6 tracking-tight leading-tight">
-            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-500 to-amber-200">Ascend?</span>
+            Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">Ascend?</span>
           </h2>
           <p className="text-base md:text-lg text-neutral-400 mb-10 max-w-[520px] mx-auto leading-relaxed font-medium">
             Join the elite community and start mastering your <span className="text-white">Quant & Reasoning</span> goals today.
@@ -595,7 +598,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/register"
-              className="px-12 py-5 bg-amber-500 text-black font-bold text-base rounded-[20px] hover:bg-amber-400 transition-all duration-200 active:scale-[0.97] shadow-lg shadow-amber-500/10"
+              className="px-12 py-5 bg-amber-500 text-black font-bold text-base rounded-[20px] hover:bg-amber-400 hover:shadow-amber-500/25 hover:-translate-y-0.5 transition-all duration-200 active:scale-[0.97] shadow-lg shadow-amber-500/10"
             >
               Start Practicing
             </Link>
@@ -606,7 +609,7 @@ export default function Home() {
               Sign in to account <ChevronRightIcon className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <Footer />
